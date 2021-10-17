@@ -1,0 +1,18 @@
+{
+  "title": "SourceCodeContext",
+  "type": "object",
+  "properties": {
+    "location": {
+      "$ref": "SourceCodeLocation.json"
+    },
+    "callStack": {
+      "items": {
+        "$ref": "SourceCodeFrame.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "callStack"
+  ]
+}

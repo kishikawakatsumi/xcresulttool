@@ -1,0 +1,16 @@
+{
+  "title": "Reference",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "targetType": {
+      "$ref": "TypeDefinition.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id"
+  ]
+}

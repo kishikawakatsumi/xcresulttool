@@ -1,0 +1,14 @@
+{
+  "title": "SourceCodeLocation",
+  "type": "object",
+  "properties": {
+    "filePath": {
+      "type": "string"
+    },
+    "lineNumber": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

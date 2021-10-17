@@ -1,0 +1,13 @@
+{
+  "title": "ActionTestConfiguration",
+  "type": "object",
+  "properties": {
+    "values": {
+      "$ref": "SortedKeyValueArray.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "values"
+  ]
+}

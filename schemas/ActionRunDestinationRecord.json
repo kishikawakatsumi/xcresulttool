@@ -1,0 +1,29 @@
+{
+  "title": "ActionRunDestinationRecord",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "targetArchitecture": {
+      "type": "string"
+    },
+    "targetDeviceRecord": {
+      "$ref": "ActionDeviceRecord.json"
+    },
+    "localComputerRecord": {
+      "$ref": "ActionDeviceRecord.json"
+    },
+    "targetSDKRecord": {
+      "$ref": "ActionSDKRecord.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "displayName",
+    "targetArchitecture",
+    "targetDeviceRecord",
+    "localComputerRecord",
+    "targetSDKRecord"
+  ]
+}

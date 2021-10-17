@@ -1,0 +1,19 @@
+{
+  "title": "CodeCoverageInfo",
+  "type": "object",
+  "properties": {
+    "hasCoverageData": {
+      "type": "boolean"
+    },
+    "reportRef": {
+      "$ref": "Reference.json"
+    },
+    "archiveRef": {
+      "$ref": "Reference.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hasCoverageData"
+  ]
+}

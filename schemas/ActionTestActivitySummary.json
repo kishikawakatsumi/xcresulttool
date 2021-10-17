@@ -1,0 +1,51 @@
+{
+  "title": "ActionTestActivitySummary",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "activityType": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "start": {
+      "type": "string"
+    },
+    "finish": {
+      "type": "string"
+    },
+    "attachments": {
+      "items": {
+        "$ref": "ActionTestAttachment.json"
+      }
+    },
+    "subactivities": {
+      "items": {
+        "$ref": "ActionTestActivitySummary.json"
+      }
+    },
+    "failureSummaryIDs": {
+      "items": {
+        "type": "string"
+      }
+    },
+    "expectedFailureIDs": {
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "activityType",
+    "uuid",
+    "attachments",
+    "subactivities",
+    "failureSummaryIDs",
+    "expectedFailureIDs"
+  ]
+}

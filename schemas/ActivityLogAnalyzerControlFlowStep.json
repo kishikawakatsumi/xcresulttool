@@ -1,0 +1,29 @@
+{
+  "title": "ActivityLogAnalyzerControlFlowStep",
+  "type": "object",
+  "properties": {
+    "parentIndex": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "startLocation": {
+      "$ref": "DocumentLocation.json"
+    },
+    "endLocation": {
+      "$ref": "DocumentLocation.json"
+    },
+    "edges": {
+      "items": {
+        "$ref": "ActivityLogAnalyzerControlFlowStepEdge.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "parentIndex",
+    "title",
+    "edges"
+  ]
+}

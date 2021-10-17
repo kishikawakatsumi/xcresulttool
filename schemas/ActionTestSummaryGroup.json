@@ -1,0 +1,25 @@
+{
+  "title": "ActionTestSummaryGroup",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
+    },
+    "subtests": {
+      "items": {
+        "$ref": "ActionTestSummaryIdentifiableObject.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "duration",
+    "subtests"
+  ]
+}

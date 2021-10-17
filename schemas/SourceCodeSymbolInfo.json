@@ -1,0 +1,17 @@
+{
+  "title": "SourceCodeSymbolInfo",
+  "type": "object",
+  "properties": {
+    "imageName": {
+      "type": "string"
+    },
+    "symbolName": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "SourceCodeLocation.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

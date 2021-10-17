@@ -1,0 +1,70 @@
+{
+  "title": "ActivityLogUnitTestSection",
+  "type": "object",
+  "properties": {
+    "domainType": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "startTime": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
+    },
+    "result": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "DocumentLocation.json"
+    },
+    "subsections": {
+      "items": {
+        "$ref": "ActivityLogSection.json"
+      }
+    },
+    "messages": {
+      "items": {
+        "$ref": "ActivityLogMessage.json"
+      }
+    },
+    "testName": {
+      "type": "string"
+    },
+    "suiteName": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "emittedOutput": {
+      "type": "string"
+    },
+    "performanceTestOutput": {
+      "type": "string"
+    },
+    "testsPassedString": {
+      "type": "string"
+    },
+    "wasSkipped": {
+      "type": "boolean"
+    },
+    "runnablePath": {
+      "type": "string"
+    },
+    "runnableUTI": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "domainType",
+    "title",
+    "duration",
+    "subsections",
+    "messages",
+    "wasSkipped"
+  ]
+}

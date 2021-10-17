@@ -1,0 +1,11 @@
+{
+  "title": "ArchiveInfo",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

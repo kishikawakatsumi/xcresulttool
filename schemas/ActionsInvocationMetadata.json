@@ -1,0 +1,20 @@
+{
+  "title": "ActionsInvocationMetadata",
+  "type": "object",
+  "properties": {
+    "creatingWorkspaceFilePath": {
+      "type": "string"
+    },
+    "uniqueIdentifier": {
+      "type": "string"
+    },
+    "schemeIdentifier": {
+      "$ref": "EntityIdentifier.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "creatingWorkspaceFilePath",
+    "uniqueIdentifier"
+  ]
+}

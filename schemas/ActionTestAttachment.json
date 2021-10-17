@@ -1,0 +1,43 @@
+{
+  "title": "ActionTestAttachment",
+  "type": "object",
+  "properties": {
+    "uniformTypeIdentifier": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "userInfo": {
+      "$ref": "SortedKeyValueArray.json"
+    },
+    "lifetime": {
+      "type": "string"
+    },
+    "inActivityIdentifier": {
+      "type": "integer"
+    },
+    "filename": {
+      "type": "string"
+    },
+    "payloadRef": {
+      "$ref": "Reference.json"
+    },
+    "payloadSize": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "uniformTypeIdentifier",
+    "lifetime",
+    "inActivityIdentifier",
+    "payloadSize"
+  ]
+}

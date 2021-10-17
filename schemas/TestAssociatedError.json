@@ -1,0 +1,17 @@
+{
+  "title": "TestAssociatedError",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "userInfo": {
+      "$ref": "SortedKeyValueArray.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

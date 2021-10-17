@@ -1,0 +1,32 @@
+{
+  "title": "ActivityLogAnalyzerWarningMessage",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "shortTitle": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "DocumentLocation.json"
+    },
+    "annotations": {
+      "items": {
+        "$ref": "ActivityLogMessageAnnotation.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "title",
+    "annotations"
+  ]
+}

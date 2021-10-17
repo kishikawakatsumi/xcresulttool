@@ -1,0 +1,25 @@
+{
+  "title": "ActionSDKRecord",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "operatingSystemVersion": {
+      "type": "string"
+    },
+    "isInternal": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "identifier",
+    "operatingSystemVersion",
+    "isInternal"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "title": "ActionTestPerformanceMetricSummary",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "unitOfMeasurement": {
+      "type": "string"
+    },
+    "measurements": {
+      "items": {
+        "type": "number"
+      }
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "baselineName": {
+      "type": "string"
+    },
+    "baselineAverage": {
+      "type": "number"
+    },
+    "maxPercentRegression": {
+      "type": "number"
+    },
+    "maxPercentRelativeStandardDeviation": {
+      "type": "number"
+    },
+    "maxRegression": {
+      "type": "number"
+    },
+    "maxStandardDeviation": {
+      "type": "number"
+    },
+    "polarity": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "displayName",
+    "unitOfMeasurement",
+    "measurements"
+  ]
+}

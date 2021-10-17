@@ -1,0 +1,13 @@
+{
+  "title": "ObjectID",
+  "type": "object",
+  "properties": {
+    "hash": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "hash"
+  ]
+}

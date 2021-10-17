@@ -1,0 +1,17 @@
+{
+  "title": "ActionPlatformRecord",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "type": "string"
+    },
+    "userDescription": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "identifier",
+    "userDescription"
+  ]
+}

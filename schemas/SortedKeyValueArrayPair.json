@@ -1,0 +1,17 @@
+{
+  "title": "SortedKeyValueArrayPair",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "value": {
+      "$ref": "SchemaSerializable.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "key",
+    "value"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "title": "ActionTestMetadata",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "testStatus": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
+    },
+    "summaryRef": {
+      "$ref": "Reference.json"
+    },
+    "performanceMetricsCount": {
+      "type": "integer"
+    },
+    "failureSummariesCount": {
+      "type": "integer"
+    },
+    "activitySummariesCount": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "testStatus",
+    "performanceMetricsCount",
+    "failureSummariesCount",
+    "activitySummariesCount"
+  ]
+}

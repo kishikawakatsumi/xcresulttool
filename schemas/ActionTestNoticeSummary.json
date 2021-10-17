@@ -1,0 +1,20 @@
+{
+  "title": "ActionTestNoticeSummary",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "fileName": {
+      "type": "string"
+    },
+    "lineNumber": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fileName",
+    "lineNumber"
+  ]
+}

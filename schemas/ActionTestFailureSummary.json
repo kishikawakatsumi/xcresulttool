@@ -1,0 +1,53 @@
+{
+  "title": "ActionTestFailureSummary",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "fileName": {
+      "type": "string"
+    },
+    "lineNumber": {
+      "type": "integer"
+    },
+    "isPerformanceFailure": {
+      "type": "boolean"
+    },
+    "uuid": {
+      "type": "string"
+    },
+    "issueType": {
+      "type": "string"
+    },
+    "detailedDescription": {
+      "type": "string"
+    },
+    "attachments": {
+      "items": {
+        "$ref": "ActionTestAttachment.json"
+      }
+    },
+    "associatedError": {
+      "$ref": "TestAssociatedError.json"
+    },
+    "sourceCodeContext": {
+      "$ref": "SourceCodeContext.json"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "isTopLevelFailure": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "fileName",
+    "lineNumber",
+    "isPerformanceFailure",
+    "uuid",
+    "attachments",
+    "isTopLevelFailure"
+  ]
+}

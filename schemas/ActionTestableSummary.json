@@ -1,0 +1,42 @@
+{
+  "title": "ActionTestableSummary",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "projectRelativePath": {
+      "type": "string"
+    },
+    "targetName": {
+      "type": "string"
+    },
+    "testKind": {
+      "type": "string"
+    },
+    "tests": {
+      "items": {
+        "$ref": "ActionTestSummaryIdentifiableObject.json"
+      }
+    },
+    "diagnosticsDirectoryName": {
+      "type": "string"
+    },
+    "failureSummaries": {
+      "items": {
+        "$ref": "ActionTestFailureSummary.json"
+      }
+    },
+    "testLanguage": {
+      "type": "string"
+    },
+    "testRegion": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "tests",
+    "failureSummaries"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "ActionTestSummary",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "testStatus": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
+    },
+    "performanceMetrics": {
+      "items": {
+        "$ref": "ActionTestPerformanceMetricSummary.json"
+      }
+    },
+    "failureSummaries": {
+      "items": {
+        "$ref": "ActionTestFailureSummary.json"
+      }
+    },
+    "expectedFailures": {
+      "items": {
+        "$ref": "ActionTestExpectedFailure.json"
+      }
+    },
+    "skipNoticeSummary": {
+      "$ref": "ActionTestNoticeSummary.json"
+    },
+    "activitySummaries": {
+      "items": {
+        "$ref": "ActionTestActivitySummary.json"
+      }
+    },
+    "repetitionPolicySummary": {
+      "$ref": "ActionTestRepetitionPolicySummary.json"
+    },
+    "configuration": {
+      "$ref": "ActionTestConfiguration.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "testStatus",
+    "duration",
+    "performanceMetrics",
+    "failureSummaries",
+    "expectedFailures",
+    "activitySummaries"
+  ]
+}

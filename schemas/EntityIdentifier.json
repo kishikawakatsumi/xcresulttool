@@ -1,0 +1,25 @@
+{
+  "title": "EntityIdentifier",
+  "type": "object",
+  "properties": {
+    "entityName": {
+      "type": "string"
+    },
+    "containerName": {
+      "type": "string"
+    },
+    "entityType": {
+      "type": "string"
+    },
+    "sharedState": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "entityName",
+    "containerName",
+    "entityType",
+    "sharedState"
+  ]
+}

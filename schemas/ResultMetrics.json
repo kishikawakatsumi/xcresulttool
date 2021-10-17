@@ -1,0 +1,33 @@
+{
+  "title": "ResultMetrics",
+  "type": "object",
+  "properties": {
+    "analyzerWarningCount": {
+      "type": "integer"
+    },
+    "errorCount": {
+      "type": "integer"
+    },
+    "testsCount": {
+      "type": "integer"
+    },
+    "testsFailedCount": {
+      "type": "integer"
+    },
+    "testsSkippedCount": {
+      "type": "integer"
+    },
+    "warningCount": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "analyzerWarningCount",
+    "errorCount",
+    "testsCount",
+    "testsFailedCount",
+    "testsSkippedCount",
+    "warningCount"
+  ]
+}

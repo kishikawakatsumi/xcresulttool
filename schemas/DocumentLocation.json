@@ -1,0 +1,17 @@
+{
+  "title": "DocumentLocation",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string"
+    },
+    "concreteTypeName": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "url",
+    "concreteTypeName"
+  ]
+}

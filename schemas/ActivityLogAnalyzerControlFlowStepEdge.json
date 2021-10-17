@@ -1,0 +1,14 @@
+{
+  "title": "ActivityLogAnalyzerControlFlowStepEdge",
+  "type": "object",
+  "properties": {
+    "startLocation": {
+      "$ref": "DocumentLocation.json"
+    },
+    "endLocation": {
+      "$ref": "DocumentLocation.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

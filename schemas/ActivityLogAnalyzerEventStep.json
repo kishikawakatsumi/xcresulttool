@@ -1,0 +1,28 @@
+{
+  "title": "ActivityLogAnalyzerEventStep",
+  "type": "object",
+  "properties": {
+    "parentIndex": {
+      "type": "integer"
+    },
+    "title": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "DocumentLocation.json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "callDepth": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "parentIndex",
+    "title",
+    "description",
+    "callDepth"
+  ]
+}

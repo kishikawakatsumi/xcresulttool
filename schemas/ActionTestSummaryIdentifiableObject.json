@@ -1,0 +1,14 @@
+{
+  "title": "ActionTestSummaryIdentifiableObject",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

@@ -1,0 +1,23 @@
+{
+  "title": "ActionTestExpectedFailure",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string"
+    },
+    "failureReason": {
+      "type": "string"
+    },
+    "failureSummary": {
+      "$ref": "ActionTestFailureSummary.json"
+    },
+    "isTopLevelFailure": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "uuid",
+    "isTopLevelFailure"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "title": "SortedKeyValueArray",
+  "type": "object",
+  "properties": {
+    "storage": {
+      "items": {
+        "$ref": "SortedKeyValueArrayPair.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "storage"
+  ]
+}

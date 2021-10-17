@@ -1,0 +1,7 @@
+{
+  "title": "SchemaSerializable",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false,
+  "required": []
+}

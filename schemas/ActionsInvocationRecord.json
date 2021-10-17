@@ -1,0 +1,29 @@
+{
+  "title": "ActionsInvocationRecord",
+  "type": "object",
+  "properties": {
+    "metadataRef": {
+      "$ref": "Reference.json"
+    },
+    "metrics": {
+      "$ref": "ResultMetrics.json"
+    },
+    "issues": {
+      "$ref": "ResultIssueSummaries.json"
+    },
+    "actions": {
+      "items": {
+        "$ref": "ActionRecord.json"
+      }
+    },
+    "archive": {
+      "$ref": "ArchiveInfo.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "metrics",
+    "issues",
+    "actions"
+  ]
+}

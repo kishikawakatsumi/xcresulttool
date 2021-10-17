@@ -1,0 +1,17 @@
+{
+  "title": "ActionTestRepetitionPolicySummary",
+  "type": "object",
+  "properties": {
+    "iteration": {
+      "type": "integer"
+    },
+    "totalIterations": {
+      "type": "integer"
+    },
+    "repetitionMode": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

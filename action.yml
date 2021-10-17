@@ -1,11 +1,10 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'xcresulttool'
+description: 'generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.'
+author: 'kishikawa katsumi'
 inputs:
-  milliseconds: # change this
+  xcresult:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'Path to the xcresult bundle'
 runs:
   using: 'node12'
   main: 'dist/index.js'

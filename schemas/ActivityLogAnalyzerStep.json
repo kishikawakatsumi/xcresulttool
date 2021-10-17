@@ -1,0 +1,13 @@
+{
+  "title": "ActivityLogAnalyzerStep",
+  "type": "object",
+  "properties": {
+    "parentIndex": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "parentIndex"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "title": "ActionDeviceRecord",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "isConcreteDevice": {
+      "type": "boolean"
+    },
+    "operatingSystemVersion": {
+      "type": "string"
+    },
+    "operatingSystemVersionWithBuildNumber": {
+      "type": "string"
+    },
+    "nativeArchitecture": {
+      "type": "string"
+    },
+    "modelName": {
+      "type": "string"
+    },
+    "modelCode": {
+      "type": "string"
+    },
+    "modelUTI": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "isWireless": {
+      "type": "boolean"
+    },
+    "cpuKind": {
+      "type": "string"
+    },
+    "cpuCount": {
+      "type": "integer"
+    },
+    "cpuSpeedInMHz": {
+      "type": "integer"
+    },
+    "busSpeedInMHz": {
+      "type": "integer"
+    },
+    "ramSizeInMegabytes": {
+      "type": "integer"
+    },
+    "physicalCPUCoresPerPackage": {
+      "type": "integer"
+    },
+    "logicalCPUCoresPerPackage": {
+      "type": "integer"
+    },
+    "platformRecord": {
+      "$ref": "ActionPlatformRecord.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "isConcreteDevice",
+    "operatingSystemVersion",
+    "operatingSystemVersionWithBuildNumber",
+    "nativeArchitecture",
+    "modelName",
+    "modelCode",
+    "modelUTI",
+    "identifier",
+    "isWireless",
+    "cpuKind",
+    "platformRecord"
+  ]
+}

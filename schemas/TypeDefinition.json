@@ -1,0 +1,16 @@
+{
+  "title": "TypeDefinition",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "supertype": {
+      "$ref": "TypeDefinition.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name"
+  ]
+}

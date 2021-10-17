@@ -1,0 +1,18 @@
+{
+  "title": "ActionTestPlanRunSummary",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "testableSummaries": {
+      "items": {
+        "$ref": "ActionTestableSummary.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "testableSummaries"
+  ]
+}

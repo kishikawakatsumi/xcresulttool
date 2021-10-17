@@ -1,0 +1,41 @@
+{
+  "title": "ActionResult",
+  "type": "object",
+  "properties": {
+    "resultName": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "metrics": {
+      "$ref": "ResultMetrics.json"
+    },
+    "issues": {
+      "$ref": "ResultIssueSummaries.json"
+    },
+    "coverage": {
+      "$ref": "CodeCoverageInfo.json"
+    },
+    "timelineRef": {
+      "$ref": "Reference.json"
+    },
+    "logRef": {
+      "$ref": "Reference.json"
+    },
+    "testsRef": {
+      "$ref": "Reference.json"
+    },
+    "diagnosticsRef": {
+      "$ref": "Reference.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "resultName",
+    "status",
+    "metrics",
+    "issues",
+    "coverage"
+  ]
+}

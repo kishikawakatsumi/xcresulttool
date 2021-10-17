@@ -1,0 +1,14 @@
+{
+  "title": "SourceCodeFrame",
+  "type": "object",
+  "properties": {
+    "addressString": {
+      "type": "string"
+    },
+    "symbolInfo": {
+      "$ref": "SourceCodeSymbolInfo.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": []
+}

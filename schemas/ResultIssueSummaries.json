@@ -1,0 +1,33 @@
+{
+  "title": "ResultIssueSummaries",
+  "type": "object",
+  "properties": {
+    "analyzerWarningSummaries": {
+      "items": {
+        "$ref": "IssueSummary.json"
+      }
+    },
+    "errorSummaries": {
+      "items": {
+        "$ref": "IssueSummary.json"
+      }
+    },
+    "testFailureSummaries": {
+      "items": {
+        "$ref": "TestFailureIssueSummary.json"
+      }
+    },
+    "warningSummaries": {
+      "items": {
+        "$ref": "IssueSummary.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "analyzerWarningSummaries",
+    "errorSummaries",
+    "testFailureSummaries",
+    "warningSummaries"
+  ]
+}

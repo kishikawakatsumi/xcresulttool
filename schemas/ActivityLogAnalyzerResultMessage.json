@@ -1,0 +1,45 @@
+{
+  "title": "ActivityLogAnalyzerResultMessage",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "shortTitle": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "DocumentLocation.json"
+    },
+    "annotations": {
+      "items": {
+        "$ref": "ActivityLogMessageAnnotation.json"
+      }
+    },
+    "steps": {
+      "items": {
+        "$ref": "ActivityLogAnalyzerStep.json"
+      }
+    },
+    "resultType": {
+      "type": "string"
+    },
+    "keyEventIndex": {
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "title",
+    "annotations",
+    "steps",
+    "keyEventIndex"
+  ]
+}

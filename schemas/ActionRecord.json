@@ -1,0 +1,40 @@
+{
+  "title": "ActionRecord",
+  "type": "object",
+  "properties": {
+    "schemeCommandName": {
+      "type": "string"
+    },
+    "schemeTaskName": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "startedTime": {
+      "type": "string"
+    },
+    "endedTime": {
+      "type": "string"
+    },
+    "runDestination": {
+      "$ref": "ActionRunDestinationRecord.json"
+    },
+    "buildResult": {
+      "$ref": "ActionResult.json"
+    },
+    "actionResult": {
+      "$ref": "ActionResult.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schemeCommandName",
+    "schemeTaskName",
+    "startedTime",
+    "endedTime",
+    "runDestination",
+    "buildResult",
+    "actionResult"
+  ]
+}

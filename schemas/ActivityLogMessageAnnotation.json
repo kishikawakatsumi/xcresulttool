@@ -1,0 +1,16 @@
+{
+  "title": "ActivityLogMessageAnnotation",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "DocumentLocation.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "title"
+  ]
+}

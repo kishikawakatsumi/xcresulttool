@@ -1,0 +1,27 @@
+{
+  "title": "TestFailureIssueSummary",
+  "type": "object",
+  "properties": {
+    "issueType": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "producingTarget": {
+      "type": "string"
+    },
+    "documentLocationInCreatingWorkspace": {
+      "$ref": "DocumentLocation.json"
+    },
+    "testCaseName": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "issueType",
+    "message",
+    "testCaseName"
+  ]
+}
