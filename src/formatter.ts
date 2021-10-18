@@ -509,17 +509,16 @@ export async function format(bundlePath: string): Promise<string[]> {
                   })
 
                   if (attachments.length) {
-                    return `${indentation(activity.indent)}- ${escapeHashSign(
-                      activity.title
-                    )}\n${indentation(
-                      activity.indent + 1
-                    )}<details><summary>:paperclip:</summary>${attachments.join(
-                      ''
-                    )}</details>`
+                    const testStatus = testResult.testStatus
+                    const open = testStatus.includes('Failure') ? 'open' : ''
+                    const title = escapeHashSign(activity.title)
+                    const message = `${indentation(activity.indent)}- ${title}`
+                    const attachmentIndent = indentation(activity.indent + 1)
+                    const attachmentContent = attachments.join('')
+                    return `${message}\n${attachmentIndent}<details ${open}><summary>:paperclip:</summary>${attachmentContent}</details>`
                   } else {
-                    return `${indentation(activity.indent)}- ${escapeHashSign(
-                      activity.title
-                    )}`
+                    const indent = indentation(activity.indent)
+                    return `${indent}- ${escapeHashSign(activity.title)}`
                   }
                 })
                 .join('\n')
