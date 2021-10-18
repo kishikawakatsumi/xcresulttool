@@ -45,9 +45,8 @@ function format(bundlePath) {
     return __awaiter(this, void 0, void 0, function* () {
         const actionsInvocationRecord = yield parser.parse(bundlePath);
         const lines = [];
-        lines.push('## Test Report\n');
-        let entityName = '';
         const testReport = {};
+        let entityName = '';
         console.log('=== actionsInvocationRecord ===');
         console.log(actionsInvocationRecord);
         if (actionsInvocationRecord.metadataRef) {
@@ -64,7 +63,7 @@ function format(bundlePath) {
                 // const title = action.title
                 // const startedTime = action.startedTime
                 // const endedTime = action.endedTime
-                lines.push(`## ${schemeCommandName} ${entityName}\n`);
+                lines.push(`### ${schemeCommandName} ${entityName}\n`);
                 // console.log(action.runDestination)
                 // const displayName = action.runDestination.displayName
                 if (action.actionResult) {
@@ -369,7 +368,7 @@ function format(bundlePath) {
                         const testResult = detail;
                         const rowSpan = `rowspan="${details.length}"`;
                         const valign = `valign="top"`;
-                        const colWidth = 'width="42px"';
+                        const colWidth = 'width="48px"';
                         const detailWidth = 'width="840px"';
                         const status = statusImage(testResult.testStatus);
                         const resultLines = [];
