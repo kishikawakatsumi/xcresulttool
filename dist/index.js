@@ -427,7 +427,8 @@ function format(bundlePath) {
                                                 }
                                             }
                                         }
-                                        return `<div><img ${width} src="${attachment.link}"></div>`;
+                                        const widthAttr = `width="${width}"`;
+                                        return `<div><img ${widthAttr} src="${attachment.link}"></div>`;
                                     });
                                     if (attachments.length) {
                                         const testStatus = testResult.testStatus;

@@ -517,7 +517,8 @@ export async function format(bundlePath: string): Promise<string[]> {
                       }
                     }
 
-                    return `<div><img ${width} src="${attachment.link}"></div>`
+                    const widthAttr = `width="${width}"`
+                    return `<div><img ${widthAttr} src="${attachment.link}"></div>`
                   })
 
                   if (attachments.length) {
