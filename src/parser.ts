@@ -1,6 +1,7 @@
 /*eslint-disable @typescript-eslint/no-explicit-any */
 import * as exec from '@actions/exec'
-import {promises as fs} from 'fs'
+import {promises} from 'fs'
+const {readFile} = promises
 
 export async function parse(
   bundlePath: string,
@@ -102,5 +103,5 @@ export async function exportObject(
   }
 
   await exec.exec('xcrun', args, options)
-  return Buffer.from(await fs.readFile(outputPath)).toString('base64')
+  return Buffer.from(await readFile(outputPath)).toString('base64')
 }
