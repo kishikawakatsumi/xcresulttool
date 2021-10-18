@@ -12,6 +12,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: kishikawakatsumi/xcresulttool@main
         with:
-          results: 'example.xcresult'
+          xcresult: 'example.xcresult'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: always()
