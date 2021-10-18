@@ -6,81 +6,81 @@
  */
 
 export interface ActionTestableSummary {
-  name?: string;
-  projectRelativePath?: string;
-  targetName?: string;
-  testKind?: string;
-  tests: ActionTestSummaryIdentifiableObject[];
-  diagnosticsDirectoryName?: string;
-  failureSummaries: ActionTestFailureSummary[];
-  testLanguage?: string;
-  testRegion?: string;
+  name?: string
+  projectRelativePath?: string
+  targetName?: string
+  testKind?: string
+  tests: ActionTestSummaryIdentifiableObject[]
+  diagnosticsDirectoryName?: string
+  failureSummaries: ActionTestFailureSummary[]
+  testLanguage?: string
+  testRegion?: string
 }
 export interface ActionTestSummaryIdentifiableObject {
-  name?: string;
-  identifier?: string;
+  name?: string
+  identifier?: string
 }
 export interface ActionTestFailureSummary {
-  message?: string;
-  fileName: string;
-  lineNumber: number;
-  isPerformanceFailure: boolean;
-  uuid: string;
-  issueType?: string;
-  detailedDescription?: string;
-  attachments: ActionTestAttachment[];
-  associatedError?: TestAssociatedError;
-  sourceCodeContext?: SourceCodeContext;
-  timestamp?: string;
-  isTopLevelFailure: boolean;
+  message?: string
+  fileName: string
+  lineNumber: number
+  isPerformanceFailure: boolean
+  uuid: string
+  issueType?: string
+  detailedDescription?: string
+  attachments: ActionTestAttachment[]
+  associatedError?: TestAssociatedError
+  sourceCodeContext?: SourceCodeContext
+  timestamp?: string
+  isTopLevelFailure: boolean
 }
 export interface ActionTestAttachment {
-  uniformTypeIdentifier: string;
-  name?: string;
-  uuid?: string;
-  timestamp?: string;
-  userInfo?: SortedKeyValueArray;
-  lifetime: string;
-  inActivityIdentifier: number;
-  filename?: string;
-  payloadRef?: Reference;
-  payloadSize: number;
+  uniformTypeIdentifier: string
+  name?: string
+  uuid?: string
+  timestamp?: string
+  userInfo?: SortedKeyValueArray
+  lifetime: string
+  inActivityIdentifier: number
+  filename?: string
+  payloadRef?: Reference
+  payloadSize: number
 }
 export interface SortedKeyValueArray {
-  storage: SortedKeyValueArrayPair[];
+  storage: SortedKeyValueArrayPair[]
 }
 export interface SortedKeyValueArrayPair {
-  key: string;
-  value: SchemaSerializable;
+  key: string
+  value: SchemaSerializable
 }
 export interface SchemaSerializable {}
 export interface Reference {
-  id: string;
-  targetType?: TypeDefinition;
+  id: string
+  targetType?: TypeDefinition
 }
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition;
+  name: string
+  supertype?: TypeDefinition
 }
 export interface TestAssociatedError {
-  domain?: string;
-  code?: number;
-  userInfo?: SortedKeyValueArray;
+  domain?: string
+  code?: number
+  userInfo?: SortedKeyValueArray
 }
 export interface SourceCodeContext {
-  location?: SourceCodeLocation;
-  callStack: SourceCodeFrame[];
+  location?: SourceCodeLocation
+  callStack: SourceCodeFrame[]
 }
 export interface SourceCodeLocation {
-  filePath?: string;
-  lineNumber?: number;
+  filePath?: string
+  lineNumber?: number
 }
 export interface SourceCodeFrame {
-  addressString?: string;
-  symbolInfo?: SourceCodeSymbolInfo;
+  addressString?: string
+  symbolInfo?: SourceCodeSymbolInfo
 }
 export interface SourceCodeSymbolInfo {
-  imageName?: string;
-  symbolName?: string;
-  location?: SourceCodeLocation;
+  imageName?: string
+  symbolName?: string
+  location?: SourceCodeLocation
 }

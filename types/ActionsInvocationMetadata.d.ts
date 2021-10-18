@@ -6,13 +6,13 @@
  */
 
 export interface ActionsInvocationMetadata {
-  creatingWorkspaceFilePath: string;
-  uniqueIdentifier: string;
-  schemeIdentifier?: EntityIdentifier;
+  creatingWorkspaceFilePath: string
+  uniqueIdentifier: string
+  schemeIdentifier?: EntityIdentifier
 }
 export interface EntityIdentifier {
-  entityName: string;
-  containerName: string;
-  entityType: string;
-  sharedState: string;
+  entityName: string
+  containerName: string
+  entityType: string
+  sharedState: string
 }

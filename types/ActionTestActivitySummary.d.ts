@@ -6,52 +6,52 @@
  */
 
 export interface ActionTestActivitySummary {
-  title: string;
-  activityType: string;
-  uuid: string;
-  start?: string;
-  finish?: string;
-  attachments: ActionTestAttachment[];
-  subactivities: ActionTestActivitySummary1[];
-  failureSummaryIDs: string[];
-  expectedFailureIDs: string[];
+  title: string
+  activityType: string
+  uuid: string
+  start?: string
+  finish?: string
+  attachments: ActionTestAttachment[]
+  subactivities: ActionTestActivitySummary1[]
+  failureSummaryIDs: string[]
+  expectedFailureIDs: string[]
 }
 export interface ActionTestAttachment {
-  uniformTypeIdentifier: string;
-  name?: string;
-  uuid?: string;
-  timestamp?: string;
-  userInfo?: SortedKeyValueArray;
-  lifetime: string;
-  inActivityIdentifier: number;
-  filename?: string;
-  payloadRef?: Reference;
-  payloadSize: number;
+  uniformTypeIdentifier: string
+  name?: string
+  uuid?: string
+  timestamp?: string
+  userInfo?: SortedKeyValueArray
+  lifetime: string
+  inActivityIdentifier: number
+  filename?: string
+  payloadRef?: Reference
+  payloadSize: number
 }
 export interface SortedKeyValueArray {
-  storage: SortedKeyValueArrayPair[];
+  storage: SortedKeyValueArrayPair[]
 }
 export interface SortedKeyValueArrayPair {
-  key: string;
-  value: SchemaSerializable;
+  key: string
+  value: SchemaSerializable
 }
 export interface SchemaSerializable {}
 export interface Reference {
-  id: string;
-  targetType?: TypeDefinition;
+  id: string
+  targetType?: TypeDefinition
 }
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition;
+  name: string
+  supertype?: TypeDefinition
 }
 export interface ActionTestActivitySummary1 {
-  title: string;
-  activityType: string;
-  uuid: string;
-  start?: string;
-  finish?: string;
-  attachments: ActionTestAttachment[];
-  subactivities: ActionTestActivitySummary1[];
-  failureSummaryIDs: string[];
-  expectedFailureIDs: string[];
+  title: string
+  activityType: string
+  uuid: string
+  start?: string
+  finish?: string
+  attachments: ActionTestAttachment[]
+  subactivities: ActionTestActivitySummary1[]
+  failureSummaryIDs: string[]
+  expectedFailureIDs: string[]
 }

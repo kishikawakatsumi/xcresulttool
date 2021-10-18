@@ -6,8 +6,8 @@
  */
 
 export interface EntityIdentifier {
-  entityName: string;
-  containerName: string;
-  entityType: string;
-  sharedState: string;
+  entityName: string
+  containerName: string
+  entityType: string
+  sharedState: string
 }

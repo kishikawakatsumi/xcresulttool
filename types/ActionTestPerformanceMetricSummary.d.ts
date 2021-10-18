@@ -6,15 +6,15 @@
  */
 
 export interface ActionTestPerformanceMetricSummary {
-  displayName: string;
-  unitOfMeasurement: string;
-  measurements: number[];
-  identifier?: string;
-  baselineName?: string;
-  baselineAverage?: number;
-  maxPercentRegression?: number;
-  maxPercentRelativeStandardDeviation?: number;
-  maxRegression?: number;
-  maxStandardDeviation?: number;
-  polarity?: string;
+  displayName: string
+  unitOfMeasurement: string
+  measurements: number[]
+  identifier?: string
+  baselineName?: string
+  baselineAverage?: number
+  maxPercentRegression?: number
+  maxPercentRelativeStandardDeviation?: number
+  maxRegression?: number
+  maxStandardDeviation?: number
+  polarity?: string
 }

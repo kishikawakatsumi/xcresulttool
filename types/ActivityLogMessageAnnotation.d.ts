@@ -6,10 +6,10 @@
  */
 
 export interface ActivityLogMessageAnnotation {
-  title: string;
-  location?: DocumentLocation;
+  title: string
+  location?: DocumentLocation
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }

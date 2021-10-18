@@ -6,24 +6,24 @@
  */
 
 export interface ActivityLogAnalyzerResultMessage {
-  type: string;
-  title: string;
-  shortTitle?: string;
-  category?: string;
-  location?: DocumentLocation;
-  annotations: ActivityLogMessageAnnotation[];
-  steps: ActivityLogAnalyzerStep[];
-  resultType?: string;
-  keyEventIndex: number;
+  type: string
+  title: string
+  shortTitle?: string
+  category?: string
+  location?: DocumentLocation
+  annotations: ActivityLogMessageAnnotation[]
+  steps: ActivityLogAnalyzerStep[]
+  resultType?: string
+  keyEventIndex: number
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface ActivityLogMessageAnnotation {
-  title: string;
-  location?: DocumentLocation;
+  title: string
+  location?: DocumentLocation
 }
 export interface ActivityLogAnalyzerStep {
-  parentIndex: number;
+  parentIndex: number
 }

@@ -6,57 +6,57 @@
  */
 
 export interface ActionResult {
-  resultName: string;
-  status: string;
-  metrics: ResultMetrics;
-  issues: ResultIssueSummaries;
-  coverage: CodeCoverageInfo;
-  timelineRef?: Reference;
-  logRef?: Reference;
-  testsRef?: Reference;
-  diagnosticsRef?: Reference;
+  resultName: string
+  status: string
+  metrics: ResultMetrics
+  issues: ResultIssueSummaries
+  coverage: CodeCoverageInfo
+  timelineRef?: Reference
+  logRef?: Reference
+  testsRef?: Reference
+  diagnosticsRef?: Reference
 }
 export interface ResultMetrics {
-  analyzerWarningCount: number;
-  errorCount: number;
-  testsCount: number;
-  testsFailedCount: number;
-  testsSkippedCount: number;
-  warningCount: number;
+  analyzerWarningCount: number
+  errorCount: number
+  testsCount: number
+  testsFailedCount: number
+  testsSkippedCount: number
+  warningCount: number
 }
 export interface ResultIssueSummaries {
-  analyzerWarningSummaries: IssueSummary[];
-  errorSummaries: IssueSummary[];
-  testFailureSummaries: TestFailureIssueSummary[];
-  warningSummaries: IssueSummary[];
+  analyzerWarningSummaries: IssueSummary[]
+  errorSummaries: IssueSummary[]
+  testFailureSummaries: TestFailureIssueSummary[]
+  warningSummaries: IssueSummary[]
 }
 export interface IssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface TestFailureIssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
-  testCaseName: string;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
+  testCaseName: string
 }
 export interface CodeCoverageInfo {
-  hasCoverageData: boolean;
-  reportRef?: Reference;
-  archiveRef?: Reference;
+  hasCoverageData: boolean
+  reportRef?: Reference
+  archiveRef?: Reference
 }
 export interface Reference {
-  id: string;
-  targetType?: TypeDefinition;
+  id: string
+  targetType?: TypeDefinition
 }
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition;
+  name: string
+  supertype?: TypeDefinition
 }

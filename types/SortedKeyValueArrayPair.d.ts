@@ -6,7 +6,7 @@
  */
 
 export interface SortedKeyValueArrayPair {
-  key: string;
-  value: SchemaSerializable;
+  key: string
+  value: SchemaSerializable
 }
 export interface SchemaSerializable {}

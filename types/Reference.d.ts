@@ -6,10 +6,10 @@
  */
 
 export interface Reference {
-  id: string;
-  targetType?: TypeDefinition;
+  id: string
+  targetType?: TypeDefinition
 }
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition;
+  name: string
+  supertype?: TypeDefinition
 }

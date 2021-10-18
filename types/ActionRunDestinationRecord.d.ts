@@ -6,39 +6,39 @@
  */
 
 export interface ActionRunDestinationRecord {
-  displayName: string;
-  targetArchitecture: string;
-  targetDeviceRecord: ActionDeviceRecord;
-  localComputerRecord: ActionDeviceRecord;
-  targetSDKRecord: ActionSDKRecord;
+  displayName: string
+  targetArchitecture: string
+  targetDeviceRecord: ActionDeviceRecord
+  localComputerRecord: ActionDeviceRecord
+  targetSDKRecord: ActionSDKRecord
 }
 export interface ActionDeviceRecord {
-  name: string;
-  isConcreteDevice: boolean;
-  operatingSystemVersion: string;
-  operatingSystemVersionWithBuildNumber: string;
-  nativeArchitecture: string;
-  modelName: string;
-  modelCode: string;
-  modelUTI: string;
-  identifier: string;
-  isWireless: boolean;
-  cpuKind: string;
-  cpuCount?: number;
-  cpuSpeedInMHz?: number;
-  busSpeedInMHz?: number;
-  ramSizeInMegabytes?: number;
-  physicalCPUCoresPerPackage?: number;
-  logicalCPUCoresPerPackage?: number;
-  platformRecord: ActionPlatformRecord;
+  name: string
+  isConcreteDevice: boolean
+  operatingSystemVersion: string
+  operatingSystemVersionWithBuildNumber: string
+  nativeArchitecture: string
+  modelName: string
+  modelCode: string
+  modelUTI: string
+  identifier: string
+  isWireless: boolean
+  cpuKind: string
+  cpuCount?: number
+  cpuSpeedInMHz?: number
+  busSpeedInMHz?: number
+  ramSizeInMegabytes?: number
+  physicalCPUCoresPerPackage?: number
+  logicalCPUCoresPerPackage?: number
+  platformRecord: ActionPlatformRecord
 }
 export interface ActionPlatformRecord {
-  identifier: string;
-  userDescription: string;
+  identifier: string
+  userDescription: string
 }
 export interface ActionSDKRecord {
-  name: string;
-  identifier: string;
-  operatingSystemVersion: string;
-  isInternal: boolean;
+  name: string
+  identifier: string
+  operatingSystemVersion: string
+  isInternal: boolean
 }

@@ -6,25 +6,25 @@
  */
 
 export interface ResultIssueSummaries {
-  analyzerWarningSummaries: IssueSummary[];
-  errorSummaries: IssueSummary[];
-  testFailureSummaries: TestFailureIssueSummary[];
-  warningSummaries: IssueSummary[];
+  analyzerWarningSummaries: IssueSummary[]
+  errorSummaries: IssueSummary[]
+  testFailureSummaries: TestFailureIssueSummary[]
+  warningSummaries: IssueSummary[]
 }
 export interface IssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface TestFailureIssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
-  testCaseName: string;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
+  testCaseName: string
 }

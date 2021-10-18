@@ -6,15 +6,15 @@
  */
 
 export interface SourceCodeFrame {
-  addressString?: string;
-  symbolInfo?: SourceCodeSymbolInfo;
+  addressString?: string
+  symbolInfo?: SourceCodeSymbolInfo
 }
 export interface SourceCodeSymbolInfo {
-  imageName?: string;
-  symbolName?: string;
-  location?: SourceCodeLocation;
+  imageName?: string
+  symbolName?: string
+  location?: SourceCodeLocation
 }
 export interface SourceCodeLocation {
-  filePath?: string;
-  lineNumber?: number;
+  filePath?: string
+  lineNumber?: number
 }

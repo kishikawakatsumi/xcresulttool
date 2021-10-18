@@ -6,5 +6,5 @@
  */
 
 export interface ActivityLogAnalyzerStep {
-  parentIndex: number;
+  parentIndex: number
 }

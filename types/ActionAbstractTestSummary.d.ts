@@ -6,5 +6,5 @@
  */
 
 export interface ActionAbstractTestSummary {
-  name?: string;
+  name?: string
 }

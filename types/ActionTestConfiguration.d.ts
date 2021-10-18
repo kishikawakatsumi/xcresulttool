@@ -6,13 +6,13 @@
  */
 
 export interface ActionTestConfiguration {
-  values: SortedKeyValueArray;
+  values: SortedKeyValueArray
 }
 export interface SortedKeyValueArray {
-  storage: SortedKeyValueArrayPair[];
+  storage: SortedKeyValueArrayPair[]
 }
 export interface SortedKeyValueArrayPair {
-  key: string;
-  value: SchemaSerializable;
+  key: string
+  value: SchemaSerializable
 }
 export interface SchemaSerializable {}

@@ -6,7 +6,7 @@
  */
 
 export interface ActionTestNoticeSummary {
-  message?: string;
-  fileName: string;
-  lineNumber: number;
+  message?: string
+  fileName: string
+  lineNumber: number
 }

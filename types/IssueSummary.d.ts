@@ -6,12 +6,12 @@
  */
 
 export interface IssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }

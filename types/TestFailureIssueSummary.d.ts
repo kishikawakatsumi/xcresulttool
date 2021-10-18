@@ -6,13 +6,13 @@
  */
 
 export interface TestFailureIssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
-  testCaseName: string;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
+  testCaseName: string
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }

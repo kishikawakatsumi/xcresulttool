@@ -6,7 +6,7 @@
  */
 
 export interface ActionTestRepetitionPolicySummary {
-  iteration?: number;
-  totalIterations?: number;
-  repetitionMode?: string;
+  iteration?: number
+  totalIterations?: number
+  repetitionMode?: string
 }

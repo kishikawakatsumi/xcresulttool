@@ -6,11 +6,11 @@
  */
 
 export interface SourceCodeSymbolInfo {
-  imageName?: string;
-  symbolName?: string;
-  location?: SourceCodeLocation;
+  imageName?: string
+  symbolName?: string
+  location?: SourceCodeLocation
 }
 export interface SourceCodeLocation {
-  filePath?: string;
-  lineNumber?: number;
+  filePath?: string
+  lineNumber?: number
 }

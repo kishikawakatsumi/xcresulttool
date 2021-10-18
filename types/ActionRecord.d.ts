@@ -6,104 +6,104 @@
  */
 
 export interface ActionRecord {
-  schemeCommandName: string;
-  schemeTaskName: string;
-  title?: string;
-  startedTime: string;
-  endedTime: string;
-  runDestination: ActionRunDestinationRecord;
-  buildResult: ActionResult;
-  actionResult: ActionResult;
+  schemeCommandName: string
+  schemeTaskName: string
+  title?: string
+  startedTime: string
+  endedTime: string
+  runDestination: ActionRunDestinationRecord
+  buildResult: ActionResult
+  actionResult: ActionResult
 }
 export interface ActionRunDestinationRecord {
-  displayName: string;
-  targetArchitecture: string;
-  targetDeviceRecord: ActionDeviceRecord;
-  localComputerRecord: ActionDeviceRecord;
-  targetSDKRecord: ActionSDKRecord;
+  displayName: string
+  targetArchitecture: string
+  targetDeviceRecord: ActionDeviceRecord
+  localComputerRecord: ActionDeviceRecord
+  targetSDKRecord: ActionSDKRecord
 }
 export interface ActionDeviceRecord {
-  name: string;
-  isConcreteDevice: boolean;
-  operatingSystemVersion: string;
-  operatingSystemVersionWithBuildNumber: string;
-  nativeArchitecture: string;
-  modelName: string;
-  modelCode: string;
-  modelUTI: string;
-  identifier: string;
-  isWireless: boolean;
-  cpuKind: string;
-  cpuCount?: number;
-  cpuSpeedInMHz?: number;
-  busSpeedInMHz?: number;
-  ramSizeInMegabytes?: number;
-  physicalCPUCoresPerPackage?: number;
-  logicalCPUCoresPerPackage?: number;
-  platformRecord: ActionPlatformRecord;
+  name: string
+  isConcreteDevice: boolean
+  operatingSystemVersion: string
+  operatingSystemVersionWithBuildNumber: string
+  nativeArchitecture: string
+  modelName: string
+  modelCode: string
+  modelUTI: string
+  identifier: string
+  isWireless: boolean
+  cpuKind: string
+  cpuCount?: number
+  cpuSpeedInMHz?: number
+  busSpeedInMHz?: number
+  ramSizeInMegabytes?: number
+  physicalCPUCoresPerPackage?: number
+  logicalCPUCoresPerPackage?: number
+  platformRecord: ActionPlatformRecord
 }
 export interface ActionPlatformRecord {
-  identifier: string;
-  userDescription: string;
+  identifier: string
+  userDescription: string
 }
 export interface ActionSDKRecord {
-  name: string;
-  identifier: string;
-  operatingSystemVersion: string;
-  isInternal: boolean;
+  name: string
+  identifier: string
+  operatingSystemVersion: string
+  isInternal: boolean
 }
 export interface ActionResult {
-  resultName: string;
-  status: string;
-  metrics: ResultMetrics;
-  issues: ResultIssueSummaries;
-  coverage: CodeCoverageInfo;
-  timelineRef?: Reference;
-  logRef?: Reference;
-  testsRef?: Reference;
-  diagnosticsRef?: Reference;
+  resultName: string
+  status: string
+  metrics: ResultMetrics
+  issues: ResultIssueSummaries
+  coverage: CodeCoverageInfo
+  timelineRef?: Reference
+  logRef?: Reference
+  testsRef?: Reference
+  diagnosticsRef?: Reference
 }
 export interface ResultMetrics {
-  analyzerWarningCount: number;
-  errorCount: number;
-  testsCount: number;
-  testsFailedCount: number;
-  testsSkippedCount: number;
-  warningCount: number;
+  analyzerWarningCount: number
+  errorCount: number
+  testsCount: number
+  testsFailedCount: number
+  testsSkippedCount: number
+  warningCount: number
 }
 export interface ResultIssueSummaries {
-  analyzerWarningSummaries: IssueSummary[];
-  errorSummaries: IssueSummary[];
-  testFailureSummaries: TestFailureIssueSummary[];
-  warningSummaries: IssueSummary[];
+  analyzerWarningSummaries: IssueSummary[]
+  errorSummaries: IssueSummary[]
+  testFailureSummaries: TestFailureIssueSummary[]
+  warningSummaries: IssueSummary[]
 }
 export interface IssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface TestFailureIssueSummary {
-  issueType: string;
-  message: string;
-  producingTarget?: string;
-  documentLocationInCreatingWorkspace?: DocumentLocation;
-  testCaseName: string;
+  issueType: string
+  message: string
+  producingTarget?: string
+  documentLocationInCreatingWorkspace?: DocumentLocation
+  testCaseName: string
 }
 export interface CodeCoverageInfo {
-  hasCoverageData: boolean;
-  reportRef?: Reference;
-  archiveRef?: Reference;
+  hasCoverageData: boolean
+  reportRef?: Reference
+  archiveRef?: Reference
 }
 export interface Reference {
-  id: string;
-  targetType?: TypeDefinition;
+  id: string
+  targetType?: TypeDefinition
 }
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition;
+  name: string
+  supertype?: TypeDefinition
 }

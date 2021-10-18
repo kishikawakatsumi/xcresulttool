@@ -6,5 +6,5 @@
  */
 
 export interface ArchiveInfo {
-  path?: string;
+  path?: string
 }

@@ -6,6 +6,6 @@
  */
 
 export interface ActionPlatformRecord {
-  identifier: string;
-  userDescription: string;
+  identifier: string
+  userDescription: string
 }

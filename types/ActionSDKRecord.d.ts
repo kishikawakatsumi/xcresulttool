@@ -6,8 +6,8 @@
  */
 
 export interface ActionSDKRecord {
-  name: string;
-  identifier: string;
-  operatingSystemVersion: string;
-  isInternal: boolean;
+  name: string
+  identifier: string
+  operatingSystemVersion: string
+  isInternal: boolean
 }

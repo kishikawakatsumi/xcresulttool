@@ -6,15 +6,15 @@
  */
 
 export interface TestAssociatedError {
-  domain?: string;
-  code?: number;
-  userInfo?: SortedKeyValueArray;
+  domain?: string
+  code?: number
+  userInfo?: SortedKeyValueArray
 }
 export interface SortedKeyValueArray {
-  storage: SortedKeyValueArrayPair[];
+  storage: SortedKeyValueArrayPair[]
 }
 export interface SortedKeyValueArrayPair {
-  key: string;
-  value: SchemaSerializable;
+  key: string
+  value: SchemaSerializable
 }
 export interface SchemaSerializable {}

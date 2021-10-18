@@ -6,10 +6,10 @@
  */
 
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition1;
+  name: string
+  supertype?: TypeDefinition1
 }
 export interface TypeDefinition1 {
-  name: string;
-  supertype?: TypeDefinition1;
+  name: string
+  supertype?: TypeDefinition1
 }

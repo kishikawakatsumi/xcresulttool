@@ -6,10 +6,10 @@
  */
 
 export interface ActivityLogAnalyzerControlFlowStepEdge {
-  startLocation?: DocumentLocation;
-  endLocation?: DocumentLocation;
+  startLocation?: DocumentLocation
+  endLocation?: DocumentLocation
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }

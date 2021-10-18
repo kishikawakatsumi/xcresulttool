@@ -6,13 +6,13 @@
  */
 
 export interface ActivityLogAnalyzerEventStep {
-  parentIndex: number;
-  title: string;
-  location?: DocumentLocation;
-  description: string;
-  callDepth: number;
+  parentIndex: number
+  title: string
+  location?: DocumentLocation
+  description: string
+  callDepth: number
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }

@@ -6,6 +6,6 @@
  */
 
 export interface SourceCodeLocation {
-  filePath?: string;
-  lineNumber?: number;
+  filePath?: string
+  lineNumber?: number
 }

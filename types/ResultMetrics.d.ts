@@ -6,10 +6,10 @@
  */
 
 export interface ResultMetrics {
-  analyzerWarningCount: number;
-  errorCount: number;
-  testsCount: number;
-  testsFailedCount: number;
-  testsSkippedCount: number;
-  warningCount: number;
+  analyzerWarningCount: number
+  errorCount: number
+  testsCount: number
+  testsFailedCount: number
+  testsSkippedCount: number
+  warningCount: number
 }

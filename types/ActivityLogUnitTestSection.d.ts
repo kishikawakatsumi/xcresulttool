@@ -6,47 +6,47 @@
  */
 
 export interface ActivityLogUnitTestSection {
-  domainType: string;
-  title: string;
-  startTime?: string;
-  duration: number;
-  result?: string;
-  location?: DocumentLocation;
-  subsections: ActivityLogSection[];
-  messages: ActivityLogMessage[];
-  testName?: string;
-  suiteName?: string;
-  summary?: string;
-  emittedOutput?: string;
-  performanceTestOutput?: string;
-  testsPassedString?: string;
-  wasSkipped: boolean;
-  runnablePath?: string;
-  runnableUTI?: string;
+  domainType: string
+  title: string
+  startTime?: string
+  duration: number
+  result?: string
+  location?: DocumentLocation
+  subsections: ActivityLogSection[]
+  messages: ActivityLogMessage[]
+  testName?: string
+  suiteName?: string
+  summary?: string
+  emittedOutput?: string
+  performanceTestOutput?: string
+  testsPassedString?: string
+  wasSkipped: boolean
+  runnablePath?: string
+  runnableUTI?: string
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface ActivityLogSection {
-  domainType: string;
-  title: string;
-  startTime?: string;
-  duration: number;
-  result?: string;
-  location?: DocumentLocation;
-  subsections: ActivityLogSection[];
-  messages: ActivityLogMessage[];
+  domainType: string
+  title: string
+  startTime?: string
+  duration: number
+  result?: string
+  location?: DocumentLocation
+  subsections: ActivityLogSection[]
+  messages: ActivityLogMessage[]
 }
 export interface ActivityLogMessage {
-  type: string;
-  title: string;
-  shortTitle?: string;
-  category?: string;
-  location?: DocumentLocation;
-  annotations: ActivityLogMessageAnnotation[];
+  type: string
+  title: string
+  shortTitle?: string
+  category?: string
+  location?: DocumentLocation
+  annotations: ActivityLogMessageAnnotation[]
 }
 export interface ActivityLogMessageAnnotation {
-  title: string;
-  location?: DocumentLocation;
+  title: string
+  location?: DocumentLocation
 }

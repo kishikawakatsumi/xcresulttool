@@ -6,20 +6,20 @@
  */
 
 export interface ActionTestMetadata {
-  name?: string;
-  identifier?: string;
-  testStatus: string;
-  duration?: number;
-  summaryRef?: Reference;
-  performanceMetricsCount: number;
-  failureSummariesCount: number;
-  activitySummariesCount: number;
+  name?: string
+  identifier?: string
+  testStatus: string
+  duration?: number
+  summaryRef?: Reference
+  performanceMetricsCount: number
+  failureSummariesCount: number
+  activitySummariesCount: number
 }
 export interface Reference {
-  id: string;
-  targetType?: TypeDefinition;
+  id: string
+  targetType?: TypeDefinition
 }
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition;
+  name: string
+  supertype?: TypeDefinition
 }

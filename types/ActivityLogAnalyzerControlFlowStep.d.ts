@@ -6,17 +6,17 @@
  */
 
 export interface ActivityLogAnalyzerControlFlowStep {
-  parentIndex: number;
-  title: string;
-  startLocation?: DocumentLocation;
-  endLocation?: DocumentLocation;
-  edges: ActivityLogAnalyzerControlFlowStepEdge[];
+  parentIndex: number
+  title: string
+  startLocation?: DocumentLocation
+  endLocation?: DocumentLocation
+  edges: ActivityLogAnalyzerControlFlowStepEdge[]
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface ActivityLogAnalyzerControlFlowStepEdge {
-  startLocation?: DocumentLocation;
-  endLocation?: DocumentLocation;
+  startLocation?: DocumentLocation
+  endLocation?: DocumentLocation
 }

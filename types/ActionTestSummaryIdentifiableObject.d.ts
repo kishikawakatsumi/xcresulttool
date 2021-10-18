@@ -6,6 +6,6 @@
  */
 
 export interface ActionTestSummaryIdentifiableObject {
-  name?: string;
-  identifier?: string;
+  name?: string
+  identifier?: string
 }

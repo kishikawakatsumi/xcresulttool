@@ -6,15 +6,15 @@
  */
 
 export interface CodeCoverageInfo {
-  hasCoverageData: boolean;
-  reportRef?: Reference;
-  archiveRef?: Reference;
+  hasCoverageData: boolean
+  reportRef?: Reference
+  archiveRef?: Reference
 }
 export interface Reference {
-  id: string;
-  targetType?: TypeDefinition;
+  id: string
+  targetType?: TypeDefinition
 }
 export interface TypeDefinition {
-  name: string;
-  supertype?: TypeDefinition;
+  name: string
+  supertype?: TypeDefinition
 }

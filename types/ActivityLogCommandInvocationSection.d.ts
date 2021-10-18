@@ -6,41 +6,41 @@
  */
 
 export interface ActivityLogCommandInvocationSection {
-  domainType: string;
-  title: string;
-  startTime?: string;
-  duration: number;
-  result?: string;
-  location?: DocumentLocation;
-  subsections: ActivityLogSection[];
-  messages: ActivityLogMessage[];
-  commandDetails: string;
-  emittedOutput: string;
-  exitCode?: number;
+  domainType: string
+  title: string
+  startTime?: string
+  duration: number
+  result?: string
+  location?: DocumentLocation
+  subsections: ActivityLogSection[]
+  messages: ActivityLogMessage[]
+  commandDetails: string
+  emittedOutput: string
+  exitCode?: number
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface ActivityLogSection {
-  domainType: string;
-  title: string;
-  startTime?: string;
-  duration: number;
-  result?: string;
-  location?: DocumentLocation;
-  subsections: ActivityLogSection[];
-  messages: ActivityLogMessage[];
+  domainType: string
+  title: string
+  startTime?: string
+  duration: number
+  result?: string
+  location?: DocumentLocation
+  subsections: ActivityLogSection[]
+  messages: ActivityLogMessage[]
 }
 export interface ActivityLogMessage {
-  type: string;
-  title: string;
-  shortTitle?: string;
-  category?: string;
-  location?: DocumentLocation;
-  annotations: ActivityLogMessageAnnotation[];
+  type: string
+  title: string
+  shortTitle?: string
+  category?: string
+  location?: DocumentLocation
+  annotations: ActivityLogMessageAnnotation[]
 }
 export interface ActivityLogMessageAnnotation {
-  title: string;
-  location?: DocumentLocation;
+  title: string
+  location?: DocumentLocation
 }

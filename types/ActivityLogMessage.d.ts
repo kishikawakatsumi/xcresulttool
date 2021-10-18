@@ -6,18 +6,18 @@
  */
 
 export interface ActivityLogMessage {
-  type: string;
-  title: string;
-  shortTitle?: string;
-  category?: string;
-  location?: DocumentLocation;
-  annotations: ActivityLogMessageAnnotation[];
+  type: string
+  title: string
+  shortTitle?: string
+  category?: string
+  location?: DocumentLocation
+  annotations: ActivityLogMessageAnnotation[]
 }
 export interface DocumentLocation {
-  url: string;
-  concreteTypeName: string;
+  url: string
+  concreteTypeName: string
 }
 export interface ActivityLogMessageAnnotation {
-  title: string;
-  location?: DocumentLocation;
+  title: string
+  location?: DocumentLocation
 }

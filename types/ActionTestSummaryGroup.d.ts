@@ -6,12 +6,12 @@
  */
 
 export interface ActionTestSummaryGroup {
-  name?: string;
-  identifier?: string;
-  duration: number;
-  subtests: ActionTestSummaryIdentifiableObject[];
+  name?: string
+  identifier?: string
+  duration: number
+  subtests: ActionTestSummaryIdentifiableObject[]
 }
 export interface ActionTestSummaryIdentifiableObject {
-  name?: string;
-  identifier?: string;
+  name?: string
+  identifier?: string
 }

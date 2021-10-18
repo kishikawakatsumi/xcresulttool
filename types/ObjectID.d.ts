@@ -6,5 +6,5 @@
  */
 
 export interface ObjectID {
-  hash: string;
+  hash: string
 }
