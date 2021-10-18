@@ -1,5 +1,6 @@
-import * as fs from 'fs/promises'
+/*eslint-disable @typescript-eslint/no-explicit-any */
 import * as exec from '@actions/exec'
+import * as fs from 'fs/promises'
 
 export async function parse(
   bundlePath: string,
@@ -12,37 +13,37 @@ export async function parse(
 function parseObject(obj: object): object {
   const o: any = {}
 
-  Object.entries(obj).forEach(([key, value]: [string, any]) => {
+  for (const [key, value] of Object.entries(obj)) {
     if (value['_value']) {
       o[key] = parsePrimitive(value)
     } else if (value['_values']) {
       o[key] = parseArray(value)
     } else if (key === '_type') {
-      return
+      continue
     } else {
       o[key] = parseObject(value)
     }
-  })
+  }
 
   return o
 }
 
 function parseArray(value: any): any {
-  return value['_values'].map((value: object) => {
+  return value['_values'].map((val: object) => {
     const obj: any = {}
-    Object.entries(value).forEach(([key, value]: [string, any]) => {
-      if (value['_value']) {
-        obj[key] = parsePrimitive(value)
-      } else if (value['_values']) {
-        obj[key] = parseArray(value)
-      } else if (key === '_type') {
-        return
-      } else if (key === '_value') {
-        return
+    for (const [k, v] of Object.entries(val)) {
+      if (v['_value']) {
+        obj[k] = parsePrimitive(v)
+      } else if (v['_values']) {
+        obj[k] = parseArray(v)
+      } else if (k === '_type') {
+        continue
+      } else if (k === '_value') {
+        continue
       } else {
-        obj[key] = parseObject(value)
+        obj[k] = parseObject(v)
       }
-    })
+    }
     return obj
   })
 }

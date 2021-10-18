@@ -1,22 +1,21 @@
-import * as os from 'os'
-import * as path from 'path'
+/*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
 import * as exec from '@actions/exec'
+import * as os from 'os'
 import * as parser from './parser'
+import * as path from 'path'
 
-import {ActionsInvocationRecord} from '../types/ActionsInvocationRecord'
-import {ActionTestPlanRunSummaries} from '../types/ActionTestPlanRunSummaries'
-import {ActionTestSummaryIdentifiableObject} from '../types/ActionTestSummaryIdentifiableObject'
-import {ActionTestSummaryGroup} from '../types/ActionTestSummaryGroup'
-import {ActionTestSummary} from '../types/ActionTestSummary'
-import {ActionTestActivitySummary} from '../types/ActionTestActivitySummary'
-import {ActionTestAttachment} from '../types/ActionTestAttachment'
-import {ActionTestFailureSummary} from '../types/ActionTestFailureSummary'
-import {SortedKeyValueArray} from '../types/SortedKeyValueArray'
-import {Reference} from '../types/Reference'
-import {ActionTestMetadata} from '../types/ActionTestMetadata'
-import {ActivityLogSection} from '../types/ActivityLogSection'
-import {ActivityLogCommandInvocationSection} from '../types/ActivityLogCommandInvocationSection'
-import {ActionsInvocationMetadata} from '../types/ActionsInvocationMetadata'
+import {ActionTestActivitySummary} from '../types/ActionTestActivitySummary.d'
+import {ActionTestFailureSummary} from '../types/ActionTestFailureSummary.d'
+import {ActionTestMetadata} from '../types/ActionTestMetadata.d'
+import {ActionTestPlanRunSummaries} from '../types/ActionTestPlanRunSummaries.d'
+import {ActionTestSummary} from '../types/ActionTestSummary.d'
+import {ActionTestSummaryGroup} from '../types/ActionTestSummaryGroup.d'
+import {ActionTestSummaryIdentifiableObject} from '../types/ActionTestSummaryIdentifiableObject.d'
+import {ActionsInvocationMetadata} from '../types/ActionsInvocationMetadata.d'
+import {ActionsInvocationRecord} from '../types/ActionsInvocationRecord.d'
+// import {ActivityLogSection} from '../types/ActivityLogSection.d'
+import {Reference} from '../types/Reference.d'
+import {SortedKeyValueArray} from '../types/SortedKeyValueArray.d'
 
 export async function format(bundlePath: string): Promise<string[]> {
   const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse(
@@ -49,14 +48,14 @@ export async function format(bundlePath: string): Promise<string[]> {
     for (const action of actionsInvocationRecord.actions) {
       const schemeCommandName = action.schemeCommandName
 
-      const title = action.title
-      const startedTime = action.startedTime
-      const endedTime = action.endedTime
+      // const title = action.title
+      // const startedTime = action.startedTime
+      // const endedTime = action.endedTime
 
       lines.push(`## ${schemeCommandName} ${entityName}\n`)
 
       // console.log(action.runDestination)
-      const displayName = action.runDestination.displayName
+      // const displayName = action.runDestination.displayName
 
       if (action.actionResult) {
         console.log('=== actionResult ===')
@@ -84,27 +83,27 @@ export async function format(bundlePath: string): Promise<string[]> {
             }
           }
         }
-        if (action.actionResult.logRef) {
-          const activityLogSection: ActivityLogSection = await parser.parse(
-            bundlePath,
-            action.actionResult.logRef.id
-          )
-          console.log('=== log ===')
-          console.log('activityLogSection')
-        }
+        // if (action.actionResult.logRef) {
+        //   const activityLogSection: ActivityLogSection = await parser.parse(
+        //     bundlePath,
+        //     action.actionResult.logRef.id
+        //   )
+        //   console.log('=== log ===')
+        //   console.log('activityLogSection')
+        // }
       }
-      if (action.buildResult) {
-        console.log('=== buildResult ===')
-        console.log(action.buildResult)
-        if (action.buildResult.logRef) {
-          const activityLogSection: ActivityLogSection = await parser.parse(
-            bundlePath,
-            action.buildResult.logRef.id
-          )
-          console.log('=== log ===')
-          console.log('activityLogSection')
-        }
-      }
+      // if (action.buildResult) {
+      //   console.log('=== buildResult ===')
+      //   console.log(action.buildResult)
+      //   if (action.buildResult.logRef) {
+      //     const activityLogSection: ActivityLogSection = await parser.parse(
+      //       bundlePath,
+      //       action.buildResult.logRef.id
+      //     )
+      //     console.log('=== log ===')
+      //     console.log('activityLogSection')
+      //   }
+      // }
     }
   }
 
@@ -112,7 +111,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     console.log('=== testFailureSummaries ===')
     for (const testFailureSummary of actionsInvocationRecord.issues
       .testFailureSummaries) {
-      // console.log(testFailureSummary)
+      console.log(testFailureSummary)
     }
   }
 
@@ -464,9 +463,9 @@ export async function format(bundlePath: string): Promise<string[]> {
               const failureSummaries = collectFailureSummaries(
                 summary.failureSummaries
               )
-              failureSummaries.forEach(failureSummary => {
+              for (const failureSummary of failureSummaries) {
                 testFailure.lines.push(`${failureSummary.contents}`)
-              })
+              }
             }
             if (summary.expectedFailures) {
               console.log('summary.expectedFailures')
@@ -480,7 +479,7 @@ export async function format(bundlePath: string): Promise<string[]> {
                 resultLines.push(`${status} ${testMethod}`)
               }
               const configuration = summary.configuration
-              let configurationValues = configuration.values.storage
+              const configurationValues = configuration.values.storage
                 .map(value => {
                   return `${value.key}: ${value.value}`
                 })
@@ -513,15 +512,17 @@ export async function format(bundlePath: string): Promise<string[]> {
                   })
 
                   if (attachments.length) {
-                    return `${indentation(activity.indent)}- ${
+                    return `${indentation(activity.indent)}- ${escapeHashSign(
                       activity.title
-                    }\n${indentation(
+                    )}\n${indentation(
                       activity.indent + 1
                     )}<details><summary>:paperclip:</summary>${attachments.join(
                       ''
                     )}</details>`
                   } else {
-                    return `${indentation(activity.indent)}- ${activity.title}`
+                    return `${indentation(activity.indent)}- ${escapeHashSign(
+                      activity.title
+                    )}`
                   }
                 })
                 .join('\n')
@@ -560,23 +561,23 @@ export async function format(bundlePath: string): Promise<string[]> {
 
   if (testFailures.failureGroups.length) {
     lines.push('### Failures')
-    testFailures.failureGroups.forEach(failureGroup => {
+    for (const failureGroup of testFailures.failureGroups) {
       const testMethodImage = remoteImage('test-method.png')
       lines.push(`<h4>${failureGroup.identifier}</h4>`)
-      failureGroup.failures.forEach(failure => {
-        failure.lines.forEach(line => {
+      for (const failure of failureGroup.failures) {
+        for (const line of failure.lines) {
           lines.push(line)
-        })
-      })
-    })
+        }
+      }
+    }
   }
 
   lines.push(testDetails.header)
-  testDetails.details.forEach(testDetail => {
-    testDetail.lines.forEach(detail => {
+  for (const testDetail of testDetails.details) {
+    for (const detail of testDetail.lines) {
       lines.push(detail)
-    })
-  })
+    }
+  }
 
   return lines
 }
@@ -586,7 +587,7 @@ async function collectTestResults(
   group: ActionTestSummaryGroup,
   testSummaries: ActionTestSummaryIdentifiableObject[],
   testResults: ActionTestSummaryIdentifiableObject[]
-) {
+): Promise<void> {
   for (const test of testSummaries) {
     if (test.hasOwnProperty('subtests')) {
       const group = test as ActionTestSummaryGroup
@@ -608,8 +609,8 @@ async function collectActivities(
   bundlePath: string,
   activitySummaries: ActionTestActivitySummary[],
   activities: Activity[],
-  indent: number = 0
-) {
+  indent = 0
+): Promise<void> {
   for (const activitySummary of activitySummaries) {
     const activity = activitySummary as Activity
     activity.indent = indent
@@ -665,7 +666,10 @@ function collectFailureSummaries(
   })
 }
 
-async function exportAttachments(bundlePath: string, activity: Activity) {
+async function exportAttachments(
+  bundlePath: string,
+  activity: Activity
+): Promise<void> {
   activity.attachments = activity.attachments || []
 
   if (activity.attachments) {
@@ -689,21 +693,21 @@ async function exportAttachments(bundlePath: string, activity: Activity) {
         }
 
         try {
-          // await exec.exec(
-          //   'curl',
-          //   [
-          //     '-X',
-          //     'POST',
-          //     'https://img-echo.netlify.app/.netlify/functions/image',
-          //     '-d',
-          //     image
-          //   ],
-          //   options
-          // )
-          // const response = JSON.parse(output)
-          // if (response) {
-          //   attachment.link = response.link
-          // }
+          await exec.exec(
+            'curl',
+            [
+              '-X',
+              'POST',
+              'https://img-echo.netlify.app/.netlify/functions/image',
+              '-d',
+              image
+            ],
+            options
+          )
+          const response = JSON.parse(output)
+          if (response) {
+            attachment.link = response.link
+          }
           attachment.link =
             'https://img-echo.netlify.app/.netlify/functions/image?file=4d10e0530dbb49eaa823eef98a51c322'
         } catch (error) {
