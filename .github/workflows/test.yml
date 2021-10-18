@@ -22,3 +22,4 @@ jobs:
       - uses: ./
         with:
           xcresult: '__tests__/data/KeychainAccess.xcresult'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
