@@ -5,6 +5,9 @@ inputs:
   xcresult:
     required: true
     description: 'Path to the xcresult bundle'
+  GITHUB_TOKEN:
+    required: true
+    description: 'GitHub token to create the check'
 runs:
   using: 'node12'
   main: 'dist/index.js'
