@@ -1,0 +1,17 @@
+name: Run
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: macos-11
+    name: Run
+    steps:
+      - uses: actions/checkout@v2
+      - uses: kishikawakatsumi/xcresulttool@main
+        with:
+          results: 'example.xcresult'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: always()
