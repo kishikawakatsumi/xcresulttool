@@ -709,10 +709,11 @@ function run() {
             if (pr && pr.head.sha) {
                 sha = pr.head.sha;
             }
+            const title = core.getInput('title');
             yield octokit.checks.create({
                 owner: owner,
                 repo: repo,
-                name: 'Xcode test results',
+                name: title,
                 status: 'completed',
                 conclusion: 'neutral',
                 head_sha: sha,

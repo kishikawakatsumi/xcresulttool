@@ -21,10 +21,11 @@ async function run(): Promise<void> {
       sha = pr.head.sha
     }
 
+    const title = core.getInput('title')
     await octokit.checks.create({
       owner: owner,
       repo: repo,
-      name: 'Xcode test results',
+      name: title,
       status: 'completed',
       conclusion: 'neutral',
       head_sha: sha,

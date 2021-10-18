@@ -8,6 +8,10 @@ inputs:
   GITHUB_TOKEN:
     required: true
     description: 'GitHub token to create the check'
+  title:
+    required: true
+    description: 'Title for the check results'
+    default: 'Xcode test results'
 runs:
   using: 'node12'
   main: 'dist/index.js'
