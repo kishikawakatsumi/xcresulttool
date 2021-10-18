@@ -680,7 +680,7 @@ async function exportAttachments(
 
         let output = ''
         const options = {
-          silent: true,
+          silent: false,
           listeners: {
             stdout: (data: Buffer) => {
               output += data.toString()

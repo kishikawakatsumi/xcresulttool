@@ -561,7 +561,7 @@ function exportAttachments(bundlePath, activity) {
                     const image = yield parser.exportObject(bundlePath, attachment.payloadRef.id, outputPath);
                     let output = '';
                     const options = {
-                        silent: true,
+                        silent: false,
                         listeners: {
                             stdout: (data) => {
                                 output += data.toString();
