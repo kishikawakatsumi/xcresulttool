@@ -23,7 +23,7 @@ stdin.on('end', () => {
       processProperties(formatDescription, type, object)
 
       fs.writeFile(
-        `schemas/${object.title}.json`,
+        `../src/schemas/${object.title}.json`,
         JSON.stringify(object, null, 2),
         err => {}
       )
