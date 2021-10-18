@@ -705,8 +705,6 @@ async function exportAttachments(
           if (response) {
             attachment.link = response.link
           }
-          attachment.link =
-            'https://img-echo.netlify.app/.netlify/functions/image?file=4d10e0530dbb49eaa823eef98a51c322'
         } catch (error) {
           console.log(error)
         }
