@@ -695,7 +695,7 @@ async function exportAttachments(
             [
               '-X',
               'POST',
-              'https://img-echo.netlify.app/.netlify/functions/image',
+              'https://xcresulttool-file.herokuapp.com/file',
               '-d',
               image
             ],
