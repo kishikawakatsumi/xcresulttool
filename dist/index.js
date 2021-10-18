@@ -417,7 +417,16 @@ function format(bundlePath) {
                                 const testActivities = activities
                                     .map(activity => {
                                     const attachments = activity.attachments.map(attachment => {
-                                        return `<div><img src="${attachment.link}"></div>`;
+                                        let width = '100%';
+                                        const userInfo = attachment.userInfo;
+                                        if (userInfo) {
+                                            for (const info of userInfo.storage) {
+                                                if (info.key === 'Scale') {
+                                                    width = `${100 / parseInt(`${info.value}`)}%`;
+                                                }
+                                            }
+                                        }
+                                        return `<div><img ${width} src="${attachment.link}"></div>`;
                                     });
                                     if (attachments.length) {
                                         const testStatus = testResult.testStatus;
@@ -561,7 +570,7 @@ function exportAttachments(bundlePath, activity) {
                     const image = yield parser.exportObject(bundlePath, attachment.payloadRef.id, outputPath);
                     let output = '';
                     const options = {
-                        silent: false,
+                        silent: true,
                         listeners: {
                             stdout: (data) => {
                                 output += data.toString();

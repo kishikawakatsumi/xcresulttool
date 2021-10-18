@@ -505,7 +505,18 @@ export async function format(bundlePath: string): Promise<string[]> {
               const testActivities = activities
                 .map(activity => {
                   const attachments = activity.attachments.map(attachment => {
-                    return `<div><img src="${attachment.link}"></div>`
+                    let width = '100%'
+
+                    const userInfo = attachment.userInfo
+                    if (userInfo) {
+                      for (const info of userInfo.storage) {
+                        if (info.key === 'Scale') {
+                          width = `${100 / parseInt(`${info.value}`)}%`
+                        }
+                      }
+                    }
+
+                    return `<div><img ${width} src="${attachment.link}"></div>`
                   })
 
                   if (attachments.length) {
@@ -680,7 +691,7 @@ async function exportAttachments(
 
         let output = ''
         const options = {
-          silent: false,
+          silent: true,
           listeners: {
             stdout: (data: Buffer) => {
               output += data.toString()
