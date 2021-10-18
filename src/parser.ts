@@ -1,6 +1,6 @@
 /*eslint-disable @typescript-eslint/no-explicit-any */
 import * as exec from '@actions/exec'
-import * as fs from 'fs/promises'
+import {promises as fs} from 'fs'
 
 export async function parse(
   bundlePath: string,
