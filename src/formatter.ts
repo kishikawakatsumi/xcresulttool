@@ -511,7 +511,8 @@ export async function format(bundlePath: string): Promise<string[]> {
                     if (userInfo) {
                       for (const info of userInfo.storage) {
                         if (info.key === 'Scale') {
-                          width = `${100 / parseInt(`${info.value}`)}%`
+                          const scale = parseInt(`${info.value}`)
+                          width = `${(100 / scale).toFixed(0)}%`
                         }
                       }
                     }
