@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: kishikawakatsumi/xcresulttool@main
         with:
-          xcresult: '__test__/data/example.xcresult'
+          xcresult: '__tests__/data/example.xcresult'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          title: 'Example test report'
         if: always()
