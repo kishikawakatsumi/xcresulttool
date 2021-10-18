@@ -368,8 +368,8 @@ function format(bundlePath) {
                         const testResult = detail;
                         const rowSpan = `rowspan="${details.length}"`;
                         const valign = `valign="top"`;
-                        const colWidth = 'width="48px"';
-                        const detailWidth = 'width="840px"';
+                        const colWidth = 'width="52px"';
+                        const detailWidth = 'width="716px"';
                         const status = statusImage(testResult.testStatus);
                         const resultLines = [];
                         if (testResult.summaryRef) {
