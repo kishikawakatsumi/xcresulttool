@@ -17,12 +17,12 @@ test('throws invalid number', async () => {
 //   expect(delta).toBeGreaterThan(450)
 // })
 
-// test('test runs', () => {
-//   process.env['INPUT_XCRESULT'] = '__tests__/results.xcresult'
-//   const np = process.execPath
-//   const ip = path.join(__dirname, '..', 'lib', 'main.js')
-//   const options: cp.ExecFileSyncOptions = {
-//     env: process.env
-//   }
-//   console.log(cp.execFileSync(np, [ip], options).toString())
-// })
+test('test runs', () => {
+  process.env['INPUT_XCRESULT'] = '__tests__/data/KeychainAccess.xcresult'
+  const np = process.execPath
+  const ip = path.join(__dirname, '..', 'lib', 'main.js')
+  const options: cp.ExecFileSyncOptions = {
+    env: process.env
+  }
+  console.log(cp.execFileSync(np, [ip], options).toString())
+})
