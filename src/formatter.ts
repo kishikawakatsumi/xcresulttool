@@ -1,4 +1,4 @@
-/*eslint-disable no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
+/*eslint-disable no-shadow */
 
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
@@ -411,7 +411,7 @@ export async function format(bundlePath: string): Promise<string[]> {
         {}
       )
 
-      for (const [identifier, details] of Object.entries(configurationGroup)) {
+      for (const [, details] of Object.entries(configurationGroup)) {
         const statuses = details.map(detail => {
           const test = detail as ActionTestSummary
           return test.testStatus
@@ -717,7 +717,6 @@ function collectFailureSummaries(
     const sourceCodeContext = failureSummary.sourceCodeContext
     const callStack = sourceCodeContext?.callStack
     const location = sourceCodeContext?.location
-    const filePath = location?.filePath
     const lineNumber = location?.lineNumber
 
     const titleAlign = 'align="right"'
@@ -744,7 +743,7 @@ function collectFailureSummaries(
         return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`
       })
       .join('\n')
-    return {contents: contents, stackTrace: stackTrace || []} as FailureSummary
+    return {contents, stackTrace: stackTrace || []} as FailureSummary
   })
 }
 
