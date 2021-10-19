@@ -313,26 +313,39 @@ function format(bundlePath) {
                 const failedRate = ((failed / total) * 100).toFixed(0);
                 const skippedRate = ((skipped / total) * 100).toFixed(0);
                 const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
-                const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`;
-                const testsStatsLines = [];
-                if (passed) {
-                    testsStatsLines.push(`${passed} passed (${passedRate}%)`);
-                }
-                if (failed) {
-                    testsStatsLines.push(`${failed} failed (${failedRate}%)`);
-                }
-                if (skipped) {
-                    testsStatsLines.push(`${skipped} skipped (${skippedRate}%)`);
-                }
-                if (expectedFailure) {
-                    testsStatsLines.push(`${expectedFailure} expected failure (${expectedFailureRate}%)`);
-                }
                 const testDuration = duration.toFixed(2);
-                const arrowImage = iconImage('right-arrow-curving-left.png');
-                const anchorName = anchorIdentifier(`${testResultSummaryName}_${groupIdentifier}_summary`);
-                const anchorBack = `[${arrowImage}](${anchorName})`;
-                const testStats = testsStatsLines.join(', ');
-                testDetail.lines.push(`${anchor}<span>${testName} ${testStats} in ${testDuration}s</span> ${anchorBack}\n`);
+                const testsStatsLines = [];
+                testsStatsLines.push('<table>');
+                testsStatsLines.push('<thead><tr>');
+                const header = [
+                    `<th>${passedImage}</th>`,
+                    `<th>${failedImage}</th>`,
+                    `<th>${skippedImage}</th>`,
+                    `<th>${expectedFailureImage}</th>`,
+                    `<th>:stopwatch:&nbsp;Time</th>`
+                ].join('');
+                testsStatsLines.push(header);
+                testsStatsLines.push('</tr></thead>');
+                testsStatsLines.push('<tbody>');
+                testsStatsLines.push('<tr>');
+                let failedCount;
+                if (failed > 0) {
+                    failedCount = `<b>${failed}</b>`;
+                }
+                else {
+                    failedCount = `${failed}`;
+                }
+                const cols = [
+                    `<td align="right" width="154px">${passed}</td>`,
+                    `<td align="right" width="154px">${failedCount}</td>`,
+                    `<td align="right" width="154px">${skipped}</td>`,
+                    `<td align="right" width="154px">${expectedFailure}</td>`,
+                    `<td align="right" width="154px">${testDuration}s</td>`
+                ].join('');
+                lines.push(cols);
+                lines.push('</tr>');
+                lines.push('</tbody>');
+                lines.push('</table>\n');
                 const testDetailTable = [];
                 testDetailTable.push(`<table>`);
                 const configurationGroup = details.reduce((groups, metadata) => {
