@@ -1,9 +1,8 @@
-/*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
+/*eslint-disable @typescript-eslint/no-explicit-any,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
 
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as os from 'os'
-import * as parser from './parser'
 import * as path from 'path'
 
 import {ActionTestActivitySummary} from '../dev/@types/ActionTestActivitySummary.d'
@@ -15,27 +14,23 @@ import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
 import {ActionTestSummaryIdentifiableObject} from '../dev/@types/ActionTestSummaryIdentifiableObject.d'
 import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata.d'
 import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
-// import {ActivityLogSection} from '../dev/@types/ActivityLogSection.d'
+import {Parser} from './parser'
 import {Reference} from '../dev/@types/Reference.d'
 import {SortedKeyValueArray} from '../dev/@types/SortedKeyValueArray.d'
 
 import sizeOf from 'image-size'
 
 export async function format(bundlePath: string): Promise<string[]> {
-  const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse(
-    bundlePath
-  )
+  const parser = new Parser(bundlePath)
+
+  const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse()
 
   const lines: string[] = []
   const testReport: any = {}
   let entityName = ''
 
-  console.log('=== actionsInvocationRecord ===')
-  console.log(actionsInvocationRecord)
-
   if (actionsInvocationRecord.metadataRef) {
     const metadata: ActionsInvocationMetadata = await parser.parse(
-      bundlePath,
       actionsInvocationRecord.metadataRef.id
     )
     if (metadata.schemeIdentifier) {
@@ -45,32 +40,21 @@ export async function format(bundlePath: string): Promise<string[]> {
   }
 
   if (actionsInvocationRecord.actions) {
-    console.log('=== actions ===')
     for (const action of actionsInvocationRecord.actions) {
       const schemeCommandName = action.schemeCommandName
 
-      // const title = action.title
-      // const startedTime = action.startedTime
-      // const endedTime = action.endedTime
-
       lines.push(`### ${schemeCommandName} ${entityName}\n`)
 
-      // console.log(action.runDestination)
-      // const displayName = action.runDestination.displayName
-
       if (action.actionResult) {
-        console.log('=== actionResult ===')
-        console.log(action.actionResult)
         if (action.actionResult.testsRef) {
           const actionTestPlanRunSummaries: ActionTestPlanRunSummaries =
-            await parser.parse(bundlePath, action.actionResult.testsRef.id)
-          console.log('=== actionTestPlanRunSummaries ===')
+            await parser.parse(action.actionResult.testsRef.id)
 
           for (const summary of actionTestPlanRunSummaries.summaries) {
             for (const testableSummary of summary.testableSummaries) {
               const testResults: ActionTestMetadata[] = []
               await collectTestResults(
-                bundlePath,
+                parser,
                 testableSummary as any,
                 testableSummary.tests,
                 testResults
@@ -84,35 +68,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             }
           }
         }
-        // if (action.actionResult.logRef) {
-        //   const activityLogSection: ActivityLogSection = await parser.parse(
-        //     bundlePath,
-        //     action.actionResult.logRef.id
-        //   )
-        //   console.log('=== log ===')
-        //   console.log('activityLogSection')
-        // }
       }
-      // if (action.buildResult) {
-      //   console.log('=== buildResult ===')
-      //   console.log(action.buildResult)
-      //   if (action.buildResult.logRef) {
-      //     const activityLogSection: ActivityLogSection = await parser.parse(
-      //       bundlePath,
-      //       action.buildResult.logRef.id
-      //     )
-      //     console.log('=== log ===')
-      //     console.log('activityLogSection')
-      //   }
-      // }
-    }
-  }
-
-  if (actionsInvocationRecord.issues.testFailureSummaries) {
-    console.log('=== testFailureSummaries ===')
-    for (const testFailureSummary of actionsInvocationRecord.issues
-      .testFailureSummaries) {
-      console.log(testFailureSummary)
     }
   }
 
@@ -487,7 +443,6 @@ export async function format(bundlePath: string): Promise<string[]> {
 
           if (testResult.summaryRef) {
             const summary: ActionTestSummary = await parser.parse(
-              bundlePath,
               testResult.summaryRef.id
             )
 
@@ -508,10 +463,6 @@ export async function format(bundlePath: string): Promise<string[]> {
               for (const failureSummary of failureSummaries) {
                 testFailure.lines.push(`${failureSummary.contents}`)
               }
-            }
-            if (summary.expectedFailures) {
-              console.log('summary.expectedFailures')
-              console.log(summary.expectedFailures)
             }
 
             if (summary.configuration) {
@@ -563,7 +514,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             const activities: Activity[] = []
             if (summary.activitySummaries) {
               await collectActivities(
-                bundlePath,
+                parser,
                 summary.activitySummaries,
                 activities
               )
@@ -703,7 +654,7 @@ export async function format(bundlePath: string): Promise<string[]> {
 }
 
 async function collectTestResults(
-  bundlePath: string,
+  parser: Parser,
   group: ActionTestSummaryGroup,
   testSummaries: ActionTestSummaryIdentifiableObject[],
   testResults: ActionTestSummaryIdentifiableObject[]
@@ -711,7 +662,7 @@ async function collectTestResults(
   for (const test of testSummaries) {
     if (test.hasOwnProperty('subtests')) {
       const group = test as ActionTestSummaryGroup
-      await collectTestResults(bundlePath, group, group.subtests, testResults)
+      await collectTestResults(parser, group, group.subtests, testResults)
     } else {
       const obj: any = test
       obj['group'] = group.name
@@ -726,7 +677,7 @@ async function collectTestResults(
 }
 
 async function collectActivities(
-  bundlePath: string,
+  parser: Parser,
   activitySummaries: ActionTestActivitySummary[],
   activities: Activity[],
   indent = 0
@@ -734,12 +685,12 @@ async function collectActivities(
   for (const activitySummary of activitySummaries) {
     const activity = activitySummary as Activity
     activity.indent = indent
-    await exportAttachments(bundlePath, activity)
+    await exportAttachments(parser, activity)
     activities.push(activity)
 
     if (activitySummary.subactivities) {
       await collectActivities(
-        bundlePath,
+        parser,
         activitySummary.subactivities,
         activities,
         indent + 1
@@ -787,7 +738,7 @@ function collectFailureSummaries(
 }
 
 async function exportAttachments(
-  bundlePath: string,
+  parser: Parser,
   activity: Activity
 ): Promise<void> {
   activity.attachments = activity.attachments || []
@@ -797,7 +748,6 @@ async function exportAttachments(
       if (attachment.filename && attachment.payloadRef) {
         const outputPath = path.join(os.tmpdir(), attachment.filename)
         const image = await parser.exportObject(
-          bundlePath,
           attachment.payloadRef.id,
           outputPath
         )
@@ -834,7 +784,7 @@ async function exportAttachments(
             }
           }
         } catch (error) {
-          console.log(error)
+          core.error(error as Error)
         }
       }
     }

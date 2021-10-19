@@ -4,33 +4,66 @@ import * as exec from '@actions/exec'
 import {promises} from 'fs'
 const {readFile} = promises
 
-export async function parse(
-  bundlePath: string,
-  reference?: string
-): Promise<any> {
-  const root = JSON.parse(await toJSON(bundlePath, reference))
-  return parseObject(root) as any
-}
+export class Parser {
+  private bundlePath: string
 
-async function toJSON(bundlePath: string, reference?: string): Promise<string> {
-  const args = ['xcresulttool', 'get', '--path', bundlePath, '--format', 'json']
-  if (reference) {
-    args.push('--id')
-    args.push(reference)
+  constructor(bundlePath: string) {
+    this.bundlePath = bundlePath
   }
 
-  let output = ''
-  const options = {
-    silent: true,
-    listeners: {
-      stdout: (data: Buffer) => {
-        output += data.toString()
+  async parse(reference?: string): Promise<any> {
+    const root = JSON.parse(await this.toJSON(reference))
+    return parseObject(root) as any
+  }
+
+  async exportObject(reference: string, outputPath: string): Promise<Buffer> {
+    const args = [
+      'xcresulttool',
+      'export',
+      '--type',
+      'file',
+      '--path',
+      this.bundlePath,
+      '--output-path',
+      outputPath,
+      '--id',
+      reference
+    ]
+    const options = {
+      silent: true
+    }
+
+    await exec.exec('xcrun', args, options)
+    return Buffer.from(await readFile(outputPath))
+  }
+
+  private async toJSON(reference?: string): Promise<string> {
+    const args = [
+      'xcresulttool',
+      'get',
+      '--path',
+      this.bundlePath,
+      '--format',
+      'json'
+    ]
+    if (reference) {
+      args.push('--id')
+      args.push(reference)
+    }
+
+    let output = ''
+    const options = {
+      silent: true,
+      listeners: {
+        stdout: (data: Buffer) => {
+          output += data.toString()
+        }
       }
     }
-  }
 
-  await exec.exec('xcrun', args, options)
-  return output
+    await exec.exec('xcrun', args, options)
+    return output
+  }
 }
 
 function parseObject(element: object): object {
@@ -80,29 +113,4 @@ function parsePrimitive(element: any): any {
     default:
       return element['_value']
   }
-}
-
-export async function exportObject(
-  bundlePath: string,
-  reference: string,
-  outputPath: string
-): Promise<Buffer> {
-  const args = [
-    'xcresulttool',
-    'export',
-    '--type',
-    'file',
-    '--path',
-    bundlePath,
-    '--output-path',
-    outputPath,
-    '--id',
-    reference
-  ]
-  const options = {
-    silent: true
-  }
-
-  await exec.exec('xcrun', args, options)
-  return Buffer.from(await readFile(outputPath))
 }
