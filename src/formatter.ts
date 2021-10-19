@@ -217,12 +217,12 @@ export async function format(bundlePath: string): Promise<string[]> {
   lines.push('<tbody><tr>')
   const duration = testSummary.duration.toFixed(2)
   const cols = [
-    `<td align="right" width="138px">${testSummary.total}</td>`,
+    `<td align="right" width="118px">${testSummary.total}</td>`,
     `<td align="right" width="118px">${testSummary.passed}</td>`,
     `<td align="right" width="118px">${testSummary.failed}</td>`,
     `<td align="right" width="118px">${testSummary.skipped}</td>`,
     `<td align="right" width="158px">${testSummary.expectedFailure}</td>`,
-    `<td align="right" width="118px">${duration}s</td>`
+    `<td align="right" width="138px">${duration}s</td>`
   ].join('')
   lines.push(cols)
   lines.push('</tr></tbody>')
@@ -577,12 +577,12 @@ export async function format(bundlePath: string): Promise<string[]> {
           let testResultRow = ''
           if (details.length > 1) {
             if (index === 0) {
-              testResultRow = `<tr><td ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+              testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
             } else {
               testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
             }
           } else {
-            testResultRow = `<tr><td ${valign} ${colWidth}>${status}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+            testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
           }
           testDetailTable.push(testResultRow)
         }
