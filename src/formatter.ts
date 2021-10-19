@@ -96,6 +96,13 @@ export async function format(bundlePath: string): Promise<string[]> {
     }
   }
 
+  interface TestSummaryStats {
+    passed: number
+    failed: number
+    skipped: number
+    expectedFailure: number
+    total: number
+  }
   const testSummary = {
     passed: 0,
     failed: 0,
@@ -121,7 +128,7 @@ export async function format(bundlePath: string): Promise<string[]> {
       {}
     )
 
-    const group: any = {}
+    const group: {[key: string]: TestSummaryStats} = {}
     for (const [identifier, details] of Object.entries(detailGroup)) {
       const [passed, failed, skipped, expectedFailure, total, duration] =
         details.reduce(
