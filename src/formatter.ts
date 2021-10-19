@@ -400,13 +400,13 @@ export async function format(bundlePath: string): Promise<string[]> {
 
       let failedCount: string
       if (failed > 0) {
-        failedCount = `<b>${failed}</b>`
+        failedCount = `<b>${failed} (${failedRate}%)</b>`
       } else {
-        failedCount = `${failed}`
+        failedCount = `${failed} (${failedRate}%)`
       }
       const cols = [
         `<td align="right" width="154px">${passed} (${passedRate}%)</td>`,
-        `<td align="right" width="154px">${failedCount} (${failedRate}%)</td>`,
+        `<td align="right" width="154px">${failedCount}</td>`,
         `<td align="right" width="154px">${skipped} (${skippedRate}%)</td>`,
         `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)</td>`,
         `<td align="right" width="154px">${testDuration}s</td>`
