@@ -40,16 +40,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.format = void 0;
+const Image = __importStar(__nccwpck_require__(1281));
 const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2087));
 const path = __importStar(__nccwpck_require__(5622));
 const parser_1 = __nccwpck_require__(267);
 const image_size_1 = __importDefault(__nccwpck_require__(8250));
-const passedImage = statusImage('Success');
-const failedImage = statusImage('Failure');
-const skippedImage = statusImage('Skipped');
-const expectedFailureImage = statusImage('Expected Failure');
+const passedIcon = Image.testStatus('Success');
+const failedIcon = Image.testStatus('Failure');
+const skippedIcon = Image.testStatus('Skipped');
+const expectedFailureIcon = Image.testStatus('Expected Failure');
+const backIcon = Image.icon('right-arrow-curving-left.png');
+const testClassIcon = Image.icon('test-class.png');
+const testMethodIcon = Image.icon('test-method.png');
+const attachmentIcon = Image.icon('attachment.png');
 class TestReportSection {
     constructor(summary, details) {
         this.summary = summary;
@@ -163,10 +168,10 @@ function format(bundlePath) {
         lines.push('<thead><tr>');
         const header = [
             `<th>Total</th>`,
-            `<th>${passedImage}&nbsp;Passed</th>`,
-            `<th>${failedImage}&nbsp;Failed</th>`,
-            `<th>${skippedImage}&nbsp;Skipped</th>`,
-            `<th>${expectedFailureImage}&nbsp;Expected Failure</th>`,
+            `<th>${passedIcon}&nbsp;Passed</th>`,
+            `<th>${failedIcon}&nbsp;Failed</th>`,
+            `<th>${skippedIcon}&nbsp;Skipped</th>`,
+            `<th>${expectedFailureIcon}&nbsp;Expected Failure</th>`,
             `<th>:stopwatch:&nbsp;Time</th>`
         ].join('');
         lines.push(header);
@@ -203,17 +208,17 @@ function format(bundlePath) {
             const header = [
                 `<th>Test</th>`,
                 `<th>Total</th>`,
-                `<th>${passedImage}</th>`,
-                `<th>${failedImage}</th>`,
-                `<th>${skippedImage}</th>`,
-                `<th>${expectedFailureImage}</th>`
+                `<th>${passedIcon}</th>`,
+                `<th>${failedIcon}</th>`,
+                `<th>${skippedIcon}</th>`,
+                `<th>${expectedFailureIcon}</th>`
             ].join('');
             lines.push(header);
             lines.push('</tr></thead>');
             lines.push('<tbody>');
             for (const [identifier, stats] of Object.entries(group)) {
                 lines.push('<tr>');
-                const testClass = `${iconImage('test-class.png')}&nbsp;${identifier}`;
+                const testClass = `${testClassIcon}&nbsp;${identifier}`;
                 const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`;
                 const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`);
                 const testClassLink = `<a href="${anchorName}">${testClass}</a>`;
@@ -247,9 +252,8 @@ function format(bundlePath) {
             const testDetail = new TestDetail();
             testDetails.details.push(testDetail);
             const testResultSummaryName = results.summary.name;
-            const backImage = iconImage('right-arrow-curving-left.png');
             const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`);
-            testDetail.lines.push(`#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backImage}](${anchorName})`);
+            testDetail.lines.push(`#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backIcon}](${anchorName})`);
             testDetail.lines.push('');
             const detailGroup = results.details.reduce((groups, detail) => {
                 const d = detail;
@@ -294,18 +298,17 @@ function format(bundlePath) {
                 const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
                 const testDuration = duration.toFixed(2);
                 const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`;
-                const arrowImage = iconImage('right-arrow-curving-left.png');
                 const anchorName = anchorIdentifier(`${testResultSummaryName}_${groupIdentifier}_summary`);
-                const anchorBack = `[${arrowImage}](${anchorName})`;
+                const anchorBack = `[${backIcon}](${anchorName})`;
                 testDetail.lines.push(`${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`);
                 const testsStatsLines = [];
                 testsStatsLines.push('<table>');
                 testsStatsLines.push('<thead><tr>');
                 const header = [
-                    `<th>${passedImage}</th>`,
-                    `<th>${failedImage}</th>`,
-                    `<th>${skippedImage}</th>`,
-                    `<th>${expectedFailureImage}</th>`,
+                    `<th>${passedIcon}</th>`,
+                    `<th>${failedIcon}</th>`,
+                    `<th>${skippedIcon}</th>`,
+                    `<th>${expectedFailureIcon}</th>`,
                     `<th>:stopwatch:</th>`
                 ].join('');
                 testsStatsLines.push(header);
@@ -380,14 +383,14 @@ function format(bundlePath) {
                             }
                         }
                     }
-                    const groupStatusImage = statusImage(groupStatus);
+                    const groupStatusImage = Image.testStatus(groupStatus);
                     for (const [index, detail] of details.entries()) {
                         const testResult = detail;
                         const rowSpan = `rowspan="${details.length}"`;
                         const valign = `valign="top"`;
                         const colWidth = 'width="52px"';
                         const detailWidth = 'width="716px"';
-                        const status = statusImage(testResult.testStatus);
+                        const status = Image.testStatus(testResult.testStatus);
                         const resultLines = [];
                         if (testResult.summaryRef) {
                             const summary = yield parser.parse(testResult.summaryRef.id);
@@ -404,16 +407,14 @@ function format(bundlePath) {
                             if (summary.configuration) {
                                 if (testResult.name) {
                                     const isFailure = testResult.testStatus === 'Failure';
-                                    const testMethodImage = iconImage('test-method.png');
                                     const testMethodAnchor = isFailure
                                         ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                                         : '';
-                                    const backImage = iconImage('right-arrow-curving-left.png');
                                     const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                     const backAnchorLink = isFailure
-                                        ? `<a href="${backAnchorName}">${backImage}</a>`
+                                        ? `<a href="${backAnchorName}">${backIcon}</a>`
                                         : '';
-                                    const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
+                                    const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
                                     resultLines.push(`${status} ${testMethod}`);
                                 }
                                 const configuration = summary.configuration;
@@ -427,16 +428,14 @@ function format(bundlePath) {
                             else {
                                 if (testResult.name) {
                                     const isFailure = testResult.testStatus === 'Failure';
-                                    const testMethodImage = iconImage('test-method.png');
                                     const testMethodAnchor = isFailure
                                         ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                                         : '';
-                                    const backImage = iconImage('right-arrow-curving-left.png');
                                     const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                     const backAnchorLink = isFailure
-                                        ? `<a href="${backAnchorName}">${backImage}</a>`
+                                        ? `<a href="${backAnchorName}">${backIcon}</a>`
                                         : '';
-                                    const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
+                                    const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
                                     resultLines.push(`${testMethod}`);
                                 }
                             }
@@ -489,8 +488,7 @@ function format(bundlePath) {
                                         const message = `${indentation(activity.indent)}- ${title}`;
                                         const attachmentIndent = indentation(activity.indent + 1);
                                         const attachmentContent = attachments.join('');
-                                        const icon = iconImage('attachment.png');
-                                        return `${message}\n${attachmentIndent}<details ${open}><summary>${icon}</summary>${attachmentContent}</details>`;
+                                        return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>`;
                                     }
                                     else {
                                         const indent = indentation(activity.indent);
@@ -504,16 +502,14 @@ function format(bundlePath) {
                         else {
                             if (testResult.name) {
                                 const isFailure = testResult.testStatus === 'Failure';
-                                const testMethodImage = iconImage('test-method.png');
                                 const testMethodAnchor = isFailure
                                     ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                                     : '';
-                                const backImage = iconImage('right-arrow-curving-left.png');
                                 const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                 const backAnchorLink = isFailure
-                                    ? `<a href="${backAnchorName}">${backImage}</a>`
+                                    ? `<a href="${backAnchorName}">${backIcon}</a>`
                                     : '';
-                                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
+                                const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
                                 resultLines.push(`${testMethod}`);
                             }
                         }
@@ -695,7 +691,24 @@ class TestDetail {
 function indentation(level) {
     return '  '.repeat(level);
 }
-function statusImage(statusText) {
+function anchorIdentifier(text) {
+    return `#user-content-${text.toLowerCase()}`;
+}
+function escapeHashSign(text) {
+    return text.replace(/#/g, '<span>#</span>');
+}
+
+
+/***/ }),
+
+/***/ 1281:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.icon = exports.testStatus = void 0;
+function testStatus(statusText) {
     let filename = '';
     switch (statusText) {
         case 'Success':
@@ -724,17 +737,13 @@ function statusImage(statusText) {
     const attrs = 'width="14px" align="top"';
     return `<img src="${baseUrl}${filename}" alt="${statusText}" title="${statusText}" ${attrs}>`;
 }
-function iconImage(filename) {
+exports.testStatus = testStatus;
+function icon(filename) {
     const baseUrl = 'https://xcresulttool-resources.netlify.app/images/';
     const attrs = 'width="14px" align="top"';
     return `<img src="${baseUrl}${filename}" ${attrs}>`;
 }
-function anchorIdentifier(text) {
-    return `#user-content-${text.toLowerCase()}`;
-}
-function escapeHashSign(text) {
-    return text.replace(/#/g, '<span>#</span>');
-}
+exports.icon = icon;
 
 
 /***/ }),

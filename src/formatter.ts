@@ -1,5 +1,6 @@
 /*eslint-disable no-shadow */
 
+import * as Image from './image'
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as os from 'os'
@@ -21,10 +22,15 @@ import {SortedKeyValueArray} from '../dev/@types/SortedKeyValueArray.d'
 
 import sizeOf from 'image-size'
 
-const passedImage = statusImage('Success')
-const failedImage = statusImage('Failure')
-const skippedImage = statusImage('Skipped')
-const expectedFailureImage = statusImage('Expected Failure')
+const passedIcon = Image.testStatus('Success')
+const failedIcon = Image.testStatus('Failure')
+const skippedIcon = Image.testStatus('Skipped')
+const expectedFailureIcon = Image.testStatus('Expected Failure')
+
+const backIcon = Image.icon('right-arrow-curving-left.png')
+const testClassIcon = Image.icon('test-class.png')
+const testMethodIcon = Image.icon('test-method.png')
+const attachmentIcon = Image.icon('attachment.png')
 
 type actionTestSummary =
   | ActionTestSummaryIdentifiableObject
@@ -180,10 +186,10 @@ export async function format(bundlePath: string): Promise<string[]> {
   lines.push('<thead><tr>')
   const header = [
     `<th>Total</th>`,
-    `<th>${passedImage}&nbsp;Passed</th>`,
-    `<th>${failedImage}&nbsp;Failed</th>`,
-    `<th>${skippedImage}&nbsp;Skipped</th>`,
-    `<th>${expectedFailureImage}&nbsp;Expected Failure</th>`,
+    `<th>${passedIcon}&nbsp;Passed</th>`,
+    `<th>${failedIcon}&nbsp;Failed</th>`,
+    `<th>${skippedIcon}&nbsp;Skipped</th>`,
+    `<th>${expectedFailureIcon}&nbsp;Expected Failure</th>`,
     `<th>:stopwatch:&nbsp;Time</th>`
   ].join('')
   lines.push(header)
@@ -227,10 +233,10 @@ export async function format(bundlePath: string): Promise<string[]> {
     const header = [
       `<th>Test</th>`,
       `<th>Total</th>`,
-      `<th>${passedImage}</th>`,
-      `<th>${failedImage}</th>`,
-      `<th>${skippedImage}</th>`,
-      `<th>${expectedFailureImage}</th>`
+      `<th>${passedIcon}</th>`,
+      `<th>${failedIcon}</th>`,
+      `<th>${skippedIcon}</th>`,
+      `<th>${expectedFailureIcon}</th>`
     ].join('')
     lines.push(header)
     lines.push('</tr></thead>')
@@ -238,7 +244,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     lines.push('<tbody>')
     for (const [identifier, stats] of Object.entries(group)) {
       lines.push('<tr>')
-      const testClass = `${iconImage('test-class.png')}&nbsp;${identifier}`
+      const testClass = `${testClassIcon}&nbsp;${identifier}`
       const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
       const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`)
       const testClassLink = `<a href="${anchorName}">${testClass}</a>`
@@ -276,10 +282,9 @@ export async function format(bundlePath: string): Promise<string[]> {
     testDetails.details.push(testDetail)
 
     const testResultSummaryName = results.summary.name
-    const backImage = iconImage('right-arrow-curving-left.png')
     const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`)
     testDetail.lines.push(
-      `#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backImage}](${anchorName})`
+      `#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backIcon}](${anchorName})`
     )
     testDetail.lines.push('')
 
@@ -348,11 +353,10 @@ export async function format(bundlePath: string): Promise<string[]> {
       const testDuration = duration.toFixed(2)
 
       const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`
-      const arrowImage = iconImage('right-arrow-curving-left.png')
       const anchorName = anchorIdentifier(
         `${testResultSummaryName}_${groupIdentifier}_summary`
       )
-      const anchorBack = `[${arrowImage}](${anchorName})`
+      const anchorBack = `[${backIcon}](${anchorName})`
       testDetail.lines.push(`${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`)
 
       const testsStatsLines: string[] = []
@@ -360,10 +364,10 @@ export async function format(bundlePath: string): Promise<string[]> {
       testsStatsLines.push('<table>')
       testsStatsLines.push('<thead><tr>')
       const header = [
-        `<th>${passedImage}</th>`,
-        `<th>${failedImage}</th>`,
-        `<th>${skippedImage}</th>`,
-        `<th>${expectedFailureImage}</th>`,
+        `<th>${passedIcon}</th>`,
+        `<th>${failedIcon}</th>`,
+        `<th>${skippedIcon}</th>`,
+        `<th>${expectedFailureIcon}</th>`,
         `<th>:stopwatch:</th>`
       ].join('')
       testsStatsLines.push(header)
@@ -445,7 +449,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             }
           }
         }
-        const groupStatusImage = statusImage(groupStatus)
+        const groupStatusImage = Image.testStatus(groupStatus)
 
         for (const [index, detail] of details.entries()) {
           const testResult = detail as ActionTestMetadata
@@ -454,7 +458,7 @@ export async function format(bundlePath: string): Promise<string[]> {
           const colWidth = 'width="52px"'
           const detailWidth = 'width="716px"'
 
-          const status = statusImage(testResult.testStatus)
+          const status = Image.testStatus(testResult.testStatus)
           const resultLines: string[] = []
 
           if (testResult.summaryRef) {
@@ -484,18 +488,16 @@ export async function format(bundlePath: string): Promise<string[]> {
             if (summary.configuration) {
               if (testResult.name) {
                 const isFailure = testResult.testStatus === 'Failure'
-                const testMethodImage = iconImage('test-method.png')
                 const testMethodAnchor = isFailure
                   ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                   : ''
-                const backImage = iconImage('right-arrow-curving-left.png')
                 const backAnchorName = anchorIdentifier(
                   `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                 )
                 const backAnchorLink = isFailure
-                  ? `<a href="${backAnchorName}">${backImage}</a>`
+                  ? `<a href="${backAnchorName}">${backIcon}</a>`
                   : ''
-                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
+                const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
                 resultLines.push(`${status} ${testMethod}`)
               }
               const configuration = summary.configuration
@@ -511,18 +513,16 @@ export async function format(bundlePath: string): Promise<string[]> {
             } else {
               if (testResult.name) {
                 const isFailure = testResult.testStatus === 'Failure'
-                const testMethodImage = iconImage('test-method.png')
                 const testMethodAnchor = isFailure
                   ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                   : ''
-                const backImage = iconImage('right-arrow-curving-left.png')
                 const backAnchorName = anchorIdentifier(
                   `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                 )
                 const backAnchorLink = isFailure
-                  ? `<a href="${backAnchorName}">${backImage}</a>`
+                  ? `<a href="${backAnchorName}">${backIcon}</a>`
                   : ''
-                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
+                const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
                 resultLines.push(`${testMethod}`)
               }
             }
@@ -588,8 +588,7 @@ export async function format(bundlePath: string): Promise<string[]> {
                     const message = `${indentation(activity.indent)}- ${title}`
                     const attachmentIndent = indentation(activity.indent + 1)
                     const attachmentContent = attachments.join('')
-                    const icon = iconImage('attachment.png')
-                    return `${message}\n${attachmentIndent}<details ${open}><summary>${icon}</summary>${attachmentContent}</details>`
+                    return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>`
                   } else {
                     const indent = indentation(activity.indent)
                     return `${indent}- ${escapeHashSign(activity.title)}`
@@ -602,18 +601,16 @@ export async function format(bundlePath: string): Promise<string[]> {
           } else {
             if (testResult.name) {
               const isFailure = testResult.testStatus === 'Failure'
-              const testMethodImage = iconImage('test-method.png')
               const testMethodAnchor = isFailure
                 ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                 : ''
-              const backImage = iconImage('right-arrow-curving-left.png')
               const backAnchorName = anchorIdentifier(
                 `${testResultSummaryName}_${testResult.identifier}_failure-summary`
               )
               const backAnchorLink = isFailure
-                ? `<a href="${backAnchorName}">${backImage}</a>`
+                ? `<a href="${backAnchorName}">${backIcon}</a>`
                 : ''
-              const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
+              const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
               resultLines.push(`${testMethod}`)
             }
           }
@@ -874,42 +871,6 @@ interface FailureSummary {
 
 function indentation(level: number): string {
   return '  '.repeat(level)
-}
-
-function statusImage(statusText: string): string {
-  let filename = ''
-  switch (statusText) {
-    case 'Success':
-      filename = 'passed.png'
-      break
-    case 'Failure':
-      filename = 'failure.png'
-      break
-    case 'Skipped':
-      filename = 'skipped.png'
-      break
-    case 'Mixed Success':
-      filename = 'mixed-passed.png'
-      break
-    case 'Mixed Failure':
-      filename = 'mixed-failure.png'
-      break
-    case 'Expected Failure':
-      filename = 'expected-failure.png'
-      break
-    default:
-      filename = 'unknown.png'
-      break
-  }
-  const baseUrl = 'https://xcresulttool-resources.netlify.app/images/'
-  const attrs = 'width="14px" align="top"'
-  return `<img src="${baseUrl}${filename}" alt="${statusText}" title="${statusText}" ${attrs}>`
-}
-
-function iconImage(filename: string): string {
-  const baseUrl = 'https://xcresulttool-resources.netlify.app/images/'
-  const attrs = 'width="14px" align="top"'
-  return `<img src="${baseUrl}${filename}" ${attrs}>`
 }
 
 function anchorIdentifier(text: string): string {
