@@ -674,14 +674,9 @@ async function collectTestSummaries(
       const group = test as ActionTestSummaryGroup
       await collectTestSummaries(parser, group, group.subtests, testSummaries)
     } else {
-      const obj: any = test
-      obj['group'] = group.name
-      if (test.hasOwnProperty('summaryRef')) {
-        const metadata = test as ActionTestMetadata
-        testSummaries.push(metadata)
-      } else {
-        testSummaries.push(test)
-      }
+      const t = test as actionTestSummary & {group?: string}
+      t.group = group.name
+      testSummaries.push(test)
     }
   }
 }
