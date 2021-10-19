@@ -218,7 +218,7 @@ function format(bundlePath) {
         lines.push('### Test Summary');
         for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
             const anchorName = anchorIdentifier(groupIdentifier);
-            lines.push(`#### <a name="${groupIdentifier}_summary">[${groupIdentifier}](${anchorName})`);
+            lines.push(`#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})`);
             lines.push('');
             lines.push('<table>');
             lines.push('<thead><tr>');
@@ -410,7 +410,9 @@ function format(bundlePath) {
                                 if (testResult.name) {
                                     const testMethodImage = iconImage('test-method.png');
                                     const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`;
-                                    const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>`;
+                                    const backImage = iconImage('right-arrow-curving-left.png');
+                                    const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                    const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>[${backImage}](${backAnchorName})`;
                                     resultLines.push(`${status} ${testMethod}`);
                                 }
                                 const configuration = summary.configuration;
@@ -424,8 +426,10 @@ function format(bundlePath) {
                             else {
                                 if (testResult.name) {
                                     const testMethodImage = iconImage('test-method.png');
-                                    const testMethodAnchor = `<a name="${testResult.identifier}"></a>`;
-                                    const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>`;
+                                    const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`;
+                                    const backImage = iconImage('right-arrow-curving-left.png');
+                                    const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                    const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>[${backImage}](${backAnchorName})`;
                                     resultLines.push(`${testMethod}`);
                                 }
                             }
@@ -493,8 +497,10 @@ function format(bundlePath) {
                         else {
                             if (testResult.name) {
                                 const testMethodImage = iconImage('test-method.png');
-                                const testMethodAnchor = `<a name="${testResult.identifier}"></a>`;
-                                const testMethod = `${testMethodAnchor}${testMethodImage} <code>${testResult.name}</code>`;
+                                const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`;
+                                const backImage = iconImage('right-arrow-curving-left.png');
+                                const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>[${backImage}](${backAnchorName})`;
                                 resultLines.push(`${testMethod}`);
                             }
                         }
@@ -524,7 +530,7 @@ function format(bundlePath) {
             for (const failureGroup of testFailures.failureGroups) {
                 if (failureGroup.failures.length) {
                     const anchorName = anchorIdentifier(`${failureGroup.summaryIdentifier}_${failureGroup.identifier}`);
-                    const testMethodLink = `<a href="${anchorName}">${failureGroup.identifier}</a>`;
+                    const testMethodLink = `<a name="${failureGroup.summaryIdentifier}_${failureGroup.identifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.identifier}</a>`;
                     lines.push(`<h4>${testMethodLink}</h4>`);
                     for (const failure of failureGroup.failures) {
                         for (const line of failure.lines) {
