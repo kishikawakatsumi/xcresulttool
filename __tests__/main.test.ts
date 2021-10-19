@@ -26,7 +26,8 @@ test('test runs', () => {
   }
   try {
     console.log(cp.execFileSync(np, [ip], options).toString())
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    console.log(error.stdout.toString())
+    console.log(error.stderr.toString())
   }
 })
