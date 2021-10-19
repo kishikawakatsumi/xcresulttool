@@ -458,7 +458,8 @@ function format(bundlePath) {
                                         const message = `${indentation(activity.indent)}- ${title}`;
                                         const attachmentIndent = indentation(activity.indent + 1);
                                         const attachmentContent = attachments.join('');
-                                        return `${message}\n${attachmentIndent}<details ${open}><summary>:paperclip:</summary>${attachmentContent}</details>`;
+                                        const icon = iconImage('attachment.png');
+                                        return `${message}\n${attachmentIndent}<details ${open}><summary> ${icon} </summary>${attachmentContent}</details>`;
                                     }
                                     else {
                                         const indent = indentation(activity.indent);
