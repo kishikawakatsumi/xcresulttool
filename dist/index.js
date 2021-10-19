@@ -346,7 +346,7 @@ function format(bundlePath) {
                 testsStatsLines.push('</tr>');
                 testsStatsLines.push('</tbody>');
                 testsStatsLines.push('</table>\n');
-                lines.push(testsStatsLines.join('\n'));
+                testDetail.lines.push(testsStatsLines.join('\n'));
                 const testDetailTable = [];
                 testDetailTable.push(`<table>`);
                 const configurationGroup = details.reduce((groups, metadata) => {

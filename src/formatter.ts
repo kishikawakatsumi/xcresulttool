@@ -409,7 +409,7 @@ export async function format(bundlePath: string): Promise<string[]> {
       testsStatsLines.push('</tbody>')
       testsStatsLines.push('</table>\n')
 
-      lines.push(testsStatsLines.join('\n'))
+      testDetail.lines.push(testsStatsLines.join('\n'))
 
       const testDetailTable: string[] = []
       testDetailTable.push(`<table>`)
