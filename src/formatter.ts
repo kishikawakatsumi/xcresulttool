@@ -403,11 +403,13 @@ export async function format(bundlePath: string): Promise<string[]> {
         `<td align="right" width="154px">${expectedFailure}</td>`,
         `<td align="right" width="154px">${testDuration}s</td>`
       ].join('')
-      lines.push(cols)
-      lines.push('</tr>')
+      testsStatsLines.push(cols)
+      testsStatsLines.push('</tr>')
 
-      lines.push('</tbody>')
-      lines.push('</table>\n')
+      testsStatsLines.push('</tbody>')
+      testsStatsLines.push('</table>\n')
+
+      lines.push(testsStatsLines.join('\n'))
 
       const testDetailTable: string[] = []
       testDetailTable.push(`<table>`)

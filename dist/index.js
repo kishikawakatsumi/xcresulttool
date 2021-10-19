@@ -342,10 +342,11 @@ function format(bundlePath) {
                     `<td align="right" width="154px">${expectedFailure}</td>`,
                     `<td align="right" width="154px">${testDuration}s</td>`
                 ].join('');
-                lines.push(cols);
-                lines.push('</tr>');
-                lines.push('</tbody>');
-                lines.push('</table>\n');
+                testsStatsLines.push(cols);
+                testsStatsLines.push('</tr>');
+                testsStatsLines.push('</tbody>');
+                testsStatsLines.push('</table>\n');
+                lines.push(testsStatsLines.join('\n'));
                 const testDetailTable = [];
                 testDetailTable.push(`<table>`);
                 const configurationGroup = details.reduce((groups, metadata) => {
