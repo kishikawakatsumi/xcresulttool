@@ -1,4 +1,5 @@
 /*eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as exec from '@actions/exec'
 import {promises} from 'fs'
 const {readFile} = promises
@@ -9,55 +10,6 @@ export async function parse(
 ): Promise<any> {
   const root = JSON.parse(await toJSON(bundlePath, reference))
   return parseObject(root) as any
-}
-
-function parseObject(obj: object): object {
-  const o: any = {}
-
-  for (const [key, value] of Object.entries(obj)) {
-    if (value['_value']) {
-      o[key] = parsePrimitive(value)
-    } else if (value['_values']) {
-      o[key] = parseArray(value)
-    } else if (key === '_type') {
-      continue
-    } else {
-      o[key] = parseObject(value)
-    }
-  }
-
-  return o
-}
-
-function parseArray(value: any): any {
-  return value['_values'].map((val: object) => {
-    const obj: any = {}
-    for (const [k, v] of Object.entries(val)) {
-      if (v['_value']) {
-        obj[k] = parsePrimitive(v)
-      } else if (v['_values']) {
-        obj[k] = parseArray(v)
-      } else if (k === '_type') {
-        continue
-      } else if (k === '_value') {
-        continue
-      } else {
-        obj[k] = parseObject(v)
-      }
-    }
-    return obj
-  })
-}
-
-function parsePrimitive(object: any): any {
-  switch (object['_type']['_name']) {
-    case 'Int':
-      return parseInt(object['_value'])
-    case 'Double':
-      return parseFloat(object['_value'])
-    default:
-      return object['_value']
-  }
 }
 
 async function toJSON(bundlePath: string, reference?: string): Promise<string> {
@@ -79,6 +31,55 @@ async function toJSON(bundlePath: string, reference?: string): Promise<string> {
 
   await exec.exec('xcrun', args, options)
   return output
+}
+
+function parseObject(element: object): object {
+  const obj: any = {}
+
+  for (const [key, value] of Object.entries(element)) {
+    if (value['_value']) {
+      obj[key] = parsePrimitive(value)
+    } else if (value['_values']) {
+      obj[key] = parseArray(value)
+    } else if (key === '_type') {
+      continue
+    } else {
+      obj[key] = parseObject(value)
+    }
+  }
+
+  return obj
+}
+
+function parseArray(arrayElement: any): any {
+  return arrayElement['_values'].map((arrayValue: object) => {
+    const obj: any = {}
+    for (const [key, value] of Object.entries(arrayValue)) {
+      if (value['_value']) {
+        obj[key] = parsePrimitive(value)
+      } else if (value['_values']) {
+        obj[key] = parseArray(value)
+      } else if (key === '_type') {
+        continue
+      } else if (key === '_value') {
+        continue
+      } else {
+        obj[key] = parseObject(value)
+      }
+    }
+    return obj
+  })
+}
+
+function parsePrimitive(element: any): any {
+  switch (element['_type']['_name']) {
+    case 'Int':
+      return parseInt(element['_value'])
+    case 'Double':
+      return parseFloat(element['_value'])
+    default:
+      return element['_value']
+  }
 }
 
 export async function exportObject(

@@ -868,6 +868,7 @@ run();
 
 "use strict";
 
+/*eslint-disable @typescript-eslint/no-explicit-any */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -898,7 +899,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.exportObject = exports.parse = void 0;
-/*eslint-disable @typescript-eslint/no-explicit-any */
 const exec = __importStar(__nccwpck_require__(1514));
 const fs_1 = __nccwpck_require__(5747);
 const { readFile } = fs_1.promises;
@@ -909,57 +909,6 @@ function parse(bundlePath, reference) {
     });
 }
 exports.parse = parse;
-function parseObject(obj) {
-    const o = {};
-    for (const [key, value] of Object.entries(obj)) {
-        if (value['_value']) {
-            o[key] = parsePrimitive(value);
-        }
-        else if (value['_values']) {
-            o[key] = parseArray(value);
-        }
-        else if (key === '_type') {
-            continue;
-        }
-        else {
-            o[key] = parseObject(value);
-        }
-    }
-    return o;
-}
-function parseArray(value) {
-    return value['_values'].map((val) => {
-        const obj = {};
-        for (const [k, v] of Object.entries(val)) {
-            if (v['_value']) {
-                obj[k] = parsePrimitive(v);
-            }
-            else if (v['_values']) {
-                obj[k] = parseArray(v);
-            }
-            else if (k === '_type') {
-                continue;
-            }
-            else if (k === '_value') {
-                continue;
-            }
-            else {
-                obj[k] = parseObject(v);
-            }
-        }
-        return obj;
-    });
-}
-function parsePrimitive(object) {
-    switch (object['_type']['_name']) {
-        case 'Int':
-            return parseInt(object['_value']);
-        case 'Double':
-            return parseFloat(object['_value']);
-        default:
-            return object['_value'];
-    }
-}
 function toJSON(bundlePath, reference) {
     return __awaiter(this, void 0, void 0, function* () {
         const args = ['xcresulttool', 'get', '--path', bundlePath, '--format', 'json'];
@@ -979,6 +928,57 @@ function toJSON(bundlePath, reference) {
         yield exec.exec('xcrun', args, options);
         return output;
     });
+}
+function parseObject(element) {
+    const obj = {};
+    for (const [key, value] of Object.entries(element)) {
+        if (value['_value']) {
+            obj[key] = parsePrimitive(value);
+        }
+        else if (value['_values']) {
+            obj[key] = parseArray(value);
+        }
+        else if (key === '_type') {
+            continue;
+        }
+        else {
+            obj[key] = parseObject(value);
+        }
+    }
+    return obj;
+}
+function parseArray(arrayElement) {
+    return arrayElement['_values'].map((arrayValue) => {
+        const obj = {};
+        for (const [key, value] of Object.entries(arrayValue)) {
+            if (value['_value']) {
+                obj[key] = parsePrimitive(value);
+            }
+            else if (value['_values']) {
+                obj[key] = parseArray(value);
+            }
+            else if (key === '_type') {
+                continue;
+            }
+            else if (key === '_value') {
+                continue;
+            }
+            else {
+                obj[key] = parseObject(value);
+            }
+        }
+        return obj;
+    });
+}
+function parsePrimitive(element) {
+    switch (element['_type']['_name']) {
+        case 'Int':
+            return parseInt(element['_value']);
+        case 'Double':
+            return parseFloat(element['_value']);
+        default:
+            return element['_value'];
+    }
 }
 function exportObject(bundlePath, reference, outputPath) {
     return __awaiter(this, void 0, void 0, function* () {
