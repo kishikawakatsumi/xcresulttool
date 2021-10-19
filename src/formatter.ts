@@ -1,22 +1,25 @@
 /*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
+
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as os from 'os'
 import * as parser from './parser'
 import * as path from 'path'
 
-import {ActionTestActivitySummary} from './types/ActionTestActivitySummary'
-import {ActionTestFailureSummary} from './types/ActionTestFailureSummary'
-import {ActionTestMetadata} from './types/ActionTestMetadata'
-import {ActionTestPlanRunSummaries} from './types/ActionTestPlanRunSummaries'
-import {ActionTestSummary} from './types/ActionTestSummary'
-import {ActionTestSummaryGroup} from './types/ActionTestSummaryGroup'
-import {ActionTestSummaryIdentifiableObject} from './types/ActionTestSummaryIdentifiableObject'
-import {ActionsInvocationMetadata} from './types/ActionsInvocationMetadata'
-import {ActionsInvocationRecord} from './types/ActionsInvocationRecord'
-// import {ActivityLogSection} from '../types/ActivityLogSection.d'
-import {Reference} from './types/Reference'
-import {SortedKeyValueArray} from './types/SortedKeyValueArray'
+import {ActionTestActivitySummary} from '../dev/@types/ActionTestActivitySummary.d'
+import {ActionTestFailureSummary} from '../dev/@types/ActionTestFailureSummary.d'
+import {ActionTestMetadata} from '../dev/@types/ActionTestMetadata.d'
+import {ActionTestPlanRunSummaries} from '../dev/@types/ActionTestPlanRunSummaries.d'
+import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
+import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
+import {ActionTestSummaryIdentifiableObject} from '../dev/@types/ActionTestSummaryIdentifiableObject.d'
+import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata.d'
+import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
+// import {ActivityLogSection} from '../dev/@types/ActivityLogSection.d'
+import {Reference} from '../dev/@types/Reference.d'
+import {SortedKeyValueArray} from '../dev/@types/SortedKeyValueArray.d'
+
+import sizeOf from 'image-size'
 
 export async function format(bundlePath: string): Promise<string[]> {
   const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse(
@@ -571,7 +574,7 @@ export async function format(bundlePath: string): Promise<string[]> {
                   const attachments = activity.attachments.map(attachment => {
                     let width = '100%'
                     const dimensions = attachment.dimensions
-                    if (dimensions && dimensions.width && dimensions.height) {
+                    if (dimensions.width && dimensions.height) {
                       if (
                         dimensions.orientation &&
                         dimensions.orientation >= 5
@@ -587,11 +590,7 @@ export async function format(bundlePath: string): Promise<string[]> {
                       for (const info of userInfo.storage) {
                         if (info.key === 'Scale') {
                           const scale = parseInt(`${info.value}`)
-                          if (
-                            dimensions &&
-                            dimensions.width &&
-                            dimensions.height
-                          ) {
+                          if (dimensions.width && dimensions.height) {
                             if (
                               dimensions.orientation &&
                               dimensions.orientation >= 5
@@ -813,12 +812,11 @@ async function exportAttachments(
           }
         }
 
-        if (image && core.getInput('GITHUB_TOKEN')) {
-          try {
-            const sizeOf = require('image-size')
-            const dimensions: Dimensions = sizeOf(image)
-            attachment.dimensions = dimensions
+        try {
+          const dimensions: Dimensions = sizeOf(image)
+          attachment.dimensions = dimensions
 
+          if (image && core.getInput('GITHUB_TOKEN')) {
             await exec.exec(
               'curl',
               [
@@ -834,9 +832,9 @@ async function exportAttachments(
             if (response) {
               attachment.link = response.link
             }
-          } catch (error) {
-            console.log(error)
           }
+        } catch (error) {
+          console.log(error)
         }
       }
     }

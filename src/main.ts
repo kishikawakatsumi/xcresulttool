@@ -1,11 +1,10 @@
 import * as artifact from '@actions/artifact'
 import * as core from '@actions/core'
-import * as github from '@actions/github'
-import {Octokit} from '@octokit/action'
 import * as formatter from './formatter'
+import * as github from '@actions/github'
 import * as path from 'path'
+import {Octokit} from '@octokit/action'
 
-/*eslint-disable @typescript-eslint/no-explicit-any */
 async function run(): Promise<void> {
   try {
     const bundlePath: string = core.getInput('xcresult')
@@ -25,8 +24,8 @@ async function run(): Promise<void> {
 
       const title = core.getInput('title')
       await octokit.checks.create({
-        owner: owner,
-        repo: repo,
+        owner,
+        repo,
         name: title,
         status: 'completed',
         conclusion: 'neutral',
@@ -47,15 +46,15 @@ async function run(): Promise<void> {
         continueOnError: false
       }
 
-      const uploadResponse = await artifactClient.uploadArtifact(
+      await artifactClient.uploadArtifact(
         artifactName,
         files,
         rootDirectory,
         options
       )
     }
-  } catch (error: any) {
-    core.setFailed(error.message)
+  } catch (error) {
+    core.setFailed((error as Error).message)
   }
 }
 

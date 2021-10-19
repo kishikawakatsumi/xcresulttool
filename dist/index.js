@@ -6,6 +6,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 
 "use strict";
 
+/*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -34,14 +35,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.format = void 0;
-/*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
 const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2087));
 const parser = __importStar(__nccwpck_require__(267));
 const path = __importStar(__nccwpck_require__(5622));
+const image_size_1 = __importDefault(__nccwpck_require__(8250));
 function format(bundlePath) {
     return __awaiter(this, void 0, void 0, function* () {
         const actionsInvocationRecord = yield parser.parse(bundlePath);
@@ -475,7 +479,7 @@ function format(bundlePath) {
                                     const attachments = activity.attachments.map(attachment => {
                                         let width = '100%';
                                         const dimensions = attachment.dimensions;
-                                        if (dimensions && dimensions.width && dimensions.height) {
+                                        if (dimensions.width && dimensions.height) {
                                             if (dimensions.orientation &&
                                                 dimensions.orientation >= 5) {
                                                 width = `${dimensions.height}px`;
@@ -489,9 +493,7 @@ function format(bundlePath) {
                                             for (const info of userInfo.storage) {
                                                 if (info.key === 'Scale') {
                                                     const scale = parseInt(`${info.value}`);
-                                                    if (dimensions &&
-                                                        dimensions.width &&
-                                                        dimensions.height) {
+                                                    if (dimensions.width && dimensions.height) {
                                                         if (dimensions.orientation &&
                                                             dimensions.orientation >= 5) {
                                                             width = `${(dimensions.height / scale).toFixed(0)}px`;
@@ -672,11 +674,10 @@ function exportAttachments(bundlePath, activity) {
                             }
                         }
                     };
-                    if (image && core.getInput('GITHUB_TOKEN')) {
-                        try {
-                            const sizeOf = __nccwpck_require__(8250);
-                            const dimensions = sizeOf(image);
-                            attachment.dimensions = dimensions;
+                    try {
+                        const dimensions = (0, image_size_1.default)(image);
+                        attachment.dimensions = dimensions;
+                        if (image && core.getInput('GITHUB_TOKEN')) {
                             yield exec.exec('curl', [
                                 '-X',
                                 'POST',
@@ -689,9 +690,9 @@ function exportAttachments(bundlePath, activity) {
                                 attachment.link = response.link;
                             }
                         }
-                        catch (error) {
-                            console.log(error);
-                        }
+                    }
+                    catch (error) {
+                        console.log(error);
                     }
                 }
             }
@@ -810,11 +811,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const artifact = __importStar(__nccwpck_require__(2605));
 const core = __importStar(__nccwpck_require__(2186));
-const github = __importStar(__nccwpck_require__(5438));
-const action_1 = __nccwpck_require__(1231);
 const formatter = __importStar(__nccwpck_require__(7556));
+const github = __importStar(__nccwpck_require__(5438));
 const path = __importStar(__nccwpck_require__(5622));
-/*eslint-disable @typescript-eslint/no-explicit-any */
+const action_1 = __nccwpck_require__(1231);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -831,8 +831,8 @@ function run() {
                 }
                 const title = core.getInput('title');
                 yield octokit.checks.create({
-                    owner: owner,
-                    repo: repo,
+                    owner,
+                    repo,
                     name: title,
                     status: 'completed',
                     conclusion: 'neutral',
@@ -850,7 +850,7 @@ function run() {
                 const options = {
                     continueOnError: false
                 };
-                const uploadResponse = yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
             }
         }
         catch (error) {
