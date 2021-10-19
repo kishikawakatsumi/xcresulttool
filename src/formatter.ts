@@ -20,6 +20,11 @@ import {SortedKeyValueArray} from '../dev/@types/SortedKeyValueArray.d'
 
 import sizeOf from 'image-size'
 
+const passedImage = statusImage('Success')
+const failedImage = statusImage('Failure')
+const skippedImage = statusImage('Skipped')
+const expectedFailureImage = statusImage('Expected Failure')
+
 export async function format(bundlePath: string): Promise<string[]> {
   const parser = new Parser(bundlePath)
 
@@ -156,10 +161,6 @@ export async function format(bundlePath: string): Promise<string[]> {
   }
 
   lines.push('### Summary')
-  const passedImage = statusImage('Success')
-  const failedImage = statusImage('Failure')
-  const skippedImage = statusImage('Skipped')
-  const expectedFailureImage = statusImage('Expected Failure')
 
   lines.push('<table>')
   lines.push('<thead><tr>')
