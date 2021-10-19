@@ -38,7 +38,8 @@ export async function format(bundlePath: string): Promise<string[]> {
   const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse()
 
   const lines: string[] = []
-  const testReport: {[key: string]: TestReportSection} = {}
+
+  const testReport = new TestReport()
   let entityName = ''
 
   if (actionsInvocationRecord.metadataRef) {
@@ -72,10 +73,8 @@ export async function format(bundlePath: string): Promise<string[]> {
                 testSummaries
               )
               if (testableSummary.name) {
-                testReport[testableSummary.name] = new TestReportSection(
-                  testableSummary,
-                  testSummaries
-                )
+                testReport.sections[testableSummary.name] =
+                  new TestReportSection(testableSummary, testSummaries)
               }
             }
           }
@@ -97,7 +96,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     duration: 0,
     groups: {} as {[key: string]: TestSummaryStatsGroup}
   }
-  for (const [identifier, results] of Object.entries(testReport)) {
+  for (const [identifier, results] of Object.entries(testReport.sections)) {
     const detailGroup = results.details.reduce(
       (groups: {[key: string]: actionTestSummaries}, detail) => {
         const d = detail as actionTestSummary & {group?: string}
@@ -259,7 +258,7 @@ export async function format(bundlePath: string): Promise<string[]> {
   const testFailures = new TestFailures()
   const testDetails = new TestDetails()
 
-  for (const [, results] of Object.entries(testReport)) {
+  for (const [, results] of Object.entries(testReport.sections)) {
     const testDetail = new TestDetail()
     testDetails.details.push(testDetail)
 
@@ -800,6 +799,10 @@ type actionTestSummary =
 
 type actionTestSummaries = actionTestSummary[]
 
+class TestReport {
+  readonly sections: {[key: string]: TestReportSection} = {}
+}
+
 class TestReportSection {
   readonly summary: ActionTestableSummary
   readonly details: actionTestSummaries
@@ -811,15 +814,15 @@ class TestReportSection {
 }
 
 class TestFailures {
-  failureGroups: TestFailureGroup[] = []
+  readonly failureGroups: TestFailureGroup[] = []
 }
 
 class TestFailureGroup {
-  summaryIdentifier: string
-  identifier: string
-  name: string
+  readonly summaryIdentifier: string
+  readonly identifier: string
+  readonly name: string
 
-  failures: TestFailure[] = []
+  readonly failures: TestFailure[] = []
 
   constructor(summaryIdentifier: string, identifier: string, name: string) {
     this.summaryIdentifier = summaryIdentifier
@@ -829,16 +832,16 @@ class TestFailureGroup {
 }
 
 class TestFailure {
-  lines: string[] = []
+  readonly lines: string[] = []
 }
 
 class TestDetails {
-  header = '### Test Details\n'
-  details: TestDetail[] = []
+  readonly header = '### Test Details\n'
+  readonly details: TestDetail[] = []
 }
 
 class TestDetail {
-  lines: string[] = []
+  readonly lines: string[] = []
 }
 
 interface Activity {
