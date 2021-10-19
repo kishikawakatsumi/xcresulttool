@@ -6,7 +6,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 
 "use strict";
 
-/*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
+/*eslint-disable no-shadow */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -43,149 +43,122 @@ exports.format = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2087));
-const parser = __importStar(__nccwpck_require__(267));
 const path = __importStar(__nccwpck_require__(5622));
+const parser_1 = __nccwpck_require__(267);
 const image_size_1 = __importDefault(__nccwpck_require__(8250));
+const passedImage = statusImage('Success');
+const failedImage = statusImage('Failure');
+const skippedImage = statusImage('Skipped');
+const expectedFailureImage = statusImage('Expected Failure');
+class TestReportSection {
+    constructor(summary, details) {
+        this.summary = summary;
+        this.details = details;
+    }
+}
 function format(bundlePath) {
     return __awaiter(this, void 0, void 0, function* () {
-        const actionsInvocationRecord = yield parser.parse(bundlePath);
+        const parser = new parser_1.Parser(bundlePath);
+        const actionsInvocationRecord = yield parser.parse();
         const lines = [];
         const testReport = {};
         let entityName = '';
-        console.log('=== actionsInvocationRecord ===');
-        console.log(actionsInvocationRecord);
         if (actionsInvocationRecord.metadataRef) {
-            const metadata = yield parser.parse(bundlePath, actionsInvocationRecord.metadataRef.id);
+            const metadata = yield parser.parse(actionsInvocationRecord.metadataRef.id);
             if (metadata.schemeIdentifier) {
                 const schemeIdentifier = metadata.schemeIdentifier;
                 entityName = schemeIdentifier.entityName;
             }
         }
         if (actionsInvocationRecord.actions) {
-            console.log('=== actions ===');
             for (const action of actionsInvocationRecord.actions) {
                 const schemeCommandName = action.schemeCommandName;
-                // const title = action.title
-                // const startedTime = action.startedTime
-                // const endedTime = action.endedTime
                 lines.push(`### ${schemeCommandName} ${entityName}\n`);
-                // console.log(action.runDestination)
-                // const displayName = action.runDestination.displayName
                 if (action.actionResult) {
-                    console.log('=== actionResult ===');
-                    console.log(action.actionResult);
                     if (action.actionResult.testsRef) {
-                        const actionTestPlanRunSummaries = yield parser.parse(bundlePath, action.actionResult.testsRef.id);
-                        console.log('=== actionTestPlanRunSummaries ===');
+                        const actionTestPlanRunSummaries = yield parser.parse(action.actionResult.testsRef.id);
                         for (const summary of actionTestPlanRunSummaries.summaries) {
                             for (const testableSummary of summary.testableSummaries) {
-                                const testResults = [];
-                                yield collectTestResults(bundlePath, testableSummary, testableSummary.tests, testResults);
+                                const testSummaries = [];
+                                yield collectTestSummaries(parser, testableSummary, testableSummary.tests, testSummaries);
                                 if (testableSummary.name) {
-                                    testReport[testableSummary.name] = {
-                                        summary: testableSummary,
-                                        details: testResults
-                                    };
+                                    testReport[testableSummary.name] = new TestReportSection(testableSummary, testSummaries);
                                 }
                             }
                         }
                     }
-                    // if (action.actionResult.logRef) {
-                    //   const activityLogSection: ActivityLogSection = await parser.parse(
-                    //     bundlePath,
-                    //     action.actionResult.logRef.id
-                    //   )
-                    //   console.log('=== log ===')
-                    //   console.log('activityLogSection')
-                    // }
                 }
-                // if (action.buildResult) {
-                //   console.log('=== buildResult ===')
-                //   console.log(action.buildResult)
-                //   if (action.buildResult.logRef) {
-                //     const activityLogSection: ActivityLogSection = await parser.parse(
-                //       bundlePath,
-                //       action.buildResult.logRef.id
-                //     )
-                //     console.log('=== log ===')
-                //     console.log('activityLogSection')
-                //   }
-                // }
             }
         }
-        if (actionsInvocationRecord.issues.testFailureSummaries) {
-            console.log('=== testFailureSummaries ===');
-            for (const testFailureSummary of actionsInvocationRecord.issues
-                .testFailureSummaries) {
-                console.log(testFailureSummary);
+        class TestSummaryStats {
+            constructor() {
+                this.passed = 0;
+                this.failed = 0;
+                this.skipped = 0;
+                this.expectedFailure = 0;
+                this.total = 0;
             }
         }
         const testSummary = {
-            passed: 0,
-            failed: 0,
-            skipped: 0,
-            expectedFailure: 0,
-            total: 0,
+            stats: new TestSummaryStats(),
             duration: 0,
             groups: {}
         };
         for (const [identifier, results] of Object.entries(testReport)) {
-            const details = results['details'];
-            const detailGroup = details.reduce((groups, detail) => {
-                const group = detail['group'];
-                if (groups[group]) {
-                    groups[group].push(detail);
-                }
-                else {
-                    groups[group] = [detail];
+            const detailGroup = results.details.reduce((groups, detail) => {
+                const d = detail;
+                if (d.group) {
+                    if (groups[d.group]) {
+                        groups[d.group].push(detail);
+                    }
+                    else {
+                        groups[d.group] = [detail];
+                    }
                 }
                 return groups;
             }, {});
             const group = {};
             for (const [identifier, details] of Object.entries(detailGroup)) {
-                const [passed, failed, skipped, expectedFailure, total, duration] = details.reduce(([passed, failed, skipped, expectedFailure, total, duration], metadata) => {
-                    switch (metadata.testStatus) {
+                const [stats, duration] = details.reduce(([stats, duration], detail) => {
+                    const test = detail;
+                    switch (test.testStatus) {
                         case 'Success':
-                            passed++;
+                            stats.passed++;
                             break;
                         case 'Failure':
-                            failed++;
+                            stats.failed++;
                             break;
                         case 'Skipped':
-                            skipped++;
+                            stats.skipped++;
                             break;
                         case 'Expected Failure':
-                            expectedFailure++;
+                            stats.expectedFailure++;
                             break;
                     }
-                    total++;
-                    if (metadata.duration) {
-                        duration = metadata.duration;
+                    stats.total++;
+                    if (test.duration) {
+                        duration = test.duration;
                     }
-                    return [passed, failed, skipped, expectedFailure, total, duration];
-                }, [0, 0, 0, 0, 0, 0]);
-                testSummary.passed += passed;
-                testSummary.failed += failed;
-                testSummary.skipped += skipped;
-                testSummary.expectedFailure += expectedFailure;
-                testSummary.total += total;
+                    return [stats, duration];
+                }, [new TestSummaryStats(), 0]);
+                testSummary.stats.passed += stats.passed;
+                testSummary.stats.failed += stats.failed;
+                testSummary.stats.skipped += stats.skipped;
+                testSummary.stats.expectedFailure += stats.expectedFailure;
+                testSummary.stats.total += stats.total;
                 testSummary.duration += duration;
                 group[identifier] = {
-                    passed: passed,
-                    failed: failed,
-                    skipped: skipped,
-                    expectedFailure: expectedFailure,
-                    total: total
+                    passed: stats.passed,
+                    failed: stats.failed,
+                    skipped: stats.skipped,
+                    expectedFailure: stats.expectedFailure,
+                    total: stats.total
                 };
             }
             const groups = testSummary.groups;
             groups[identifier] = group;
         }
         lines.push('### Summary');
-        const passedImage = statusImage('Success');
-        const failedImage = statusImage('Failure');
-        const skippedImage = statusImage('Skipped');
-        const expectedFailureImage = statusImage('Expected Failure');
         lines.push('<table>');
         lines.push('<thead><tr>');
         const header = [
@@ -200,19 +173,19 @@ function format(bundlePath) {
         lines.push('</tr></thead>');
         lines.push('<tbody><tr>');
         let failedCount;
-        if (testSummary.failed > 0) {
-            failedCount = `<b>${testSummary.failed}</b>`;
+        if (testSummary.stats.failed > 0) {
+            failedCount = `<b>${testSummary.stats.failed}</b>`;
         }
         else {
-            failedCount = `${testSummary.failed}`;
+            failedCount = `${testSummary.stats.failed}`;
         }
         const duration = testSummary.duration.toFixed(2);
         const cols = [
-            `<td align="right" width="118px">${testSummary.total}</td>`,
-            `<td align="right" width="118px">${testSummary.passed}</td>`,
+            `<td align="right" width="118px">${testSummary.stats.total}</td>`,
+            `<td align="right" width="118px">${testSummary.stats.passed}</td>`,
             `<td align="right" width="118px">${failedCount}</td>`,
-            `<td align="right" width="118px">${testSummary.skipped}</td>`,
-            `<td align="right" width="158px">${testSummary.expectedFailure}</td>`,
+            `<td align="right" width="118px">${testSummary.stats.skipped}</td>`,
+            `<td align="right" width="158px">${testSummary.stats.expectedFailure}</td>`,
             `<td align="right" width="138px">${duration}s</td>`
         ].join('');
         lines.push(cols);
@@ -238,27 +211,26 @@ function format(bundlePath) {
             lines.push(header);
             lines.push('</tr></thead>');
             lines.push('<tbody>');
-            for (const [identifier, detail] of Object.entries(group)) {
+            for (const [identifier, stats] of Object.entries(group)) {
                 lines.push('<tr>');
-                const test = detail;
                 const testClass = `${iconImage('test-class.png')}&nbsp;${identifier}`;
                 const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`;
                 const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`);
                 const testClassLink = `<a href="${anchorName}">${testClass}</a>`;
                 let failedCount;
-                if (test.failed > 0) {
-                    failedCount = `<b>${test.failed}</b>`;
+                if (stats.failed > 0) {
+                    failedCount = `<b>${stats.failed}</b>`;
                 }
                 else {
-                    failedCount = `${test.failed}`;
+                    failedCount = `${stats.failed}`;
                 }
                 const cols = [
                     `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
-                    `<td align="right" width="80px">${test.total}</td>`,
-                    `<td align="right" width="80px">${test.passed}</td>`,
+                    `<td align="right" width="80px">${stats.total}</td>`,
+                    `<td align="right" width="80px">${stats.passed}</td>`,
                     `<td align="right" width="80px">${failedCount}</td>`,
-                    `<td align="right" width="80px">${test.skipped}</td>`,
-                    `<td align="right" width="80px">${test.expectedFailure}</td>`
+                    `<td align="right" width="80px">${stats.skipped}</td>`,
+                    `<td align="right" width="80px">${stats.expectedFailure}</td>`
                 ].join('');
                 lines.push(cols);
                 lines.push('</tr>');
@@ -271,29 +243,31 @@ function format(bundlePath) {
         lines.push('');
         const testFailures = new TestFailures();
         const testDetails = new TestDetails();
-        for (const [identifier, results] of Object.entries(testReport)) {
+        for (const [, results] of Object.entries(testReport)) {
             const testDetail = new TestDetail();
             testDetails.details.push(testDetail);
-            const testResultSummaryName = results['summary']['name'];
+            const testResultSummaryName = results.summary.name;
             const backImage = iconImage('right-arrow-curving-left.png');
             const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`);
             testDetail.lines.push(`#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backImage}](${anchorName})`);
             testDetail.lines.push('');
-            const details = results['details'];
-            const detailGroup = details.reduce((groups, detail) => {
-                const group = detail['group'];
-                if (groups[group]) {
-                    groups[group].push(detail);
-                }
-                else {
-                    groups[group] = [detail];
+            const detailGroup = results.details.reduce((groups, detail) => {
+                const d = detail;
+                if (d.group) {
+                    if (groups[d.group]) {
+                        groups[d.group].push(detail);
+                    }
+                    else {
+                        groups[d.group] = [detail];
+                    }
                 }
                 return groups;
             }, {});
             for (const [identifier, details] of Object.entries(detailGroup)) {
                 const groupIdentifier = identifier;
-                const [passed, failed, skipped, expectedFailure, total, duration] = details.reduce(([passed, failed, skipped, expectedFailure, total, duration], metadata) => {
-                    switch (metadata.testStatus) {
+                const [passed, failed, skipped, expectedFailure, total, duration] = details.reduce(([passed, failed, skipped, expectedFailure, total, duration], detail) => {
+                    const test = detail;
+                    switch (test.testStatus) {
                         case 'Success':
                             passed++;
                             break;
@@ -308,8 +282,8 @@ function format(bundlePath) {
                             break;
                     }
                     total++;
-                    if (metadata.duration) {
-                        duration = metadata.duration;
+                    if (test.duration) {
+                        duration = test.duration;
                     }
                     return [passed, failed, skipped, expectedFailure, total, duration];
                 }, [0, 0, 0, 0, 0, 0]);
@@ -359,20 +333,21 @@ function format(bundlePath) {
                 testDetail.lines.push(testsStatsLines.join('\n'));
                 const testDetailTable = [];
                 testDetailTable.push(`<table>`);
-                const configurationGroup = details.reduce((groups, metadata) => {
-                    if (metadata.identifier) {
-                        if (groups[metadata.identifier]) {
-                            groups[metadata.identifier].push(metadata);
+                const configurationGroup = details.reduce((groups, detail) => {
+                    if (detail.identifier) {
+                        if (groups[detail.identifier]) {
+                            groups[detail.identifier].push(detail);
                         }
                         else {
-                            groups[metadata.identifier] = [metadata];
+                            groups[detail.identifier] = [detail];
                         }
                     }
                     return groups;
                 }, {});
-                for (const [identifier, details] of Object.entries(configurationGroup)) {
+                for (const [, details] of Object.entries(configurationGroup)) {
                     const statuses = details.map(detail => {
-                        return detail.testStatus;
+                        const test = detail;
+                        return test.testStatus;
                     });
                     let groupStatus = '';
                     if (statuses.length) {
@@ -415,8 +390,8 @@ function format(bundlePath) {
                         const status = statusImage(testResult.testStatus);
                         const resultLines = [];
                         if (testResult.summaryRef) {
-                            const summary = yield parser.parse(bundlePath, testResult.summaryRef.id);
-                            const testFailureGroup = new TestFailureGroup(testResultSummaryName, summary.identifier || '', summary.name || '');
+                            const summary = yield parser.parse(testResult.summaryRef.id);
+                            const testFailureGroup = new TestFailureGroup(testResultSummaryName || '', summary.identifier || '', summary.name || '');
                             testFailures.failureGroups.push(testFailureGroup);
                             if (summary.failureSummaries) {
                                 const testFailure = new TestFailure();
@@ -425,10 +400,6 @@ function format(bundlePath) {
                                 for (const failureSummary of failureSummaries) {
                                     testFailure.lines.push(`${failureSummary.contents}`);
                                 }
-                            }
-                            if (summary.expectedFailures) {
-                                console.log('summary.expectedFailures');
-                                console.log(summary.expectedFailures);
                             }
                             if (summary.configuration) {
                                 if (testResult.name) {
@@ -471,7 +442,7 @@ function format(bundlePath) {
                             }
                             const activities = [];
                             if (summary.activitySummaries) {
-                                yield collectActivities(bundlePath, summary.activitySummaries, activities);
+                                yield collectActivities(parser, summary.activitySummaries, activities);
                             }
                             if (activities.length) {
                                 const testActivities = activities
@@ -593,36 +564,30 @@ function format(bundlePath) {
     });
 }
 exports.format = format;
-function collectTestResults(bundlePath, group, testSummaries, testResults) {
+function collectTestSummaries(parser, group, tests, testSummaries) {
     return __awaiter(this, void 0, void 0, function* () {
-        for (const test of testSummaries) {
+        for (const test of tests) {
             if (test.hasOwnProperty('subtests')) {
                 const group = test;
-                yield collectTestResults(bundlePath, group, group.subtests, testResults);
+                yield collectTestSummaries(parser, group, group.subtests, testSummaries);
             }
             else {
-                const obj = test;
-                obj['group'] = group.name;
-                if (test.hasOwnProperty('summaryRef')) {
-                    const metadata = test;
-                    testResults.push(metadata);
-                }
-                else {
-                    testResults.push(test);
-                }
+                const t = test;
+                t.group = group.name;
+                testSummaries.push(test);
             }
         }
     });
 }
-function collectActivities(bundlePath, activitySummaries, activities, indent = 0) {
+function collectActivities(parser, activitySummaries, activities, indent = 0) {
     return __awaiter(this, void 0, void 0, function* () {
         for (const activitySummary of activitySummaries) {
             const activity = activitySummary;
             activity.indent = indent;
-            yield exportAttachments(bundlePath, activity);
+            yield exportAttachments(parser, activity);
             activities.push(activity);
             if (activitySummary.subactivities) {
-                yield collectActivities(bundlePath, activitySummary.subactivities, activities, indent + 1);
+                yield collectActivities(parser, activitySummary.subactivities, activities, indent + 1);
             }
         }
     });
@@ -632,7 +597,6 @@ function collectFailureSummaries(failureSummaries) {
         const sourceCodeContext = failureSummary.sourceCodeContext;
         const callStack = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.callStack;
         const location = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.location;
-        const filePath = location === null || location === void 0 ? void 0 : location.filePath;
         const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
         const titleAlign = 'align="right"';
         const titleWidth = 'width="100px"';
@@ -654,17 +618,17 @@ function collectFailureSummaries(failureSummaries) {
             const seq = `${index}`.padEnd(2, ' ');
             return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`;
         }).join('\n');
-        return { contents: contents, stackTrace: stackTrace || [] };
+        return { contents, stackTrace: stackTrace || [] };
     });
 }
-function exportAttachments(bundlePath, activity) {
+function exportAttachments(parser, activity) {
     return __awaiter(this, void 0, void 0, function* () {
         activity.attachments = activity.attachments || [];
         if (activity.attachments) {
             for (const attachment of activity.attachments) {
                 if (attachment.filename && attachment.payloadRef) {
                     const outputPath = path.join(os.tmpdir(), attachment.filename);
-                    const image = yield parser.exportObject(bundlePath, attachment.payloadRef.id, outputPath);
+                    const image = yield parser.exportObject(attachment.payloadRef.id, outputPath);
                     let output = '';
                     const options = {
                         silent: true,
@@ -692,7 +656,7 @@ function exportAttachments(bundlePath, activity) {
                         }
                     }
                     catch (error) {
-                        console.log(error);
+                        core.error(error);
                     }
                 }
             }
@@ -898,37 +862,70 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.exportObject = exports.parse = void 0;
+exports.Parser = void 0;
 const exec = __importStar(__nccwpck_require__(1514));
 const fs_1 = __nccwpck_require__(5747);
 const { readFile } = fs_1.promises;
-function parse(bundlePath, reference) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const root = JSON.parse(yield toJSON(bundlePath, reference));
-        return parseObject(root);
-    });
-}
-exports.parse = parse;
-function toJSON(bundlePath, reference) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const args = ['xcresulttool', 'get', '--path', bundlePath, '--format', 'json'];
-        if (reference) {
-            args.push('--id');
-            args.push(reference);
-        }
-        let output = '';
-        const options = {
-            silent: true,
-            listeners: {
-                stdout: (data) => {
-                    output += data.toString();
-                }
+class Parser {
+    constructor(bundlePath) {
+        this.bundlePath = bundlePath;
+    }
+    parse(reference) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const root = JSON.parse(yield this.toJSON(reference));
+            return parseObject(root);
+        });
+    }
+    exportObject(reference, outputPath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const args = [
+                'xcresulttool',
+                'export',
+                '--type',
+                'file',
+                '--path',
+                this.bundlePath,
+                '--output-path',
+                outputPath,
+                '--id',
+                reference
+            ];
+            const options = {
+                silent: true
+            };
+            yield exec.exec('xcrun', args, options);
+            return Buffer.from(yield readFile(outputPath));
+        });
+    }
+    toJSON(reference) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const args = [
+                'xcresulttool',
+                'get',
+                '--path',
+                this.bundlePath,
+                '--format',
+                'json'
+            ];
+            if (reference) {
+                args.push('--id');
+                args.push(reference);
             }
-        };
-        yield exec.exec('xcrun', args, options);
-        return output;
-    });
+            let output = '';
+            const options = {
+                silent: true,
+                listeners: {
+                    stdout: (data) => {
+                        output += data.toString();
+                    }
+                }
+            };
+            yield exec.exec('xcrun', args, options);
+            return output;
+        });
+    }
 }
+exports.Parser = Parser;
 function parseObject(element) {
     const obj = {};
     for (const [key, value] of Object.entries(element)) {
@@ -980,28 +977,6 @@ function parsePrimitive(element) {
             return element['_value'];
     }
 }
-function exportObject(bundlePath, reference, outputPath) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const args = [
-            'xcresulttool',
-            'export',
-            '--type',
-            'file',
-            '--path',
-            bundlePath,
-            '--output-path',
-            outputPath,
-            '--id',
-            reference
-        ];
-        const options = {
-            silent: true
-        };
-        yield exec.exec('xcrun', args, options);
-        return Buffer.from(yield readFile(outputPath));
-    });
-}
-exports.exportObject = exportObject;
 
 
 /***/ }),
