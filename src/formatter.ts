@@ -1,4 +1,4 @@
-/*eslint-disable @typescript-eslint/no-explicit-any,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
+/*eslint-disable no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
 
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
@@ -271,11 +271,11 @@ export async function format(bundlePath: string): Promise<string[]> {
   const testFailures = new TestFailures()
   const testDetails = new TestDetails()
 
-  for (const [identifier, results] of Object.entries(testReport)) {
+  for (const [, results] of Object.entries(testReport)) {
     const testDetail = new TestDetail()
     testDetails.details.push(testDetail)
 
-    const testResultSummaryName = (results as any)['summary']['name']
+    const testResultSummaryName = results.summary.name
     const backImage = iconImage('right-arrow-curving-left.png')
     const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`)
     testDetail.lines.push(
@@ -283,15 +283,15 @@ export async function format(bundlePath: string): Promise<string[]> {
     )
     testDetail.lines.push('')
 
-    const details: ActionTestMetadata[] = (results as any)['details']
-
-    const detailGroup = details.reduce(
-      (groups: {[key: string]: ActionTestMetadata[]}, detail) => {
-        const group: string = (detail as any)['group']
-        if (groups[group]) {
-          groups[group].push(detail)
-        } else {
-          groups[group] = [detail]
+    const detailGroup = results.details.reduce(
+      (groups: {[key: string]: actionTestSummaries}, detail) => {
+        const d = detail as actionTestSummary & {group?: string}
+        if (d.group) {
+          if (groups[d.group]) {
+            groups[d.group].push(detail)
+          } else {
+            groups[d.group] = [detail]
+          }
         }
         return groups
       },
@@ -312,9 +312,10 @@ export async function format(bundlePath: string): Promise<string[]> {
               number,
               number
             ],
-            metadata
+            detail
           ) => {
-            switch (metadata.testStatus) {
+            const test = detail as ActionTestSummary
+            switch (test.testStatus) {
               case 'Success':
                 passed++
                 break
@@ -331,8 +332,8 @@ export async function format(bundlePath: string): Promise<string[]> {
 
             total++
 
-            if (metadata.duration) {
-              duration = metadata.duration
+            if (test.duration) {
+              duration = test.duration
             }
             return [passed, failed, skipped, expectedFailure, total, duration]
           },
@@ -397,12 +398,12 @@ export async function format(bundlePath: string): Promise<string[]> {
       testDetailTable.push(`<table>`)
 
       const configurationGroup = details.reduce(
-        (groups: {[key: string]: ActionTestMetadata[]}, metadata) => {
-          if (metadata.identifier) {
-            if (groups[metadata.identifier]) {
-              groups[metadata.identifier].push(metadata)
+        (groups: {[key: string]: actionTestSummaries}, detail) => {
+          if (detail.identifier) {
+            if (groups[detail.identifier]) {
+              groups[detail.identifier].push(detail)
             } else {
-              groups[metadata.identifier] = [metadata]
+              groups[detail.identifier] = [detail]
             }
           }
           return groups
@@ -412,7 +413,8 @@ export async function format(bundlePath: string): Promise<string[]> {
 
       for (const [identifier, details] of Object.entries(configurationGroup)) {
         const statuses = details.map(detail => {
-          return detail.testStatus
+          const test = detail as ActionTestSummary
+          return test.testStatus
         })
         let groupStatus = ''
         if (statuses.length) {
@@ -446,7 +448,7 @@ export async function format(bundlePath: string): Promise<string[]> {
         const groupStatusImage = statusImage(groupStatus)
 
         for (const [index, detail] of details.entries()) {
-          const testResult = detail
+          const testResult = detail as ActionTestMetadata
           const rowSpan = `rowspan="${details.length}"`
           const valign = `valign="top"`
           const colWidth = 'width="52px"'
@@ -461,7 +463,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             )
 
             const testFailureGroup = new TestFailureGroup(
-              testResultSummaryName,
+              testResultSummaryName || '',
               summary.identifier || '',
               summary.name || ''
             )
