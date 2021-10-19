@@ -18,7 +18,13 @@ test('throws invalid number', async () => {
 // })
 
 test('test runs', () => {
-  process.env['INPUT_XCRESULT'] = '__tests__/data/KeychainAccess.xcresult'
+  process.env['INPUT_XCRESULT'] = path.join(
+    __dirname,
+    '..',
+    '__tests__',
+    'data',
+    'example.xcresult'
+  )
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {
