@@ -18,17 +18,15 @@ test('throws invalid number', async () => {
 // })
 
 test('test runs', () => {
-  process.env['INPUT_XCRESULT'] = path.join(
-    __dirname,
-    '..',
-    '__tests__',
-    'data',
-    'example.xcresult'
-  )
+  process.env['INPUT_XCRESULT'] = '__tests__/data/example.xcresult'
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {
     env: process.env
   }
-  console.log(cp.execFileSync(np, [ip], options).toString())
+  try {
+    console.log(cp.execFileSync(np, [ip], options).toString())
+  } catch (error) {
+    console.log(error)
+  }
 })
