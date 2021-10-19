@@ -217,7 +217,8 @@ function format(bundlePath) {
         lines.push('');
         lines.push('### Test Summary');
         for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
-            lines.push(`#### <a name="${groupIdentifier}_summary">[${groupIdentifier}](#${groupIdentifier})`);
+            const anchorName = anchorIdentifier(groupIdentifier);
+            lines.push(`#### <a name="${groupIdentifier}_summary">[${groupIdentifier}](${anchorName})`);
             lines.push('');
             lines.push('<table>');
             lines.push('<thead><tr>');
@@ -269,7 +270,8 @@ function format(bundlePath) {
             testDetails.details.push(testDetail);
             const name = results['summary']['name'];
             const backImage = iconImage('right-arrow-curving-left.png');
-            testDetail.lines.push(`#### <a name="${name}"></a>${name}[${backImage}](#${name}_summary)`);
+            const anchorName = anchorIdentifier(`${name}_summary`);
+            testDetail.lines.push(`#### <a name="${name}"></a>${name}[${backImage}](${anchorName})`);
             testDetail.lines.push('');
             const details = results['details'];
             const detailGroup = details.reduce((groups, detail) => {
@@ -326,7 +328,8 @@ function format(bundlePath) {
                 }
                 const testDuration = duration.toFixed(2);
                 const arrowImage = iconImage('right-arrow-curving-left.png');
-                const anchorBack = `[${arrowImage}](#${name}_${groupIdentifier}_summary)`;
+                const anchorName = anchorIdentifier(`${name}_${groupIdentifier}_summary`);
+                const anchorBack = `[${arrowImage}](${anchorName})`;
                 const testStats = testsStatsLines.join(', ');
                 testDetail.lines.push(`${anchor}<span>${testName} ${testStats} in ${testDuration}s</span> ${anchorBack}\n`);
                 const testDetailTable = [];
@@ -519,7 +522,8 @@ function format(bundlePath) {
             lines.push('### Failures');
             for (const failureGroup of testFailures.failureGroups) {
                 if (failureGroup.failures.length) {
-                    const testMethodLink = `<a href="#${failureGroup.identifier}">${failureGroup.identifier}</a>`;
+                    const anchorName = anchorIdentifier(failureGroup.identifier);
+                    const testMethodLink = `<a href="${anchorName}">${failureGroup.identifier}</a>`;
                     lines.push(`<h4>${testMethodLink}</h4>`);
                     for (const failure of failureGroup.failures) {
                         for (const line of failure.lines) {
@@ -711,6 +715,9 @@ function iconImage(filename) {
     const baseUrl = 'https://xcresulttool-resources.netlify.app/images/';
     const attrs = 'width="14px" align="top"';
     return `<img src="${baseUrl}${filename}" ${attrs}>`;
+}
+function anchorIdentifier(text) {
+    return `#user-content-${text.toLowerCase()}`;
 }
 function escapeHashSign(text) {
     return text.replace(/#/g, '<span>#</span>');
