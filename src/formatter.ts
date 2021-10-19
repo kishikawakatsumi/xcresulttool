@@ -96,19 +96,15 @@ export async function format(bundlePath: string): Promise<string[]> {
     }
   }
 
-  interface TestSummaryStats {
-    passed: number
-    failed: number
-    skipped: number
-    expectedFailure: number
-    total: number
+  class TestSummaryStats {
+    passed = 0
+    failed = 0
+    skipped = 0
+    expectedFailure = 0
+    total = 0
   }
   const testSummary = {
-    passed: 0,
-    failed: 0,
-    skipped: 0,
-    expectedFailure: 0,
-    total: 0,
+    stats: new TestSummaryStats(),
     duration: 0,
     groups: {} as {[key: string]: actionTestSummaries}
   }
@@ -130,57 +126,46 @@ export async function format(bundlePath: string): Promise<string[]> {
 
     const group: {[key: string]: TestSummaryStats} = {}
     for (const [identifier, details] of Object.entries(detailGroup)) {
-      const [passed, failed, skipped, expectedFailure, total, duration] =
-        details.reduce(
-          (
-            [passed, failed, skipped, expectedFailure, total, duration]: [
-              number,
-              number,
-              number,
-              number,
-              number,
-              number
-            ],
-            detail
-          ) => {
-            const test = detail as ActionTestSummary
-            switch (test.testStatus) {
-              case 'Success':
-                passed++
-                break
-              case 'Failure':
-                failed++
-                break
-              case 'Skipped':
-                skipped++
-                break
-              case 'Expected Failure':
-                expectedFailure++
-                break
-            }
+      const [stats, duration] = details.reduce(
+        ([stats, duration]: [TestSummaryStats, number], detail) => {
+          const test = detail as ActionTestSummary
+          switch (test.testStatus) {
+            case 'Success':
+              stats.passed++
+              break
+            case 'Failure':
+              stats.failed++
+              break
+            case 'Skipped':
+              stats.skipped++
+              break
+            case 'Expected Failure':
+              stats.expectedFailure++
+              break
+          }
 
-            total++
+          stats.total++
 
-            if (test.duration) {
-              duration = test.duration
-            }
-            return [passed, failed, skipped, expectedFailure, total, duration]
-          },
-          [0, 0, 0, 0, 0, 0]
-        )
-      testSummary.passed += passed
-      testSummary.failed += failed
-      testSummary.skipped += skipped
-      testSummary.expectedFailure += expectedFailure
-      testSummary.total += total
+          if (test.duration) {
+            duration = test.duration
+          }
+          return [stats, duration]
+        },
+        [new TestSummaryStats(), 0]
+      )
+      testSummary.stats.passed += stats.passed
+      testSummary.stats.failed += stats.failed
+      testSummary.stats.skipped += stats.skipped
+      testSummary.stats.expectedFailure += stats.expectedFailure
+      testSummary.stats.total += stats.total
       testSummary.duration += duration
 
       group[identifier] = {
-        passed: passed,
-        failed: failed,
-        skipped: skipped,
-        expectedFailure: expectedFailure,
-        total: total
+        passed: stats.passed,
+        failed: stats.failed,
+        skipped: stats.skipped,
+        expectedFailure: stats.expectedFailure,
+        total: stats.total
       }
     }
 
@@ -206,18 +191,18 @@ export async function format(bundlePath: string): Promise<string[]> {
   lines.push('<tbody><tr>')
 
   let failedCount: string
-  if (testSummary.failed > 0) {
-    failedCount = `<b>${testSummary.failed}</b>`
+  if (testSummary.stats.failed > 0) {
+    failedCount = `<b>${testSummary.stats.failed}</b>`
   } else {
-    failedCount = `${testSummary.failed}`
+    failedCount = `${testSummary.stats.failed}`
   }
   const duration = testSummary.duration.toFixed(2)
   const cols = [
-    `<td align="right" width="118px">${testSummary.total}</td>`,
-    `<td align="right" width="118px">${testSummary.passed}</td>`,
+    `<td align="right" width="118px">${testSummary.stats.total}</td>`,
+    `<td align="right" width="118px">${testSummary.stats.passed}</td>`,
     `<td align="right" width="118px">${failedCount}</td>`,
-    `<td align="right" width="118px">${testSummary.skipped}</td>`,
-    `<td align="right" width="158px">${testSummary.expectedFailure}</td>`,
+    `<td align="right" width="118px">${testSummary.stats.skipped}</td>`,
+    `<td align="right" width="158px">${testSummary.stats.expectedFailure}</td>`,
     `<td align="right" width="138px">${duration}s</td>`
   ].join('')
   lines.push(cols)
