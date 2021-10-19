@@ -1,21 +1,44 @@
-// import {wait} from '../src/wait'
+import {expect, test} from '@jest/globals'
 import * as cp from 'child_process'
+import {promises} from 'fs'
+const {readFile, writeFile} = promises
+import * as os from 'os'
 import * as path from 'path'
 import * as process from 'process'
-import {expect, test} from '@jest/globals'
+import * as formatter from '../src/formatter'
 
-test('throws invalid number', async () => {
-  const input = parseInt('foo', 10)
-  // await expect(wait(input)).rejects.toThrow('milliseconds not a number')
+test('example.xcresult', async () => {
+  const bundlePath = '__tests__/data/example.xcresult'
+  const formatted = await formatter.format(bundlePath)
+
+  const outputPath = path.join(os.tmpdir(), 'example.md')
+  await writeFile(outputPath, formatted.join('\n'))
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/example.md')).toString()
+  )
 })
 
-// test('wait 500 ms', async () => {
-//   const start = new Date()
-//   await wait(500)
-//   const end = new Date()
-//   var delta = Math.abs(end.getTime() - start.getTime())
-//   expect(delta).toBeGreaterThan(450)
-// })
+test('KeychainAccess.xcresult', async () => {
+  const bundlePath = '__tests__/data/KeychainAccess.xcresult'
+  const formatted = await formatter.format(bundlePath)
+
+  const outputPath = path.join(os.tmpdir(), 'KeychainAccess.md')
+  await writeFile(outputPath, formatted.join('\n'))
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/KeychainAccess.md')).toString()
+  )
+})
+
+test('TAU.xcresult', async () => {
+  const bundlePath = '__tests__/data/TAU.xcresult'
+  const formatted = await formatter.format(bundlePath)
+
+  const outputPath = path.join(os.tmpdir(), 'TAU.md')
+  await writeFile(outputPath, formatted.join('\n'))
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/TAU.md')).toString()
+  )
+})
 
 test('test runs', () => {
   process.env['INPUT_XCRESULT'] = '__tests__/data/example.xcresult'

@@ -1,4 +1,5 @@
 /*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
+import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import * as os from 'os'
 import * as parser from './parser'
@@ -570,7 +571,7 @@ export async function format(bundlePath: string): Promise<string[]> {
                   const attachments = activity.attachments.map(attachment => {
                     let width = '100%'
                     const dimensions = attachment.dimensions
-                    if (dimensions.width && dimensions.height) {
+                    if (dimensions && dimensions.width && dimensions.height) {
                       if (
                         dimensions.orientation &&
                         dimensions.orientation >= 5
@@ -586,7 +587,11 @@ export async function format(bundlePath: string): Promise<string[]> {
                       for (const info of userInfo.storage) {
                         if (info.key === 'Scale') {
                           const scale = parseInt(`${info.value}`)
-                          if (dimensions.width && dimensions.height) {
+                          if (
+                            dimensions &&
+                            dimensions.width &&
+                            dimensions.height
+                          ) {
                             if (
                               dimensions.orientation &&
                               dimensions.orientation >= 5
@@ -808,7 +813,7 @@ async function exportAttachments(
           }
         }
 
-        if (image) {
+        if (image && core.getInput('GITHUB_TOKEN')) {
           try {
             const sizeOf = require('image-size')
             const dimensions: Dimensions = sizeOf(image)

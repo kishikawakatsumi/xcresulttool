@@ -37,6 +37,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.format = void 0;
 /*eslint-disable @typescript-eslint/no-explicit-any,no-console,no-shadow,object-shorthand,@typescript-eslint/no-unused-vars */
+const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2087));
 const parser = __importStar(__nccwpck_require__(267));
@@ -474,7 +475,7 @@ function format(bundlePath) {
                                     const attachments = activity.attachments.map(attachment => {
                                         let width = '100%';
                                         const dimensions = attachment.dimensions;
-                                        if (dimensions.width && dimensions.height) {
+                                        if (dimensions && dimensions.width && dimensions.height) {
                                             if (dimensions.orientation &&
                                                 dimensions.orientation >= 5) {
                                                 width = `${dimensions.height}px`;
@@ -488,7 +489,9 @@ function format(bundlePath) {
                                             for (const info of userInfo.storage) {
                                                 if (info.key === 'Scale') {
                                                     const scale = parseInt(`${info.value}`);
-                                                    if (dimensions.width && dimensions.height) {
+                                                    if (dimensions &&
+                                                        dimensions.width &&
+                                                        dimensions.height) {
                                                         if (dimensions.orientation &&
                                                             dimensions.orientation >= 5) {
                                                             width = `${(dimensions.height / scale).toFixed(0)}px`;
@@ -669,7 +672,7 @@ function exportAttachments(bundlePath, activity) {
                             }
                         }
                     };
-                    if (image) {
+                    if (image && core.getInput('GITHUB_TOKEN')) {
                         try {
                             const sizeOf = __nccwpck_require__(8250);
                             const dimensions = sizeOf(image);
