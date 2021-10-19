@@ -215,11 +215,18 @@ export async function format(bundlePath: string): Promise<string[]> {
   lines.push('</tr></thead>')
 
   lines.push('<tbody><tr>')
+
+  let failedCount: string
+  if (testSummary.failed > 0) {
+    failedCount = `<b>${testSummary.failed}</b>`
+  } else {
+    failedCount = `${testSummary.failed}`
+  }
   const duration = testSummary.duration.toFixed(2)
   const cols = [
     `<td align="right" width="118px">${testSummary.total}</td>`,
     `<td align="right" width="118px">${testSummary.passed}</td>`,
-    `<td align="right" width="118px">${testSummary.failed}</td>`,
+    `<td align="right" width="118px">${failedCount}</td>`,
     `<td align="right" width="118px">${testSummary.skipped}</td>`,
     `<td align="right" width="158px">${testSummary.expectedFailure}</td>`,
     `<td align="right" width="138px">${duration}s</td>`
@@ -260,11 +267,17 @@ export async function format(bundlePath: string): Promise<string[]> {
       const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
       const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`
 
+      let failedCount: string
+      if (test.failed > 0) {
+        failedCount = `<b>${test.failed}</b>`
+      } else {
+        failedCount = `${test.failed}`
+      }
       const cols = [
         `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
         `<td align="right" width="80px">${test.total}</td>`,
         `<td align="right" width="80px">${test.passed}</td>`,
-        `<td align="right" width="80px">${test.failed}</td>`,
+        `<td align="right" width="80px">${failedCount}</td>`,
         `<td align="right" width="80px">${test.skipped}</td>`,
         `<td align="right" width="80px">${test.expectedFailure}</td>`
       ].join('')
