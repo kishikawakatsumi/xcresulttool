@@ -236,27 +236,26 @@ export async function format(bundlePath: string): Promise<string[]> {
     lines.push('</tr></thead>')
 
     lines.push('<tbody>')
-    for (const [identifier, detail] of Object.entries(group as any)) {
+    for (const [identifier, stats] of Object.entries(group)) {
       lines.push('<tr>')
-      const test: any = detail
       const testClass = `${iconImage('test-class.png')}&nbsp;${identifier}`
       const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
       const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`)
       const testClassLink = `<a href="${anchorName}">${testClass}</a>`
 
       let failedCount: string
-      if (test.failed > 0) {
-        failedCount = `<b>${test.failed}</b>`
+      if (stats.failed > 0) {
+        failedCount = `<b>${stats.failed}</b>`
       } else {
-        failedCount = `${test.failed}`
+        failedCount = `${stats.failed}`
       }
       const cols = [
         `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
-        `<td align="right" width="80px">${test.total}</td>`,
-        `<td align="right" width="80px">${test.passed}</td>`,
+        `<td align="right" width="80px">${stats.total}</td>`,
+        `<td align="right" width="80px">${stats.passed}</td>`,
         `<td align="right" width="80px">${failedCount}</td>`,
-        `<td align="right" width="80px">${test.skipped}</td>`,
-        `<td align="right" width="80px">${test.expectedFailure}</td>`
+        `<td align="right" width="80px">${stats.skipped}</td>`,
+        `<td align="right" width="80px">${stats.expectedFailure}</td>`
       ].join('')
       lines.push(cols)
       lines.push('</tr>')
