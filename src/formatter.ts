@@ -485,7 +485,8 @@ export async function format(bundlePath: string): Promise<string[]> {
             if (summary.configuration) {
               if (testResult.name) {
                 const testMethodImage = iconImage('test-method.png')
-                const testMethod = `${testMethodImage}&nbsp;<code>${testResult.name}</code>`
+                const testMethodAnchor = `<a name="${testResult.identifier}"></a>`
+                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>`
                 resultLines.push(`${status} ${testMethod}`)
               }
               const configuration = summary.configuration
@@ -501,7 +502,8 @@ export async function format(bundlePath: string): Promise<string[]> {
             } else {
               if (testResult.name) {
                 const testMethodImage = iconImage('test-method.png')
-                const testMethod = `${testMethodImage}&nbsp;<code>${testResult.name}</code>`
+                const testMethodAnchor = `<a name="${testResult.identifier}"></a>`
+                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>`
                 resultLines.push(`${testMethod}`)
               }
             }
@@ -581,7 +583,8 @@ export async function format(bundlePath: string): Promise<string[]> {
           } else {
             if (testResult.name) {
               const testMethodImage = iconImage('test-method.png')
-              const testMethod = `${testMethodImage} <code>${testResult.name}</code>`
+              const testMethodAnchor = `<a name="${testResult.identifier}"></a>`
+              const testMethod = `${testMethodAnchor}${testMethodImage} <code>${testResult.name}</code>`
               resultLines.push(`${testMethod}`)
             }
           }
@@ -612,7 +615,9 @@ export async function format(bundlePath: string): Promise<string[]> {
     lines.push('### Failures')
     for (const failureGroup of testFailures.failureGroups) {
       if (failureGroup.failures.length) {
-        lines.push(`<h4>${failureGroup.identifier}</h4>`)
+        lines.push(
+          `<h4>[${failureGroup.identifier}](#${failureGroup.identifier})</h4>`
+        )
         for (const failure of failureGroup.failures) {
           for (const line of failure.lines) {
             lines.push(line)
