@@ -217,12 +217,12 @@ export async function format(bundlePath: string): Promise<string[]> {
   lines.push('<tbody><tr>')
   const duration = testSummary.duration.toFixed(2)
   const cols = [
-    `<td align="right" width="210px">${testSummary.total}</td>`,
-    `<td align="right" width="100px">${testSummary.passed}</td>`,
-    `<td align="right" width="100px">${testSummary.failed}</td>`,
-    `<td align="right" width="100px">${testSummary.skipped}</td>`,
+    `<td align="right" width="138px">${testSummary.total}</td>`,
+    `<td align="right" width="118px">${testSummary.passed}</td>`,
+    `<td align="right" width="118px">${testSummary.failed}</td>`,
+    `<td align="right" width="118px">${testSummary.skipped}</td>`,
     `<td align="right" width="158px">${testSummary.expectedFailure}</td>`,
-    `<td align="right" width="100px">${duration}s</td>`
+    `<td align="right" width="118px">${duration}s</td>`
   ].join('')
   lines.push(cols)
   lines.push('</tr></tbody>')
@@ -677,7 +677,7 @@ function collectFailureSummaries(
     const titleAlign = 'align="right"'
     const titleWidth = 'width="120px"'
     const titleAttr = `${titleAlign} ${titleWidth}`
-    const detailWidth = 'width="780px"'
+    const detailWidth = 'width="648px"'
     const contents =
       '<table>' +
       `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${failureSummary.fileName}:${lineNumber}</td></tr>` +
@@ -858,7 +858,7 @@ function statusImage(statusText: string): string {
   }
   const baseUrl = 'https://xcresulttool-resources.netlify.app/images/'
   const attrs = 'width="14px" align="top"'
-  return `<img src="${baseUrl}${filename}" alt="${statusText}" ${attrs}>`
+  return `<img src="${baseUrl}${filename}" alt="${statusText}" title="${statusText}" ${attrs}>`
 }
 
 function iconImage(filename: string): string {
