@@ -8,14 +8,30 @@ export class TestReport {
   entityName?: string
   readonly chapters: TestReportChapter[] = []
 
-  print(): string {
-    return this.chapters
-      .map(chapter => {
-        const title = `### ${chapter.schemeCommandName} ${this.entityName}`
-        const content = chapter.summary.join('\n')
-        return `${title}\n\n${content}`
-      })
-      .join('\n')
+  get reportSummary(): string {
+    const lines: string[] = []
+
+    for (const chapter of this.chapters) {
+      for (const chapterSummary of chapter.summaries) {
+        const summaryTitle = `### ${chapter.schemeCommandName} ${this.entityName}`
+        const summaryContent = chapterSummary.content.join('\n')
+        lines.push(`${summaryTitle}\n\n${summaryContent}`)
+      }
+    }
+
+    return lines.join('\n')
+  }
+
+  get reportDetail(): string {
+    const lines: string[] = []
+
+    for (const chapter of this.chapters) {
+      for (const chapterDetail of chapter.details) {
+        lines.push(chapterDetail.content.join('\n'))
+      }
+    }
+
+    return lines.join('\n')
   }
 }
 
@@ -23,11 +39,20 @@ export class TestReportChapter {
   readonly schemeCommandName: string
   readonly sections: {[key: string]: TestReportSection} = {}
 
-  readonly summary: string[] = []
+  readonly summaries: TestReportChapterSummary[] = []
+  readonly details: TestReportChapterDetail[] = []
 
   constructor(schemeCommandName: string) {
     this.schemeCommandName = schemeCommandName
   }
+}
+
+export class TestReportChapterSummary {
+  readonly content: string[] = []
+}
+
+export class TestReportChapterDetail {
+  readonly content: string[] = []
 }
 
 export class TestReportSection {

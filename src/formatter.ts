@@ -14,6 +14,8 @@ import {
   TestFailures,
   TestReport,
   TestReportChapter,
+  TestReportChapterDetail,
+  TestReportChapterSummary,
   TestReportSection,
   actionTestSummaries,
   actionTestSummary
@@ -44,365 +46,94 @@ const testClassIcon = Image.icon('test-class.png')
 const testMethodIcon = Image.icon('test-method.png')
 const attachmentIcon = Image.icon('attachment.png')
 
-export async function format(bundlePath: string): Promise<string> {
-  const parser = new Parser(bundlePath)
+export class Formatter {
+  readonly summaries = ''
+  readonly details = ''
 
-  const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse()
+  private bundlePath: string
 
-  const testReport = new TestReport()
-
-  if (actionsInvocationRecord.metadataRef) {
-    const metadata: ActionsInvocationMetadata = await parser.parse(
-      actionsInvocationRecord.metadataRef.id
-    )
-    if (metadata.schemeIdentifier) {
-      const schemeIdentifier = metadata.schemeIdentifier
-      testReport.entityName = schemeIdentifier.entityName
-    }
+  constructor(bundlePath: string) {
+    this.bundlePath = bundlePath
+    this.format()
   }
 
-  if (actionsInvocationRecord.actions) {
-    for (const action of actionsInvocationRecord.actions) {
-      if (action.actionResult) {
-        if (action.actionResult.testsRef) {
-          const testReportChapter = new TestReportChapter(
-            action.schemeCommandName
-          )
-          testReport.chapters.push(testReportChapter)
+  async format(): Promise<TestReport> {
+    const parser = new Parser(this.bundlePath)
 
-          const actionTestPlanRunSummaries: ActionTestPlanRunSummaries =
-            await parser.parse(action.actionResult.testsRef.id)
+    const actionsInvocationRecord: ActionsInvocationRecord =
+      await parser.parse()
 
-          for (const summary of actionTestPlanRunSummaries.summaries) {
-            for (const testableSummary of summary.testableSummaries) {
-              const testSummaries: actionTestSummaries = []
-              await collectTestSummaries(
-                parser,
-                testableSummary,
-                testableSummary.tests,
-                testSummaries
-              )
-              if (testableSummary.name) {
-                testReportChapter.sections[testableSummary.name] =
-                  new TestReportSection(testableSummary, testSummaries)
+    const testReport = new TestReport()
+
+    if (actionsInvocationRecord.metadataRef) {
+      const metadata: ActionsInvocationMetadata = await parser.parse(
+        actionsInvocationRecord.metadataRef.id
+      )
+      if (metadata.schemeIdentifier) {
+        const schemeIdentifier = metadata.schemeIdentifier
+        testReport.entityName = schemeIdentifier.entityName
+      }
+    }
+
+    if (actionsInvocationRecord.actions) {
+      for (const action of actionsInvocationRecord.actions) {
+        if (action.actionResult) {
+          if (action.actionResult.testsRef) {
+            const testReportChapter = new TestReportChapter(
+              action.schemeCommandName
+            )
+            testReport.chapters.push(testReportChapter)
+
+            const actionTestPlanRunSummaries: ActionTestPlanRunSummaries =
+              await parser.parse(action.actionResult.testsRef.id)
+
+            for (const summary of actionTestPlanRunSummaries.summaries) {
+              for (const testableSummary of summary.testableSummaries) {
+                const testSummaries: actionTestSummaries = []
+                await collectTestSummaries(
+                  parser,
+                  testableSummary,
+                  testableSummary.tests,
+                  testSummaries
+                )
+                if (testableSummary.name) {
+                  testReportChapter.sections[testableSummary.name] =
+                    new TestReportSection(testableSummary, testSummaries)
+                }
               }
             }
           }
         }
       }
     }
-  }
 
-  class TestSummaryStats {
-    passed = 0
-    failed = 0
-    skipped = 0
-    expectedFailure = 0
-    total = 0
-  }
-  type TestSummaryStatsGroup = {[key: string]: TestSummaryStats}
-  const testSummary = {
-    stats: new TestSummaryStats(),
-    duration: 0,
-    groups: {} as {[key: string]: TestSummaryStatsGroup}
-  }
-
-  for (const chapter of testReport.chapters) {
-    for (const [identifier, results] of Object.entries(chapter.sections)) {
-      const detailGroup = results.details.reduce(
-        (groups: {[key: string]: actionTestSummaries}, detail) => {
-          const d = detail as actionTestSummary & {group?: string}
-          if (d.group) {
-            if (groups[d.group]) {
-              groups[d.group].push(detail)
-            } else {
-              groups[d.group] = [detail]
-            }
-          }
-          return groups
-        },
-        {}
-      )
-
-      const group: TestSummaryStatsGroup = {}
-      for (const [identifier, details] of Object.entries(detailGroup)) {
-        const [stats, duration] = details.reduce(
-          ([stats, duration]: [TestSummaryStats, number], detail) => {
-            const test = detail as ActionTestSummary
-            switch (test.testStatus) {
-              case 'Success':
-                stats.passed++
-                break
-              case 'Failure':
-                stats.failed++
-                break
-              case 'Skipped':
-                stats.skipped++
-                break
-              case 'Expected Failure':
-                stats.expectedFailure++
-                break
-            }
-
-            stats.total++
-
-            if (test.duration) {
-              duration = test.duration
-            }
-            return [stats, duration]
-          },
-          [new TestSummaryStats(), 0]
-        )
-        testSummary.stats.passed += stats.passed
-        testSummary.stats.failed += stats.failed
-        testSummary.stats.skipped += stats.skipped
-        testSummary.stats.expectedFailure += stats.expectedFailure
-        testSummary.stats.total += stats.total
-        testSummary.duration += duration
-
-        group[identifier] = {
-          passed: stats.passed,
-          failed: stats.failed,
-          skipped: stats.skipped,
-          expectedFailure: stats.expectedFailure,
-          total: stats.total
-        }
-      }
-
-      const groups = testSummary.groups
-      groups[identifier] = group
+    class TestSummaryStats {
+      passed = 0
+      failed = 0
+      skipped = 0
+      expectedFailure = 0
+      total = 0
+    }
+    type TestSummaryStatsGroup = {[key: string]: TestSummaryStats}
+    const testSummary = {
+      stats: new TestSummaryStats(),
+      duration: 0,
+      groups: {} as {[key: string]: TestSummaryStatsGroup}
     }
 
-    chapter.summary.push('### Summary')
+    for (const chapter of testReport.chapters) {
+      const chapterSummary = new TestReportChapterSummary()
+      chapter.summaries.push(chapterSummary)
 
-    chapter.summary.push('<table>')
-    chapter.summary.push('<thead><tr>')
-    const header = [
-      `<th>Total</th>`,
-      `<th>${passedIcon}&nbsp;Passed</th>`,
-      `<th>${failedIcon}&nbsp;Failed</th>`,
-      `<th>${skippedIcon}&nbsp;Skipped</th>`,
-      `<th>${expectedFailureIcon}&nbsp;Expected Failure</th>`,
-      `<th>:stopwatch:&nbsp;Time</th>`
-    ].join('')
-    chapter.summary.push(header)
-    chapter.summary.push('</tr></thead>')
-
-    chapter.summary.push('<tbody><tr>')
-
-    let failedCount: string
-    if (testSummary.stats.failed > 0) {
-      failedCount = `<b>${testSummary.stats.failed}</b>`
-    } else {
-      failedCount = `${testSummary.stats.failed}`
-    }
-    const duration = testSummary.duration.toFixed(2)
-    const cols = [
-      `<td align="right" width="118px">${testSummary.stats.total}</td>`,
-      `<td align="right" width="118px">${testSummary.stats.passed}</td>`,
-      `<td align="right" width="118px">${failedCount}</td>`,
-      `<td align="right" width="118px">${testSummary.stats.skipped}</td>`,
-      `<td align="right" width="158px">${testSummary.stats.expectedFailure}</td>`,
-      `<td align="right" width="138px">${duration}s</td>`
-    ].join('')
-    chapter.summary.push(cols)
-    chapter.summary.push('</tr></tbody>')
-    chapter.summary.push('</table>\n')
-
-    chapter.summary.push('---')
-    chapter.summary.push('')
-
-    chapter.summary.push('### Test Summary')
-
-    for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
-      const anchorName = anchorIdentifier(groupIdentifier)
-      chapter.summary.push(
-        `#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})`
-      )
-      chapter.summary.push('')
-
-      chapter.summary.push('<table>')
-      chapter.summary.push('<thead><tr>')
-      const header = [
-        `<th>Test</th>`,
-        `<th>Total</th>`,
-        `<th>${passedIcon}</th>`,
-        `<th>${failedIcon}</th>`,
-        `<th>${skippedIcon}</th>`,
-        `<th>${expectedFailureIcon}</th>`
-      ].join('')
-      chapter.summary.push(header)
-      chapter.summary.push('</tr></thead>')
-
-      chapter.summary.push('<tbody>')
-      for (const [identifier, stats] of Object.entries(group)) {
-        chapter.summary.push('<tr>')
-        const testClass = `${testClassIcon}&nbsp;${identifier}`
-        const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
-        const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`)
-        const testClassLink = `<a href="${anchorName}">${testClass}</a>`
-
-        let failedCount: string
-        if (stats.failed > 0) {
-          failedCount = `<b>${stats.failed}</b>`
-        } else {
-          failedCount = `${stats.failed}`
-        }
-        const cols = [
-          `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
-          `<td align="right" width="80px">${stats.total}</td>`,
-          `<td align="right" width="80px">${stats.passed}</td>`,
-          `<td align="right" width="80px">${failedCount}</td>`,
-          `<td align="right" width="80px">${stats.skipped}</td>`,
-          `<td align="right" width="80px">${stats.expectedFailure}</td>`
-        ].join('')
-        chapter.summary.push(cols)
-        chapter.summary.push('</tr>')
-      }
-      chapter.summary.push('</tbody>')
-      chapter.summary.push('</table>\n')
-    }
-    chapter.summary.push('')
-
-    chapter.summary.push('---')
-    chapter.summary.push('')
-
-    const testFailures = new TestFailures()
-    const testDetails = new TestDetails()
-
-    for (const [, results] of Object.entries(chapter.sections)) {
-      const testDetail = new TestDetail()
-      testDetails.details.push(testDetail)
-
-      const testResultSummaryName = results.summary.name
-      const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`)
-      testDetail.lines.push(
-        `#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backIcon}](${anchorName})`
-      )
-      testDetail.lines.push('')
-
-      const detailGroup = results.details.reduce(
-        (groups: {[key: string]: actionTestSummaries}, detail) => {
-          const d = detail as actionTestSummary & {group?: string}
-          if (d.group) {
-            if (groups[d.group]) {
-              groups[d.group].push(detail)
-            } else {
-              groups[d.group] = [detail]
-            }
-          }
-          return groups
-        },
-        {}
-      )
-
-      for (const [identifier, details] of Object.entries(detailGroup)) {
-        const groupIdentifier = identifier
-
-        const [passed, failed, skipped, expectedFailure, total, duration] =
-          details.reduce(
-            (
-              [passed, failed, skipped, expectedFailure, total, duration]: [
-                number,
-                number,
-                number,
-                number,
-                number,
-                number
-              ],
-              detail
-            ) => {
-              const test = detail as ActionTestSummary
-              switch (test.testStatus) {
-                case 'Success':
-                  passed++
-                  break
-                case 'Failure':
-                  failed++
-                  break
-                case 'Skipped':
-                  skipped++
-                  break
-                case 'Expected Failure':
-                  expectedFailure++
-                  break
-              }
-
-              total++
-
-              if (test.duration) {
-                duration = test.duration
-              }
-              return [passed, failed, skipped, expectedFailure, total, duration]
-            },
-            [0, 0, 0, 0, 0, 0]
-          )
-
-        const testName = `${groupIdentifier}`
-        const passedRate = ((passed / total) * 100).toFixed(0)
-        const failedRate = ((failed / total) * 100).toFixed(0)
-        const skippedRate = ((skipped / total) * 100).toFixed(0)
-        const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0)
-        const testDuration = duration.toFixed(2)
-
-        const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`
-        const anchorName = anchorIdentifier(
-          `${testResultSummaryName}_${groupIdentifier}_summary`
-        )
-        const anchorBack = `[${backIcon}](${anchorName})`
-        testDetail.lines.push(
-          `${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`
-        )
-
-        const testsStatsLines: string[] = []
-
-        testsStatsLines.push('<table>')
-        testsStatsLines.push('<thead><tr>')
-        const header = [
-          `<th>${passedIcon}</th>`,
-          `<th>${failedIcon}</th>`,
-          `<th>${skippedIcon}</th>`,
-          `<th>${expectedFailureIcon}</th>`,
-          `<th>:stopwatch:</th>`
-        ].join('')
-        testsStatsLines.push(header)
-        testsStatsLines.push('</tr></thead>')
-
-        testsStatsLines.push('<tbody>')
-
-        testsStatsLines.push('<tr>')
-
-        let failedCount: string
-        if (failed > 0) {
-          failedCount = `<b>${failed} (${failedRate}%)</b>`
-        } else {
-          failedCount = `${failed} (${failedRate}%)`
-        }
-        const cols = [
-          `<td align="right" width="154px">${passed} (${passedRate}%)</td>`,
-          `<td align="right" width="154px">${failedCount}</td>`,
-          `<td align="right" width="154px">${skipped} (${skippedRate}%)</td>`,
-          `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)</td>`,
-          `<td align="right" width="154px">${testDuration}s</td>`
-        ].join('')
-        testsStatsLines.push(cols)
-        testsStatsLines.push('</tr>')
-
-        testsStatsLines.push('</tbody>')
-        testsStatsLines.push('</table>\n')
-
-        testDetail.lines.push(testsStatsLines.join('\n'))
-
-        const testDetailTable: string[] = []
-        testDetailTable.push(`<table>`)
-
-        const configurationGroup = details.reduce(
+      for (const [identifier, results] of Object.entries(chapter.sections)) {
+        const detailGroup = results.details.reduce(
           (groups: {[key: string]: actionTestSummaries}, detail) => {
-            if (detail.identifier) {
-              if (groups[detail.identifier]) {
-                groups[detail.identifier].push(detail)
+            const d = detail as actionTestSummary & {group?: string}
+            if (d.group) {
+              if (groups[d.group]) {
+                groups[d.group].push(detail)
               } else {
-                groups[detail.identifier] = [detail]
+                groups[d.group] = [detail]
               }
             }
             return groups
@@ -410,103 +141,562 @@ export async function format(bundlePath: string): Promise<string> {
           {}
         )
 
-        for (const [, details] of Object.entries(configurationGroup)) {
-          const statuses = details.map(detail => {
-            const test = detail as ActionTestSummary
-            return test.testStatus
-          })
-          let groupStatus = ''
-          if (statuses.length) {
-            if (statuses.every(status => status === 'Success')) {
-              groupStatus = 'Success'
-            } else if (statuses.every(status => status === 'Failure')) {
-              groupStatus = 'Failure'
-            } else if (statuses.every(status => status === 'Skipped')) {
-              groupStatus = 'Skipped'
-            } else if (
-              statuses.every(status => status === 'Expected Failure')
-            ) {
-              groupStatus = 'Expected Failure'
-            } else {
-              if (
-                statuses
-                  .filter(status => status !== 'Skipped')
-                  .some(status => status === 'Failure')
-              ) {
-                groupStatus = 'Mixed Failure'
-              } else if (
-                statuses
-                  .filter(status => status !== 'Skipped')
-                  .filter(status => status !== 'Expected Failure')
-                  .every(status => status === 'Success')
-              ) {
-                groupStatus = 'Mixed Success'
+        const group: TestSummaryStatsGroup = {}
+        for (const [identifier, details] of Object.entries(detailGroup)) {
+          const [stats, duration] = details.reduce(
+            ([stats, duration]: [TestSummaryStats, number], detail) => {
+              const test = detail as ActionTestSummary
+              switch (test.testStatus) {
+                case 'Success':
+                  stats.passed++
+                  break
+                case 'Failure':
+                  stats.failed++
+                  break
+                case 'Skipped':
+                  stats.skipped++
+                  break
+                case 'Expected Failure':
+                  stats.expectedFailure++
+                  break
+              }
+
+              stats.total++
+
+              if (test.duration) {
+                duration = test.duration
+              }
+              return [stats, duration]
+            },
+            [new TestSummaryStats(), 0]
+          )
+          testSummary.stats.passed += stats.passed
+          testSummary.stats.failed += stats.failed
+          testSummary.stats.skipped += stats.skipped
+          testSummary.stats.expectedFailure += stats.expectedFailure
+          testSummary.stats.total += stats.total
+          testSummary.duration += duration
+
+          group[identifier] = {
+            passed: stats.passed,
+            failed: stats.failed,
+            skipped: stats.skipped,
+            expectedFailure: stats.expectedFailure,
+            total: stats.total
+          }
+        }
+
+        const groups = testSummary.groups
+        groups[identifier] = group
+      }
+
+      chapterSummary.content.push('### Summary')
+
+      chapterSummary.content.push('<table>')
+      chapterSummary.content.push('<thead><tr>')
+      const header = [
+        `<th>Total</th>`,
+        `<th>${passedIcon}&nbsp;Passed</th>`,
+        `<th>${failedIcon}&nbsp;Failed</th>`,
+        `<th>${skippedIcon}&nbsp;Skipped</th>`,
+        `<th>${expectedFailureIcon}&nbsp;Expected Failure</th>`,
+        `<th>:stopwatch:&nbsp;Time</th>`
+      ].join('')
+      chapterSummary.content.push(header)
+      chapterSummary.content.push('</tr></thead>')
+
+      chapterSummary.content.push('<tbody><tr>')
+
+      let failedCount: string
+      if (testSummary.stats.failed > 0) {
+        failedCount = `<b>${testSummary.stats.failed}</b>`
+      } else {
+        failedCount = `${testSummary.stats.failed}`
+      }
+      const duration = testSummary.duration.toFixed(2)
+      const cols = [
+        `<td align="right" width="118px">${testSummary.stats.total}</td>`,
+        `<td align="right" width="118px">${testSummary.stats.passed}</td>`,
+        `<td align="right" width="118px">${failedCount}</td>`,
+        `<td align="right" width="118px">${testSummary.stats.skipped}</td>`,
+        `<td align="right" width="158px">${testSummary.stats.expectedFailure}</td>`,
+        `<td align="right" width="138px">${duration}s</td>`
+      ].join('')
+      chapterSummary.content.push(cols)
+      chapterSummary.content.push('</tr></tbody>')
+      chapterSummary.content.push('</table>\n')
+
+      chapterSummary.content.push('---\n')
+
+      chapterSummary.content.push('### Test Summary')
+
+      for (const [groupIdentifier, group] of Object.entries(
+        testSummary.groups
+      )) {
+        const anchorName = anchorIdentifier(groupIdentifier)
+        chapterSummary.content.push(
+          `#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})\n`
+        )
+
+        chapterSummary.content.push('<table>')
+        chapterSummary.content.push('<thead><tr>')
+        const header = [
+          `<th>Test</th>`,
+          `<th>Total</th>`,
+          `<th>${passedIcon}</th>`,
+          `<th>${failedIcon}</th>`,
+          `<th>${skippedIcon}</th>`,
+          `<th>${expectedFailureIcon}</th>`
+        ].join('')
+        chapterSummary.content.push(header)
+        chapterSummary.content.push('</tr></thead>')
+
+        chapterSummary.content.push('<tbody>')
+        for (const [identifier, stats] of Object.entries(group)) {
+          chapterSummary.content.push('<tr>')
+          const testClass = `${testClassIcon}&nbsp;${identifier}`
+          const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
+          const anchorName = anchorIdentifier(
+            `${groupIdentifier}_${identifier}`
+          )
+          const testClassLink = `<a href="${anchorName}">${testClass}</a>`
+
+          let failedCount: string
+          if (stats.failed > 0) {
+            failedCount = `<b>${stats.failed}</b>`
+          } else {
+            failedCount = `${stats.failed}`
+          }
+          const cols = [
+            `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
+            `<td align="right" width="80px">${stats.total}</td>`,
+            `<td align="right" width="80px">${stats.passed}</td>`,
+            `<td align="right" width="80px">${failedCount}</td>`,
+            `<td align="right" width="80px">${stats.skipped}</td>`,
+            `<td align="right" width="80px">${stats.expectedFailure}</td>`
+          ].join('')
+          chapterSummary.content.push(cols)
+          chapterSummary.content.push('</tr>')
+        }
+        chapterSummary.content.push('</tbody>')
+        chapterSummary.content.push('</table>\n')
+      }
+      chapterSummary.content.push('')
+
+      chapterSummary.content.push('---\n')
+
+      const testFailures = new TestFailures()
+      for (const [, results] of Object.entries(chapter.sections)) {
+        const testResultSummaryName = results.summary.name
+
+        const detailGroup = results.details.reduce(
+          (groups: {[key: string]: actionTestSummaries}, detail) => {
+            const d = detail as actionTestSummary & {group?: string}
+            if (d.group) {
+              if (groups[d.group]) {
+                groups[d.group].push(detail)
               } else {
-                groupStatus = 'Expected Failure'
+                groups[d.group] = [detail]
+              }
+            }
+            return groups
+          },
+          {}
+        )
+
+        for (const [, details] of Object.entries(detailGroup)) {
+          const configurationGroup = details.reduce(
+            (groups: {[key: string]: actionTestSummaries}, detail) => {
+              if (detail.identifier) {
+                if (groups[detail.identifier]) {
+                  groups[detail.identifier].push(detail)
+                } else {
+                  groups[detail.identifier] = [detail]
+                }
+              }
+              return groups
+            },
+            {}
+          )
+
+          for (const [, details] of Object.entries(configurationGroup)) {
+            for (const [, detail] of details.entries()) {
+              const testResult = detail as ActionTestMetadata
+
+              if (testResult.summaryRef) {
+                const summary: ActionTestSummary = await parser.parse(
+                  testResult.summaryRef.id
+                )
+
+                const testFailureGroup = new TestFailureGroup(
+                  testResultSummaryName || '',
+                  summary.identifier || '',
+                  summary.name || ''
+                )
+                testFailures.failureGroups.push(testFailureGroup)
+
+                if (summary.failureSummaries) {
+                  const testFailure = new TestFailure()
+                  testFailureGroup.failures.push(testFailure)
+
+                  const failureSummaries = collectFailureSummaries(
+                    summary.failureSummaries
+                  )
+                  for (const failureSummary of failureSummaries) {
+                    testFailure.lines.push(`${failureSummary.contents}`)
+                  }
+                }
               }
             }
           }
-          const groupStatusImage = Image.testStatus(groupStatus)
+        }
+      }
 
-          for (const [index, detail] of details.entries()) {
-            const testResult = detail as ActionTestMetadata
-            const rowSpan = `rowspan="${details.length}"`
-            const valign = `valign="top"`
-            const colWidth = 'width="52px"'
-            const detailWidth = 'width="716px"'
+      if (testFailures.failureGroups.length) {
+        chapterSummary.content.push('### Failures')
+        for (const failureGroup of testFailures.failureGroups) {
+          if (failureGroup.failures.length) {
+            const anchorName = anchorIdentifier(
+              `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`
+            )
+            const testMethodLink = `<a name="${failureGroup.summaryIdentifier}_${failureGroup.identifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.identifier}</a>`
+            chapterSummary.content.push(`<h4>${testMethodLink}</h4>`)
+            for (const failure of failureGroup.failures) {
+              for (const line of failure.lines) {
+                chapterSummary.content.push(line)
+              }
+            }
+          }
+        }
+      }
+      chapterSummary.content.push('')
 
-            const status = Image.testStatus(testResult.testStatus)
-            const resultLines: string[] = []
+      const testDetails = new TestDetails()
+      for (const [, results] of Object.entries(chapter.sections)) {
+        const testDetail = new TestDetail()
+        testDetails.details.push(testDetail)
 
-            if (testResult.summaryRef) {
-              const summary: ActionTestSummary = await parser.parse(
-                testResult.summaryRef.id
-              )
+        const testResultSummaryName = results.summary.name
+        const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`)
+        testDetail.lines.push(
+          `#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backIcon}](${anchorName})`
+        )
+        testDetail.lines.push('')
 
-              const testFailureGroup = new TestFailureGroup(
-                testResultSummaryName || '',
-                summary.identifier || '',
-                summary.name || ''
-              )
-              testFailures.failureGroups.push(testFailureGroup)
+        const detailGroup = results.details.reduce(
+          (groups: {[key: string]: actionTestSummaries}, detail) => {
+            const d = detail as actionTestSummary & {group?: string}
+            if (d.group) {
+              if (groups[d.group]) {
+                groups[d.group].push(detail)
+              } else {
+                groups[d.group] = [detail]
+              }
+            }
+            return groups
+          },
+          {}
+        )
 
-              if (summary.failureSummaries) {
-                const testFailure = new TestFailure()
-                testFailureGroup.failures.push(testFailure)
+        for (const [identifier, details] of Object.entries(detailGroup)) {
+          const groupIdentifier = identifier
 
-                const failureSummaries = collectFailureSummaries(
-                  summary.failureSummaries
-                )
-                for (const failureSummary of failureSummaries) {
-                  testFailure.lines.push(`${failureSummary.contents}`)
+          const [passed, failed, skipped, expectedFailure, total, duration] =
+            details.reduce(
+              (
+                [passed, failed, skipped, expectedFailure, total, duration]: [
+                  number,
+                  number,
+                  number,
+                  number,
+                  number,
+                  number
+                ],
+                detail
+              ) => {
+                const test = detail as ActionTestSummary
+                switch (test.testStatus) {
+                  case 'Success':
+                    passed++
+                    break
+                  case 'Failure':
+                    failed++
+                    break
+                  case 'Skipped':
+                    skipped++
+                    break
+                  case 'Expected Failure':
+                    expectedFailure++
+                    break
+                }
+
+                total++
+
+                if (test.duration) {
+                  duration = test.duration
+                }
+                return [
+                  passed,
+                  failed,
+                  skipped,
+                  expectedFailure,
+                  total,
+                  duration
+                ]
+              },
+              [0, 0, 0, 0, 0, 0]
+            )
+
+          const testName = `${groupIdentifier}`
+          const passedRate = ((passed / total) * 100).toFixed(0)
+          const failedRate = ((failed / total) * 100).toFixed(0)
+          const skippedRate = ((skipped / total) * 100).toFixed(0)
+          const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(
+            0
+          )
+          const testDuration = duration.toFixed(2)
+
+          const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`
+          const anchorName = anchorIdentifier(
+            `${testResultSummaryName}_${groupIdentifier}_summary`
+          )
+          const anchorBack = `[${backIcon}](${anchorName})`
+          testDetail.lines.push(
+            `${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`
+          )
+
+          const testsStatsLines: string[] = []
+
+          testsStatsLines.push('<table>')
+          testsStatsLines.push('<thead><tr>')
+          const header = [
+            `<th>${passedIcon}</th>`,
+            `<th>${failedIcon}</th>`,
+            `<th>${skippedIcon}</th>`,
+            `<th>${expectedFailureIcon}</th>`,
+            `<th>:stopwatch:</th>`
+          ].join('')
+          testsStatsLines.push(header)
+          testsStatsLines.push('</tr></thead>')
+
+          testsStatsLines.push('<tbody>')
+
+          testsStatsLines.push('<tr>')
+
+          let failedCount: string
+          if (failed > 0) {
+            failedCount = `<b>${failed} (${failedRate}%)</b>`
+          } else {
+            failedCount = `${failed} (${failedRate}%)`
+          }
+          const cols = [
+            `<td align="right" width="154px">${passed} (${passedRate}%)</td>`,
+            `<td align="right" width="154px">${failedCount}</td>`,
+            `<td align="right" width="154px">${skipped} (${skippedRate}%)</td>`,
+            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)</td>`,
+            `<td align="right" width="154px">${testDuration}s</td>`
+          ].join('')
+          testsStatsLines.push(cols)
+          testsStatsLines.push('</tr>')
+
+          testsStatsLines.push('</tbody>')
+          testsStatsLines.push('</table>\n')
+
+          testDetail.lines.push(testsStatsLines.join('\n'))
+
+          const testDetailTable: string[] = []
+          testDetailTable.push(`<table>`)
+
+          const configurationGroup = details.reduce(
+            (groups: {[key: string]: actionTestSummaries}, detail) => {
+              if (detail.identifier) {
+                if (groups[detail.identifier]) {
+                  groups[detail.identifier].push(detail)
+                } else {
+                  groups[detail.identifier] = [detail]
                 }
               }
+              return groups
+            },
+            {}
+          )
 
-              if (summary.configuration) {
-                if (testResult.name) {
-                  const isFailure = testResult.testStatus === 'Failure'
-                  const testMethodAnchor = isFailure
-                    ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                    : ''
-                  const backAnchorName = anchorIdentifier(
-                    `${testResultSummaryName}_${testResult.identifier}_failure-summary`
-                  )
-                  const backAnchorLink = isFailure
-                    ? `<a href="${backAnchorName}">${backIcon}</a>`
-                    : ''
-                  const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
-                  resultLines.push(`${status} ${testMethod}`)
+          for (const [, details] of Object.entries(configurationGroup)) {
+            const statuses = details.map(detail => {
+              const test = detail as ActionTestSummary
+              return test.testStatus
+            })
+            let groupStatus = ''
+            if (statuses.length) {
+              if (statuses.every(status => status === 'Success')) {
+                groupStatus = 'Success'
+              } else if (statuses.every(status => status === 'Failure')) {
+                groupStatus = 'Failure'
+              } else if (statuses.every(status => status === 'Skipped')) {
+                groupStatus = 'Skipped'
+              } else if (
+                statuses.every(status => status === 'Expected Failure')
+              ) {
+                groupStatus = 'Expected Failure'
+              } else {
+                if (
+                  statuses
+                    .filter(status => status !== 'Skipped')
+                    .some(status => status === 'Failure')
+                ) {
+                  groupStatus = 'Mixed Failure'
+                } else if (
+                  statuses
+                    .filter(status => status !== 'Skipped')
+                    .filter(status => status !== 'Expected Failure')
+                    .every(status => status === 'Success')
+                ) {
+                  groupStatus = 'Mixed Success'
+                } else {
+                  groupStatus = 'Expected Failure'
                 }
-                const configuration = summary.configuration
-                const configurationValues = configuration.values.storage
-                  .map(value => {
-                    return `${value.key}: ${value.value}`
-                  })
-                  .join(', ')
+              }
+            }
+            const groupStatusImage = Image.testStatus(groupStatus)
 
-                resultLines.push(
-                  `<br><b>Configuration:</b><br><code>${configurationValues}</code>`
+            for (const [index, detail] of details.entries()) {
+              const testResult = detail as ActionTestMetadata
+              const rowSpan = `rowspan="${details.length}"`
+              const valign = `valign="top"`
+              const colWidth = 'width="52px"'
+              const detailWidth = 'width="716px"'
+
+              const status = Image.testStatus(testResult.testStatus)
+              const resultLines: string[] = []
+
+              if (testResult.summaryRef) {
+                const summary: ActionTestSummary = await parser.parse(
+                  testResult.summaryRef.id
                 )
+
+                if (summary.configuration) {
+                  if (testResult.name) {
+                    const isFailure = testResult.testStatus === 'Failure'
+                    const testMethodAnchor = isFailure
+                      ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                      : ''
+                    const backAnchorName = anchorIdentifier(
+                      `${testResultSummaryName}_${testResult.identifier}_failure-summary`
+                    )
+                    const backAnchorLink = isFailure
+                      ? `<a href="${backAnchorName}">${backIcon}</a>`
+                      : ''
+                    const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
+                    resultLines.push(`${status} ${testMethod}`)
+                  }
+                  const configuration = summary.configuration
+                  const configurationValues = configuration.values.storage
+                    .map(value => {
+                      return `${value.key}: ${value.value}`
+                    })
+                    .join(', ')
+
+                  resultLines.push(
+                    `<br><b>Configuration:</b><br><code>${configurationValues}</code>`
+                  )
+                } else {
+                  if (testResult.name) {
+                    const isFailure = testResult.testStatus === 'Failure'
+                    const testMethodAnchor = isFailure
+                      ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                      : ''
+                    const backAnchorName = anchorIdentifier(
+                      `${testResultSummaryName}_${testResult.identifier}_failure-summary`
+                    )
+                    const backAnchorLink = isFailure
+                      ? `<a href="${backAnchorName}">${backIcon}</a>`
+                      : ''
+                    const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
+                    resultLines.push(`${testMethod}`)
+                  }
+                }
+
+                const activities: Activity[] = []
+                if (summary.activitySummaries) {
+                  await collectActivities(
+                    parser,
+                    summary.activitySummaries,
+                    activities
+                  )
+                }
+                if (activities.length) {
+                  const testActivities = activities
+                    .map(activity => {
+                      const attachments = activity.attachments.map(
+                        attachment => {
+                          let width = '100%'
+                          const dimensions = attachment.dimensions
+                          if (dimensions.width && dimensions.height) {
+                            if (
+                              dimensions.orientation &&
+                              dimensions.orientation >= 5
+                            ) {
+                              width = `${dimensions.height}px`
+                            } else {
+                              width = `${dimensions.width}px`
+                            }
+                          }
+
+                          const userInfo = attachment.userInfo
+                          if (userInfo) {
+                            for (const info of userInfo.storage) {
+                              if (info.key === 'Scale') {
+                                const scale = parseInt(`${info.value}`)
+                                if (dimensions.width && dimensions.height) {
+                                  if (
+                                    dimensions.orientation &&
+                                    dimensions.orientation >= 5
+                                  ) {
+                                    width = `${(
+                                      dimensions.height / scale
+                                    ).toFixed(0)}px`
+                                  } else {
+                                    width = `${(
+                                      dimensions.width / scale
+                                    ).toFixed(0)}px`
+                                  }
+                                } else {
+                                  width = `${(100 / scale).toFixed(0)}%`
+                                }
+                              }
+                            }
+                          }
+
+                          const widthAttr = `width="${width}"`
+                          return `<div><img ${widthAttr} src="${attachment.link}"></div>`
+                        }
+                      )
+
+                      if (attachments.length) {
+                        const testStatus = testResult.testStatus
+                        const open = testStatus.includes('Failure')
+                          ? 'open'
+                          : ''
+                        const title = escapeHashSign(activity.title)
+                        const message = `${indentation(
+                          activity.indent
+                        )}- ${title}`
+                        const attachmentIndent = indentation(
+                          activity.indent + 1
+                        )
+                        const attachmentContent = attachments.join('')
+                        return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>`
+                      } else {
+                        const indent = indentation(activity.indent)
+                        return `${indent}- ${escapeHashSign(activity.title)}`
+                      }
+                    })
+                    .join('\n')
+
+                  resultLines.push(
+                    `<br><b>Activities:</b>\n\n${testActivities}`
+                  )
+                }
               } else {
                 if (testResult.name) {
                   const isFailure = testResult.testStatus === 'Failure'
@@ -524,146 +714,41 @@ export async function format(bundlePath: string): Promise<string> {
                 }
               }
 
-              const activities: Activity[] = []
-              if (summary.activitySummaries) {
-                await collectActivities(
-                  parser,
-                  summary.activitySummaries,
-                  activities
-                )
-              }
-              if (activities.length) {
-                const testActivities = activities
-                  .map(activity => {
-                    const attachments = activity.attachments.map(attachment => {
-                      let width = '100%'
-                      const dimensions = attachment.dimensions
-                      if (dimensions.width && dimensions.height) {
-                        if (
-                          dimensions.orientation &&
-                          dimensions.orientation >= 5
-                        ) {
-                          width = `${dimensions.height}px`
-                        } else {
-                          width = `${dimensions.width}px`
-                        }
-                      }
-
-                      const userInfo = attachment.userInfo
-                      if (userInfo) {
-                        for (const info of userInfo.storage) {
-                          if (info.key === 'Scale') {
-                            const scale = parseInt(`${info.value}`)
-                            if (dimensions.width && dimensions.height) {
-                              if (
-                                dimensions.orientation &&
-                                dimensions.orientation >= 5
-                              ) {
-                                width = `${(dimensions.height / scale).toFixed(
-                                  0
-                                )}px`
-                              } else {
-                                width = `${(dimensions.width / scale).toFixed(
-                                  0
-                                )}px`
-                              }
-                            } else {
-                              width = `${(100 / scale).toFixed(0)}%`
-                            }
-                          }
-                        }
-                      }
-
-                      const widthAttr = `width="${width}"`
-                      return `<div><img ${widthAttr} src="${attachment.link}"></div>`
-                    })
-
-                    if (attachments.length) {
-                      const testStatus = testResult.testStatus
-                      const open = testStatus.includes('Failure') ? 'open' : ''
-                      const title = escapeHashSign(activity.title)
-                      const message = `${indentation(
-                        activity.indent
-                      )}- ${title}`
-                      const attachmentIndent = indentation(activity.indent + 1)
-                      const attachmentContent = attachments.join('')
-                      return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>`
-                    } else {
-                      const indent = indentation(activity.indent)
-                      return `${indent}- ${escapeHashSign(activity.title)}`
-                    }
-                  })
-                  .join('\n')
-
-                resultLines.push(`<br><b>Activities:</b>\n\n${testActivities}`)
-              }
-            } else {
-              if (testResult.name) {
-                const isFailure = testResult.testStatus === 'Failure'
-                const testMethodAnchor = isFailure
-                  ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                  : ''
-                const backAnchorName = anchorIdentifier(
-                  `${testResultSummaryName}_${testResult.identifier}_failure-summary`
-                )
-                const backAnchorLink = isFailure
-                  ? `<a href="${backAnchorName}">${backIcon}</a>`
-                  : ''
-                const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
-                resultLines.push(`${testMethod}`)
-              }
-            }
-
-            const testResultContent = resultLines.join('<br>')
-            let testResultRow = ''
-            if (details.length > 1) {
-              if (index === 0) {
-                testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+              const testResultContent = resultLines.join('<br>')
+              let testResultRow = ''
+              if (details.length > 1) {
+                if (index === 0) {
+                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+                } else {
+                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+                }
               } else {
-                testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+                testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
               }
-            } else {
-              testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+              testDetailTable.push(testResultRow)
             }
-            testDetailTable.push(testResultRow)
           }
+
+          testDetailTable.push(`</table>`)
+          testDetailTable.push('')
+
+          testDetail.lines.push(testDetailTable.join('\n'))
         }
-
-        testDetailTable.push(`</table>`)
-        testDetailTable.push('')
-
-        testDetail.lines.push(testDetailTable.join('\n'))
       }
-    }
 
-    if (testFailures.failureGroups.length) {
-      chapter.summary.push('### Failures')
-      for (const failureGroup of testFailures.failureGroups) {
-        if (failureGroup.failures.length) {
-          const anchorName = anchorIdentifier(
-            `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`
-          )
-          const testMethodLink = `<a name="${failureGroup.summaryIdentifier}_${failureGroup.identifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.identifier}</a>`
-          chapter.summary.push(`<h4>${testMethodLink}</h4>`)
-          for (const failure of failureGroup.failures) {
-            for (const line of failure.lines) {
-              chapter.summary.push(line)
-            }
-          }
+      const chapterDetail = new TestReportChapterDetail()
+      chapter.details.push(chapterDetail)
+
+      chapterDetail.content.push(testDetails.header)
+      for (const testDetail of testDetails.details) {
+        for (const detail of testDetail.lines) {
+          chapterDetail.content.push(detail)
         }
       }
     }
 
-    chapter.summary.push('')
-    chapter.summary.push(testDetails.header)
-    for (const testDetail of testDetails.details) {
-      for (const detail of testDetail.lines) {
-        chapter.summary.push(detail)
-      }
-    }
+    return testReport
   }
-
-  return testReport.print()
 }
 
 async function collectTestSummaries(

@@ -1,14 +1,15 @@
 import * as artifact from '@actions/artifact'
 import * as core from '@actions/core'
-import * as formatter from './formatter'
 import * as github from '@actions/github'
 import * as path from 'path'
+import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 
 async function run(): Promise<void> {
   try {
     const bundlePath: string = core.getInput('xcresult')
-    const formatted = await formatter.format(bundlePath)
+    const formatter = new Formatter(bundlePath)
+    const report = await formatter.format()
 
     if (core.getInput('GITHUB_TOKEN')) {
       const octokit = new Octokit()
@@ -32,7 +33,8 @@ async function run(): Promise<void> {
         head_sha: sha,
         output: {
           title: 'Xcode test results',
-          summary: formatted,
+          summary: report.reportSummary,
+          text: report.reportDetail,
           annotations: []
         }
       })
