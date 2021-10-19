@@ -408,11 +408,14 @@ function format(bundlePath) {
                             }
                             if (summary.configuration) {
                                 if (testResult.name) {
+                                    const isFailure = testResult.testStatus === 'Failure';
                                     const testMethodImage = iconImage('test-method.png');
-                                    const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`;
+                                    const testMethodAnchor = isFailure
+                                        ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                                        : '';
                                     const backImage = iconImage('right-arrow-curving-left.png');
                                     const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
-                                    const backAnchorLink = testResult.testStatus === 'Failure'
+                                    const backAnchorLink = isFailure
                                         ? `<a href="${backAnchorName}">${backImage}</a>`
                                         : '';
                                     const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
@@ -428,11 +431,14 @@ function format(bundlePath) {
                             }
                             else {
                                 if (testResult.name) {
+                                    const isFailure = testResult.testStatus === 'Failure';
                                     const testMethodImage = iconImage('test-method.png');
-                                    const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`;
+                                    const testMethodAnchor = isFailure
+                                        ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                                        : '';
                                     const backImage = iconImage('right-arrow-curving-left.png');
                                     const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
-                                    const backAnchorLink = testResult.testStatus === 'Failure'
+                                    const backAnchorLink = isFailure
                                         ? `<a href="${backAnchorName}">${backImage}</a>`
                                         : '';
                                     const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
@@ -502,11 +508,14 @@ function format(bundlePath) {
                         }
                         else {
                             if (testResult.name) {
+                                const isFailure = testResult.testStatus === 'Failure';
                                 const testMethodImage = iconImage('test-method.png');
-                                const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`;
+                                const testMethodAnchor = isFailure
+                                    ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                                    : '';
                                 const backImage = iconImage('right-arrow-curving-left.png');
                                 const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
-                                const backAnchorLink = testResult.testStatus === 'Failure'
+                                const backAnchorLink = isFailure
                                     ? `<a href="${backAnchorName}">${backImage}</a>`
                                     : '';
                                 const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;

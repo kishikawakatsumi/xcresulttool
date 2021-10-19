@@ -491,16 +491,18 @@ export async function format(bundlePath: string): Promise<string[]> {
 
             if (summary.configuration) {
               if (testResult.name) {
+                const isFailure = testResult.testStatus === 'Failure'
                 const testMethodImage = iconImage('test-method.png')
-                const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                const testMethodAnchor = isFailure
+                  ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                  : ''
                 const backImage = iconImage('right-arrow-curving-left.png')
                 const backAnchorName = anchorIdentifier(
                   `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                 )
-                const backAnchorLink =
-                  testResult.testStatus === 'Failure'
-                    ? `<a href="${backAnchorName}">${backImage}</a>`
-                    : ''
+                const backAnchorLink = isFailure
+                  ? `<a href="${backAnchorName}">${backImage}</a>`
+                  : ''
                 const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
                 resultLines.push(`${status} ${testMethod}`)
               }
@@ -516,16 +518,18 @@ export async function format(bundlePath: string): Promise<string[]> {
               )
             } else {
               if (testResult.name) {
+                const isFailure = testResult.testStatus === 'Failure'
                 const testMethodImage = iconImage('test-method.png')
-                const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                const testMethodAnchor = isFailure
+                  ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                  : ''
                 const backImage = iconImage('right-arrow-curving-left.png')
                 const backAnchorName = anchorIdentifier(
                   `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                 )
-                const backAnchorLink =
-                  testResult.testStatus === 'Failure'
-                    ? `<a href="${backAnchorName}">${backImage}</a>`
-                    : ''
+                const backAnchorLink = isFailure
+                  ? `<a href="${backAnchorName}">${backImage}</a>`
+                  : ''
                 const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
                 resultLines.push(`${testMethod}`)
               }
@@ -605,16 +609,18 @@ export async function format(bundlePath: string): Promise<string[]> {
             }
           } else {
             if (testResult.name) {
+              const isFailure = testResult.testStatus === 'Failure'
               const testMethodImage = iconImage('test-method.png')
-              const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+              const testMethodAnchor = isFailure
+                ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
+                : ''
               const backImage = iconImage('right-arrow-curving-left.png')
               const backAnchorName = anchorIdentifier(
                 `${testResultSummaryName}_${testResult.identifier}_failure-summary`
               )
-              const backAnchorLink =
-                testResult.testStatus === 'Failure'
-                  ? `<a href="${backAnchorName}">${backImage}</a>`
-                  : ''
+              const backAnchorLink = isFailure
+                ? `<a href="${backAnchorName}">${backImage}</a>`
+                : ''
               const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
               resultLines.push(`${testMethod}`)
             }
