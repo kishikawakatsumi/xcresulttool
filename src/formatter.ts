@@ -365,7 +365,7 @@ export async function format(bundlePath: string): Promise<string[]> {
           [0, 0, 0, 0, 0, 0]
         )
 
-      const testName = `${groupIdentifier} ${testResultSummaryName}`
+      const testName = `${groupIdentifier}`
       const passedRate = ((passed / total) * 100).toFixed(0)
       const failedRate = ((failed / total) * 100).toFixed(0)
       const skippedRate = ((skipped / total) * 100).toFixed(0)
@@ -378,9 +378,7 @@ export async function format(bundlePath: string): Promise<string[]> {
         `${testResultSummaryName}_${groupIdentifier}_summary`
       )
       const anchorBack = `[${arrowImage}](${anchorName})`
-      testDetail.lines.push(
-        `${anchor}<h5>${testName}</h5>&nbsp;${anchorBack}\n`
-      )
+      testDetail.lines.push(`${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`)
 
       const testsStatsLines: string[] = []
 
@@ -407,10 +405,10 @@ export async function format(bundlePath: string): Promise<string[]> {
         failedCount = `${failed}`
       }
       const cols = [
-        `<td align="right" width="154px">${passed}</td>`,
-        `<td align="right" width="154px">${failedCount}</td>`,
-        `<td align="right" width="154px">${skipped}</td>`,
-        `<td align="right" width="154px">${expectedFailure}</td>`,
+        `<td align="right" width="154px">${passed} (${passedRate}%)</td>`,
+        `<td align="right" width="154px">${failedCount} (${failedRate}%)</td>`,
+        `<td align="right" width="154px">${skipped} (${skippedRate}%)</td>`,
+        `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)</td>`,
         `<td align="right" width="154px">${testDuration}s</td>`
       ].join('')
       testsStatsLines.push(cols)
