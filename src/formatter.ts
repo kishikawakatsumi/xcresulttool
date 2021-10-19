@@ -492,7 +492,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             if (summary.configuration) {
               if (testResult.name) {
                 const testMethodImage = iconImage('test-method.png')
-                const testMethodAnchor = `<a name="${testResult.identifier}"></a>`
+                const testMethodAnchor = `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                 const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>`
                 resultLines.push(`${status} ${testMethod}`)
               }
@@ -623,7 +623,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     for (const failureGroup of testFailures.failureGroups) {
       if (failureGroup.failures.length) {
         const anchorName = anchorIdentifier(
-          `${failureGroup.summaryIdentifier}/${failureGroup.identifier}`
+          `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`
         )
         const testMethodLink = `<a href="${anchorName}">${failureGroup.identifier}</a>`
         lines.push(`<h4>${testMethodLink}</h4>`)
