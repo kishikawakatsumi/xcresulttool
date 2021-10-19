@@ -611,9 +611,9 @@ function collectFailureSummaries(failureSummaries) {
         const filePath = location === null || location === void 0 ? void 0 : location.filePath;
         const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
         const titleAlign = 'align="right"';
-        const titleWidth = 'width="120px"';
+        const titleWidth = 'width="100px"';
         const titleAttr = `${titleAlign} ${titleWidth}`;
-        const detailWidth = 'width="648px"';
+        const detailWidth = 'width="668px"';
         const contents = '<table>' +
             `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${failureSummary.fileName}:${lineNumber}</td></tr>` +
             `<tr><td ${titleAttr}><b>Issue Type</b></td><td ${detailWidth}>${failureSummary.issueType}</td></tr>` +
