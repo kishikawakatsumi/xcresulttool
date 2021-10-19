@@ -1,6 +1,96 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 2985:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.exportAttachments = void 0;
+const core = __importStar(__nccwpck_require__(2186));
+const exec = __importStar(__nccwpck_require__(1514));
+const os = __importStar(__nccwpck_require__(2087));
+const path = __importStar(__nccwpck_require__(5622));
+const image_size_1 = __importDefault(__nccwpck_require__(8250));
+function exportAttachments(parser, activity) {
+    return __awaiter(this, void 0, void 0, function* () {
+        activity.attachments = activity.attachments || [];
+        if (activity.attachments) {
+            for (const attachment of activity.attachments) {
+                if (attachment.filename && attachment.payloadRef) {
+                    const outputPath = path.join(os.tmpdir(), attachment.filename);
+                    const image = yield parser.exportObject(attachment.payloadRef.id, outputPath);
+                    let output = '';
+                    const options = {
+                        silent: true,
+                        listeners: {
+                            stdout: (data) => {
+                                output += data.toString();
+                            }
+                        }
+                    };
+                    try {
+                        const dimensions = (0, image_size_1.default)(image);
+                        attachment.dimensions = dimensions;
+                        if (image && core.getInput('GITHUB_TOKEN')) {
+                            yield exec.exec('curl', [
+                                '-X',
+                                'POST',
+                                'https://xcresulttool-file.herokuapp.com/file',
+                                '-d',
+                                image.toString('base64')
+                            ], options);
+                            const response = JSON.parse(output);
+                            if (response) {
+                                attachment.link = response.link;
+                            }
+                        }
+                    }
+                    catch (error) {
+                        core.error(error);
+                    }
+                }
+            }
+        }
+    });
+}
+exports.exportAttachments = exportAttachments;
+
+
+/***/ }),
+
 /***/ 7556:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -35,19 +125,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
-const core = __importStar(__nccwpck_require__(2186));
-const exec = __importStar(__nccwpck_require__(1514));
-const os = __importStar(__nccwpck_require__(2087));
-const path = __importStar(__nccwpck_require__(5622));
 const report_1 = __nccwpck_require__(8269);
+const markdown_1 = __nccwpck_require__(5821);
 const parser_1 = __nccwpck_require__(267);
-const image_size_1 = __importDefault(__nccwpck_require__(8250));
+const attachment_1 = __nccwpck_require__(2985);
 const passedIcon = Image.testStatus('Success');
 const failedIcon = Image.testStatus('Failure');
 const skippedIcon = Image.testStatus('Skipped');
@@ -203,7 +287,7 @@ class Formatter {
                 chapterSummary.content.push('---\n');
                 chapterSummary.content.push('### Test Summary');
                 for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
-                    const anchorName = anchorIdentifier(groupIdentifier);
+                    const anchorName = (0, markdown_1.anchorIdentifier)(groupIdentifier);
                     chapterSummary.content.push(`#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})\n`);
                     chapterSummary.content.push('<table>');
                     chapterSummary.content.push('<thead><tr>');
@@ -222,7 +306,7 @@ class Formatter {
                         chapterSummary.content.push('<tr>');
                         const testClass = `${testClassIcon}&nbsp;${identifier}`;
                         const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`;
-                        const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`);
+                        const anchorName = (0, markdown_1.anchorIdentifier)(`${groupIdentifier}_${identifier}`);
                         const testClassLink = `<a href="${anchorName}">${testClass}</a>`;
                         let failedCount;
                         if (stats.failed > 0) {
@@ -298,7 +382,7 @@ class Formatter {
                     chapterSummary.content.push('### Failures');
                     for (const failureGroup of testFailures.failureGroups) {
                         if (failureGroup.failures.length) {
-                            const anchorName = anchorIdentifier(`${failureGroup.summaryIdentifier}_${failureGroup.identifier}`);
+                            const anchorName = (0, markdown_1.anchorIdentifier)(`${failureGroup.summaryIdentifier}_${failureGroup.identifier}`);
                             const testMethodLink = `<a name="${failureGroup.summaryIdentifier}_${failureGroup.identifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.identifier}</a>`;
                             chapterSummary.content.push(`<h4>${testMethodLink}</h4>`);
                             for (const failure of failureGroup.failures) {
@@ -315,7 +399,7 @@ class Formatter {
                     const testDetail = new report_1.TestDetail();
                     testDetails.details.push(testDetail);
                     const testResultSummaryName = results.summary.name;
-                    const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`);
+                    const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_summary`);
                     testDetail.lines.push(`#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backIcon}](${anchorName})`);
                     testDetail.lines.push('');
                     const detailGroup = results.details.reduce((groups, detail) => {
@@ -368,7 +452,7 @@ class Formatter {
                         const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
                         const testDuration = duration.toFixed(2);
                         const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`;
-                        const anchorName = anchorIdentifier(`${testResultSummaryName}_${groupIdentifier}_summary`);
+                        const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${groupIdentifier}_summary`);
                         const anchorBack = `[${backIcon}](${anchorName})`;
                         testDetail.lines.push(`${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`);
                         const testsStatsLines = [];
@@ -470,7 +554,7 @@ class Formatter {
                                             const testMethodAnchor = isFailure
                                                 ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                                                 : '';
-                                            const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                            const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                             const backAnchorLink = isFailure
                                                 ? `<a href="${backAnchorName}">${backIcon}</a>`
                                                 : '';
@@ -491,7 +575,7 @@ class Formatter {
                                             const testMethodAnchor = isFailure
                                                 ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                                                 : '';
-                                            const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                            const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                             const backAnchorLink = isFailure
                                                 ? `<a href="${backAnchorName}">${backIcon}</a>`
                                                 : '';
@@ -546,15 +630,15 @@ class Formatter {
                                                 const open = testStatus.includes('Failure')
                                                     ? 'open'
                                                     : '';
-                                                const title = escapeHashSign(activity.title);
-                                                const message = `${indentation(activity.indent)}- ${title}`;
-                                                const attachmentIndent = indentation(activity.indent + 1);
+                                                const title = (0, markdown_1.escapeHashSign)(activity.title);
+                                                const message = `${(0, markdown_1.indentation)(activity.indent)}- ${title}`;
+                                                const attachmentIndent = (0, markdown_1.indentation)(activity.indent + 1);
                                                 const attachmentContent = attachments.join('');
                                                 return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>`;
                                             }
                                             else {
-                                                const indent = indentation(activity.indent);
-                                                return `${indent}- ${escapeHashSign(activity.title)}`;
+                                                const indent = (0, markdown_1.indentation)(activity.indent);
+                                                return `${indent}- ${(0, markdown_1.escapeHashSign)(activity.title)}`;
                                             }
                                         })
                                             .join('\n');
@@ -567,7 +651,7 @@ class Formatter {
                                         const testMethodAnchor = isFailure
                                             ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
                                             : '';
-                                        const backAnchorName = anchorIdentifier(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                        const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                         const backAnchorLink = isFailure
                                             ? `<a href="${backAnchorName}">${backIcon}</a>`
                                             : '';
@@ -630,7 +714,7 @@ function collectActivities(parser, activitySummaries, activities, indent = 0) {
         for (const activitySummary of activitySummaries) {
             const activity = activitySummary;
             activity.indent = indent;
-            yield exportAttachments(parser, activity);
+            yield (0, attachment_1.exportAttachments)(parser, activity);
             activities.push(activity);
             if (activitySummary.subactivities) {
                 yield collectActivities(parser, activitySummary.subactivities, activities, indent + 1);
@@ -666,57 +750,6 @@ function collectFailureSummaries(failureSummaries) {
         }).join('\n');
         return { contents, stackTrace: stackTrace || [] };
     });
-}
-function exportAttachments(parser, activity) {
-    return __awaiter(this, void 0, void 0, function* () {
-        activity.attachments = activity.attachments || [];
-        if (activity.attachments) {
-            for (const attachment of activity.attachments) {
-                if (attachment.filename && attachment.payloadRef) {
-                    const outputPath = path.join(os.tmpdir(), attachment.filename);
-                    const image = yield parser.exportObject(attachment.payloadRef.id, outputPath);
-                    let output = '';
-                    const options = {
-                        silent: true,
-                        listeners: {
-                            stdout: (data) => {
-                                output += data.toString();
-                            }
-                        }
-                    };
-                    try {
-                        const dimensions = (0, image_size_1.default)(image);
-                        attachment.dimensions = dimensions;
-                        if (image && core.getInput('GITHUB_TOKEN')) {
-                            yield exec.exec('curl', [
-                                '-X',
-                                'POST',
-                                'https://xcresulttool-file.herokuapp.com/file',
-                                '-d',
-                                image.toString('base64')
-                            ], options);
-                            const response = JSON.parse(output);
-                            if (response) {
-                                attachment.link = response.link;
-                            }
-                        }
-                    }
-                    catch (error) {
-                        core.error(error);
-                    }
-                }
-            }
-        }
-    });
-}
-function indentation(level) {
-    return '  '.repeat(level);
-}
-function anchorIdentifier(text) {
-    return `#user-content-${text.toLowerCase()}`;
-}
-function escapeHashSign(text) {
-    return text.replace(/#/g, '<span>#</span>');
 }
 
 
@@ -855,6 +888,29 @@ function run() {
     });
 }
 run();
+
+
+/***/ }),
+
+/***/ 5821:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.escapeHashSign = exports.anchorIdentifier = exports.indentation = void 0;
+function indentation(level) {
+    return '  '.repeat(level);
+}
+exports.indentation = indentation;
+function anchorIdentifier(text) {
+    return `#user-content-${text.toLowerCase()}`;
+}
+exports.anchorIdentifier = anchorIdentifier;
+function escapeHashSign(text) {
+    return text.replace(/#/g, '<span>#</span>');
+}
+exports.escapeHashSign = escapeHashSign;
 
 
 /***/ }),

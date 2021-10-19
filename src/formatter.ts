@@ -1,10 +1,6 @@
 /*eslint-disable no-shadow */
 
 import * as Image from './image'
-import * as core from '@actions/core'
-import * as exec from '@actions/exec'
-import * as os from 'os'
-import * as path from 'path'
 
 import {
   TestDetail,
@@ -20,6 +16,7 @@ import {
   actionTestSummaries,
   actionTestSummary
 } from './report'
+import {anchorIdentifier, escapeHashSign, indentation} from './markdown'
 
 import {ActionTestActivitySummary} from '../dev/@types/ActionTestActivitySummary.d'
 import {ActionTestFailureSummary} from '../dev/@types/ActionTestFailureSummary.d'
@@ -30,11 +27,11 @@ import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
 import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
 import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata.d'
 import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
-import {Parser} from './parser'
-import {Reference} from '../dev/@types/Reference.d'
-import {SortedKeyValueArray} from '../dev/@types/SortedKeyValueArray.d'
 
-import sizeOf from 'image-size'
+import {Activity} from './activity'
+import {Parser} from './parser'
+
+import {exportAttachments} from './attachment'
 
 const passedIcon = Image.testStatus('Success')
 const failedIcon = Image.testStatus('Failure')
@@ -827,107 +824,6 @@ function collectFailureSummaries(
       .join('\n')
     return {contents, stackTrace: stackTrace || []} as FailureSummary
   })
-}
-
-async function exportAttachments(
-  parser: Parser,
-  activity: Activity
-): Promise<void> {
-  activity.attachments = activity.attachments || []
-
-  if (activity.attachments) {
-    for (const attachment of activity.attachments) {
-      if (attachment.filename && attachment.payloadRef) {
-        const outputPath = path.join(os.tmpdir(), attachment.filename)
-        const image = await parser.exportObject(
-          attachment.payloadRef.id,
-          outputPath
-        )
-
-        let output = ''
-        const options = {
-          silent: true,
-          listeners: {
-            stdout: (data: Buffer) => {
-              output += data.toString()
-            }
-          }
-        }
-
-        try {
-          const dimensions: Dimensions = sizeOf(image)
-          attachment.dimensions = dimensions
-
-          if (image && core.getInput('GITHUB_TOKEN')) {
-            await exec.exec(
-              'curl',
-              [
-                '-X',
-                'POST',
-                'https://xcresulttool-file.herokuapp.com/file',
-                '-d',
-                image.toString('base64')
-              ],
-              options
-            )
-            const response = JSON.parse(output)
-            if (response) {
-              attachment.link = response.link
-            }
-          }
-        } catch (error) {
-          core.error(error as Error)
-        }
-      }
-    }
-  }
-}
-
-function indentation(level: number): string {
-  return '  '.repeat(level)
-}
-
-function anchorIdentifier(text: string): string {
-  return `#user-content-${text.toLowerCase()}`
-}
-
-function escapeHashSign(text: string): string {
-  return text.replace(/#/g, '<span>#</span>')
-}
-
-interface Activity {
-  title: string
-  activityType: string
-  uuid: string
-  start?: string
-  finish?: string
-  attachments: Attachment[]
-  subactivities: ActionTestActivitySummary[]
-  failureSummaryIDs: string[]
-  expectedFailureIDs: string[]
-  indent: number
-}
-
-interface Attachment {
-  uniformTypeIdentifier: string
-  name?: string
-  uuid?: string
-  timestamp?: string
-  userInfo?: SortedKeyValueArray
-  lifetime: string
-  inActivityIdentifier: number
-  filename?: string
-  payloadRef?: Reference
-  payloadSize: number
-  link: string
-  dimensions: Dimensions
-}
-
-interface Dimensions {
-  width: number | undefined
-  height: number | undefined
-  orientation?: number
-  type?: string
 }
 
 interface FailureSummary {
