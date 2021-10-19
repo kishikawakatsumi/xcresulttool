@@ -32,12 +32,10 @@ const testClassIcon = Image.icon('test-class.png')
 const testMethodIcon = Image.icon('test-method.png')
 const attachmentIcon = Image.icon('attachment.png')
 
-export async function format(bundlePath: string): Promise<string[]> {
+export async function format(bundlePath: string): Promise<string> {
   const parser = new Parser(bundlePath)
 
   const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse()
-
-  const lines: string[] = []
 
   const testReport = new TestReport()
 
@@ -55,11 +53,10 @@ export async function format(bundlePath: string): Promise<string[]> {
     for (const action of actionsInvocationRecord.actions) {
       if (action.actionResult) {
         if (action.actionResult.testsRef) {
-          const schemeCommandName = action.schemeCommandName
-          const testReportChapter = new TestReportChapter(schemeCommandName)
+          const testReportChapter = new TestReportChapter(
+            action.schemeCommandName
+          )
           testReport.chapters.push(testReportChapter)
-
-          lines.push(`### ${schemeCommandName} ${testReport.entityName}\n`)
 
           const actionTestPlanRunSummaries: ActionTestPlanRunSummaries =
             await parser.parse(action.actionResult.testsRef.id)
@@ -164,10 +161,10 @@ export async function format(bundlePath: string): Promise<string[]> {
       groups[identifier] = group
     }
 
-    lines.push('### Summary')
+    chapter.summary.push('### Summary')
 
-    lines.push('<table>')
-    lines.push('<thead><tr>')
+    chapter.summary.push('<table>')
+    chapter.summary.push('<thead><tr>')
     const header = [
       `<th>Total</th>`,
       `<th>${passedIcon}&nbsp;Passed</th>`,
@@ -176,10 +173,10 @@ export async function format(bundlePath: string): Promise<string[]> {
       `<th>${expectedFailureIcon}&nbsp;Expected Failure</th>`,
       `<th>:stopwatch:&nbsp;Time</th>`
     ].join('')
-    lines.push(header)
-    lines.push('</tr></thead>')
+    chapter.summary.push(header)
+    chapter.summary.push('</tr></thead>')
 
-    lines.push('<tbody><tr>')
+    chapter.summary.push('<tbody><tr>')
 
     let failedCount: string
     if (testSummary.stats.failed > 0) {
@@ -196,24 +193,24 @@ export async function format(bundlePath: string): Promise<string[]> {
       `<td align="right" width="158px">${testSummary.stats.expectedFailure}</td>`,
       `<td align="right" width="138px">${duration}s</td>`
     ].join('')
-    lines.push(cols)
-    lines.push('</tr></tbody>')
-    lines.push('</table>\n')
+    chapter.summary.push(cols)
+    chapter.summary.push('</tr></tbody>')
+    chapter.summary.push('</table>\n')
 
-    lines.push('---')
-    lines.push('')
+    chapter.summary.push('---')
+    chapter.summary.push('')
 
-    lines.push('### Test Summary')
+    chapter.summary.push('### Test Summary')
 
     for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
       const anchorName = anchorIdentifier(groupIdentifier)
-      lines.push(
+      chapter.summary.push(
         `#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})`
       )
-      lines.push('')
+      chapter.summary.push('')
 
-      lines.push('<table>')
-      lines.push('<thead><tr>')
+      chapter.summary.push('<table>')
+      chapter.summary.push('<thead><tr>')
       const header = [
         `<th>Test</th>`,
         `<th>Total</th>`,
@@ -222,12 +219,12 @@ export async function format(bundlePath: string): Promise<string[]> {
         `<th>${skippedIcon}</th>`,
         `<th>${expectedFailureIcon}</th>`
       ].join('')
-      lines.push(header)
-      lines.push('</tr></thead>')
+      chapter.summary.push(header)
+      chapter.summary.push('</tr></thead>')
 
-      lines.push('<tbody>')
+      chapter.summary.push('<tbody>')
       for (const [identifier, stats] of Object.entries(group)) {
-        lines.push('<tr>')
+        chapter.summary.push('<tr>')
         const testClass = `${testClassIcon}&nbsp;${identifier}`
         const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
         const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`)
@@ -247,16 +244,16 @@ export async function format(bundlePath: string): Promise<string[]> {
           `<td align="right" width="80px">${stats.skipped}</td>`,
           `<td align="right" width="80px">${stats.expectedFailure}</td>`
         ].join('')
-        lines.push(cols)
-        lines.push('</tr>')
+        chapter.summary.push(cols)
+        chapter.summary.push('</tr>')
       }
-      lines.push('</tbody>')
-      lines.push('</table>\n')
+      chapter.summary.push('</tbody>')
+      chapter.summary.push('</table>\n')
     }
-    lines.push('')
+    chapter.summary.push('')
 
-    lines.push('---')
-    lines.push('')
+    chapter.summary.push('---')
+    chapter.summary.push('')
 
     const testFailures = new TestFailures()
     const testDetails = new TestDetails()
@@ -628,33 +625,33 @@ export async function format(bundlePath: string): Promise<string[]> {
     }
 
     if (testFailures.failureGroups.length) {
-      lines.push('### Failures')
+      chapter.summary.push('### Failures')
       for (const failureGroup of testFailures.failureGroups) {
         if (failureGroup.failures.length) {
           const anchorName = anchorIdentifier(
             `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`
           )
           const testMethodLink = `<a name="${failureGroup.summaryIdentifier}_${failureGroup.identifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.identifier}</a>`
-          lines.push(`<h4>${testMethodLink}</h4>`)
+          chapter.summary.push(`<h4>${testMethodLink}</h4>`)
           for (const failure of failureGroup.failures) {
             for (const line of failure.lines) {
-              lines.push(line)
+              chapter.summary.push(line)
             }
           }
         }
       }
     }
 
-    lines.push('')
-    lines.push(testDetails.header)
+    chapter.summary.push('')
+    chapter.summary.push(testDetails.header)
     for (const testDetail of testDetails.details) {
       for (const detail of testDetail.lines) {
-        lines.push(detail)
+        chapter.summary.push(detail)
       }
     }
   }
 
-  return lines
+  return testReport.print()
 }
 
 async function collectTestSummaries(
@@ -812,11 +809,23 @@ type actionTestSummaries = actionTestSummary[]
 class TestReport {
   entityName?: string
   readonly chapters: TestReportChapter[] = []
+
+  print(): string {
+    return this.chapters
+      .map(chapter => {
+        const title = `### ${chapter.schemeCommandName} ${this.entityName}`
+        const content = chapter.summary.join('\n')
+        return `${title}\n\n${content}`
+      })
+      .join('\n')
+  }
 }
 
 class TestReportChapter {
   readonly schemeCommandName: string
   readonly sections: {[key: string]: TestReportSection} = {}
+
+  readonly summary: string[] = []
 
   constructor(schemeCommandName: string) {
     this.schemeCommandName = schemeCommandName
@@ -826,6 +835,8 @@ class TestReportChapter {
 class TestReportSection {
   readonly summary: ActionTestableSummary
   readonly details: actionTestSummaries
+
+  readonly sectionSummary: string[] = []
 
   constructor(summary: ActionTestableSummary, details: actionTestSummaries) {
     this.summary = summary

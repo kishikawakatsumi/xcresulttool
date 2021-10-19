@@ -32,7 +32,7 @@ async function run(): Promise<void> {
         head_sha: sha,
         output: {
           title: 'Xcode test results',
-          summary: formatted.join('\n'),
+          summary: formatted,
           annotations: []
         }
       })

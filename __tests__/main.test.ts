@@ -12,8 +12,8 @@ test('example.xcresult', async () => {
   const formatted = await formatter.format(bundlePath)
 
   const outputPath = path.join(os.tmpdir(), 'example.md')
-  await writeFile(outputPath, formatted.join('\n'))
-  // await writeFile('example.md', formatted.join('\n'))
+  await writeFile(outputPath, formatted)
+  // await writeFile('example.md', formatted)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/example.md')).toString()
   )
@@ -24,8 +24,8 @@ test('KeychainAccess.xcresult', async () => {
   const formatted = await formatter.format(bundlePath)
 
   const outputPath = path.join(os.tmpdir(), 'KeychainAccess.md')
-  await writeFile(outputPath, formatted.join('\n'))
-  // await writeFile('KeychainAccess.md', formatted.join('\n'))
+  await writeFile(outputPath, formatted)
+  // await writeFile('KeychainAccess.md', formatted)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/KeychainAccess.md')).toString()
   )
@@ -36,8 +36,8 @@ test('TAU.xcresult', async () => {
   const formatted = await formatter.format(bundlePath)
 
   const outputPath = path.join(os.tmpdir(), 'TAU.md')
-  await writeFile(outputPath, formatted.join('\n'))
-  // await writeFile('TAU.md', formatted.join('\n'))
+  await writeFile(outputPath, formatted)
+  // await writeFile('TAU.md', formatted)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/TAU.md')).toString()
   )
