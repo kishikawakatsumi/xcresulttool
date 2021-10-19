@@ -6,13 +6,25 @@ import * as exec from '@actions/exec'
 import * as os from 'os'
 import * as path from 'path'
 
+import {
+  TestDetail,
+  TestDetails,
+  TestFailure,
+  TestFailureGroup,
+  TestFailures,
+  TestReport,
+  TestReportChapter,
+  TestReportSection,
+  actionTestSummaries,
+  actionTestSummary
+} from './report'
+
 import {ActionTestActivitySummary} from '../dev/@types/ActionTestActivitySummary.d'
 import {ActionTestFailureSummary} from '../dev/@types/ActionTestFailureSummary.d'
 import {ActionTestMetadata} from '../dev/@types/ActionTestMetadata.d'
 import {ActionTestPlanRunSummaries} from '../dev/@types/ActionTestPlanRunSummaries.d'
 import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
 import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
-import {ActionTestSummaryIdentifiableObject} from '../dev/@types/ActionTestSummaryIdentifiableObject.d'
 import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
 import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata.d'
 import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
@@ -796,83 +808,6 @@ function anchorIdentifier(text: string): string {
 
 function escapeHashSign(text: string): string {
   return text.replace(/#/g, '<span>#</span>')
-}
-
-type actionTestSummary =
-  | ActionTestSummaryIdentifiableObject
-  | ActionTestSummaryGroup
-  | ActionTestSummary
-  | ActionTestMetadata
-
-type actionTestSummaries = actionTestSummary[]
-
-class TestReport {
-  entityName?: string
-  readonly chapters: TestReportChapter[] = []
-
-  print(): string {
-    return this.chapters
-      .map(chapter => {
-        const title = `### ${chapter.schemeCommandName} ${this.entityName}`
-        const content = chapter.summary.join('\n')
-        return `${title}\n\n${content}`
-      })
-      .join('\n')
-  }
-}
-
-class TestReportChapter {
-  readonly schemeCommandName: string
-  readonly sections: {[key: string]: TestReportSection} = {}
-
-  readonly summary: string[] = []
-
-  constructor(schemeCommandName: string) {
-    this.schemeCommandName = schemeCommandName
-  }
-}
-
-class TestReportSection {
-  readonly summary: ActionTestableSummary
-  readonly details: actionTestSummaries
-
-  readonly sectionSummary: string[] = []
-
-  constructor(summary: ActionTestableSummary, details: actionTestSummaries) {
-    this.summary = summary
-    this.details = details
-  }
-}
-
-class TestFailures {
-  readonly failureGroups: TestFailureGroup[] = []
-}
-
-class TestFailureGroup {
-  readonly summaryIdentifier: string
-  readonly identifier: string
-  readonly name: string
-
-  readonly failures: TestFailure[] = []
-
-  constructor(summaryIdentifier: string, identifier: string, name: string) {
-    this.summaryIdentifier = summaryIdentifier
-    this.identifier = identifier
-    this.name = name
-  }
-}
-
-class TestFailure {
-  readonly lines: string[] = []
-}
-
-class TestDetails {
-  readonly header = '### Test Details\n'
-  readonly details: TestDetail[] = []
-}
-
-class TestDetail {
-  readonly lines: string[] = []
 }
 
 interface Activity {

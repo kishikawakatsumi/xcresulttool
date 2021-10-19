@@ -45,6 +45,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2087));
 const path = __importStar(__nccwpck_require__(5622));
+const report_1 = __nccwpck_require__(8269);
 const parser_1 = __nccwpck_require__(267);
 const image_size_1 = __importDefault(__nccwpck_require__(8250));
 const passedIcon = Image.testStatus('Success');
@@ -59,7 +60,7 @@ function format(bundlePath) {
     return __awaiter(this, void 0, void 0, function* () {
         const parser = new parser_1.Parser(bundlePath);
         const actionsInvocationRecord = yield parser.parse();
-        const testReport = new TestReport();
+        const testReport = new report_1.TestReport();
         if (actionsInvocationRecord.metadataRef) {
             const metadata = yield parser.parse(actionsInvocationRecord.metadataRef.id);
             if (metadata.schemeIdentifier) {
@@ -71,7 +72,7 @@ function format(bundlePath) {
             for (const action of actionsInvocationRecord.actions) {
                 if (action.actionResult) {
                     if (action.actionResult.testsRef) {
-                        const testReportChapter = new TestReportChapter(action.schemeCommandName);
+                        const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName);
                         testReport.chapters.push(testReportChapter);
                         const actionTestPlanRunSummaries = yield parser.parse(action.actionResult.testsRef.id);
                         for (const summary of actionTestPlanRunSummaries.summaries) {
@@ -80,7 +81,7 @@ function format(bundlePath) {
                                 yield collectTestSummaries(parser, testableSummary, testableSummary.tests, testSummaries);
                                 if (testableSummary.name) {
                                     testReportChapter.sections[testableSummary.name] =
-                                        new TestReportSection(testableSummary, testSummaries);
+                                        new report_1.TestReportSection(testableSummary, testSummaries);
                                 }
                             }
                         }
@@ -240,10 +241,10 @@ function format(bundlePath) {
             chapter.summary.push('');
             chapter.summary.push('---');
             chapter.summary.push('');
-            const testFailures = new TestFailures();
-            const testDetails = new TestDetails();
+            const testFailures = new report_1.TestFailures();
+            const testDetails = new report_1.TestDetails();
             for (const [, results] of Object.entries(chapter.sections)) {
-                const testDetail = new TestDetail();
+                const testDetail = new report_1.TestDetail();
                 testDetails.details.push(testDetail);
                 const testResultSummaryName = results.summary.name;
                 const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`);
@@ -388,10 +389,10 @@ function format(bundlePath) {
                             const resultLines = [];
                             if (testResult.summaryRef) {
                                 const summary = yield parser.parse(testResult.summaryRef.id);
-                                const testFailureGroup = new TestFailureGroup(testResultSummaryName || '', summary.identifier || '', summary.name || '');
+                                const testFailureGroup = new report_1.TestFailureGroup(testResultSummaryName || '', summary.identifier || '', summary.name || '');
                                 testFailures.failureGroups.push(testFailureGroup);
                                 if (summary.failureSummaries) {
-                                    const testFailure = new TestFailure();
+                                    const testFailure = new report_1.TestFailure();
                                     testFailureGroup.failures.push(testFailure);
                                     const failureSummaries = collectFailureSummaries(summary.failureSummaries);
                                     for (const failureSummary of failureSummaries) {
@@ -662,63 +663,6 @@ function anchorIdentifier(text) {
 }
 function escapeHashSign(text) {
     return text.replace(/#/g, '<span>#</span>');
-}
-class TestReport {
-    constructor() {
-        this.chapters = [];
-    }
-    print() {
-        return this.chapters
-            .map(chapter => {
-            const title = `### ${chapter.schemeCommandName} ${this.entityName}`;
-            const content = chapter.summary.join('\n');
-            return `${title}\n\n${content}`;
-        })
-            .join('\n');
-    }
-}
-class TestReportChapter {
-    constructor(schemeCommandName) {
-        this.sections = {};
-        this.summary = [];
-        this.schemeCommandName = schemeCommandName;
-    }
-}
-class TestReportSection {
-    constructor(summary, details) {
-        this.sectionSummary = [];
-        this.summary = summary;
-        this.details = details;
-    }
-}
-class TestFailures {
-    constructor() {
-        this.failureGroups = [];
-    }
-}
-class TestFailureGroup {
-    constructor(summaryIdentifier, identifier, name) {
-        this.failures = [];
-        this.summaryIdentifier = summaryIdentifier;
-        this.identifier = identifier;
-        this.name = name;
-    }
-}
-class TestFailure {
-    constructor() {
-        this.lines = [];
-    }
-}
-class TestDetails {
-    constructor() {
-        this.header = '### Test Details\n';
-        this.details = [];
-    }
-}
-class TestDetail {
-    constructor() {
-        this.lines = [];
-    }
 }
 
 
@@ -1009,6 +953,82 @@ function parsePrimitive(element) {
             return element['_value'];
     }
 }
+
+
+/***/ }),
+
+/***/ 8269:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TestDetail = exports.TestDetails = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestReportSection = exports.TestReportChapter = exports.TestReport = void 0;
+class TestReport {
+    constructor() {
+        this.chapters = [];
+    }
+    print() {
+        return this.chapters
+            .map(chapter => {
+            const title = `### ${chapter.schemeCommandName} ${this.entityName}`;
+            const content = chapter.summary.join('\n');
+            return `${title}\n\n${content}`;
+        })
+            .join('\n');
+    }
+}
+exports.TestReport = TestReport;
+class TestReportChapter {
+    constructor(schemeCommandName) {
+        this.sections = {};
+        this.summary = [];
+        this.schemeCommandName = schemeCommandName;
+    }
+}
+exports.TestReportChapter = TestReportChapter;
+class TestReportSection {
+    constructor(summary, details) {
+        this.sectionSummary = [];
+        this.summary = summary;
+        this.details = details;
+    }
+}
+exports.TestReportSection = TestReportSection;
+class TestFailures {
+    constructor() {
+        this.failureGroups = [];
+    }
+}
+exports.TestFailures = TestFailures;
+class TestFailureGroup {
+    constructor(summaryIdentifier, identifier, name) {
+        this.failures = [];
+        this.summaryIdentifier = summaryIdentifier;
+        this.identifier = identifier;
+        this.name = name;
+    }
+}
+exports.TestFailureGroup = TestFailureGroup;
+class TestFailure {
+    constructor() {
+        this.lines = [];
+    }
+}
+exports.TestFailure = TestFailure;
+class TestDetails {
+    constructor() {
+        this.header = '### Test Details\n';
+        this.details = [];
+    }
+}
+exports.TestDetails = TestDetails;
+class TestDetail {
+    constructor() {
+        this.lines = [];
+    }
+}
+exports.TestDetail = TestDetail;
 
 
 /***/ }),
