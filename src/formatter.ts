@@ -12,6 +12,7 @@ import {ActionTestPlanRunSummaries} from '../dev/@types/ActionTestPlanRunSummari
 import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
 import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
 import {ActionTestSummaryIdentifiableObject} from '../dev/@types/ActionTestSummaryIdentifiableObject.d'
+import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
 import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata.d'
 import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
 import {Parser} from './parser'
@@ -24,6 +25,14 @@ const passedImage = statusImage('Success')
 const failedImage = statusImage('Failure')
 const skippedImage = statusImage('Skipped')
 const expectedFailureImage = statusImage('Expected Failure')
+
+type actionTestSummary =
+  | ActionTestSummaryIdentifiableObject
+  | ActionTestSummaryGroup
+  | ActionTestSummary
+  | ActionTestMetadata
+
+type actionTestSummaries = actionTestSummary[]
 
 export async function format(bundlePath: string): Promise<string[]> {
   const parser = new Parser(bundlePath)
@@ -58,9 +67,9 @@ export async function format(bundlePath: string): Promise<string[]> {
           for (const summary of actionTestPlanRunSummaries.summaries) {
             for (const testableSummary of summary.testableSummaries) {
               const testResults: ActionTestMetadata[] = []
-              await collectTestResults(
+              await collectTestSummaries(
                 parser,
-                testableSummary as any,
+                testableSummary,
                 testableSummary.tests,
                 testResults
               )
@@ -654,24 +663,24 @@ export async function format(bundlePath: string): Promise<string[]> {
   return lines
 }
 
-async function collectTestResults(
+async function collectTestSummaries(
   parser: Parser,
-  group: ActionTestSummaryGroup,
-  testSummaries: ActionTestSummaryIdentifiableObject[],
-  testResults: ActionTestSummaryIdentifiableObject[]
+  group: ActionTestableSummary | ActionTestSummaryGroup,
+  tests: actionTestSummaries,
+  testSummaries: actionTestSummaries
 ): Promise<void> {
-  for (const test of testSummaries) {
+  for (const test of tests) {
     if (test.hasOwnProperty('subtests')) {
       const group = test as ActionTestSummaryGroup
-      await collectTestResults(parser, group, group.subtests, testResults)
+      await collectTestSummaries(parser, group, group.subtests, testSummaries)
     } else {
       const obj: any = test
       obj['group'] = group.name
       if (test.hasOwnProperty('summaryRef')) {
         const metadata = test as ActionTestMetadata
-        testResults.push(metadata)
+        testSummaries.push(metadata)
       } else {
-        testResults.push(test)
+        testSummaries.push(test)
       }
     }
   }
