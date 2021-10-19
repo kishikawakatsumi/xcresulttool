@@ -266,7 +266,8 @@ export async function format(bundlePath: string): Promise<string[]> {
       const test: any = detail
       const testClass = `${iconImage('test-class.png')}&nbsp;${identifier}`
       const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
-      const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`
+      const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`)
+      const testClassLink = `<a href="${anchorName}">${testClass}</a>`
 
       let failedCount: string
       if (test.failed > 0) {
@@ -300,11 +301,11 @@ export async function format(bundlePath: string): Promise<string[]> {
     const testDetail = new TestDetail()
     testDetails.details.push(testDetail)
 
-    const name = (results as any)['summary']['name']
+    const testResultSummaryName = (results as any)['summary']['name']
     const backImage = iconImage('right-arrow-curving-left.png')
-    const anchorName = anchorIdentifier(`${name}_summary`)
+    const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`)
     testDetail.lines.push(
-      `#### <a name="${name}"></a>${name}[${backImage}](${anchorName})`
+      `#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backImage}](${anchorName})`
     )
     testDetail.lines.push('')
 
@@ -364,12 +365,12 @@ export async function format(bundlePath: string): Promise<string[]> {
           [0, 0, 0, 0, 0, 0]
         )
 
-      const testName = `${groupIdentifier} ${name}`
+      const testName = `${groupIdentifier} ${testResultSummaryName}`
       const passedRate = ((passed / total) * 100).toFixed(0)
       const failedRate = ((failed / total) * 100).toFixed(0)
       const skippedRate = ((skipped / total) * 100).toFixed(0)
       const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0)
-      const anchor = `<a name="${name}_${groupIdentifier}"></a>`
+      const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`
 
       const testsStatsLines: string[] = []
       if (passed) {
@@ -388,7 +389,9 @@ export async function format(bundlePath: string): Promise<string[]> {
       }
       const testDuration = duration.toFixed(2)
       const arrowImage = iconImage('right-arrow-curving-left.png')
-      const anchorName = anchorIdentifier(`${name}_${groupIdentifier}_summary`)
+      const anchorName = anchorIdentifier(
+        `${testResultSummaryName}_${groupIdentifier}_summary`
+      )
       const anchorBack = `[${arrowImage}](${anchorName})`
       const testStats = testsStatsLines.join(', ')
       testDetail.lines.push(
@@ -464,6 +467,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             )
 
             const testFailureGroup = new TestFailureGroup(
+              testResultSummaryName,
               summary.identifier || '',
               summary.name || ''
             )
@@ -618,7 +622,9 @@ export async function format(bundlePath: string): Promise<string[]> {
     lines.push('### Failures')
     for (const failureGroup of testFailures.failureGroups) {
       if (failureGroup.failures.length) {
-        const anchorName = anchorIdentifier(failureGroup.identifier)
+        const anchorName = anchorIdentifier(
+          `${failureGroup.summaryIdentifier}/${failureGroup.identifier}`
+        )
         const testMethodLink = `<a href="${anchorName}">${failureGroup.identifier}</a>`
         lines.push(`<h4>${testMethodLink}</h4>`)
         for (const failure of failureGroup.failures) {
@@ -786,12 +792,14 @@ class TestFailures {
 }
 
 class TestFailureGroup {
+  summaryIdentifier: string
   identifier: string
   name: string
 
   failures: TestFailure[] = []
 
-  constructor(identifier: string, name: string) {
+  constructor(summaryIdentifier: string, identifier: string, name: string) {
+    this.summaryIdentifier = summaryIdentifier
     this.identifier = identifier
     this.name = name
   }

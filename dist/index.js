@@ -238,7 +238,8 @@ function format(bundlePath) {
                 const test = detail;
                 const testClass = `${iconImage('test-class.png')}&nbsp;${identifier}`;
                 const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`;
-                const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`;
+                const anchorName = anchorIdentifier(`${groupIdentifier}_${identifier}`);
+                const testClassLink = `<a href="${anchorName}">${testClass}</a>`;
                 let failedCount;
                 if (test.failed > 0) {
                     failedCount = `<b>${test.failed}</b>`;
@@ -268,10 +269,10 @@ function format(bundlePath) {
         for (const [identifier, results] of Object.entries(testReport)) {
             const testDetail = new TestDetail();
             testDetails.details.push(testDetail);
-            const name = results['summary']['name'];
+            const testResultSummaryName = results['summary']['name'];
             const backImage = iconImage('right-arrow-curving-left.png');
-            const anchorName = anchorIdentifier(`${name}_summary`);
-            testDetail.lines.push(`#### <a name="${name}"></a>${name}[${backImage}](${anchorName})`);
+            const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`);
+            testDetail.lines.push(`#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backImage}](${anchorName})`);
             testDetail.lines.push('');
             const details = results['details'];
             const detailGroup = details.reduce((groups, detail) => {
@@ -307,12 +308,12 @@ function format(bundlePath) {
                     }
                     return [passed, failed, skipped, expectedFailure, total, duration];
                 }, [0, 0, 0, 0, 0, 0]);
-                const testName = `${groupIdentifier} ${name}`;
+                const testName = `${groupIdentifier} ${testResultSummaryName}`;
                 const passedRate = ((passed / total) * 100).toFixed(0);
                 const failedRate = ((failed / total) * 100).toFixed(0);
                 const skippedRate = ((skipped / total) * 100).toFixed(0);
                 const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
-                const anchor = `<a name="${name}_${groupIdentifier}"></a>`;
+                const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`;
                 const testsStatsLines = [];
                 if (passed) {
                     testsStatsLines.push(`${passed} passed (${passedRate}%)`);
@@ -328,7 +329,7 @@ function format(bundlePath) {
                 }
                 const testDuration = duration.toFixed(2);
                 const arrowImage = iconImage('right-arrow-curving-left.png');
-                const anchorName = anchorIdentifier(`${name}_${groupIdentifier}_summary`);
+                const anchorName = anchorIdentifier(`${testResultSummaryName}_${groupIdentifier}_summary`);
                 const anchorBack = `[${arrowImage}](${anchorName})`;
                 const testStats = testsStatsLines.join(', ');
                 testDetail.lines.push(`${anchor}<span>${testName} ${testStats} in ${testDuration}s</span> ${anchorBack}\n`);
@@ -391,7 +392,7 @@ function format(bundlePath) {
                         const resultLines = [];
                         if (testResult.summaryRef) {
                             const summary = yield parser.parse(bundlePath, testResult.summaryRef.id);
-                            const testFailureGroup = new TestFailureGroup(summary.identifier || '', summary.name || '');
+                            const testFailureGroup = new TestFailureGroup(testResultSummaryName, summary.identifier || '', summary.name || '');
                             testFailures.failureGroups.push(testFailureGroup);
                             if (summary.failureSummaries) {
                                 const testFailure = new TestFailure();
@@ -522,7 +523,7 @@ function format(bundlePath) {
             lines.push('### Failures');
             for (const failureGroup of testFailures.failureGroups) {
                 if (failureGroup.failures.length) {
-                    const anchorName = anchorIdentifier(failureGroup.identifier);
+                    const anchorName = anchorIdentifier(`${failureGroup.summaryIdentifier}/${failureGroup.identifier}`);
                     const testMethodLink = `<a href="${anchorName}">${failureGroup.identifier}</a>`;
                     lines.push(`<h4>${testMethodLink}</h4>`);
                     for (const failure of failureGroup.failures) {
@@ -657,8 +658,9 @@ class TestFailures {
     }
 }
 class TestFailureGroup {
-    constructor(identifier, name) {
+    constructor(summaryIdentifier, identifier, name) {
         this.failures = [];
+        this.summaryIdentifier = summaryIdentifier;
         this.identifier = identifier;
         this.name = name;
     }
