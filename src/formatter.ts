@@ -615,9 +615,8 @@ export async function format(bundlePath: string): Promise<string[]> {
     lines.push('### Failures')
     for (const failureGroup of testFailures.failureGroups) {
       if (failureGroup.failures.length) {
-        lines.push(
-          `<h4>[${failureGroup.identifier}](#${failureGroup.identifier})</h4>`
-        )
+        const testMethodLink = `<a href="#${failureGroup.identifier}">${failureGroup.identifier}</a>`
+        lines.push(`<h4>${testMethodLink}</h4>`)
         for (const failure of failureGroup.failures) {
           for (const line of failure.lines) {
             lines.push(line)
