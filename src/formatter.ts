@@ -32,24 +32,6 @@ const testClassIcon = Image.icon('test-class.png')
 const testMethodIcon = Image.icon('test-method.png')
 const attachmentIcon = Image.icon('attachment.png')
 
-type actionTestSummary =
-  | ActionTestSummaryIdentifiableObject
-  | ActionTestSummaryGroup
-  | ActionTestSummary
-  | ActionTestMetadata
-
-type actionTestSummaries = actionTestSummary[]
-
-class TestReportSection {
-  readonly summary: ActionTestableSummary
-  readonly details: actionTestSummaries
-
-  constructor(summary: ActionTestableSummary, details: actionTestSummaries) {
-    this.summary = summary
-    this.details = details
-  }
-}
-
 export async function format(bundlePath: string): Promise<string[]> {
   const parser = new Parser(bundlePath)
 
@@ -808,6 +790,24 @@ function anchorIdentifier(text: string): string {
 
 function escapeHashSign(text: string): string {
   return text.replace(/#/g, '<span>#</span>')
+}
+
+type actionTestSummary =
+  | ActionTestSummaryIdentifiableObject
+  | ActionTestSummaryGroup
+  | ActionTestSummary
+  | ActionTestMetadata
+
+type actionTestSummaries = actionTestSummary[]
+
+class TestReportSection {
+  readonly summary: ActionTestableSummary
+  readonly details: actionTestSummaries
+
+  constructor(summary: ActionTestableSummary, details: actionTestSummaries) {
+    this.summary = summary
+    this.details = details
+  }
 }
 
 class TestFailures {

@@ -55,12 +55,6 @@ const backIcon = Image.icon('right-arrow-curving-left.png');
 const testClassIcon = Image.icon('test-class.png');
 const testMethodIcon = Image.icon('test-method.png');
 const attachmentIcon = Image.icon('attachment.png');
-class TestReportSection {
-    constructor(summary, details) {
-        this.summary = summary;
-        this.details = details;
-    }
-}
 function format(bundlePath) {
     return __awaiter(this, void 0, void 0, function* () {
         const parser = new parser_1.Parser(bundlePath);
@@ -667,6 +661,12 @@ function anchorIdentifier(text) {
 }
 function escapeHashSign(text) {
     return text.replace(/#/g, '<span>#</span>');
+}
+class TestReportSection {
+    constructor(summary, details) {
+        this.summary = summary;
+        this.details = details;
+    }
 }
 class TestFailures {
     constructor() {
