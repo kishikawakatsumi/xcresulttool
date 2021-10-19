@@ -209,7 +209,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     `<th>${failedImage}&nbsp;Failed</th>`,
     `<th>${skippedImage}&nbsp;Skipped</th>`,
     `<th>${expectedFailureImage}&nbsp;Expected Failure</th>`,
-    `<th>:stopwatch: Time</th>`
+    `<th>:stopwatch:&nbsp;Time</th>`
   ].join('')
   lines.push(header)
   lines.push('</tr></thead>')
@@ -221,8 +221,8 @@ export async function format(bundlePath: string): Promise<string[]> {
     `<td align="right" width="100px">${testSummary.passed}</td>`,
     `<td align="right" width="100px">${testSummary.failed}</td>`,
     `<td align="right" width="100px">${testSummary.skipped}</td>`,
-    `<td align="right" width="100px">${testSummary.expectedFailure}</td>`,
-    `<td align="right" width="158px">${duration}s</td>`
+    `<td align="right" width="158px">${testSummary.expectedFailure}</td>`,
+    `<td align="right" width="100px">${duration}s</td>`
   ].join('')
   lines.push(cols)
   lines.push('</tr></tbody>')
@@ -256,7 +256,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     for (const [identifier, detail] of Object.entries(group as any)) {
       lines.push('<tr>')
       const test: any = detail
-      const testClass = `${iconImage('test-class.png')} ${identifier}`
+      const testClass = `${iconImage('test-class.png')}&nbsp;${identifier}`
       const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
       const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`
 
@@ -472,7 +472,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             if (summary.configuration) {
               if (testResult.name) {
                 const testMethodImage = iconImage('test-method.png')
-                const testMethod = `${testMethodImage} <code>${testResult.name}</code>`
+                const testMethod = `${testMethodImage}&nbsp;<code>${testResult.name}</code>`
                 resultLines.push(`${status} ${testMethod}`)
               }
               const configuration = summary.configuration
@@ -488,7 +488,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             } else {
               if (testResult.name) {
                 const testMethodImage = iconImage('test-method.png')
-                const testMethod = `${testMethodImage} <code>${testResult.name}</code>`
+                const testMethod = `${testMethodImage}&nbsp;<code>${testResult.name}</code>`
                 resultLines.push(`${testMethod}`)
               }
             }
@@ -555,7 +555,7 @@ export async function format(bundlePath: string): Promise<string[]> {
                     const attachmentIndent = indentation(activity.indent + 1)
                     const attachmentContent = attachments.join('')
                     const icon = iconImage('attachment.png')
-                    return `${message}\n${attachmentIndent}<details ${open}><summary> ${icon} </summary>${attachmentContent}</details>`
+                    return `${message}\n${attachmentIndent}<details ${open}><summary>${icon}</summary>${attachmentContent}</details>`
                   } else {
                     const indent = indentation(activity.indent)
                     return `${indent}- ${escapeHashSign(activity.title)}`
@@ -607,6 +607,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     }
   }
 
+  lines.push('')
   lines.push(testDetails.header)
   for (const testDetail of testDetails.details) {
     for (const detail of testDetail.lines) {
