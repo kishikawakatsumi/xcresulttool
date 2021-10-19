@@ -506,13 +506,21 @@ export async function format(bundlePath: string): Promise<string[]> {
                 .map(activity => {
                   const attachments = activity.attachments.map(attachment => {
                     let width = '100%'
+                    const dimensions = attachment.dimensions
+                    if (dimensions.width) {
+                      width = `${dimensions.width}px`
+                    }
 
                     const userInfo = attachment.userInfo
                     if (userInfo) {
                       for (const info of userInfo.storage) {
                         if (info.key === 'Scale') {
                           const scale = parseInt(`${info.value}`)
-                          width = `${(100 / scale).toFixed(0)}%`
+                          if (dimensions.width) {
+                            width = `${(dimensions.width / scale).toFixed(0)}px`
+                          } else {
+                            width = `${(100 / scale).toFixed(0)}%`
+                          }
                         }
                       }
                     }
@@ -571,7 +579,6 @@ export async function format(bundlePath: string): Promise<string[]> {
   if (testFailures.failureGroups.length) {
     lines.push('### Failures')
     for (const failureGroup of testFailures.failureGroups) {
-      const testMethodImage = remoteImage('test-method.png')
       lines.push(`<h4>${failureGroup.identifier}</h4>`)
       for (const failure of failureGroup.failures) {
         for (const line of failure.lines) {
@@ -701,24 +708,30 @@ async function exportAttachments(
           }
         }
 
-        try {
-          await exec.exec(
-            'curl',
-            [
-              '-X',
-              'POST',
-              'https://xcresulttool-file.herokuapp.com/file',
-              '-d',
-              image
-            ],
-            options
-          )
-          const response = JSON.parse(output)
-          if (response) {
-            attachment.link = response.link
+        if (image) {
+          try {
+            const sizeOf = require('image-size')
+            const dimensions: Dimensions = sizeOf(image)
+            attachment.dimensions = dimensions
+
+            await exec.exec(
+              'curl',
+              [
+                '-X',
+                'POST',
+                'https://xcresulttool-file.herokuapp.com/file',
+                '-d',
+                image.toString('base64')
+              ],
+              options
+            )
+            const response = JSON.parse(output)
+            if (response) {
+              attachment.link = response.link
+            }
+          } catch (error) {
+            console.log(error)
           }
-        } catch (error) {
-          console.log(error)
         }
       }
     }
@@ -779,6 +792,14 @@ interface Attachment {
   payloadRef?: Reference
   payloadSize: number
   link: string
+  dimensions: Dimensions
+}
+
+interface Dimensions {
+  width: number | undefined
+  height: number | undefined
+  orientation?: number
+  type?: string
 }
 
 interface FailureSummary {

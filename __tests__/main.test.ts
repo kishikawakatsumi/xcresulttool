@@ -24,10 +24,5 @@ test('test runs', () => {
   const options: cp.ExecFileSyncOptions = {
     env: process.env
   }
-  try {
-    console.log(cp.execFileSync(np, [ip], options).toString())
-  } catch (error: any) {
-    console.log(error.stdout.toString())
-    console.log(error.stderr.toString())
-  }
+  console.log(cp.execFileSync(np, [ip], options).toString())
 })

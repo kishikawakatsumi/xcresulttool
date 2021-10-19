@@ -85,7 +85,7 @@ export async function exportObject(
   bundlePath: string,
   reference: string,
   outputPath: string
-): Promise<string> {
+): Promise<Buffer> {
   const args = [
     'xcresulttool',
     'export',
@@ -103,5 +103,5 @@ export async function exportObject(
   }
 
   await exec.exec('xcrun', args, options)
-  return Buffer.from(await readFile(outputPath)).toString('base64')
+  return Buffer.from(await readFile(outputPath))
 }
