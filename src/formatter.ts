@@ -34,13 +34,23 @@ type actionTestSummary =
 
 type actionTestSummaries = actionTestSummary[]
 
+class TestReportSection {
+  readonly summary: ActionTestableSummary
+  readonly details: actionTestSummaries
+
+  constructor(summary: ActionTestableSummary, details: actionTestSummaries) {
+    this.summary = summary
+    this.details = details
+  }
+}
+
 export async function format(bundlePath: string): Promise<string[]> {
   const parser = new Parser(bundlePath)
 
   const actionsInvocationRecord: ActionsInvocationRecord = await parser.parse()
 
   const lines: string[] = []
-  const testReport: any = {}
+  const testReport: {[key: string]: TestReportSection} = {}
   let entityName = ''
 
   if (actionsInvocationRecord.metadataRef) {
@@ -66,18 +76,18 @@ export async function format(bundlePath: string): Promise<string[]> {
 
           for (const summary of actionTestPlanRunSummaries.summaries) {
             for (const testableSummary of summary.testableSummaries) {
-              const testResults: ActionTestMetadata[] = []
+              const testSummaries: actionTestSummaries = []
               await collectTestSummaries(
                 parser,
                 testableSummary,
                 testableSummary.tests,
-                testResults
+                testSummaries
               )
               if (testableSummary.name) {
-                testReport[testableSummary.name] = {
-                  summary: testableSummary,
-                  details: testResults
-                }
+                testReport[testableSummary.name] = new TestReportSection(
+                  testableSummary,
+                  testSummaries
+                )
               }
             }
           }
