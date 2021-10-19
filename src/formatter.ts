@@ -598,10 +598,12 @@ export async function format(bundlePath: string): Promise<string[]> {
   if (testFailures.failureGroups.length) {
     lines.push('### Failures')
     for (const failureGroup of testFailures.failureGroups) {
-      lines.push(`<h4>${failureGroup.identifier}</h4>`)
-      for (const failure of failureGroup.failures) {
-        for (const line of failure.lines) {
-          lines.push(line)
+      if (failureGroup.failures.length) {
+        lines.push(`<h4>${failureGroup.identifier}</h4>`)
+        for (const failure of failureGroup.failures) {
+          for (const line of failure.lines) {
+            lines.push(line)
+          }
         }
       }
     }
