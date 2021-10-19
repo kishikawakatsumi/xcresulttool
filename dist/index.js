@@ -314,6 +314,11 @@ function format(bundlePath) {
                 const skippedRate = ((skipped / total) * 100).toFixed(0);
                 const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
                 const testDuration = duration.toFixed(2);
+                const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`;
+                const arrowImage = iconImage('right-arrow-curving-left.png');
+                const anchorName = anchorIdentifier(`${testResultSummaryName}_${groupIdentifier}_summary`);
+                const anchorBack = `[${arrowImage}](${anchorName})`;
+                testDetail.lines.push(`${anchor}<h5>${testName}</h5>&nbsp;${anchorBack}\n`);
                 const testsStatsLines = [];
                 testsStatsLines.push('<table>');
                 testsStatsLines.push('<thead><tr>');
@@ -322,7 +327,7 @@ function format(bundlePath) {
                     `<th>${failedImage}</th>`,
                     `<th>${skippedImage}</th>`,
                     `<th>${expectedFailureImage}</th>`,
-                    `<th>:stopwatch:&nbsp;Time</th>`
+                    `<th>:stopwatch:</th>`
                 ].join('');
                 testsStatsLines.push(header);
                 testsStatsLines.push('</tr></thead>');
