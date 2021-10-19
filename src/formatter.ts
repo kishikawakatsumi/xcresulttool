@@ -497,7 +497,11 @@ export async function format(bundlePath: string): Promise<string[]> {
                 const backAnchorName = anchorIdentifier(
                   `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                 )
-                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>[${backImage}](${backAnchorName})`
+                const backAnchorLink =
+                  testResult.testStatus === 'Failure'
+                    ? `<a href="${backAnchorName}">${backImage}</a>`
+                    : ''
+                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
                 resultLines.push(`${status} ${testMethod}`)
               }
               const configuration = summary.configuration
@@ -518,7 +522,11 @@ export async function format(bundlePath: string): Promise<string[]> {
                 const backAnchorName = anchorIdentifier(
                   `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                 )
-                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>[${backImage}](${backAnchorName})`
+                const backAnchorLink =
+                  testResult.testStatus === 'Failure'
+                    ? `<a href="${backAnchorName}">${backImage}</a>`
+                    : ''
+                const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
                 resultLines.push(`${testMethod}`)
               }
             }
@@ -603,7 +611,11 @@ export async function format(bundlePath: string): Promise<string[]> {
               const backAnchorName = anchorIdentifier(
                 `${testResultSummaryName}_${testResult.identifier}_failure-summary`
               )
-              const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>[${backImage}](${backAnchorName})`
+              const backAnchorLink =
+                testResult.testStatus === 'Failure'
+                  ? `<a href="${backAnchorName}">${backImage}</a>`
+                  : ''
+              const testMethod = `${testMethodAnchor}${testMethodImage}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
               resultLines.push(`${testMethod}`)
             }
           }
