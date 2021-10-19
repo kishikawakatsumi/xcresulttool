@@ -205,10 +205,10 @@ export async function format(bundlePath: string): Promise<string[]> {
   lines.push('<thead><tr>')
   const header = [
     `<th>Total</th>`,
-    `<th>${passedImage} Passed</th>`,
-    `<th>${failedImage} Failed</th>`,
-    `<th>${skippedImage} Skipped</th>`,
-    `<th>${expectedFailureImage} Expected Failure</th>`,
+    `<th>${passedImage}&nbsp;Passed</th>`,
+    `<th>${failedImage}&nbsp;Failed</th>`,
+    `<th>${skippedImage}&nbsp;Skipped</th>`,
+    `<th>${expectedFailureImage}&nbsp;Expected Failure</th>`,
     `<th>:stopwatch: Time</th>`
   ].join('')
   lines.push(header)
@@ -217,12 +217,12 @@ export async function format(bundlePath: string): Promise<string[]> {
   lines.push('<tbody><tr>')
   const duration = testSummary.duration.toFixed(2)
   const cols = [
-    `<td align="right" width="150px">${testSummary.total}</td>`,
-    `<td align="right" width="150px">${testSummary.passed}</td>`,
-    `<td align="right" width="150px">${testSummary.failed}</td>`,
-    `<td align="right" width="150px">${testSummary.skipped}</td>`,
-    `<td align="right" width="200px">${testSummary.expectedFailure}</td>`,
-    `<td align="right" width="150px">${duration}s</td>`
+    `<td align="right" width="210px">${testSummary.total}</td>`,
+    `<td align="right" width="100px">${testSummary.passed}</td>`,
+    `<td align="right" width="100px">${testSummary.failed}</td>`,
+    `<td align="right" width="100px">${testSummary.skipped}</td>`,
+    `<td align="right" width="100px">${testSummary.expectedFailure}</td>`,
+    `<td align="right" width="158px">${duration}s</td>`
   ].join('')
   lines.push(cols)
   lines.push('</tr></tbody>')
@@ -244,10 +244,10 @@ export async function format(bundlePath: string): Promise<string[]> {
     const header = [
       `<th>Test</th>`,
       `<th>Total</th>`,
-      `<th>${passedImage} Passed</th>`,
-      `<th>${failedImage} Failed</th>`,
-      `<th>${skippedImage} Skipped</th>`,
-      `<th>${expectedFailureImage} Expected Failure</th>`
+      `<th>${passedImage}&nbsp;Passed</th>`,
+      `<th>${failedImage}&nbsp;Failed</th>`,
+      `<th>${skippedImage}&nbsp;Skipped</th>`,
+      `<th>${expectedFailureImage}&nbsp;Expected Failure</th>`
     ].join('')
     lines.push(header)
     lines.push('</tr></thead>')
@@ -261,12 +261,12 @@ export async function format(bundlePath: string): Promise<string[]> {
       const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`
 
       const cols = [
-        `<td align="left" width="280px">${testClassAnchor}${testClassLink}</td>`,
+        `<td align="left" width="210px">${testClassAnchor}${testClassLink}</td>`,
         `<td align="right" width="100px">${test.total}</td>`,
         `<td align="right" width="100px">${test.passed}</td>`,
         `<td align="right" width="100px">${test.failed}</td>`,
-        `<td align="right" width="120px">${test.skipped}</td>`,
-        `<td align="right" width="180px">${test.expectedFailure}s</td>`
+        `<td align="right" width="100px">${test.skipped}</td>`,
+        `<td align="right" width="158px">${test.expectedFailure}s</td>`
       ].join('')
       lines.push(cols)
       lines.push('</tr>')
