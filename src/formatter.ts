@@ -103,17 +103,18 @@ export async function format(bundlePath: string): Promise<string[]> {
     expectedFailure: 0,
     total: 0,
     duration: 0,
-    groups: {}
+    groups: {} as {[key: string]: actionTestSummaries}
   }
   for (const [identifier, results] of Object.entries(testReport)) {
-    const details: ActionTestMetadata[] = (results as any)['details']
-    const detailGroup = details.reduce(
-      (groups: {[key: string]: ActionTestMetadata[]}, detail) => {
-        const group: string = (detail as any)['group']
-        if (groups[group]) {
-          groups[group].push(detail)
-        } else {
-          groups[group] = [detail]
+    const detailGroup = results.details.reduce(
+      (groups: {[key: string]: actionTestSummaries}, detail) => {
+        const d = detail as actionTestSummary & {group?: string}
+        if (d.group) {
+          if (groups[d.group]) {
+            groups[d.group].push(detail)
+          } else {
+            groups[d.group] = [detail]
+          }
         }
         return groups
       },
@@ -133,9 +134,10 @@ export async function format(bundlePath: string): Promise<string[]> {
               number,
               number
             ],
-            metadata
+            detail
           ) => {
-            switch (metadata.testStatus) {
+            const test = detail as ActionTestSummary
+            switch (test.testStatus) {
               case 'Success':
                 passed++
                 break
@@ -152,8 +154,8 @@ export async function format(bundlePath: string): Promise<string[]> {
 
             total++
 
-            if (metadata.duration) {
-              duration = metadata.duration
+            if (test.duration) {
+              duration = test.duration
             }
             return [passed, failed, skipped, expectedFailure, total, duration]
           },
