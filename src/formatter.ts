@@ -256,7 +256,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     for (const [identifier, detail] of Object.entries(group as any)) {
       lines.push('<tr>')
       const test: any = detail
-      const testClass = `${remoteImage('test-class.png')} ${identifier}`
+      const testClass = `${iconImage('test-class.png')} ${identifier}`
       const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
       const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`
 
@@ -287,7 +287,7 @@ export async function format(bundlePath: string): Promise<string[]> {
     testDetails.details.push(testDetail)
 
     const name = (results as any)['summary']['name']
-    const backImage = remoteImage('right-arrow-curving-left.png')
+    const backImage = iconImage('right-arrow-curving-left.png')
     testDetail.lines.push(
       `#### <a name="${name}"></a>${name}[${backImage}](#${name}_summary)`
     )
@@ -372,7 +372,7 @@ export async function format(bundlePath: string): Promise<string[]> {
         )
       }
       const testDuration = duration.toFixed(2)
-      const arrowImage = remoteImage('right-arrow-curving-left.png')
+      const arrowImage = iconImage('right-arrow-curving-left.png')
       const anchorBack = `[${arrowImage}](#${name}_${groupIdentifier}_summary)`
       const testStats = testsStatsLines.join(', ')
       testDetail.lines.push(
@@ -471,7 +471,7 @@ export async function format(bundlePath: string): Promise<string[]> {
 
             if (summary.configuration) {
               if (testResult.name) {
-                const testMethodImage = remoteImage('test-method.png')
+                const testMethodImage = iconImage('test-method.png')
                 const testMethod = `${testMethodImage} <code>${testResult.name}</code>`
                 resultLines.push(`${status} ${testMethod}`)
               }
@@ -487,7 +487,7 @@ export async function format(bundlePath: string): Promise<string[]> {
               )
             } else {
               if (testResult.name) {
-                const testMethodImage = remoteImage('test-method.png')
+                const testMethodImage = iconImage('test-method.png')
                 const testMethod = `${testMethodImage} <code>${testResult.name}</code>`
                 resultLines.push(`${testMethod}`)
               }
@@ -566,7 +566,7 @@ export async function format(bundlePath: string): Promise<string[]> {
             }
           } else {
             if (testResult.name) {
-              const testMethodImage = remoteImage('test-method.png')
+              const testMethodImage = iconImage('test-method.png')
               const testMethod = `${testMethodImage} <code>${testResult.name}</code>`
               resultLines.push(`${testMethod}`)
             }
@@ -859,7 +859,7 @@ function statusImage(statusText: string): string {
   return `<img src="${baseUrl}${filename}" ${attrs}>`
 }
 
-function remoteImage(filename: string): string {
+function iconImage(filename: string): string {
   const baseUrl = 'https://xcresulttool-resources.netlify.app/images/'
   const attrs = 'width="14px" align="top"'
   return `<img src="${baseUrl}${filename}" ${attrs}>`

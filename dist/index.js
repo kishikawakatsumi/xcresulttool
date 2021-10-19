@@ -228,7 +228,7 @@ function format(bundlePath) {
             for (const [identifier, detail] of Object.entries(group)) {
                 lines.push('<tr>');
                 const test = detail;
-                const testClass = `${remoteImage('test-class.png')} ${identifier}`;
+                const testClass = `${iconImage('test-class.png')} ${identifier}`;
                 const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`;
                 const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`;
                 const cols = [
@@ -254,7 +254,7 @@ function format(bundlePath) {
             const testDetail = new TestDetail();
             testDetails.details.push(testDetail);
             const name = results['summary']['name'];
-            const backImage = remoteImage('right-arrow-curving-left.png');
+            const backImage = iconImage('right-arrow-curving-left.png');
             testDetail.lines.push(`#### <a name="${name}"></a>${name}[${backImage}](#${name}_summary)`);
             testDetail.lines.push('');
             const details = results['details'];
@@ -311,7 +311,7 @@ function format(bundlePath) {
                     testsStatsLines.push(`${expectedFailure} expected failure (${expectedFailureRate}%)`);
                 }
                 const testDuration = duration.toFixed(2);
-                const arrowImage = remoteImage('right-arrow-curving-left.png');
+                const arrowImage = iconImage('right-arrow-curving-left.png');
                 const anchorBack = `[${arrowImage}](#${name}_${groupIdentifier}_summary)`;
                 const testStats = testsStatsLines.join(', ');
                 testDetail.lines.push(`${anchor}<span>${testName} ${testStats} in ${testDuration}s</span> ${anchorBack}\n`);
@@ -390,7 +390,7 @@ function format(bundlePath) {
                             }
                             if (summary.configuration) {
                                 if (testResult.name) {
-                                    const testMethodImage = remoteImage('test-method.png');
+                                    const testMethodImage = iconImage('test-method.png');
                                     const testMethod = `${testMethodImage} <code>${testResult.name}</code>`;
                                     resultLines.push(`${status} ${testMethod}`);
                                 }
@@ -404,7 +404,7 @@ function format(bundlePath) {
                             }
                             else {
                                 if (testResult.name) {
-                                    const testMethodImage = remoteImage('test-method.png');
+                                    const testMethodImage = iconImage('test-method.png');
                                     const testMethod = `${testMethodImage} <code>${testResult.name}</code>`;
                                     resultLines.push(`${testMethod}`);
                                 }
@@ -471,7 +471,7 @@ function format(bundlePath) {
                         }
                         else {
                             if (testResult.name) {
-                                const testMethodImage = remoteImage('test-method.png');
+                                const testMethodImage = iconImage('test-method.png');
                                 const testMethod = `${testMethodImage} <code>${testResult.name}</code>`;
                                 resultLines.push(`${testMethod}`);
                             }
@@ -685,7 +685,7 @@ function statusImage(statusText) {
     const attrs = 'width="14px" align="top"';
     return `<img src="${baseUrl}${filename}" ${attrs}>`;
 }
-function remoteImage(filename) {
+function iconImage(filename) {
     const baseUrl = 'https://xcresulttool-resources.netlify.app/images/';
     const attrs = 'width="14px" align="top"';
     return `<img src="${baseUrl}${filename}" ${attrs}>`;
