@@ -798,6 +798,18 @@ async function exportAttachments(
   }
 }
 
+function indentation(level: number): string {
+  return '  '.repeat(level)
+}
+
+function anchorIdentifier(text: string): string {
+  return `#user-content-${text.toLowerCase()}`
+}
+
+function escapeHashSign(text: string): string {
+  return text.replace(/#/g, '<span>#</span>')
+}
+
 class TestFailures {
   failureGroups: TestFailureGroup[] = []
 }
@@ -867,16 +879,4 @@ interface Dimensions {
 interface FailureSummary {
   contents: string
   stackTrace: string
-}
-
-function indentation(level: number): string {
-  return '  '.repeat(level)
-}
-
-function anchorIdentifier(text: string): string {
-  return `#user-content-${text.toLowerCase()}`
-}
-
-function escapeHashSign(text: string): string {
-  return text.replace(/#/g, '<span>#</span>')
 }

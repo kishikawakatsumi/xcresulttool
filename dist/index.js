@@ -659,6 +659,15 @@ function exportAttachments(parser, activity) {
         }
     });
 }
+function indentation(level) {
+    return '  '.repeat(level);
+}
+function anchorIdentifier(text) {
+    return `#user-content-${text.toLowerCase()}`;
+}
+function escapeHashSign(text) {
+    return text.replace(/#/g, '<span>#</span>');
+}
 class TestFailures {
     constructor() {
         this.failureGroups = [];
@@ -687,15 +696,6 @@ class TestDetail {
     constructor() {
         this.lines = [];
     }
-}
-function indentation(level) {
-    return '  '.repeat(level);
-}
-function anchorIdentifier(text) {
-    return `#user-content-${text.toLowerCase()}`;
-}
-function escapeHashSign(text) {
-    return text.replace(/#/g, '<span>#</span>');
 }
 
 
