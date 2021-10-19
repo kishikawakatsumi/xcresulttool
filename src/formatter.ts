@@ -103,10 +103,11 @@ export async function format(bundlePath: string): Promise<string[]> {
     expectedFailure = 0
     total = 0
   }
+  type TestSummaryStatsGroup = {[key: string]: TestSummaryStats}
   const testSummary = {
     stats: new TestSummaryStats(),
     duration: 0,
-    groups: {} as {[key: string]: actionTestSummaries}
+    groups: {} as {[key: string]: TestSummaryStatsGroup}
   }
   for (const [identifier, results] of Object.entries(testReport)) {
     const detailGroup = results.details.reduce(
@@ -124,7 +125,7 @@ export async function format(bundlePath: string): Promise<string[]> {
       {}
     )
 
-    const group: {[key: string]: TestSummaryStats} = {}
+    const group: TestSummaryStatsGroup = {}
     for (const [identifier, details] of Object.entries(detailGroup)) {
       const [stats, duration] = details.reduce(
         ([stats, duration]: [TestSummaryStats, number], detail) => {
@@ -169,7 +170,7 @@ export async function format(bundlePath: string): Promise<string[]> {
       }
     }
 
-    const groups: any = testSummary.groups
+    const groups = testSummary.groups
     groups[identifier] = group
   }
 
