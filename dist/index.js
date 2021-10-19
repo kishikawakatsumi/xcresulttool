@@ -217,10 +217,10 @@ function format(bundlePath) {
             const header = [
                 `<th>Test</th>`,
                 `<th>Total</th>`,
-                `<th>${passedImage}&nbsp;Passed</th>`,
-                `<th>${failedImage}&nbsp;Failed</th>`,
-                `<th>${skippedImage}&nbsp;Skipped</th>`,
-                `<th>${expectedFailureImage}&nbsp;Expected Failure</th>`
+                `<th>${passedImage}</th>`,
+                `<th>${failedImage}</th>`,
+                `<th>${skippedImage}</th>`,
+                `<th>${expectedFailureImage}</th>`
             ].join('');
             lines.push(header);
             lines.push('</tr></thead>');
@@ -232,12 +232,12 @@ function format(bundlePath) {
                 const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`;
                 const testClassLink = `<a href="#${groupIdentifier}_${identifier}">${testClass}</a>`;
                 const cols = [
-                    `<td align="left" width="210px">${testClassAnchor}${testClassLink}</td>`,
-                    `<td align="right" width="100px">${test.total}</td>`,
-                    `<td align="right" width="100px">${test.passed}</td>`,
-                    `<td align="right" width="100px">${test.failed}</td>`,
-                    `<td align="right" width="100px">${test.skipped}</td>`,
-                    `<td align="right" width="158px">${test.expectedFailure}s</td>`
+                    `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
+                    `<td align="right" width="80px">${test.total}</td>`,
+                    `<td align="right" width="80px">${test.passed}</td>`,
+                    `<td align="right" width="80px">${test.failed}</td>`,
+                    `<td align="right" width="80px">${test.skipped}</td>`,
+                    `<td align="right" width="80px">${test.expectedFailure}</td>`
                 ].join('');
                 lines.push(cols);
                 lines.push('</tr>');
@@ -685,7 +685,7 @@ function statusImage(statusText) {
     }
     const baseUrl = 'https://xcresulttool-resources.netlify.app/images/';
     const attrs = 'width="14px" align="top"';
-    return `<img src="${baseUrl}${filename}" ${attrs}>`;
+    return `<img src="${baseUrl}${filename}" alt="${statusText}" ${attrs}>`;
 }
 function iconImage(filename) {
     const baseUrl = 'https://xcresulttool-resources.netlify.app/images/';
