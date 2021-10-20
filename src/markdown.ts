@@ -9,6 +9,6 @@ export function anchorIdentifier(text: string): string {
 }
 
 export function escapeHashSign(text: string): string {
-  core.info(text)
+  core.info(`escapeHashSign: ${text}`)
   return text.replace(/#/g, '<span>#</span>')
 }

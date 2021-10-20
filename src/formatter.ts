@@ -356,7 +356,8 @@ export class Formatter {
                     const workspace = path.dirname(
                       `${testReport.creatingWorkspaceFilePath}`
                     )
-                    core.info(failureSummary.filePath)
+                    core.info(`failureSummary: ${failureSummary}`)
+                    core.info(`failureSummary: ${failureSummary.filePath}`)
                     const filepath = failureSummary.filePath.replace(
                       `${workspace}/`,
                       ''

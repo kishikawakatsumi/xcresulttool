@@ -376,7 +376,8 @@ class Formatter {
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
                                             const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
-                                            core.info(failureSummary.filePath);
+                                            core.info(`failureSummary: ${failureSummary}`);
+                                            core.info(`failureSummary: ${failureSummary.filePath}`);
                                             const filepath = failureSummary.filePath.replace(`${workspace}/`, '');
                                             const annotation = new report_1.Annotation(filepath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
                                             annotations.push(annotation);
@@ -1015,7 +1016,7 @@ function anchorIdentifier(text) {
 }
 exports.anchorIdentifier = anchorIdentifier;
 function escapeHashSign(text) {
-    core.info(text);
+    core.info(`escapeHashSign: ${text}`);
     return text.replace(/#/g, '<span>#</span>');
 }
 exports.escapeHashSign = escapeHashSign;
