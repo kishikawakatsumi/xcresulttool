@@ -64,7 +64,7 @@ function exportAttachments(parser, activity) {
                     try {
                         const dimensions = (0, image_size_1.default)(image);
                         attachment.dimensions = dimensions;
-                        if (image && core.getInput('GITHUB_TOKEN')) {
+                        if (image && core.getInput('token')) {
                             yield exec.exec('curl', [
                                 '-X',
                                 'POST',

@@ -56,7 +56,7 @@ export async function exportAttachments(
           const dimensions: Dimensions = sizeOf(image)
           attachment.dimensions = dimensions
 
-          if (image && core.getInput('GITHUB_TOKEN')) {
+          if (image && core.getInput('token')) {
             await exec.exec(
               'curl',
               [
