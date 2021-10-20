@@ -1,6 +1,7 @@
 /*eslint-disable no-shadow */
 
 import * as Image from './image'
+import * as core from '@actions/core'
 import * as path from 'path'
 
 import {
@@ -355,6 +356,7 @@ export class Formatter {
                     const workspace = path.dirname(
                       `${testReport.creatingWorkspaceFilePath}`
                     )
+                    core.info(failureSummary.filePath)
                     const filepath = failureSummary.filePath.replace(
                       `${workspace}/`,
                       ''
