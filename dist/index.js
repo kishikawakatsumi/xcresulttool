@@ -284,6 +284,12 @@ class Formatter {
                 chapterSummary.content.push('</tr></tbody>');
                 chapterSummary.content.push('</table>\n');
                 chapterSummary.content.push('---\n');
+                if (testSummary.stats.failed > 0) {
+                    testReport.testStatus = 'failure';
+                }
+                else if (testSummary.stats.passed > 0) {
+                    testReport.testStatus = 'success';
+                }
                 chapterSummary.content.push('### Test Summary');
                 for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
                     const anchorName = (0, markdown_1.anchorIdentifier)(groupIdentifier);
@@ -938,7 +944,7 @@ function run() {
                     name: title,
                     head_sha: sha,
                     status: 'completed',
-                    conclusion: annotations.length ? 'failure' : 'success',
+                    conclusion: report.testStatus,
                     output: {
                         title: 'Xcode test results',
                         summary: reportSummary,
@@ -1182,6 +1188,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Annotation = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
 class TestReport {
     constructor() {
+        this.testStatus = 'neutral';
         this.chapters = [];
         this.annotations = [];
     }
