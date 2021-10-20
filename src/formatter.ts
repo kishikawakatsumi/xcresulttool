@@ -344,7 +344,10 @@ export class Formatter {
                   for (const failureSummary of failureSummaries) {
                     testFailure.lines.push(`${failureSummary.contents}`)
                     const annotation = new Annotation(
-                      failureSummary.filePath,
+                      failureSummary.filePath.replace(
+                        process.env.GITHUB_WORKSPACE || '',
+                        ''
+                      ),
                       failureSummary.lineNumber,
                       failureSummary.lineNumber,
                       'failure',

@@ -372,7 +372,7 @@ class Formatter {
                                         const failureSummaries = collectFailureSummaries(summary.failureSummaries);
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
-                                            const annotation = new report_1.Annotation(failureSummary.filePath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
+                                            const annotation = new report_1.Annotation(failureSummary.filePath.replace(process.env.GITHUB_WORKSPACE || '', ''), failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
                                             annotations.push(annotation);
                                         }
                                     }
