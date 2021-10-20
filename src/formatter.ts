@@ -818,6 +818,7 @@ function collectFailureSummaries(
   failureSummaries: ActionTestFailureSummary[]
 ): FailureSummary[] {
   return failureSummaries.map(failureSummary => {
+    const fileName = failureSummary.fileName
     const sourceCodeContext = failureSummary.sourceCodeContext
     const callStack = sourceCodeContext?.callStack
     const location = sourceCodeContext?.location
@@ -830,7 +831,7 @@ function collectFailureSummaries(
     const detailWidth = 'width="668px"'
     const contents =
       '<table>' +
-      `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${failureSummary.fileName}:${lineNumber}</td></tr>` +
+      `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileName}:${lineNumber}</td></tr>` +
       `<tr><td ${titleAttr}><b>Issue Type</b></td><td ${detailWidth}>${failureSummary.issueType}</td></tr>` +
       `<tr><td ${titleAttr}><b>Message</b></td><td ${detailWidth}>${failureSummary.message}</td></tr>` +
       `</table>\n`
@@ -842,7 +843,7 @@ function collectFailureSummaries(
         const imageName = symbolInfo?.imageName || ''
         const symbolName = symbolInfo?.symbolName || ''
         const location = symbolInfo?.location
-        const filePath = location?.filePath
+        const filePath = location?.filePath || fileName || '<NULL>'
         const lineNumber = location?.lineNumber
         const seq = `${index}`.padEnd(2, ' ')
         return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`
