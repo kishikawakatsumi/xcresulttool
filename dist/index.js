@@ -862,10 +862,18 @@ const path = __importStar(__nccwpck_require__(5622));
 const formatter_1 = __nccwpck_require__(7556);
 const action_1 = __nccwpck_require__(1231);
 const glob_1 = __nccwpck_require__(1957);
+const fs_1 = __nccwpck_require__(5747);
+const { stat } = fs_1.promises;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const bundlePath = core.getInput('path');
+            try {
+                yield stat(bundlePath);
+            }
+            catch (error) {
+                core.error(error.message);
+            }
             const formatter = new formatter_1.Formatter(bundlePath);
             const report = yield formatter.format();
             if (core.getInput('token')) {

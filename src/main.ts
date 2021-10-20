@@ -5,10 +5,17 @@ import * as path from 'path'
 import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 import {glob} from 'glob'
+import {promises} from 'fs'
+const {stat} = promises
 
 async function run(): Promise<void> {
   try {
     const bundlePath: string = core.getInput('path')
+    try {
+      await stat(bundlePath)
+    } catch (error) {
+      core.error((error as Error).message)
+    }
     const formatter = new Formatter(bundlePath)
     const report = await formatter.format()
 
