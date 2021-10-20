@@ -868,6 +868,8 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const bundlePath = core.getInput('path');
+            core.info(bundlePath);
+            core.info(core.getInput('title'));
             try {
                 yield stat(bundlePath);
             }

@@ -11,6 +11,9 @@ const {stat} = promises
 async function run(): Promise<void> {
   try {
     const bundlePath: string = core.getInput('path')
+    core.info(bundlePath)
+    core.info(core.getInput('title'))
+
     try {
       await stat(bundlePath)
     } catch (error) {
