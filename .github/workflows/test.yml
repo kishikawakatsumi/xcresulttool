@@ -33,6 +33,10 @@ jobs:
           title: TAU test report
       - uses: ./
         with:
+          path: __tests__/data/TestResults.xcresult
+          title: TestResults test report
+      - uses: ./
+        with:
           path: |
             __tests__/data/Example.xcresult
             __tests__/data/KeychainAccess.xcresult

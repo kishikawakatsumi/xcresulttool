@@ -13,7 +13,7 @@
 ---
 
 ### Test Summary
-#### <a name="WeatherTests_summary"></a>[WeatherTests](#user-content-weathertests)
+#### <a name="weathertests_summary"></a>[WeatherTests](#user-content-weathertests)
 
 - **Device:** iPhone 13 mini, 15.0 (19A339)
 - **SDK:** Simulator - iOS 15.0, 15.0
@@ -23,12 +23,12 @@
 </tr></thead>
 <tbody>
 <tr>
-<td align="left" width="368px"><a name="WeatherTests_WeatherTests_summary"></a><a href="#user-content-weathertests_weathertests"><img src="https://xcresulttool-resources.netlify.app/images/test-class.png" width="14px" align="top">&nbsp;WeatherTests</a></td><td align="right" width="80px">3</td><td align="right" width="80px">2</td><td align="right" width="80px"><b>1</b></td><td align="right" width="80px">0</td><td align="right" width="80px">0</td>
+<td align="left" width="368px"><a name="weathertests_weathertests_summary"></a><a href="#user-content-weathertests_weathertests"><img src="https://xcresulttool-resources.netlify.app/images/test-class.png" width="14px" align="top">&nbsp;WeatherTests</a></td><td align="right" width="80px">3</td><td align="right" width="80px">2</td><td align="right" width="80px"><b>1</b></td><td align="right" width="80px">0</td><td align="right" width="80px">0</td>
 </tr>
 </tbody>
 </table>
 
-#### <a name="WeatherUITests_summary"></a>[WeatherUITests](#user-content-weatheruitests)
+#### <a name="weatheruitests_summary"></a>[WeatherUITests](#user-content-weatheruitests)
 
 - **Device:** iPhone 13 mini, 15.0 (19A339)
 - **SDK:** Simulator - iOS 15.0, 15.0
@@ -38,10 +38,10 @@
 </tr></thead>
 <tbody>
 <tr>
-<td align="left" width="368px"><a name="WeatherUITests_WeatherUITests4_summary"></a><a href="#user-content-weatheruitests_weatheruitests4"><img src="https://xcresulttool-resources.netlify.app/images/test-class.png" width="14px" align="top">&nbsp;WeatherUITests4</a></td><td align="right" width="80px">4</td><td align="right" width="80px">3</td><td align="right" width="80px">0</td><td align="right" width="80px">0</td><td align="right" width="80px">1</td>
+<td align="left" width="368px"><a name="weatheruitests_weatheruitests4_summary"></a><a href="#user-content-weatheruitests_weatheruitests4"><img src="https://xcresulttool-resources.netlify.app/images/test-class.png" width="14px" align="top">&nbsp;WeatherUITests4</a></td><td align="right" width="80px">4</td><td align="right" width="80px">3</td><td align="right" width="80px">0</td><td align="right" width="80px">0</td><td align="right" width="80px">1</td>
 </tr>
 <tr>
-<td align="left" width="368px"><a name="WeatherUITests_WeatherUITestsLaunchTests_summary"></a><a href="#user-content-weatheruitests_weatheruitestslaunchtests"><img src="https://xcresulttool-resources.netlify.app/images/test-class.png" width="14px" align="top">&nbsp;WeatherUITestsLaunchTests</a></td><td align="right" width="80px">4</td><td align="right" width="80px">3</td><td align="right" width="80px"><b>1</b></td><td align="right" width="80px">0</td><td align="right" width="80px">0</td>
+<td align="left" width="368px"><a name="weatheruitests_weatheruitestslaunchtests_summary"></a><a href="#user-content-weatheruitests_weatheruitestslaunchtests"><img src="https://xcresulttool-resources.netlify.app/images/test-class.png" width="14px" align="top">&nbsp;WeatherUITestsLaunchTests</a></td><td align="right" width="80px">4</td><td align="right" width="80px">3</td><td align="right" width="80px"><b>1</b></td><td align="right" width="80px">0</td><td align="right" width="80px">0</td>
 </tr>
 </tbody>
 </table>
@@ -50,18 +50,18 @@
 ---
 
 ### <img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"> Failures
-<h4><a name="WeatherTests_WeatherTests/testFail()_failure-summary"></a><a href="#user-content-weathertests_weathertests/testfail()">WeatherTests/WeatherTests/testFail()</a></h4>
+<h4><a name="weathertests_weathertests/testfail()_failure-summary"></a><a href="#user-content-weathertests_weathertests/testfail()">WeatherTests/WeatherTests/testFail()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b></td><td width="668px">/Users/katsumi/Develop/Weather/WeatherTests/WeatherTests.swift:23</td></tr><tr><td align="right" width="100px"><b>Issue Type</b></td><td width="668px">Assertion Failure</td></tr><tr><td align="right" width="100px"><b>Message</b></td><td width="668px">XCTAssertEqual failed: ("1") is not equal to ("2")</td></tr></table>
 
-<h4><a name="WeatherUITests_WeatherUITestsLaunchTests/testLaunch()_failure-summary"></a><a href="#user-content-weatheruitests_weatheruitestslaunchtests/testlaunch()">WeatherUITests/WeatherUITestsLaunchTests/testLaunch()</a></h4>
+<h4><a name="weatheruitests_weatheruitestslaunchtests/testlaunch()_failure-summary"></a><a href="#user-content-weatheruitests_weatheruitestslaunchtests/testlaunch()">WeatherUITests/WeatherUITestsLaunchTests/testLaunch()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b></td><td width="668px">/Users/katsumi/Develop/Weather/WeatherUITests/WeatherUITestsLaunchTests.swift:28</td></tr><tr><td align="right" width="100px"><b>Issue Type</b></td><td width="668px">Assertion Failure</td></tr><tr><td align="right" width="100px"><b>Message</b></td><td width="668px">failed - Fail!!</td></tr></table>
 
 
 ### Test Details
 
-#### <a name="WeatherTests"></a>WeatherTests[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weathertests_summary)
+#### <a name="weathertests"></a>WeatherTests[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weathertests_summary)
 
-<a name="WeatherTests_WeatherTests"></a><h5>WeatherTests&nbsp;[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weathertests_weathertests_summary)</h5>
+<a name="weathertests_weathertests"></a><h5>WeatherTests&nbsp;[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weathertests_weathertests_summary)</h5>
 <table>
 <thead><tr>
 <th><img src="https://xcresulttool-resources.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top"></th><th>:stopwatch:</th>
@@ -75,15 +75,15 @@
 
 <table>
 <tr><td align="center" valign="top" width="52px"><img src="https://xcresulttool-resources.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"></td><td valign="top" width="716px"><img src="https://xcresulttool-resources.netlify.app/images/test-method.png" width="14px" align="top">&nbsp;<code>testExample()</code></td></tr>
-<tr><td align="center" valign="top" width="52px"><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"></td><td valign="top" width="716px"><a name="WeatherTests_WeatherTests/testFail()"></a><img src="https://xcresulttool-resources.netlify.app/images/test-method.png" width="14px" align="top">&nbsp;<code>testFail()</code><a href="#user-content-weathertests_weathertests/testfail()_failure-summary"><img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top"></a><br><br><b>Activities:</b>
+<tr><td align="center" valign="top" width="52px"><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"></td><td valign="top" width="716px"><a name="weathertests_weathertests/testfail()"></a><img src="https://xcresulttool-resources.netlify.app/images/test-method.png" width="14px" align="top">&nbsp;<code>testFail()</code><a href="#user-content-weathertests_weathertests/testfail()_failure-summary"><img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top"></a><br><br><b>Activities:</b>
 
 - Assertion Failure at WeatherTests.swift:23: XCTAssertEqual failed: ("1") is not equal to ("2")</td></tr>
 <tr><td align="center" valign="top" width="52px"><img src="https://xcresulttool-resources.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"></td><td valign="top" width="716px"><img src="https://xcresulttool-resources.netlify.app/images/test-method.png" width="14px" align="top">&nbsp;<code>testPerformanceExample()</code></td></tr>
 </table>
 
-#### <a name="WeatherUITests"></a>WeatherUITests[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weatheruitests_summary)
+#### <a name="weatheruitests"></a>WeatherUITests[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weatheruitests_summary)
 
-<a name="WeatherUITests_WeatherUITests4"></a><h5>WeatherUITests4&nbsp;[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weatheruitests_weatheruitests4_summary)</h5>
+<a name="weatheruitests_weatheruitests4"></a><h5>WeatherUITests4&nbsp;[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weatheruitests_weatheruitests4_summary)</h5>
 <table>
 <thead><tr>
 <th><img src="https://xcresulttool-resources.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top"></th><th>:stopwatch:</th>
@@ -131,7 +131,7 @@
 - Tear Down</td></tr>
 </table>
 
-<a name="WeatherUITests_WeatherUITestsLaunchTests"></a><h5>WeatherUITestsLaunchTests&nbsp;[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weatheruitests_weatheruitestslaunchtests_summary)</h5>
+<a name="weatheruitests_weatheruitestslaunchtests"></a><h5>WeatherUITestsLaunchTests&nbsp;[<img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top">](#user-content-weatheruitests_weatheruitestslaunchtests_summary)</h5>
 <table>
 <thead><tr>
 <th><img src="https://xcresulttool-resources.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top"></th><th>:stopwatch:</th>
@@ -180,7 +180,7 @@
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-resources.netlify.app/images/attachment.png" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
 - Tear Down</td></tr>
-<tr><td valign="top" width="716px"><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"> <a name="WeatherUITests_WeatherUITestsLaunchTests/testLaunch()"></a><img src="https://xcresulttool-resources.netlify.app/images/test-method.png" width="14px" align="top">&nbsp;<code>testLaunch()</code><a href="#user-content-weatheruitests_weatheruitestslaunchtests/testlaunch()_failure-summary"><img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top"></a><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 2, XCUIDeviceOrientation: 1</code><br><br><b>Activities:</b>
+<tr><td valign="top" width="716px"><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"> <a name="weatheruitests_weatheruitestslaunchtests/testlaunch()"></a><img src="https://xcresulttool-resources.netlify.app/images/test-method.png" width="14px" align="top">&nbsp;<code>testLaunch()</code><a href="#user-content-weatheruitests_weatheruitestslaunchtests/testlaunch()_failure-summary"><img src="https://xcresulttool-resources.netlify.app/images/right-arrow-curving-left.png" width="14px" align="top"></a><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 2, XCUIDeviceOrientation: 1</code><br><br><b>Activities:</b>
 
 - Setting device orientation to Portrait
   <details open><summary><img src="https://xcresulttool-resources.netlify.app/images/attachment.png" width="14px" align="top"></summary><div><img width="812px" src="undefined"></div></details>

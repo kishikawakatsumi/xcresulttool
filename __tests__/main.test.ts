@@ -77,6 +77,20 @@ test('Spaceship.xcresult', async () => {
   )
 })
 
+test('TestResults.xcresult', async () => {
+  const bundlePath = '__tests__/data/TestResults.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'TestResults.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('TestResults.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/TestResults.md')).toString()
+  )
+})
+
 test('test runs', () => {
   process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
   const np = process.execPath

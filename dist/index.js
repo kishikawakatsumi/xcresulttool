@@ -284,10 +284,17 @@ class Formatter {
                 chapterSummary.content.push('</tr></tbody>');
                 chapterSummary.content.push('</table>\n');
                 chapterSummary.content.push('---\n');
+                if (testSummary.stats.failed > 0) {
+                    testReport.testStatus = 'failure';
+                }
+                else if (testSummary.stats.passed > 0) {
+                    testReport.testStatus = 'success';
+                }
                 chapterSummary.content.push('### Test Summary');
                 for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
                     const anchorName = (0, markdown_1.anchorIdentifier)(groupIdentifier);
-                    chapterSummary.content.push(`#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})\n`);
+                    const anchorTag = (0, markdown_1.anchorNameTag)(`${groupIdentifier}_summary`);
+                    chapterSummary.content.push(`#### ${anchorTag}[${groupIdentifier}](${anchorName})\n`);
                     const runDestination = chapter.runDestination;
                     chapterSummary.content.push(`- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`);
                     chapterSummary.content.push(`- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`);
@@ -307,7 +314,7 @@ class Formatter {
                     for (const [identifier, stats] of Object.entries(group)) {
                         chapterSummary.content.push('<tr>');
                         const testClass = `${testClassIcon}&nbsp;${identifier}`;
-                        const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`;
+                        const testClassAnchor = (0, markdown_1.anchorNameTag)(`${groupIdentifier}_${identifier}_summary`);
                         const anchorName = (0, markdown_1.anchorIdentifier)(`${groupIdentifier}_${identifier}`);
                         const testClassLink = `<a href="${anchorName}">${testClass}</a>`;
                         let failedCount;
@@ -375,9 +382,16 @@ class Formatter {
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
                                             const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
-                                            const filepath = failureSummary.filePath.replace(`${workspace}/`, '');
-                                            const annotation = new report_1.Annotation(filepath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
-                                            annotations.push(annotation);
+                                            let filepath = '';
+                                            if (failureSummary.filePath) {
+                                                filepath = failureSummary.filePath.replace(`${workspace}/`, '');
+                                            }
+                                            if (filepath &&
+                                                failureSummary.lineNumber &&
+                                                failureSummary.message) {
+                                                const annotation = new report_1.Annotation(filepath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
+                                                annotations.push(annotation);
+                                            }
                                         }
                                     }
                                 }
@@ -394,7 +408,8 @@ class Formatter {
                         if (failureGroup.failures.length) {
                             const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`;
                             const anchorName = (0, markdown_1.anchorIdentifier)(testIdentifier);
-                            const testMethodLink = `<a name="${testIdentifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`;
+                            const anchorTag = (0, markdown_1.anchorNameTag)(`${testIdentifier}_failure-summary`);
+                            const testMethodLink = `${anchorTag}<a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`;
                             chapterSummary.content.push(`<h4>${testMethodLink}</h4>`);
                             for (const failure of failureGroup.failures) {
                                 for (const line of failure.lines) {
@@ -410,8 +425,9 @@ class Formatter {
                     const testDetail = new report_1.TestDetail();
                     testDetails.details.push(testDetail);
                     const testResultSummaryName = results.summary.name;
+                    const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}`);
                     const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_summary`);
-                    testDetail.lines.push(`#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backIcon}](${anchorName})`);
+                    testDetail.lines.push(`#### ${anchorTag}${testResultSummaryName}[${backIcon}](${anchorName})`);
                     testDetail.lines.push('');
                     const detailGroup = results.details.reduce((groups, detail) => {
                         const d = detail;
@@ -462,10 +478,10 @@ class Formatter {
                         const skippedRate = ((skipped / total) * 100).toFixed(0);
                         const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
                         const testDuration = duration.toFixed(2);
-                        const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`;
+                        const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${groupIdentifier}`);
                         const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${groupIdentifier}_summary`);
                         const anchorBack = `[${backIcon}](${anchorName})`;
-                        testDetail.lines.push(`${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`);
+                        testDetail.lines.push(`${anchorTag}<h5>${testName}&nbsp;${anchorBack}</h5>`);
                         const testsStatsLines = [];
                         testsStatsLines.push('<table>');
                         testsStatsLines.push('<thead><tr>');
@@ -562,9 +578,8 @@ class Formatter {
                                     if (summary.configuration) {
                                         if (testResult.name) {
                                             const isFailure = testResult.testStatus === 'Failure';
-                                            const testMethodAnchor = isFailure
-                                                ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                                                : '';
+                                            const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
+                                            const testMethodAnchor = isFailure ? anchorTag : '';
                                             const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                             const backAnchorLink = isFailure
                                                 ? `<a href="${backAnchorName}">${backIcon}</a>`
@@ -583,9 +598,8 @@ class Formatter {
                                     else {
                                         if (testResult.name) {
                                             const isFailure = testResult.testStatus === 'Failure';
-                                            const testMethodAnchor = isFailure
-                                                ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                                                : '';
+                                            const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
+                                            const testMethodAnchor = isFailure ? anchorTag : '';
                                             const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                             const backAnchorLink = isFailure
                                                 ? `<a href="${backAnchorName}">${backIcon}</a>`
@@ -659,9 +673,8 @@ class Formatter {
                                 else {
                                     if (testResult.name) {
                                         const isFailure = testResult.testStatus === 'Failure';
-                                        const testMethodAnchor = isFailure
-                                            ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                                            : '';
+                                        const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
+                                        const testMethodAnchor = isFailure ? anchorTag : '';
                                         const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
                                         const backAnchorLink = isFailure
                                             ? `<a href="${backAnchorName}">${backIcon}</a>`
@@ -739,14 +752,21 @@ function collectFailureSummaries(failureSummaries) {
         const sourceCodeContext = failureSummary.sourceCodeContext;
         const callStack = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.callStack;
         const location = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.location;
-        const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName || '[undefined]';
+        const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName;
         const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
+        let fileLocation = '';
+        if (fileName && lineNumber) {
+            fileLocation = `${fileName}:${lineNumber}`;
+        }
+        else if (fileName) {
+            fileLocation = fileName;
+        }
         const titleAlign = 'align="right"';
         const titleWidth = 'width="100px"';
         const titleAttr = `${titleAlign} ${titleWidth}`;
         const detailWidth = 'width="668px"';
         const contents = '<table>' +
-            `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileName}:${lineNumber}</td></tr>` +
+            `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileLocation}</td></tr>` +
             `<tr><td ${titleAttr}><b>Issue Type</b></td><td ${detailWidth}>${failureSummary.issueType}</td></tr>` +
             `<tr><td ${titleAttr}><b>Message</b></td><td ${detailWidth}>${failureSummary.message}</td></tr>` +
             `</table>\n`;
@@ -924,7 +944,7 @@ function run() {
                     name: title,
                     head_sha: sha,
                     status: 'completed',
-                    conclusion: annotations.length ? 'failure' : 'success',
+                    conclusion: report.testStatus,
                     output: {
                         title: 'Xcode test results',
                         summary: reportSummary,
@@ -983,19 +1003,24 @@ function mergeResultBundle(inputPaths, outputPath) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.escapeHashSign = exports.anchorIdentifier = exports.indentation = void 0;
-function indentation(level) {
-    return '  '.repeat(level);
-}
-exports.indentation = indentation;
+exports.indentation = exports.escapeHashSign = exports.anchorNameTag = exports.anchorIdentifier = void 0;
 function anchorIdentifier(text) {
-    return `#user-content-${text.toLowerCase()}`;
+    return `#user-content-${text.toLowerCase()}`.replace(/ /g, '-');
 }
 exports.anchorIdentifier = anchorIdentifier;
+function anchorNameTag(text) {
+    const name = text.toLowerCase().replace(/ /g, '-');
+    return `<a name="${name}"></a>`;
+}
+exports.anchorNameTag = anchorNameTag;
 function escapeHashSign(text) {
     return text.replace(/#/g, '<span>#</span>');
 }
 exports.escapeHashSign = escapeHashSign;
+function indentation(level) {
+    return '  '.repeat(level);
+}
+exports.indentation = indentation;
 
 
 /***/ }),
@@ -1163,6 +1188,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Annotation = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
 class TestReport {
     constructor() {
+        this.testStatus = 'neutral';
         this.chapters = [];
         this.annotations = [];
     }
