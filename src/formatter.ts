@@ -55,7 +55,6 @@ export class Formatter {
   constructor(bundlePath: string) {
     this.bundlePath = bundlePath
     this.parser = new Parser(this.bundlePath)
-    this.format()
   }
 
   async format(): Promise<TestReport> {
@@ -79,7 +78,8 @@ export class Formatter {
           if (action.actionResult.testsRef) {
             const testReportChapter = new TestReportChapter(
               action.schemeCommandName,
-              action.runDestination
+              action.runDestination,
+              action.title
             )
             testReport.chapters.push(testReportChapter)
 
@@ -380,7 +380,7 @@ export class Formatter {
       }
 
       if (testFailures.failureGroups.length) {
-        chapterSummary.content.push('### Failures')
+        chapterSummary.content.push(`### ${failedIcon} Failures`)
         for (const failureGroup of testFailures.failureGroups) {
           if (failureGroup.failures.length) {
             const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`

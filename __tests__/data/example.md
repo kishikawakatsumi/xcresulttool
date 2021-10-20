@@ -1,4 +1,4 @@
-### Test Weather
+## Testing project Weather with scheme Weather
 
 ### Summary
 <table>
@@ -49,7 +49,7 @@
 
 ---
 
-### Failures
+### <img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"> Failures
 <h4><a name="WeatherTests_WeatherTests/testFail()_failure-summary"></a><a href="#user-content-weathertests_weathertests/testfail()">WeatherTests/WeatherTests/testFail()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b></td><td width="668px">/Users/katsumi/Develop/Weather/WeatherTests/WeatherTests.swift:23</td></tr><tr><td align="right" width="100px"><b>Issue Type</b></td><td width="668px">Assertion Failure</td></tr><tr><td align="right" width="100px"><b>Message</b></td><td width="668px">XCTAssertEqual failed: ("1") is not equal to ("2")</td></tr></table>
 

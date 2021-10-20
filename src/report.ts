@@ -17,7 +17,14 @@ export class TestReport {
 
     for (const chapter of this.chapters) {
       for (const chapterSummary of chapter.summaries) {
-        const summaryTitle = `### ${chapter.schemeCommandName} ${this.entityName}`
+        let summaryTitle = ''
+        if (chapter.title) {
+          summaryTitle = `## ${chapter.title}`
+        } else if (this.entityName) {
+          summaryTitle = `## ${chapter.schemeCommandName} ${this.entityName}`
+        } else {
+          summaryTitle = `## ${chapter.schemeCommandName}`
+        }
         const summaryContent = chapterSummary.content.join('\n')
         lines.push(`${summaryTitle}\n\n${summaryContent}`)
       }
@@ -40,6 +47,7 @@ export class TestReport {
 }
 
 export class TestReportChapter {
+  readonly title?: string
   readonly schemeCommandName: string
   readonly runDestination: ActionRunDestinationRecord
   readonly sections: {[key: string]: TestReportSection} = {}
@@ -49,10 +57,12 @@ export class TestReportChapter {
 
   constructor(
     schemeCommandName: string,
-    runDestination: ActionRunDestinationRecord
+    runDestination: ActionRunDestinationRecord,
+    title?: string
   ) {
     this.schemeCommandName = schemeCommandName
     this.runDestination = runDestination
+    this.title = title
   }
 }
 

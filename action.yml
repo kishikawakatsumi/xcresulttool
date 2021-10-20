@@ -2,14 +2,13 @@ name: 'xcresulttool'
 description: 'generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.'
 author: 'kishikawa katsumi'
 inputs:
-  xcresult:
+  path:
     required: true
     description: 'Path to the xcresult bundle'
-  GITHUB_TOKEN:
-    required: true
-    description: 'GitHub token to create the check'
+  token:
+    description: 'The GitHub authentication token'
+    default: ${{ github.token }}
   title:
-    required: true
     description: 'Title for the check results'
     default: 'Xcode test results'
 runs:

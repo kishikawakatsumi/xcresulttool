@@ -147,7 +147,6 @@ class Formatter {
         this.details = '';
         this.bundlePath = bundlePath;
         this.parser = new parser_1.Parser(this.bundlePath);
-        this.format();
     }
     format() {
         var _a;
@@ -163,7 +162,7 @@ class Formatter {
                 for (const action of actionsInvocationRecord.actions) {
                     if (action.actionResult) {
                         if (action.actionResult.testsRef) {
-                            const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName, action.runDestination);
+                            const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName, action.runDestination, action.title);
                             testReport.chapters.push(testReportChapter);
                             const actionTestPlanRunSummaries = yield this.parser.parse(action.actionResult.testsRef.id);
                             for (const summary of actionTestPlanRunSummaries.summaries) {
@@ -390,7 +389,7 @@ class Formatter {
                     testReport.annotations.push(annotation);
                 }
                 if (testFailures.failureGroups.length) {
-                    chapterSummary.content.push('### Failures');
+                    chapterSummary.content.push(`### ${failedIcon} Failures`);
                     for (const failureGroup of testFailures.failureGroups) {
                         if (failureGroup.failures.length) {
                             const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`;
@@ -866,10 +865,10 @@ const glob_1 = __nccwpck_require__(1957);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const bundlePath = core.getInput('xcresult');
+            const bundlePath = core.getInput('path');
             const formatter = new formatter_1.Formatter(bundlePath);
             const report = yield formatter.format();
-            if (core.getInput('GITHUB_TOKEN')) {
+            if (core.getInput('token')) {
                 const octokit = new action_1.Octokit();
                 const owner = github.context.repo.owner;
                 const repo = github.context.repo.repo;
@@ -1109,7 +1108,16 @@ class TestReport {
         const lines = [];
         for (const chapter of this.chapters) {
             for (const chapterSummary of chapter.summaries) {
-                const summaryTitle = `### ${chapter.schemeCommandName} ${this.entityName}`;
+                let summaryTitle = '';
+                if (chapter.title) {
+                    summaryTitle = `## ${chapter.title}`;
+                }
+                else if (this.entityName) {
+                    summaryTitle = `## ${chapter.schemeCommandName} ${this.entityName}`;
+                }
+                else {
+                    summaryTitle = `## ${chapter.schemeCommandName}`;
+                }
                 const summaryContent = chapterSummary.content.join('\n');
                 lines.push(`${summaryTitle}\n\n${summaryContent}`);
             }
@@ -1128,12 +1136,13 @@ class TestReport {
 }
 exports.TestReport = TestReport;
 class TestReportChapter {
-    constructor(schemeCommandName, runDestination) {
+    constructor(schemeCommandName, runDestination, title) {
         this.sections = {};
         this.summaries = [];
         this.details = [];
         this.schemeCommandName = schemeCommandName;
         this.runDestination = runDestination;
+        this.title = title;
     }
 }
 exports.TestReportChapter = TestReportChapter;

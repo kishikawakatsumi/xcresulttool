@@ -21,16 +21,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          xcresult: '__tests__/data/example.xcresult'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: '__tests__/data/example.xcresult'
           title: 'Example test report'
       - uses: ./
         with:
-          xcresult: '__tests__/data/KeychainAccess.xcresult'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: '__tests__/data/KeychainAccess.xcresult'
           title: 'KeychainAccess test report'
       - uses: ./
         with:
-          xcresult: '__tests__/data/TAU.xcresult'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: '__tests__/data/TAU.xcresult'
           title: 'TAU test report'

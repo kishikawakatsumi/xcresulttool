@@ -7,17 +7,17 @@ import {promises} from 'fs'
 const {readFile, writeFile} = promises
 import {Formatter} from '../src/formatter'
 
-test('example.xcresult', async () => {
-  const bundlePath = '__tests__/data/example.xcresult'
+test('Example.xcresult', async () => {
+  const bundlePath = '__tests__/data/Example.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format()
   const reportText = `${report.reportSummary}\n${report.reportDetail}`
 
-  const outputPath = path.join(os.tmpdir(), 'example.md')
+  const outputPath = path.join(os.tmpdir(), 'Example.md')
   await writeFile(outputPath, reportText)
-  // await writeFile('example.md', reportText)
+  // await writeFile('Example.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
-    (await readFile('__tests__/data/example.md')).toString()
+    (await readFile('__tests__/data/Example.md')).toString()
   )
 })
 
@@ -49,8 +49,22 @@ test('TAU.xcresult', async () => {
   )
 })
 
+test('merged.xcresult', async () => {
+  const bundlePath = '__tests__/data/merged.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'merged.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('merged.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/merged.md')).toString()
+  )
+})
+
 test('test runs', () => {
-  process.env['INPUT_XCRESULT'] = '__tests__/data/example.xcresult'
+  process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {

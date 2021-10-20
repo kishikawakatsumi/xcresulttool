@@ -1,4 +1,4 @@
-### Test TAUUITests
+## Testing project TAU with scheme TAUUITests
 
 ### Summary
 <table>
@@ -34,7 +34,7 @@
 
 ---
 
-### Failures
+### <img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"> Failures
 <h4><a name="TAUUITests_BDDTest/testThankYouMessageInBDStyle()_failure-summary"></a><a href="#user-content-tauuitests_bddtest/testthankyoumessageinbdstyle()">TAUUITests/BDDTest/testThankYouMessageInBDStyle()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b></td><td width="668px">/Users/katsumi/Downloads/XCUITest-TAU-chapter4/TAUUITests/BDDTest.swift:40</td></tr><tr><td align="right" width="100px"><b>Issue Type</b></td><td width="668px">Assertion Failure</td></tr><tr><td align="right" width="100px"><b>Message</b></td><td width="668px">Failed to synthesize event: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11. (Underlying Error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11)</td></tr></table>
 

@@ -8,11 +8,11 @@ import {glob} from 'glob'
 
 async function run(): Promise<void> {
   try {
-    const bundlePath: string = core.getInput('xcresult')
+    const bundlePath: string = core.getInput('path')
     const formatter = new Formatter(bundlePath)
     const report = await formatter.format()
 
-    if (core.getInput('GITHUB_TOKEN')) {
+    if (core.getInput('token')) {
       const octokit = new Octokit()
 
       const owner = github.context.repo.owner

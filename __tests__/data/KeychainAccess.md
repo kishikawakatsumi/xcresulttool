@@ -1,4 +1,4 @@
-### Test KeychainAccess
+## Testing workspace KeychainAccess with scheme KeychainAccess
 
 ### Summary
 <table>
@@ -61,7 +61,7 @@
 
 ---
 
-### Failures
+### <img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"> Failures
 <h4><a name="KeychainAccessTests-MacCatalyst_KeychainAccessTests/testAllKeys()_failure-summary"></a><a href="#user-content-keychainaccesstests-maccatalyst_keychainaccesstests/testallkeys()">KeychainAccessTests-MacCatalyst/KeychainAccessTests/testAllKeys()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b></td><td width="668px">/Users/katsumi/Documents/XcodeProjects/KeychainAccess/Lib/TestHost-MacCatalyst/KeychainAccessTests-MacCatalyst/KeychainAccessTests.swift:1372</td></tr><tr><td align="right" width="100px"><b>Issue Type</b></td><td width="668px">Assertion Failure</td></tr><tr><td align="right" width="100px"><b>Message</b></td><td width="668px">XCTAssertEqual failed: ("Optional("27AEDK3C9F.com.kishikawakatsumi.KeychainAccess.TestHost-MacCatalyst")") is not equal to ("Optional("27AEDK3C9F.com.kishikawakatsumi.KeychainAccess.TestHost")")</td></tr></table>
 
