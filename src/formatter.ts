@@ -1,6 +1,7 @@
 /*eslint-disable no-shadow */
 
 import * as Image from './image'
+import * as path from 'path'
 
 import {
   Annotation,
@@ -67,10 +68,9 @@ export class Formatter {
       const metadata: ActionsInvocationMetadata = await this.parser.parse(
         actionsInvocationRecord.metadataRef.id
       )
-      if (metadata.schemeIdentifier) {
-        const schemeIdentifier = metadata.schemeIdentifier
-        testReport.entityName = schemeIdentifier.entityName
-      }
+
+      testReport.entityName = metadata.schemeIdentifier?.entityName
+      testReport.creatingWorkspaceFilePath = metadata.creatingWorkspaceFilePath
     }
 
     if (actionsInvocationRecord.actions) {
@@ -78,7 +78,8 @@ export class Formatter {
         if (action.actionResult) {
           if (action.actionResult.testsRef) {
             const testReportChapter = new TestReportChapter(
-              action.schemeCommandName
+              action.schemeCommandName,
+              action.runDestination
             )
             testReport.chapters.push(testReportChapter)
 
@@ -235,6 +236,14 @@ export class Formatter {
           `#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})\n`
         )
 
+        const runDestination = chapter.runDestination
+        chapterSummary.content.push(
+          `- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`
+        )
+        chapterSummary.content.push(
+          `- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`
+        )
+
         chapterSummary.content.push('<table>')
         chapterSummary.content.push('<thead><tr>')
         const header = [
@@ -343,12 +352,15 @@ export class Formatter {
                   for (const failureSummary of failureSummaries) {
                     testFailure.lines.push(`${failureSummary.contents}`)
 
-                    const path = failureSummary.filePath.replace(
-                      `${process.env.GITHUB_WORKSPACE}/`,
+                    const workspace = path.dirname(
+                      `${testReport.creatingWorkspaceFilePath}`
+                    )
+                    const filepath = failureSummary.filePath.replace(
+                      `${workspace}/`,
                       ''
                     )
                     const annotation = new Annotation(
-                      path,
+                      filepath,
                       failureSummary.lineNumber,
                       failureSummary.lineNumber,
                       'failure',
@@ -363,7 +375,9 @@ export class Formatter {
           }
         }
       }
-      testReport.annotations = annotations
+      for (const annotation of annotations) {
+        testReport.annotations.push(annotation)
+      }
 
       if (testFailures.failureGroups.length) {
         chapterSummary.content.push('### Failures')

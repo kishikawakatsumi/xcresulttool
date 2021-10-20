@@ -128,6 +128,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
+const path = __importStar(__nccwpck_require__(5622));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
 const parser_1 = __nccwpck_require__(267);
@@ -149,21 +150,20 @@ class Formatter {
         this.format();
     }
     format() {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const actionsInvocationRecord = yield this.parser.parse();
             const testReport = new report_1.TestReport();
             if (actionsInvocationRecord.metadataRef) {
                 const metadata = yield this.parser.parse(actionsInvocationRecord.metadataRef.id);
-                if (metadata.schemeIdentifier) {
-                    const schemeIdentifier = metadata.schemeIdentifier;
-                    testReport.entityName = schemeIdentifier.entityName;
-                }
+                testReport.entityName = (_a = metadata.schemeIdentifier) === null || _a === void 0 ? void 0 : _a.entityName;
+                testReport.creatingWorkspaceFilePath = metadata.creatingWorkspaceFilePath;
             }
             if (actionsInvocationRecord.actions) {
                 for (const action of actionsInvocationRecord.actions) {
                     if (action.actionResult) {
                         if (action.actionResult.testsRef) {
-                            const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName);
+                            const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName, action.runDestination);
                             testReport.chapters.push(testReportChapter);
                             const actionTestPlanRunSummaries = yield this.parser.parse(action.actionResult.testsRef.id);
                             for (const summary of actionTestPlanRunSummaries.summaries) {
@@ -289,6 +289,9 @@ class Formatter {
                 for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
                     const anchorName = (0, markdown_1.anchorIdentifier)(groupIdentifier);
                     chapterSummary.content.push(`#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})\n`);
+                    const runDestination = chapter.runDestination;
+                    chapterSummary.content.push(`- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`);
+                    chapterSummary.content.push(`- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`);
                     chapterSummary.content.push('<table>');
                     chapterSummary.content.push('<thead><tr>');
                     const header = [
@@ -372,8 +375,9 @@ class Formatter {
                                         const failureSummaries = collectFailureSummaries(summary.failureSummaries);
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
-                                            const path = failureSummary.filePath.replace(`${process.env.GITHUB_WORKSPACE}/`, '');
-                                            const annotation = new report_1.Annotation(path, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
+                                            const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
+                                            const filepath = failureSummary.filePath.replace(`${workspace}/`, '');
+                                            const annotation = new report_1.Annotation(filepath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
                                             annotations.push(annotation);
                                         }
                                     }
@@ -382,7 +386,9 @@ class Formatter {
                         }
                     }
                 }
-                testReport.annotations = annotations;
+                for (const annotation of annotations) {
+                    testReport.annotations.push(annotation);
+                }
                 if (testFailures.failureGroups.length) {
                     chapterSummary.content.push('### Failures');
                     for (const failureGroup of testFailures.failureGroups) {
@@ -1119,11 +1125,12 @@ class TestReport {
 }
 exports.TestReport = TestReport;
 class TestReportChapter {
-    constructor(schemeCommandName) {
+    constructor(schemeCommandName, runDestination) {
         this.sections = {};
         this.summaries = [];
         this.details = [];
         this.schemeCommandName = schemeCommandName;
+        this.runDestination = runDestination;
     }
 }
 exports.TestReportChapter = TestReportChapter;

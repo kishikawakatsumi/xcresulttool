@@ -15,6 +15,8 @@
 ### Test Summary
 #### <a name="KeychainAccessTests_summary"></a>[KeychainAccessTests](#user-content-keychainaccesstests)
 
+- **Device:** iPhone 13 mini, 15.0 (19A339)
+- **SDK:** Simulator - iOS 15.0, 15.0
 <table>
 <thead><tr>
 <th>Test</th><th>Total</th><th><img src="https://xcresulttool-resources.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top"></th>
@@ -37,6 +39,8 @@
 
 #### <a name="KeychainAccessTests-MacCatalyst_summary"></a>[KeychainAccessTests-MacCatalyst](#user-content-keychainaccesstests-maccatalyst)
 
+- **Device:** iPhone 13 mini, 15.0 (19A339)
+- **SDK:** Simulator - iOS 15.0, 15.0
 <table>
 <thead><tr>
 <th>Test</th><th>Total</th><th><img src="https://xcresulttool-resources.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/failure.png" alt="Failure" title="Failure" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/skipped.png" alt="Skipped" title="Skipped" width="14px" align="top"></th><th><img src="https://xcresulttool-resources.netlify.app/images/expected-failure.png" alt="Expected Failure" title="Expected Failure" width="14px" align="top"></th>

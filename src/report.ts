@@ -1,3 +1,4 @@
+import {ActionRunDestinationRecord} from '../dev/@types/ActionRunDestinationRecord.d'
 import {ActionTestMetadata} from '../dev/@types/ActionTestMetadata.d'
 import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
 import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
@@ -6,8 +7,10 @@ import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
 
 export class TestReport {
   entityName?: string
+  creatingWorkspaceFilePath?: string
+
   readonly chapters: TestReportChapter[] = []
-  annotations: Annotation[] = []
+  readonly annotations: Annotation[] = []
 
   get reportSummary(): string {
     const lines: string[] = []
@@ -38,13 +41,18 @@ export class TestReport {
 
 export class TestReportChapter {
   readonly schemeCommandName: string
+  readonly runDestination: ActionRunDestinationRecord
   readonly sections: {[key: string]: TestReportSection} = {}
 
   readonly summaries: TestReportChapterSummary[] = []
   readonly details: TestReportChapterDetail[] = []
 
-  constructor(schemeCommandName: string) {
+  constructor(
+    schemeCommandName: string,
+    runDestination: ActionRunDestinationRecord
+  ) {
     this.schemeCommandName = schemeCommandName
+    this.runDestination = runDestination
   }
 }
 
