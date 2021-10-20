@@ -128,7 +128,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
-const core = __importStar(__nccwpck_require__(2186));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
 const parser_1 = __nccwpck_require__(267);
@@ -373,9 +372,7 @@ class Formatter {
                                         const failureSummaries = collectFailureSummaries(summary.failureSummaries);
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
-                                            core.info(process.env.GITHUB_WORKSPACE || '');
-                                            const path = failureSummary.filePath.replace(process.env.GITHUB_WORKSPACE || '', '');
-                                            core.info(path);
+                                            const path = failureSummary.filePath.replace(`${process.env.GITHUB_WORKSPACE}/`, '');
                                             const annotation = new report_1.Annotation(path, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
                                             annotations.push(annotation);
                                         }

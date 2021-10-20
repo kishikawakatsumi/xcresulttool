@@ -1,7 +1,6 @@
 /*eslint-disable no-shadow */
 
 import * as Image from './image'
-import * as core from '@actions/core'
 
 import {
   Annotation,
@@ -345,13 +344,10 @@ export class Formatter {
                   for (const failureSummary of failureSummaries) {
                     testFailure.lines.push(`${failureSummary.contents}`)
 
-                    core.info(process.env.GITHUB_WORKSPACE || '')
                     const path = failureSummary.filePath.replace(
-                      process.env.GITHUB_WORKSPACE || '',
+                      `${process.env.GITHUB_WORKSPACE}/`,
                       ''
                     )
-                    core.info(path)
-
                     const annotation = new Annotation(
                       path,
                       failureSummary.lineNumber,
