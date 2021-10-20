@@ -38,7 +38,7 @@ async function run(): Promise<void> {
 
       const artifactClient = artifact.create()
       const artifactName = path.basename(bundlePath)
-      const files = [bundlePath]
+      const files = [`${process.env.GITHUB_WORKSPACE}/${bundlePath}`]
 
       const rootDirectory = '.'
       const options = {
