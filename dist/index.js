@@ -1062,8 +1062,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Parser = void 0;
 const exec = __importStar(__nccwpck_require__(1514));
-const fs_1 = __nccwpck_require__(5747);
-const { readFile } = fs_1.promises;
 class Parser {
     constructor(bundlePath) {
         this.bundlePath = bundlePath;
@@ -1092,7 +1090,7 @@ class Parser {
                 silent: true
             };
             yield exec.exec('xcrun', args, options);
-            return Buffer.from(yield readFile(outputPath));
+            return Buffer.from('');
         });
     }
     toJSON(reference) {

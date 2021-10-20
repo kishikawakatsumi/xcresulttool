@@ -1,8 +1,6 @@
 /*eslint-disable @typescript-eslint/no-explicit-any */
 
 import * as exec from '@actions/exec'
-import {promises} from 'fs'
-const {readFile} = promises
 
 export class Parser {
   private bundlePath: string
@@ -34,7 +32,7 @@ export class Parser {
     }
 
     await exec.exec('xcrun', args, options)
-    return Buffer.from(await readFile(outputPath))
+    return Buffer.from('')
   }
 
   private async toJSON(reference?: string): Promise<string> {
