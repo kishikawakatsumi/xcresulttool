@@ -3,6 +3,7 @@
 import * as Image from './image'
 
 import {
+  Annotation,
   TestDetail,
   TestDetails,
   TestFailure,
@@ -283,6 +284,7 @@ export class Formatter {
       chapterSummary.content.push('---\n')
 
       const testFailures = new TestFailures()
+      const annotations: Annotation[] = []
       for (const [, results] of Object.entries(chapter.sections)) {
         const testResultSummaryName = results.summary.name
 
@@ -341,6 +343,15 @@ export class Formatter {
                   )
                   for (const failureSummary of failureSummaries) {
                     testFailure.lines.push(`${failureSummary.contents}`)
+                    const annotation = new Annotation(
+                      failureSummary.filePath,
+                      failureSummary.lineNumber,
+                      failureSummary.lineNumber,
+                      'failure',
+                      failureSummary.message,
+                      failureSummary.issueType
+                    )
+                    annotations.push(annotation)
                   }
                 }
               }
@@ -348,6 +359,7 @@ export class Formatter {
           }
         }
       }
+      testReport.annotations = annotations
 
       if (testFailures.failureGroups.length) {
         chapterSummary.content.push('### Failures')
@@ -795,6 +807,7 @@ function collectFailureSummaries(
     const sourceCodeContext = failureSummary.sourceCodeContext
     const callStack = sourceCodeContext?.callStack
     const location = sourceCodeContext?.location
+    const filePath = location?.filePath
     const lineNumber = location?.lineNumber
 
     const titleAlign = 'align="right"'
@@ -821,11 +834,22 @@ function collectFailureSummaries(
         return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`
       })
       .join('\n')
-    return {contents, stackTrace: stackTrace || []} as FailureSummary
+    return {
+      filePath,
+      lineNumber,
+      issueType: failureSummary.issueType,
+      message: failureSummary.message,
+      contents,
+      stackTrace: stackTrace || []
+    } as FailureSummary
   })
 }
 
 interface FailureSummary {
+  filePath: string
+  lineNumber: number
+  issueType: string
+  message: string
   contents: string
   stackTrace: string
 }
