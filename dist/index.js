@@ -897,7 +897,10 @@ function run() {
                     continueOnError: false
                 };
                 (0, glob_1.glob)(`${bundlePath}/**/*`, (error, files) => __awaiter(this, void 0, void 0, function* () {
-                    if (!error) {
+                    if (error) {
+                        core.error(error);
+                    }
+                    if (files.length) {
                         yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
                     }
                 }));

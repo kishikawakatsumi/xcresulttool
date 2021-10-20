@@ -46,7 +46,10 @@ async function run(): Promise<void> {
       }
 
       glob(`${bundlePath}/**/*`, async (error, files) => {
-        if (!error) {
+        if (error) {
+          core.error(error)
+        }
+        if (files.length) {
           await artifactClient.uploadArtifact(
             artifactName,
             files,
