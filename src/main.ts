@@ -8,6 +8,7 @@ import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 import {glob} from 'glob'
 import {promises} from 'fs'
+import {TestReport} from './report'
 const {stat} = promises
 
 async function run(): Promise<void> {
@@ -77,7 +78,7 @@ async function run(): Promise<void> {
         name: title,
         head_sha: sha,
         status: 'completed',
-        conclusion: annotations.length ? 'failure' : 'success',
+        conclusion: report.testStatus,
         output: {
           title: 'Xcode test results',
           summary: reportSummary,

@@ -231,6 +231,12 @@ export class Formatter {
 
       chapterSummary.content.push('---\n')
 
+      if (testSummary.stats.failed > 0) {
+        testReport.testStatus = 'failure'
+      } else if (testSummary.stats.passed > 0) {
+        testReport.testStatus = 'success'
+      }
+
       chapterSummary.content.push('### Test Summary')
 
       for (const [groupIdentifier, group] of Object.entries(

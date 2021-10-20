@@ -8,6 +8,7 @@ import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
 export class TestReport {
   entityName?: string
   creatingWorkspaceFilePath?: string
+  testStatus: string = 'neutral'
 
   readonly chapters: TestReportChapter[] = []
   readonly annotations: Annotation[] = []
