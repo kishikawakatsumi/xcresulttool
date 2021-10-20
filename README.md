@@ -6,11 +6,7 @@
 
 A GitHub Action that generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.
 
-# Usage
-
-> For complete input/output documentation, see [action.yml](action.yml).
-
-## Pre-Requisites
+### Pre-Requisites
 
 This action only works on macOS builders.
 
@@ -30,6 +26,10 @@ jobs:
         run: |
           xcodebuild -scheme MyFramework -resultBundlePath TestResults test
 ```
+
+# Usage
+
+> For complete input/output documentation, see [action.yml](action.yml).
 
 ## Example
 
@@ -61,7 +61,7 @@ jobs:
         # even if the test fails in the previous step.
 ```
 
-### Multiple result bundle paths
+## Multiple result bundle paths
 
 ```yaml
 - uses: kishikawakatsumi/xcresulttool@v1
@@ -73,7 +73,7 @@ jobs:
   if: always()
 ```
 
-## Input parameters
+# Input parameters
 
 ```yaml
 - uses: kishikawakatsumi/xcresulttool@v1
