@@ -8,7 +8,6 @@ import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 import {glob} from 'glob'
 import {promises} from 'fs'
-import {TestReport} from './report'
 const {stat} = promises
 
 async function run(): Promise<void> {
