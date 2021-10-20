@@ -12,11 +12,11 @@ The result is formatted into a test report that shows the success or failure of 
 
 Here is [an example result](https://github.com/kishikawakatsumi/xcresulttool-example/runs/3954065204?check_suite_focus=true).
 
-<img width="392" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138133779-fcf57fde-ef67-4207-a2ed-6d13c47842aa.png"> <img width="400" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138133993-0573480d-1840-4f3e-987f-af928978972f.png">
+<img width="300" height="300" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138133779-fcf57fde-ef67-4207-a2ed-6d13c47842aa.png"> <img width="300" height="300" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138133993-0573480d-1840-4f3e-987f-af928978972f.png">
 
-<img width="400" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134540-823d2cb5-82c0-45b6-a551-f68c4befa08d.png"> <img width="392" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134559-43fc5f7a-6ce3-4992-b3e6-f6c3cd995dfb.png">
+<img width="300" height="300" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134540-823d2cb5-82c0-45b6-a551-f68c4befa08d.png"> <img width="300" height="300" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134559-43fc5f7a-6ce3-4992-b3e6-f6c3cd995dfb.png">
 
-<img width="392" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134800-38262042-e053-4522-ac9b-308e0046e872.png"> <img width="400" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134810-9c9f5a94-4642-482c-9414-ee83bd74f917.png">
+<img width="300" height="300" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134800-38262042-e053-4522-ac9b-308e0046e872.png"> <img width="300" height="300" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138134810-9c9f5a94-4642-482c-9414-ee83bd74f917.png">
 
 ### Pre-Requisites
 
