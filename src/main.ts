@@ -48,36 +48,41 @@ async function run(): Promise<void> {
       let title = core.getInput('title')
       if (title.length > charactersLimit) {
         core.error(
-          'The result will be truncated because the character limit exceeded. [title]'
+          `The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`
         )
         title = title.substring(0, charactersLimit)
       }
       let reportSummary = report.reportSummary
       if (reportSummary.length > charactersLimit) {
         core.error(
-          'The result will be truncated because the character limit exceeded. [summary]'
+          `The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`
         )
         reportSummary = reportSummary.substring(0, charactersLimit)
       }
       let reportDetail = report.reportDetail
       if (reportDetail.length > charactersLimit) {
         core.error(
-          'The result will be truncated because the character limit exceeded. [text]'
+          `The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`
         )
         reportDetail = reportDetail.substring(0, charactersLimit)
       }
+
+      if (report.annotations.length > 50) {
+        core.error('Annotations that exceed the limit (50) will be truncated.')
+      }
+      const annotations = report.annotations.slice(0, 50)
       await octokit.checks.create({
         owner,
         repo,
         name: title,
         head_sha: sha,
         status: 'completed',
-        conclusion: report.annotations.length ? 'failure' : 'success',
+        conclusion: annotations.length ? 'failure' : 'success',
         output: {
           title: 'Xcode test results',
           summary: reportSummary,
           text: reportDetail,
-          annotations: report.annotations
+          annotations
         }
       })
 
