@@ -18,7 +18,12 @@ import {
   actionTestSummaries,
   actionTestSummary
 } from './report'
-import {anchorIdentifier, escapeHashSign, indentation} from './markdown'
+import {
+  anchorIdentifier,
+  anchorNameTag,
+  escapeHashSign,
+  indentation
+} from './markdown'
 
 import {ActionTestActivitySummary} from '../dev/@types/ActionTestActivitySummary.d'
 import {ActionTestFailureSummary} from '../dev/@types/ActionTestFailureSummary.d'
@@ -232,8 +237,9 @@ export class Formatter {
         testSummary.groups
       )) {
         const anchorName = anchorIdentifier(groupIdentifier)
+        const anchorTag = anchorNameTag(`${groupIdentifier}_summary`)
         chapterSummary.content.push(
-          `#### <a name="${groupIdentifier}_summary"></a>[${groupIdentifier}](${anchorName})\n`
+          `#### ${anchorTag}[${groupIdentifier}](${anchorName})\n`
         )
 
         const runDestination = chapter.runDestination
@@ -261,7 +267,9 @@ export class Formatter {
         for (const [identifier, stats] of Object.entries(group)) {
           chapterSummary.content.push('<tr>')
           const testClass = `${testClassIcon}&nbsp;${identifier}`
-          const testClassAnchor = `<a name="${groupIdentifier}_${identifier}_summary"></a>`
+          const testClassAnchor = anchorNameTag(
+            `${groupIdentifier}_${identifier}_summary`
+          )
           const anchorName = anchorIdentifier(
             `${groupIdentifier}_${identifier}`
           )
@@ -355,19 +363,28 @@ export class Formatter {
                     const workspace = path.dirname(
                       `${testReport.creatingWorkspaceFilePath}`
                     )
-                    const filepath = failureSummary.filePath.replace(
-                      `${workspace}/`,
-                      ''
-                    )
-                    const annotation = new Annotation(
-                      filepath,
-                      failureSummary.lineNumber,
-                      failureSummary.lineNumber,
-                      'failure',
-                      failureSummary.message,
-                      failureSummary.issueType
-                    )
-                    annotations.push(annotation)
+                    let filepath = ''
+                    if (failureSummary.filePath) {
+                      filepath = failureSummary.filePath.replace(
+                        `${workspace}/`,
+                        ''
+                      )
+                    }
+                    if (
+                      filepath &&
+                      failureSummary.lineNumber &&
+                      failureSummary.message
+                    ) {
+                      const annotation = new Annotation(
+                        filepath,
+                        failureSummary.lineNumber,
+                        failureSummary.lineNumber,
+                        'failure',
+                        failureSummary.message,
+                        failureSummary.issueType
+                      )
+                      annotations.push(annotation)
+                    }
                   }
                 }
               }
@@ -385,7 +402,8 @@ export class Formatter {
           if (failureGroup.failures.length) {
             const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`
             const anchorName = anchorIdentifier(testIdentifier)
-            const testMethodLink = `<a name="${testIdentifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`
+            const anchorTag = anchorNameTag(`${testIdentifier}_failure-summary`)
+            const testMethodLink = `${anchorTag}<a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`
             chapterSummary.content.push(`<h4>${testMethodLink}</h4>`)
             for (const failure of failureGroup.failures) {
               for (const line of failure.lines) {
@@ -403,9 +421,10 @@ export class Formatter {
         testDetails.details.push(testDetail)
 
         const testResultSummaryName = results.summary.name
+        const anchorTag = anchorNameTag(`${testResultSummaryName}`)
         const anchorName = anchorIdentifier(`${testResultSummaryName}_summary`)
         testDetail.lines.push(
-          `#### <a name="${testResultSummaryName}"></a>${testResultSummaryName}[${backIcon}](${anchorName})`
+          `#### ${anchorTag}${testResultSummaryName}[${backIcon}](${anchorName})`
         )
         testDetail.lines.push('')
 
@@ -482,13 +501,15 @@ export class Formatter {
           )
           const testDuration = duration.toFixed(2)
 
-          const anchor = `<a name="${testResultSummaryName}_${groupIdentifier}"></a>`
+          const anchorTag = anchorNameTag(
+            `${testResultSummaryName}_${groupIdentifier}`
+          )
           const anchorName = anchorIdentifier(
             `${testResultSummaryName}_${groupIdentifier}_summary`
           )
           const anchorBack = `[${backIcon}](${anchorName})`
           testDetail.lines.push(
-            `${anchor}<h5>${testName}&nbsp;${anchorBack}</h5>`
+            `${anchorTag}<h5>${testName}&nbsp;${anchorBack}</h5>`
           )
 
           const testsStatsLines: string[] = []
@@ -603,9 +624,10 @@ export class Formatter {
                 if (summary.configuration) {
                   if (testResult.name) {
                     const isFailure = testResult.testStatus === 'Failure'
-                    const testMethodAnchor = isFailure
-                      ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                      : ''
+                    const anchorTag = anchorNameTag(
+                      `${testResultSummaryName}_${testResult.identifier}`
+                    )
+                    const testMethodAnchor = isFailure ? anchorTag : ''
                     const backAnchorName = anchorIdentifier(
                       `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                     )
@@ -628,9 +650,10 @@ export class Formatter {
                 } else {
                   if (testResult.name) {
                     const isFailure = testResult.testStatus === 'Failure'
-                    const testMethodAnchor = isFailure
-                      ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                      : ''
+                    const anchorTag = anchorNameTag(
+                      `${testResultSummaryName}_${testResult.identifier}`
+                    )
+                    const testMethodAnchor = isFailure ? anchorTag : ''
                     const backAnchorName = anchorIdentifier(
                       `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                     )
@@ -725,9 +748,10 @@ export class Formatter {
               } else {
                 if (testResult.name) {
                   const isFailure = testResult.testStatus === 'Failure'
-                  const testMethodAnchor = isFailure
-                    ? `<a name="${testResultSummaryName}_${testResult.identifier}"></a>`
-                    : ''
+                  const anchorTag = anchorNameTag(
+                    `${testResultSummaryName}_${testResult.identifier}`
+                  )
+                  const testMethodAnchor = isFailure ? anchorTag : ''
                   const backAnchorName = anchorIdentifier(
                     `${testResultSummaryName}_${testResult.identifier}_failure-summary`
                   )
@@ -822,8 +846,15 @@ function collectFailureSummaries(
     const sourceCodeContext = failureSummary.sourceCodeContext
     const callStack = sourceCodeContext?.callStack
     const location = sourceCodeContext?.location
-    const filePath = location?.filePath || fileName || '[undefined]'
+    const filePath = location?.filePath || fileName
     const lineNumber = location?.lineNumber
+
+    let fileLocation = ''
+    if (fileName && lineNumber) {
+      fileLocation = `${fileName}:${lineNumber}`
+    } else if (fileName) {
+      fileLocation = fileName
+    }
 
     const titleAlign = 'align="right"'
     const titleWidth = 'width="100px"'
@@ -831,7 +862,7 @@ function collectFailureSummaries(
     const detailWidth = 'width="668px"'
     const contents =
       '<table>' +
-      `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileName}:${lineNumber}</td></tr>` +
+      `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileLocation}</td></tr>` +
       `<tr><td ${titleAttr}><b>Issue Type</b></td><td ${detailWidth}>${failureSummary.issueType}</td></tr>` +
       `<tr><td ${titleAttr}><b>Message</b></td><td ${detailWidth}>${failureSummary.message}</td></tr>` +
       `</table>\n`

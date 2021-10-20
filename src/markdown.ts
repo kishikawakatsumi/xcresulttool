@@ -1,11 +1,16 @@
-export function indentation(level: number): string {
-  return '  '.repeat(level)
+export function anchorIdentifier(text: string): string {
+  return `#user-content-${text.toLowerCase()}`.replace(/ /g, '-')
 }
 
-export function anchorIdentifier(text: string): string {
-  return `#user-content-${text.toLowerCase()}`
+export function anchorNameTag(text: string): string {
+  const name = text.toLowerCase().replace(/ /g, '-')
+  return `<a name="${name}"></a>`
 }
 
 export function escapeHashSign(text: string): string {
   return text.replace(/#/g, '<span>#</span>')
+}
+
+export function indentation(level: number): string {
+  return '  '.repeat(level)
 }
