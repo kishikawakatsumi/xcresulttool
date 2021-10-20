@@ -6,12 +6,55 @@
 
 A GitHub Action that generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.
 
-## Usage
+# Usage
 
-<!-- start usage -->
+> For complete input/output documentation, see [action.yml](action.yml).
+
+## Pre-Requisites
+
+This action only works on macOS builders.
+
+By default `xcodebuild` will generate the `xcresult` bundle file to a randomly named directory in `DerivedData`. To use this action `xcodebuild`
+needs to generate `xcresult` bundle to an accessible location.
+
+This can be done using the `-resultBundlePath` flag in `xcodebuild`.
+
+The following action uses a script action to invoke xcodebuild and store the results
+in `TestResults.xcresult`
 
 ```yaml
-- uses: kishikawakatsumi/xcresulttool@main
+jobs:
+  test:
+    runs-on: macos-11
+      - name: Run Tests
+        run: |
+          xcodebuild -scheme MyFramework -resultBundlePath TestResults test
+```
+
+## Example
+
+```yaml
+jobs:
+  test:
+    runs-on: macos-11
+    name: Test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test
+        run: |
+          xcodebuild -scheme MyFramework -resultBundlePath TestResults test
+
+      - uses: kishikawakatsumi/xcresulttool@v1
+        with:
+          path: TestResults.xcresult
+        if: always()
+        # ^ This is important because the action will be run even if the test fails in the previous step.
+```
+
+## Input parameters
+
+```yaml
+- uses: kishikawakatsumi/xcresulttool@v1
   with:
     # Path to the xcresult bundle.
     path: 'Results.xcresult'
@@ -25,7 +68,4 @@ A GitHub Action that generates a human-readable test report from the Xcode resul
     #
     # Default: 'Xcode test results'
     title:
-  if: always()
 ```
-
-<!-- end usage -->

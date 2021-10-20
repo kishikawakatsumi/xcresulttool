@@ -898,7 +898,22 @@ function run() {
                 const repo = github.context.repo.repo;
                 const pr = github.context.payload.pull_request;
                 const sha = (pr && pr.head.sha) || github.context.sha;
-                const title = core.getInput('title');
+                const charactersLimit = 65535;
+                let title = core.getInput('title');
+                if (title.length > charactersLimit) {
+                    core.error('The result will be truncated because the character limit exceeded. [title]');
+                    title = title.substring(0, charactersLimit);
+                }
+                let reportSummary = report.reportSummary;
+                if (reportSummary.length > charactersLimit) {
+                    core.error('The result will be truncated because the character limit exceeded. [summary]');
+                    reportSummary = reportSummary.substring(0, charactersLimit);
+                }
+                let reportDetail = report.reportDetail;
+                if (reportDetail.length > charactersLimit) {
+                    core.error('The result will be truncated because the character limit exceeded. [text]');
+                    reportDetail = reportDetail.substring(0, charactersLimit);
+                }
                 yield octokit.checks.create({
                     owner,
                     repo,
@@ -908,8 +923,8 @@ function run() {
                     conclusion: report.annotations.length ? 'failure' : 'success',
                     output: {
                         title: 'Xcode test results',
-                        summary: report.reportSummary,
-                        text: report.reportDetail,
+                        summary: reportSummary,
+                        text: reportDetail,
                         annotations: report.annotations
                     }
                 });
