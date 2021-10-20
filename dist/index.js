@@ -128,7 +128,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
-const core = __importStar(__nccwpck_require__(2186));
 const path = __importStar(__nccwpck_require__(5622));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
@@ -376,8 +375,6 @@ class Formatter {
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
                                             const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
-                                            core.info(`failureSummary: ${failureSummary}`);
-                                            core.info(`failureSummary: ${failureSummary.filePath}`);
                                             const filepath = failureSummary.filePath.replace(`${workspace}/`, '');
                                             const annotation = new report_1.Annotation(filepath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
                                             annotations.push(annotation);
@@ -742,7 +739,7 @@ function collectFailureSummaries(failureSummaries) {
         const sourceCodeContext = failureSummary.sourceCodeContext;
         const callStack = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.callStack;
         const location = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.location;
-        const filePath = location === null || location === void 0 ? void 0 : location.filePath;
+        const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName;
         const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
         const titleAlign = 'align="right"';
         const titleWidth = 'width="100px"';
@@ -759,7 +756,7 @@ function collectFailureSummaries(failureSummaries) {
             const imageName = (symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.imageName) || '';
             const symbolName = (symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.symbolName) || '';
             const location = symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.location;
-            const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName || '<NULL>';
+            const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName;
             const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
             const seq = `${index}`.padEnd(2, ' ');
             return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`;
@@ -981,32 +978,12 @@ function mergeResultBundle(inputPaths, outputPath) {
 /***/ }),
 
 /***/ 5821:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.escapeHashSign = exports.anchorIdentifier = exports.indentation = void 0;
-const core = __importStar(__nccwpck_require__(2186));
 function indentation(level) {
     return '  '.repeat(level);
 }
@@ -1016,7 +993,6 @@ function anchorIdentifier(text) {
 }
 exports.anchorIdentifier = anchorIdentifier;
 function escapeHashSign(text) {
-    core.info(`escapeHashSign: ${text}`);
     return text.replace(/#/g, '<span>#</span>');
 }
 exports.escapeHashSign = escapeHashSign;

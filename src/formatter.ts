@@ -1,7 +1,6 @@
 /*eslint-disable no-shadow */
 
 import * as Image from './image'
-import * as core from '@actions/core'
 import * as path from 'path'
 
 import {
@@ -356,8 +355,6 @@ export class Formatter {
                     const workspace = path.dirname(
                       `${testReport.creatingWorkspaceFilePath}`
                     )
-                    core.info(`failureSummary: ${failureSummary}`)
-                    core.info(`failureSummary: ${failureSummary.filePath}`)
                     const filepath = failureSummary.filePath.replace(
                       `${workspace}/`,
                       ''
@@ -825,7 +822,7 @@ function collectFailureSummaries(
     const sourceCodeContext = failureSummary.sourceCodeContext
     const callStack = sourceCodeContext?.callStack
     const location = sourceCodeContext?.location
-    const filePath = location?.filePath
+    const filePath = location?.filePath || fileName
     const lineNumber = location?.lineNumber
 
     const titleAlign = 'align="right"'
@@ -846,7 +843,7 @@ function collectFailureSummaries(
         const imageName = symbolInfo?.imageName || ''
         const symbolName = symbolInfo?.symbolName || ''
         const location = symbolInfo?.location
-        const filePath = location?.filePath || fileName || '<NULL>'
+        const filePath = location?.filePath || fileName
         const lineNumber = location?.lineNumber
         const seq = `${index}`.padEnd(2, ' ')
         return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`
