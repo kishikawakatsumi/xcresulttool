@@ -34,6 +34,15 @@ jobs:
 ## Example
 
 ```yaml
+- uses: kishikawakatsumi/xcresulttool@v1
+  with:
+    path: TestResults.xcresult
+  if: always()
+  # ^ This is important because the action will be run
+  # even if the test fails in the previous step.
+```
+
+```yaml
 jobs:
   test:
     runs-on: macos-11
@@ -48,7 +57,20 @@ jobs:
         with:
           path: TestResults.xcresult
         if: always()
-        # ^ This is important because the action will be run even if the test fails in the previous step.
+        # ^ This is important because the action will be run
+        # even if the test fails in the previous step.
+```
+
+### Multiple result bundle paths
+
+```yaml
+- uses: kishikawakatsumi/xcresulttool@v1
+  with:
+    path: |
+      results/Example.xcresult
+      results/TestResult.xcresult
+      results/Result.xcresult
+  if: always()
 ```
 
 ## Input parameters
@@ -57,7 +79,7 @@ jobs:
 - uses: kishikawakatsumi/xcresulttool@v1
   with:
     # Path to the xcresult bundle.
-    path: 'Results.xcresult'
+    path: 'TestResults.xcresult'
 
     # The GitHub authentication token to create the check.
     #
