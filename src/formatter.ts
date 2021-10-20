@@ -822,7 +822,7 @@ function collectFailureSummaries(
     const sourceCodeContext = failureSummary.sourceCodeContext
     const callStack = sourceCodeContext?.callStack
     const location = sourceCodeContext?.location
-    const filePath = location?.filePath || fileName
+    const filePath = location?.filePath || fileName || '[undefined]'
     const lineNumber = location?.lineNumber
 
     const titleAlign = 'align="right"'

@@ -739,7 +739,7 @@ function collectFailureSummaries(failureSummaries) {
         const sourceCodeContext = failureSummary.sourceCodeContext;
         const callStack = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.callStack;
         const location = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.location;
-        const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName;
+        const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName || '[undefined]';
         const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
         const titleAlign = 'align="right"';
         const titleWidth = 'width="100px"';
