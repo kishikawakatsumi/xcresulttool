@@ -73,7 +73,7 @@ jobs:
   if: always()
 ```
 
-# Input parameters
+## Input parameters
 
 ```yaml
 - uses: kishikawakatsumi/xcresulttool@v1
