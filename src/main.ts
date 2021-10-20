@@ -1,6 +1,8 @@
 import * as artifact from '@actions/artifact'
 import * as core from '@actions/core'
+import * as exec from '@actions/exec'
 import * as github from '@actions/github'
+import * as os from 'os'
 import * as path from 'path'
 import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
@@ -10,15 +12,26 @@ const {stat} = promises
 
 async function run(): Promise<void> {
   try {
-    const bundlePath: string = core.getInput('path')
-    core.info(bundlePath)
-    core.info(core.getInput('title'))
+    const inputPath: string = core.getInput('path')
 
-    try {
-      await stat(bundlePath)
-    } catch (error) {
-      core.error((error as Error).message)
+    const paths = inputPath.split('\n')
+    const existPaths: string[] = []
+    for (const checkPath of paths) {
+      try {
+        await stat(checkPath)
+        existPaths.push(checkPath)
+      } catch (error) {
+        core.error((error as Error).message)
+      }
     }
+    let bundlePath = path.join(os.tmpdir(), 'Merged.xcresult')
+    if (paths.length > 1) {
+      await mergeResultBundle(existPaths, bundlePath)
+    } else {
+      await stat(inputPath)
+      bundlePath = inputPath
+    }
+
     const formatter = new Formatter(bundlePath)
     const report = await formatter.format()
 
@@ -47,27 +60,35 @@ async function run(): Promise<void> {
         }
       })
 
-      const artifactClient = artifact.create()
-      const artifactName = path.basename(bundlePath)
+      for (const uploadBundlePath of paths) {
+        try {
+          await stat(uploadBundlePath)
+        } catch (error) {
+          continue
+        }
 
-      const rootDirectory = bundlePath
-      const options = {
-        continueOnError: false
+        const artifactClient = artifact.create()
+        const artifactName = path.basename(uploadBundlePath)
+
+        const rootDirectory = uploadBundlePath
+        const options = {
+          continueOnError: false
+        }
+
+        glob(`${uploadBundlePath}/**/*`, async (error, files) => {
+          if (error) {
+            core.error(error)
+          }
+          if (files.length) {
+            await artifactClient.uploadArtifact(
+              artifactName,
+              files,
+              rootDirectory,
+              options
+            )
+          }
+        })
       }
-
-      glob(`${bundlePath}/**/*`, async (error, files) => {
-        if (error) {
-          core.error(error)
-        }
-        if (files.length) {
-          await artifactClient.uploadArtifact(
-            artifactName,
-            files,
-            rootDirectory,
-            options
-          )
-        }
-      })
     }
   } catch (error) {
     core.setFailed((error as Error).message)
@@ -75,3 +96,17 @@ async function run(): Promise<void> {
 }
 
 run()
+
+async function mergeResultBundle(
+  inputPaths: string[],
+  outputPath: string
+): Promise<void> {
+  const args = ['xcresulttool', 'merge']
+    .concat(inputPaths)
+    .concat(['--output-path', outputPath])
+  const options = {
+    silent: true
+  }
+
+  await exec.exec('xcrun', args, options)
+}

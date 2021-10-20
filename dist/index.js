@@ -735,6 +735,7 @@ class Formatter {
 exports.Formatter = Formatter;
 function collectFailureSummaries(failureSummaries) {
     return failureSummaries.map(failureSummary => {
+        const fileName = failureSummary.fileName;
         const sourceCodeContext = failureSummary.sourceCodeContext;
         const callStack = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.callStack;
         const location = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.location;
@@ -745,7 +746,7 @@ function collectFailureSummaries(failureSummaries) {
         const titleAttr = `${titleAlign} ${titleWidth}`;
         const detailWidth = 'width="668px"';
         const contents = '<table>' +
-            `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${failureSummary.fileName}:${lineNumber}</td></tr>` +
+            `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileName}:${lineNumber}</td></tr>` +
             `<tr><td ${titleAttr}><b>Issue Type</b></td><td ${detailWidth}>${failureSummary.issueType}</td></tr>` +
             `<tr><td ${titleAttr}><b>Message</b></td><td ${detailWidth}>${failureSummary.message}</td></tr>` +
             `</table>\n`;
@@ -755,7 +756,7 @@ function collectFailureSummaries(failureSummaries) {
             const imageName = (symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.imageName) || '';
             const symbolName = (symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.symbolName) || '';
             const location = symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.location;
-            const filePath = location === null || location === void 0 ? void 0 : location.filePath;
+            const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName || '<NULL>';
             const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
             const seq = `${index}`.padEnd(2, ' ');
             return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`;
@@ -857,7 +858,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const artifact = __importStar(__nccwpck_require__(2605));
 const core = __importStar(__nccwpck_require__(2186));
+const exec = __importStar(__nccwpck_require__(1514));
 const github = __importStar(__nccwpck_require__(5438));
+const os = __importStar(__nccwpck_require__(2087));
 const path = __importStar(__nccwpck_require__(5622));
 const formatter_1 = __nccwpck_require__(7556);
 const action_1 = __nccwpck_require__(1231);
@@ -867,14 +870,25 @@ const { stat } = fs_1.promises;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const bundlePath = core.getInput('path');
-            core.info(bundlePath);
-            core.info(core.getInput('title'));
-            try {
-                yield stat(bundlePath);
+            const inputPath = core.getInput('path');
+            const paths = inputPath.split('\n');
+            const existPaths = [];
+            for (const checkPath of paths) {
+                try {
+                    yield stat(checkPath);
+                    existPaths.push(checkPath);
+                }
+                catch (error) {
+                    core.error(error.message);
+                }
             }
-            catch (error) {
-                core.error(error.message);
+            let bundlePath = path.join(os.tmpdir(), 'Merged.xcresult');
+            if (paths.length > 1) {
+                yield mergeResultBundle(existPaths, bundlePath);
+            }
+            else {
+                yield stat(inputPath);
+                bundlePath = inputPath;
             }
             const formatter = new formatter_1.Formatter(bundlePath);
             const report = yield formatter.format();
@@ -899,20 +913,28 @@ function run() {
                         annotations: report.annotations
                     }
                 });
-                const artifactClient = artifact.create();
-                const artifactName = path.basename(bundlePath);
-                const rootDirectory = bundlePath;
-                const options = {
-                    continueOnError: false
-                };
-                (0, glob_1.glob)(`${bundlePath}/**/*`, (error, files) => __awaiter(this, void 0, void 0, function* () {
-                    if (error) {
-                        core.error(error);
+                for (const uploadBundlePath of paths) {
+                    try {
+                        yield stat(uploadBundlePath);
                     }
-                    if (files.length) {
-                        yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                    catch (error) {
+                        continue;
                     }
-                }));
+                    const artifactClient = artifact.create();
+                    const artifactName = path.basename(uploadBundlePath);
+                    const rootDirectory = uploadBundlePath;
+                    const options = {
+                        continueOnError: false
+                    };
+                    (0, glob_1.glob)(`${uploadBundlePath}/**/*`, (error, files) => __awaiter(this, void 0, void 0, function* () {
+                        if (error) {
+                            core.error(error);
+                        }
+                        if (files.length) {
+                            yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                        }
+                    }));
+                }
             }
         }
         catch (error) {
@@ -921,6 +943,17 @@ function run() {
     });
 }
 run();
+function mergeResultBundle(inputPaths, outputPath) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const args = ['xcresulttool', 'merge']
+            .concat(inputPaths)
+            .concat(['--output-path', outputPath]);
+        const options = {
+            silent: true
+        };
+        yield exec.exec('xcrun', args, options);
+    });
+}
 
 
 /***/ }),

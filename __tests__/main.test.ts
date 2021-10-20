@@ -49,17 +49,31 @@ test('TAU.xcresult', async () => {
   )
 })
 
-test('merged.xcresult', async () => {
-  const bundlePath = '__tests__/data/merged.xcresult'
+test('Merged.xcresult', async () => {
+  const bundlePath = '__tests__/data/Merged.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format()
   const reportText = `${report.reportSummary}\n${report.reportDetail}`
 
-  const outputPath = path.join(os.tmpdir(), 'merged.md')
+  const outputPath = path.join(os.tmpdir(), 'Merged.md')
   await writeFile(outputPath, reportText)
-  // await writeFile('merged.md', reportText)
+  // await writeFile('Merged.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
-    (await readFile('__tests__/data/merged.md')).toString()
+    (await readFile('__tests__/data/Merged.md')).toString()
+  )
+})
+
+test('Spaceship.xcresult', async () => {
+  const bundlePath = '__tests__/data/Spaceship.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'Spaceship.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('Spaceship.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/Spaceship.md')).toString()
   )
 })
 
