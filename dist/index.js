@@ -914,6 +914,10 @@ function run() {
                     core.error('The result will be truncated because the character limit exceeded. [text]');
                     reportDetail = reportDetail.substring(0, charactersLimit);
                 }
+                let annotations = [];
+                for (let index = 0; index < 60; index++) {
+                    annotations = annotations.concat(report.annotations);
+                }
                 yield octokit.checks.create({
                     owner,
                     repo,
@@ -925,7 +929,7 @@ function run() {
                         title: 'Xcode test results',
                         summary: reportSummary,
                         text: reportDetail,
-                        annotations: report.annotations
+                        annotations
                     }
                 });
                 for (const uploadBundlePath of paths) {

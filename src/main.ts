@@ -4,6 +4,7 @@ import * as exec from '@actions/exec'
 import * as github from '@actions/github'
 import * as os from 'os'
 import * as path from 'path'
+import {Annotation} from './report'
 import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 import {glob} from 'glob'
@@ -66,6 +67,11 @@ async function run(): Promise<void> {
         )
         reportDetail = reportDetail.substring(0, charactersLimit)
       }
+
+      let annotations: Annotation[] = []
+      for (let index = 0; index < 60; index++) {
+        annotations = annotations.concat(report.annotations)
+      }
       await octokit.checks.create({
         owner,
         repo,
@@ -77,7 +83,7 @@ async function run(): Promise<void> {
           title: 'Xcode test results',
           summary: reportSummary,
           text: reportDetail,
-          annotations: report.annotations
+          annotations
         }
       })
 
