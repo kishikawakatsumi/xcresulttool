@@ -128,6 +128,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
+const core = __importStar(__nccwpck_require__(2186));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
 const parser_1 = __nccwpck_require__(267);
@@ -372,7 +373,10 @@ class Formatter {
                                         const failureSummaries = collectFailureSummaries(summary.failureSummaries);
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
-                                            const annotation = new report_1.Annotation(failureSummary.filePath.replace(process.env.GITHUB_WORKSPACE || '', ''), failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
+                                            core.info(process.env.GITHUB_WORKSPACE || '');
+                                            const path = failureSummary.filePath.replace(process.env.GITHUB_WORKSPACE || '', '');
+                                            core.info(path);
+                                            const annotation = new report_1.Annotation(path, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
                                             annotations.push(annotation);
                                         }
                                     }
@@ -861,12 +865,6 @@ function run() {
             const bundlePath = core.getInput('xcresult');
             const formatter = new formatter_1.Formatter(bundlePath);
             const report = yield formatter.format();
-            core.info(process.env.GITHUB_WORKSPACE || '');
-            core.info(bundlePath);
-            core.debug(process.env.GITHUB_WORKSPACE || '');
-            core.debug(bundlePath);
-            core.error(process.env.GITHUB_WORKSPACE || '');
-            core.error(bundlePath);
             if (core.getInput('GITHUB_TOKEN')) {
                 const octokit = new action_1.Octokit();
                 const owner = github.context.repo.owner;
@@ -880,7 +878,7 @@ function run() {
                     name: title,
                     head_sha: sha,
                     status: 'completed',
-                    conclusion: 'neutral',
+                    conclusion: report.annotations.length ? 'failure' : 'success',
                     output: {
                         title: 'Xcode test results',
                         summary: report.reportSummary,
