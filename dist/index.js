@@ -856,6 +856,7 @@ const github = __importStar(__nccwpck_require__(5438));
 const path = __importStar(__nccwpck_require__(5622));
 const formatter_1 = __nccwpck_require__(7556);
 const action_1 = __nccwpck_require__(1231);
+const glob_1 = __nccwpck_require__(1957);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -885,12 +886,15 @@ function run() {
                 });
                 const artifactClient = artifact.create();
                 const artifactName = path.basename(bundlePath);
-                const files = [`${process.env.GITHUB_WORKSPACE}/${bundlePath}`];
                 const rootDirectory = '.';
                 const options = {
                     continueOnError: false
                 };
-                yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                (0, glob_1.glob)(`${bundlePath}/**/*`, (error, files) => __awaiter(this, void 0, void 0, function* () {
+                    if (!error) {
+                        yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                    }
+                }));
             }
         }
         catch (error) {

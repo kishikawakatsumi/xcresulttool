@@ -4,6 +4,7 @@ import * as github from '@actions/github'
 import * as path from 'path'
 import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
+import {glob} from 'glob'
 
 async function run(): Promise<void> {
   try {
@@ -38,19 +39,22 @@ async function run(): Promise<void> {
 
       const artifactClient = artifact.create()
       const artifactName = path.basename(bundlePath)
-      const files = [`${process.env.GITHUB_WORKSPACE}/${bundlePath}`]
 
       const rootDirectory = '.'
       const options = {
         continueOnError: false
       }
 
-      await artifactClient.uploadArtifact(
-        artifactName,
-        files,
-        rootDirectory,
-        options
-      )
+      glob(`${bundlePath}/**/*`, async (error, files) => {
+        if (!error) {
+          await artifactClient.uploadArtifact(
+            artifactName,
+            files,
+            rootDirectory,
+            options
+          )
+        }
+      })
     }
   } catch (error) {
     core.setFailed((error as Error).message)
