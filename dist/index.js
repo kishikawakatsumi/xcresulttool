@@ -145,15 +145,15 @@ class Formatter {
         this.summaries = '';
         this.details = '';
         this.bundlePath = bundlePath;
+        this.parser = new parser_1.Parser(this.bundlePath);
         this.format();
     }
     format() {
         return __awaiter(this, void 0, void 0, function* () {
-            const parser = new parser_1.Parser(this.bundlePath);
-            const actionsInvocationRecord = yield parser.parse();
+            const actionsInvocationRecord = yield this.parser.parse();
             const testReport = new report_1.TestReport();
             if (actionsInvocationRecord.metadataRef) {
-                const metadata = yield parser.parse(actionsInvocationRecord.metadataRef.id);
+                const metadata = yield this.parser.parse(actionsInvocationRecord.metadataRef.id);
                 if (metadata.schemeIdentifier) {
                     const schemeIdentifier = metadata.schemeIdentifier;
                     testReport.entityName = schemeIdentifier.entityName;
@@ -165,11 +165,11 @@ class Formatter {
                         if (action.actionResult.testsRef) {
                             const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName);
                             testReport.chapters.push(testReportChapter);
-                            const actionTestPlanRunSummaries = yield parser.parse(action.actionResult.testsRef.id);
+                            const actionTestPlanRunSummaries = yield this.parser.parse(action.actionResult.testsRef.id);
                             for (const summary of actionTestPlanRunSummaries.summaries) {
                                 for (const testableSummary of summary.testableSummaries) {
                                     const testSummaries = [];
-                                    yield collectTestSummaries(parser, testableSummary, testableSummary.tests, testSummaries);
+                                    yield this.collectTestSummaries(testableSummary, testableSummary.tests, testSummaries);
                                     if (testableSummary.name) {
                                         testReportChapter.sections[testableSummary.name] =
                                             new report_1.TestReportSection(testableSummary, testSummaries);
@@ -363,7 +363,7 @@ class Formatter {
                             for (const [, detail] of details.entries()) {
                                 const testResult = detail;
                                 if (testResult.summaryRef) {
-                                    const summary = yield parser.parse(testResult.summaryRef.id);
+                                    const summary = yield this.parser.parse(testResult.summaryRef.id);
                                     const testFailureGroup = new report_1.TestFailureGroup(testResultSummaryName || '', summary.identifier || '', summary.name || '');
                                     testFailures.failureGroups.push(testFailureGroup);
                                     if (summary.failureSummaries) {
@@ -553,7 +553,7 @@ class Formatter {
                                 const status = Image.testStatus(testResult.testStatus);
                                 const resultLines = [];
                                 if (testResult.summaryRef) {
-                                    const summary = yield parser.parse(testResult.summaryRef.id);
+                                    const summary = yield this.parser.parse(testResult.summaryRef.id);
                                     if (summary.configuration) {
                                         if (testResult.name) {
                                             const isFailure = testResult.testStatus === 'Failure';
@@ -591,7 +591,7 @@ class Formatter {
                                     }
                                     const activities = [];
                                     if (summary.activitySummaries) {
-                                        yield collectActivities(parser, summary.activitySummaries, activities);
+                                        yield this.collectActivities(summary.activitySummaries, activities);
                                     }
                                     if (activities.length) {
                                         const testActivities = activities
@@ -698,36 +698,36 @@ class Formatter {
             return testReport;
         });
     }
+    collectTestSummaries(group, tests, testSummaries) {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (const test of tests) {
+                if (test.hasOwnProperty('subtests')) {
+                    const group = test;
+                    yield this.collectTestSummaries(group, group.subtests, testSummaries);
+                }
+                else {
+                    const t = test;
+                    t.group = group.name;
+                    testSummaries.push(test);
+                }
+            }
+        });
+    }
+    collectActivities(activitySummaries, activities, indent = 0) {
+        return __awaiter(this, void 0, void 0, function* () {
+            for (const activitySummary of activitySummaries) {
+                const activity = activitySummary;
+                activity.indent = indent;
+                yield (0, attachment_1.exportAttachments)(this.parser, activity);
+                activities.push(activity);
+                if (activitySummary.subactivities) {
+                    yield this.collectActivities(activitySummary.subactivities, activities, indent + 1);
+                }
+            }
+        });
+    }
 }
 exports.Formatter = Formatter;
-function collectTestSummaries(parser, group, tests, testSummaries) {
-    return __awaiter(this, void 0, void 0, function* () {
-        for (const test of tests) {
-            if (test.hasOwnProperty('subtests')) {
-                const group = test;
-                yield collectTestSummaries(parser, group, group.subtests, testSummaries);
-            }
-            else {
-                const t = test;
-                t.group = group.name;
-                testSummaries.push(test);
-            }
-        }
-    });
-}
-function collectActivities(parser, activitySummaries, activities, indent = 0) {
-    return __awaiter(this, void 0, void 0, function* () {
-        for (const activitySummary of activitySummaries) {
-            const activity = activitySummary;
-            activity.indent = indent;
-            yield (0, attachment_1.exportAttachments)(parser, activity);
-            activities.push(activity);
-            if (activitySummary.subactivities) {
-                yield collectActivities(parser, activitySummary.subactivities, activities, indent + 1);
-            }
-        }
-    });
-}
 function collectFailureSummaries(failureSummaries) {
     return failureSummaries.map(failureSummary => {
         const sourceCodeContext = failureSummary.sourceCodeContext;

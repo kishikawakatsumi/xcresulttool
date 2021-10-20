@@ -49,22 +49,22 @@ export class Formatter {
   readonly details = ''
 
   private bundlePath: string
+  private parser: Parser
 
   constructor(bundlePath: string) {
     this.bundlePath = bundlePath
+    this.parser = new Parser(this.bundlePath)
     this.format()
   }
 
   async format(): Promise<TestReport> {
-    const parser = new Parser(this.bundlePath)
-
     const actionsInvocationRecord: ActionsInvocationRecord =
-      await parser.parse()
+      await this.parser.parse()
 
     const testReport = new TestReport()
 
     if (actionsInvocationRecord.metadataRef) {
-      const metadata: ActionsInvocationMetadata = await parser.parse(
+      const metadata: ActionsInvocationMetadata = await this.parser.parse(
         actionsInvocationRecord.metadataRef.id
       )
       if (metadata.schemeIdentifier) {
@@ -83,13 +83,12 @@ export class Formatter {
             testReport.chapters.push(testReportChapter)
 
             const actionTestPlanRunSummaries: ActionTestPlanRunSummaries =
-              await parser.parse(action.actionResult.testsRef.id)
+              await this.parser.parse(action.actionResult.testsRef.id)
 
             for (const summary of actionTestPlanRunSummaries.summaries) {
               for (const testableSummary of summary.testableSummaries) {
                 const testSummaries: actionTestSummaries = []
-                await collectTestSummaries(
-                  parser,
+                await this.collectTestSummaries(
                   testableSummary,
                   testableSummary.tests,
                   testSummaries
@@ -323,7 +322,7 @@ export class Formatter {
               const testResult = detail as ActionTestMetadata
 
               if (testResult.summaryRef) {
-                const summary: ActionTestSummary = await parser.parse(
+                const summary: ActionTestSummary = await this.parser.parse(
                   testResult.summaryRef.id
                 )
 
@@ -583,7 +582,7 @@ export class Formatter {
               const resultLines: string[] = []
 
               if (testResult.summaryRef) {
-                const summary: ActionTestSummary = await parser.parse(
+                const summary: ActionTestSummary = await this.parser.parse(
                   testResult.summaryRef.id
                 )
 
@@ -631,8 +630,7 @@ export class Formatter {
 
                 const activities: Activity[] = []
                 if (summary.activitySummaries) {
-                  await collectActivities(
-                    parser,
+                  await this.collectActivities(
                     summary.activitySummaries,
                     activities
                   )
@@ -762,45 +760,42 @@ export class Formatter {
 
     return testReport
   }
-}
 
-async function collectTestSummaries(
-  parser: Parser,
-  group: ActionTestableSummary | ActionTestSummaryGroup,
-  tests: actionTestSummaries,
-  testSummaries: actionTestSummaries
-): Promise<void> {
-  for (const test of tests) {
-    if (test.hasOwnProperty('subtests')) {
-      const group = test as ActionTestSummaryGroup
-      await collectTestSummaries(parser, group, group.subtests, testSummaries)
-    } else {
-      const t = test as actionTestSummary & {group?: string}
-      t.group = group.name
-      testSummaries.push(test)
+  async collectTestSummaries(
+    group: ActionTestableSummary | ActionTestSummaryGroup,
+    tests: actionTestSummaries,
+    testSummaries: actionTestSummaries
+  ): Promise<void> {
+    for (const test of tests) {
+      if (test.hasOwnProperty('subtests')) {
+        const group = test as ActionTestSummaryGroup
+        await this.collectTestSummaries(group, group.subtests, testSummaries)
+      } else {
+        const t = test as actionTestSummary & {group?: string}
+        t.group = group.name
+        testSummaries.push(test)
+      }
     }
   }
-}
 
-async function collectActivities(
-  parser: Parser,
-  activitySummaries: ActionTestActivitySummary[],
-  activities: Activity[],
-  indent = 0
-): Promise<void> {
-  for (const activitySummary of activitySummaries) {
-    const activity = activitySummary as Activity
-    activity.indent = indent
-    await exportAttachments(parser, activity)
-    activities.push(activity)
+  async collectActivities(
+    activitySummaries: ActionTestActivitySummary[],
+    activities: Activity[],
+    indent = 0
+  ): Promise<void> {
+    for (const activitySummary of activitySummaries) {
+      const activity = activitySummary as Activity
+      activity.indent = indent
+      await exportAttachments(this.parser, activity)
+      activities.push(activity)
 
-    if (activitySummary.subactivities) {
-      await collectActivities(
-        parser,
-        activitySummary.subactivities,
-        activities,
-        indent + 1
-      )
+      if (activitySummary.subactivities) {
+        await this.collectActivities(
+          activitySummary.subactivities,
+          activities,
+          indent + 1
+        )
+      }
     }
   }
 }
