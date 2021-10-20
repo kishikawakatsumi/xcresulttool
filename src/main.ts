@@ -40,7 +40,7 @@ async function run(): Promise<void> {
       const artifactClient = artifact.create()
       const artifactName = path.basename(bundlePath)
 
-      const rootDirectory = '.'
+      const rootDirectory = bundlePath
       const options = {
         continueOnError: false
       }
