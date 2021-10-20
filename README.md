@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
+  <a href="https://github.com/kishikawakatsumi/xcresulttool/actions"><img alt="xcresulttool status" src="https://github.com/kishikawakatsumi/xcresulttool/workflows/build-test/badge.svg"></a>
 </p>
 
 # xcresulttool GitHub Action
