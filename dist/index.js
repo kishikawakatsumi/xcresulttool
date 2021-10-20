@@ -332,6 +332,7 @@ class Formatter {
                 chapterSummary.content.push('');
                 chapterSummary.content.push('---\n');
                 const testFailures = new report_1.TestFailures();
+                const annotations = [];
                 for (const [, results] of Object.entries(chapter.sections)) {
                     const testResultSummaryName = results.summary.name;
                     const detailGroup = results.details.reduce((groups, detail) => {
@@ -371,6 +372,8 @@ class Formatter {
                                         const failureSummaries = collectFailureSummaries(summary.failureSummaries);
                                         for (const failureSummary of failureSummaries) {
                                             testFailure.lines.push(`${failureSummary.contents}`);
+                                            const annotation = new report_1.Annotation(failureSummary.filePath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
+                                            annotations.push(annotation);
                                         }
                                     }
                                 }
@@ -378,6 +381,7 @@ class Formatter {
                         }
                     }
                 }
+                testReport.annotations = annotations;
                 if (testFailures.failureGroups.length) {
                     chapterSummary.content.push('### Failures');
                     for (const failureGroup of testFailures.failureGroups) {
@@ -728,6 +732,7 @@ function collectFailureSummaries(failureSummaries) {
         const sourceCodeContext = failureSummary.sourceCodeContext;
         const callStack = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.callStack;
         const location = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.location;
+        const filePath = location === null || location === void 0 ? void 0 : location.filePath;
         const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
         const titleAlign = 'align="right"';
         const titleWidth = 'width="100px"';
@@ -749,7 +754,14 @@ function collectFailureSummaries(failureSummaries) {
             const seq = `${index}`.padEnd(2, ' ');
             return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`;
         }).join('\n');
-        return { contents, stackTrace: stackTrace || [] };
+        return {
+            filePath,
+            lineNumber,
+            issueType: failureSummary.issueType,
+            message: failureSummary.message,
+            contents,
+            stackTrace: stackTrace || []
+        };
     });
 }
 
@@ -853,24 +865,21 @@ function run() {
                 const octokit = new action_1.Octokit();
                 const owner = github.context.repo.owner;
                 const repo = github.context.repo.repo;
-                let sha = github.context.sha;
                 const pr = github.context.payload.pull_request;
-                if (pr && pr.head.sha) {
-                    sha = pr.head.sha;
-                }
+                const sha = (pr && pr.head.sha) || github.context.sha;
                 const title = core.getInput('title');
                 yield octokit.checks.create({
                     owner,
                     repo,
                     name: title,
+                    head_sha: sha,
                     status: 'completed',
                     conclusion: 'neutral',
-                    head_sha: sha,
                     output: {
                         title: 'Xcode test results',
                         summary: report.reportSummary,
                         text: report.reportDetail,
-                        annotations: []
+                        annotations: report.annotations
                     }
                 });
                 const artifactClient = artifact.create();
@@ -1076,10 +1085,11 @@ function parsePrimitive(element) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TestDetail = exports.TestDetails = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
+exports.Annotation = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
 class TestReport {
     constructor() {
         this.chapters = [];
+        this.annotations = [];
     }
     get reportSummary() {
         const lines = [];
@@ -1132,6 +1142,19 @@ class TestReportSection {
     }
 }
 exports.TestReportSection = TestReportSection;
+class TestDetails {
+    constructor() {
+        this.header = '### Test Details\n';
+        this.details = [];
+    }
+}
+exports.TestDetails = TestDetails;
+class TestDetail {
+    constructor() {
+        this.lines = [];
+    }
+}
+exports.TestDetail = TestDetail;
 class TestFailures {
     constructor() {
         this.failureGroups = [];
@@ -1153,19 +1176,18 @@ class TestFailure {
     }
 }
 exports.TestFailure = TestFailure;
-class TestDetails {
-    constructor() {
-        this.header = '### Test Details\n';
-        this.details = [];
+class Annotation {
+    constructor(path, start_line, end_line, annotation_level, message, title, raw_details) {
+        this.path = path;
+        this.start_line = start_line;
+        this.end_line = end_line;
+        this.annotation_level = annotation_level;
+        this.message = message;
+        this.title = title;
+        this.raw_details = raw_details;
     }
 }
-exports.TestDetails = TestDetails;
-class TestDetail {
-    constructor() {
-        this.lines = [];
-    }
-}
-exports.TestDetail = TestDetail;
+exports.Annotation = Annotation;
 
 
 /***/ }),

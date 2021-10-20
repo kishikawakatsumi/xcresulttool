@@ -17,25 +17,22 @@ async function run(): Promise<void> {
       const owner = github.context.repo.owner
       const repo = github.context.repo.repo
 
-      let sha = github.context.sha
       const pr = github.context.payload.pull_request
-      if (pr && pr.head.sha) {
-        sha = pr.head.sha
-      }
+      const sha = (pr && pr.head.sha) || github.context.sha
 
       const title = core.getInput('title')
       await octokit.checks.create({
         owner,
         repo,
         name: title,
+        head_sha: sha,
         status: 'completed',
         conclusion: 'neutral',
-        head_sha: sha,
         output: {
           title: 'Xcode test results',
           summary: report.reportSummary,
           text: report.reportDetail,
-          annotations: []
+          annotations: report.annotations
         }
       })
 

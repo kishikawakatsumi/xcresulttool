@@ -7,6 +7,7 @@ import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
 export class TestReport {
   entityName?: string
   readonly chapters: TestReportChapter[] = []
+  annotations: Annotation[] = []
 
   get reportSummary(): string {
     const lines: string[] = []
@@ -67,6 +68,15 @@ export class TestReportSection {
   }
 }
 
+export class TestDetails {
+  readonly header = '### Test Details\n'
+  readonly details: TestDetail[] = []
+}
+
+export class TestDetail {
+  readonly lines: string[] = []
+}
+
 export class TestFailures {
   readonly failureGroups: TestFailureGroup[] = []
 }
@@ -89,13 +99,34 @@ export class TestFailure {
   readonly lines: string[] = []
 }
 
-export class TestDetails {
-  readonly header = '### Test Details\n'
-  readonly details: TestDetail[] = []
-}
+export class Annotation {
+  path: string
+  start_line: number
+  end_line: number
+  start_column?: number
+  end_column?: number
+  annotation_level: string
+  message: string
+  title?: string
+  raw_details?: string
 
-export class TestDetail {
-  readonly lines: string[] = []
+  constructor(
+    path: string,
+    start_line: number,
+    end_line: number,
+    annotation_level: string,
+    message: string,
+    title?: string,
+    raw_details?: string
+  ) {
+    this.path = path
+    this.start_line = start_line
+    this.end_line = end_line
+    this.annotation_level = annotation_level
+    this.message = message
+    this.title = title
+    this.raw_details = raw_details
+  }
 }
 
 export type actionTestSummary =
