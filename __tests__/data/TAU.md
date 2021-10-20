@@ -33,10 +33,10 @@
 ---
 
 ### Failures
-<h4><a name="TAUUITests_BDDTest/testThankYouMessageInBDStyle()_failure-summary"></a><a href="#user-content-tauuitests_bddtest/testthankyoumessageinbdstyle()">BDDTest/testThankYouMessageInBDStyle()</a></h4>
+<h4><a name="TAUUITests_BDDTest/testThankYouMessageInBDStyle()_failure-summary"></a><a href="#user-content-tauuitests_bddtest/testthankyoumessageinbdstyle()">TAUUITests/BDDTest/testThankYouMessageInBDStyle()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b></td><td width="668px">/Users/katsumi/Downloads/XCUITest-TAU-chapter4/TAUUITests/BDDTest.swift:40</td></tr><tr><td align="right" width="100px"><b>Issue Type</b></td><td width="668px">Assertion Failure</td></tr><tr><td align="right" width="100px"><b>Message</b></td><td width="668px">Failed to synthesize event: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11. (Underlying Error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11)</td></tr></table>
 
-<h4><a name="TAUUITests_TAUUITests/testThankYouMessage()_failure-summary"></a><a href="#user-content-tauuitests_tauuitests/testthankyoumessage()">TAUUITests/testThankYouMessage()</a></h4>
+<h4><a name="TAUUITests_TAUUITests/testThankYouMessage()_failure-summary"></a><a href="#user-content-tauuitests_tauuitests/testthankyoumessage()">TAUUITests/TAUUITests/testThankYouMessage()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b></td><td width="668px">/Users/katsumi/Downloads/XCUITest-TAU-chapter4/TAUUITests/TAUUITests.swift:24</td></tr><tr><td align="right" width="100px"><b>Issue Type</b></td><td width="668px">Assertion Failure</td></tr><tr><td align="right" width="100px"><b>Message</b></td><td width="668px">Failed to synthesize event: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58971, elementOrHash.elementID: 4931535136.11. (Underlying Error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58971, elementOrHash.elementID: 4931535136.11)</td></tr></table>
 
 

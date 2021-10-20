@@ -382,8 +382,9 @@ class Formatter {
                     chapterSummary.content.push('### Failures');
                     for (const failureGroup of testFailures.failureGroups) {
                         if (failureGroup.failures.length) {
-                            const anchorName = (0, markdown_1.anchorIdentifier)(`${failureGroup.summaryIdentifier}_${failureGroup.identifier}`);
-                            const testMethodLink = `<a name="${failureGroup.summaryIdentifier}_${failureGroup.identifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.identifier}</a>`;
+                            const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`;
+                            const anchorName = (0, markdown_1.anchorIdentifier)(testIdentifier);
+                            const testMethodLink = `<a name="${testIdentifier}_failure-summary"></a><a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`;
                             chapterSummary.content.push(`<h4>${testMethodLink}</h4>`);
                             for (const failure of failureGroup.failures) {
                                 for (const line of failure.lines) {
