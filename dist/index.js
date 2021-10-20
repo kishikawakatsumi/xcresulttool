@@ -861,6 +861,12 @@ function run() {
             const bundlePath = core.getInput('xcresult');
             const formatter = new formatter_1.Formatter(bundlePath);
             const report = yield formatter.format();
+            core.info(process.env.GITHUB_WORKSPACE || '');
+            core.info(bundlePath);
+            core.debug(process.env.GITHUB_WORKSPACE || '');
+            core.debug(bundlePath);
+            core.error(process.env.GITHUB_WORKSPACE || '');
+            core.error(bundlePath);
             if (core.getInput('GITHUB_TOKEN')) {
                 const octokit = new action_1.Octokit();
                 const owner = github.context.repo.owner;

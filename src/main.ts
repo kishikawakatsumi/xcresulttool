@@ -11,10 +11,12 @@ async function run(): Promise<void> {
     const formatter = new Formatter(bundlePath)
     const report = await formatter.format()
 
-    console.log(process.env.GITHUB_WORKSPACE)
-    console.log(bundlePath)
     core.info(process.env.GITHUB_WORKSPACE || '')
     core.info(bundlePath)
+    core.debug(process.env.GITHUB_WORKSPACE || '')
+    core.debug(bundlePath)
+    core.error(process.env.GITHUB_WORKSPACE || '')
+    core.error(bundlePath)
 
     if (core.getInput('GITHUB_TOKEN')) {
       const octokit = new Octokit()
