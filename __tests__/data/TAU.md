@@ -52,69 +52,87 @@
 
 - Start Test at 2021-10-17 02:43:13.407
   <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Set Up
   - Open com.shashikant.TAU
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Launch com.shashikant.TAU
       - Terminate com.shashikant.TAU:31875
         <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
       - Setting up automation session
       - Wait for com.shashikant.TAU to idle
         <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Given App is ready 
   - Checking existence of `"enrollButton" Button`
 - When I enter city London 
   - Tap "city" TextField
     - Wait for com.shashikant.TAU to idle
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Find the "city" TextField
     - Check for interrupting elements affecting "city" TextField
     - Synthesize event
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Wait for com.shashikant.TAU to idle
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
   - Type 'London' into "city" TextField
     - Wait for com.shashikant.TAU to idle
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Find the "city" TextField
     - Check for interrupting elements affecting "city" TextField
     - Synthesize event
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Wait for com.shashikant.TAU to idle
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - When I Enrolled 
   - Tap "enrollButton" Button
     - Wait for com.shashikant.TAU to idle
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Find the "enrollButton" Button
     - Check for interrupting elements affecting "enrollButton" Button
     - Synthesize event
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
       - Scroll element to visible
       - Failed: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11
     - Retrying `Tap "enrollButton" Button` (attempt <span>#</span>2)
       - Wait for com.shashikant.TAU to idle
         <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
       - Find the "enrollButton" Button
       - Check for interrupting elements affecting "enrollButton" Button
       - Synthesize event
         <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
         - Scroll element to visible
         - Failed: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11
     - Retrying `Tap "enrollButton" Button` (attempt <span>#</span>3)
       - Wait for com.shashikant.TAU to idle
         <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
       - Find the "enrollButton" Button
       - Check for interrupting elements affecting "enrollButton" Button
       - Synthesize event
         <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
         - Scroll element to visible
         - Failed: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11
     - Assertion Failure at BDDTest.swift:40: Failed to synthesize event: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11. (Underlying Error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58911, elementOrHash.elementID: 5661339664.11)
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tear Down
   - Terminate com.shashikant.TAU:58911
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 </table>
 
 <a name="tauuitests_tauuitests"/><h5>TAUUITests&nbsp;[<img src="https://xcresulttool-static.netlify.app/images/back.png" alt="back" width="14px" align="top">](#user-content-tauuitests_tauuitests_summary)</h5>
@@ -166,61 +184,78 @@
 
 - Start Test at 2021-10-17 02:43:29.414
   <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Set Up
   - Open com.shashikant.TAU
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Launch com.shashikant.TAU
       - Setting up automation session
       - Wait for com.shashikant.TAU to idle
         <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tap "city" TextField
   - Wait for com.shashikant.TAU to idle
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
   - Find the "city" TextField
   - Check for interrupting elements affecting "city" TextField
   - Synthesize event
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
   - Wait for com.shashikant.TAU to idle
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Type 'London' into "city" TextField
   - Wait for com.shashikant.TAU to idle
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
   - Find the "city" TextField
   - Check for interrupting elements affecting "city" TextField
   - Synthesize event
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
   - Wait for com.shashikant.TAU to idle
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tap "enrollButton" Button
   - Wait for com.shashikant.TAU to idle
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
   - Find the "enrollButton" Button
   - Check for interrupting elements affecting "enrollButton" Button
   - Synthesize event
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Scroll element to visible
     - Failed: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58971, elementOrHash.elementID: 4931535136.11
   - Retrying `Tap "enrollButton" Button` (attempt <span>#</span>2)
     - Wait for com.shashikant.TAU to idle
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Find the "enrollButton" Button
     - Check for interrupting elements affecting "enrollButton" Button
     - Synthesize event
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
       - Scroll element to visible
       - Failed: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58971, elementOrHash.elementID: 4931535136.11
   - Retrying `Tap "enrollButton" Button` (attempt <span>#</span>3)
     - Wait for com.shashikant.TAU to idle
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
     - Find the "enrollButton" Button
     - Check for interrupting elements affecting "enrollButton" Button
     - Synthesize event
       <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
       - Scroll element to visible
       - Failed: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58971, elementOrHash.elementID: 4931535136.11
   - Assertion Failure at TAUUITests.swift:24: Failed to synthesize event: Failed to scroll to visible (by AX action) Button, {{25.0, 500.0}, {330.0, 41.0}}, identifier: 'enrollButton', label: 'Enroll', error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58971, elementOrHash.elementID: 4931535136.11. (Underlying Error: Error kAXErrorCannotComplete performing AXAction kAXScrollToVisibleAction on element AX element pid: 58971, elementOrHash.elementID: 4931535136.11)
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tear Down
   - Terminate com.shashikant.TAU:58971
     <details open><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 </table>

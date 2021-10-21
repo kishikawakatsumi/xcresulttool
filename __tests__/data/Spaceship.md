@@ -195,6 +195,7 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="390px" src="undefined"></div></details>
+
 - Tear Down
 <tr><td valign="top" width="716px"><img src="https://xcresulttool-static.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"> <img src="https://xcresulttool-static.netlify.app/images/test-method.png" alt="test-method" width="14px" align="top">&nbsp;<code>testLaunch()</code><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 1, XCUIDeviceOrientation: 4</code><br><br><b>Activities:</b>
 
@@ -213,6 +214,7 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="390px" src="undefined"></div></details>
+
 - Tear Down
 <tr><td valign="top" width="716px"><img src="https://xcresulttool-static.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"> <img src="https://xcresulttool-static.netlify.app/images/test-method.png" alt="test-method" width="14px" align="top">&nbsp;<code>testLaunch()</code><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 2, XCUIDeviceOrientation: 1</code><br><br><b>Activities:</b>
 
@@ -231,6 +233,7 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="390px" src="undefined"></div></details>
+
 - Tear Down
 <tr><td valign="top" width="716px"><img src="https://xcresulttool-static.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"> <img src="https://xcresulttool-static.netlify.app/images/test-method.png" alt="test-method" width="14px" align="top">&nbsp;<code>testLaunch()</code><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 2, XCUIDeviceOrientation: 4</code><br><br><b>Activities:</b>
 
@@ -249,6 +252,7 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="390px" src="undefined"></div></details>
+
 - Tear Down
 </table>
 
@@ -357,6 +361,7 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tear Down
 <tr><td valign="top" width="716px"><img src="https://xcresulttool-static.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"> <img src="https://xcresulttool-static.netlify.app/images/test-method.png" alt="test-method" width="14px" align="top">&nbsp;<code>testLaunch()</code><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 1, XCUIDeviceOrientation: 4</code><br><br><b>Activities:</b>
 
@@ -375,6 +380,7 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tear Down
 <tr><td valign="top" width="716px"><img src="https://xcresulttool-static.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"> <img src="https://xcresulttool-static.netlify.app/images/test-method.png" alt="test-method" width="14px" align="top">&nbsp;<code>testLaunch()</code><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 2, XCUIDeviceOrientation: 1</code><br><br><b>Activities:</b>
 
@@ -393,6 +399,7 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tear Down
 <tr><td valign="top" width="716px"><img src="https://xcresulttool-static.netlify.app/images/passed.png" alt="Success" title="Success" width="14px" align="top"> <img src="https://xcresulttool-static.netlify.app/images/test-method.png" alt="test-method" width="14px" align="top">&nbsp;<code>testLaunch()</code><br><br><b>Configuration:</b><br><code>XCUIAppearanceMode: 2, XCUIDeviceOrientation: 4</code><br><br><b>Activities:</b>
 
@@ -411,5 +418,6 @@
 - Find the Target Application 'com.kishikawakatsumi.Spaceship'
 - Added attachment named 'Launch Screen'
   <details ><summary><img src="https://xcresulttool-static.netlify.app/images/attachment.png" alt="attachment" width="14px" align="top"></summary><div><img width="375px" src="undefined"></div></details>
+
 - Tear Down
 </table>
