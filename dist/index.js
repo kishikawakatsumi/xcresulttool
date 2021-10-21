@@ -137,7 +137,7 @@ const passedIcon = Image.testStatus('Success');
 const failedIcon = Image.testStatus('Failure');
 const skippedIcon = Image.testStatus('Skipped');
 const expectedFailureIcon = Image.testStatus('Expected Failure');
-const backIcon = Image.icon('right-arrow-curving-left.png');
+const backIcon = Image.icon('back.png');
 const testClassIcon = Image.icon('test-class.png');
 const testMethodIcon = Image.icon('test-method.png');
 const attachmentIcon = Image.icon('attachment.png');
@@ -252,18 +252,17 @@ class Formatter {
                 }
                 chapterSummary.content.push('### Summary');
                 chapterSummary.content.push('<table>');
-                chapterSummary.content.push('<thead><tr>');
+                chapterSummary.content.push('<tr>');
                 const header = [
-                    `<th>Total</th>`,
-                    `<th>${passedIcon}&nbsp;Passed</th>`,
-                    `<th>${failedIcon}&nbsp;Failed</th>`,
-                    `<th>${skippedIcon}&nbsp;Skipped</th>`,
-                    `<th>${expectedFailureIcon}&nbsp;Expected Failure</th>`,
-                    `<th>:stopwatch:&nbsp;Time</th>`
+                    `<th>Total`,
+                    `<th>${passedIcon}&nbsp;Passed`,
+                    `<th>${failedIcon}&nbsp;Failed`,
+                    `<th>${skippedIcon}&nbsp;Skipped`,
+                    `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
+                    `<th>:stopwatch:&nbsp;Time`
                 ].join('');
                 chapterSummary.content.push(header);
-                chapterSummary.content.push('</tr></thead>');
-                chapterSummary.content.push('<tbody><tr>');
+                chapterSummary.content.push('<tr>');
                 let failedCount;
                 if (testSummary.stats.failed > 0) {
                     failedCount = `<b>${testSummary.stats.failed}</b>`;
@@ -273,15 +272,14 @@ class Formatter {
                 }
                 const duration = testSummary.duration.toFixed(2);
                 const cols = [
-                    `<td align="right" width="118px">${testSummary.stats.total}</td>`,
-                    `<td align="right" width="118px">${testSummary.stats.passed}</td>`,
-                    `<td align="right" width="118px">${failedCount}</td>`,
-                    `<td align="right" width="118px">${testSummary.stats.skipped}</td>`,
-                    `<td align="right" width="158px">${testSummary.stats.expectedFailure}</td>`,
-                    `<td align="right" width="138px">${duration}s</td>`
+                    `<td align="right" width="118px">${testSummary.stats.total}`,
+                    `<td align="right" width="118px">${testSummary.stats.passed}`,
+                    `<td align="right" width="118px">${failedCount}`,
+                    `<td align="right" width="118px">${testSummary.stats.skipped}`,
+                    `<td align="right" width="158px">${testSummary.stats.expectedFailure}`,
+                    `<td align="right" width="138px">${duration}s`
                 ].join('');
                 chapterSummary.content.push(cols);
-                chapterSummary.content.push('</tr></tbody>');
                 chapterSummary.content.push('</table>\n');
                 chapterSummary.content.push('---\n');
                 if (testSummary.stats.failed > 0) {
@@ -299,18 +297,16 @@ class Formatter {
                     chapterSummary.content.push(`- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`);
                     chapterSummary.content.push(`- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`);
                     chapterSummary.content.push('<table>');
-                    chapterSummary.content.push('<thead><tr>');
+                    chapterSummary.content.push('<tr>');
                     const header = [
-                        `<th>Test</th>`,
-                        `<th>Total</th>`,
-                        `<th>${passedIcon}</th>`,
-                        `<th>${failedIcon}</th>`,
-                        `<th>${skippedIcon}</th>`,
-                        `<th>${expectedFailureIcon}</th>`
+                        `<th>Test`,
+                        `<th>Total`,
+                        `<th>${passedIcon}`,
+                        `<th>${failedIcon}`,
+                        `<th>${skippedIcon}`,
+                        `<th>${expectedFailureIcon}`
                     ].join('');
                     chapterSummary.content.push(header);
-                    chapterSummary.content.push('</tr></thead>');
-                    chapterSummary.content.push('<tbody>');
                     for (const [identifier, stats] of Object.entries(group)) {
                         chapterSummary.content.push('<tr>');
                         const testClass = `${testClassIcon}&nbsp;${identifier}`;
@@ -325,20 +321,18 @@ class Formatter {
                             failedCount = `${stats.failed}`;
                         }
                         const cols = [
-                            `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
-                            `<td align="right" width="80px">${stats.total}</td>`,
-                            `<td align="right" width="80px">${stats.passed}</td>`,
-                            `<td align="right" width="80px">${failedCount}</td>`,
-                            `<td align="right" width="80px">${stats.skipped}</td>`,
-                            `<td align="right" width="80px">${stats.expectedFailure}</td>`
+                            `<td align="left" width="368px">${testClassAnchor}${testClassLink}`,
+                            `<td align="right" width="80px">${stats.total}`,
+                            `<td align="right" width="80px">${stats.passed}`,
+                            `<td align="right" width="80px">${failedCount}`,
+                            `<td align="right" width="80px">${stats.skipped}`,
+                            `<td align="right" width="80px">${stats.expectedFailure}`
                         ].join('');
                         chapterSummary.content.push(cols);
-                        chapterSummary.content.push('</tr>');
                     }
-                    chapterSummary.content.push('</tbody>');
+                    chapterSummary.content.push('');
                     chapterSummary.content.push('</table>\n');
                 }
-                chapterSummary.content.push('');
                 chapterSummary.content.push('---\n');
                 const testFailures = new report_1.TestFailures();
                 const annotations = [];
@@ -484,17 +478,15 @@ class Formatter {
                         testDetail.lines.push(`${anchorTag}<h5>${testName}&nbsp;${anchorBack}</h5>`);
                         const testsStatsLines = [];
                         testsStatsLines.push('<table>');
-                        testsStatsLines.push('<thead><tr>');
+                        testsStatsLines.push('<tr>');
                         const header = [
-                            `<th>${passedIcon}</th>`,
-                            `<th>${failedIcon}</th>`,
-                            `<th>${skippedIcon}</th>`,
-                            `<th>${expectedFailureIcon}</th>`,
-                            `<th>:stopwatch:</th>`
+                            `<th>${passedIcon}`,
+                            `<th>${failedIcon}`,
+                            `<th>${skippedIcon}`,
+                            `<th>${expectedFailureIcon}`,
+                            `<th>:stopwatch:`
                         ].join('');
                         testsStatsLines.push(header);
-                        testsStatsLines.push('</tr></thead>');
-                        testsStatsLines.push('<tbody>');
                         testsStatsLines.push('<tr>');
                         let failedCount;
                         if (failed > 0) {
@@ -504,15 +496,13 @@ class Formatter {
                             failedCount = `${failed} (${failedRate}%)`;
                         }
                         const cols = [
-                            `<td align="right" width="154px">${passed} (${passedRate}%)</td>`,
-                            `<td align="right" width="154px">${failedCount}</td>`,
-                            `<td align="right" width="154px">${skipped} (${skippedRate}%)</td>`,
-                            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)</td>`,
-                            `<td align="right" width="154px">${testDuration}s</td>`
+                            `<td align="right" width="154px">${passed} (${passedRate}%)`,
+                            `<td align="right" width="154px">${failedCount}`,
+                            `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
+                            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
+                            `<td align="right" width="154px">${testDuration}s`
                         ].join('');
                         testsStatsLines.push(cols);
-                        testsStatsLines.push('</tr>');
-                        testsStatsLines.push('</tbody>');
                         testsStatsLines.push('</table>\n');
                         testDetail.lines.push(testsStatsLines.join('\n'));
                         const testDetailTable = [];
@@ -687,14 +677,14 @@ class Formatter {
                                 let testResultRow = '';
                                 if (details.length > 1) {
                                     if (index === 0) {
-                                        testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`;
+                                        testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`;
                                     }
                                     else {
-                                        testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`;
+                                        testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`;
                                     }
                                 }
                                 else {
-                                    testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`;
+                                    testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`;
                                 }
                                 testDetailTable.push(testResultRow);
                             }
@@ -766,9 +756,9 @@ function collectFailureSummaries(failureSummaries) {
         const titleAttr = `${titleAlign} ${titleWidth}`;
         const detailWidth = 'width="668px"';
         const contents = '<table>' +
-            `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileLocation}</td></tr>` +
-            `<tr><td ${titleAttr}><b>Issue Type</b></td><td ${detailWidth}>${failureSummary.issueType}</td></tr>` +
-            `<tr><td ${titleAttr}><b>Message</b></td><td ${detailWidth}>${failureSummary.message}</td></tr>` +
+            `<tr><td ${titleAttr}><b>File</b><td ${detailWidth}>${fileLocation}` +
+            `<tr><td ${titleAttr}><b>Issue Type</b><td ${detailWidth}>${failureSummary.issueType}` +
+            `<tr><td ${titleAttr}><b>Message</b><td ${detailWidth}>${failureSummary.message}` +
             `</table>\n`;
         const stackTrace = callStack === null || callStack === void 0 ? void 0 : callStack.map((callStack, index) => {
             const addressString = callStack.addressString;
@@ -796,12 +786,34 @@ function collectFailureSummaries(failureSummaries) {
 /***/ }),
 
 /***/ 1281:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.icon = exports.testStatus = void 0;
+const path = __importStar(__nccwpck_require__(5622));
+const baseUrl = '//xcresulttool-static.netlify.app/images/';
+const attrs = 'width="14px" align="top"';
 function testStatus(statusText) {
     let filename = '';
     switch (statusText) {
@@ -827,15 +839,12 @@ function testStatus(statusText) {
             filename = 'unknown.png';
             break;
     }
-    const baseUrl = 'https://xcresulttool-resources.netlify.app/images/';
-    const attrs = 'width="14px" align="top"';
     return `<img src="${baseUrl}${filename}" alt="${statusText}" title="${statusText}" ${attrs}>`;
 }
 exports.testStatus = testStatus;
 function icon(filename) {
-    const baseUrl = 'https://xcresulttool-resources.netlify.app/images/';
-    const attrs = 'width="14px" align="top"';
-    return `<img src="${baseUrl}${filename}" ${attrs}>`;
+    const alt = path.parse(filename).name;
+    return `<img src="${baseUrl}${filename}" alt="${alt}" ${attrs}>`;
 }
 exports.icon = icon;
 
@@ -1010,7 +1019,7 @@ function anchorIdentifier(text) {
 exports.anchorIdentifier = anchorIdentifier;
 function anchorNameTag(text) {
     const name = text.toLowerCase().replace(/ /g, '-');
-    return `<a name="${name}"></a>`;
+    return `<a name="${name}"/>`;
 }
 exports.anchorNameTag = anchorNameTag;
 function escapeHashSign(text) {
