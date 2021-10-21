@@ -726,7 +726,7 @@ export class Formatter {
                           activity.indent + 1
                         )
                         const attachmentContent = attachments.join('')
-                        return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>`
+                        return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>\n`
                       } else {
                         const indent = indentation(activity.indent)
                         return `${indent}- ${escapeHashSign(activity.title)}`
