@@ -49,7 +49,7 @@ jobs:
 - uses: kishikawakatsumi/xcresulttool@v1.0.2
   with:
     path: TestResults.xcresult
-  if: always()
+  if: success() || failure()
   # ^ This is important because the action will be run
   # even if the test fails in the previous step.
 ```
@@ -68,7 +68,7 @@ jobs:
       - uses: kishikawakatsumi/xcresulttool@v1.0.2
         with:
           path: TestResults.xcresult
-        if: always()
+        if: success() || failure()
         # ^ This is important because the action will be run
         # even if the test fails in the previous step.
 ```
@@ -82,7 +82,7 @@ jobs:
       results/Example.xcresult
       results/TestResult.xcresult
       results/Result.xcresult
-  if: always()
+  if: success() || failure()
 ```
 
 ## Input parameters
