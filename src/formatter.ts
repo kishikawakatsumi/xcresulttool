@@ -410,6 +410,8 @@ export class Formatter {
                 chapterSummary.content.push(line)
               }
             }
+          } else {
+            chapterSummary.content.push(`All tests passed :tada:`)
           }
         }
       }
