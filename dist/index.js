@@ -68,7 +68,7 @@ function exportAttachments(parser, activity) {
                             yield exec.exec('curl', [
                                 '-X',
                                 'POST',
-                                '//xcresulttool-file.herokuapp.com/file',
+                                'https://xcresulttool-file.herokuapp.com/file',
                                 '-d',
                                 image.toString('base64')
                             ], options);
