@@ -411,6 +411,9 @@ class Formatter {
                                 }
                             }
                         }
+                        else {
+                            chapterSummary.content.push(`All tests passed :tada:`);
+                        }
                     }
                 }
                 chapterSummary.content.push('');
