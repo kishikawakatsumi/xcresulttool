@@ -4,7 +4,7 @@ export function anchorIdentifier(text: string): string {
 
 export function anchorNameTag(text: string): string {
   const name = text.toLowerCase().replace(/ /g, '-')
-  return `<a name="${name}"></a>`
+  return `<a name="${name}"/>`
 }
 
 export function escapeHashSign(text: string): string {

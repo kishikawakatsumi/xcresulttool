@@ -1,3 +1,8 @@
+import * as path from 'path'
+
+const baseUrl = 'https://xcresulttool-static.netlify.app/images/'
+const attrs = 'width="14px" align="top"'
+
 export function testStatus(statusText: string): string {
   let filename = ''
   switch (statusText) {
@@ -23,13 +28,10 @@ export function testStatus(statusText: string): string {
       filename = 'unknown.png'
       break
   }
-  const baseUrl = 'https://xcresulttool-resources.netlify.app/images/'
-  const attrs = 'width="14px" align="top"'
   return `<img src="${baseUrl}${filename}" alt="${statusText}" title="${statusText}" ${attrs}>`
 }
 
 export function icon(filename: string): string {
-  const baseUrl = 'https://xcresulttool-resources.netlify.app/images/'
-  const attrs = 'width="14px" align="top"'
-  return `<img src="${baseUrl}${filename}" ${attrs}>`
+  const alt = path.parse(filename).name
+  return `<img src="${baseUrl}${filename}" alt="${alt}" ${attrs}>`
 }
