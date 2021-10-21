@@ -812,7 +812,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.icon = exports.testStatus = void 0;
 const path = __importStar(__nccwpck_require__(5622));
-const baseUrl = '//xcresulttool-static.netlify.app/images/';
+const baseUrl = 'https://xcresulttool-static.netlify.app/images/';
 const attrs = 'width="14px" align="top"';
 function testStatus(statusText) {
     let filename = '';

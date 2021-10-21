@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-const baseUrl = '//xcresulttool-static.netlify.app/images/'
+const baseUrl = 'https://xcresulttool-static.netlify.app/images/'
 const attrs = 'width="14px" align="top"'
 
 export function testStatus(statusText: string): string {
