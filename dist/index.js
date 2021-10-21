@@ -396,24 +396,29 @@ class Formatter {
                 for (const annotation of annotations) {
                     testReport.annotations.push(annotation);
                 }
-                if (testFailures.failureGroups.length) {
-                    chapterSummary.content.push(`### ${failedIcon} Failures`);
-                    for (const failureGroup of testFailures.failureGroups) {
-                        if (failureGroup.failures.length) {
-                            const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`;
-                            const anchorName = (0, markdown_1.anchorIdentifier)(testIdentifier);
-                            const anchorTag = (0, markdown_1.anchorNameTag)(`${testIdentifier}_failure-summary`);
-                            const testMethodLink = `${anchorTag}<a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`;
-                            chapterSummary.content.push(`<h4>${testMethodLink}</h4>`);
-                            for (const failure of failureGroup.failures) {
-                                for (const line of failure.lines) {
-                                    chapterSummary.content.push(line);
-                                }
+                chapterSummary.content.push(`### ${failedIcon} Failures`);
+                const summaryFailures = [];
+                for (const failureGroup of testFailures.failureGroups) {
+                    if (failureGroup.failures.length) {
+                        const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`;
+                        const anchorName = (0, markdown_1.anchorIdentifier)(testIdentifier);
+                        const anchorTag = (0, markdown_1.anchorNameTag)(`${testIdentifier}_failure-summary`);
+                        const testMethodLink = `${anchorTag}<a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`;
+                        summaryFailures.push(`<h4>${testMethodLink}</h4>`);
+                        for (const failure of failureGroup.failures) {
+                            for (const line of failure.lines) {
+                                summaryFailures.push(line);
                             }
                         }
                     }
                 }
-                chapterSummary.content.push('');
+                if (summaryFailures.length) {
+                    chapterSummary.content.push(summaryFailures.join('\n'));
+                    chapterSummary.content.push('');
+                }
+                else {
+                    chapterSummary.content.push(`All tests passed :tada:`);
+                }
                 const testDetails = new report_1.TestDetails();
                 for (const [, results] of Object.entries(chapter.sections)) {
                     const testDetail = new report_1.TestDetail();
