@@ -103,3 +103,9 @@ jobs:
     # Default: 'Xcode test results'
     title:
 ```
+
+## Limitations
+
+GitHub Checks has a maximum text limit of 65535 characters. Currently, any text longer than that will be automatically truncated.
+
+There is a limit of 50 annotations in GitHub Checks. Currently, any annotations longer than that will be automatically truncated.
