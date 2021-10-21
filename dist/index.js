@@ -649,7 +649,7 @@ class Formatter {
                                                 const message = `${(0, markdown_1.indentation)(activity.indent)}- ${title}`;
                                                 const attachmentIndent = (0, markdown_1.indentation)(activity.indent + 1);
                                                 const attachmentContent = attachments.join('');
-                                                return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>`;
+                                                return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>\n`;
                                             }
                                             else {
                                                 const indent = (0, markdown_1.indentation)(activity.indent);
