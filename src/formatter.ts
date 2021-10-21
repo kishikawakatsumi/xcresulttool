@@ -45,7 +45,7 @@ const failedIcon = Image.testStatus('Failure')
 const skippedIcon = Image.testStatus('Skipped')
 const expectedFailureIcon = Image.testStatus('Expected Failure')
 
-const backIcon = Image.icon('right-arrow-curving-left.png')
+const backIcon = Image.icon('back.png')
 const testClassIcon = Image.icon('test-class.png')
 const testMethodIcon = Image.icon('test-method.png')
 const attachmentIcon = Image.icon('attachment.png')
@@ -196,19 +196,18 @@ export class Formatter {
       chapterSummary.content.push('### Summary')
 
       chapterSummary.content.push('<table>')
-      chapterSummary.content.push('<thead><tr>')
+      chapterSummary.content.push('<tr>')
       const header = [
-        `<th>Total</th>`,
-        `<th>${passedIcon}&nbsp;Passed</th>`,
-        `<th>${failedIcon}&nbsp;Failed</th>`,
-        `<th>${skippedIcon}&nbsp;Skipped</th>`,
-        `<th>${expectedFailureIcon}&nbsp;Expected Failure</th>`,
-        `<th>:stopwatch:&nbsp;Time</th>`
+        `<th>Total`,
+        `<th>${passedIcon}&nbsp;Passed`,
+        `<th>${failedIcon}&nbsp;Failed`,
+        `<th>${skippedIcon}&nbsp;Skipped`,
+        `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
+        `<th>:stopwatch:&nbsp;Time`
       ].join('')
       chapterSummary.content.push(header)
-      chapterSummary.content.push('</tr></thead>')
 
-      chapterSummary.content.push('<tbody><tr>')
+      chapterSummary.content.push('<tr>')
 
       let failedCount: string
       if (testSummary.stats.failed > 0) {
@@ -218,15 +217,14 @@ export class Formatter {
       }
       const duration = testSummary.duration.toFixed(2)
       const cols = [
-        `<td align="right" width="118px">${testSummary.stats.total}</td>`,
-        `<td align="right" width="118px">${testSummary.stats.passed}</td>`,
-        `<td align="right" width="118px">${failedCount}</td>`,
-        `<td align="right" width="118px">${testSummary.stats.skipped}</td>`,
-        `<td align="right" width="158px">${testSummary.stats.expectedFailure}</td>`,
-        `<td align="right" width="138px">${duration}s</td>`
+        `<td align="right" width="118px">${testSummary.stats.total}`,
+        `<td align="right" width="118px">${testSummary.stats.passed}`,
+        `<td align="right" width="118px">${failedCount}`,
+        `<td align="right" width="118px">${testSummary.stats.skipped}`,
+        `<td align="right" width="158px">${testSummary.stats.expectedFailure}`,
+        `<td align="right" width="138px">${duration}s`
       ].join('')
       chapterSummary.content.push(cols)
-      chapterSummary.content.push('</tr></tbody>')
       chapterSummary.content.push('</table>\n')
 
       chapterSummary.content.push('---\n')
@@ -257,19 +255,17 @@ export class Formatter {
         )
 
         chapterSummary.content.push('<table>')
-        chapterSummary.content.push('<thead><tr>')
+        chapterSummary.content.push('<tr>')
         const header = [
-          `<th>Test</th>`,
-          `<th>Total</th>`,
-          `<th>${passedIcon}</th>`,
-          `<th>${failedIcon}</th>`,
-          `<th>${skippedIcon}</th>`,
-          `<th>${expectedFailureIcon}</th>`
+          `<th>Test`,
+          `<th>Total`,
+          `<th>${passedIcon}`,
+          `<th>${failedIcon}`,
+          `<th>${skippedIcon}`,
+          `<th>${expectedFailureIcon}`
         ].join('')
         chapterSummary.content.push(header)
-        chapterSummary.content.push('</tr></thead>')
 
-        chapterSummary.content.push('<tbody>')
         for (const [identifier, stats] of Object.entries(group)) {
           chapterSummary.content.push('<tr>')
           const testClass = `${testClassIcon}&nbsp;${identifier}`
@@ -288,20 +284,18 @@ export class Formatter {
             failedCount = `${stats.failed}`
           }
           const cols = [
-            `<td align="left" width="368px">${testClassAnchor}${testClassLink}</td>`,
-            `<td align="right" width="80px">${stats.total}</td>`,
-            `<td align="right" width="80px">${stats.passed}</td>`,
-            `<td align="right" width="80px">${failedCount}</td>`,
-            `<td align="right" width="80px">${stats.skipped}</td>`,
-            `<td align="right" width="80px">${stats.expectedFailure}</td>`
+            `<td align="left" width="368px">${testClassAnchor}${testClassLink}`,
+            `<td align="right" width="80px">${stats.total}`,
+            `<td align="right" width="80px">${stats.passed}`,
+            `<td align="right" width="80px">${failedCount}`,
+            `<td align="right" width="80px">${stats.skipped}`,
+            `<td align="right" width="80px">${stats.expectedFailure}`
           ].join('')
           chapterSummary.content.push(cols)
-          chapterSummary.content.push('</tr>')
         }
-        chapterSummary.content.push('</tbody>')
+        chapterSummary.content.push('')
         chapterSummary.content.push('</table>\n')
       }
-      chapterSummary.content.push('')
 
       chapterSummary.content.push('---\n')
 
@@ -521,21 +515,17 @@ export class Formatter {
           const testsStatsLines: string[] = []
 
           testsStatsLines.push('<table>')
-          testsStatsLines.push('<thead><tr>')
+          testsStatsLines.push('<tr>')
           const header = [
-            `<th>${passedIcon}</th>`,
-            `<th>${failedIcon}</th>`,
-            `<th>${skippedIcon}</th>`,
-            `<th>${expectedFailureIcon}</th>`,
-            `<th>:stopwatch:</th>`
+            `<th>${passedIcon}`,
+            `<th>${failedIcon}`,
+            `<th>${skippedIcon}`,
+            `<th>${expectedFailureIcon}`,
+            `<th>:stopwatch:`
           ].join('')
           testsStatsLines.push(header)
-          testsStatsLines.push('</tr></thead>')
-
-          testsStatsLines.push('<tbody>')
 
           testsStatsLines.push('<tr>')
-
           let failedCount: string
           if (failed > 0) {
             failedCount = `<b>${failed} (${failedRate}%)</b>`
@@ -543,16 +533,13 @@ export class Formatter {
             failedCount = `${failed} (${failedRate}%)`
           }
           const cols = [
-            `<td align="right" width="154px">${passed} (${passedRate}%)</td>`,
-            `<td align="right" width="154px">${failedCount}</td>`,
-            `<td align="right" width="154px">${skipped} (${skippedRate}%)</td>`,
-            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)</td>`,
-            `<td align="right" width="154px">${testDuration}s</td>`
+            `<td align="right" width="154px">${passed} (${passedRate}%)`,
+            `<td align="right" width="154px">${failedCount}`,
+            `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
+            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
+            `<td align="right" width="154px">${testDuration}s`
           ].join('')
           testsStatsLines.push(cols)
-          testsStatsLines.push('</tr>')
-
-          testsStatsLines.push('</tbody>')
           testsStatsLines.push('</table>\n')
 
           testDetail.lines.push(testsStatsLines.join('\n'))
@@ -773,12 +760,12 @@ export class Formatter {
               let testResultRow = ''
               if (details.length > 1) {
                 if (index === 0) {
-                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+                  testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`
                 } else {
-                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+                  testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`
                 }
               } else {
-                testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}</td><td ${valign} ${detailWidth}>${testResultContent}</td></tr>`
+                testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`
               }
               testDetailTable.push(testResultRow)
             }
@@ -868,9 +855,9 @@ function collectFailureSummaries(
     const detailWidth = 'width="668px"'
     const contents =
       '<table>' +
-      `<tr><td ${titleAttr}><b>File</b></td><td ${detailWidth}>${fileLocation}</td></tr>` +
-      `<tr><td ${titleAttr}><b>Issue Type</b></td><td ${detailWidth}>${failureSummary.issueType}</td></tr>` +
-      `<tr><td ${titleAttr}><b>Message</b></td><td ${detailWidth}>${failureSummary.message}</td></tr>` +
+      `<tr><td ${titleAttr}><b>File</b><td ${detailWidth}>${fileLocation}` +
+      `<tr><td ${titleAttr}><b>Issue Type</b><td ${detailWidth}>${failureSummary.issueType}` +
+      `<tr><td ${titleAttr}><b>Message</b><td ${detailWidth}>${failureSummary.message}` +
       `</table>\n`
 
     const stackTrace = callStack
