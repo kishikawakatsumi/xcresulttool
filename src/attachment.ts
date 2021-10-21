@@ -62,7 +62,7 @@ export async function exportAttachments(
               [
                 '-X',
                 'POST',
-                'https://xcresulttool-file.herokuapp.com/file',
+                '//xcresulttool-file.herokuapp.com/file',
                 '-d',
                 image.toString('base64')
               ],
