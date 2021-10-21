@@ -33,7 +33,7 @@
     "image-size": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.1",
+    "@types/node": "^16.11.2",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     "@vercel/ncc": "^0.31.1",
