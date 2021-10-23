@@ -905,6 +905,10 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputPath = core.getInput('path');
+            if (github.context.payload.pull_request) {
+                core.info(github.context.payload.pull_request.head.sha);
+            }
+            core.info(github.context.sha);
             const paths = inputPath.split('\n');
             const existPaths = [];
             for (const checkPath of paths) {
