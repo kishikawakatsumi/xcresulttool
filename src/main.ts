@@ -13,6 +13,10 @@ const {stat} = promises
 async function run(): Promise<void> {
   try {
     const inputPath: string = core.getInput('path')
+    if (github.context.payload.pull_request) {
+      core.info(github.context.payload.pull_request.head.sha)
+    }
+    core.info(github.context.sha)
 
     const paths = inputPath.split('\n')
     const existPaths: string[] = []
