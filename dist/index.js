@@ -623,8 +623,8 @@ class Formatter {
                                                 let width = '100%';
                                                 const dimensions = attachment.dimensions;
                                                 if (dimensions.width && dimensions.height) {
-                                                    if (dimensions.orientation &&
-                                                        dimensions.orientation >= 5) {
+                                                    const orientation = dimensions.orientation;
+                                                    if (orientation && orientation >= 5) {
                                                         width = `${dimensions.height}px`;
                                                     }
                                                     else {
@@ -639,10 +639,12 @@ class Formatter {
                                                             if (dimensions.width && dimensions.height) {
                                                                 if (dimensions.orientation &&
                                                                     dimensions.orientation >= 5) {
-                                                                    width = `${(dimensions.height / scale).toFixed(0)}px`;
+                                                                    const value = dimensions.height / scale;
+                                                                    width = `${value.toFixed(0)}px`;
                                                                 }
                                                                 else {
-                                                                    width = `${(dimensions.width / scale).toFixed(0)}px`;
+                                                                    const value = dimensions.width / scale;
+                                                                    width = `${value.toFixed(0)}px`;
                                                                 }
                                                             }
                                                             else {
