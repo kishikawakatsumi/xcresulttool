@@ -24,6 +24,7 @@ import {
   escapeHashSign,
   indentation
 } from './markdown'
+import {exportAttachments, isImageAttachmentType} from './attachment'
 
 import {ActionTestActivitySummary} from '../dev/@types/ActionTestActivitySummary.d'
 import {ActionTestFailureSummary} from '../dev/@types/ActionTestFailureSummary.d'
@@ -37,8 +38,6 @@ import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
 
 import {Activity} from './activity'
 import {Parser} from './parser'
-
-import {exportAttachments} from './attachment'
 
 const passedIcon = Image.testStatus('Success')
 const failedIcon = Image.testStatus('Failure')
@@ -673,50 +672,51 @@ export class Formatter {
                 if (activities.length) {
                   const testActivities = activities
                     .map(activity => {
-                      const attachments = activity.attachments.map(
+                      const imageAttachments = activity.attachments.filter(
                         attachment => {
-                          let width = '100%'
-                          const dimensions = attachment.dimensions
-                          if (dimensions.width && dimensions.height) {
-                            if (
-                              dimensions.orientation &&
-                              dimensions.orientation >= 5
-                            ) {
-                              width = `${dimensions.height}px`
-                            } else {
-                              width = `${dimensions.width}px`
-                            }
+                          return isImageAttachmentType(
+                            attachment.uniformTypeIdentifier
+                          )
+                        }
+                      )
+                      const attachments = imageAttachments.map(attachment => {
+                        let width = '100%'
+                        const dimensions = attachment.dimensions
+                        if (dimensions.width && dimensions.height) {
+                          const orientation = dimensions.orientation
+                          if (orientation && orientation >= 5) {
+                            width = `${dimensions.height}px`
+                          } else {
+                            width = `${dimensions.width}px`
                           }
+                        }
 
-                          const userInfo = attachment.userInfo
-                          if (userInfo) {
-                            for (const info of userInfo.storage) {
-                              if (info.key === 'Scale') {
-                                const scale = parseInt(`${info.value}`)
-                                if (dimensions.width && dimensions.height) {
-                                  if (
-                                    dimensions.orientation &&
-                                    dimensions.orientation >= 5
-                                  ) {
-                                    width = `${(
-                                      dimensions.height / scale
-                                    ).toFixed(0)}px`
-                                  } else {
-                                    width = `${(
-                                      dimensions.width / scale
-                                    ).toFixed(0)}px`
-                                  }
+                        const userInfo = attachment.userInfo
+                        if (userInfo) {
+                          for (const info of userInfo.storage) {
+                            if (info.key === 'Scale') {
+                              const scale = parseInt(`${info.value}`)
+                              if (dimensions.width && dimensions.height) {
+                                if (
+                                  dimensions.orientation &&
+                                  dimensions.orientation >= 5
+                                ) {
+                                  const value = dimensions.height / scale
+                                  width = `${value.toFixed(0)}px`
                                 } else {
-                                  width = `${(100 / scale).toFixed(0)}%`
+                                  const value = dimensions.width / scale
+                                  width = `${value.toFixed(0)}px`
                                 }
+                              } else {
+                                width = `${(100 / scale).toFixed(0)}%`
                               }
                             }
                           }
-
-                          const widthAttr = `width="${width}"`
-                          return `<div><img ${widthAttr} src="${attachment.link}"></div>`
                         }
-                      )
+
+                        const widthAttr = `width="${width}"`
+                        return `<div><img ${widthAttr} src="${attachment.link}"></div>`
+                      })
 
                       if (attachments.length) {
                         const testStatus = testResult.testStatus
