@@ -27,6 +27,10 @@ export interface Attachment {
   dimensions: Dimensions
 }
 
+export function isImageAttachmentType(uniformTypeIdentifier: string) {
+  return ['public.jpeg', 'public.png'].includes(uniformTypeIdentifier)
+}
+
 export async function exportAttachments(
   parser: Parser,
   activity: Activity
@@ -35,7 +39,7 @@ export async function exportAttachments(
 
   if (activity.attachments) {
     for (const attachment of activity.attachments) {
-      if (attachment.filename && attachment.payloadRef) {
+      if (attachment.filename && attachment.payloadRef && isImageAttachmentType(attachment.uniformTypeIdentifier)) {
         const outputPath = path.join(os.tmpdir(), attachment.filename)
         const image = await parser.exportObject(
           attachment.payloadRef.id,
