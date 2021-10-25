@@ -1,7 +1,7 @@
 {
   "name": "xcresulttool",
   "version": "1.0.3",
-  "private": true,
+  "private": false,
   "description": "A GitHub Action that generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.",
   "main": "lib/main.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "node",
     "setup"
   ],
-  "author": "",
+  "author": "Kishikawa Katsumi",
   "license": "MIT",
   "dependencies": {
     "@actions/artifact": "^0.5.2",
