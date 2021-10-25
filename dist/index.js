@@ -38,18 +38,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.exportAttachments = void 0;
+exports.exportAttachments = exports.isImageAttachmentType = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2087));
 const path = __importStar(__nccwpck_require__(5622));
 const image_size_1 = __importDefault(__nccwpck_require__(8250));
+function isImageAttachmentType(uniformTypeIdentifier) {
+    return ['public.jpeg', 'public.png'].includes(uniformTypeIdentifier);
+}
+exports.isImageAttachmentType = isImageAttachmentType;
 function exportAttachments(parser, activity) {
     return __awaiter(this, void 0, void 0, function* () {
         activity.attachments = activity.attachments || [];
         if (activity.attachments) {
             for (const attachment of activity.attachments) {
-                if (attachment.filename && attachment.payloadRef) {
+                if (attachment.filename &&
+                    attachment.payloadRef &&
+                    isImageAttachmentType(attachment.uniformTypeIdentifier)) {
                     const outputPath = path.join(os.tmpdir(), attachment.filename);
                     const image = yield parser.exportObject(attachment.payloadRef.id, outputPath);
                     let output = '';
@@ -131,8 +137,8 @@ const Image = __importStar(__nccwpck_require__(1281));
 const path = __importStar(__nccwpck_require__(5622));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
-const parser_1 = __nccwpck_require__(267);
 const attachment_1 = __nccwpck_require__(2985);
+const parser_1 = __nccwpck_require__(267);
 const passedIcon = Image.testStatus('Success');
 const failedIcon = Image.testStatus('Failure');
 const skippedIcon = Image.testStatus('Skipped');
@@ -610,7 +616,10 @@ class Formatter {
                                     if (activities.length) {
                                         const testActivities = activities
                                             .map(activity => {
-                                            const attachments = activity.attachments.map(attachment => {
+                                            const imageAttachments = activity.attachments.filter(attachment => {
+                                                return (0, attachment_1.isImageAttachmentType)(attachment.uniformTypeIdentifier);
+                                            });
+                                            const attachments = imageAttachments.map(attachment => {
                                                 let width = '100%';
                                                 const dimensions = attachment.dimensions;
                                                 if (dimensions.width && dimensions.height) {
