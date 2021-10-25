@@ -39,6 +39,7 @@ import {Activity} from './activity'
 import {Parser} from './parser'
 
 import {exportAttachments} from './attachment'
+import {isImageAttachmentType} from './attachment'
 
 const passedIcon = Image.testStatus('Success')
 const failedIcon = Image.testStatus('Failure')
@@ -673,7 +674,10 @@ export class Formatter {
                 if (activities.length) {
                   const testActivities = activities
                     .map(activity => {
-                      const attachments = activity.attachments.map(
+                      const imageAttachments = activity.attachments.filter(attachment => {
+                        return isImageAttachmentType(attachment.uniformTypeIdentifier)
+                      })
+                      const attachments = imageAttachments.map(
                         attachment => {
                           let width = '100%'
                           const dimensions = attachment.dimensions
