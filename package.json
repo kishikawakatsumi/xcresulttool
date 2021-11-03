@@ -1,6 +1,6 @@
 {
   "name": "xcresulttool",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": false,
   "description": "A GitHub Action that generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.",
   "main": "lib/main.js",
