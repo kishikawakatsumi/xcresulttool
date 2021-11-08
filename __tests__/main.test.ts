@@ -105,6 +105,20 @@ test('UhooiPicBook.xcresult', async () => {
   )
 })
 
+test('Attachment.xcresult', async () => {
+  const bundlePath = '__tests__/data/Attachment.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'Attachment.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('Attachment.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/Attachment.md')).toString()
+  )
+})
+
 test('test runs', () => {
   process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
   const np = process.execPath
