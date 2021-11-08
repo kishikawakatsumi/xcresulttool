@@ -78,8 +78,8 @@ function exportAttachments(parser, activity) {
                             }
                         }
                     }
-                    catch (error) {
-                        core.notice(error);
+                    catch (_a) {
+                        // no-op
                     }
                 }
             }

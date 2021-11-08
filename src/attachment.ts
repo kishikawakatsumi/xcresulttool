@@ -73,8 +73,8 @@ export async function exportAttachments(
               attachment.link = response.link
             }
           }
-        } catch (error) {
-          core.notice(error as Error)
+        } catch {
+          // no-op
         }
       }
     }
