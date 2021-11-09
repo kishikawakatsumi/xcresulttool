@@ -91,6 +91,200 @@ exports.exportAttachments = exportAttachments;
 
 /***/ }),
 
+/***/ 5730:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/*eslint-disable
+@typescript-eslint/no-explicit-any,
+@typescript-eslint/no-extraneous-class,
+@typescript-eslint/explicit-member-accessibility,
+github/array-foreach,
+no-shadow,
+@typescript-eslint/prefer-includes,
+@typescript-eslint/explicit-function-return-type,
+@typescript-eslint/no-unused-vars,
+no-empty
+*/
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Convert = void 0;
+// Converts JSON strings to/from your types
+// and asserts the results of JSON.parse at runtime
+class Convert {
+    static toCodeCoverage(json) {
+        return cast(JSON.parse(json), r('CodeCoverage'));
+    }
+    static codeCoverageToJson(value) {
+        return JSON.stringify(uncast(value, r('CodeCoverage')), null, 2);
+    }
+}
+exports.Convert = Convert;
+function invalidValue(typ, val, key = '') {
+    if (key) {
+        throw Error(`Invalid value for key "${key}". Expected type ${JSON.stringify(typ)} but got ${JSON.stringify(val)}`);
+    }
+    throw Error(`Invalid value ${JSON.stringify(val)} for type ${JSON.stringify(typ)}`);
+}
+function jsonToJSProps(typ) {
+    if (typ.jsonToJS === undefined) {
+        const map = {};
+        typ.props.forEach((p) => (map[p.json] = { key: p.js, typ: p.typ }));
+        typ.jsonToJS = map;
+    }
+    return typ.jsonToJS;
+}
+function jsToJSONProps(typ) {
+    if (typ.jsToJSON === undefined) {
+        const map = {};
+        typ.props.forEach((p) => (map[p.js] = { key: p.json, typ: p.typ }));
+        typ.jsToJSON = map;
+    }
+    return typ.jsToJSON;
+}
+function transform(val, typ, getProps, key = '') {
+    function transformPrimitive(typ, val) {
+        if (typeof typ === typeof val)
+            return val;
+        return invalidValue(typ, val, key);
+    }
+    function transformUnion(typs, val) {
+        // val must validate against one typ in typs
+        const l = typs.length;
+        for (let i = 0; i < l; i++) {
+            const typ = typs[i];
+            try {
+                return transform(val, typ, getProps);
+            }
+            catch (_) { }
+        }
+        return invalidValue(typs, val);
+    }
+    function transformEnum(cases, val) {
+        if (cases.indexOf(val) !== -1)
+            return val;
+        return invalidValue(cases, val);
+    }
+    function transformArray(typ, val) {
+        // val must be an array with no invalid elements
+        if (!Array.isArray(val))
+            return invalidValue('array', val);
+        return val.map(el => transform(el, typ, getProps));
+    }
+    function transformDate(val) {
+        if (val === null) {
+            return null;
+        }
+        const d = new Date(val);
+        if (isNaN(d.valueOf())) {
+            return invalidValue('Date', val);
+        }
+        return d;
+    }
+    function transformObject(props, additional, val) {
+        if (val === null || typeof val !== 'object' || Array.isArray(val)) {
+            return invalidValue('object', val);
+        }
+        const result = {};
+        Object.getOwnPropertyNames(props).forEach(key => {
+            const prop = props[key];
+            const v = Object.prototype.hasOwnProperty.call(val, key)
+                ? val[key]
+                : undefined;
+            result[prop.key] = transform(v, prop.typ, getProps, prop.key);
+        });
+        Object.getOwnPropertyNames(val).forEach(key => {
+            if (!Object.prototype.hasOwnProperty.call(props, key)) {
+                result[key] = transform(val[key], additional, getProps, key);
+            }
+        });
+        return result;
+    }
+    if (typ === 'any')
+        return val;
+    if (typ === null) {
+        if (val === null)
+            return val;
+        return invalidValue(typ, val);
+    }
+    if (typ === false)
+        return invalidValue(typ, val);
+    while (typeof typ === 'object' && typ.ref !== undefined) {
+        typ = typeMap[typ.ref];
+    }
+    if (Array.isArray(typ))
+        return transformEnum(typ, val);
+    if (typeof typ === 'object') {
+        return typ.hasOwnProperty('unionMembers')
+            ? transformUnion(typ.unionMembers, val)
+            : typ.hasOwnProperty('arrayItems')
+                ? transformArray(typ.arrayItems, val)
+                : typ.hasOwnProperty('props')
+                    ? transformObject(getProps(typ), typ.additional, val)
+                    : invalidValue(typ, val);
+    }
+    // Numbers can be parsed by Date but shouldn't be.
+    if (typ === Date && typeof val !== 'number')
+        return transformDate(val);
+    return transformPrimitive(typ, val);
+}
+function cast(val, typ) {
+    return transform(val, typ, jsonToJSProps);
+}
+function uncast(val, typ) {
+    return transform(val, typ, jsToJSONProps);
+}
+function a(typ) {
+    return { arrayItems: typ };
+}
+function u(...typs) {
+    return { unionMembers: typs };
+}
+function o(props, additional) {
+    return { props, additional };
+}
+function m(additional) {
+    return { props: [], additional };
+}
+function r(name) {
+    return { ref: name };
+}
+const typeMap = {
+    CodeCoverage: o([
+        { json: 'coveredLines', js: 'coveredLines', typ: 0 },
+        { json: 'lineCoverage', js: 'lineCoverage', typ: 3.14 },
+        { json: 'targets', js: 'targets', typ: a(r('Target')) },
+        { json: 'executableLines', js: 'executableLines', typ: 0 }
+    ], false),
+    Target: o([
+        { json: 'coveredLines', js: 'coveredLines', typ: 0 },
+        { json: 'lineCoverage', js: 'lineCoverage', typ: 3.14 },
+        { json: 'files', js: 'files', typ: a(r('File')) },
+        { json: 'name', js: 'name', typ: '' },
+        { json: 'executableLines', js: 'executableLines', typ: 0 },
+        { json: 'buildProductPath', js: 'buildProductPath', typ: '' }
+    ], false),
+    File: o([
+        { json: 'coveredLines', js: 'coveredLines', typ: 0 },
+        { json: 'lineCoverage', js: 'lineCoverage', typ: 3.14 },
+        { json: 'path', js: 'path', typ: '' },
+        { json: 'functions', js: 'functions', typ: a(r('Function')) },
+        { json: 'name', js: 'name', typ: '' },
+        { json: 'executableLines', js: 'executableLines', typ: 0 }
+    ], false),
+    Function: o([
+        { json: 'coveredLines', js: 'coveredLines', typ: 0 },
+        { json: 'lineCoverage', js: 'lineCoverage', typ: 3.14 },
+        { json: 'lineNumber', js: 'lineNumber', typ: 0 },
+        { json: 'executionCount', js: 'executionCount', typ: 0 },
+        { json: 'name', js: 'name', typ: '' },
+        { json: 'executableLines', js: 'executableLines', typ: 0 }
+    ], false)
+};
+
+
+/***/ }),
+
 /***/ 7556:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -131,6 +325,7 @@ const Image = __importStar(__nccwpck_require__(1281));
 const path = __importStar(__nccwpck_require__(5622));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
+const coverage_1 = __nccwpck_require__(5730);
 const parser_1 = __nccwpck_require__(267);
 const attachment_1 = __nccwpck_require__(2985);
 const passedIcon = Image.testStatus('Success');
@@ -173,6 +368,16 @@ class Formatter {
                                         testReportChapter.sections[testableSummary.name] =
                                             new report_1.TestReportSection(testableSummary, testSummaries);
                                     }
+                                }
+                            }
+                            if (action.actionResult.coverage) {
+                                try {
+                                    const codeCoverage = coverage_1.Convert.toCodeCoverage(yield this.parser.exportCodeCoverage());
+                                    const testCodeCoverage = new report_1.TestCodeCoverage(codeCoverage);
+                                    testReport.codeCoverage = testCodeCoverage;
+                                }
+                                catch (error) {
+                                    // no-op
                                 }
                             }
                         }
@@ -282,6 +487,9 @@ class Formatter {
                 chapterSummary.content.push(cols);
                 chapterSummary.content.push('</table>\n');
                 chapterSummary.content.push('---\n');
+                if (testReport.codeCoverage) {
+                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n'));
+                }
                 if (testSummary.stats.failed > 0) {
                     testReport.testStatus = 'failure';
                 }
@@ -911,6 +1119,9 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputPath = core.getInput('path');
+            if (!inputPath) {
+                throw new Error('Failed to find the path to the input xcresult file.');
+            }
             const paths = inputPath.split('\n');
             const existPaths = [];
             for (const checkPath of paths) {
@@ -1115,6 +1326,22 @@ class Parser {
             return Buffer.from(yield readFile(outputPath));
         });
     }
+    exportCodeCoverage() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const args = ['xccov', 'view', '--report', '--json', this.bundlePath];
+            let output = '';
+            const options = {
+                silent: true,
+                listeners: {
+                    stdout: (data) => {
+                        output += data.toString();
+                    }
+                }
+            };
+            yield exec.exec('xcrun', args, options);
+            return output;
+        });
+    }
     toJSON(reference) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = [
@@ -1205,7 +1432,7 @@ function parsePrimitive(element) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Annotation = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
+exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
 class TestReport {
     constructor() {
         this.testStatus = 'neutral';
@@ -1308,6 +1535,64 @@ class TestFailure {
     }
 }
 exports.TestFailure = TestFailure;
+class TestCodeCoverage {
+    constructor(codeCoverage) {
+        this.lines = [];
+        this.lines.push('### Code Coverage');
+        this.lines.push('<table>');
+        this.lines.push('<tr>');
+        this.lines.push('<th width="404px">');
+        this.lines.push('<th width="204px" colspan="2"><b>Coverage');
+        this.lines.push('<th width="80px"><b>Covered');
+        this.lines.push('<th width="80px"><b>Executable');
+        const total = {
+            name: 'Total',
+            lineCoverage: 0,
+            coveredLines: 0,
+            executableLines: 0,
+            hasCodeCoverage: false
+        };
+        for (const target of codeCoverage.targets) {
+            if (target.name.endsWith('.xctest')) {
+                continue;
+            }
+            total.hasCodeCoverage = true;
+            {
+                const lineCoverage = target.lineCoverage * 100;
+                this.lines.push('<tr>');
+                this.lines.push(`<td>${target.name}`);
+                const image = `${lineCoverage.toFixed(0)}.svg`;
+                this.lines.push(`<td><img src="https://xcresulttool-static.netlify.app/i/${image}"/>`);
+                this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`);
+                this.lines.push(`<td align="right">${target.coveredLines}`);
+                this.lines.push(`<td align="right">${target.executableLines}`);
+            }
+            total.coveredLines += target.coveredLines;
+            total.executableLines += target.executableLines;
+            for (const file of target.files) {
+                const lineCoverage = file.lineCoverage * 100;
+                this.lines.push('<tr>');
+                this.lines.push(`<td>${file.name}`);
+                const image = `${lineCoverage.toFixed(0)}.svg`;
+                this.lines.push(`<td><img src="https://xcresulttool-static.netlify.app/i/${image}.svg"/>`);
+                this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`);
+                this.lines.push(`<td align="right">${file.coveredLines}`);
+                this.lines.push(`<td align="right">${file.executableLines}`);
+            }
+        }
+        if (total.hasCodeCoverage) {
+            const lineCoverage = (total.coveredLines / total.executableLines) * 100;
+            this.lines.push('<tr>');
+            this.lines.push(`<td><b>${total.name}`);
+            const image = `${lineCoverage.toFixed(0)}.svg`;
+            this.lines.push(`<td><img src="https://xcresulttool-static.netlify.app/i/${image}.svg"/>`);
+            this.lines.push(`<td align="right"><b>${lineCoverage.toFixed(2)} %`);
+            this.lines.push(`<td align="right"><b>${total.coveredLines}`);
+            this.lines.push(`<td align="right"><b>${total.executableLines}`);
+        }
+    }
+}
+exports.TestCodeCoverage = TestCodeCoverage;
 class Annotation {
     constructor(path, start_line, end_line, annotation_level, message, title, raw_details) {
         this.path = path;

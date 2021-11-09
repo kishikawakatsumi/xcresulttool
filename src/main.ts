@@ -13,6 +13,9 @@ const {stat} = promises
 async function run(): Promise<void> {
   try {
     const inputPath: string = core.getInput('path')
+    if (!inputPath) {
+      throw new Error('Failed to find the path to the input xcresult file.')
+    }
 
     const paths = inputPath.split('\n')
     const existPaths: string[] = []

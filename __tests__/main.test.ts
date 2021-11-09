@@ -99,7 +99,7 @@ test('UhooiPicBook.xcresult', async () => {
 
   const outputPath = path.join(os.tmpdir(), 'UhooiPicBook.md')
   await writeFile(outputPath, reportText)
-  // await writeFile('UhooiPicBook.md', reportText)
+  await writeFile('UhooiPicBook.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/UhooiPicBook.md')).toString()
   )
@@ -116,6 +116,20 @@ test('Attachment.xcresult', async () => {
   // await writeFile('Attachment.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/Attachment.md')).toString()
+  )
+})
+
+test('Coverage.xcresult', async () => {
+  const bundlePath = '__tests__/data/Coverage.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'Coverage.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('Coverage.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/Coverage.md')).toString()
   )
 })
 

@@ -5,6 +5,7 @@ import * as path from 'path'
 
 import {
   Annotation,
+  TestCodeCoverage,
   TestDetail,
   TestDetails,
   TestFailure,
@@ -36,6 +37,7 @@ import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata
 import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
 
 import {Activity} from './activity'
+import {Convert} from './coverage'
 import {Parser} from './parser'
 import {exportAttachments} from './attachment'
 
@@ -102,6 +104,19 @@ export class Formatter {
                   testReportChapter.sections[testableSummary.name] =
                     new TestReportSection(testableSummary, testSummaries)
                 }
+              }
+            }
+
+            if (action.actionResult.coverage) {
+              try {
+                const codeCoverage = Convert.toCodeCoverage(
+                  await this.parser.exportCodeCoverage()
+                )
+
+                const testCodeCoverage = new TestCodeCoverage(codeCoverage)
+                testReport.codeCoverage = testCodeCoverage
+              } catch (error) {
+                // no-op
               }
             }
           }
@@ -227,6 +242,10 @@ export class Formatter {
       chapterSummary.content.push('</table>\n')
 
       chapterSummary.content.push('---\n')
+
+      if (testReport.codeCoverage) {
+        chapterSummary.content.push(testReport.codeCoverage.lines.join('\n'))
+      }
 
       if (testSummary.stats.failed > 0) {
         testReport.testStatus = 'failure'
