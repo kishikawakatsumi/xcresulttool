@@ -135,7 +135,18 @@ test('Coverage.xcresult', async () => {
   const bundlePath = '__tests__/data/Coverage.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format()
-  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  let root = ''
+  if (process.env.GITHUB_REPOSITORY) {
+    const pr = github.context.payload.pull_request
+    const sha = (pr && pr.head.sha) || github.context.sha
+    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+  }
+  const re = new RegExp(`${root}`, 'g')
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`.replace(
+    re,
+    ''
+  )
 
   const outputPath = path.join(os.tmpdir(), 'Coverage.md')
   await writeFile(outputPath, reportText)
