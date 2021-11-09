@@ -37,6 +37,10 @@ jobs:
           title: TestResults test report
       - uses: ./
         with:
+          path: __tests__/data/UhooiPicBook.xcresult
+          title: UhooiPicBook test report
+      - uses: ./
+        with:
           path: |
             __tests__/data/Example.xcresult
             __tests__/data/KeychainAccess.xcresult
