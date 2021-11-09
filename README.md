@@ -46,7 +46,7 @@ jobs:
 ## Example
 
 ```yaml
-- uses: kishikawakatsumi/xcresulttool@v1.0.5
+- uses: kishikawakatsumi/xcresulttool@v1.1.0
   with:
     path: TestResults.xcresult
   if: success() || failure()
@@ -65,7 +65,7 @@ jobs:
         run: |
           xcodebuild -scheme MyFramework -resultBundlePath TestResults test
 
-      - uses: kishikawakatsumi/xcresulttool@v1.0.5
+      - uses: kishikawakatsumi/xcresulttool@v1.1.0
         with:
           path: TestResults.xcresult
         if: success() || failure()
@@ -76,7 +76,7 @@ jobs:
 ## Multiple result bundle paths
 
 ```yaml
-- uses: kishikawakatsumi/xcresulttool@v1.0.5
+- uses: kishikawakatsumi/xcresulttool@v1.1.0
   with:
     path: |
       results/Example.xcresult
@@ -88,7 +88,7 @@ jobs:
 ## Input parameters
 
 ```yaml
-- uses: kishikawakatsumi/xcresulttool@v1.0.5
+- uses: kishikawakatsumi/xcresulttool@v1.1.0
   with:
     # Path to the xcresult bundle.
     path: 'TestResults.xcresult'
