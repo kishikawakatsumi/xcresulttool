@@ -99,7 +99,7 @@ test('UhooiPicBook.xcresult', async () => {
 
   const outputPath = path.join(os.tmpdir(), 'UhooiPicBook.md')
   await writeFile(outputPath, reportText)
-  await writeFile('UhooiPicBook.md', reportText)
+  // await writeFile('UhooiPicBook.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/UhooiPicBook.md')).toString()
   )

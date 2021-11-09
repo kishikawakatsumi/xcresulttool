@@ -14,9 +14,9 @@
 <table>
 <tr>
 <th width="404px">
-<th width="204px" colspan="2"><b>Coverage
-<th width="80px"><b>Covered
-<th width="80px"><b>Executable
+<th width="204px" colspan="2">Coverage
+<th width="80px">Covered
+<th width="80px">Executable
 <tr>
 <td>UhooiPicBook.app
 <td><img src="https://xcresulttool-static.netlify.app/i/41.svg"/>
@@ -25,181 +25,181 @@
 <td align="right">1074
 <tr>
 <td>ActivityRouter.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">11
 <tr>
 <td>MonsterListViewController.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/75.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/75.svg"/>
 <td align="right">74.60 %
 <td align="right">94
 <td align="right">126
 <tr>
 <td>UIView+Material.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">7
 <tr>
 <td>SpotlightRepository.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/9.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/9.svg"/>
 <td align="right">9.30 %
 <td align="right">4
 <td align="right">43
 <tr>
 <td>UIColor+Hex.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">12
 <tr>
 <td>MonsterDetailViewController.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">57
 <tr>
 <td>UserDefaultsClient.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/92.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/92.svg"/>
 <td align="right">91.67 %
 <td align="right">22
 <td align="right">24
 <tr>
 <td>MonstersRepository.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/87.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/87.svg"/>
 <td align="right">86.67 %
 <td align="right">52
 <td align="right">60
 <tr>
 <td>UIImage+GIF.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">102
 <tr>
 <td>MonsterListInteractor.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/100.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/100.svg"/>
 <td align="right">100.00 %
 <td align="right">14
 <td align="right">14
 <tr>
 <td>ImagePopupRouter.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">13
 <tr>
 <td>MonsterDetailInteractor.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">2
 <tr>
 <td>ImagePopupViewController.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">14
 <tr>
 <td>AppDelegate.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/54.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/54.svg"/>
 <td align="right">53.57 %
 <td align="right">30
 <td align="right">56
 <tr>
 <td>UINavigationBar+Color.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/100.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/100.svg"/>
 <td align="right">100.00 %
 <td align="right">6
 <td align="right">6
 <tr>
 <td>InAppWebBrowserViewController.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">77
 <tr>
 <td>MonsterListRouter.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/30.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/30.svg"/>
 <td align="right">29.51 %
 <td align="right">18
 <td align="right">61
 <tr>
 <td>SceneDelegate.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/41.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/41.svg"/>
 <td align="right">40.63 %
 <td align="right">26
 <td align="right">64
 <tr>
 <td>MonsterDetailPresenter.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/100.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/100.svg"/>
 <td align="right">100.00 %
 <td align="right">20
 <td align="right">20
 <tr>
 <td>Bundle+String.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/57.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/57.svg"/>
 <td align="right">57.14 %
 <td align="right">12
 <td align="right">21
 <tr>
 <td>MonsterListPresenter.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/91.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/91.svg"/>
 <td align="right">91.18 %
 <td align="right">62
 <td align="right">68
 <tr>
 <td>MonsterDetailRouter.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">25
 <tr>
 <td>UIImage+Resize.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">14
 <tr>
 <td>InAppWebBrowserRouter.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">13
 <tr>
 <td>MonsterIntentObject+Convert.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">28
 <tr>
 <td>UICollectionView+Animation.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/100.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/100.svg"/>
 <td align="right">100.00 %
 <td align="right">49
 <td align="right">49
 <tr>
 <td>MonsterCollectionViewCell.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/35.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/35.svg"/>
 <td align="right">35.29 %
 <td align="right">6
 <td align="right">17
 <tr>
 <td>UIViewController+Alert.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/0.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/0.svg"/>
 <td align="right">0.00 %
 <td align="right">0
 <td align="right">6
 <tr>
 <td>BaseView.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/100.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/100.svg"/>
 <td align="right">100.00 %
 <td align="right">3
 <td align="right">3
 <tr>
 <td>ImageCacheManager.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/39.svg.svg"/>
+<td><img src="https://xcresulttool-static.netlify.app/i/39.svg"/>
 <td align="right">39.34 %
 <td align="right">24
 <td align="right">61
@@ -209,6 +209,8 @@
 <td align="right"><b>41.15 %
 <td align="right"><b>442
 <td align="right"><b>1074
+</table>
+
 ### Test Summary
 #### <a name="uhooipicbooktests_summary"/>[UhooiPicBookTests](#user-content-uhooipicbooktests)
 
