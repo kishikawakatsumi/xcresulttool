@@ -440,15 +440,14 @@ export class Formatter {
           `${testReport.creatingWorkspaceFilePath}`
         )
         chapterSummary.content.push('---\n')
-        const re = new RegExp(`${workspace}/`, 'g')
 
+        const re = new RegExp(`${workspace}/`, 'g')
         let root = ''
         if (process.env.GITHUB_REPOSITORY) {
           const pr = github.context.payload.pull_request
           const sha = (pr && pr.head.sha) || github.context.sha
           root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
         }
-
         chapterSummary.content.push(
           testReport.codeCoverage.lines.join('\n').replace(re, root)
         )
