@@ -627,7 +627,8 @@ class Formatter {
                 if (testReport.codeCoverage) {
                     const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
                     chapterSummary.content.push('---\n');
-                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n').replace(`${workspace}/`, ''));
+                    const re = new RegExp(`${workspace}/`, 'g');
+                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n').replace(re, ''));
                 }
                 const testDetails = new report_1.TestDetails();
                 for (const [, results] of Object.entries(chapter.sections)) {

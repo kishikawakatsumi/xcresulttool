@@ -439,8 +439,9 @@ export class Formatter {
           `${testReport.creatingWorkspaceFilePath}`
         )
         chapterSummary.content.push('---\n')
+        const re = new RegExp(`${workspace}/`, 'g')
         chapterSummary.content.push(
-          testReport.codeCoverage.lines.join('\n').replace(`${workspace}/`, '')
+          testReport.codeCoverage.lines.join('\n').replace(re, '')
         )
       }
 

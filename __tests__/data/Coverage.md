@@ -69,7 +69,7 @@
 <td align="right">8
 <td align="right">18
 <tr>
-<td>&nbsp;&nbsp;<a href="/Users/katsumi/Develop/xcresulttool-example/xcresulttool-example/AppDelegate.swift">AppDelegate.swift</a>
+<td>&nbsp;&nbsp;<a href="xcresulttool-example/AppDelegate.swift">AppDelegate.swift</a>
 <td><img src="https://xcresulttool-static.netlify.app/i/46.svg"/>
 <td align="right">46.15 %
 <td align="right">6
