@@ -63,13 +63,13 @@
 <td align="right">14
 <td align="right">31
 <tr>
-<td>&nbsp;&nbsp;ViewController.swift
+<td>&nbsp;&nbsp;<a href="xcresulttool-example/ViewController.swift">ViewController.swift</a>
 <td><img src="https://xcresulttool-static.netlify.app/i/44.svg"/>
 <td align="right">44.44 %
 <td align="right">8
 <td align="right">18
 <tr>
-<td>&nbsp;&nbsp;AppDelegate.swift
+<td>&nbsp;&nbsp;<a href="/Users/katsumi/Develop/xcresulttool-example/xcresulttool-example/AppDelegate.swift">AppDelegate.swift</a>
 <td><img src="https://xcresulttool-static.netlify.app/i/46.svg"/>
 <td align="right">46.15 %
 <td align="right">6

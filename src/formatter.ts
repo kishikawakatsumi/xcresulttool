@@ -435,8 +435,13 @@ export class Formatter {
       }
 
       if (testReport.codeCoverage) {
+        const workspace = path.dirname(
+          `${testReport.creatingWorkspaceFilePath}`
+        )
         chapterSummary.content.push('---\n')
-        chapterSummary.content.push(testReport.codeCoverage.lines.join('\n'))
+        chapterSummary.content.push(
+          testReport.codeCoverage.lines.join('\n').replace(`${workspace}/`, '')
+        )
       }
 
       const testDetails = new TestDetails()

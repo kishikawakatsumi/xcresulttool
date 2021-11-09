@@ -169,7 +169,9 @@ export class TestCodeCoverage {
         const lineCoverage = file.lineCoverage * 100
 
         this.lines.push('<tr>')
-        this.lines.push(`<td>&nbsp;&nbsp;${file.name}`)
+        this.lines.push(
+          `<td>&nbsp;&nbsp;<a href="${file.path}">${file.name}</a>`
+        )
         const image = `${lineCoverage.toFixed(0)}.svg`
         this.lines.push(`<td><img src="${baseUrl}${image}"/>`)
         this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`)
