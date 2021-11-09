@@ -243,10 +243,6 @@ export class Formatter {
 
       chapterSummary.content.push('---\n')
 
-      if (testReport.codeCoverage) {
-        chapterSummary.content.push(testReport.codeCoverage.lines.join('\n'))
-      }
-
       if (testSummary.stats.failed > 0) {
         testReport.testStatus = 'failure'
       } else if (testSummary.stats.passed > 0) {
@@ -436,6 +432,11 @@ export class Formatter {
         chapterSummary.content.push('')
       } else {
         chapterSummary.content.push(`All tests passed :tada:`)
+      }
+
+      if (testReport.codeCoverage) {
+        chapterSummary.content.push('---\n')
+        chapterSummary.content.push(testReport.codeCoverage.lines.join('\n'))
       }
 
       const testDetails = new TestDetails()

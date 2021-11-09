@@ -1,13 +1,13 @@
 /*eslint-disable
+no-empty,
+no-shadow,
+github/array-foreach,
+@typescript-eslint/explicit-function-return-type,
+@typescript-eslint/explicit-member-accessibility,
 @typescript-eslint/no-explicit-any,
 @typescript-eslint/no-extraneous-class,
-@typescript-eslint/explicit-member-accessibility,
-github/array-foreach,
-no-shadow,
-@typescript-eslint/prefer-includes,
-@typescript-eslint/explicit-function-return-type,
 @typescript-eslint/no-unused-vars,
-no-empty
+@typescript-eslint/prefer-includes,
 */
 
 // To parse this data:

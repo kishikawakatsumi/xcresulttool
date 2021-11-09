@@ -97,15 +97,15 @@ exports.exportAttachments = exportAttachments;
 "use strict";
 
 /*eslint-disable
+no-empty,
+no-shadow,
+github/array-foreach,
+@typescript-eslint/explicit-function-return-type,
+@typescript-eslint/explicit-member-accessibility,
 @typescript-eslint/no-explicit-any,
 @typescript-eslint/no-extraneous-class,
-@typescript-eslint/explicit-member-accessibility,
-github/array-foreach,
-no-shadow,
-@typescript-eslint/prefer-includes,
-@typescript-eslint/explicit-function-return-type,
 @typescript-eslint/no-unused-vars,
-no-empty
+@typescript-eslint/prefer-includes,
 */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Convert = void 0;
@@ -487,9 +487,6 @@ class Formatter {
                 chapterSummary.content.push(cols);
                 chapterSummary.content.push('</table>\n');
                 chapterSummary.content.push('---\n');
-                if (testReport.codeCoverage) {
-                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n'));
-                }
                 if (testSummary.stats.failed > 0) {
                     testReport.testStatus = 'failure';
                 }
@@ -626,6 +623,10 @@ class Formatter {
                 }
                 else {
                     chapterSummary.content.push(`All tests passed :tada:`);
+                }
+                if (testReport.codeCoverage) {
+                    chapterSummary.content.push('---\n');
+                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n'));
                 }
                 const testDetails = new report_1.TestDetails();
                 for (const [, results] of Object.entries(chapter.sections)) {

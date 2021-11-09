@@ -10,39 +10,6 @@
 
 ---
 
-### Code Coverage
-<table>
-<tr>
-<th width="404px">
-<th width="204px" colspan="2">Coverage
-<th width="80px">Covered
-<th width="80px">Executable
-<tr>
-<td>xcresulttool-example.app
-<td><img src="https://xcresulttool-static.netlify.app/i/45.svg"/>
-<td align="right">45.16 %
-<td align="right">14
-<td align="right">31
-<tr>
-<td>&nbsp;&nbsp;ViewController.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/44.svg"/>
-<td align="right">44.44 %
-<td align="right">8
-<td align="right">18
-<tr>
-<td>&nbsp;&nbsp;AppDelegate.swift
-<td><img src="https://xcresulttool-static.netlify.app/i/46.svg"/>
-<td align="right">46.15 %
-<td align="right">6
-<td align="right">13
-<tr>
-<td><b>Total
-<td><img src="https://xcresulttool-static.netlify.app/i/45.svg"/>
-<td align="right"><b>45.16 %
-<td align="right"><b>14
-<td align="right"><b>31
-</table>
-
 ### Test Summary
 #### <a name="xcresulttool-exampletests_summary"/>[xcresulttool-exampleTests](#user-content-xcresulttool-exampletests)
 
@@ -79,6 +46,41 @@
 <h4><a name="xcresulttool-exampletests_xcresulttool_exampletests/testskip()_failure-summary"/><a href="#user-content-xcresulttool-exampletests_xcresulttool_exampletests/testskip()">xcresulttool-exampleTests/xcresulttool_exampleTests/testSkip()</a></h4>
 <table><tr><td align="right" width="100px"><b>File</b><td width="668px">/Users/katsumi/Develop/xcresulttool-example/xcresulttool-exampleTests/xcresulttool_exampleTests.swift:44<tr><td align="right" width="100px"><b>Issue Type</b><td width="668px">Assertion Failure<tr><td align="right" width="100px"><b>Message</b><td width="668px">XCTAssertEqual failed: ("success") is not equal to ("fail")</table>
 
+
+---
+
+### Code Coverage
+<table>
+<tr>
+<th width="404px">
+<th width="204px" colspan="2">Coverage
+<th width="80px">Covered
+<th width="80px">Executable
+<tr>
+<td>xcresulttool-example.app
+<td><img src="https://xcresulttool-static.netlify.app/i/45.svg"/>
+<td align="right">45.16 %
+<td align="right">14
+<td align="right">31
+<tr>
+<td>&nbsp;&nbsp;ViewController.swift
+<td><img src="https://xcresulttool-static.netlify.app/i/44.svg"/>
+<td align="right">44.44 %
+<td align="right">8
+<td align="right">18
+<tr>
+<td>&nbsp;&nbsp;AppDelegate.swift
+<td><img src="https://xcresulttool-static.netlify.app/i/46.svg"/>
+<td align="right">46.15 %
+<td align="right">6
+<td align="right">13
+<tr>
+<td><b>Total
+<td><img src="https://xcresulttool-static.netlify.app/i/45.svg"/>
+<td align="right"><b>45.16 %
+<td align="right"><b>14
+<td align="right"><b>31
+</table>
 
 ### Test Details
 
