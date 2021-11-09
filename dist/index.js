@@ -1572,7 +1572,7 @@ class TestCodeCoverage {
             for (const file of target.files) {
                 const lineCoverage = file.lineCoverage * 100;
                 this.lines.push('<tr>');
-                this.lines.push(`<td>${file.name}`);
+                this.lines.push(`<td>&nbsp;&nbsp;${file.name}`);
                 const image = `${lineCoverage.toFixed(0)}.svg`;
                 this.lines.push(`<td><img src="https://xcresulttool-static.netlify.app/i/${image}"/>`);
                 this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`);
@@ -1585,7 +1585,7 @@ class TestCodeCoverage {
             this.lines.push('<tr>');
             this.lines.push(`<td><b>${total.name}`);
             const image = `${lineCoverage.toFixed(0)}.svg`;
-            this.lines.push(`<td><img src="https://xcresulttool-static.netlify.app/i/${image}.svg"/>`);
+            this.lines.push(`<td><img src="https://xcresulttool-static.netlify.app/i/${image}"/>`);
             this.lines.push(`<td align="right"><b>${lineCoverage.toFixed(2)} %`);
             this.lines.push(`<td align="right"><b>${total.coveredLines}`);
             this.lines.push(`<td align="right"><b>${total.executableLines}`);
