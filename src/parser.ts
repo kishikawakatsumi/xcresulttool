@@ -37,6 +37,23 @@ export class Parser {
     return Buffer.from(await readFile(outputPath))
   }
 
+  async exportCodeCoverage(): Promise<string> {
+    const args = ['xccov', 'view', '--report', '--json', this.bundlePath]
+
+    let output = ''
+    const options = {
+      silent: true,
+      listeners: {
+        stdout: (data: Buffer) => {
+          output += data.toString()
+        }
+      }
+    }
+
+    await exec.exec('xcrun', args, options)
+    return output
+  }
+
   private async toJSON(reference?: string): Promise<string> {
     const args = [
       'xcresulttool',

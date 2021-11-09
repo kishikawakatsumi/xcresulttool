@@ -1,10 +1,12 @@
 /*eslint-disable no-shadow */
 
 import * as Image from './image'
+import * as github from '@actions/github'
 import * as path from 'path'
 
 import {
   Annotation,
+  TestCodeCoverage,
   TestDetail,
   TestDetails,
   TestFailure,
@@ -36,6 +38,7 @@ import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata
 import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
 
 import {Activity} from './activity'
+import {Convert} from './coverage'
 import {Parser} from './parser'
 import {exportAttachments} from './attachment'
 
@@ -102,6 +105,19 @@ export class Formatter {
                   testReportChapter.sections[testableSummary.name] =
                     new TestReportSection(testableSummary, testSummaries)
                 }
+              }
+            }
+
+            if (action.actionResult.coverage) {
+              try {
+                const codeCoverage = Convert.toCodeCoverage(
+                  await this.parser.exportCodeCoverage()
+                )
+
+                const testCodeCoverage = new TestCodeCoverage(codeCoverage)
+                testReport.codeCoverage = testCodeCoverage
+              } catch (error) {
+                // no-op
               }
             }
           }
@@ -416,7 +432,25 @@ export class Formatter {
         chapterSummary.content.push(summaryFailures.join('\n'))
         chapterSummary.content.push('')
       } else {
-        chapterSummary.content.push(`All tests passed :tada:`)
+        chapterSummary.content.push(`All tests passed :tada:\n`)
+      }
+
+      if (testReport.codeCoverage) {
+        const workspace = path.dirname(
+          `${testReport.creatingWorkspaceFilePath}`
+        )
+        chapterSummary.content.push('---\n')
+
+        const re = new RegExp(`${workspace}/`, 'g')
+        let root = ''
+        if (process.env.GITHUB_REPOSITORY) {
+          const pr = github.context.payload.pull_request
+          const sha = (pr && pr.head.sha) || github.context.sha
+          root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+        }
+        chapterSummary.content.push(
+          testReport.codeCoverage.lines.join('\n').replace(re, root)
+        )
       }
 
       const testDetails = new TestDetails()

@@ -1,4 +1,5 @@
 import * as cp from 'child_process'
+import * as github from '@actions/github'
 import * as os from 'os'
 import * as path from 'path'
 import * as process from 'process'
@@ -95,7 +96,18 @@ test('UhooiPicBook.xcresult', async () => {
   const bundlePath = '__tests__/data/UhooiPicBook.xcresult'
   const formatter = new Formatter(bundlePath)
   const report = await formatter.format()
-  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  let root = ''
+  if (process.env.GITHUB_REPOSITORY) {
+    const pr = github.context.payload.pull_request
+    const sha = (pr && pr.head.sha) || github.context.sha
+    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+  }
+  const re = new RegExp(`${root}`, 'g')
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`.replace(
+    re,
+    ''
+  )
 
   const outputPath = path.join(os.tmpdir(), 'UhooiPicBook.md')
   await writeFile(outputPath, reportText)
@@ -116,6 +128,31 @@ test('Attachment.xcresult', async () => {
   // await writeFile('Attachment.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/Attachment.md')).toString()
+  )
+})
+
+test('Coverage.xcresult', async () => {
+  const bundlePath = '__tests__/data/Coverage.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+
+  let root = ''
+  if (process.env.GITHUB_REPOSITORY) {
+    const pr = github.context.payload.pull_request
+    const sha = (pr && pr.head.sha) || github.context.sha
+    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+  }
+  const re = new RegExp(`${root}`, 'g')
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`.replace(
+    re,
+    ''
+  )
+
+  const outputPath = path.join(os.tmpdir(), 'Coverage.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('Coverage.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/Coverage.md')).toString()
   )
 })
 

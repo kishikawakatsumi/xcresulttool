@@ -4,6 +4,7 @@ import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
 import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
 import {ActionTestSummaryIdentifiableObject} from '../dev/@types/ActionTestSummaryIdentifiableObject.d'
 import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
+import {CodeCoverage} from './coverage'
 
 export class TestReport {
   entityName?: string
@@ -11,6 +12,7 @@ export class TestReport {
   testStatus = 'neutral'
 
   readonly chapters: TestReportChapter[] = []
+  codeCoverage?: TestCodeCoverage
   readonly annotations: Annotation[] = []
 
   get reportSummary(): string {
@@ -116,6 +118,82 @@ export class TestFailureGroup {
 
 export class TestFailure {
   readonly lines: string[] = []
+}
+
+export class TestCodeCoverage {
+  readonly lines: string[] = []
+
+  constructor(codeCoverage: CodeCoverage) {
+    const baseUrl = 'https://xcresulttool-static.netlify.app/i/'
+
+    this.lines.push('### Code Coverage')
+    this.lines.push('<table>')
+    this.lines.push('<tr>')
+    this.lines.push('<th width="344px">')
+    this.lines.push('<th colspan="2">Coverage')
+    this.lines.push('<th width="100px">Covered')
+    this.lines.push('<th width="100px">Executable')
+
+    const total = {
+      name: 'Total',
+      lineCoverage: 0,
+      coveredLines: 0,
+      executableLines: 0,
+      hasCodeCoverage: false
+    }
+
+    for (const target of codeCoverage.targets) {
+      if (target.name.endsWith('.xctest')) {
+        continue
+      }
+      total.hasCodeCoverage = true
+
+      {
+        const lineCoverage = target.lineCoverage * 100
+
+        this.lines.push('<tr>')
+        this.lines.push(`<td>${target.name}`)
+        const image = `${lineCoverage.toFixed(0)}.svg`
+        this.lines.push(`<td width="120px"><img src="${baseUrl}${image}"/>`)
+        this.lines.push(
+          `<td width="104px" align="right">${lineCoverage.toFixed(2)} %`
+        )
+        this.lines.push(`<td align="right">${target.coveredLines}`)
+        this.lines.push(`<td align="right">${target.executableLines}`)
+      }
+
+      total.coveredLines += target.coveredLines
+      total.executableLines += target.executableLines
+
+      for (const file of target.files) {
+        const lineCoverage = file.lineCoverage * 100
+
+        this.lines.push('<tr>')
+        this.lines.push(
+          `<td>&nbsp;&nbsp;<a href="${file.path}">${file.name}</a>`
+        )
+        const image = `${lineCoverage.toFixed(0)}.svg`
+        this.lines.push(`<td><img src="${baseUrl}${image}"/>`)
+        this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`)
+        this.lines.push(`<td align="right">${file.coveredLines}`)
+        this.lines.push(`<td align="right">${file.executableLines}`)
+      }
+    }
+
+    if (total.hasCodeCoverage) {
+      const lineCoverage = (total.coveredLines / total.executableLines) * 100
+
+      this.lines.push('<tr>')
+      this.lines.push(`<td><b>${total.name}`)
+      const image = `${lineCoverage.toFixed(0)}.svg`
+      this.lines.push(`<td><img src="${baseUrl}${image}"/>`)
+      this.lines.push(`<td align="right"><b>${lineCoverage.toFixed(2)} %`)
+      this.lines.push(`<td align="right"><b>${total.coveredLines}`)
+      this.lines.push(`<td align="right"><b>${total.executableLines}`)
+
+      this.lines.push('</table>\n')
+    }
+  }
 }
 
 export class Annotation {
