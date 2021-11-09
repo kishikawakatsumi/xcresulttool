@@ -1,6 +1,7 @@
 /*eslint-disable no-shadow */
 
 import * as Image from './image'
+import * as github from '@actions/github'
 import * as path from 'path'
 
 import {
@@ -431,7 +432,7 @@ export class Formatter {
         chapterSummary.content.push(summaryFailures.join('\n'))
         chapterSummary.content.push('')
       } else {
-        chapterSummary.content.push(`All tests passed :tada:`)
+        chapterSummary.content.push(`All tests passed :tada:\n`)
       }
 
       if (testReport.codeCoverage) {
@@ -440,8 +441,16 @@ export class Formatter {
         )
         chapterSummary.content.push('---\n')
         const re = new RegExp(`${workspace}/`, 'g')
+
+        let root = ''
+        if (process.env.GITHUB_REPOSITORY) {
+          const pr = github.context.payload.pull_request
+          const sha = (pr && pr.head.sha) || github.context.sha
+          root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+        }
+
         chapterSummary.content.push(
-          testReport.codeCoverage.lines.join('\n').replace(re, '')
+          testReport.codeCoverage.lines.join('\n').replace(re, root)
         )
       }
 

@@ -322,6 +322,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
+const github = __importStar(__nccwpck_require__(5438));
 const path = __importStar(__nccwpck_require__(5622));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
@@ -622,13 +623,19 @@ class Formatter {
                     chapterSummary.content.push('');
                 }
                 else {
-                    chapterSummary.content.push(`All tests passed :tada:`);
+                    chapterSummary.content.push(`All tests passed :tada:\n`);
                 }
                 if (testReport.codeCoverage) {
                     const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
                     chapterSummary.content.push('---\n');
                     const re = new RegExp(`${workspace}/`, 'g');
-                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n').replace(re, ''));
+                    let root = '';
+                    if (process.env.GITHUB_REPOSITORY) {
+                        const pr = github.context.payload.pull_request;
+                        const sha = (pr && pr.head.sha) || github.context.sha;
+                        root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`;
+                    }
+                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n').replace(re, root));
                 }
                 const testDetails = new report_1.TestDetails();
                 for (const [, results] of Object.entries(chapter.sections)) {

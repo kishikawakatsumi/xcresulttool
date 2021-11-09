@@ -35,6 +35,7 @@
 
 ### <img src="https://xcresulttool-static.netlify.app/i/failure.png" alt="Failure" title="Failure" width="14px" align="top"> Failures
 All tests passed :tada:
+
 ---
 
 ### Code Coverage
