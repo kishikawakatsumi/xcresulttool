@@ -124,13 +124,15 @@ export class TestCodeCoverage {
   readonly lines: string[] = []
 
   constructor(codeCoverage: CodeCoverage) {
+    const baseUrl = 'https://xcresulttool-static.netlify.app/i/'
+
     this.lines.push('### Code Coverage')
     this.lines.push('<table>')
     this.lines.push('<tr>')
-    this.lines.push('<th width="404px">')
-    this.lines.push('<th width="204px" colspan="2">Coverage')
-    this.lines.push('<th width="80px">Covered')
-    this.lines.push('<th width="80px">Executable')
+    this.lines.push('<th width="324px">')
+    this.lines.push('<th width="244px" colspan="2">Coverage')
+    this.lines.push('<th width="100px">Covered')
+    this.lines.push('<th width="100px">Executable')
 
     const total = {
       name: 'Total',
@@ -152,9 +154,7 @@ export class TestCodeCoverage {
         this.lines.push('<tr>')
         this.lines.push(`<td>${target.name}`)
         const image = `${lineCoverage.toFixed(0)}.svg`
-        this.lines.push(
-          `<td><img src="https://xcresulttool-static.netlify.app/i/${image}"/>`
-        )
+        this.lines.push(`<td><img src="${baseUrl}${image}"/>`)
         this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`)
         this.lines.push(`<td align="right">${target.coveredLines}`)
         this.lines.push(`<td align="right">${target.executableLines}`)
@@ -169,9 +169,7 @@ export class TestCodeCoverage {
         this.lines.push('<tr>')
         this.lines.push(`<td>&nbsp;&nbsp;${file.name}`)
         const image = `${lineCoverage.toFixed(0)}.svg`
-        this.lines.push(
-          `<td><img src="https://xcresulttool-static.netlify.app/i/${image}"/>`
-        )
+        this.lines.push(`<td><img src="${baseUrl}${image}"/>`)
         this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`)
         this.lines.push(`<td align="right">${file.coveredLines}`)
         this.lines.push(`<td align="right">${file.executableLines}`)
@@ -184,9 +182,7 @@ export class TestCodeCoverage {
       this.lines.push('<tr>')
       this.lines.push(`<td><b>${total.name}`)
       const image = `${lineCoverage.toFixed(0)}.svg`
-      this.lines.push(
-        `<td><img src="https://xcresulttool-static.netlify.app/i/${image}"/>`
-      )
+      this.lines.push(`<td><img src="${baseUrl}${image}"/>`)
       this.lines.push(`<td align="right"><b>${lineCoverage.toFixed(2)} %`)
       this.lines.push(`<td align="right"><b>${total.coveredLines}`)
       this.lines.push(`<td align="right"><b>${total.executableLines}`)
