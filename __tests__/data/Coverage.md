@@ -52,14 +52,14 @@
 ### Code Coverage
 <table>
 <tr>
-<th width="324px">
-<th width="244px" colspan="2">Coverage
+<th width="344px">
+<th colspan="2">Coverage
 <th width="100px">Covered
 <th width="100px">Executable
 <tr>
 <td>xcresulttool-example.app
-<td><img src="https://xcresulttool-static.netlify.app/i/45.svg"/>
-<td align="right">45.16 %
+<td width="120px"><img src="https://xcresulttool-static.netlify.app/i/45.svg"/>
+<td width="104px" align="right">45.16 %
 <td align="right">14
 <td align="right">31
 <tr>

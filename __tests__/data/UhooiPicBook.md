@@ -40,14 +40,14 @@ All tests passed :tada:
 ### Code Coverage
 <table>
 <tr>
-<th width="324px">
-<th width="244px" colspan="2">Coverage
+<th width="344px">
+<th colspan="2">Coverage
 <th width="100px">Covered
 <th width="100px">Executable
 <tr>
 <td>UhooiPicBook.app
-<td><img src="https://xcresulttool-static.netlify.app/i/41.svg"/>
-<td align="right">41.15 %
+<td width="120px"><img src="https://xcresulttool-static.netlify.app/i/41.svg"/>
+<td width="104px" align="right">41.15 %
 <td align="right">442
 <td align="right">1074
 <tr>

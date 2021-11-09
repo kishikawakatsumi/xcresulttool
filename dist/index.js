@@ -1543,8 +1543,8 @@ class TestCodeCoverage {
         this.lines.push('### Code Coverage');
         this.lines.push('<table>');
         this.lines.push('<tr>');
-        this.lines.push('<th width="324px">');
-        this.lines.push('<th width="244px" colspan="2">Coverage');
+        this.lines.push('<th width="344px">');
+        this.lines.push('<th colspan="2">Coverage');
         this.lines.push('<th width="100px">Covered');
         this.lines.push('<th width="100px">Executable');
         const total = {
@@ -1564,8 +1564,8 @@ class TestCodeCoverage {
                 this.lines.push('<tr>');
                 this.lines.push(`<td>${target.name}`);
                 const image = `${lineCoverage.toFixed(0)}.svg`;
-                this.lines.push(`<td><img src="${baseUrl}${image}"/>`);
-                this.lines.push(`<td align="right">${lineCoverage.toFixed(2)} %`);
+                this.lines.push(`<td width="120px"><img src="${baseUrl}${image}"/>`);
+                this.lines.push(`<td width="104px" align="right">${lineCoverage.toFixed(2)} %`);
                 this.lines.push(`<td align="right">${target.coveredLines}`);
                 this.lines.push(`<td align="right">${target.executableLines}`);
             }
