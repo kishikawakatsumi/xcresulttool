@@ -1,3 +1,5 @@
+import * as pathModule from 'path'
+
 import {ActionRunDestinationRecord} from '../dev/@types/ActionRunDestinationRecord.d'
 import {ActionTestMetadata} from '../dev/@types/ActionTestMetadata.d'
 import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
@@ -12,7 +14,7 @@ export class BuildLog {
   content: string[] = []
   readonly annotations: Annotation[] = []
 
-  constructor(log: ActivityLogSection) {
+  constructor(log: ActivityLogSection, creatingWorkspaceFilePath?: string) {
     const lines: string[] = []
     if (!log.subsections) {
       return
@@ -62,8 +64,12 @@ export class BuildLog {
                     }
                   }
                 }
+                const workspace = pathModule.dirname(
+                  `${creatingWorkspaceFilePath ?? ''}`
+                )
+                const location = url.toString().replace(`${workspace}/`, '')
                 const annotation = new Annotation(
-                  url.toString(),
+                  location,
                   startLine,
                   endLine,
                   'failure',

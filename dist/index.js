@@ -358,7 +358,7 @@ class Formatter {
                 for (const action of actionsInvocationRecord.actions) {
                     if (action.buildResult.logRef) {
                         const log = yield this.parser.parse(action.buildResult.logRef.id);
-                        const buildLog = new report_1.BuildLog(log);
+                        const buildLog = new report_1.BuildLog(log, testReport.creatingWorkspaceFilePath);
                         if (buildLog.content.length) {
                             testReport.buildLog = buildLog;
                             for (const annotation of buildLog.annotations) {
@@ -1458,14 +1458,34 @@ function parsePrimitive(element) {
 /***/ }),
 
 /***/ 8269:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = exports.BuildLog = void 0;
+const pathModule = __importStar(__nccwpck_require__(5622));
 class BuildLog {
-    constructor(log) {
+    constructor(log, creatingWorkspaceFilePath) {
         var _a, _b;
         this.content = [];
         this.annotations = [];
@@ -1515,7 +1535,9 @@ class BuildLog {
                                         }
                                     }
                                 }
-                                const annotation = new Annotation(url.toString(), startLine, endLine, 'failure', message.title, message.type);
+                                const workspace = pathModule.dirname(`${creatingWorkspaceFilePath !== null && creatingWorkspaceFilePath !== void 0 ? creatingWorkspaceFilePath : ''}`);
+                                const location = url.toString().replace(`${workspace}/`, '');
+                                const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
                                 this.annotations.push(annotation);
                             }
                         }

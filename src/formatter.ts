@@ -87,7 +87,10 @@ export class Formatter {
           const log: ActivityLogSection = await this.parser.parse(
             action.buildResult.logRef.id
           )
-          const buildLog = new BuildLog(log)
+          const buildLog = new BuildLog(
+            log,
+            testReport.creatingWorkspaceFilePath
+          )
           if (buildLog.content.length) {
             testReport.buildLog = buildLog
             for (const annotation of buildLog.annotations) {
