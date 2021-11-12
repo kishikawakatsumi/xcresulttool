@@ -93,6 +93,7 @@ export class Formatter {
           )
           if (buildLog.content.length) {
             testReport.buildLog = buildLog
+            testReport.testStatus = 'failure'
             for (const annotation of buildLog.annotations) {
               testReport.annotations.push(annotation)
             }

@@ -361,6 +361,7 @@ class Formatter {
                         const buildLog = new report_1.BuildLog(log, testReport.creatingWorkspaceFilePath);
                         if (buildLog.content.length) {
                             testReport.buildLog = buildLog;
+                            testReport.testStatus = 'failure';
                             for (const annotation of buildLog.annotations) {
                                 testReport.annotations.push(annotation);
                             }
