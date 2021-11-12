@@ -1486,7 +1486,7 @@ exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.Te
 const pathModule = __importStar(__nccwpck_require__(5622));
 class BuildLog {
     constructor(log, creatingWorkspaceFilePath) {
-        var _a, _b, _c;
+        var _a, _b;
         this.content = [];
         this.annotations = [];
         const lines = [];
@@ -1536,7 +1536,9 @@ class BuildLog {
                                         }
                                     }
                                 }
-                                const location = (_c = message.location) === null || _c === void 0 ? void 0 : _c.url.replace('file://', '').replace(`${workspace}/`, '');
+                                const location = url.pathname
+                                    .replace('file://', '')
+                                    .replace(`${workspace}/`, '');
                                 const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
                                 this.annotations.push(annotation);
                             }
