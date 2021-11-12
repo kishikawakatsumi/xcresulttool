@@ -1483,7 +1483,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = exports.BuildLog = void 0;
-const github = __importStar(__nccwpck_require__(5438));
 const pathModule = __importStar(__nccwpck_require__(5622));
 class BuildLog {
     constructor(log, creatingWorkspaceFilePath) {
@@ -1537,16 +1536,10 @@ class BuildLog {
                                         }
                                     }
                                 }
-                                let root = '';
-                                if (process.env.GITHUB_REPOSITORY) {
-                                    const pr = github.context.payload.pull_request;
-                                    const sha = (pr && pr.head.sha) || github.context.sha;
-                                    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`;
-                                }
                                 const location = url.pathname
                                     .replace('file://', '')
                                     .replace(`${workspace}/`, '');
-                                const annotation = new Annotation(`${root}/${location}`, startLine, endLine, 'failure', message.title, message.type);
+                                const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
                                 this.annotations.push(annotation);
                             }
                         }
