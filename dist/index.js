@@ -365,6 +365,7 @@ class Formatter {
                             for (const annotation of buildLog.annotations) {
                                 testReport.annotations.push(annotation);
                             }
+                            console.log(buildLog.content.join('\n'));
                         }
                     }
                     if (action.actionResult) {
@@ -1510,7 +1511,7 @@ class BuildLog {
                 if (subsection.hasOwnProperty('exitCode')) {
                     const logCommandInvocationSection = subsection;
                     if (logCommandInvocationSection.exitCode !== 0) {
-                        lines.push(`<b>${logCommandInvocationSection.title}`);
+                        lines.push(`<b>${logCommandInvocationSection.title}</b>`);
                         for (const message of subsection.messages) {
                             if (message.category) {
                                 lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
@@ -1550,7 +1551,7 @@ class BuildLog {
                         }
                         const pre = '```\n';
                         const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
-                        lines.push(`\n${pre}${emittedOutput}${pre}`);
+                        lines.push(`${pre}${emittedOutput}${pre}`);
                     }
                 }
                 else if (subsection.result !== 'succeeded') {
@@ -1562,18 +1563,7 @@ class BuildLog {
             }
         }
         if (failures.length) {
-            this.content.push('<table>');
-            for (const [index, line] of lines.entries()) {
-                this.content.push('<tr>');
-                if (index === 0) {
-                    this.content.push('<td width="768px">');
-                }
-                else {
-                    this.content.push('<td>');
-                }
-                this.content.push(line);
-            }
-            this.content.push('</table>');
+            this.content.push(lines.join('\n'));
         }
     }
 }
