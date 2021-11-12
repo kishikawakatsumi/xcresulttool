@@ -4,13 +4,106 @@ import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
 import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
 import {ActionTestSummaryIdentifiableObject} from '../dev/@types/ActionTestSummaryIdentifiableObject.d'
 import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
+import {ActivityLogCommandInvocationSection} from '../dev/@types/ActivityLogCommandInvocationSection.d'
+import {ActivityLogSection} from '../dev/@types/ActivityLogSection.d'
 import {CodeCoverage} from './coverage'
+
+export class BuildLog {
+  content: string[] = []
+  readonly annotations: Annotation[] = []
+
+  constructor(log: ActivityLogSection) {
+    const lines: string[] = []
+    if (!log.subsections) {
+      return
+    }
+
+    const failures = log.subsections.filter(subsection => {
+      if (subsection.hasOwnProperty('exitCode')) {
+        const logCommandInvocationSection =
+          subsection as ActivityLogCommandInvocationSection
+        return logCommandInvocationSection.exitCode !== 0
+      } else {
+        return subsection.result !== 'succeeded'
+      }
+    })
+    for (const failure of failures) {
+      for (const subsection of failure.subsections) {
+        if (subsection.hasOwnProperty('exitCode')) {
+          const logCommandInvocationSection =
+            subsection as ActivityLogCommandInvocationSection
+          if (logCommandInvocationSection.exitCode !== 0) {
+            for (const message of subsection.messages) {
+              lines.push(`${message.type}:&nbsp;${message.title}`)
+              if (message.category) {
+                lines.push(message.category)
+              }
+              if (message.location?.url) {
+                let startLine = 0
+                let endLine = 0
+
+                const url = new URL(message.location?.url)
+                const locations = url.hash.substring(1).split('&') as [string]
+                for (const location of locations) {
+                  const pair = location.split('=')
+                  if (pair.length === 2) {
+                    const value = parseInt(pair[1])
+                    switch (pair[0]) {
+                      case 'StartingLineNumber': {
+                        startLine = value
+                        break
+                      }
+                      case 'EndingLineNumber': {
+                        endLine = value
+                        break
+                      }
+                      default:
+                        break
+                    }
+                  }
+                }
+                const annotation = new Annotation(
+                  url.toString(),
+                  startLine,
+                  endLine,
+                  'failure',
+                  message.title,
+                  message.type
+                )
+                this.annotations.push(annotation)
+              }
+            }
+            lines.push(logCommandInvocationSection.title)
+            lines.push(
+              `<pre>${logCommandInvocationSection.emittedOutput}</pre>`
+            )
+          }
+        } else if (subsection.result !== 'succeeded') {
+          lines.push(subsection.title)
+          for (const message of subsection.messages) {
+            lines.push(message.title)
+          }
+        }
+      }
+    }
+    if (failures.length) {
+      this.content.push('<table>')
+      for (const line of lines) {
+        this.content.push('<tr>')
+        this.content.push('<td width="768px">')
+        this.content.push(line)
+      }
+      this.content.push('</table>')
+    }
+  }
+}
 
 export class TestReport {
   entityName?: string
   creatingWorkspaceFilePath?: string
   testStatus = 'neutral'
 
+  buildLog?: BuildLog
   readonly chapters: TestReportChapter[] = []
   codeCoverage?: TestCodeCoverage
   readonly annotations: Annotation[] = []
@@ -28,8 +121,14 @@ export class TestReport {
         } else {
           summaryTitle = `## ${chapter.schemeCommandName}`
         }
+
+        let buildSummary = ''
+        if (this.buildLog) {
+          const content = this.buildLog.content.join('\n')
+          buildSummary = `## Build Summary\n\n${content}\n\n`
+        }
         const summaryContent = chapterSummary.content.join('\n')
-        lines.push(`${summaryTitle}\n\n${summaryContent}`)
+        lines.push(`${buildSummary}${summaryTitle}\n\n${summaryContent}`)
       }
     }
 

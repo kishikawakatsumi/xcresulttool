@@ -356,6 +356,16 @@ class Formatter {
             }
             if (actionsInvocationRecord.actions) {
                 for (const action of actionsInvocationRecord.actions) {
+                    if (action.buildResult.logRef) {
+                        const log = yield this.parser.parse(action.buildResult.logRef.id);
+                        const buildLog = new report_1.BuildLog(log);
+                        if (buildLog.content.length) {
+                            testReport.buildLog = buildLog;
+                            for (const annotation of buildLog.annotations) {
+                                testReport.annotations.push(annotation);
+                            }
+                        }
+                    }
                     if (action.actionResult) {
                         if (action.actionResult.testsRef) {
                             const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName, action.runDestination, action.title);
@@ -1442,7 +1452,86 @@ function parsePrimitive(element) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
+exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = exports.BuildLog = void 0;
+class BuildLog {
+    constructor(log) {
+        var _a, _b;
+        this.content = [];
+        this.annotations = [];
+        const lines = [];
+        if (!log.subsections) {
+            return;
+        }
+        const failures = log.subsections.filter(subsection => {
+            if (subsection.hasOwnProperty('exitCode')) {
+                const logCommandInvocationSection = subsection;
+                return logCommandInvocationSection.exitCode !== 0;
+            }
+            else {
+                return subsection.result !== 'succeeded';
+            }
+        });
+        for (const failure of failures) {
+            for (const subsection of failure.subsections) {
+                if (subsection.hasOwnProperty('exitCode')) {
+                    const logCommandInvocationSection = subsection;
+                    if (logCommandInvocationSection.exitCode !== 0) {
+                        for (const message of subsection.messages) {
+                            lines.push(`${message.type}:&nbsp;${message.title}`);
+                            if (message.category) {
+                                lines.push(message.category);
+                            }
+                            if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
+                                let startLine = 0;
+                                let endLine = 0;
+                                const url = new URL((_b = message.location) === null || _b === void 0 ? void 0 : _b.url);
+                                const locations = url.hash.substring(1).split('&');
+                                for (const location of locations) {
+                                    const pair = location.split('=');
+                                    if (pair.length === 2) {
+                                        const value = parseInt(pair[1]);
+                                        switch (pair[0]) {
+                                            case 'StartingLineNumber': {
+                                                startLine = value;
+                                                break;
+                                            }
+                                            case 'EndingLineNumber': {
+                                                endLine = value;
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                                const annotation = new Annotation(url.toString(), startLine, endLine, 'failure', message.title, message.type);
+                                this.annotations.push(annotation);
+                            }
+                        }
+                        lines.push(logCommandInvocationSection.title);
+                        lines.push(`<pre>${logCommandInvocationSection.emittedOutput}</pre>`);
+                    }
+                }
+                else if (subsection.result !== 'succeeded') {
+                    lines.push(subsection.title);
+                    for (const message of subsection.messages) {
+                        lines.push(message.title);
+                    }
+                }
+            }
+        }
+        if (failures.length) {
+            this.content.push('<table>');
+            for (const line of lines) {
+                this.content.push('<tr>');
+                this.content.push('<td width="768px">');
+                this.content.push(line);
+            }
+            this.content.push('</table>');
+        }
+    }
+}
+exports.BuildLog = BuildLog;
 class TestReport {
     constructor() {
         this.testStatus = 'neutral';
@@ -1463,8 +1552,13 @@ class TestReport {
                 else {
                     summaryTitle = `## ${chapter.schemeCommandName}`;
                 }
+                let buildSummary = '';
+                if (this.buildLog) {
+                    const content = this.buildLog.content.join('\n');
+                    buildSummary = `## Build Summary\n\n${content}\n\n`;
+                }
                 const summaryContent = chapterSummary.content.join('\n');
-                lines.push(`${summaryTitle}\n\n${summaryContent}`);
+                lines.push(`${buildSummary}${summaryTitle}\n\n${summaryContent}`);
             }
         }
         return lines.join('\n');
