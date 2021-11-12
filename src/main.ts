@@ -84,7 +84,7 @@ async function run(): Promise<void> {
         output: {
           title: 'Xcode test results',
           summary: reportSummary,
-          text: reportDetail ?? null,
+          text: reportDetail.trim() ? reportDetail : null,
           annotations
         }
       })
