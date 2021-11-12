@@ -1540,6 +1540,10 @@ class TestReport {
     }
     get reportSummary() {
         const lines = [];
+        if (this.buildLog) {
+            const content = this.buildLog.content.join('\n');
+            lines.push(`## Build Summary\n\n${content}\n`);
+        }
         for (const chapter of this.chapters) {
             for (const chapterSummary of chapter.summaries) {
                 let summaryTitle = '';
@@ -1552,13 +1556,8 @@ class TestReport {
                 else {
                     summaryTitle = `## ${chapter.schemeCommandName}`;
                 }
-                let buildSummary = '';
-                if (this.buildLog) {
-                    const content = this.buildLog.content.join('\n');
-                    buildSummary = `## Build Summary\n\n${content}\n\n`;
-                }
                 const summaryContent = chapterSummary.content.join('\n');
-                lines.push(`${buildSummary}${summaryTitle}\n\n${summaryContent}`);
+                lines.push(`${summaryTitle}\n\n${summaryContent}`);
             }
         }
         return lines.join('\n');
