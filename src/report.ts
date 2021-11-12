@@ -1,3 +1,4 @@
+import * as github from '@actions/github'
 import * as pathModule from 'path'
 
 import {ActionRunDestinationRecord} from '../dev/@types/ActionRunDestinationRecord.d'
@@ -65,11 +66,17 @@ export class BuildLog {
                     }
                   }
                 }
+                let root = ''
+                if (process.env.GITHUB_REPOSITORY) {
+                  const pr = github.context.payload.pull_request
+                  const sha = (pr && pr.head.sha) || github.context.sha
+                  root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+                }
                 const location = url.pathname
                   .replace('file://', '')
                   .replace(`${workspace}/`, '')
                 const annotation = new Annotation(
-                  location,
+                  `${root}/${location}`,
                   startLine,
                   endLine,
                   'failure',
