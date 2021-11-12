@@ -1199,7 +1199,7 @@ function run() {
                     output: {
                         title: 'Xcode test results',
                         summary: reportSummary,
-                        text: reportDetail,
+                        text: reportDetail !== null && reportDetail !== void 0 ? reportDetail : null,
                         annotations
                     }
                 });
