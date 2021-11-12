@@ -1486,13 +1486,14 @@ exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.Te
 const pathModule = __importStar(__nccwpck_require__(5622));
 class BuildLog {
     constructor(log, creatingWorkspaceFilePath) {
-        var _a, _b;
+        var _a, _b, _c;
         this.content = [];
         this.annotations = [];
         const lines = [];
         if (!log.subsections) {
             return;
         }
+        const workspace = pathModule.dirname(`${creatingWorkspaceFilePath !== null && creatingWorkspaceFilePath !== void 0 ? creatingWorkspaceFilePath : ''}`);
         const failures = log.subsections.filter(subsection => {
             if (subsection.hasOwnProperty('exitCode')) {
                 const logCommandInvocationSection = subsection;
@@ -1535,14 +1536,14 @@ class BuildLog {
                                         }
                                     }
                                 }
-                                const workspace = pathModule.dirname(`${creatingWorkspaceFilePath !== null && creatingWorkspaceFilePath !== void 0 ? creatingWorkspaceFilePath : ''}`);
-                                const location = url.toString().replace(`${workspace}/`, '');
+                                const location = (_c = message.location) === null || _c === void 0 ? void 0 : _c.url.replace(`${workspace}/`, '');
                                 const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
                                 this.annotations.push(annotation);
                             }
                         }
                         lines.push(logCommandInvocationSection.title);
-                        lines.push(`<pre>${logCommandInvocationSection.emittedOutput}</pre>`);
+                        const emittedOutput = logCommandInvocationSection.emittedOutput.replace(`${workspace}/`, '');
+                        lines.push(`<pre>${emittedOutput}</pre>`);
                     }
                 }
                 else if (subsection.result !== 'succeeded') {

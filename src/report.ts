@@ -19,6 +19,7 @@ export class BuildLog {
     if (!log.subsections) {
       return
     }
+    const workspace = pathModule.dirname(`${creatingWorkspaceFilePath ?? ''}`)
 
     const failures = log.subsections.filter(subsection => {
       if (subsection.hasOwnProperty('exitCode')) {
@@ -64,10 +65,10 @@ export class BuildLog {
                     }
                   }
                 }
-                const workspace = pathModule.dirname(
-                  `${creatingWorkspaceFilePath ?? ''}`
+                const location = message.location?.url.replace(
+                  `${workspace}/`,
+                  ''
                 )
-                const location = url.toString().replace(`${workspace}/`, '')
                 const annotation = new Annotation(
                   location,
                   startLine,
@@ -80,9 +81,12 @@ export class BuildLog {
               }
             }
             lines.push(logCommandInvocationSection.title)
-            lines.push(
-              `<pre>${logCommandInvocationSection.emittedOutput}</pre>`
-            )
+            const emittedOutput =
+              logCommandInvocationSection.emittedOutput.replace(
+                `${workspace}/`,
+                ''
+              )
+            lines.push(`<pre>${emittedOutput}</pre>`)
           }
         } else if (subsection.result !== 'succeeded') {
           lines.push(subsection.title)
