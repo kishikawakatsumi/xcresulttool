@@ -6,6 +6,7 @@ import * as path from 'path'
 
 import {
   Annotation,
+  BuildLog,
   TestCodeCoverage,
   TestDetail,
   TestDetails,
@@ -38,6 +39,7 @@ import {ActionsInvocationMetadata} from '../dev/@types/ActionsInvocationMetadata
 import {ActionsInvocationRecord} from '../dev/@types/ActionsInvocationRecord.d'
 
 import {Activity} from './activity'
+import {ActivityLogSection} from '../dev/@types/ActivityLogSection.d'
 import {Convert} from './coverage'
 import {Parser} from './parser'
 import {exportAttachments} from './attachment'
@@ -81,6 +83,22 @@ export class Formatter {
 
     if (actionsInvocationRecord.actions) {
       for (const action of actionsInvocationRecord.actions) {
+        if (action.buildResult.logRef) {
+          const log: ActivityLogSection = await this.parser.parse(
+            action.buildResult.logRef.id
+          )
+          const buildLog = new BuildLog(
+            log,
+            testReport.creatingWorkspaceFilePath
+          )
+          if (buildLog.content.length) {
+            testReport.buildLog = buildLog
+            testReport.testStatus = 'failure'
+            for (const annotation of buildLog.annotations) {
+              testReport.annotations.push(annotation)
+            }
+          }
+        }
         if (action.actionResult) {
           if (action.actionResult.testsRef) {
             const testReportChapter = new TestReportChapter(

@@ -1,22 +1,126 @@
+import * as pathModule from 'path'
+
 import {ActionRunDestinationRecord} from '../dev/@types/ActionRunDestinationRecord.d'
 import {ActionTestMetadata} from '../dev/@types/ActionTestMetadata.d'
 import {ActionTestSummary} from '../dev/@types/ActionTestSummary.d'
 import {ActionTestSummaryGroup} from '../dev/@types/ActionTestSummaryGroup.d'
 import {ActionTestSummaryIdentifiableObject} from '../dev/@types/ActionTestSummaryIdentifiableObject.d'
 import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
+import {ActivityLogCommandInvocationSection} from '../dev/@types/ActivityLogCommandInvocationSection.d'
+import {ActivityLogSection} from '../dev/@types/ActivityLogSection.d'
 import {CodeCoverage} from './coverage'
+
+export class BuildLog {
+  content: string[] = []
+  readonly annotations: Annotation[] = []
+
+  constructor(log: ActivityLogSection, creatingWorkspaceFilePath?: string) {
+    const lines: string[] = []
+    if (!log.subsections) {
+      return
+    }
+    const workspace = pathModule.dirname(`${creatingWorkspaceFilePath ?? ''}`)
+    const re = new RegExp(`${workspace}/`, 'g')
+
+    const failures = log.subsections.filter(subsection => {
+      if (subsection.hasOwnProperty('exitCode')) {
+        const logCommandInvocationSection =
+          subsection as ActivityLogCommandInvocationSection
+        return logCommandInvocationSection.exitCode !== 0
+      } else {
+        return subsection.result !== 'succeeded'
+      }
+    })
+    for (const failure of failures) {
+      for (const subsection of failure.subsections) {
+        if (subsection.hasOwnProperty('exitCode')) {
+          const logCommandInvocationSection =
+            subsection as ActivityLogCommandInvocationSection
+          if (logCommandInvocationSection.exitCode !== 0) {
+            lines.push(`<b>${logCommandInvocationSection.title}</b>`)
+            for (const message of subsection.messages) {
+              if (message.category) {
+                lines.push(
+                  `${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`
+                )
+              } else {
+                lines.push(`${message.type}:&nbsp;${message.title}`)
+              }
+
+              if (message.location?.url) {
+                let startLine = 0
+                let endLine = 0
+
+                const url = new URL(message.location?.url)
+                const locations = url.hash.substring(1).split('&') as [string]
+                for (const location of locations) {
+                  const pair = location.split('=')
+                  if (pair.length === 2) {
+                    const value = parseInt(pair[1])
+                    switch (pair[0]) {
+                      case 'StartingLineNumber': {
+                        startLine = value
+                        break
+                      }
+                      case 'EndingLineNumber': {
+                        endLine = value
+                        break
+                      }
+                      default:
+                        break
+                    }
+                  }
+                }
+                const location = url.pathname
+                  .replace('file://', '')
+                  .replace(re, '')
+                const annotation = new Annotation(
+                  location,
+                  startLine,
+                  endLine,
+                  'failure',
+                  message.title,
+                  message.type
+                )
+                this.annotations.push(annotation)
+              }
+            }
+            const pre = '```\n'
+            const emittedOutput =
+              logCommandInvocationSection.emittedOutput.replace(re, '')
+            lines.push(`${pre}${emittedOutput}${pre}`)
+          }
+        } else if (subsection.result !== 'succeeded') {
+          lines.push(subsection.title)
+          for (const message of subsection.messages) {
+            lines.push(message.title)
+          }
+        }
+      }
+    }
+    if (failures.length) {
+      this.content.push(lines.join('\n'))
+    }
+  }
+}
 
 export class TestReport {
   entityName?: string
   creatingWorkspaceFilePath?: string
   testStatus = 'neutral'
 
+  buildLog?: BuildLog
   readonly chapters: TestReportChapter[] = []
   codeCoverage?: TestCodeCoverage
   readonly annotations: Annotation[] = []
 
   get reportSummary(): string {
     const lines: string[] = []
+
+    if (this.buildLog) {
+      const content = this.buildLog.content.join('\n')
+      lines.push(`## Build Summary\n\n${content}\n`)
+    }
 
     for (const chapter of this.chapters) {
       for (const chapterSummary of chapter.summaries) {
@@ -28,6 +132,7 @@ export class TestReport {
         } else {
           summaryTitle = `## ${chapter.schemeCommandName}`
         }
+
         const summaryContent = chapterSummary.content.join('\n')
         lines.push(`${summaryTitle}\n\n${summaryContent}`)
       }

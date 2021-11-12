@@ -356,6 +356,17 @@ class Formatter {
             }
             if (actionsInvocationRecord.actions) {
                 for (const action of actionsInvocationRecord.actions) {
+                    if (action.buildResult.logRef) {
+                        const log = yield this.parser.parse(action.buildResult.logRef.id);
+                        const buildLog = new report_1.BuildLog(log, testReport.creatingWorkspaceFilePath);
+                        if (buildLog.content.length) {
+                            testReport.buildLog = buildLog;
+                            testReport.testStatus = 'failure';
+                            for (const annotation of buildLog.annotations) {
+                                testReport.annotations.push(annotation);
+                            }
+                        }
+                    }
                     if (action.actionResult) {
                         if (action.actionResult.testsRef) {
                             const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName, action.runDestination, action.title);
@@ -1179,6 +1190,22 @@ function run() {
                     core.error('Annotations that exceed the limit (50) will be truncated.');
                 }
                 const annotations = report.annotations.slice(0, 50);
+                let output;
+                if (reportDetail.trim()) {
+                    output = {
+                        title: 'Xcode test results',
+                        summary: reportSummary,
+                        text: reportDetail,
+                        annotations
+                    };
+                }
+                else {
+                    output = {
+                        title: 'Xcode test results',
+                        summary: reportSummary,
+                        annotations
+                    };
+                }
                 yield octokit.checks.create({
                     owner,
                     repo,
@@ -1186,12 +1213,7 @@ function run() {
                     head_sha: sha,
                     status: 'completed',
                     conclusion: report.testStatus,
-                    output: {
-                        title: 'Xcode test results',
-                        summary: reportSummary,
-                        text: reportDetail,
-                        annotations
-                    }
+                    output
                 });
                 for (const uploadBundlePath of paths) {
                     try {
@@ -1437,12 +1459,114 @@ function parsePrimitive(element) {
 /***/ }),
 
 /***/ 8269:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
+exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = exports.BuildLog = void 0;
+const pathModule = __importStar(__nccwpck_require__(5622));
+class BuildLog {
+    constructor(log, creatingWorkspaceFilePath) {
+        var _a, _b;
+        this.content = [];
+        this.annotations = [];
+        const lines = [];
+        if (!log.subsections) {
+            return;
+        }
+        const workspace = pathModule.dirname(`${creatingWorkspaceFilePath !== null && creatingWorkspaceFilePath !== void 0 ? creatingWorkspaceFilePath : ''}`);
+        const re = new RegExp(`${workspace}/`, 'g');
+        const failures = log.subsections.filter(subsection => {
+            if (subsection.hasOwnProperty('exitCode')) {
+                const logCommandInvocationSection = subsection;
+                return logCommandInvocationSection.exitCode !== 0;
+            }
+            else {
+                return subsection.result !== 'succeeded';
+            }
+        });
+        for (const failure of failures) {
+            for (const subsection of failure.subsections) {
+                if (subsection.hasOwnProperty('exitCode')) {
+                    const logCommandInvocationSection = subsection;
+                    if (logCommandInvocationSection.exitCode !== 0) {
+                        lines.push(`<b>${logCommandInvocationSection.title}</b>`);
+                        for (const message of subsection.messages) {
+                            if (message.category) {
+                                lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
+                            }
+                            else {
+                                lines.push(`${message.type}:&nbsp;${message.title}`);
+                            }
+                            if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
+                                let startLine = 0;
+                                let endLine = 0;
+                                const url = new URL((_b = message.location) === null || _b === void 0 ? void 0 : _b.url);
+                                const locations = url.hash.substring(1).split('&');
+                                for (const location of locations) {
+                                    const pair = location.split('=');
+                                    if (pair.length === 2) {
+                                        const value = parseInt(pair[1]);
+                                        switch (pair[0]) {
+                                            case 'StartingLineNumber': {
+                                                startLine = value;
+                                                break;
+                                            }
+                                            case 'EndingLineNumber': {
+                                                endLine = value;
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                                const location = url.pathname
+                                    .replace('file://', '')
+                                    .replace(re, '');
+                                const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
+                                this.annotations.push(annotation);
+                            }
+                        }
+                        const pre = '```\n';
+                        const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
+                        lines.push(`${pre}${emittedOutput}${pre}`);
+                    }
+                }
+                else if (subsection.result !== 'succeeded') {
+                    lines.push(subsection.title);
+                    for (const message of subsection.messages) {
+                        lines.push(message.title);
+                    }
+                }
+            }
+        }
+        if (failures.length) {
+            this.content.push(lines.join('\n'));
+        }
+    }
+}
+exports.BuildLog = BuildLog;
 class TestReport {
     constructor() {
         this.testStatus = 'neutral';
@@ -1451,6 +1575,10 @@ class TestReport {
     }
     get reportSummary() {
         const lines = [];
+        if (this.buildLog) {
+            const content = this.buildLog.content.join('\n');
+            lines.push(`## Build Summary\n\n${content}\n`);
+        }
         for (const chapter of this.chapters) {
             for (const chapterSummary of chapter.summaries) {
                 let summaryTitle = '';
