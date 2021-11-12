@@ -20,6 +20,7 @@ export class BuildLog {
       return
     }
     const workspace = pathModule.dirname(`${creatingWorkspaceFilePath ?? ''}`)
+    const re = new RegExp(`${workspace}/`, 'g')
 
     const failures = log.subsections.filter(subsection => {
       if (subsection.hasOwnProperty('exitCode')) {
@@ -67,7 +68,7 @@ export class BuildLog {
                 }
                 const location = url.pathname
                   .replace('file://', '')
-                  .replace(`${workspace}/`, '')
+                  .replace(re, '')
                 const annotation = new Annotation(
                   location,
                   startLine,
@@ -81,10 +82,7 @@ export class BuildLog {
             }
             lines.push(logCommandInvocationSection.title)
             const emittedOutput =
-              logCommandInvocationSection.emittedOutput.replace(
-                `${workspace}/`,
-                ''
-              )
+              logCommandInvocationSection.emittedOutput.replace(re, '')
             lines.push(`<pre>${emittedOutput}</pre>`)
           }
         } else if (subsection.result !== 'succeeded') {
