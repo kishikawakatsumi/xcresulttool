@@ -365,7 +365,6 @@ class Formatter {
                             for (const annotation of buildLog.annotations) {
                                 testReport.annotations.push(annotation);
                             }
-                            console.log(buildLog.content.join('\n'));
                         }
                     }
                     if (action.actionResult) {
