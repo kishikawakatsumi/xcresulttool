@@ -1536,7 +1536,7 @@ class BuildLog {
                                         }
                                     }
                                 }
-                                const location = (_c = message.location) === null || _c === void 0 ? void 0 : _c.url.replace(`${workspace}/`, '');
+                                const location = (_c = message.location) === null || _c === void 0 ? void 0 : _c.url.replace('file://', '').replace(`${workspace}/`, '');
                                 const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
                                 this.annotations.push(annotation);
                             }

@@ -65,10 +65,9 @@ export class BuildLog {
                     }
                   }
                 }
-                const location = message.location?.url.replace(
-                  `${workspace}/`,
-                  ''
-                )
+                const location = message.location?.url
+                  .replace('file://', '')
+                  .replace(`${workspace}/`, '')
                 const annotation = new Annotation(
                   location,
                   startLine,
