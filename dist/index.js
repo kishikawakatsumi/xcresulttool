@@ -1189,6 +1189,22 @@ function run() {
                     core.error('Annotations that exceed the limit (50) will be truncated.');
                 }
                 const annotations = report.annotations.slice(0, 50);
+                let output;
+                if (reportDetail.trim()) {
+                    output = {
+                        title: 'Xcode test results',
+                        summary: reportSummary,
+                        text: reportDetail,
+                        annotations
+                    };
+                }
+                else {
+                    output = {
+                        title: 'Xcode test results',
+                        summary: reportSummary,
+                        annotations
+                    };
+                }
                 yield octokit.checks.create({
                     owner,
                     repo,
@@ -1196,12 +1212,7 @@ function run() {
                     head_sha: sha,
                     status: 'completed',
                     conclusion: report.testStatus,
-                    output: {
-                        title: 'Xcode test results',
-                        summary: reportSummary,
-                        text: reportDetail.trim() ? reportDetail : null,
-                        annotations
-                    }
+                    output
                 });
                 for (const uploadBundlePath of paths) {
                     try {
