@@ -1510,10 +1510,13 @@ class BuildLog {
                 if (subsection.hasOwnProperty('exitCode')) {
                     const logCommandInvocationSection = subsection;
                     if (logCommandInvocationSection.exitCode !== 0) {
+                        lines.push(`<b>${logCommandInvocationSection.title}`);
                         for (const message of subsection.messages) {
-                            lines.push(`${message.type}:&nbsp;${message.title}`);
                             if (message.category) {
-                                lines.push(message.category);
+                                lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
+                            }
+                            else {
+                                lines.push(`${message.type}:&nbsp;${message.title}`);
                             }
                             if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
                                 let startLine = 0;
@@ -1545,9 +1548,9 @@ class BuildLog {
                                 this.annotations.push(annotation);
                             }
                         }
-                        lines.push(logCommandInvocationSection.title);
+                        const pre = '```\n';
                         const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
-                        lines.push(`<pre>${emittedOutput}</pre>`);
+                        lines.push(`\n${pre}${emittedOutput}${pre}`);
                     }
                 }
                 else if (subsection.result !== 'succeeded') {
@@ -1560,9 +1563,14 @@ class BuildLog {
         }
         if (failures.length) {
             this.content.push('<table>');
-            for (const line of lines) {
+            for (const [index, line] of lines.entries()) {
                 this.content.push('<tr>');
-                this.content.push('<td width="768px">');
+                if (index === 0) {
+                    this.content.push('<td width="768px">');
+                }
+                else {
+                    this.content.push('<td>');
+                }
                 this.content.push(line);
             }
             this.content.push('</table>');
