@@ -25,6 +25,16 @@ jobs:
           title: Example test report
       - uses: ./
         with:
+          path: __tests__/data/Example.xcresult
+          title: Example Failures Only test report
+          show-passed-tests: false
+      - uses: ./
+        with:
+          path: __tests__/data/KeychainAccess.xcresult
+          title: KeychainAccess Failures Only test report
+          show-passed-tests: false
+      - uses: ./
+        with:
           path: __tests__/data/KeychainAccess.xcresult
           title: KeychainAccess test report
       - uses: ./
@@ -41,8 +51,23 @@ jobs:
           title: Coverage test report
       - uses: ./
         with:
+          path: __tests__/data/Coverage.xcresult
+          title: Hide Coverage test report
+          show-code-coverage: false
+      - uses: ./
+        with:
           path: __tests__/data/UhooiPicBook.xcresult
           title: UhooiPicBook test report
+      - uses: ./
+        with:
+          path: __tests__/data/UhooiPicBook.xcresult
+          title: UhooiPicBook No Passed test report
+          show-passed-tests: false
+      - uses: ./
+        with:
+          path: __tests__/data/UhooiPicBook.xcresult
+          title: UhooiPicBook No Code Coverage test report
+          show-code-coverage: false
       - uses: ./
         with:
           path: |

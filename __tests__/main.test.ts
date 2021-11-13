@@ -6,7 +6,7 @@ import * as process from 'process'
 import {expect, test} from '@jest/globals'
 import {promises} from 'fs'
 const {readFile, writeFile} = promises
-import {Formatter} from '../src/formatter'
+import {Formatter, FormatterOptions} from '../src/formatter'
 
 test('Example.xcresult', async () => {
   const bundlePath = '__tests__/data/Example.xcresult'
@@ -22,6 +22,23 @@ test('Example.xcresult', async () => {
   )
 })
 
+test('Example.xcresult', async () => {
+  const bundlePath = '__tests__/data/Example.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format({
+    showPassedTests: false,
+    showCodeCoverage: true
+  })
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'ExampleOnlyFailures.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('ExampleOnlyFailures.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/ExampleOnlyFailures.md')).toString()
+  )
+})
+
 test('KeychainAccess.xcresult', async () => {
   const bundlePath = '__tests__/data/KeychainAccess.xcresult'
   const formatter = new Formatter(bundlePath)
@@ -33,6 +50,23 @@ test('KeychainAccess.xcresult', async () => {
   // await writeFile('KeychainAccess.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/KeychainAccess.md')).toString()
+  )
+})
+
+test('KeychainAccess.xcresult', async () => {
+  const bundlePath = '__tests__/data/KeychainAccess.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format({
+    showPassedTests: false,
+    showCodeCoverage: true
+  })
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'KeychainAccessOnlyFailures.md')
+  await writeFile(outputPath, reportText)
+  await writeFile('KeychainAccessOnlyFailures.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/KeychainAccessOnlyFailures.md')).toString()
   )
 })
 
@@ -156,6 +190,34 @@ test('Coverage.xcresult', async () => {
   )
 })
 
+test('Coverage.xcresult', async () => {
+  const bundlePath = '__tests__/data/Coverage.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format({
+    showPassedTests: true,
+    showCodeCoverage: false
+  })
+
+  let root = ''
+  if (process.env.GITHUB_REPOSITORY) {
+    const pr = github.context.payload.pull_request
+    const sha = (pr && pr.head.sha) || github.context.sha
+    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+  }
+  const re = new RegExp(`${root}`, 'g')
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`.replace(
+    re,
+    ''
+  )
+
+  const outputPath = path.join(os.tmpdir(), 'HideCodeCoverage.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('HideCodeCoverage.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/HideCodeCoverage.md')).toString()
+  )
+})
+
 test('BuildError.xcresult', async () => {
   const bundlePath = '__tests__/data/BuildError.xcresult'
   const formatter = new Formatter(bundlePath)
@@ -186,6 +248,8 @@ test('LinkError.xcresult', async () => {
 
 test('test runs', () => {
   process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
+  process.env['INPUT_SHOW-PASSED-TESTS'] = 'true'
+  process.env['INPUT_SHOW-CODE-COVERAGE'] = 'true'
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {
