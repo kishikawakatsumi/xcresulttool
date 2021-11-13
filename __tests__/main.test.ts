@@ -170,6 +170,20 @@ test('BuildError.xcresult', async () => {
   )
 })
 
+test('LinkError.xcresult', async () => {
+  const bundlePath = '__tests__/data/LinkError.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'LinkError.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('LinkError.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/LinkError.md')).toString()
+  )
+})
+
 test('test runs', () => {
   process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
   const np = process.execPath

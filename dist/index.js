@@ -1487,7 +1487,7 @@ exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.Te
 const pathModule = __importStar(__nccwpck_require__(5622));
 class BuildLog {
     constructor(log, creatingWorkspaceFilePath) {
-        var _a, _b;
+        var _a, _b, _c, _d;
         this.content = [];
         this.annotations = [];
         const lines = [];
@@ -1506,22 +1506,78 @@ class BuildLog {
             }
         });
         for (const failure of failures) {
-            for (const subsection of failure.subsections) {
-                if (subsection.hasOwnProperty('exitCode')) {
-                    const logCommandInvocationSection = subsection;
+            if (failure.subsections) {
+                for (const subsection of failure.subsections) {
+                    if (subsection.hasOwnProperty('exitCode')) {
+                        const logCommandInvocationSection = subsection;
+                        if (logCommandInvocationSection.exitCode !== 0) {
+                            lines.push(`<b>${logCommandInvocationSection.title}</b>`);
+                            for (const message of subsection.messages) {
+                                if (message.category) {
+                                    lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
+                                }
+                                else {
+                                    lines.push(`${message.type}:&nbsp;${message.title}`);
+                                }
+                                if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
+                                    let startLine = 0;
+                                    let endLine = 0;
+                                    const url = new URL((_b = message.location) === null || _b === void 0 ? void 0 : _b.url);
+                                    const locations = url.hash.substring(1).split('&');
+                                    for (const location of locations) {
+                                        const pair = location.split('=');
+                                        if (pair.length === 2) {
+                                            const value = parseInt(pair[1]);
+                                            switch (pair[0]) {
+                                                case 'StartingLineNumber': {
+                                                    startLine = value;
+                                                    break;
+                                                }
+                                                case 'EndingLineNumber': {
+                                                    endLine = value;
+                                                    break;
+                                                }
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                    const location = url.pathname
+                                        .replace('file://', '')
+                                        .replace(re, '');
+                                    const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
+                                    this.annotations.push(annotation);
+                                }
+                            }
+                            const pre = '```\n';
+                            const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
+                            lines.push(`${pre}${emittedOutput}${pre}`);
+                        }
+                    }
+                    else if (subsection.result !== 'succeeded') {
+                        lines.push(subsection.title);
+                        for (const message of subsection.messages) {
+                            lines.push(message.title);
+                        }
+                    }
+                }
+            }
+            else {
+                if (failure.hasOwnProperty('exitCode')) {
+                    const logCommandInvocationSection = failure;
                     if (logCommandInvocationSection.exitCode !== 0) {
                         lines.push(`<b>${logCommandInvocationSection.title}</b>`);
-                        for (const message of subsection.messages) {
+                        for (const message of failure.messages) {
                             if (message.category) {
                                 lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
                             }
                             else {
                                 lines.push(`${message.type}:&nbsp;${message.title}`);
                             }
-                            if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
+                            if ((_c = message.location) === null || _c === void 0 ? void 0 : _c.url) {
                                 let startLine = 0;
                                 let endLine = 0;
-                                const url = new URL((_b = message.location) === null || _b === void 0 ? void 0 : _b.url);
+                                const url = new URL((_d = message.location) === null || _d === void 0 ? void 0 : _d.url);
                                 const locations = url.hash.substring(1).split('&');
                                 for (const location of locations) {
                                     const pair = location.split('=');
@@ -1553,9 +1609,9 @@ class BuildLog {
                         lines.push(`${pre}${emittedOutput}${pre}`);
                     }
                 }
-                else if (subsection.result !== 'succeeded') {
-                    lines.push(subsection.title);
-                    for (const message of subsection.messages) {
+                else if (failure.result !== 'succeeded') {
+                    lines.push(failure.title);
+                    for (const message of failure.messages) {
                         lines.push(message.title);
                     }
                 }
