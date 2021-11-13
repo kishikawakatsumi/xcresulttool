@@ -66,7 +66,9 @@ export class Formatter {
     this.parser = new Parser(this.bundlePath)
   }
 
-  async format(): Promise<TestReport> {
+  async format(
+    options: FormatterOptions = new FormatterOptions()
+  ): Promise<TestReport> {
     const actionsInvocationRecord: ActionsInvocationRecord =
       await this.parser.parse()
 
@@ -450,7 +452,7 @@ export class Formatter {
         chapterSummary.content.push(summaryFailures.join('\n'))
         chapterSummary.content.push('')
       } else {
-        chapterSummary.content.push(`All tests passed :tada:\n`)
+        chapterSummary.content.push('All tests passed :tada:\n')
       }
 
       if (testReport.codeCoverage) {
@@ -655,8 +657,12 @@ export class Formatter {
             }
             const groupStatusImage = Image.testStatus(groupStatus)
 
+            let skippedPassedTests = 0
             for (const [index, detail] of details.entries()) {
               const testResult = detail as ActionTestMetadata
+
+              const isFailure = testResult.testStatus === 'Failure'
+
               const rowSpan = `rowspan="${details.length}"`
               const valign = `valign="top"`
               const colWidth = 'width="52px"'
@@ -672,7 +678,6 @@ export class Formatter {
 
                 if (summary.configuration) {
                   if (testResult.name) {
-                    const isFailure = testResult.testStatus === 'Failure'
                     const anchorTag = anchorNameTag(
                       `${testResultSummaryName}_${testResult.identifier}`
                     )
@@ -686,6 +691,11 @@ export class Formatter {
                     const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`
                     resultLines.push(`${status} ${testMethod}`)
                   }
+                  if (!options.showPassedTests && !isFailure) {
+                    skippedPassedTests++
+                    continue
+                  }
+
                   const configuration = summary.configuration
                   const configurationValues = configuration.values.storage
                     .map(value => {
@@ -697,8 +707,10 @@ export class Formatter {
                     `<br><b>Configuration:</b><br><code>${configurationValues}</code>`
                   )
                 } else {
+                  if (!options.showPassedTests && !isFailure) {
+                    continue
+                  }
                   if (testResult.name) {
-                    const isFailure = testResult.testStatus === 'Failure'
                     const anchorTag = anchorNameTag(
                       `${testResultSummaryName}_${testResult.identifier}`
                     )
@@ -722,6 +734,13 @@ export class Formatter {
                   )
                 }
                 if (activities.length) {
+                  if (
+                    !options.showPassedTests &&
+                    summary.testStatus !== 'Failure'
+                  ) {
+                    continue
+                  }
+
                   const testActivities = activities
                     .map(activity => {
                       const attachments = activity.attachments
@@ -793,8 +812,10 @@ export class Formatter {
                   )
                 }
               } else {
+                if (!options.showPassedTests && !isFailure) {
+                  continue
+                }
                 if (testResult.name) {
-                  const isFailure = testResult.testStatus === 'Failure'
                   const anchorTag = anchorNameTag(
                     `${testResultSummaryName}_${testResult.identifier}`
                   )
@@ -813,7 +834,7 @@ export class Formatter {
               const testResultContent = resultLines.join('<br>')
               let testResultRow = ''
               if (details.length > 1) {
-                if (index === 0) {
+                if (index - skippedPassedTests === 0) {
                   testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`
                 } else {
                   testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`
@@ -828,7 +849,11 @@ export class Formatter {
           testDetailTable.push(`</table>`)
           testDetailTable.push('')
 
-          testDetail.lines.push(testDetailTable.join('\n'))
+          if (testDetailTable.join('').trim() === '<table></table>') {
+            testDetail.lines.push('All tests passed :tada:\n')
+          } else {
+            testDetail.lines.push(testDetailTable.join('\n'))
+          }
         }
       }
 
@@ -945,4 +970,14 @@ interface FailureSummary {
   message: string
   contents: string
   stackTrace: string
+}
+
+export class FormatterOptions {
+  showPassedTests: boolean
+  showCodeCoverage: boolean
+
+  constructor(showPassedTests = true, showCodeCoverage = true) {
+    this.showPassedTests = showPassedTests
+    this.showCodeCoverage = showCodeCoverage
+  }
 }

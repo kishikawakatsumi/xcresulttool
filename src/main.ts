@@ -13,6 +13,8 @@ const {stat} = promises
 async function run(): Promise<void> {
   try {
     const inputPaths = core.getMultilineInput('path')
+    const showPassedTests = core.getBooleanInput('show-passed-tests')
+    const showCodeCoverage = core.getBooleanInput('show-code-coverage')
 
     const bundlePaths: string[] = []
     for (const checkPath of inputPaths) {
@@ -33,7 +35,10 @@ async function run(): Promise<void> {
     }
 
     const formatter = new Formatter(bundlePath)
-    const report = await formatter.format()
+    const report = await formatter.format({
+      showPassedTests,
+      showCodeCoverage
+    })
 
     if (core.getInput('token')) {
       const octokit = new Octokit()

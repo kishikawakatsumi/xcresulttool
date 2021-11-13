@@ -6,7 +6,7 @@ import * as process from 'process'
 import {expect, test} from '@jest/globals'
 import {promises} from 'fs'
 const {readFile, writeFile} = promises
-import {Formatter} from '../src/formatter'
+import {Formatter, FormatterOptions} from '../src/formatter'
 
 test('Example.xcresult', async () => {
   const bundlePath = '__tests__/data/Example.xcresult'
@@ -19,6 +19,23 @@ test('Example.xcresult', async () => {
   // await writeFile('Example.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/Example.md')).toString()
+  )
+})
+
+test('Example.xcresult', async () => {
+  const bundlePath = '__tests__/data/Example.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format({
+    showPassedTests: false,
+    showCodeCoverage: true
+  })
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'ExampleOnlyFailures.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('ExampleOnlyFailures.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/ExampleOnlyFailures.md')).toString()
   )
 })
 
@@ -186,6 +203,8 @@ test('LinkError.xcresult', async () => {
 
 test('test runs', () => {
   process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
+  process.env['INPUT_SHOW-PASSED-TESTS'] = 'true'
+  process.env['INPUT_SHOW-CODE-COVERAGE'] = 'true'
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {

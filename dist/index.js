@@ -320,7 +320,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Formatter = void 0;
+exports.FormatterOptions = exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
 const github = __importStar(__nccwpck_require__(5438));
 const path = __importStar(__nccwpck_require__(5622));
@@ -344,7 +344,7 @@ class Formatter {
         this.bundlePath = bundlePath;
         this.parser = new parser_1.Parser(this.bundlePath);
     }
-    format() {
+    format(options = new FormatterOptions()) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const actionsInvocationRecord = yield this.parser.parse();
@@ -634,7 +634,7 @@ class Formatter {
                     chapterSummary.content.push('');
                 }
                 else {
-                    chapterSummary.content.push(`All tests passed :tada:\n`);
+                    chapterSummary.content.push('All tests passed :tada:\n');
                 }
                 if (testReport.codeCoverage) {
                     const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
@@ -789,8 +789,10 @@ class Formatter {
                                 }
                             }
                             const groupStatusImage = Image.testStatus(groupStatus);
+                            let skippedPassedTests = 0;
                             for (const [index, detail] of details.entries()) {
                                 const testResult = detail;
+                                const isFailure = testResult.testStatus === 'Failure';
                                 const rowSpan = `rowspan="${details.length}"`;
                                 const valign = `valign="top"`;
                                 const colWidth = 'width="52px"';
@@ -801,7 +803,6 @@ class Formatter {
                                     const summary = yield this.parser.parse(testResult.summaryRef.id);
                                     if (summary.configuration) {
                                         if (testResult.name) {
-                                            const isFailure = testResult.testStatus === 'Failure';
                                             const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
                                             const testMethodAnchor = isFailure ? anchorTag : '';
                                             const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
@@ -810,6 +811,10 @@ class Formatter {
                                                 : '';
                                             const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
                                             resultLines.push(`${status} ${testMethod}`);
+                                        }
+                                        if (!options.showPassedTests && !isFailure) {
+                                            skippedPassedTests++;
+                                            continue;
                                         }
                                         const configuration = summary.configuration;
                                         const configurationValues = configuration.values.storage
@@ -820,8 +825,10 @@ class Formatter {
                                         resultLines.push(`<br><b>Configuration:</b><br><code>${configurationValues}</code>`);
                                     }
                                     else {
+                                        if (!options.showPassedTests && !isFailure) {
+                                            continue;
+                                        }
                                         if (testResult.name) {
-                                            const isFailure = testResult.testStatus === 'Failure';
                                             const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
                                             const testMethodAnchor = isFailure ? anchorTag : '';
                                             const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
@@ -837,6 +844,10 @@ class Formatter {
                                         yield this.collectActivities(summary.activitySummaries, activities);
                                     }
                                     if (activities.length) {
+                                        if (!options.showPassedTests &&
+                                            summary.testStatus !== 'Failure') {
+                                            continue;
+                                        }
                                         const testActivities = activities
                                             .map(activity => {
                                             const attachments = activity.attachments
@@ -901,8 +912,10 @@ class Formatter {
                                     }
                                 }
                                 else {
+                                    if (!options.showPassedTests && !isFailure) {
+                                        continue;
+                                    }
                                     if (testResult.name) {
-                                        const isFailure = testResult.testStatus === 'Failure';
                                         const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
                                         const testMethodAnchor = isFailure ? anchorTag : '';
                                         const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
@@ -916,7 +929,7 @@ class Formatter {
                                 const testResultContent = resultLines.join('<br>');
                                 let testResultRow = '';
                                 if (details.length > 1) {
-                                    if (index === 0) {
+                                    if (index - skippedPassedTests === 0) {
                                         testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`;
                                     }
                                     else {
@@ -931,7 +944,12 @@ class Formatter {
                         }
                         testDetailTable.push(`</table>`);
                         testDetailTable.push('');
-                        testDetail.lines.push(testDetailTable.join('\n'));
+                        if (testDetailTable.join('').trim() === '<table></table>') {
+                            testDetail.lines.push('All tests passed :tada:\n');
+                        }
+                        else {
+                            testDetail.lines.push(testDetailTable.join('\n'));
+                        }
                     }
                 }
                 const chapterDetail = new report_1.TestReportChapterDetail();
@@ -1021,6 +1039,13 @@ function collectFailureSummaries(failureSummaries) {
         };
     });
 }
+class FormatterOptions {
+    constructor(showPassedTests = true, showCodeCoverage = true) {
+        this.showPassedTests = showPassedTests;
+        this.showCodeCoverage = showCodeCoverage;
+    }
+}
+exports.FormatterOptions = FormatterOptions;
 
 
 /***/ }),
@@ -1140,6 +1165,8 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputPaths = core.getMultilineInput('path');
+            const showPassedTests = core.getBooleanInput('show-passed-tests');
+            const showCodeCoverage = core.getBooleanInput('show-code-coverage');
             const bundlePaths = [];
             for (const checkPath of inputPaths) {
                 try {
@@ -1160,7 +1187,10 @@ function run() {
                 bundlePath = inputPath;
             }
             const formatter = new formatter_1.Formatter(bundlePath);
-            const report = yield formatter.format();
+            const report = yield formatter.format({
+                showPassedTests,
+                showCodeCoverage
+            });
             if (core.getInput('token')) {
                 const octokit = new action_1.Octokit();
                 const owner = github.context.repo.owner;
@@ -1480,154 +1510,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = exports.BuildLog = void 0;
+exports.BuildLog = exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
 const pathModule = __importStar(__nccwpck_require__(5622));
-class BuildLog {
-    constructor(log, creatingWorkspaceFilePath) {
-        var _a, _b, _c, _d;
-        this.content = [];
-        this.annotations = [];
-        const lines = [];
-        if (!log.subsections) {
-            return;
-        }
-        const workspace = pathModule.dirname(`${creatingWorkspaceFilePath !== null && creatingWorkspaceFilePath !== void 0 ? creatingWorkspaceFilePath : ''}`);
-        const re = new RegExp(`${workspace}/`, 'g');
-        const failures = log.subsections.filter(subsection => {
-            if (subsection.hasOwnProperty('exitCode')) {
-                const logCommandInvocationSection = subsection;
-                return logCommandInvocationSection.exitCode !== 0;
-            }
-            else {
-                return subsection.result !== 'succeeded';
-            }
-        });
-        for (const failure of failures) {
-            if (failure.subsections) {
-                for (const subsection of failure.subsections) {
-                    if (subsection.hasOwnProperty('exitCode')) {
-                        const logCommandInvocationSection = subsection;
-                        if (logCommandInvocationSection.exitCode === 0) {
-                            continue;
-                        }
-                        lines.push(`<b>${logCommandInvocationSection.title}</b>`);
-                        if (!subsection.messages) {
-                            continue;
-                        }
-                        for (const message of subsection.messages) {
-                            if (message.category) {
-                                lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
-                            }
-                            else {
-                                lines.push(`${message.type}:&nbsp;${message.title}`);
-                            }
-                            if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
-                                let startLine = 0;
-                                let endLine = 0;
-                                const url = new URL((_b = message.location) === null || _b === void 0 ? void 0 : _b.url);
-                                const locations = url.hash.substring(1).split('&');
-                                for (const location of locations) {
-                                    const pair = location.split('=');
-                                    if (pair.length === 2) {
-                                        const value = parseInt(pair[1]);
-                                        switch (pair[0]) {
-                                            case 'StartingLineNumber': {
-                                                startLine = value;
-                                                break;
-                                            }
-                                            case 'EndingLineNumber': {
-                                                endLine = value;
-                                                break;
-                                            }
-                                            default:
-                                                break;
-                                        }
-                                    }
-                                }
-                                const location = url.pathname
-                                    .replace('file://', '')
-                                    .replace(re, '');
-                                const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
-                                this.annotations.push(annotation);
-                            }
-                        }
-                        const pre = '```\n';
-                        const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
-                        lines.push(`${pre}${emittedOutput}${pre}`);
-                    }
-                    else if (subsection.result !== 'succeeded') {
-                        lines.push(subsection.title);
-                        for (const message of subsection.messages) {
-                            lines.push(message.title);
-                        }
-                    }
-                }
-            }
-            else {
-                if (failure.hasOwnProperty('exitCode')) {
-                    const logCommandInvocationSection = failure;
-                    if (logCommandInvocationSection.exitCode === 0) {
-                        continue;
-                    }
-                    lines.push(`<b>${logCommandInvocationSection.title}</b>`);
-                    if (!failure.messages) {
-                        continue;
-                    }
-                    for (const message of failure.messages) {
-                        if (message.category) {
-                            lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
-                        }
-                        else {
-                            lines.push(`${message.type}:&nbsp;${message.title}`);
-                        }
-                        if ((_c = message.location) === null || _c === void 0 ? void 0 : _c.url) {
-                            let startLine = 0;
-                            let endLine = 0;
-                            const url = new URL((_d = message.location) === null || _d === void 0 ? void 0 : _d.url);
-                            const locations = url.hash.substring(1).split('&');
-                            for (const location of locations) {
-                                const pair = location.split('=');
-                                if (pair.length === 2) {
-                                    const value = parseInt(pair[1]);
-                                    switch (pair[0]) {
-                                        case 'StartingLineNumber': {
-                                            startLine = value;
-                                            break;
-                                        }
-                                        case 'EndingLineNumber': {
-                                            endLine = value;
-                                            break;
-                                        }
-                                        default:
-                                            break;
-                                    }
-                                }
-                            }
-                            const location = url.pathname
-                                .replace('file://', '')
-                                .replace(re, '');
-                            const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
-                            this.annotations.push(annotation);
-                        }
-                    }
-                    const pre = '```\n';
-                    const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
-                    lines.push(`${pre}${emittedOutput}${pre}`);
-                }
-                else if (failure.result !== 'succeeded') {
-                    lines.push(failure.title);
-                    for (const message of failure.messages) {
-                        lines.push(message.title);
-                    }
-                }
-            }
-        }
-        if (failures.length) {
-            this.content.push(lines.join('\n'));
-        }
-    }
-}
-exports.BuildLog = BuildLog;
 class TestReport {
     constructor() {
         this.testStatus = 'neutral';
@@ -1806,6 +1690,152 @@ class Annotation {
     }
 }
 exports.Annotation = Annotation;
+class BuildLog {
+    constructor(log, creatingWorkspaceFilePath) {
+        var _a, _b, _c, _d;
+        this.content = [];
+        this.annotations = [];
+        const lines = [];
+        if (!log.subsections) {
+            return;
+        }
+        const workspace = pathModule.dirname(`${creatingWorkspaceFilePath !== null && creatingWorkspaceFilePath !== void 0 ? creatingWorkspaceFilePath : ''}`);
+        const re = new RegExp(`${workspace}/`, 'g');
+        const failures = log.subsections.filter(subsection => {
+            if (subsection.hasOwnProperty('exitCode')) {
+                const logCommandInvocationSection = subsection;
+                return logCommandInvocationSection.exitCode !== 0;
+            }
+            else {
+                return subsection.result !== 'succeeded';
+            }
+        });
+        for (const failure of failures) {
+            if (failure.subsections) {
+                for (const subsection of failure.subsections) {
+                    if (subsection.hasOwnProperty('exitCode')) {
+                        const logCommandInvocationSection = subsection;
+                        if (logCommandInvocationSection.exitCode === 0) {
+                            continue;
+                        }
+                        lines.push(`<b>${logCommandInvocationSection.title}</b>`);
+                        if (!subsection.messages) {
+                            continue;
+                        }
+                        for (const message of subsection.messages) {
+                            if (message.category) {
+                                lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
+                            }
+                            else {
+                                lines.push(`${message.type}:&nbsp;${message.title}`);
+                            }
+                            if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
+                                let startLine = 0;
+                                let endLine = 0;
+                                const url = new URL((_b = message.location) === null || _b === void 0 ? void 0 : _b.url);
+                                const locations = url.hash.substring(1).split('&');
+                                for (const location of locations) {
+                                    const pair = location.split('=');
+                                    if (pair.length === 2) {
+                                        const value = parseInt(pair[1]);
+                                        switch (pair[0]) {
+                                            case 'StartingLineNumber': {
+                                                startLine = value;
+                                                break;
+                                            }
+                                            case 'EndingLineNumber': {
+                                                endLine = value;
+                                                break;
+                                            }
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                }
+                                const location = url.pathname
+                                    .replace('file://', '')
+                                    .replace(re, '');
+                                const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
+                                this.annotations.push(annotation);
+                            }
+                        }
+                        const pre = '```\n';
+                        const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
+                        lines.push(`${pre}${emittedOutput}${pre}`);
+                    }
+                    else if (subsection.result !== 'succeeded') {
+                        lines.push(subsection.title);
+                        for (const message of subsection.messages) {
+                            lines.push(message.title);
+                        }
+                    }
+                }
+            }
+            else {
+                if (failure.hasOwnProperty('exitCode')) {
+                    const logCommandInvocationSection = failure;
+                    if (logCommandInvocationSection.exitCode === 0) {
+                        continue;
+                    }
+                    lines.push(`<b>${logCommandInvocationSection.title}</b>`);
+                    if (!failure.messages) {
+                        continue;
+                    }
+                    for (const message of failure.messages) {
+                        if (message.category) {
+                            lines.push(`${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`);
+                        }
+                        else {
+                            lines.push(`${message.type}:&nbsp;${message.title}`);
+                        }
+                        if ((_c = message.location) === null || _c === void 0 ? void 0 : _c.url) {
+                            let startLine = 0;
+                            let endLine = 0;
+                            const url = new URL((_d = message.location) === null || _d === void 0 ? void 0 : _d.url);
+                            const locations = url.hash.substring(1).split('&');
+                            for (const location of locations) {
+                                const pair = location.split('=');
+                                if (pair.length === 2) {
+                                    const value = parseInt(pair[1]);
+                                    switch (pair[0]) {
+                                        case 'StartingLineNumber': {
+                                            startLine = value;
+                                            break;
+                                        }
+                                        case 'EndingLineNumber': {
+                                            endLine = value;
+                                            break;
+                                        }
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                            const location = url.pathname
+                                .replace('file://', '')
+                                .replace(re, '');
+                            const annotation = new Annotation(location, startLine, endLine, 'failure', message.title, message.type);
+                            this.annotations.push(annotation);
+                        }
+                    }
+                    const pre = '```\n';
+                    const emittedOutput = logCommandInvocationSection.emittedOutput.replace(re, '');
+                    lines.push(`${pre}${emittedOutput}${pre}`);
+                }
+                else if (failure.result !== 'succeeded') {
+                    lines.push(failure.title);
+                    for (const message of failure.messages) {
+                        lines.push(message.title);
+                    }
+                }
+            }
+        }
+        if (failures.length) {
+            this.content.push(lines.join('\n'));
+        }
+    }
+}
+exports.BuildLog = BuildLog;
 
 
 /***/ }),
