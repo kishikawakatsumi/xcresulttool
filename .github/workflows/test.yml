@@ -51,6 +51,11 @@ jobs:
           title: Coverage test report
       - uses: ./
         with:
+          path: __tests__/data/Coverage.xcresult
+          title: Coverage test report
+          show-code-coverage: false
+      - uses: ./
+        with:
           path: __tests__/data/UhooiPicBook.xcresult
           title: UhooiPicBook test report
       - uses: ./

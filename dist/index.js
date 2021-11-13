@@ -636,7 +636,7 @@ class Formatter {
                 else {
                     chapterSummary.content.push('All tests passed :tada:\n');
                 }
-                if (testReport.codeCoverage) {
+                if (testReport.codeCoverage && options.showCodeCoverage) {
                     const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
                     chapterSummary.content.push('---\n');
                     const re = new RegExp(`${workspace}/`, 'g');

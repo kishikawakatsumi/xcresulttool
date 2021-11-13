@@ -455,7 +455,7 @@ export class Formatter {
         chapterSummary.content.push('All tests passed :tada:\n')
       }
 
-      if (testReport.codeCoverage) {
+      if (testReport.codeCoverage && options.showCodeCoverage) {
         const workspace = path.dirname(
           `${testReport.creatingWorkspaceFilePath}`
         )
