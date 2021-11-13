@@ -121,4 +121,4 @@ GitHub Checks has a maximum text limit of 65535 characters. Currently, any text 
 
 There is a limit of 50 annotations in GitHub Checks. Currently, any annotations longer than that will be automatically truncated.
 
-** You can set the `show-passed-tests` option to `false` to reduce the output to avoid the limitation. **
+**You can set the `show-passed-tests` option to `false` to reduce the output to avoid the limitation.**
