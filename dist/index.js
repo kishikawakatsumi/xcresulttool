@@ -1139,26 +1139,23 @@ const { stat } = fs_1.promises;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const inputPath = core.getInput('path');
-            if (!inputPath) {
-                throw new Error('Failed to find the path to the input xcresult file.');
-            }
-            const paths = inputPath.split('\n');
-            const existPaths = [];
-            for (const checkPath of paths) {
+            const inputPaths = core.getMultilineInput('path');
+            const bundlePaths = [];
+            for (const checkPath of inputPaths) {
                 try {
                     yield stat(checkPath);
-                    existPaths.push(checkPath);
+                    bundlePaths.push(checkPath);
                 }
                 catch (error) {
                     core.error(error.message);
                 }
             }
             let bundlePath = path.join(os.tmpdir(), 'Merged.xcresult');
-            if (paths.length > 1) {
-                yield mergeResultBundle(existPaths, bundlePath);
+            if (inputPaths.length > 1) {
+                yield mergeResultBundle(bundlePaths, bundlePath);
             }
             else {
+                const inputPath = inputPaths[0];
                 yield stat(inputPath);
                 bundlePath = inputPath;
             }
@@ -1215,7 +1212,7 @@ function run() {
                     conclusion: report.testStatus,
                     output
                 });
-                for (const uploadBundlePath of paths) {
+                for (const uploadBundlePath of inputPaths) {
                     try {
                         yield stat(uploadBundlePath);
                     }

@@ -12,25 +12,22 @@ const {stat} = promises
 
 async function run(): Promise<void> {
   try {
-    const inputPath: string = core.getInput('path')
-    if (!inputPath) {
-      throw new Error('Failed to find the path to the input xcresult file.')
-    }
+    const inputPaths = core.getMultilineInput('path')
 
-    const paths = inputPath.split('\n')
-    const existPaths: string[] = []
-    for (const checkPath of paths) {
+    const bundlePaths: string[] = []
+    for (const checkPath of inputPaths) {
       try {
         await stat(checkPath)
-        existPaths.push(checkPath)
+        bundlePaths.push(checkPath)
       } catch (error) {
         core.error((error as Error).message)
       }
     }
     let bundlePath = path.join(os.tmpdir(), 'Merged.xcresult')
-    if (paths.length > 1) {
-      await mergeResultBundle(existPaths, bundlePath)
+    if (inputPaths.length > 1) {
+      await mergeResultBundle(bundlePaths, bundlePath)
     } else {
+      const inputPath = inputPaths[0]
       await stat(inputPath)
       bundlePath = inputPath
     }
@@ -99,7 +96,7 @@ async function run(): Promise<void> {
         output
       })
 
-      for (const uploadBundlePath of paths) {
+      for (const uploadBundlePath of inputPaths) {
         try {
           await stat(uploadBundlePath)
         } catch (error) {

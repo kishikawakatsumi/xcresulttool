@@ -11,6 +11,12 @@ inputs:
   title:
     description: 'Title for the check results'
     default: 'Xcode test results'
+  show-passed-tests:
+    description: 'Show passed tests'
+    default: true
+  show-code-coverage:
+    description: 'Whether to show code coverage'
+    default: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
