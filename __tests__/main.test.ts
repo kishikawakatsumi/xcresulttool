@@ -53,6 +53,23 @@ test('KeychainAccess.xcresult', async () => {
   )
 })
 
+test('KeychainAccess.xcresult', async () => {
+  const bundlePath = '__tests__/data/KeychainAccess.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format({
+    showPassedTests: false,
+    showCodeCoverage: true
+  })
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`
+
+  const outputPath = path.join(os.tmpdir(), 'KeychainAccessOnlyFailures.md')
+  await writeFile(outputPath, reportText)
+  await writeFile('KeychainAccessOnlyFailures.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/KeychainAccessOnlyFailures.md')).toString()
+  )
+})
+
 test('TAU.xcresult', async () => {
   const bundlePath = '__tests__/data/TAU.xcresult'
   const formatter = new Formatter(bundlePath)

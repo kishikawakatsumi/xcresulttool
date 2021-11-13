@@ -31,6 +31,11 @@ jobs:
       - uses: ./
         with:
           path: __tests__/data/KeychainAccess.xcresult
+          title: KeychainAccess Failures Only test report
+          show-passed-tests: false
+      - uses: ./
+        with:
+          path: __tests__/data/KeychainAccess.xcresult
           title: KeychainAccess test report
       - uses: ./
         with:
