@@ -37,74 +37,14 @@ export class BuildLog {
           if (subsection.hasOwnProperty('exitCode')) {
             const logCommandInvocationSection =
               subsection as ActivityLogCommandInvocationSection
-            if (logCommandInvocationSection.exitCode !== 0) {
-              lines.push(`<b>${logCommandInvocationSection.title}</b>`)
-              for (const message of subsection.messages) {
-                if (message.category) {
-                  lines.push(
-                    `${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`
-                  )
-                } else {
-                  lines.push(`${message.type}:&nbsp;${message.title}`)
-                }
-
-                if (message.location?.url) {
-                  let startLine = 0
-                  let endLine = 0
-
-                  const url = new URL(message.location?.url)
-                  const locations = url.hash.substring(1).split('&') as [string]
-                  for (const location of locations) {
-                    const pair = location.split('=')
-                    if (pair.length === 2) {
-                      const value = parseInt(pair[1])
-                      switch (pair[0]) {
-                        case 'StartingLineNumber': {
-                          startLine = value
-                          break
-                        }
-                        case 'EndingLineNumber': {
-                          endLine = value
-                          break
-                        }
-                        default:
-                          break
-                      }
-                    }
-                  }
-                  const location = url.pathname
-                    .replace('file://', '')
-                    .replace(re, '')
-                  const annotation = new Annotation(
-                    location,
-                    startLine,
-                    endLine,
-                    'failure',
-                    message.title,
-                    message.type
-                  )
-                  this.annotations.push(annotation)
-                }
-              }
-              const pre = '```\n'
-              const emittedOutput =
-                logCommandInvocationSection.emittedOutput.replace(re, '')
-              lines.push(`${pre}${emittedOutput}${pre}`)
+            if (logCommandInvocationSection.exitCode === 0) {
+              continue
             }
-          } else if (subsection.result !== 'succeeded') {
-            lines.push(subsection.title)
-            for (const message of subsection.messages) {
-              lines.push(message.title)
-            }
-          }
-        }
-      } else {
-        if (failure.hasOwnProperty('exitCode')) {
-          const logCommandInvocationSection =
-            failure as ActivityLogCommandInvocationSection
-          if (logCommandInvocationSection.exitCode !== 0) {
             lines.push(`<b>${logCommandInvocationSection.title}</b>`)
-            for (const message of failure.messages) {
+            if (!subsection.messages) {
+              continue
+            }
+            for (const message of subsection.messages) {
               if (message.category) {
                 lines.push(
                   `${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`
@@ -155,7 +95,75 @@ export class BuildLog {
             const emittedOutput =
               logCommandInvocationSection.emittedOutput.replace(re, '')
             lines.push(`${pre}${emittedOutput}${pre}`)
+          } else if (subsection.result !== 'succeeded') {
+            lines.push(subsection.title)
+            for (const message of subsection.messages) {
+              lines.push(message.title)
+            }
           }
+        }
+      } else {
+        if (failure.hasOwnProperty('exitCode')) {
+          const logCommandInvocationSection =
+            failure as ActivityLogCommandInvocationSection
+          if (logCommandInvocationSection.exitCode === 0) {
+            continue
+          }
+          lines.push(`<b>${logCommandInvocationSection.title}</b>`)
+          if (!failure.messages) {
+            continue
+          }
+          for (const message of failure.messages) {
+            if (message.category) {
+              lines.push(
+                `${message.type}:&nbsp;${message.category}:&nbsp;${message.title}`
+              )
+            } else {
+              lines.push(`${message.type}:&nbsp;${message.title}`)
+            }
+
+            if (message.location?.url) {
+              let startLine = 0
+              let endLine = 0
+
+              const url = new URL(message.location?.url)
+              const locations = url.hash.substring(1).split('&') as [string]
+              for (const location of locations) {
+                const pair = location.split('=')
+                if (pair.length === 2) {
+                  const value = parseInt(pair[1])
+                  switch (pair[0]) {
+                    case 'StartingLineNumber': {
+                      startLine = value
+                      break
+                    }
+                    case 'EndingLineNumber': {
+                      endLine = value
+                      break
+                    }
+                    default:
+                      break
+                  }
+                }
+              }
+              const location = url.pathname
+                .replace('file://', '')
+                .replace(re, '')
+              const annotation = new Annotation(
+                location,
+                startLine,
+                endLine,
+                'failure',
+                message.title,
+                message.type
+              )
+              this.annotations.push(annotation)
+            }
+          }
+          const pre = '```\n'
+          const emittedOutput =
+            logCommandInvocationSection.emittedOutput.replace(re, '')
+          lines.push(`${pre}${emittedOutput}${pre}`)
         } else if (failure.result !== 'succeeded') {
           lines.push(failure.title)
           for (const message of failure.messages) {
