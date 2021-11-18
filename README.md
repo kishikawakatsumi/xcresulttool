@@ -8,7 +8,7 @@ A GitHub Action that generates a human-readable test report from the Xcode resul
 
 <img width="600" alt="Screen Shot" src="https://user-images.githubusercontent.com/40610/138135764-e9c30d24-2dee-4db7-abfd-1533ec5ec2bc.png">
 
-The result is formatted into a test report that shows the success or failure of the tests, logs, activities, and saved screenshots.
+The result is formatted into a test report that shows the success or failure of the tests, code coverages, logs, activities, and saved screenshots.
 
 Here is [an example result](https://github.com/kishikawakatsumi/xcresulttool-example/pull/2/checks?check_run_id=3954797886).
 
