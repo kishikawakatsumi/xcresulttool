@@ -184,22 +184,24 @@ export class Formatter {
           const [stats, duration] = details.reduce(
             ([stats, duration]: [TestSummaryStats, number], detail) => {
               const test = detail as ActionTestSummary
-              switch (test.testStatus) {
-                case 'Success':
-                  stats.passed++
-                  break
-                case 'Failure':
-                  stats.failed++
-                  break
-                case 'Skipped':
-                  stats.skipped++
-                  break
-                case 'Expected Failure':
-                  stats.expectedFailure++
-                  break
-              }
+              if (test.testStatus) {
+                switch (test.testStatus) {
+                  case 'Success':
+                    stats.passed++
+                    break
+                  case 'Failure':
+                    stats.failed++
+                    break
+                  case 'Skipped':
+                    stats.skipped++
+                    break
+                  case 'Expected Failure':
+                    stats.expectedFailure++
+                    break
+                }
 
-              stats.total++
+                stats.total++
+              }
 
               if (test.duration) {
                 duration = test.duration
@@ -660,6 +662,9 @@ export class Formatter {
             let skippedPassedTests = 0
             for (const [index, detail] of details.entries()) {
               const testResult = detail as ActionTestMetadata
+              if (!testResult.testStatus) {
+                continue
+              }
 
               const isFailure = testResult.testStatus === 'Failure'
 

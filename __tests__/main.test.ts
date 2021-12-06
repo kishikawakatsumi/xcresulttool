@@ -64,7 +64,7 @@ test('KeychainAccess.xcresult', async () => {
 
   const outputPath = path.join(os.tmpdir(), 'KeychainAccessOnlyFailures.md')
   await writeFile(outputPath, reportText)
-  await writeFile('KeychainAccessOnlyFailures.md', reportText)
+  // await writeFile('KeychainAccessOnlyFailures.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/KeychainAccessOnlyFailures.md')).toString()
   )
@@ -243,6 +243,31 @@ test('LinkError.xcresult', async () => {
   // await writeFile('LinkError.md', reportText)
   expect((await readFile(outputPath)).toString()).toBe(
     (await readFile('__tests__/data/LinkError.md')).toString()
+  )
+})
+
+test('NoTests.xcresult', async () => {
+  const bundlePath = '__tests__/data/NoTests.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+
+  let root = ''
+  if (process.env.GITHUB_REPOSITORY) {
+    const pr = github.context.payload.pull_request
+    const sha = (pr && pr.head.sha) || github.context.sha
+    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+  }
+  const re = new RegExp(`${root}`, 'g')
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`.replace(
+    re,
+    ''
+  )
+
+  const outputPath = path.join(os.tmpdir(), 'NoTests.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('NoTests.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/NoTests.md')).toString()
   )
 })
 

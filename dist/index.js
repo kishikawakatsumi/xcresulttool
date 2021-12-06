@@ -430,21 +430,23 @@ class Formatter {
                     for (const [identifier, details] of Object.entries(detailGroup)) {
                         const [stats, duration] = details.reduce(([stats, duration], detail) => {
                             const test = detail;
-                            switch (test.testStatus) {
-                                case 'Success':
-                                    stats.passed++;
-                                    break;
-                                case 'Failure':
-                                    stats.failed++;
-                                    break;
-                                case 'Skipped':
-                                    stats.skipped++;
-                                    break;
-                                case 'Expected Failure':
-                                    stats.expectedFailure++;
-                                    break;
+                            if (test.testStatus) {
+                                switch (test.testStatus) {
+                                    case 'Success':
+                                        stats.passed++;
+                                        break;
+                                    case 'Failure':
+                                        stats.failed++;
+                                        break;
+                                    case 'Skipped':
+                                        stats.skipped++;
+                                        break;
+                                    case 'Expected Failure':
+                                        stats.expectedFailure++;
+                                        break;
+                                }
+                                stats.total++;
                             }
-                            stats.total++;
                             if (test.duration) {
                                 duration = test.duration;
                             }
@@ -792,6 +794,9 @@ class Formatter {
                             let skippedPassedTests = 0;
                             for (const [index, detail] of details.entries()) {
                                 const testResult = detail;
+                                if (!testResult.testStatus) {
+                                    continue;
+                                }
                                 const isFailure = testResult.testStatus === 'Failure';
                                 const rowSpan = `rowspan="${details.length}"`;
                                 const valign = `valign="top"`;
