@@ -40,7 +40,7 @@
     "eslint": "8.6.0",
     "eslint-plugin-github": "4.3.5",
     "eslint-plugin-jest": "25.3.4",
-    "jest": "27.4.5",
+    "jest": "27.4.7",
     "js-yaml": "4.1.0",
     "json-schema-to-typescript": "10.1.5",
     "prettier": "2.5.1",
