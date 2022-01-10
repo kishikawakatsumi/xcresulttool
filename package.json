@@ -30,7 +30,7 @@
     "@actions/exec": "1.1.0",
     "@actions/github": "5.0.0",
     "@octokit/action": "3.18.0",
-    "image-size": "1.0.0"
+    "image-size": "1.0.1"
   },
   "devDependencies": {
     "@types/node": "17.0.8",
