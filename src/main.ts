@@ -15,6 +15,7 @@ async function run(): Promise<void> {
     const inputPaths = core.getMultilineInput('path')
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
+    const uploadBundles = core.getBooleanInput('upload-bundles')
 
     const bundlePaths: string[] = []
     for (const checkPath of inputPaths) {
@@ -101,34 +102,36 @@ async function run(): Promise<void> {
         output
       })
 
-      for (const uploadBundlePath of inputPaths) {
-        try {
-          await stat(uploadBundlePath)
-        } catch (error) {
-          continue
-        }
-
-        const artifactClient = artifact.create()
-        const artifactName = path.basename(uploadBundlePath)
-
-        const rootDirectory = uploadBundlePath
-        const options = {
-          continueOnError: false
-        }
-
-        glob(`${uploadBundlePath}/**/*`, async (error, files) => {
-          if (error) {
-            core.error(error)
+      if (uploadBundles) {
+        for (const uploadBundlePath of inputPaths) {
+          try {
+            await stat(uploadBundlePath)
+          } catch (error) {
+            continue
           }
-          if (files.length) {
-            await artifactClient.uploadArtifact(
-              artifactName,
-              files,
-              rootDirectory,
-              options
-            )
+
+          const artifactClient = artifact.create()
+          const artifactName = path.basename(uploadBundlePath)
+
+          const rootDirectory = uploadBundlePath
+          const options = {
+            continueOnError: false
           }
-        })
+
+          glob(`${uploadBundlePath}/**/*`, async (error, files) => {
+            if (error) {
+              core.error(error)
+            }
+            if (files.length) {
+              await artifactClient.uploadArtifact(
+                artifactName,
+                files,
+                rootDirectory,
+                options
+              )
+            }
+          })
+        }
       }
     }
   } catch (error) {
