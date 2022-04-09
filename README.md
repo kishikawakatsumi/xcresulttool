@@ -113,6 +113,11 @@ jobs:
     #
     # Default: true
     show-code-coverage:
+
+    # Whether to upload the xcresult bundles.
+    #
+    # Default: true
+    upload-bundles:
 ```
 
 ## Limitations
