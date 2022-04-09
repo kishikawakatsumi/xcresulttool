@@ -17,6 +17,9 @@ inputs:
   show-code-coverage:
     description: 'Whether to show code coverage'
     default: true
+  upload-bundles:
+    description: 'Whether to upload the xcresult bundles'
+    default: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

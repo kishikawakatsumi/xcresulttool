@@ -1172,6 +1172,7 @@ function run() {
             const inputPaths = core.getMultilineInput('path');
             const showPassedTests = core.getBooleanInput('show-passed-tests');
             const showCodeCoverage = core.getBooleanInput('show-code-coverage');
+            const uploadBundles = core.getBooleanInput('upload-bundles');
             const bundlePaths = [];
             for (const checkPath of inputPaths) {
                 try {
@@ -1247,27 +1248,29 @@ function run() {
                     conclusion: report.testStatus,
                     output
                 });
-                for (const uploadBundlePath of inputPaths) {
-                    try {
-                        yield stat(uploadBundlePath);
-                    }
-                    catch (error) {
-                        continue;
-                    }
-                    const artifactClient = artifact.create();
-                    const artifactName = path.basename(uploadBundlePath);
-                    const rootDirectory = uploadBundlePath;
-                    const options = {
-                        continueOnError: false
-                    };
-                    (0, glob_1.glob)(`${uploadBundlePath}/**/*`, (error, files) => __awaiter(this, void 0, void 0, function* () {
-                        if (error) {
-                            core.error(error);
+                if (uploadBundles) {
+                    for (const uploadBundlePath of inputPaths) {
+                        try {
+                            yield stat(uploadBundlePath);
                         }
-                        if (files.length) {
-                            yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                        catch (error) {
+                            continue;
                         }
-                    }));
+                        const artifactClient = artifact.create();
+                        const artifactName = path.basename(uploadBundlePath);
+                        const rootDirectory = uploadBundlePath;
+                        const options = {
+                            continueOnError: false
+                        };
+                        (0, glob_1.glob)(`${uploadBundlePath}/**/*`, (error, files) => __awaiter(this, void 0, void 0, function* () {
+                            if (error) {
+                                core.error(error);
+                            }
+                            if (files.length) {
+                                yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                            }
+                        }));
+                    }
                 }
             }
         }
