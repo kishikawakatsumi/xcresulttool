@@ -203,6 +203,15 @@ export class TestCodeCoverage {
       this.lines.push(`<td align="right"><b>${total.executableLines}`)
 
       this.lines.push('</table>\n')
+    } else {
+      this.lines.push('<tr>')
+      this.lines.push(`<td>`)
+      this.lines.push(`<td>`)
+      this.lines.push(`<td align="right">0 %`)
+      this.lines.push(`<td align="right">0`)
+      this.lines.push(`<td align="right">0`)
+
+      this.lines.push('</table>\n')
     }
   }
 }
