@@ -8,11 +8,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -45,8 +41,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.exportAttachments = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
-const os = __importStar(__nccwpck_require__(2037));
-const path = __importStar(__nccwpck_require__(1017));
+const os = __importStar(__nccwpck_require__(2087));
+const path = __importStar(__nccwpck_require__(5622));
 const image_size_1 = __importDefault(__nccwpck_require__(8250));
 function exportAttachments(parser, activity) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -297,11 +293,7 @@ const typeMap = {
 /*eslint-disable no-shadow */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -331,7 +323,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FormatterOptions = exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
 const github = __importStar(__nccwpck_require__(5438));
-const path = __importStar(__nccwpck_require__(1017));
+const path = __importStar(__nccwpck_require__(5622));
 const report_1 = __nccwpck_require__(8269);
 const markdown_1 = __nccwpck_require__(5821);
 const coverage_1 = __nccwpck_require__(5730);
@@ -1070,11 +1062,7 @@ exports.FormatterOptions = FormatterOptions;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1093,7 +1081,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.icon = exports.testStatus = void 0;
-const path = __importStar(__nccwpck_require__(1017));
+const path = __importStar(__nccwpck_require__(5622));
 const baseUrl = 'https://xcresulttool-static.netlify.app/i/';
 const attrs = 'width="14px" align="top"';
 function testStatus(statusText) {
@@ -1140,11 +1128,7 @@ exports.icon = icon;
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1175,12 +1159,12 @@ const artifact = __importStar(__nccwpck_require__(2605));
 const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const github = __importStar(__nccwpck_require__(5438));
-const os = __importStar(__nccwpck_require__(2037));
-const path = __importStar(__nccwpck_require__(1017));
+const os = __importStar(__nccwpck_require__(2087));
+const path = __importStar(__nccwpck_require__(5622));
 const formatter_1 = __nccwpck_require__(7556);
 const action_1 = __nccwpck_require__(1231);
 const glob_1 = __nccwpck_require__(1957);
-const fs_1 = __nccwpck_require__(7147);
+const fs_1 = __nccwpck_require__(5747);
 const { stat } = fs_1.promises;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -1347,11 +1331,7 @@ exports.indentation = indentation;
 /*eslint-disable @typescript-eslint/no-explicit-any */
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1380,7 +1360,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Parser = void 0;
 const exec = __importStar(__nccwpck_require__(1514));
-const fs_1 = __nccwpck_require__(7147);
+const fs_1 = __nccwpck_require__(5747);
 const { readFile } = fs_1.promises;
 class Parser {
     constructor(bundlePath) {
@@ -1520,11 +1500,7 @@ function parsePrimitive(element) {
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -1543,7 +1519,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BuildLog = exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
-const pathModule = __importStar(__nccwpck_require__(1017));
+const pathModule = __importStar(__nccwpck_require__(5622));
 class TestReport {
     constructor() {
         this.testStatus = 'neutral';
@@ -1887,7 +1863,6 @@ exports.BuildLog = BuildLog;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.create = void 0;
 const artifact_client_1 = __nccwpck_require__(8802);
 /**
  * Constructs an ArtifactClient
@@ -1905,25 +1880,6 @@ exports.create = create;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1933,17 +1889,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DefaultArtifactClient = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const upload_specification_1 = __nccwpck_require__(183);
 const upload_http_client_1 = __nccwpck_require__(4354);
 const utils_1 = __nccwpck_require__(6327);
-const path_and_artifact_name_validation_1 = __nccwpck_require__(7398);
 const download_http_client_1 = __nccwpck_require__(8538);
 const download_specification_1 = __nccwpck_require__(5686);
 const config_variables_1 = __nccwpck_require__(2222);
-const path_1 = __nccwpck_require__(1017);
+const path_1 = __nccwpck_require__(5622);
 class DefaultArtifactClient {
     /**
      * Constructs a DefaultArtifactClient
@@ -1956,9 +1917,7 @@ class DefaultArtifactClient {
      */
     uploadArtifact(name, files, rootDirectory, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            core.info(`Starting artifact upload
-For more detailed logs during the artifact upload process, enable step-debugging: https://docs.github.com/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging`);
-            path_and_artifact_name_validation_1.checkArtifactName(name);
+            utils_1.checkArtifactName(name);
             // Get specification for the files being uploaded
             const uploadSpecification = upload_specification_1.getUploadSpecification(name, rootDirectory, files);
             const uploadResponse = {
@@ -1979,24 +1938,12 @@ For more detailed logs during the artifact upload process, enable step-debugging
                     throw new Error('No URL provided by the Artifact Service to upload an artifact to');
                 }
                 core.debug(`Upload Resource URL: ${response.fileContainerResourceUrl}`);
-                core.info(`Container for artifact "${name}" successfully created. Starting upload of file(s)`);
                 // Upload each of the files that were found concurrently
                 const uploadResult = yield uploadHttpClient.uploadArtifactToFileContainer(response.fileContainerResourceUrl, uploadSpecification, options);
                 // Update the size of the artifact to indicate we are done uploading
                 // The uncompressed size is used for display when downloading a zip of the artifact from the UI
-                core.info(`File upload process has finished. Finalizing the artifact upload`);
                 yield uploadHttpClient.patchArtifactSize(uploadResult.totalSize, name);
-                if (uploadResult.failedItems.length > 0) {
-                    core.info(`Upload finished. There were ${uploadResult.failedItems.length} items that failed to upload`);
-                }
-                else {
-                    core.info(`Artifact has been finalized. All files have been successfully uploaded!`);
-                }
-                core.info(`
-The raw size of all the files that were specified for upload is ${uploadResult.totalSize} bytes
-The size of all the files that were uploaded is ${uploadResult.uploadSize} bytes. This takes into account any gzip compression used to reduce the upload size, time and storage
-
-Note: The size of downloaded zips can differ significantly from the reported size. For more information see: https://github.com/actions/upload-artifact#zipped-artifact-downloads \r\n`);
+                core.info(`Finished uploading artifact ${name}. Reported size is ${uploadResult.uploadSize} bytes. There were ${uploadResult.failedItems.length} items that failed to upload`);
                 uploadResponse.artifactItems = uploadSpecification.map(item => item.absoluteFilePath);
                 uploadResponse.size = uploadResult.uploadSize;
                 uploadResponse.failedItems = uploadResult.failedItems;
@@ -2059,7 +2006,6 @@ Note: The size of downloaded zips can differ significantly from the reported siz
             while (downloadedArtifacts < artifacts.count) {
                 const currentArtifactToDownload = artifacts.value[downloadedArtifacts];
                 downloadedArtifacts += 1;
-                core.info(`starting download of artifact ${currentArtifactToDownload.name} : ${downloadedArtifacts}/${artifacts.count}`);
                 // Get container entries for the specific artifact
                 const items = yield downloadHttpClient.getContainerItems(currentArtifactToDownload.name, currentArtifactToDownload.fileContainerResourceUrl);
                 const downloadSpecification = download_specification_1.getDownloadSpecification(currentArtifactToDownload.name, items.value, path, true);
@@ -2091,7 +2037,6 @@ exports.DefaultArtifactClient = DefaultArtifactClient;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getRetentionDays = exports.getWorkSpaceDirectory = exports.getWorkFlowRunId = exports.getRuntimeUrl = exports.getRuntimeToken = exports.getDownloadFileConcurrency = exports.getInitialRetryIntervalInMilliseconds = exports.getRetryMultiplier = exports.getRetryLimit = exports.getUploadChunkSize = exports.getUploadFileConcurrency = void 0;
 // The number of concurrent uploads that happens at the same time
 function getUploadFileConcurrency() {
     return 2;
@@ -2169,25 +2114,6 @@ exports.getRetentionDays = getRetentionDays;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2197,15 +2123,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DownloadHttpClient = void 0;
-const fs = __importStar(__nccwpck_require__(7147));
+const fs = __importStar(__nccwpck_require__(5747));
 const core = __importStar(__nccwpck_require__(2186));
-const zlib = __importStar(__nccwpck_require__(9796));
+const zlib = __importStar(__nccwpck_require__(8761));
 const utils_1 = __nccwpck_require__(6327);
-const url_1 = __nccwpck_require__(7310);
+const url_1 = __nccwpck_require__(8835);
 const status_reporter_1 = __nccwpck_require__(9081);
-const perf_hooks_1 = __nccwpck_require__(4074);
+const perf_hooks_1 = __nccwpck_require__(630);
 const http_manager_1 = __nccwpck_require__(6527);
 const config_variables_1 = __nccwpck_require__(2222);
 const requestUtils_1 = __nccwpck_require__(755);
@@ -2350,6 +2282,9 @@ class DownloadHttpClient {
                 let response;
                 try {
                     response = yield makeDownloadRequest();
+                    if (core.isDebug()) {
+                        utils_1.displayHttpDiagnostics(response);
+                    }
                 }
                 catch (error) {
                     // if an error is caught, it is usually indicative of a timeout so retry the download
@@ -2461,28 +2396,15 @@ exports.DownloadHttpClient = DownloadHttpClient;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getDownloadSpecification = void 0;
-const path = __importStar(__nccwpck_require__(1017));
+const path = __importStar(__nccwpck_require__(5622));
 /**
  * Creates a specification for a set of files that will be downloaded
  * @param artifactName the name of the artifact
@@ -2543,7 +2465,6 @@ exports.getDownloadSpecification = getDownloadSpecification;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.HttpManager = void 0;
 const utils_1 = __nccwpck_require__(6327);
 /**
  * Used for managing http clients during either upload or download
@@ -2576,104 +2497,11 @@ exports.HttpManager = HttpManager;
 
 /***/ }),
 
-/***/ 7398:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.checkArtifactFilePath = exports.checkArtifactName = void 0;
-const core_1 = __nccwpck_require__(2186);
-/**
- * Invalid characters that cannot be in the artifact name or an uploaded file. Will be rejected
- * from the server if attempted to be sent over. These characters are not allowed due to limitations with certain
- * file systems such as NTFS. To maintain platform-agnostic behavior, all characters that are not supported by an
- * individual filesystem/platform will not be supported on all fileSystems/platforms
- *
- * FilePaths can include characters such as \ and / which are not permitted in the artifact name alone
- */
-const invalidArtifactFilePathCharacters = new Map([
-    ['"', ' Double quote "'],
-    [':', ' Colon :'],
-    ['<', ' Less than <'],
-    ['>', ' Greater than >'],
-    ['|', ' Vertical bar |'],
-    ['*', ' Asterisk *'],
-    ['?', ' Question mark ?'],
-    ['\r', ' Carriage return \\r'],
-    ['\n', ' Line feed \\n']
-]);
-const invalidArtifactNameCharacters = new Map([
-    ...invalidArtifactFilePathCharacters,
-    ['\\', ' Backslash \\'],
-    ['/', ' Forward slash /']
-]);
-/**
- * Scans the name of the artifact to make sure there are no illegal characters
- */
-function checkArtifactName(name) {
-    if (!name) {
-        throw new Error(`Artifact name: ${name}, is incorrectly provided`);
-    }
-    for (const [invalidCharacterKey, errorMessageForCharacter] of invalidArtifactNameCharacters) {
-        if (name.includes(invalidCharacterKey)) {
-            throw new Error(`Artifact name is not valid: ${name}. Contains the following character: ${errorMessageForCharacter}
-          
-Invalid characters include: ${Array.from(invalidArtifactNameCharacters.values()).toString()}
-          
-These characters are not allowed in the artifact name due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.`);
-        }
-    }
-    core_1.info(`Artifact name is valid!`);
-}
-exports.checkArtifactName = checkArtifactName;
-/**
- * Scans the name of the filePath used to make sure there are no illegal characters
- */
-function checkArtifactFilePath(path) {
-    if (!path) {
-        throw new Error(`Artifact path: ${path}, is incorrectly provided`);
-    }
-    for (const [invalidCharacterKey, errorMessageForCharacter] of invalidArtifactFilePathCharacters) {
-        if (path.includes(invalidCharacterKey)) {
-            throw new Error(`Artifact path is not valid: ${path}. Contains the following character: ${errorMessageForCharacter}
-          
-Invalid characters include: ${Array.from(invalidArtifactFilePathCharacters.values()).toString()}
-          
-The following characters are not allowed in files that are uploaded due to limitations with certain file systems such as NTFS. To maintain file system agnostic behavior, these characters are intentionally not allowed to prevent potential problems with downloads on different file systems.
-          `);
-        }
-    }
-}
-exports.checkArtifactFilePath = checkArtifactFilePath;
-//# sourceMappingURL=path-and-artifact-name-validation.js.map
-
-/***/ }),
-
 /***/ 755:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2683,8 +2511,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.retryHttpClientRequest = exports.retry = void 0;
 const utils_1 = __nccwpck_require__(6327);
 const core = __importStar(__nccwpck_require__(2186));
 const config_variables_1 = __nccwpck_require__(2222);
@@ -2751,7 +2585,6 @@ exports.retryHttpClientRequest = retryHttpClientRequest;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StatusReporter = void 0;
 const core_1 = __nccwpck_require__(2186);
 /**
  * Status Reporter that displays information about the progress/status of an artifact that is being uploaded or downloaded
@@ -2766,11 +2599,11 @@ class StatusReporter {
         this.processedCount = 0;
         this.largeFiles = new Map();
         this.totalFileStatus = undefined;
+        this.largeFileStatus = undefined;
         this.displayFrequencyInMilliseconds = displayFrequencyInMilliseconds;
     }
     setTotalNumberOfFilesToProcess(fileTotal) {
         this.totalNumberOfFilesToProcess = fileTotal;
-        this.processedCount = 0;
     }
     start() {
         // displays information about the total upload/download status
@@ -2779,16 +2612,29 @@ class StatusReporter {
             const percentage = this.formatPercentage(this.processedCount, this.totalNumberOfFilesToProcess);
             core_1.info(`Total file count: ${this.totalNumberOfFilesToProcess} ---- Processed file #${this.processedCount} (${percentage.slice(0, percentage.indexOf('.') + 2)}%)`);
         }, this.displayFrequencyInMilliseconds);
+        // displays extra information about any large files that take a significant amount of time to upload or download every 1 second
+        this.largeFileStatus = setInterval(() => {
+            for (const value of Array.from(this.largeFiles.values())) {
+                core_1.info(value);
+            }
+            // delete all entries in the map after displaying the information so it will not be displayed again unless explicitly added
+            this.largeFiles.clear();
+        }, 1000);
     }
     // if there is a large file that is being uploaded in chunks, this is used to display extra information about the status of the upload
-    updateLargeFileStatus(fileName, chunkStartIndex, chunkEndIndex, totalUploadFileSize) {
+    updateLargeFileStatus(fileName, numerator, denominator) {
         // display 1 decimal place without any rounding
-        const percentage = this.formatPercentage(chunkEndIndex, totalUploadFileSize);
-        core_1.info(`Uploaded ${fileName} (${percentage.slice(0, percentage.indexOf('.') + 2)}%) bytes ${chunkStartIndex}:${chunkEndIndex}`);
+        const percentage = this.formatPercentage(numerator, denominator);
+        const displayInformation = `Uploading ${fileName} (${percentage.slice(0, percentage.indexOf('.') + 2)}%)`;
+        // any previously added display information should be overwritten for the specific large file because a map is being used
+        this.largeFiles.set(fileName, displayInformation);
     }
     stop() {
         if (this.totalFileStatus) {
             clearInterval(this.totalFileStatus);
+        }
+        if (this.largeFileStatus) {
+            clearInterval(this.largeFileStatus);
         }
     }
     incrementProcessedCount() {
@@ -2809,25 +2655,6 @@ exports.StatusReporter = StatusReporter;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2844,25 +2671,18 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createGZipFileInBuffer = exports.createGZipFileOnDisk = void 0;
-const fs = __importStar(__nccwpck_require__(7147));
-const zlib = __importStar(__nccwpck_require__(9796));
-const util_1 = __nccwpck_require__(3837);
+const fs = __importStar(__nccwpck_require__(5747));
+const zlib = __importStar(__nccwpck_require__(8761));
+const util_1 = __nccwpck_require__(1669);
 const stat = util_1.promisify(fs.stat);
-/**
- * GZipping certain files that are already compressed will likely not yield further size reductions. Creating large temporary gzip
- * files then will just waste a lot of time before ultimately being discarded (especially for very large files).
- * If any of these types of files are encountered then on-disk gzip creation will be skipped and the original file will be uploaded as-is
- */
-const gzipExemptFileExtensions = [
-    '.gzip',
-    '.zip',
-    '.tar.lz',
-    '.tar.gz',
-    '.tar.bz2',
-    '.7z'
-];
 /**
  * Creates a Gzip compressed file of an original file at the provided temporary filepath location
  * @param {string} originalFilePath filepath of whatever will be compressed. The original file will be unmodified
@@ -2871,12 +2691,6 @@ const gzipExemptFileExtensions = [
  */
 function createGZipFileOnDisk(originalFilePath, tempFilePath) {
     return __awaiter(this, void 0, void 0, function* () {
-        for (const gzipExemptExtension of gzipExemptFileExtensions) {
-            if (originalFilePath.endsWith(gzipExemptExtension)) {
-                // return a really large number so that the original file gets uploaded
-                return Number.MAX_SAFE_INTEGER;
-            }
-        }
         return new Promise((resolve, reject) => {
             const inputStream = fs.createReadStream(originalFilePath);
             const gzip = zlib.createGzip();
@@ -2937,25 +2751,6 @@ exports.createGZipFileInBuffer = createGZipFileInBuffer;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2965,17 +2760,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UploadHttpClient = void 0;
-const fs = __importStar(__nccwpck_require__(7147));
+const fs = __importStar(__nccwpck_require__(5747));
 const core = __importStar(__nccwpck_require__(2186));
 const tmp = __importStar(__nccwpck_require__(8065));
-const stream = __importStar(__nccwpck_require__(2781));
+const stream = __importStar(__nccwpck_require__(2413));
 const utils_1 = __nccwpck_require__(6327);
 const config_variables_1 = __nccwpck_require__(2222);
-const util_1 = __nccwpck_require__(3837);
-const url_1 = __nccwpck_require__(7310);
-const perf_hooks_1 = __nccwpck_require__(4074);
+const util_1 = __nccwpck_require__(1669);
+const url_1 = __nccwpck_require__(8835);
+const perf_hooks_1 = __nccwpck_require__(630);
 const status_reporter_1 = __nccwpck_require__(9081);
 const http_client_1 = __nccwpck_require__(9925);
 const http_manager_1 = __nccwpck_require__(6527);
@@ -3112,33 +2913,27 @@ class UploadHttpClient {
      */
     uploadFileAsync(httpClientIndex, parameters) {
         return __awaiter(this, void 0, void 0, function* () {
-            const fileStat = yield stat(parameters.file);
-            const totalFileSize = fileStat.size;
-            const isFIFO = fileStat.isFIFO();
+            const totalFileSize = (yield stat(parameters.file)).size;
             let offset = 0;
             let isUploadSuccessful = true;
             let failedChunkSizes = 0;
             let uploadFileSize = 0;
             let isGzip = true;
-            // the file that is being uploaded is less than 64k in size to increase throughput and to minimize disk I/O
+            // the file that is being uploaded is less than 64k in size, to increase throughput and to minimize disk I/O
             // for creating a new GZip file, an in-memory buffer is used for compression
-            // with named pipes the file size is reported as zero in that case don't read the file in memory
-            if (!isFIFO && totalFileSize < 65536) {
-                core.debug(`${parameters.file} is less than 64k in size. Creating a gzip file in-memory to potentially reduce the upload size`);
+            if (totalFileSize < 65536) {
                 const buffer = yield upload_gzip_1.createGZipFileInBuffer(parameters.file);
-                // An open stream is needed in the event of a failure and we need to retry. If a NodeJS.ReadableStream is directly passed in,
+                //An open stream is needed in the event of a failure and we need to retry. If a NodeJS.ReadableStream is directly passed in,
                 // it will not properly get reset to the start of the stream if a chunk upload needs to be retried
                 let openUploadStream;
                 if (totalFileSize < buffer.byteLength) {
                     // compression did not help with reducing the size, use a readable stream from the original file for upload
-                    core.debug(`The gzip file created for ${parameters.file} did not help with reducing the size of the file. The original file will be uploaded as-is`);
                     openUploadStream = () => fs.createReadStream(parameters.file);
                     isGzip = false;
                     uploadFileSize = totalFileSize;
                 }
                 else {
                     // create a readable stream using a PassThrough stream that is both readable and writable
-                    core.debug(`A gzip file created for ${parameters.file} helped with reducing the size of the original file. The file will be uploaded using gzip.`);
                     openUploadStream = () => {
                         const passThrough = new stream.PassThrough();
                         passThrough.end(buffer);
@@ -3163,27 +2958,25 @@ class UploadHttpClient {
                 // the file that is being uploaded is greater than 64k in size, a temporary file gets created on disk using the
                 // npm tmp-promise package and this file gets used to create a GZipped file
                 const tempFile = yield tmp.file();
-                core.debug(`${parameters.file} is greater than 64k in size. Creating a gzip file on-disk ${tempFile.path} to potentially reduce the upload size`);
                 // create a GZip file of the original file being uploaded, the original file should not be modified in any way
                 uploadFileSize = yield upload_gzip_1.createGZipFileOnDisk(parameters.file, tempFile.path);
                 let uploadFilePath = tempFile.path;
                 // compression did not help with size reduction, use the original file for upload and delete the temp GZip file
-                // for named pipes totalFileSize is zero, this assumes compression did help
-                if (!isFIFO && totalFileSize < uploadFileSize) {
-                    core.debug(`The gzip file created for ${parameters.file} did not help with reducing the size of the file. The original file will be uploaded as-is`);
+                if (totalFileSize < uploadFileSize) {
                     uploadFileSize = totalFileSize;
                     uploadFilePath = parameters.file;
                     isGzip = false;
-                }
-                else {
-                    core.debug(`The gzip file created for ${parameters.file} is smaller than the original file. The file will be uploaded using gzip.`);
                 }
                 let abortFileUpload = false;
                 // upload only a single chunk at a time
                 while (offset < uploadFileSize) {
                     const chunkSize = Math.min(uploadFileSize - offset, parameters.maxChunkSize);
-                    const startChunkIndex = offset;
-                    const endChunkIndex = offset + chunkSize - 1;
+                    // if an individual file is greater than 100MB (1024*1024*100) in size, display extra information about the upload status
+                    if (uploadFileSize > 104857600) {
+                        this.statusReporter.updateLargeFileStatus(parameters.file, offset, uploadFileSize);
+                    }
+                    const start = offset;
+                    const end = offset + chunkSize - 1;
                     offset += parameters.maxChunkSize;
                     if (abortFileUpload) {
                         // if we don't want to continue in the event of an error, any pending upload chunks will be marked as failed
@@ -3191,10 +2984,10 @@ class UploadHttpClient {
                         continue;
                     }
                     const result = yield this.uploadChunk(httpClientIndex, parameters.resourceUrl, () => fs.createReadStream(uploadFilePath, {
-                        start: startChunkIndex,
-                        end: endChunkIndex,
+                        start,
+                        end,
                         autoClose: false
-                    }), startChunkIndex, endChunkIndex, uploadFileSize, isGzip, totalFileSize);
+                    }), start, end, uploadFileSize, isGzip, totalFileSize);
                     if (!result) {
                         // Chunk failed to upload, report as failed and do not continue uploading any more chunks for the file. It is possible that part of a chunk was
                         // successfully uploaded so the server may report a different size for what was uploaded
@@ -3203,16 +2996,9 @@ class UploadHttpClient {
                         core.warning(`Aborting upload for ${parameters.file} due to failure`);
                         abortFileUpload = true;
                     }
-                    else {
-                        // if an individual file is greater than 8MB (1024*1024*8) in size, display extra information about the upload status
-                        if (uploadFileSize > 8388608) {
-                            this.statusReporter.updateLargeFileStatus(parameters.file, startChunkIndex, endChunkIndex, uploadFileSize);
-                        }
-                    }
                 }
                 // Delete the temporary file that was created as part of the upload. If the temp file does not get manually deleted by
                 // calling cleanup, it gets removed when the node process exits. For more info see: https://www.npmjs.com/package/tmp-promise#about
-                core.debug(`deleting temporary gzip file ${tempFile.path}`);
                 yield tempFile.cleanup();
                 return {
                     isSuccess: isUploadSuccessful,
@@ -3351,31 +3137,18 @@ exports.UploadHttpClient = UploadHttpClient;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getUploadSpecification = void 0;
-const fs = __importStar(__nccwpck_require__(7147));
+const fs = __importStar(__nccwpck_require__(5747));
 const core_1 = __nccwpck_require__(2186);
-const path_1 = __nccwpck_require__(1017);
-const path_and_artifact_name_validation_1 = __nccwpck_require__(7398);
+const path_1 = __nccwpck_require__(5622);
+const utils_1 = __nccwpck_require__(6327);
 /**
  * Creates a specification that describes how each file that is part of the artifact will be uploaded
  * @param artifactName the name of the artifact being uploaded. Used during upload to denote where the artifact is stored on the server
@@ -3383,7 +3156,7 @@ const path_and_artifact_name_validation_1 = __nccwpck_require__(7398);
  * @param artifactFiles a list of absolute file paths that denote what should be uploaded as part of the artifact
  */
 function getUploadSpecification(artifactName, rootDirectory, artifactFiles) {
-    // artifact name was checked earlier on, no need to check again
+    utils_1.checkArtifactName(artifactName);
     const specifications = [];
     if (!fs.existsSync(rootDirectory)) {
         throw new Error(`Provided rootDirectory ${rootDirectory} does not exist`);
@@ -3426,7 +3199,7 @@ function getUploadSpecification(artifactName, rootDirectory, artifactFiles) {
             }
             // Check for forbidden characters in file paths that will be rejected during upload
             const uploadPath = file.replace(rootDirectory, '');
-            path_and_artifact_name_validation_1.checkArtifactFilePath(uploadPath);
+            utils_1.checkArtifactFilePath(uploadPath);
             /*
               uploadFilePath denotes where the file will be uploaded in the file container on the server. During a run, if multiple artifacts are uploaded, they will all
               be saved in the same container. The artifact name is used as the root directory in the container to separate and distinguish uploaded artifacts
@@ -3469,9 +3242,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.sleep = exports.getProperRetention = exports.rmFile = exports.getFileSize = exports.createEmptyFilesForArtifact = exports.createDirectoriesForArtifact = exports.displayHttpDiagnostics = exports.getArtifactUrl = exports.createHttpClient = exports.getUploadHeaders = exports.getDownloadHeaders = exports.getContentRange = exports.tryGetRetryAfterValueTimeInMilliseconds = exports.isThrottledStatusCode = exports.isRetryableStatusCode = exports.isForbiddenStatusCode = exports.isSuccessStatusCode = exports.getApiVersion = exports.parseEnvNumber = exports.getExponentialRetryTimeInMilliseconds = void 0;
 const core_1 = __nccwpck_require__(2186);
-const fs_1 = __nccwpck_require__(7147);
+const fs_1 = __nccwpck_require__(5747);
 const http_client_1 = __nccwpck_require__(9925);
 const auth_1 = __nccwpck_require__(3702);
 const config_variables_1 = __nccwpck_require__(2222);
@@ -3489,7 +3261,7 @@ function getExponentialRetryTimeInMilliseconds(retryCount) {
     const minTime = config_variables_1.getInitialRetryIntervalInMilliseconds() * config_variables_1.getRetryMultiplier() * retryCount;
     const maxTime = minTime * config_variables_1.getRetryMultiplier();
     // returns a random number between the minTime (inclusive) and the maxTime (exclusive)
-    return Math.trunc(Math.random() * (maxTime - minTime) + minTime);
+    return Math.random() * (maxTime - minTime) + minTime;
 }
 exports.getExponentialRetryTimeInMilliseconds = getExponentialRetryTimeInMilliseconds;
 /**
@@ -3668,6 +3440,48 @@ Header Information: ${JSON.stringify(response.message.headers, undefined, 2)}
 ###### End Diagnostic HTTP information ######`);
 }
 exports.displayHttpDiagnostics = displayHttpDiagnostics;
+/**
+ * Invalid characters that cannot be in the artifact name or an uploaded file. Will be rejected
+ * from the server if attempted to be sent over. These characters are not allowed due to limitations with certain
+ * file systems such as NTFS. To maintain platform-agnostic behavior, all characters that are not supported by an
+ * individual filesystem/platform will not be supported on all fileSystems/platforms
+ *
+ * FilePaths can include characters such as \ and / which are not permitted in the artifact name alone
+ */
+const invalidArtifactFilePathCharacters = ['"', ':', '<', '>', '|', '*', '?'];
+const invalidArtifactNameCharacters = [
+    ...invalidArtifactFilePathCharacters,
+    '\\',
+    '/'
+];
+/**
+ * Scans the name of the artifact to make sure there are no illegal characters
+ */
+function checkArtifactName(name) {
+    if (!name) {
+        throw new Error(`Artifact name: ${name}, is incorrectly provided`);
+    }
+    for (const invalidChar of invalidArtifactNameCharacters) {
+        if (name.includes(invalidChar)) {
+            throw new Error(`Artifact name is not valid: ${name}. Contains character: "${invalidChar}". Invalid artifact name characters include: ${invalidArtifactNameCharacters.toString()}.`);
+        }
+    }
+}
+exports.checkArtifactName = checkArtifactName;
+/**
+ * Scans the name of the filePath used to make sure there are no illegal characters
+ */
+function checkArtifactFilePath(path) {
+    if (!path) {
+        throw new Error(`Artifact path: ${path}, is incorrectly provided`);
+    }
+    for (const invalidChar of invalidArtifactFilePathCharacters) {
+        if (path.includes(invalidChar)) {
+            throw new Error(`Artifact path is not valid: ${path}. Contains character: "${invalidChar}". Invalid characters include: ${invalidArtifactFilePathCharacters.toString()}.`);
+        }
+    }
+}
+exports.checkArtifactFilePath = checkArtifactFilePath;
 function createDirectoriesForArtifact(directories) {
     return __awaiter(this, void 0, void 0, function* () {
         for (const directory of directories) {
@@ -3751,7 +3565,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
-const os = __importStar(__nccwpck_require__(2037));
+const os = __importStar(__nccwpck_require__(2087));
 const utils_1 = __nccwpck_require__(5278);
 /**
  * Commands
@@ -3862,8 +3676,8 @@ exports.getIDToken = exports.getState = exports.saveState = exports.group = expo
 const command_1 = __nccwpck_require__(7351);
 const file_command_1 = __nccwpck_require__(717);
 const utils_1 = __nccwpck_require__(5278);
-const os = __importStar(__nccwpck_require__(2037));
-const path = __importStar(__nccwpck_require__(1017));
+const os = __importStar(__nccwpck_require__(2087));
+const path = __importStar(__nccwpck_require__(5622));
 const oidc_utils_1 = __nccwpck_require__(8041);
 /**
  * The code to exit an action
@@ -4172,8 +3986,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issueCommand = void 0;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const fs = __importStar(__nccwpck_require__(7147));
-const os = __importStar(__nccwpck_require__(2037));
+const fs = __importStar(__nccwpck_require__(5747));
+const os = __importStar(__nccwpck_require__(2087));
 const utils_1 = __nccwpck_require__(5278);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
@@ -4358,7 +4172,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getExecOutput = exports.exec = void 0;
-const string_decoder_1 = __nccwpck_require__(1576);
+const string_decoder_1 = __nccwpck_require__(4304);
 const tr = __importStar(__nccwpck_require__(8159));
 /**
  * Exec a command.
@@ -4468,13 +4282,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.argStringToArray = exports.ToolRunner = void 0;
-const os = __importStar(__nccwpck_require__(2037));
-const events = __importStar(__nccwpck_require__(2361));
-const child = __importStar(__nccwpck_require__(2081));
-const path = __importStar(__nccwpck_require__(1017));
+const os = __importStar(__nccwpck_require__(2087));
+const events = __importStar(__nccwpck_require__(8614));
+const child = __importStar(__nccwpck_require__(3129));
+const path = __importStar(__nccwpck_require__(5622));
 const io = __importStar(__nccwpck_require__(7436));
 const ioUtil = __importStar(__nccwpck_require__(1962));
-const timers_1 = __nccwpck_require__(9512);
+const timers_1 = __nccwpck_require__(8213);
 /* eslint-disable @typescript-eslint/unbound-method */
 const IS_WINDOWS = process.platform === 'win32';
 /*
@@ -5065,8 +4879,8 @@ class ExecState extends events.EventEmitter {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Context = void 0;
-const fs_1 = __nccwpck_require__(7147);
-const os_1 = __nccwpck_require__(2037);
+const fs_1 = __nccwpck_require__(5747);
+const os_1 = __nccwpck_require__(2087);
 class Context {
     /**
      * Hydrate the context from the environment
@@ -5345,8 +5159,8 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const http = __nccwpck_require__(3685);
-const https = __nccwpck_require__(5687);
+const http = __nccwpck_require__(8605);
+const https = __nccwpck_require__(7211);
 const pm = __nccwpck_require__(6443);
 let tunnel;
 var HttpCodes;
@@ -5985,8 +5799,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rename = exports.readlink = exports.readdir = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
-const fs = __importStar(__nccwpck_require__(7147));
-const path = __importStar(__nccwpck_require__(1017));
+const fs = __importStar(__nccwpck_require__(5747));
+const path = __importStar(__nccwpck_require__(5622));
 _a = fs.promises, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
 exports.IS_WINDOWS = process.platform === 'win32';
 function exists(fsPath) {
@@ -6168,10 +5982,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.findInPath = exports.which = exports.mkdirP = exports.rmRF = exports.mv = exports.cp = void 0;
-const assert_1 = __nccwpck_require__(9491);
-const childProcess = __importStar(__nccwpck_require__(2081));
-const path = __importStar(__nccwpck_require__(1017));
-const util_1 = __nccwpck_require__(3837);
+const assert_1 = __nccwpck_require__(2357);
+const childProcess = __importStar(__nccwpck_require__(3129));
+const path = __importStar(__nccwpck_require__(5622));
+const util_1 = __nccwpck_require__(1669);
 const ioUtil = __importStar(__nccwpck_require__(1962));
 const exec = util_1.promisify(childProcess.exec);
 const execFile = util_1.promisify(childProcess.execFile);
@@ -6724,7 +6538,7 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-const VERSION = "3.6.0";
+const VERSION = "3.5.1";
 
 const _excluded = ["authStrategy"];
 class Octokit {
@@ -8738,7 +8552,7 @@ var isPlainObject = __nccwpck_require__(3287);
 var nodeFetch = _interopDefault(__nccwpck_require__(467));
 var requestError = __nccwpck_require__(537);
 
-const VERSION = "5.6.3";
+const VERSION = "5.6.2";
 
 function getBufferResponse(response) {
   return response.arrayBuffer();
@@ -8953,5631 +8767,6 @@ module.exports = once;
 
 /***/ }),
 
-/***/ 390:
-/***/ (function(__unused_webpack_module, exports) {
-
-(function (global, factory) {
-   true ? factory(exports) :
-  0;
-})(this, (function (exports) { 'use strict';
-
-  // Reserved word lists for various dialects of the language
-
-  var reservedWords = {
-    3: "abstract boolean byte char class double enum export extends final float goto implements import int interface long native package private protected public short static super synchronized throws transient volatile",
-    5: "class enum extends super const export import",
-    6: "enum",
-    strict: "implements interface let package private protected public static yield",
-    strictBind: "eval arguments"
-  };
-
-  // And the keywords
-
-  var ecma5AndLessKeywords = "break case catch continue debugger default do else finally for function if return switch throw try var while with null true false instanceof typeof void delete new in this";
-
-  var keywords$1 = {
-    5: ecma5AndLessKeywords,
-    "5module": ecma5AndLessKeywords + " export import",
-    6: ecma5AndLessKeywords + " const class extends export import super"
-  };
-
-  var keywordRelationalOperator = /^in(stanceof)?$/;
-
-  // ## Character categories
-
-  // Big ugly regular expressions that match characters in the
-  // whitespace, identifier, and identifier-start categories. These
-  // are only applied when a character is found to actually have a
-  // code point above 128.
-  // Generated by `bin/generate-identifier-regex.js`.
-  var nonASCIIidentifierStartChars = "\xaa\xb5\xba\xc0-\xd6\xd8-\xf6\xf8-\u02c1\u02c6-\u02d1\u02e0-\u02e4\u02ec\u02ee\u0370-\u0374\u0376\u0377\u037a-\u037d\u037f\u0386\u0388-\u038a\u038c\u038e-\u03a1\u03a3-\u03f5\u03f7-\u0481\u048a-\u052f\u0531-\u0556\u0559\u0560-\u0588\u05d0-\u05ea\u05ef-\u05f2\u0620-\u064a\u066e\u066f\u0671-\u06d3\u06d5\u06e5\u06e6\u06ee\u06ef\u06fa-\u06fc\u06ff\u0710\u0712-\u072f\u074d-\u07a5\u07b1\u07ca-\u07ea\u07f4\u07f5\u07fa\u0800-\u0815\u081a\u0824\u0828\u0840-\u0858\u0860-\u086a\u0870-\u0887\u0889-\u088e\u08a0-\u08c9\u0904-\u0939\u093d\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098c\u098f\u0990\u0993-\u09a8\u09aa-\u09b0\u09b2\u09b6-\u09b9\u09bd\u09ce\u09dc\u09dd\u09df-\u09e1\u09f0\u09f1\u09fc\u0a05-\u0a0a\u0a0f\u0a10\u0a13-\u0a28\u0a2a-\u0a30\u0a32\u0a33\u0a35\u0a36\u0a38\u0a39\u0a59-\u0a5c\u0a5e\u0a72-\u0a74\u0a85-\u0a8d\u0a8f-\u0a91\u0a93-\u0aa8\u0aaa-\u0ab0\u0ab2\u0ab3\u0ab5-\u0ab9\u0abd\u0ad0\u0ae0\u0ae1\u0af9\u0b05-\u0b0c\u0b0f\u0b10\u0b13-\u0b28\u0b2a-\u0b30\u0b32\u0b33\u0b35-\u0b39\u0b3d\u0b5c\u0b5d\u0b5f-\u0b61\u0b71\u0b83\u0b85-\u0b8a\u0b8e-\u0b90\u0b92-\u0b95\u0b99\u0b9a\u0b9c\u0b9e\u0b9f\u0ba3\u0ba4\u0ba8-\u0baa\u0bae-\u0bb9\u0bd0\u0c05-\u0c0c\u0c0e-\u0c10\u0c12-\u0c28\u0c2a-\u0c39\u0c3d\u0c58-\u0c5a\u0c5d\u0c60\u0c61\u0c80\u0c85-\u0c8c\u0c8e-\u0c90\u0c92-\u0ca8\u0caa-\u0cb3\u0cb5-\u0cb9\u0cbd\u0cdd\u0cde\u0ce0\u0ce1\u0cf1\u0cf2\u0d04-\u0d0c\u0d0e-\u0d10\u0d12-\u0d3a\u0d3d\u0d4e\u0d54-\u0d56\u0d5f-\u0d61\u0d7a-\u0d7f\u0d85-\u0d96\u0d9a-\u0db1\u0db3-\u0dbb\u0dbd\u0dc0-\u0dc6\u0e01-\u0e30\u0e32\u0e33\u0e40-\u0e46\u0e81\u0e82\u0e84\u0e86-\u0e8a\u0e8c-\u0ea3\u0ea5\u0ea7-\u0eb0\u0eb2\u0eb3\u0ebd\u0ec0-\u0ec4\u0ec6\u0edc-\u0edf\u0f00\u0f40-\u0f47\u0f49-\u0f6c\u0f88-\u0f8c\u1000-\u102a\u103f\u1050-\u1055\u105a-\u105d\u1061\u1065\u1066\u106e-\u1070\u1075-\u1081\u108e\u10a0-\u10c5\u10c7\u10cd\u10d0-\u10fa\u10fc-\u1248\u124a-\u124d\u1250-\u1256\u1258\u125a-\u125d\u1260-\u1288\u128a-\u128d\u1290-\u12b0\u12b2-\u12b5\u12b8-\u12be\u12c0\u12c2-\u12c5\u12c8-\u12d6\u12d8-\u1310\u1312-\u1315\u1318-\u135a\u1380-\u138f\u13a0-\u13f5\u13f8-\u13fd\u1401-\u166c\u166f-\u167f\u1681-\u169a\u16a0-\u16ea\u16ee-\u16f8\u1700-\u1711\u171f-\u1731\u1740-\u1751\u1760-\u176c\u176e-\u1770\u1780-\u17b3\u17d7\u17dc\u1820-\u1878\u1880-\u18a8\u18aa\u18b0-\u18f5\u1900-\u191e\u1950-\u196d\u1970-\u1974\u1980-\u19ab\u19b0-\u19c9\u1a00-\u1a16\u1a20-\u1a54\u1aa7\u1b05-\u1b33\u1b45-\u1b4c\u1b83-\u1ba0\u1bae\u1baf\u1bba-\u1be5\u1c00-\u1c23\u1c4d-\u1c4f\u1c5a-\u1c7d\u1c80-\u1c88\u1c90-\u1cba\u1cbd-\u1cbf\u1ce9-\u1cec\u1cee-\u1cf3\u1cf5\u1cf6\u1cfa\u1d00-\u1dbf\u1e00-\u1f15\u1f18-\u1f1d\u1f20-\u1f45\u1f48-\u1f4d\u1f50-\u1f57\u1f59\u1f5b\u1f5d\u1f5f-\u1f7d\u1f80-\u1fb4\u1fb6-\u1fbc\u1fbe\u1fc2-\u1fc4\u1fc6-\u1fcc\u1fd0-\u1fd3\u1fd6-\u1fdb\u1fe0-\u1fec\u1ff2-\u1ff4\u1ff6-\u1ffc\u2071\u207f\u2090-\u209c\u2102\u2107\u210a-\u2113\u2115\u2118-\u211d\u2124\u2126\u2128\u212a-\u2139\u213c-\u213f\u2145-\u2149\u214e\u2160-\u2188\u2c00-\u2ce4\u2ceb-\u2cee\u2cf2\u2cf3\u2d00-\u2d25\u2d27\u2d2d\u2d30-\u2d67\u2d6f\u2d80-\u2d96\u2da0-\u2da6\u2da8-\u2dae\u2db0-\u2db6\u2db8-\u2dbe\u2dc0-\u2dc6\u2dc8-\u2dce\u2dd0-\u2dd6\u2dd8-\u2dde\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303c\u3041-\u3096\u309b-\u309f\u30a1-\u30fa\u30fc-\u30ff\u3105-\u312f\u3131-\u318e\u31a0-\u31bf\u31f0-\u31ff\u3400-\u4dbf\u4e00-\ua48c\ua4d0-\ua4fd\ua500-\ua60c\ua610-\ua61f\ua62a\ua62b\ua640-\ua66e\ua67f-\ua69d\ua6a0-\ua6ef\ua717-\ua71f\ua722-\ua788\ua78b-\ua7ca\ua7d0\ua7d1\ua7d3\ua7d5-\ua7d9\ua7f2-\ua801\ua803-\ua805\ua807-\ua80a\ua80c-\ua822\ua840-\ua873\ua882-\ua8b3\ua8f2-\ua8f7\ua8fb\ua8fd\ua8fe\ua90a-\ua925\ua930-\ua946\ua960-\ua97c\ua984-\ua9b2\ua9cf\ua9e0-\ua9e4\ua9e6-\ua9ef\ua9fa-\ua9fe\uaa00-\uaa28\uaa40-\uaa42\uaa44-\uaa4b\uaa60-\uaa76\uaa7a\uaa7e-\uaaaf\uaab1\uaab5\uaab6\uaab9-\uaabd\uaac0\uaac2\uaadb-\uaadd\uaae0-\uaaea\uaaf2-\uaaf4\uab01-\uab06\uab09-\uab0e\uab11-\uab16\uab20-\uab26\uab28-\uab2e\uab30-\uab5a\uab5c-\uab69\uab70-\uabe2\uac00-\ud7a3\ud7b0-\ud7c6\ud7cb-\ud7fb\uf900-\ufa6d\ufa70-\ufad9\ufb00-\ufb06\ufb13-\ufb17\ufb1d\ufb1f-\ufb28\ufb2a-\ufb36\ufb38-\ufb3c\ufb3e\ufb40\ufb41\ufb43\ufb44\ufb46-\ufbb1\ufbd3-\ufd3d\ufd50-\ufd8f\ufd92-\ufdc7\ufdf0-\ufdfb\ufe70-\ufe74\ufe76-\ufefc\uff21-\uff3a\uff41-\uff5a\uff66-\uffbe\uffc2-\uffc7\uffca-\uffcf\uffd2-\uffd7\uffda-\uffdc";
-  var nonASCIIidentifierChars = "\u200c\u200d\xb7\u0300-\u036f\u0387\u0483-\u0487\u0591-\u05bd\u05bf\u05c1\u05c2\u05c4\u05c5\u05c7\u0610-\u061a\u064b-\u0669\u0670\u06d6-\u06dc\u06df-\u06e4\u06e7\u06e8\u06ea-\u06ed\u06f0-\u06f9\u0711\u0730-\u074a\u07a6-\u07b0\u07c0-\u07c9\u07eb-\u07f3\u07fd\u0816-\u0819\u081b-\u0823\u0825-\u0827\u0829-\u082d\u0859-\u085b\u0898-\u089f\u08ca-\u08e1\u08e3-\u0903\u093a-\u093c\u093e-\u094f\u0951-\u0957\u0962\u0963\u0966-\u096f\u0981-\u0983\u09bc\u09be-\u09c4\u09c7\u09c8\u09cb-\u09cd\u09d7\u09e2\u09e3\u09e6-\u09ef\u09fe\u0a01-\u0a03\u0a3c\u0a3e-\u0a42\u0a47\u0a48\u0a4b-\u0a4d\u0a51\u0a66-\u0a71\u0a75\u0a81-\u0a83\u0abc\u0abe-\u0ac5\u0ac7-\u0ac9\u0acb-\u0acd\u0ae2\u0ae3\u0ae6-\u0aef\u0afa-\u0aff\u0b01-\u0b03\u0b3c\u0b3e-\u0b44\u0b47\u0b48\u0b4b-\u0b4d\u0b55-\u0b57\u0b62\u0b63\u0b66-\u0b6f\u0b82\u0bbe-\u0bc2\u0bc6-\u0bc8\u0bca-\u0bcd\u0bd7\u0be6-\u0bef\u0c00-\u0c04\u0c3c\u0c3e-\u0c44\u0c46-\u0c48\u0c4a-\u0c4d\u0c55\u0c56\u0c62\u0c63\u0c66-\u0c6f\u0c81-\u0c83\u0cbc\u0cbe-\u0cc4\u0cc6-\u0cc8\u0cca-\u0ccd\u0cd5\u0cd6\u0ce2\u0ce3\u0ce6-\u0cef\u0d00-\u0d03\u0d3b\u0d3c\u0d3e-\u0d44\u0d46-\u0d48\u0d4a-\u0d4d\u0d57\u0d62\u0d63\u0d66-\u0d6f\u0d81-\u0d83\u0dca\u0dcf-\u0dd4\u0dd6\u0dd8-\u0ddf\u0de6-\u0def\u0df2\u0df3\u0e31\u0e34-\u0e3a\u0e47-\u0e4e\u0e50-\u0e59\u0eb1\u0eb4-\u0ebc\u0ec8-\u0ecd\u0ed0-\u0ed9\u0f18\u0f19\u0f20-\u0f29\u0f35\u0f37\u0f39\u0f3e\u0f3f\u0f71-\u0f84\u0f86\u0f87\u0f8d-\u0f97\u0f99-\u0fbc\u0fc6\u102b-\u103e\u1040-\u1049\u1056-\u1059\u105e-\u1060\u1062-\u1064\u1067-\u106d\u1071-\u1074\u1082-\u108d\u108f-\u109d\u135d-\u135f\u1369-\u1371\u1712-\u1715\u1732-\u1734\u1752\u1753\u1772\u1773\u17b4-\u17d3\u17dd\u17e0-\u17e9\u180b-\u180d\u180f-\u1819\u18a9\u1920-\u192b\u1930-\u193b\u1946-\u194f\u19d0-\u19da\u1a17-\u1a1b\u1a55-\u1a5e\u1a60-\u1a7c\u1a7f-\u1a89\u1a90-\u1a99\u1ab0-\u1abd\u1abf-\u1ace\u1b00-\u1b04\u1b34-\u1b44\u1b50-\u1b59\u1b6b-\u1b73\u1b80-\u1b82\u1ba1-\u1bad\u1bb0-\u1bb9\u1be6-\u1bf3\u1c24-\u1c37\u1c40-\u1c49\u1c50-\u1c59\u1cd0-\u1cd2\u1cd4-\u1ce8\u1ced\u1cf4\u1cf7-\u1cf9\u1dc0-\u1dff\u203f\u2040\u2054\u20d0-\u20dc\u20e1\u20e5-\u20f0\u2cef-\u2cf1\u2d7f\u2de0-\u2dff\u302a-\u302f\u3099\u309a\ua620-\ua629\ua66f\ua674-\ua67d\ua69e\ua69f\ua6f0\ua6f1\ua802\ua806\ua80b\ua823-\ua827\ua82c\ua880\ua881\ua8b4-\ua8c5\ua8d0-\ua8d9\ua8e0-\ua8f1\ua8ff-\ua909\ua926-\ua92d\ua947-\ua953\ua980-\ua983\ua9b3-\ua9c0\ua9d0-\ua9d9\ua9e5\ua9f0-\ua9f9\uaa29-\uaa36\uaa43\uaa4c\uaa4d\uaa50-\uaa59\uaa7b-\uaa7d\uaab0\uaab2-\uaab4\uaab7\uaab8\uaabe\uaabf\uaac1\uaaeb-\uaaef\uaaf5\uaaf6\uabe3-\uabea\uabec\uabed\uabf0-\uabf9\ufb1e\ufe00-\ufe0f\ufe20-\ufe2f\ufe33\ufe34\ufe4d-\ufe4f\uff10-\uff19\uff3f";
-
-  var nonASCIIidentifierStart = new RegExp("[" + nonASCIIidentifierStartChars + "]");
-  var nonASCIIidentifier = new RegExp("[" + nonASCIIidentifierStartChars + nonASCIIidentifierChars + "]");
-
-  nonASCIIidentifierStartChars = nonASCIIidentifierChars = null;
-
-  // These are a run-length and offset encoded representation of the
-  // >0xffff code points that are a valid part of identifiers. The
-  // offset starts at 0x10000, and each pair of numbers represents an
-  // offset to the next range, and then a size of the range. They were
-  // generated by bin/generate-identifier-regex.js
-
-  // eslint-disable-next-line comma-spacing
-  var astralIdentifierStartCodes = [0,11,2,25,2,18,2,1,2,14,3,13,35,122,70,52,268,28,4,48,48,31,14,29,6,37,11,29,3,35,5,7,2,4,43,157,19,35,5,35,5,39,9,51,13,10,2,14,2,6,2,1,2,10,2,14,2,6,2,1,68,310,10,21,11,7,25,5,2,41,2,8,70,5,3,0,2,43,2,1,4,0,3,22,11,22,10,30,66,18,2,1,11,21,11,25,71,55,7,1,65,0,16,3,2,2,2,28,43,28,4,28,36,7,2,27,28,53,11,21,11,18,14,17,111,72,56,50,14,50,14,35,349,41,7,1,79,28,11,0,9,21,43,17,47,20,28,22,13,52,58,1,3,0,14,44,33,24,27,35,30,0,3,0,9,34,4,0,13,47,15,3,22,0,2,0,36,17,2,24,85,6,2,0,2,3,2,14,2,9,8,46,39,7,3,1,3,21,2,6,2,1,2,4,4,0,19,0,13,4,159,52,19,3,21,2,31,47,21,1,2,0,185,46,42,3,37,47,21,0,60,42,14,0,72,26,38,6,186,43,117,63,32,7,3,0,3,7,2,1,2,23,16,0,2,0,95,7,3,38,17,0,2,0,29,0,11,39,8,0,22,0,12,45,20,0,19,72,264,8,2,36,18,0,50,29,113,6,2,1,2,37,22,0,26,5,2,1,2,31,15,0,328,18,190,0,80,921,103,110,18,195,2637,96,16,1070,4050,582,8634,568,8,30,18,78,18,29,19,47,17,3,32,20,6,18,689,63,129,74,6,0,67,12,65,1,2,0,29,6135,9,1237,43,8,8936,3,2,6,2,1,2,290,46,2,18,3,9,395,2309,106,6,12,4,8,8,9,5991,84,2,70,2,1,3,0,3,1,3,3,2,11,2,0,2,6,2,64,2,3,3,7,2,6,2,27,2,3,2,4,2,0,4,6,2,339,3,24,2,24,2,30,2,24,2,30,2,24,2,30,2,24,2,30,2,24,2,7,1845,30,482,44,11,6,17,0,322,29,19,43,1269,6,2,3,2,1,2,14,2,196,60,67,8,0,1205,3,2,26,2,1,2,0,3,0,2,9,2,3,2,0,2,0,7,0,5,0,2,0,2,0,2,2,2,1,2,0,3,0,2,0,2,0,2,0,2,0,2,1,2,0,3,3,2,6,2,3,2,3,2,0,2,9,2,16,6,2,2,4,2,16,4421,42719,33,4152,8,221,3,5761,15,7472,3104,541,1507,4938];
-
-  // eslint-disable-next-line comma-spacing
-  var astralIdentifierCodes = [509,0,227,0,150,4,294,9,1368,2,2,1,6,3,41,2,5,0,166,1,574,3,9,9,370,1,154,10,50,3,123,2,54,14,32,10,3,1,11,3,46,10,8,0,46,9,7,2,37,13,2,9,6,1,45,0,13,2,49,13,9,3,2,11,83,11,7,0,161,11,6,9,7,3,56,1,2,6,3,1,3,2,10,0,11,1,3,6,4,4,193,17,10,9,5,0,82,19,13,9,214,6,3,8,28,1,83,16,16,9,82,12,9,9,84,14,5,9,243,14,166,9,71,5,2,1,3,3,2,0,2,1,13,9,120,6,3,6,4,0,29,9,41,6,2,3,9,0,10,10,47,15,406,7,2,7,17,9,57,21,2,13,123,5,4,0,2,1,2,6,2,0,9,9,49,4,2,1,2,4,9,9,330,3,19306,9,87,9,39,4,60,6,26,9,1014,0,2,54,8,3,82,0,12,1,19628,1,4706,45,3,22,543,4,4,5,9,7,3,6,31,3,149,2,1418,49,513,54,5,49,9,0,15,0,23,4,2,14,1361,6,2,16,3,6,2,1,2,4,262,6,10,9,357,0,62,13,1495,6,110,6,6,9,4759,9,787719,239];
-
-  // This has a complexity linear to the value of the code. The
-  // assumption is that looking up astral identifier characters is
-  // rare.
-  function isInAstralSet(code, set) {
-    var pos = 0x10000;
-    for (var i = 0; i < set.length; i += 2) {
-      pos += set[i];
-      if (pos > code) { return false }
-      pos += set[i + 1];
-      if (pos >= code) { return true }
-    }
-  }
-
-  // Test whether a given character code starts an identifier.
-
-  function isIdentifierStart(code, astral) {
-    if (code < 65) { return code === 36 }
-    if (code < 91) { return true }
-    if (code < 97) { return code === 95 }
-    if (code < 123) { return true }
-    if (code <= 0xffff) { return code >= 0xaa && nonASCIIidentifierStart.test(String.fromCharCode(code)) }
-    if (astral === false) { return false }
-    return isInAstralSet(code, astralIdentifierStartCodes)
-  }
-
-  // Test whether a given character is part of an identifier.
-
-  function isIdentifierChar(code, astral) {
-    if (code < 48) { return code === 36 }
-    if (code < 58) { return true }
-    if (code < 65) { return false }
-    if (code < 91) { return true }
-    if (code < 97) { return code === 95 }
-    if (code < 123) { return true }
-    if (code <= 0xffff) { return code >= 0xaa && nonASCIIidentifier.test(String.fromCharCode(code)) }
-    if (astral === false) { return false }
-    return isInAstralSet(code, astralIdentifierStartCodes) || isInAstralSet(code, astralIdentifierCodes)
-  }
-
-  // ## Token types
-
-  // The assignment of fine-grained, information-carrying type objects
-  // allows the tokenizer to store the information it has about a
-  // token in a way that is very cheap for the parser to look up.
-
-  // All token type variables start with an underscore, to make them
-  // easy to recognize.
-
-  // The `beforeExpr` property is used to disambiguate between regular
-  // expressions and divisions. It is set on all token types that can
-  // be followed by an expression (thus, a slash after them would be a
-  // regular expression).
-  //
-  // The `startsExpr` property is used to check if the token ends a
-  // `yield` expression. It is set on all token types that either can
-  // directly start an expression (like a quotation mark) or can
-  // continue an expression (like the body of a string).
-  //
-  // `isLoop` marks a keyword as starting a loop, which is important
-  // to know when parsing a label, in order to allow or disallow
-  // continue jumps to that label.
-
-  var TokenType = function TokenType(label, conf) {
-    if ( conf === void 0 ) conf = {};
-
-    this.label = label;
-    this.keyword = conf.keyword;
-    this.beforeExpr = !!conf.beforeExpr;
-    this.startsExpr = !!conf.startsExpr;
-    this.isLoop = !!conf.isLoop;
-    this.isAssign = !!conf.isAssign;
-    this.prefix = !!conf.prefix;
-    this.postfix = !!conf.postfix;
-    this.binop = conf.binop || null;
-    this.updateContext = null;
-  };
-
-  function binop(name, prec) {
-    return new TokenType(name, {beforeExpr: true, binop: prec})
-  }
-  var beforeExpr = {beforeExpr: true}, startsExpr = {startsExpr: true};
-
-  // Map keyword names to token types.
-
-  var keywords = {};
-
-  // Succinct definitions of keyword token types
-  function kw(name, options) {
-    if ( options === void 0 ) options = {};
-
-    options.keyword = name;
-    return keywords[name] = new TokenType(name, options)
-  }
-
-  var types$1 = {
-    num: new TokenType("num", startsExpr),
-    regexp: new TokenType("regexp", startsExpr),
-    string: new TokenType("string", startsExpr),
-    name: new TokenType("name", startsExpr),
-    privateId: new TokenType("privateId", startsExpr),
-    eof: new TokenType("eof"),
-
-    // Punctuation token types.
-    bracketL: new TokenType("[", {beforeExpr: true, startsExpr: true}),
-    bracketR: new TokenType("]"),
-    braceL: new TokenType("{", {beforeExpr: true, startsExpr: true}),
-    braceR: new TokenType("}"),
-    parenL: new TokenType("(", {beforeExpr: true, startsExpr: true}),
-    parenR: new TokenType(")"),
-    comma: new TokenType(",", beforeExpr),
-    semi: new TokenType(";", beforeExpr),
-    colon: new TokenType(":", beforeExpr),
-    dot: new TokenType("."),
-    question: new TokenType("?", beforeExpr),
-    questionDot: new TokenType("?."),
-    arrow: new TokenType("=>", beforeExpr),
-    template: new TokenType("template"),
-    invalidTemplate: new TokenType("invalidTemplate"),
-    ellipsis: new TokenType("...", beforeExpr),
-    backQuote: new TokenType("`", startsExpr),
-    dollarBraceL: new TokenType("${", {beforeExpr: true, startsExpr: true}),
-
-    // Operators. These carry several kinds of properties to help the
-    // parser use them properly (the presence of these properties is
-    // what categorizes them as operators).
-    //
-    // `binop`, when present, specifies that this operator is a binary
-    // operator, and will refer to its precedence.
-    //
-    // `prefix` and `postfix` mark the operator as a prefix or postfix
-    // unary operator.
-    //
-    // `isAssign` marks all of `=`, `+=`, `-=` etcetera, which act as
-    // binary operators with a very low precedence, that should result
-    // in AssignmentExpression nodes.
-
-    eq: new TokenType("=", {beforeExpr: true, isAssign: true}),
-    assign: new TokenType("_=", {beforeExpr: true, isAssign: true}),
-    incDec: new TokenType("++/--", {prefix: true, postfix: true, startsExpr: true}),
-    prefix: new TokenType("!/~", {beforeExpr: true, prefix: true, startsExpr: true}),
-    logicalOR: binop("||", 1),
-    logicalAND: binop("&&", 2),
-    bitwiseOR: binop("|", 3),
-    bitwiseXOR: binop("^", 4),
-    bitwiseAND: binop("&", 5),
-    equality: binop("==/!=/===/!==", 6),
-    relational: binop("</>/<=/>=", 7),
-    bitShift: binop("<</>>/>>>", 8),
-    plusMin: new TokenType("+/-", {beforeExpr: true, binop: 9, prefix: true, startsExpr: true}),
-    modulo: binop("%", 10),
-    star: binop("*", 10),
-    slash: binop("/", 10),
-    starstar: new TokenType("**", {beforeExpr: true}),
-    coalesce: binop("??", 1),
-
-    // Keyword token types.
-    _break: kw("break"),
-    _case: kw("case", beforeExpr),
-    _catch: kw("catch"),
-    _continue: kw("continue"),
-    _debugger: kw("debugger"),
-    _default: kw("default", beforeExpr),
-    _do: kw("do", {isLoop: true, beforeExpr: true}),
-    _else: kw("else", beforeExpr),
-    _finally: kw("finally"),
-    _for: kw("for", {isLoop: true}),
-    _function: kw("function", startsExpr),
-    _if: kw("if"),
-    _return: kw("return", beforeExpr),
-    _switch: kw("switch"),
-    _throw: kw("throw", beforeExpr),
-    _try: kw("try"),
-    _var: kw("var"),
-    _const: kw("const"),
-    _while: kw("while", {isLoop: true}),
-    _with: kw("with"),
-    _new: kw("new", {beforeExpr: true, startsExpr: true}),
-    _this: kw("this", startsExpr),
-    _super: kw("super", startsExpr),
-    _class: kw("class", startsExpr),
-    _extends: kw("extends", beforeExpr),
-    _export: kw("export"),
-    _import: kw("import", startsExpr),
-    _null: kw("null", startsExpr),
-    _true: kw("true", startsExpr),
-    _false: kw("false", startsExpr),
-    _in: kw("in", {beforeExpr: true, binop: 7}),
-    _instanceof: kw("instanceof", {beforeExpr: true, binop: 7}),
-    _typeof: kw("typeof", {beforeExpr: true, prefix: true, startsExpr: true}),
-    _void: kw("void", {beforeExpr: true, prefix: true, startsExpr: true}),
-    _delete: kw("delete", {beforeExpr: true, prefix: true, startsExpr: true})
-  };
-
-  // Matches a whole line break (where CRLF is considered a single
-  // line break). Used to count lines.
-
-  var lineBreak = /\r\n?|\n|\u2028|\u2029/;
-  var lineBreakG = new RegExp(lineBreak.source, "g");
-
-  function isNewLine(code) {
-    return code === 10 || code === 13 || code === 0x2028 || code === 0x2029
-  }
-
-  function nextLineBreak(code, from, end) {
-    if ( end === void 0 ) end = code.length;
-
-    for (var i = from; i < end; i++) {
-      var next = code.charCodeAt(i);
-      if (isNewLine(next))
-        { return i < end - 1 && next === 13 && code.charCodeAt(i + 1) === 10 ? i + 2 : i + 1 }
-    }
-    return -1
-  }
-
-  var nonASCIIwhitespace = /[\u1680\u2000-\u200a\u202f\u205f\u3000\ufeff]/;
-
-  var skipWhiteSpace = /(?:\s|\/\/.*|\/\*[^]*?\*\/)*/g;
-
-  var ref = Object.prototype;
-  var hasOwnProperty = ref.hasOwnProperty;
-  var toString = ref.toString;
-
-  var hasOwn = Object.hasOwn || (function (obj, propName) { return (
-    hasOwnProperty.call(obj, propName)
-  ); });
-
-  var isArray = Array.isArray || (function (obj) { return (
-    toString.call(obj) === "[object Array]"
-  ); });
-
-  function wordsRegexp(words) {
-    return new RegExp("^(?:" + words.replace(/ /g, "|") + ")$")
-  }
-
-  var loneSurrogate = /(?:[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])/;
-
-  // These are used when `options.locations` is on, for the
-  // `startLoc` and `endLoc` properties.
-
-  var Position = function Position(line, col) {
-    this.line = line;
-    this.column = col;
-  };
-
-  Position.prototype.offset = function offset (n) {
-    return new Position(this.line, this.column + n)
-  };
-
-  var SourceLocation = function SourceLocation(p, start, end) {
-    this.start = start;
-    this.end = end;
-    if (p.sourceFile !== null) { this.source = p.sourceFile; }
-  };
-
-  // The `getLineInfo` function is mostly useful when the
-  // `locations` option is off (for performance reasons) and you
-  // want to find the line/column position for a given character
-  // offset. `input` should be the code string that the offset refers
-  // into.
-
-  function getLineInfo(input, offset) {
-    for (var line = 1, cur = 0;;) {
-      var nextBreak = nextLineBreak(input, cur, offset);
-      if (nextBreak < 0) { return new Position(line, offset - cur) }
-      ++line;
-      cur = nextBreak;
-    }
-  }
-
-  // A second argument must be given to configure the parser process.
-  // These options are recognized (only `ecmaVersion` is required):
-
-  var defaultOptions = {
-    // `ecmaVersion` indicates the ECMAScript version to parse. Must be
-    // either 3, 5, 6 (or 2015), 7 (2016), 8 (2017), 9 (2018), 10
-    // (2019), 11 (2020), 12 (2021), 13 (2022), or `"latest"` (the
-    // latest version the library supports). This influences support
-    // for strict mode, the set of reserved words, and support for
-    // new syntax features.
-    ecmaVersion: null,
-    // `sourceType` indicates the mode the code should be parsed in.
-    // Can be either `"script"` or `"module"`. This influences global
-    // strict mode and parsing of `import` and `export` declarations.
-    sourceType: "script",
-    // `onInsertedSemicolon` can be a callback that will be called
-    // when a semicolon is automatically inserted. It will be passed
-    // the position of the comma as an offset, and if `locations` is
-    // enabled, it is given the location as a `{line, column}` object
-    // as second argument.
-    onInsertedSemicolon: null,
-    // `onTrailingComma` is similar to `onInsertedSemicolon`, but for
-    // trailing commas.
-    onTrailingComma: null,
-    // By default, reserved words are only enforced if ecmaVersion >= 5.
-    // Set `allowReserved` to a boolean value to explicitly turn this on
-    // an off. When this option has the value "never", reserved words
-    // and keywords can also not be used as property names.
-    allowReserved: null,
-    // When enabled, a return at the top level is not considered an
-    // error.
-    allowReturnOutsideFunction: false,
-    // When enabled, import/export statements are not constrained to
-    // appearing at the top of the program, and an import.meta expression
-    // in a script isn't considered an error.
-    allowImportExportEverywhere: false,
-    // By default, await identifiers are allowed to appear at the top-level scope only if ecmaVersion >= 2022.
-    // When enabled, await identifiers are allowed to appear at the top-level scope,
-    // but they are still not allowed in non-async functions.
-    allowAwaitOutsideFunction: null,
-    // When enabled, super identifiers are not constrained to
-    // appearing in methods and do not raise an error when they appear elsewhere.
-    allowSuperOutsideMethod: null,
-    // When enabled, hashbang directive in the beginning of file
-    // is allowed and treated as a line comment.
-    allowHashBang: false,
-    // When `locations` is on, `loc` properties holding objects with
-    // `start` and `end` properties in `{line, column}` form (with
-    // line being 1-based and column 0-based) will be attached to the
-    // nodes.
-    locations: false,
-    // A function can be passed as `onToken` option, which will
-    // cause Acorn to call that function with object in the same
-    // format as tokens returned from `tokenizer().getToken()`. Note
-    // that you are not allowed to call the parser from the
-    // callback—that will corrupt its internal state.
-    onToken: null,
-    // A function can be passed as `onComment` option, which will
-    // cause Acorn to call that function with `(block, text, start,
-    // end)` parameters whenever a comment is skipped. `block` is a
-    // boolean indicating whether this is a block (`/* */`) comment,
-    // `text` is the content of the comment, and `start` and `end` are
-    // character offsets that denote the start and end of the comment.
-    // When the `locations` option is on, two more parameters are
-    // passed, the full `{line, column}` locations of the start and
-    // end of the comments. Note that you are not allowed to call the
-    // parser from the callback—that will corrupt its internal state.
-    onComment: null,
-    // Nodes have their start and end characters offsets recorded in
-    // `start` and `end` properties (directly on the node, rather than
-    // the `loc` object, which holds line/column data. To also add a
-    // [semi-standardized][range] `range` property holding a `[start,
-    // end]` array with the same numbers, set the `ranges` option to
-    // `true`.
-    //
-    // [range]: https://bugzilla.mozilla.org/show_bug.cgi?id=745678
-    ranges: false,
-    // It is possible to parse multiple files into a single AST by
-    // passing the tree produced by parsing the first file as
-    // `program` option in subsequent parses. This will add the
-    // toplevel forms of the parsed file to the `Program` (top) node
-    // of an existing parse tree.
-    program: null,
-    // When `locations` is on, you can pass this to record the source
-    // file in every node's `loc` object.
-    sourceFile: null,
-    // This value, if given, is stored in every node, whether
-    // `locations` is on or off.
-    directSourceFile: null,
-    // When enabled, parenthesized expressions are represented by
-    // (non-standard) ParenthesizedExpression nodes
-    preserveParens: false
-  };
-
-  // Interpret and default an options object
-
-  var warnedAboutEcmaVersion = false;
-
-  function getOptions(opts) {
-    var options = {};
-
-    for (var opt in defaultOptions)
-      { options[opt] = opts && hasOwn(opts, opt) ? opts[opt] : defaultOptions[opt]; }
-
-    if (options.ecmaVersion === "latest") {
-      options.ecmaVersion = 1e8;
-    } else if (options.ecmaVersion == null) {
-      if (!warnedAboutEcmaVersion && typeof console === "object" && console.warn) {
-        warnedAboutEcmaVersion = true;
-        console.warn("Since Acorn 8.0.0, options.ecmaVersion is required.\nDefaulting to 2020, but this will stop working in the future.");
-      }
-      options.ecmaVersion = 11;
-    } else if (options.ecmaVersion >= 2015) {
-      options.ecmaVersion -= 2009;
-    }
-
-    if (options.allowReserved == null)
-      { options.allowReserved = options.ecmaVersion < 5; }
-
-    if (isArray(options.onToken)) {
-      var tokens = options.onToken;
-      options.onToken = function (token) { return tokens.push(token); };
-    }
-    if (isArray(options.onComment))
-      { options.onComment = pushComment(options, options.onComment); }
-
-    return options
-  }
-
-  function pushComment(options, array) {
-    return function(block, text, start, end, startLoc, endLoc) {
-      var comment = {
-        type: block ? "Block" : "Line",
-        value: text,
-        start: start,
-        end: end
-      };
-      if (options.locations)
-        { comment.loc = new SourceLocation(this, startLoc, endLoc); }
-      if (options.ranges)
-        { comment.range = [start, end]; }
-      array.push(comment);
-    }
-  }
-
-  // Each scope gets a bitset that may contain these flags
-  var
-      SCOPE_TOP = 1,
-      SCOPE_FUNCTION = 2,
-      SCOPE_ASYNC = 4,
-      SCOPE_GENERATOR = 8,
-      SCOPE_ARROW = 16,
-      SCOPE_SIMPLE_CATCH = 32,
-      SCOPE_SUPER = 64,
-      SCOPE_DIRECT_SUPER = 128,
-      SCOPE_CLASS_STATIC_BLOCK = 256,
-      SCOPE_VAR = SCOPE_TOP | SCOPE_FUNCTION | SCOPE_CLASS_STATIC_BLOCK;
-
-  function functionFlags(async, generator) {
-    return SCOPE_FUNCTION | (async ? SCOPE_ASYNC : 0) | (generator ? SCOPE_GENERATOR : 0)
-  }
-
-  // Used in checkLVal* and declareName to determine the type of a binding
-  var
-      BIND_NONE = 0, // Not a binding
-      BIND_VAR = 1, // Var-style binding
-      BIND_LEXICAL = 2, // Let- or const-style binding
-      BIND_FUNCTION = 3, // Function declaration
-      BIND_SIMPLE_CATCH = 4, // Simple (identifier pattern) catch binding
-      BIND_OUTSIDE = 5; // Special case for function names as bound inside the function
-
-  var Parser = function Parser(options, input, startPos) {
-    this.options = options = getOptions(options);
-    this.sourceFile = options.sourceFile;
-    this.keywords = wordsRegexp(keywords$1[options.ecmaVersion >= 6 ? 6 : options.sourceType === "module" ? "5module" : 5]);
-    var reserved = "";
-    if (options.allowReserved !== true) {
-      reserved = reservedWords[options.ecmaVersion >= 6 ? 6 : options.ecmaVersion === 5 ? 5 : 3];
-      if (options.sourceType === "module") { reserved += " await"; }
-    }
-    this.reservedWords = wordsRegexp(reserved);
-    var reservedStrict = (reserved ? reserved + " " : "") + reservedWords.strict;
-    this.reservedWordsStrict = wordsRegexp(reservedStrict);
-    this.reservedWordsStrictBind = wordsRegexp(reservedStrict + " " + reservedWords.strictBind);
-    this.input = String(input);
-
-    // Used to signal to callers of `readWord1` whether the word
-    // contained any escape sequences. This is needed because words with
-    // escape sequences must not be interpreted as keywords.
-    this.containsEsc = false;
-
-    // Set up token state
-
-    // The current position of the tokenizer in the input.
-    if (startPos) {
-      this.pos = startPos;
-      this.lineStart = this.input.lastIndexOf("\n", startPos - 1) + 1;
-      this.curLine = this.input.slice(0, this.lineStart).split(lineBreak).length;
-    } else {
-      this.pos = this.lineStart = 0;
-      this.curLine = 1;
-    }
-
-    // Properties of the current token:
-    // Its type
-    this.type = types$1.eof;
-    // For tokens that include more information than their type, the value
-    this.value = null;
-    // Its start and end offset
-    this.start = this.end = this.pos;
-    // And, if locations are used, the {line, column} object
-    // corresponding to those offsets
-    this.startLoc = this.endLoc = this.curPosition();
-
-    // Position information for the previous token
-    this.lastTokEndLoc = this.lastTokStartLoc = null;
-    this.lastTokStart = this.lastTokEnd = this.pos;
-
-    // The context stack is used to superficially track syntactic
-    // context to predict whether a regular expression is allowed in a
-    // given position.
-    this.context = this.initialContext();
-    this.exprAllowed = true;
-
-    // Figure out if it's a module code.
-    this.inModule = options.sourceType === "module";
-    this.strict = this.inModule || this.strictDirective(this.pos);
-
-    // Used to signify the start of a potential arrow function
-    this.potentialArrowAt = -1;
-    this.potentialArrowInForAwait = false;
-
-    // Positions to delayed-check that yield/await does not exist in default parameters.
-    this.yieldPos = this.awaitPos = this.awaitIdentPos = 0;
-    // Labels in scope.
-    this.labels = [];
-    // Thus-far undefined exports.
-    this.undefinedExports = Object.create(null);
-
-    // If enabled, skip leading hashbang line.
-    if (this.pos === 0 && options.allowHashBang && this.input.slice(0, 2) === "#!")
-      { this.skipLineComment(2); }
-
-    // Scope tracking for duplicate variable names (see scope.js)
-    this.scopeStack = [];
-    this.enterScope(SCOPE_TOP);
-
-    // For RegExp validation
-    this.regexpState = null;
-
-    // The stack of private names.
-    // Each element has two properties: 'declared' and 'used'.
-    // When it exited from the outermost class definition, all used private names must be declared.
-    this.privateNameStack = [];
-  };
-
-  var prototypeAccessors = { inFunction: { configurable: true },inGenerator: { configurable: true },inAsync: { configurable: true },canAwait: { configurable: true },allowSuper: { configurable: true },allowDirectSuper: { configurable: true },treatFunctionsAsVar: { configurable: true },allowNewDotTarget: { configurable: true },inClassStaticBlock: { configurable: true } };
-
-  Parser.prototype.parse = function parse () {
-    var node = this.options.program || this.startNode();
-    this.nextToken();
-    return this.parseTopLevel(node)
-  };
-
-  prototypeAccessors.inFunction.get = function () { return (this.currentVarScope().flags & SCOPE_FUNCTION) > 0 };
-
-  prototypeAccessors.inGenerator.get = function () { return (this.currentVarScope().flags & SCOPE_GENERATOR) > 0 && !this.currentVarScope().inClassFieldInit };
-
-  prototypeAccessors.inAsync.get = function () { return (this.currentVarScope().flags & SCOPE_ASYNC) > 0 && !this.currentVarScope().inClassFieldInit };
-
-  prototypeAccessors.canAwait.get = function () {
-    for (var i = this.scopeStack.length - 1; i >= 0; i--) {
-      var scope = this.scopeStack[i];
-      if (scope.inClassFieldInit || scope.flags & SCOPE_CLASS_STATIC_BLOCK) { return false }
-      if (scope.flags & SCOPE_FUNCTION) { return (scope.flags & SCOPE_ASYNC) > 0 }
-    }
-    return (this.inModule && this.options.ecmaVersion >= 13) || this.options.allowAwaitOutsideFunction
-  };
-
-  prototypeAccessors.allowSuper.get = function () {
-    var ref = this.currentThisScope();
-      var flags = ref.flags;
-      var inClassFieldInit = ref.inClassFieldInit;
-    return (flags & SCOPE_SUPER) > 0 || inClassFieldInit || this.options.allowSuperOutsideMethod
-  };
-
-  prototypeAccessors.allowDirectSuper.get = function () { return (this.currentThisScope().flags & SCOPE_DIRECT_SUPER) > 0 };
-
-  prototypeAccessors.treatFunctionsAsVar.get = function () { return this.treatFunctionsAsVarInScope(this.currentScope()) };
-
-  prototypeAccessors.allowNewDotTarget.get = function () {
-    var ref = this.currentThisScope();
-      var flags = ref.flags;
-      var inClassFieldInit = ref.inClassFieldInit;
-    return (flags & (SCOPE_FUNCTION | SCOPE_CLASS_STATIC_BLOCK)) > 0 || inClassFieldInit
-  };
-
-  prototypeAccessors.inClassStaticBlock.get = function () {
-    return (this.currentVarScope().flags & SCOPE_CLASS_STATIC_BLOCK) > 0
-  };
-
-  Parser.extend = function extend () {
-      var plugins = [], len = arguments.length;
-      while ( len-- ) plugins[ len ] = arguments[ len ];
-
-    var cls = this;
-    for (var i = 0; i < plugins.length; i++) { cls = plugins[i](cls); }
-    return cls
-  };
-
-  Parser.parse = function parse (input, options) {
-    return new this(options, input).parse()
-  };
-
-  Parser.parseExpressionAt = function parseExpressionAt (input, pos, options) {
-    var parser = new this(options, input, pos);
-    parser.nextToken();
-    return parser.parseExpression()
-  };
-
-  Parser.tokenizer = function tokenizer (input, options) {
-    return new this(options, input)
-  };
-
-  Object.defineProperties( Parser.prototype, prototypeAccessors );
-
-  var pp$9 = Parser.prototype;
-
-  // ## Parser utilities
-
-  var literal = /^(?:'((?:\\.|[^'\\])*?)'|"((?:\\.|[^"\\])*?)")/;
-  pp$9.strictDirective = function(start) {
-    for (;;) {
-      // Try to find string literal.
-      skipWhiteSpace.lastIndex = start;
-      start += skipWhiteSpace.exec(this.input)[0].length;
-      var match = literal.exec(this.input.slice(start));
-      if (!match) { return false }
-      if ((match[1] || match[2]) === "use strict") {
-        skipWhiteSpace.lastIndex = start + match[0].length;
-        var spaceAfter = skipWhiteSpace.exec(this.input), end = spaceAfter.index + spaceAfter[0].length;
-        var next = this.input.charAt(end);
-        return next === ";" || next === "}" ||
-          (lineBreak.test(spaceAfter[0]) &&
-           !(/[(`.[+\-/*%<>=,?^&]/.test(next) || next === "!" && this.input.charAt(end + 1) === "="))
-      }
-      start += match[0].length;
-
-      // Skip semicolon, if any.
-      skipWhiteSpace.lastIndex = start;
-      start += skipWhiteSpace.exec(this.input)[0].length;
-      if (this.input[start] === ";")
-        { start++; }
-    }
-  };
-
-  // Predicate that tests whether the next token is of the given
-  // type, and if yes, consumes it as a side effect.
-
-  pp$9.eat = function(type) {
-    if (this.type === type) {
-      this.next();
-      return true
-    } else {
-      return false
-    }
-  };
-
-  // Tests whether parsed token is a contextual keyword.
-
-  pp$9.isContextual = function(name) {
-    return this.type === types$1.name && this.value === name && !this.containsEsc
-  };
-
-  // Consumes contextual keyword if possible.
-
-  pp$9.eatContextual = function(name) {
-    if (!this.isContextual(name)) { return false }
-    this.next();
-    return true
-  };
-
-  // Asserts that following token is given contextual keyword.
-
-  pp$9.expectContextual = function(name) {
-    if (!this.eatContextual(name)) { this.unexpected(); }
-  };
-
-  // Test whether a semicolon can be inserted at the current position.
-
-  pp$9.canInsertSemicolon = function() {
-    return this.type === types$1.eof ||
-      this.type === types$1.braceR ||
-      lineBreak.test(this.input.slice(this.lastTokEnd, this.start))
-  };
-
-  pp$9.insertSemicolon = function() {
-    if (this.canInsertSemicolon()) {
-      if (this.options.onInsertedSemicolon)
-        { this.options.onInsertedSemicolon(this.lastTokEnd, this.lastTokEndLoc); }
-      return true
-    }
-  };
-
-  // Consume a semicolon, or, failing that, see if we are allowed to
-  // pretend that there is a semicolon at this position.
-
-  pp$9.semicolon = function() {
-    if (!this.eat(types$1.semi) && !this.insertSemicolon()) { this.unexpected(); }
-  };
-
-  pp$9.afterTrailingComma = function(tokType, notNext) {
-    if (this.type === tokType) {
-      if (this.options.onTrailingComma)
-        { this.options.onTrailingComma(this.lastTokStart, this.lastTokStartLoc); }
-      if (!notNext)
-        { this.next(); }
-      return true
-    }
-  };
-
-  // Expect a token of a given type. If found, consume it, otherwise,
-  // raise an unexpected token error.
-
-  pp$9.expect = function(type) {
-    this.eat(type) || this.unexpected();
-  };
-
-  // Raise an unexpected token error.
-
-  pp$9.unexpected = function(pos) {
-    this.raise(pos != null ? pos : this.start, "Unexpected token");
-  };
-
-  function DestructuringErrors() {
-    this.shorthandAssign =
-    this.trailingComma =
-    this.parenthesizedAssign =
-    this.parenthesizedBind =
-    this.doubleProto =
-      -1;
-  }
-
-  pp$9.checkPatternErrors = function(refDestructuringErrors, isAssign) {
-    if (!refDestructuringErrors) { return }
-    if (refDestructuringErrors.trailingComma > -1)
-      { this.raiseRecoverable(refDestructuringErrors.trailingComma, "Comma is not permitted after the rest element"); }
-    var parens = isAssign ? refDestructuringErrors.parenthesizedAssign : refDestructuringErrors.parenthesizedBind;
-    if (parens > -1) { this.raiseRecoverable(parens, "Parenthesized pattern"); }
-  };
-
-  pp$9.checkExpressionErrors = function(refDestructuringErrors, andThrow) {
-    if (!refDestructuringErrors) { return false }
-    var shorthandAssign = refDestructuringErrors.shorthandAssign;
-    var doubleProto = refDestructuringErrors.doubleProto;
-    if (!andThrow) { return shorthandAssign >= 0 || doubleProto >= 0 }
-    if (shorthandAssign >= 0)
-      { this.raise(shorthandAssign, "Shorthand property assignments are valid only in destructuring patterns"); }
-    if (doubleProto >= 0)
-      { this.raiseRecoverable(doubleProto, "Redefinition of __proto__ property"); }
-  };
-
-  pp$9.checkYieldAwaitInDefaultParams = function() {
-    if (this.yieldPos && (!this.awaitPos || this.yieldPos < this.awaitPos))
-      { this.raise(this.yieldPos, "Yield expression cannot be a default value"); }
-    if (this.awaitPos)
-      { this.raise(this.awaitPos, "Await expression cannot be a default value"); }
-  };
-
-  pp$9.isSimpleAssignTarget = function(expr) {
-    if (expr.type === "ParenthesizedExpression")
-      { return this.isSimpleAssignTarget(expr.expression) }
-    return expr.type === "Identifier" || expr.type === "MemberExpression"
-  };
-
-  var pp$8 = Parser.prototype;
-
-  // ### Statement parsing
-
-  // Parse a program. Initializes the parser, reads any number of
-  // statements, and wraps them in a Program node.  Optionally takes a
-  // `program` argument.  If present, the statements will be appended
-  // to its body instead of creating a new node.
-
-  pp$8.parseTopLevel = function(node) {
-    var exports = Object.create(null);
-    if (!node.body) { node.body = []; }
-    while (this.type !== types$1.eof) {
-      var stmt = this.parseStatement(null, true, exports);
-      node.body.push(stmt);
-    }
-    if (this.inModule)
-      { for (var i = 0, list = Object.keys(this.undefinedExports); i < list.length; i += 1)
-        {
-          var name = list[i];
-
-          this.raiseRecoverable(this.undefinedExports[name].start, ("Export '" + name + "' is not defined"));
-        } }
-    this.adaptDirectivePrologue(node.body);
-    this.next();
-    node.sourceType = this.options.sourceType;
-    return this.finishNode(node, "Program")
-  };
-
-  var loopLabel = {kind: "loop"}, switchLabel = {kind: "switch"};
-
-  pp$8.isLet = function(context) {
-    if (this.options.ecmaVersion < 6 || !this.isContextual("let")) { return false }
-    skipWhiteSpace.lastIndex = this.pos;
-    var skip = skipWhiteSpace.exec(this.input);
-    var next = this.pos + skip[0].length, nextCh = this.input.charCodeAt(next);
-    // For ambiguous cases, determine if a LexicalDeclaration (or only a
-    // Statement) is allowed here. If context is not empty then only a Statement
-    // is allowed. However, `let [` is an explicit negative lookahead for
-    // ExpressionStatement, so special-case it first.
-    if (nextCh === 91 || nextCh === 92 || nextCh > 0xd7ff && nextCh < 0xdc00) { return true } // '[', '/', astral
-    if (context) { return false }
-
-    if (nextCh === 123) { return true } // '{'
-    if (isIdentifierStart(nextCh, true)) {
-      var pos = next + 1;
-      while (isIdentifierChar(nextCh = this.input.charCodeAt(pos), true)) { ++pos; }
-      if (nextCh === 92 || nextCh > 0xd7ff && nextCh < 0xdc00) { return true }
-      var ident = this.input.slice(next, pos);
-      if (!keywordRelationalOperator.test(ident)) { return true }
-    }
-    return false
-  };
-
-  // check 'async [no LineTerminator here] function'
-  // - 'async /*foo*/ function' is OK.
-  // - 'async /*\n*/ function' is invalid.
-  pp$8.isAsyncFunction = function() {
-    if (this.options.ecmaVersion < 8 || !this.isContextual("async"))
-      { return false }
-
-    skipWhiteSpace.lastIndex = this.pos;
-    var skip = skipWhiteSpace.exec(this.input);
-    var next = this.pos + skip[0].length, after;
-    return !lineBreak.test(this.input.slice(this.pos, next)) &&
-      this.input.slice(next, next + 8) === "function" &&
-      (next + 8 === this.input.length ||
-       !(isIdentifierChar(after = this.input.charCodeAt(next + 8)) || after > 0xd7ff && after < 0xdc00))
-  };
-
-  // Parse a single statement.
-  //
-  // If expecting a statement and finding a slash operator, parse a
-  // regular expression literal. This is to handle cases like
-  // `if (foo) /blah/.exec(foo)`, where looking at the previous token
-  // does not help.
-
-  pp$8.parseStatement = function(context, topLevel, exports) {
-    var starttype = this.type, node = this.startNode(), kind;
-
-    if (this.isLet(context)) {
-      starttype = types$1._var;
-      kind = "let";
-    }
-
-    // Most types of statements are recognized by the keyword they
-    // start with. Many are trivial to parse, some require a bit of
-    // complexity.
-
-    switch (starttype) {
-    case types$1._break: case types$1._continue: return this.parseBreakContinueStatement(node, starttype.keyword)
-    case types$1._debugger: return this.parseDebuggerStatement(node)
-    case types$1._do: return this.parseDoStatement(node)
-    case types$1._for: return this.parseForStatement(node)
-    case types$1._function:
-      // Function as sole body of either an if statement or a labeled statement
-      // works, but not when it is part of a labeled statement that is the sole
-      // body of an if statement.
-      if ((context && (this.strict || context !== "if" && context !== "label")) && this.options.ecmaVersion >= 6) { this.unexpected(); }
-      return this.parseFunctionStatement(node, false, !context)
-    case types$1._class:
-      if (context) { this.unexpected(); }
-      return this.parseClass(node, true)
-    case types$1._if: return this.parseIfStatement(node)
-    case types$1._return: return this.parseReturnStatement(node)
-    case types$1._switch: return this.parseSwitchStatement(node)
-    case types$1._throw: return this.parseThrowStatement(node)
-    case types$1._try: return this.parseTryStatement(node)
-    case types$1._const: case types$1._var:
-      kind = kind || this.value;
-      if (context && kind !== "var") { this.unexpected(); }
-      return this.parseVarStatement(node, kind)
-    case types$1._while: return this.parseWhileStatement(node)
-    case types$1._with: return this.parseWithStatement(node)
-    case types$1.braceL: return this.parseBlock(true, node)
-    case types$1.semi: return this.parseEmptyStatement(node)
-    case types$1._export:
-    case types$1._import:
-      if (this.options.ecmaVersion > 10 && starttype === types$1._import) {
-        skipWhiteSpace.lastIndex = this.pos;
-        var skip = skipWhiteSpace.exec(this.input);
-        var next = this.pos + skip[0].length, nextCh = this.input.charCodeAt(next);
-        if (nextCh === 40 || nextCh === 46) // '(' or '.'
-          { return this.parseExpressionStatement(node, this.parseExpression()) }
-      }
-
-      if (!this.options.allowImportExportEverywhere) {
-        if (!topLevel)
-          { this.raise(this.start, "'import' and 'export' may only appear at the top level"); }
-        if (!this.inModule)
-          { this.raise(this.start, "'import' and 'export' may appear only with 'sourceType: module'"); }
-      }
-      return starttype === types$1._import ? this.parseImport(node) : this.parseExport(node, exports)
-
-      // If the statement does not start with a statement keyword or a
-      // brace, it's an ExpressionStatement or LabeledStatement. We
-      // simply start parsing an expression, and afterwards, if the
-      // next token is a colon and the expression was a simple
-      // Identifier node, we switch to interpreting it as a label.
-    default:
-      if (this.isAsyncFunction()) {
-        if (context) { this.unexpected(); }
-        this.next();
-        return this.parseFunctionStatement(node, true, !context)
-      }
-
-      var maybeName = this.value, expr = this.parseExpression();
-      if (starttype === types$1.name && expr.type === "Identifier" && this.eat(types$1.colon))
-        { return this.parseLabeledStatement(node, maybeName, expr, context) }
-      else { return this.parseExpressionStatement(node, expr) }
-    }
-  };
-
-  pp$8.parseBreakContinueStatement = function(node, keyword) {
-    var isBreak = keyword === "break";
-    this.next();
-    if (this.eat(types$1.semi) || this.insertSemicolon()) { node.label = null; }
-    else if (this.type !== types$1.name) { this.unexpected(); }
-    else {
-      node.label = this.parseIdent();
-      this.semicolon();
-    }
-
-    // Verify that there is an actual destination to break or
-    // continue to.
-    var i = 0;
-    for (; i < this.labels.length; ++i) {
-      var lab = this.labels[i];
-      if (node.label == null || lab.name === node.label.name) {
-        if (lab.kind != null && (isBreak || lab.kind === "loop")) { break }
-        if (node.label && isBreak) { break }
-      }
-    }
-    if (i === this.labels.length) { this.raise(node.start, "Unsyntactic " + keyword); }
-    return this.finishNode(node, isBreak ? "BreakStatement" : "ContinueStatement")
-  };
-
-  pp$8.parseDebuggerStatement = function(node) {
-    this.next();
-    this.semicolon();
-    return this.finishNode(node, "DebuggerStatement")
-  };
-
-  pp$8.parseDoStatement = function(node) {
-    this.next();
-    this.labels.push(loopLabel);
-    node.body = this.parseStatement("do");
-    this.labels.pop();
-    this.expect(types$1._while);
-    node.test = this.parseParenExpression();
-    if (this.options.ecmaVersion >= 6)
-      { this.eat(types$1.semi); }
-    else
-      { this.semicolon(); }
-    return this.finishNode(node, "DoWhileStatement")
-  };
-
-  // Disambiguating between a `for` and a `for`/`in` or `for`/`of`
-  // loop is non-trivial. Basically, we have to parse the init `var`
-  // statement or expression, disallowing the `in` operator (see
-  // the second parameter to `parseExpression`), and then check
-  // whether the next token is `in` or `of`. When there is no init
-  // part (semicolon immediately after the opening parenthesis), it
-  // is a regular `for` loop.
-
-  pp$8.parseForStatement = function(node) {
-    this.next();
-    var awaitAt = (this.options.ecmaVersion >= 9 && this.canAwait && this.eatContextual("await")) ? this.lastTokStart : -1;
-    this.labels.push(loopLabel);
-    this.enterScope(0);
-    this.expect(types$1.parenL);
-    if (this.type === types$1.semi) {
-      if (awaitAt > -1) { this.unexpected(awaitAt); }
-      return this.parseFor(node, null)
-    }
-    var isLet = this.isLet();
-    if (this.type === types$1._var || this.type === types$1._const || isLet) {
-      var init$1 = this.startNode(), kind = isLet ? "let" : this.value;
-      this.next();
-      this.parseVar(init$1, true, kind);
-      this.finishNode(init$1, "VariableDeclaration");
-      if ((this.type === types$1._in || (this.options.ecmaVersion >= 6 && this.isContextual("of"))) && init$1.declarations.length === 1) {
-        if (this.options.ecmaVersion >= 9) {
-          if (this.type === types$1._in) {
-            if (awaitAt > -1) { this.unexpected(awaitAt); }
-          } else { node.await = awaitAt > -1; }
-        }
-        return this.parseForIn(node, init$1)
-      }
-      if (awaitAt > -1) { this.unexpected(awaitAt); }
-      return this.parseFor(node, init$1)
-    }
-    var startsWithLet = this.isContextual("let"), isForOf = false;
-    var refDestructuringErrors = new DestructuringErrors;
-    var init = this.parseExpression(awaitAt > -1 ? "await" : true, refDestructuringErrors);
-    if (this.type === types$1._in || (isForOf = this.options.ecmaVersion >= 6 && this.isContextual("of"))) {
-      if (this.options.ecmaVersion >= 9) {
-        if (this.type === types$1._in) {
-          if (awaitAt > -1) { this.unexpected(awaitAt); }
-        } else { node.await = awaitAt > -1; }
-      }
-      if (startsWithLet && isForOf) { this.raise(init.start, "The left-hand side of a for-of loop may not start with 'let'."); }
-      this.toAssignable(init, false, refDestructuringErrors);
-      this.checkLValPattern(init);
-      return this.parseForIn(node, init)
-    } else {
-      this.checkExpressionErrors(refDestructuringErrors, true);
-    }
-    if (awaitAt > -1) { this.unexpected(awaitAt); }
-    return this.parseFor(node, init)
-  };
-
-  pp$8.parseFunctionStatement = function(node, isAsync, declarationPosition) {
-    this.next();
-    return this.parseFunction(node, FUNC_STATEMENT | (declarationPosition ? 0 : FUNC_HANGING_STATEMENT), false, isAsync)
-  };
-
-  pp$8.parseIfStatement = function(node) {
-    this.next();
-    node.test = this.parseParenExpression();
-    // allow function declarations in branches, but only in non-strict mode
-    node.consequent = this.parseStatement("if");
-    node.alternate = this.eat(types$1._else) ? this.parseStatement("if") : null;
-    return this.finishNode(node, "IfStatement")
-  };
-
-  pp$8.parseReturnStatement = function(node) {
-    if (!this.inFunction && !this.options.allowReturnOutsideFunction)
-      { this.raise(this.start, "'return' outside of function"); }
-    this.next();
-
-    // In `return` (and `break`/`continue`), the keywords with
-    // optional arguments, we eagerly look for a semicolon or the
-    // possibility to insert one.
-
-    if (this.eat(types$1.semi) || this.insertSemicolon()) { node.argument = null; }
-    else { node.argument = this.parseExpression(); this.semicolon(); }
-    return this.finishNode(node, "ReturnStatement")
-  };
-
-  pp$8.parseSwitchStatement = function(node) {
-    this.next();
-    node.discriminant = this.parseParenExpression();
-    node.cases = [];
-    this.expect(types$1.braceL);
-    this.labels.push(switchLabel);
-    this.enterScope(0);
-
-    // Statements under must be grouped (by label) in SwitchCase
-    // nodes. `cur` is used to keep the node that we are currently
-    // adding statements to.
-
-    var cur;
-    for (var sawDefault = false; this.type !== types$1.braceR;) {
-      if (this.type === types$1._case || this.type === types$1._default) {
-        var isCase = this.type === types$1._case;
-        if (cur) { this.finishNode(cur, "SwitchCase"); }
-        node.cases.push(cur = this.startNode());
-        cur.consequent = [];
-        this.next();
-        if (isCase) {
-          cur.test = this.parseExpression();
-        } else {
-          if (sawDefault) { this.raiseRecoverable(this.lastTokStart, "Multiple default clauses"); }
-          sawDefault = true;
-          cur.test = null;
-        }
-        this.expect(types$1.colon);
-      } else {
-        if (!cur) { this.unexpected(); }
-        cur.consequent.push(this.parseStatement(null));
-      }
-    }
-    this.exitScope();
-    if (cur) { this.finishNode(cur, "SwitchCase"); }
-    this.next(); // Closing brace
-    this.labels.pop();
-    return this.finishNode(node, "SwitchStatement")
-  };
-
-  pp$8.parseThrowStatement = function(node) {
-    this.next();
-    if (lineBreak.test(this.input.slice(this.lastTokEnd, this.start)))
-      { this.raise(this.lastTokEnd, "Illegal newline after throw"); }
-    node.argument = this.parseExpression();
-    this.semicolon();
-    return this.finishNode(node, "ThrowStatement")
-  };
-
-  // Reused empty array added for node fields that are always empty.
-
-  var empty$1 = [];
-
-  pp$8.parseTryStatement = function(node) {
-    this.next();
-    node.block = this.parseBlock();
-    node.handler = null;
-    if (this.type === types$1._catch) {
-      var clause = this.startNode();
-      this.next();
-      if (this.eat(types$1.parenL)) {
-        clause.param = this.parseBindingAtom();
-        var simple = clause.param.type === "Identifier";
-        this.enterScope(simple ? SCOPE_SIMPLE_CATCH : 0);
-        this.checkLValPattern(clause.param, simple ? BIND_SIMPLE_CATCH : BIND_LEXICAL);
-        this.expect(types$1.parenR);
-      } else {
-        if (this.options.ecmaVersion < 10) { this.unexpected(); }
-        clause.param = null;
-        this.enterScope(0);
-      }
-      clause.body = this.parseBlock(false);
-      this.exitScope();
-      node.handler = this.finishNode(clause, "CatchClause");
-    }
-    node.finalizer = this.eat(types$1._finally) ? this.parseBlock() : null;
-    if (!node.handler && !node.finalizer)
-      { this.raise(node.start, "Missing catch or finally clause"); }
-    return this.finishNode(node, "TryStatement")
-  };
-
-  pp$8.parseVarStatement = function(node, kind) {
-    this.next();
-    this.parseVar(node, false, kind);
-    this.semicolon();
-    return this.finishNode(node, "VariableDeclaration")
-  };
-
-  pp$8.parseWhileStatement = function(node) {
-    this.next();
-    node.test = this.parseParenExpression();
-    this.labels.push(loopLabel);
-    node.body = this.parseStatement("while");
-    this.labels.pop();
-    return this.finishNode(node, "WhileStatement")
-  };
-
-  pp$8.parseWithStatement = function(node) {
-    if (this.strict) { this.raise(this.start, "'with' in strict mode"); }
-    this.next();
-    node.object = this.parseParenExpression();
-    node.body = this.parseStatement("with");
-    return this.finishNode(node, "WithStatement")
-  };
-
-  pp$8.parseEmptyStatement = function(node) {
-    this.next();
-    return this.finishNode(node, "EmptyStatement")
-  };
-
-  pp$8.parseLabeledStatement = function(node, maybeName, expr, context) {
-    for (var i$1 = 0, list = this.labels; i$1 < list.length; i$1 += 1)
-      {
-      var label = list[i$1];
-
-      if (label.name === maybeName)
-        { this.raise(expr.start, "Label '" + maybeName + "' is already declared");
-    } }
-    var kind = this.type.isLoop ? "loop" : this.type === types$1._switch ? "switch" : null;
-    for (var i = this.labels.length - 1; i >= 0; i--) {
-      var label$1 = this.labels[i];
-      if (label$1.statementStart === node.start) {
-        // Update information about previous labels on this node
-        label$1.statementStart = this.start;
-        label$1.kind = kind;
-      } else { break }
-    }
-    this.labels.push({name: maybeName, kind: kind, statementStart: this.start});
-    node.body = this.parseStatement(context ? context.indexOf("label") === -1 ? context + "label" : context : "label");
-    this.labels.pop();
-    node.label = expr;
-    return this.finishNode(node, "LabeledStatement")
-  };
-
-  pp$8.parseExpressionStatement = function(node, expr) {
-    node.expression = expr;
-    this.semicolon();
-    return this.finishNode(node, "ExpressionStatement")
-  };
-
-  // Parse a semicolon-enclosed block of statements, handling `"use
-  // strict"` declarations when `allowStrict` is true (used for
-  // function bodies).
-
-  pp$8.parseBlock = function(createNewLexicalScope, node, exitStrict) {
-    if ( createNewLexicalScope === void 0 ) createNewLexicalScope = true;
-    if ( node === void 0 ) node = this.startNode();
-
-    node.body = [];
-    this.expect(types$1.braceL);
-    if (createNewLexicalScope) { this.enterScope(0); }
-    while (this.type !== types$1.braceR) {
-      var stmt = this.parseStatement(null);
-      node.body.push(stmt);
-    }
-    if (exitStrict) { this.strict = false; }
-    this.next();
-    if (createNewLexicalScope) { this.exitScope(); }
-    return this.finishNode(node, "BlockStatement")
-  };
-
-  // Parse a regular `for` loop. The disambiguation code in
-  // `parseStatement` will already have parsed the init statement or
-  // expression.
-
-  pp$8.parseFor = function(node, init) {
-    node.init = init;
-    this.expect(types$1.semi);
-    node.test = this.type === types$1.semi ? null : this.parseExpression();
-    this.expect(types$1.semi);
-    node.update = this.type === types$1.parenR ? null : this.parseExpression();
-    this.expect(types$1.parenR);
-    node.body = this.parseStatement("for");
-    this.exitScope();
-    this.labels.pop();
-    return this.finishNode(node, "ForStatement")
-  };
-
-  // Parse a `for`/`in` and `for`/`of` loop, which are almost
-  // same from parser's perspective.
-
-  pp$8.parseForIn = function(node, init) {
-    var isForIn = this.type === types$1._in;
-    this.next();
-
-    if (
-      init.type === "VariableDeclaration" &&
-      init.declarations[0].init != null &&
-      (
-        !isForIn ||
-        this.options.ecmaVersion < 8 ||
-        this.strict ||
-        init.kind !== "var" ||
-        init.declarations[0].id.type !== "Identifier"
-      )
-    ) {
-      this.raise(
-        init.start,
-        ((isForIn ? "for-in" : "for-of") + " loop variable declaration may not have an initializer")
-      );
-    }
-    node.left = init;
-    node.right = isForIn ? this.parseExpression() : this.parseMaybeAssign();
-    this.expect(types$1.parenR);
-    node.body = this.parseStatement("for");
-    this.exitScope();
-    this.labels.pop();
-    return this.finishNode(node, isForIn ? "ForInStatement" : "ForOfStatement")
-  };
-
-  // Parse a list of variable declarations.
-
-  pp$8.parseVar = function(node, isFor, kind) {
-    node.declarations = [];
-    node.kind = kind;
-    for (;;) {
-      var decl = this.startNode();
-      this.parseVarId(decl, kind);
-      if (this.eat(types$1.eq)) {
-        decl.init = this.parseMaybeAssign(isFor);
-      } else if (kind === "const" && !(this.type === types$1._in || (this.options.ecmaVersion >= 6 && this.isContextual("of")))) {
-        this.unexpected();
-      } else if (decl.id.type !== "Identifier" && !(isFor && (this.type === types$1._in || this.isContextual("of")))) {
-        this.raise(this.lastTokEnd, "Complex binding patterns require an initialization value");
-      } else {
-        decl.init = null;
-      }
-      node.declarations.push(this.finishNode(decl, "VariableDeclarator"));
-      if (!this.eat(types$1.comma)) { break }
-    }
-    return node
-  };
-
-  pp$8.parseVarId = function(decl, kind) {
-    decl.id = this.parseBindingAtom();
-    this.checkLValPattern(decl.id, kind === "var" ? BIND_VAR : BIND_LEXICAL, false);
-  };
-
-  var FUNC_STATEMENT = 1, FUNC_HANGING_STATEMENT = 2, FUNC_NULLABLE_ID = 4;
-
-  // Parse a function declaration or literal (depending on the
-  // `statement & FUNC_STATEMENT`).
-
-  // Remove `allowExpressionBody` for 7.0.0, as it is only called with false
-  pp$8.parseFunction = function(node, statement, allowExpressionBody, isAsync, forInit) {
-    this.initFunction(node);
-    if (this.options.ecmaVersion >= 9 || this.options.ecmaVersion >= 6 && !isAsync) {
-      if (this.type === types$1.star && (statement & FUNC_HANGING_STATEMENT))
-        { this.unexpected(); }
-      node.generator = this.eat(types$1.star);
-    }
-    if (this.options.ecmaVersion >= 8)
-      { node.async = !!isAsync; }
-
-    if (statement & FUNC_STATEMENT) {
-      node.id = (statement & FUNC_NULLABLE_ID) && this.type !== types$1.name ? null : this.parseIdent();
-      if (node.id && !(statement & FUNC_HANGING_STATEMENT))
-        // If it is a regular function declaration in sloppy mode, then it is
-        // subject to Annex B semantics (BIND_FUNCTION). Otherwise, the binding
-        // mode depends on properties of the current scope (see
-        // treatFunctionsAsVar).
-        { this.checkLValSimple(node.id, (this.strict || node.generator || node.async) ? this.treatFunctionsAsVar ? BIND_VAR : BIND_LEXICAL : BIND_FUNCTION); }
-    }
-
-    var oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, oldAwaitIdentPos = this.awaitIdentPos;
-    this.yieldPos = 0;
-    this.awaitPos = 0;
-    this.awaitIdentPos = 0;
-    this.enterScope(functionFlags(node.async, node.generator));
-
-    if (!(statement & FUNC_STATEMENT))
-      { node.id = this.type === types$1.name ? this.parseIdent() : null; }
-
-    this.parseFunctionParams(node);
-    this.parseFunctionBody(node, allowExpressionBody, false, forInit);
-
-    this.yieldPos = oldYieldPos;
-    this.awaitPos = oldAwaitPos;
-    this.awaitIdentPos = oldAwaitIdentPos;
-    return this.finishNode(node, (statement & FUNC_STATEMENT) ? "FunctionDeclaration" : "FunctionExpression")
-  };
-
-  pp$8.parseFunctionParams = function(node) {
-    this.expect(types$1.parenL);
-    node.params = this.parseBindingList(types$1.parenR, false, this.options.ecmaVersion >= 8);
-    this.checkYieldAwaitInDefaultParams();
-  };
-
-  // Parse a class declaration or literal (depending on the
-  // `isStatement` parameter).
-
-  pp$8.parseClass = function(node, isStatement) {
-    this.next();
-
-    // ecma-262 14.6 Class Definitions
-    // A class definition is always strict mode code.
-    var oldStrict = this.strict;
-    this.strict = true;
-
-    this.parseClassId(node, isStatement);
-    this.parseClassSuper(node);
-    var privateNameMap = this.enterClassBody();
-    var classBody = this.startNode();
-    var hadConstructor = false;
-    classBody.body = [];
-    this.expect(types$1.braceL);
-    while (this.type !== types$1.braceR) {
-      var element = this.parseClassElement(node.superClass !== null);
-      if (element) {
-        classBody.body.push(element);
-        if (element.type === "MethodDefinition" && element.kind === "constructor") {
-          if (hadConstructor) { this.raise(element.start, "Duplicate constructor in the same class"); }
-          hadConstructor = true;
-        } else if (element.key && element.key.type === "PrivateIdentifier" && isPrivateNameConflicted(privateNameMap, element)) {
-          this.raiseRecoverable(element.key.start, ("Identifier '#" + (element.key.name) + "' has already been declared"));
-        }
-      }
-    }
-    this.strict = oldStrict;
-    this.next();
-    node.body = this.finishNode(classBody, "ClassBody");
-    this.exitClassBody();
-    return this.finishNode(node, isStatement ? "ClassDeclaration" : "ClassExpression")
-  };
-
-  pp$8.parseClassElement = function(constructorAllowsSuper) {
-    if (this.eat(types$1.semi)) { return null }
-
-    var ecmaVersion = this.options.ecmaVersion;
-    var node = this.startNode();
-    var keyName = "";
-    var isGenerator = false;
-    var isAsync = false;
-    var kind = "method";
-    var isStatic = false;
-
-    if (this.eatContextual("static")) {
-      // Parse static init block
-      if (ecmaVersion >= 13 && this.eat(types$1.braceL)) {
-        this.parseClassStaticBlock(node);
-        return node
-      }
-      if (this.isClassElementNameStart() || this.type === types$1.star) {
-        isStatic = true;
-      } else {
-        keyName = "static";
-      }
-    }
-    node.static = isStatic;
-    if (!keyName && ecmaVersion >= 8 && this.eatContextual("async")) {
-      if ((this.isClassElementNameStart() || this.type === types$1.star) && !this.canInsertSemicolon()) {
-        isAsync = true;
-      } else {
-        keyName = "async";
-      }
-    }
-    if (!keyName && (ecmaVersion >= 9 || !isAsync) && this.eat(types$1.star)) {
-      isGenerator = true;
-    }
-    if (!keyName && !isAsync && !isGenerator) {
-      var lastValue = this.value;
-      if (this.eatContextual("get") || this.eatContextual("set")) {
-        if (this.isClassElementNameStart()) {
-          kind = lastValue;
-        } else {
-          keyName = lastValue;
-        }
-      }
-    }
-
-    // Parse element name
-    if (keyName) {
-      // 'async', 'get', 'set', or 'static' were not a keyword contextually.
-      // The last token is any of those. Make it the element name.
-      node.computed = false;
-      node.key = this.startNodeAt(this.lastTokStart, this.lastTokStartLoc);
-      node.key.name = keyName;
-      this.finishNode(node.key, "Identifier");
-    } else {
-      this.parseClassElementName(node);
-    }
-
-    // Parse element value
-    if (ecmaVersion < 13 || this.type === types$1.parenL || kind !== "method" || isGenerator || isAsync) {
-      var isConstructor = !node.static && checkKeyName(node, "constructor");
-      var allowsDirectSuper = isConstructor && constructorAllowsSuper;
-      // Couldn't move this check into the 'parseClassMethod' method for backward compatibility.
-      if (isConstructor && kind !== "method") { this.raise(node.key.start, "Constructor can't have get/set modifier"); }
-      node.kind = isConstructor ? "constructor" : kind;
-      this.parseClassMethod(node, isGenerator, isAsync, allowsDirectSuper);
-    } else {
-      this.parseClassField(node);
-    }
-
-    return node
-  };
-
-  pp$8.isClassElementNameStart = function() {
-    return (
-      this.type === types$1.name ||
-      this.type === types$1.privateId ||
-      this.type === types$1.num ||
-      this.type === types$1.string ||
-      this.type === types$1.bracketL ||
-      this.type.keyword
-    )
-  };
-
-  pp$8.parseClassElementName = function(element) {
-    if (this.type === types$1.privateId) {
-      if (this.value === "constructor") {
-        this.raise(this.start, "Classes can't have an element named '#constructor'");
-      }
-      element.computed = false;
-      element.key = this.parsePrivateIdent();
-    } else {
-      this.parsePropertyName(element);
-    }
-  };
-
-  pp$8.parseClassMethod = function(method, isGenerator, isAsync, allowsDirectSuper) {
-    // Check key and flags
-    var key = method.key;
-    if (method.kind === "constructor") {
-      if (isGenerator) { this.raise(key.start, "Constructor can't be a generator"); }
-      if (isAsync) { this.raise(key.start, "Constructor can't be an async method"); }
-    } else if (method.static && checkKeyName(method, "prototype")) {
-      this.raise(key.start, "Classes may not have a static property named prototype");
-    }
-
-    // Parse value
-    var value = method.value = this.parseMethod(isGenerator, isAsync, allowsDirectSuper);
-
-    // Check value
-    if (method.kind === "get" && value.params.length !== 0)
-      { this.raiseRecoverable(value.start, "getter should have no params"); }
-    if (method.kind === "set" && value.params.length !== 1)
-      { this.raiseRecoverable(value.start, "setter should have exactly one param"); }
-    if (method.kind === "set" && value.params[0].type === "RestElement")
-      { this.raiseRecoverable(value.params[0].start, "Setter cannot use rest params"); }
-
-    return this.finishNode(method, "MethodDefinition")
-  };
-
-  pp$8.parseClassField = function(field) {
-    if (checkKeyName(field, "constructor")) {
-      this.raise(field.key.start, "Classes can't have a field named 'constructor'");
-    } else if (field.static && checkKeyName(field, "prototype")) {
-      this.raise(field.key.start, "Classes can't have a static field named 'prototype'");
-    }
-
-    if (this.eat(types$1.eq)) {
-      // To raise SyntaxError if 'arguments' exists in the initializer.
-      var scope = this.currentThisScope();
-      var inClassFieldInit = scope.inClassFieldInit;
-      scope.inClassFieldInit = true;
-      field.value = this.parseMaybeAssign();
-      scope.inClassFieldInit = inClassFieldInit;
-    } else {
-      field.value = null;
-    }
-    this.semicolon();
-
-    return this.finishNode(field, "PropertyDefinition")
-  };
-
-  pp$8.parseClassStaticBlock = function(node) {
-    node.body = [];
-
-    var oldLabels = this.labels;
-    this.labels = [];
-    this.enterScope(SCOPE_CLASS_STATIC_BLOCK | SCOPE_SUPER);
-    while (this.type !== types$1.braceR) {
-      var stmt = this.parseStatement(null);
-      node.body.push(stmt);
-    }
-    this.next();
-    this.exitScope();
-    this.labels = oldLabels;
-
-    return this.finishNode(node, "StaticBlock")
-  };
-
-  pp$8.parseClassId = function(node, isStatement) {
-    if (this.type === types$1.name) {
-      node.id = this.parseIdent();
-      if (isStatement)
-        { this.checkLValSimple(node.id, BIND_LEXICAL, false); }
-    } else {
-      if (isStatement === true)
-        { this.unexpected(); }
-      node.id = null;
-    }
-  };
-
-  pp$8.parseClassSuper = function(node) {
-    node.superClass = this.eat(types$1._extends) ? this.parseExprSubscripts(false) : null;
-  };
-
-  pp$8.enterClassBody = function() {
-    var element = {declared: Object.create(null), used: []};
-    this.privateNameStack.push(element);
-    return element.declared
-  };
-
-  pp$8.exitClassBody = function() {
-    var ref = this.privateNameStack.pop();
-    var declared = ref.declared;
-    var used = ref.used;
-    var len = this.privateNameStack.length;
-    var parent = len === 0 ? null : this.privateNameStack[len - 1];
-    for (var i = 0; i < used.length; ++i) {
-      var id = used[i];
-      if (!hasOwn(declared, id.name)) {
-        if (parent) {
-          parent.used.push(id);
-        } else {
-          this.raiseRecoverable(id.start, ("Private field '#" + (id.name) + "' must be declared in an enclosing class"));
-        }
-      }
-    }
-  };
-
-  function isPrivateNameConflicted(privateNameMap, element) {
-    var name = element.key.name;
-    var curr = privateNameMap[name];
-
-    var next = "true";
-    if (element.type === "MethodDefinition" && (element.kind === "get" || element.kind === "set")) {
-      next = (element.static ? "s" : "i") + element.kind;
-    }
-
-    // `class { get #a(){}; static set #a(_){} }` is also conflict.
-    if (
-      curr === "iget" && next === "iset" ||
-      curr === "iset" && next === "iget" ||
-      curr === "sget" && next === "sset" ||
-      curr === "sset" && next === "sget"
-    ) {
-      privateNameMap[name] = "true";
-      return false
-    } else if (!curr) {
-      privateNameMap[name] = next;
-      return false
-    } else {
-      return true
-    }
-  }
-
-  function checkKeyName(node, name) {
-    var computed = node.computed;
-    var key = node.key;
-    return !computed && (
-      key.type === "Identifier" && key.name === name ||
-      key.type === "Literal" && key.value === name
-    )
-  }
-
-  // Parses module export declaration.
-
-  pp$8.parseExport = function(node, exports) {
-    this.next();
-    // export * from '...'
-    if (this.eat(types$1.star)) {
-      if (this.options.ecmaVersion >= 11) {
-        if (this.eatContextual("as")) {
-          node.exported = this.parseModuleExportName();
-          this.checkExport(exports, node.exported.name, this.lastTokStart);
-        } else {
-          node.exported = null;
-        }
-      }
-      this.expectContextual("from");
-      if (this.type !== types$1.string) { this.unexpected(); }
-      node.source = this.parseExprAtom();
-      this.semicolon();
-      return this.finishNode(node, "ExportAllDeclaration")
-    }
-    if (this.eat(types$1._default)) { // export default ...
-      this.checkExport(exports, "default", this.lastTokStart);
-      var isAsync;
-      if (this.type === types$1._function || (isAsync = this.isAsyncFunction())) {
-        var fNode = this.startNode();
-        this.next();
-        if (isAsync) { this.next(); }
-        node.declaration = this.parseFunction(fNode, FUNC_STATEMENT | FUNC_NULLABLE_ID, false, isAsync);
-      } else if (this.type === types$1._class) {
-        var cNode = this.startNode();
-        node.declaration = this.parseClass(cNode, "nullableID");
-      } else {
-        node.declaration = this.parseMaybeAssign();
-        this.semicolon();
-      }
-      return this.finishNode(node, "ExportDefaultDeclaration")
-    }
-    // export var|const|let|function|class ...
-    if (this.shouldParseExportStatement()) {
-      node.declaration = this.parseStatement(null);
-      if (node.declaration.type === "VariableDeclaration")
-        { this.checkVariableExport(exports, node.declaration.declarations); }
-      else
-        { this.checkExport(exports, node.declaration.id.name, node.declaration.id.start); }
-      node.specifiers = [];
-      node.source = null;
-    } else { // export { x, y as z } [from '...']
-      node.declaration = null;
-      node.specifiers = this.parseExportSpecifiers(exports);
-      if (this.eatContextual("from")) {
-        if (this.type !== types$1.string) { this.unexpected(); }
-        node.source = this.parseExprAtom();
-      } else {
-        for (var i = 0, list = node.specifiers; i < list.length; i += 1) {
-          // check for keywords used as local names
-          var spec = list[i];
-
-          this.checkUnreserved(spec.local);
-          // check if export is defined
-          this.checkLocalExport(spec.local);
-
-          if (spec.local.type === "Literal") {
-            this.raise(spec.local.start, "A string literal cannot be used as an exported binding without `from`.");
-          }
-        }
-
-        node.source = null;
-      }
-      this.semicolon();
-    }
-    return this.finishNode(node, "ExportNamedDeclaration")
-  };
-
-  pp$8.checkExport = function(exports, name, pos) {
-    if (!exports) { return }
-    if (hasOwn(exports, name))
-      { this.raiseRecoverable(pos, "Duplicate export '" + name + "'"); }
-    exports[name] = true;
-  };
-
-  pp$8.checkPatternExport = function(exports, pat) {
-    var type = pat.type;
-    if (type === "Identifier")
-      { this.checkExport(exports, pat.name, pat.start); }
-    else if (type === "ObjectPattern")
-      { for (var i = 0, list = pat.properties; i < list.length; i += 1)
-        {
-          var prop = list[i];
-
-          this.checkPatternExport(exports, prop);
-        } }
-    else if (type === "ArrayPattern")
-      { for (var i$1 = 0, list$1 = pat.elements; i$1 < list$1.length; i$1 += 1) {
-        var elt = list$1[i$1];
-
-          if (elt) { this.checkPatternExport(exports, elt); }
-      } }
-    else if (type === "Property")
-      { this.checkPatternExport(exports, pat.value); }
-    else if (type === "AssignmentPattern")
-      { this.checkPatternExport(exports, pat.left); }
-    else if (type === "RestElement")
-      { this.checkPatternExport(exports, pat.argument); }
-    else if (type === "ParenthesizedExpression")
-      { this.checkPatternExport(exports, pat.expression); }
-  };
-
-  pp$8.checkVariableExport = function(exports, decls) {
-    if (!exports) { return }
-    for (var i = 0, list = decls; i < list.length; i += 1)
-      {
-      var decl = list[i];
-
-      this.checkPatternExport(exports, decl.id);
-    }
-  };
-
-  pp$8.shouldParseExportStatement = function() {
-    return this.type.keyword === "var" ||
-      this.type.keyword === "const" ||
-      this.type.keyword === "class" ||
-      this.type.keyword === "function" ||
-      this.isLet() ||
-      this.isAsyncFunction()
-  };
-
-  // Parses a comma-separated list of module exports.
-
-  pp$8.parseExportSpecifiers = function(exports) {
-    var nodes = [], first = true;
-    // export { x, y as z } [from '...']
-    this.expect(types$1.braceL);
-    while (!this.eat(types$1.braceR)) {
-      if (!first) {
-        this.expect(types$1.comma);
-        if (this.afterTrailingComma(types$1.braceR)) { break }
-      } else { first = false; }
-
-      var node = this.startNode();
-      node.local = this.parseModuleExportName();
-      node.exported = this.eatContextual("as") ? this.parseModuleExportName() : node.local;
-      this.checkExport(
-        exports,
-        node.exported[node.exported.type === "Identifier" ? "name" : "value"],
-        node.exported.start
-      );
-      nodes.push(this.finishNode(node, "ExportSpecifier"));
-    }
-    return nodes
-  };
-
-  // Parses import declaration.
-
-  pp$8.parseImport = function(node) {
-    this.next();
-    // import '...'
-    if (this.type === types$1.string) {
-      node.specifiers = empty$1;
-      node.source = this.parseExprAtom();
-    } else {
-      node.specifiers = this.parseImportSpecifiers();
-      this.expectContextual("from");
-      node.source = this.type === types$1.string ? this.parseExprAtom() : this.unexpected();
-    }
-    this.semicolon();
-    return this.finishNode(node, "ImportDeclaration")
-  };
-
-  // Parses a comma-separated list of module imports.
-
-  pp$8.parseImportSpecifiers = function() {
-    var nodes = [], first = true;
-    if (this.type === types$1.name) {
-      // import defaultObj, { x, y as z } from '...'
-      var node = this.startNode();
-      node.local = this.parseIdent();
-      this.checkLValSimple(node.local, BIND_LEXICAL);
-      nodes.push(this.finishNode(node, "ImportDefaultSpecifier"));
-      if (!this.eat(types$1.comma)) { return nodes }
-    }
-    if (this.type === types$1.star) {
-      var node$1 = this.startNode();
-      this.next();
-      this.expectContextual("as");
-      node$1.local = this.parseIdent();
-      this.checkLValSimple(node$1.local, BIND_LEXICAL);
-      nodes.push(this.finishNode(node$1, "ImportNamespaceSpecifier"));
-      return nodes
-    }
-    this.expect(types$1.braceL);
-    while (!this.eat(types$1.braceR)) {
-      if (!first) {
-        this.expect(types$1.comma);
-        if (this.afterTrailingComma(types$1.braceR)) { break }
-      } else { first = false; }
-
-      var node$2 = this.startNode();
-      node$2.imported = this.parseModuleExportName();
-      if (this.eatContextual("as")) {
-        node$2.local = this.parseIdent();
-      } else {
-        this.checkUnreserved(node$2.imported);
-        node$2.local = node$2.imported;
-      }
-      this.checkLValSimple(node$2.local, BIND_LEXICAL);
-      nodes.push(this.finishNode(node$2, "ImportSpecifier"));
-    }
-    return nodes
-  };
-
-  pp$8.parseModuleExportName = function() {
-    if (this.options.ecmaVersion >= 13 && this.type === types$1.string) {
-      var stringLiteral = this.parseLiteral(this.value);
-      if (loneSurrogate.test(stringLiteral.value)) {
-        this.raise(stringLiteral.start, "An export name cannot include a lone surrogate.");
-      }
-      return stringLiteral
-    }
-    return this.parseIdent(true)
-  };
-
-  // Set `ExpressionStatement#directive` property for directive prologues.
-  pp$8.adaptDirectivePrologue = function(statements) {
-    for (var i = 0; i < statements.length && this.isDirectiveCandidate(statements[i]); ++i) {
-      statements[i].directive = statements[i].expression.raw.slice(1, -1);
-    }
-  };
-  pp$8.isDirectiveCandidate = function(statement) {
-    return (
-      statement.type === "ExpressionStatement" &&
-      statement.expression.type === "Literal" &&
-      typeof statement.expression.value === "string" &&
-      // Reject parenthesized strings.
-      (this.input[statement.start] === "\"" || this.input[statement.start] === "'")
-    )
-  };
-
-  var pp$7 = Parser.prototype;
-
-  // Convert existing expression atom to assignable pattern
-  // if possible.
-
-  pp$7.toAssignable = function(node, isBinding, refDestructuringErrors) {
-    if (this.options.ecmaVersion >= 6 && node) {
-      switch (node.type) {
-      case "Identifier":
-        if (this.inAsync && node.name === "await")
-          { this.raise(node.start, "Cannot use 'await' as identifier inside an async function"); }
-        break
-
-      case "ObjectPattern":
-      case "ArrayPattern":
-      case "AssignmentPattern":
-      case "RestElement":
-        break
-
-      case "ObjectExpression":
-        node.type = "ObjectPattern";
-        if (refDestructuringErrors) { this.checkPatternErrors(refDestructuringErrors, true); }
-        for (var i = 0, list = node.properties; i < list.length; i += 1) {
-          var prop = list[i];
-
-        this.toAssignable(prop, isBinding);
-          // Early error:
-          //   AssignmentRestProperty[Yield, Await] :
-          //     `...` DestructuringAssignmentTarget[Yield, Await]
-          //
-          //   It is a Syntax Error if |DestructuringAssignmentTarget| is an |ArrayLiteral| or an |ObjectLiteral|.
-          if (
-            prop.type === "RestElement" &&
-            (prop.argument.type === "ArrayPattern" || prop.argument.type === "ObjectPattern")
-          ) {
-            this.raise(prop.argument.start, "Unexpected token");
-          }
-        }
-        break
-
-      case "Property":
-        // AssignmentProperty has type === "Property"
-        if (node.kind !== "init") { this.raise(node.key.start, "Object pattern can't contain getter or setter"); }
-        this.toAssignable(node.value, isBinding);
-        break
-
-      case "ArrayExpression":
-        node.type = "ArrayPattern";
-        if (refDestructuringErrors) { this.checkPatternErrors(refDestructuringErrors, true); }
-        this.toAssignableList(node.elements, isBinding);
-        break
-
-      case "SpreadElement":
-        node.type = "RestElement";
-        this.toAssignable(node.argument, isBinding);
-        if (node.argument.type === "AssignmentPattern")
-          { this.raise(node.argument.start, "Rest elements cannot have a default value"); }
-        break
-
-      case "AssignmentExpression":
-        if (node.operator !== "=") { this.raise(node.left.end, "Only '=' operator can be used for specifying default value."); }
-        node.type = "AssignmentPattern";
-        delete node.operator;
-        this.toAssignable(node.left, isBinding);
-        break
-
-      case "ParenthesizedExpression":
-        this.toAssignable(node.expression, isBinding, refDestructuringErrors);
-        break
-
-      case "ChainExpression":
-        this.raiseRecoverable(node.start, "Optional chaining cannot appear in left-hand side");
-        break
-
-      case "MemberExpression":
-        if (!isBinding) { break }
-
-      default:
-        this.raise(node.start, "Assigning to rvalue");
-      }
-    } else if (refDestructuringErrors) { this.checkPatternErrors(refDestructuringErrors, true); }
-    return node
-  };
-
-  // Convert list of expression atoms to binding list.
-
-  pp$7.toAssignableList = function(exprList, isBinding) {
-    var end = exprList.length;
-    for (var i = 0; i < end; i++) {
-      var elt = exprList[i];
-      if (elt) { this.toAssignable(elt, isBinding); }
-    }
-    if (end) {
-      var last = exprList[end - 1];
-      if (this.options.ecmaVersion === 6 && isBinding && last && last.type === "RestElement" && last.argument.type !== "Identifier")
-        { this.unexpected(last.argument.start); }
-    }
-    return exprList
-  };
-
-  // Parses spread element.
-
-  pp$7.parseSpread = function(refDestructuringErrors) {
-    var node = this.startNode();
-    this.next();
-    node.argument = this.parseMaybeAssign(false, refDestructuringErrors);
-    return this.finishNode(node, "SpreadElement")
-  };
-
-  pp$7.parseRestBinding = function() {
-    var node = this.startNode();
-    this.next();
-
-    // RestElement inside of a function parameter must be an identifier
-    if (this.options.ecmaVersion === 6 && this.type !== types$1.name)
-      { this.unexpected(); }
-
-    node.argument = this.parseBindingAtom();
-
-    return this.finishNode(node, "RestElement")
-  };
-
-  // Parses lvalue (assignable) atom.
-
-  pp$7.parseBindingAtom = function() {
-    if (this.options.ecmaVersion >= 6) {
-      switch (this.type) {
-      case types$1.bracketL:
-        var node = this.startNode();
-        this.next();
-        node.elements = this.parseBindingList(types$1.bracketR, true, true);
-        return this.finishNode(node, "ArrayPattern")
-
-      case types$1.braceL:
-        return this.parseObj(true)
-      }
-    }
-    return this.parseIdent()
-  };
-
-  pp$7.parseBindingList = function(close, allowEmpty, allowTrailingComma) {
-    var elts = [], first = true;
-    while (!this.eat(close)) {
-      if (first) { first = false; }
-      else { this.expect(types$1.comma); }
-      if (allowEmpty && this.type === types$1.comma) {
-        elts.push(null);
-      } else if (allowTrailingComma && this.afterTrailingComma(close)) {
-        break
-      } else if (this.type === types$1.ellipsis) {
-        var rest = this.parseRestBinding();
-        this.parseBindingListItem(rest);
-        elts.push(rest);
-        if (this.type === types$1.comma) { this.raise(this.start, "Comma is not permitted after the rest element"); }
-        this.expect(close);
-        break
-      } else {
-        var elem = this.parseMaybeDefault(this.start, this.startLoc);
-        this.parseBindingListItem(elem);
-        elts.push(elem);
-      }
-    }
-    return elts
-  };
-
-  pp$7.parseBindingListItem = function(param) {
-    return param
-  };
-
-  // Parses assignment pattern around given atom if possible.
-
-  pp$7.parseMaybeDefault = function(startPos, startLoc, left) {
-    left = left || this.parseBindingAtom();
-    if (this.options.ecmaVersion < 6 || !this.eat(types$1.eq)) { return left }
-    var node = this.startNodeAt(startPos, startLoc);
-    node.left = left;
-    node.right = this.parseMaybeAssign();
-    return this.finishNode(node, "AssignmentPattern")
-  };
-
-  // The following three functions all verify that a node is an lvalue —
-  // something that can be bound, or assigned to. In order to do so, they perform
-  // a variety of checks:
-  //
-  // - Check that none of the bound/assigned-to identifiers are reserved words.
-  // - Record name declarations for bindings in the appropriate scope.
-  // - Check duplicate argument names, if checkClashes is set.
-  //
-  // If a complex binding pattern is encountered (e.g., object and array
-  // destructuring), the entire pattern is recursively checked.
-  //
-  // There are three versions of checkLVal*() appropriate for different
-  // circumstances:
-  //
-  // - checkLValSimple() shall be used if the syntactic construct supports
-  //   nothing other than identifiers and member expressions. Parenthesized
-  //   expressions are also correctly handled. This is generally appropriate for
-  //   constructs for which the spec says
-  //
-  //   > It is a Syntax Error if AssignmentTargetType of [the production] is not
-  //   > simple.
-  //
-  //   It is also appropriate for checking if an identifier is valid and not
-  //   defined elsewhere, like import declarations or function/class identifiers.
-  //
-  //   Examples where this is used include:
-  //     a += …;
-  //     import a from '…';
-  //   where a is the node to be checked.
-  //
-  // - checkLValPattern() shall be used if the syntactic construct supports
-  //   anything checkLValSimple() supports, as well as object and array
-  //   destructuring patterns. This is generally appropriate for constructs for
-  //   which the spec says
-  //
-  //   > It is a Syntax Error if [the production] is neither an ObjectLiteral nor
-  //   > an ArrayLiteral and AssignmentTargetType of [the production] is not
-  //   > simple.
-  //
-  //   Examples where this is used include:
-  //     (a = …);
-  //     const a = …;
-  //     try { … } catch (a) { … }
-  //   where a is the node to be checked.
-  //
-  // - checkLValInnerPattern() shall be used if the syntactic construct supports
-  //   anything checkLValPattern() supports, as well as default assignment
-  //   patterns, rest elements, and other constructs that may appear within an
-  //   object or array destructuring pattern.
-  //
-  //   As a special case, function parameters also use checkLValInnerPattern(),
-  //   as they also support defaults and rest constructs.
-  //
-  // These functions deliberately support both assignment and binding constructs,
-  // as the logic for both is exceedingly similar. If the node is the target of
-  // an assignment, then bindingType should be set to BIND_NONE. Otherwise, it
-  // should be set to the appropriate BIND_* constant, like BIND_VAR or
-  // BIND_LEXICAL.
-  //
-  // If the function is called with a non-BIND_NONE bindingType, then
-  // additionally a checkClashes object may be specified to allow checking for
-  // duplicate argument names. checkClashes is ignored if the provided construct
-  // is an assignment (i.e., bindingType is BIND_NONE).
-
-  pp$7.checkLValSimple = function(expr, bindingType, checkClashes) {
-    if ( bindingType === void 0 ) bindingType = BIND_NONE;
-
-    var isBind = bindingType !== BIND_NONE;
-
-    switch (expr.type) {
-    case "Identifier":
-      if (this.strict && this.reservedWordsStrictBind.test(expr.name))
-        { this.raiseRecoverable(expr.start, (isBind ? "Binding " : "Assigning to ") + expr.name + " in strict mode"); }
-      if (isBind) {
-        if (bindingType === BIND_LEXICAL && expr.name === "let")
-          { this.raiseRecoverable(expr.start, "let is disallowed as a lexically bound name"); }
-        if (checkClashes) {
-          if (hasOwn(checkClashes, expr.name))
-            { this.raiseRecoverable(expr.start, "Argument name clash"); }
-          checkClashes[expr.name] = true;
-        }
-        if (bindingType !== BIND_OUTSIDE) { this.declareName(expr.name, bindingType, expr.start); }
-      }
-      break
-
-    case "ChainExpression":
-      this.raiseRecoverable(expr.start, "Optional chaining cannot appear in left-hand side");
-      break
-
-    case "MemberExpression":
-      if (isBind) { this.raiseRecoverable(expr.start, "Binding member expression"); }
-      break
-
-    case "ParenthesizedExpression":
-      if (isBind) { this.raiseRecoverable(expr.start, "Binding parenthesized expression"); }
-      return this.checkLValSimple(expr.expression, bindingType, checkClashes)
-
-    default:
-      this.raise(expr.start, (isBind ? "Binding" : "Assigning to") + " rvalue");
-    }
-  };
-
-  pp$7.checkLValPattern = function(expr, bindingType, checkClashes) {
-    if ( bindingType === void 0 ) bindingType = BIND_NONE;
-
-    switch (expr.type) {
-    case "ObjectPattern":
-      for (var i = 0, list = expr.properties; i < list.length; i += 1) {
-        var prop = list[i];
-
-      this.checkLValInnerPattern(prop, bindingType, checkClashes);
-      }
-      break
-
-    case "ArrayPattern":
-      for (var i$1 = 0, list$1 = expr.elements; i$1 < list$1.length; i$1 += 1) {
-        var elem = list$1[i$1];
-
-      if (elem) { this.checkLValInnerPattern(elem, bindingType, checkClashes); }
-      }
-      break
-
-    default:
-      this.checkLValSimple(expr, bindingType, checkClashes);
-    }
-  };
-
-  pp$7.checkLValInnerPattern = function(expr, bindingType, checkClashes) {
-    if ( bindingType === void 0 ) bindingType = BIND_NONE;
-
-    switch (expr.type) {
-    case "Property":
-      // AssignmentProperty has type === "Property"
-      this.checkLValInnerPattern(expr.value, bindingType, checkClashes);
-      break
-
-    case "AssignmentPattern":
-      this.checkLValPattern(expr.left, bindingType, checkClashes);
-      break
-
-    case "RestElement":
-      this.checkLValPattern(expr.argument, bindingType, checkClashes);
-      break
-
-    default:
-      this.checkLValPattern(expr, bindingType, checkClashes);
-    }
-  };
-
-  // The algorithm used to determine whether a regexp can appear at a
-
-  var TokContext = function TokContext(token, isExpr, preserveSpace, override, generator) {
-    this.token = token;
-    this.isExpr = !!isExpr;
-    this.preserveSpace = !!preserveSpace;
-    this.override = override;
-    this.generator = !!generator;
-  };
-
-  var types = {
-    b_stat: new TokContext("{", false),
-    b_expr: new TokContext("{", true),
-    b_tmpl: new TokContext("${", false),
-    p_stat: new TokContext("(", false),
-    p_expr: new TokContext("(", true),
-    q_tmpl: new TokContext("`", true, true, function (p) { return p.tryReadTemplateToken(); }),
-    f_stat: new TokContext("function", false),
-    f_expr: new TokContext("function", true),
-    f_expr_gen: new TokContext("function", true, false, null, true),
-    f_gen: new TokContext("function", false, false, null, true)
-  };
-
-  var pp$6 = Parser.prototype;
-
-  pp$6.initialContext = function() {
-    return [types.b_stat]
-  };
-
-  pp$6.curContext = function() {
-    return this.context[this.context.length - 1]
-  };
-
-  pp$6.braceIsBlock = function(prevType) {
-    var parent = this.curContext();
-    if (parent === types.f_expr || parent === types.f_stat)
-      { return true }
-    if (prevType === types$1.colon && (parent === types.b_stat || parent === types.b_expr))
-      { return !parent.isExpr }
-
-    // The check for `tt.name && exprAllowed` detects whether we are
-    // after a `yield` or `of` construct. See the `updateContext` for
-    // `tt.name`.
-    if (prevType === types$1._return || prevType === types$1.name && this.exprAllowed)
-      { return lineBreak.test(this.input.slice(this.lastTokEnd, this.start)) }
-    if (prevType === types$1._else || prevType === types$1.semi || prevType === types$1.eof || prevType === types$1.parenR || prevType === types$1.arrow)
-      { return true }
-    if (prevType === types$1.braceL)
-      { return parent === types.b_stat }
-    if (prevType === types$1._var || prevType === types$1._const || prevType === types$1.name)
-      { return false }
-    return !this.exprAllowed
-  };
-
-  pp$6.inGeneratorContext = function() {
-    for (var i = this.context.length - 1; i >= 1; i--) {
-      var context = this.context[i];
-      if (context.token === "function")
-        { return context.generator }
-    }
-    return false
-  };
-
-  pp$6.updateContext = function(prevType) {
-    var update, type = this.type;
-    if (type.keyword && prevType === types$1.dot)
-      { this.exprAllowed = false; }
-    else if (update = type.updateContext)
-      { update.call(this, prevType); }
-    else
-      { this.exprAllowed = type.beforeExpr; }
-  };
-
-  // Used to handle egde case when token context could not be inferred correctly in tokenize phase
-  pp$6.overrideContext = function(tokenCtx) {
-    if (this.curContext() !== tokenCtx) {
-      this.context[this.context.length - 1] = tokenCtx;
-    }
-  };
-
-  // Token-specific context update code
-
-  types$1.parenR.updateContext = types$1.braceR.updateContext = function() {
-    if (this.context.length === 1) {
-      this.exprAllowed = true;
-      return
-    }
-    var out = this.context.pop();
-    if (out === types.b_stat && this.curContext().token === "function") {
-      out = this.context.pop();
-    }
-    this.exprAllowed = !out.isExpr;
-  };
-
-  types$1.braceL.updateContext = function(prevType) {
-    this.context.push(this.braceIsBlock(prevType) ? types.b_stat : types.b_expr);
-    this.exprAllowed = true;
-  };
-
-  types$1.dollarBraceL.updateContext = function() {
-    this.context.push(types.b_tmpl);
-    this.exprAllowed = true;
-  };
-
-  types$1.parenL.updateContext = function(prevType) {
-    var statementParens = prevType === types$1._if || prevType === types$1._for || prevType === types$1._with || prevType === types$1._while;
-    this.context.push(statementParens ? types.p_stat : types.p_expr);
-    this.exprAllowed = true;
-  };
-
-  types$1.incDec.updateContext = function() {
-    // tokExprAllowed stays unchanged
-  };
-
-  types$1._function.updateContext = types$1._class.updateContext = function(prevType) {
-    if (prevType.beforeExpr && prevType !== types$1._else &&
-        !(prevType === types$1.semi && this.curContext() !== types.p_stat) &&
-        !(prevType === types$1._return && lineBreak.test(this.input.slice(this.lastTokEnd, this.start))) &&
-        !((prevType === types$1.colon || prevType === types$1.braceL) && this.curContext() === types.b_stat))
-      { this.context.push(types.f_expr); }
-    else
-      { this.context.push(types.f_stat); }
-    this.exprAllowed = false;
-  };
-
-  types$1.backQuote.updateContext = function() {
-    if (this.curContext() === types.q_tmpl)
-      { this.context.pop(); }
-    else
-      { this.context.push(types.q_tmpl); }
-    this.exprAllowed = false;
-  };
-
-  types$1.star.updateContext = function(prevType) {
-    if (prevType === types$1._function) {
-      var index = this.context.length - 1;
-      if (this.context[index] === types.f_expr)
-        { this.context[index] = types.f_expr_gen; }
-      else
-        { this.context[index] = types.f_gen; }
-    }
-    this.exprAllowed = true;
-  };
-
-  types$1.name.updateContext = function(prevType) {
-    var allowed = false;
-    if (this.options.ecmaVersion >= 6 && prevType !== types$1.dot) {
-      if (this.value === "of" && !this.exprAllowed ||
-          this.value === "yield" && this.inGeneratorContext())
-        { allowed = true; }
-    }
-    this.exprAllowed = allowed;
-  };
-
-  // A recursive descent parser operates by defining functions for all
-
-  var pp$5 = Parser.prototype;
-
-  // Check if property name clashes with already added.
-  // Object/class getters and setters are not allowed to clash —
-  // either with each other or with an init property — and in
-  // strict mode, init properties are also not allowed to be repeated.
-
-  pp$5.checkPropClash = function(prop, propHash, refDestructuringErrors) {
-    if (this.options.ecmaVersion >= 9 && prop.type === "SpreadElement")
-      { return }
-    if (this.options.ecmaVersion >= 6 && (prop.computed || prop.method || prop.shorthand))
-      { return }
-    var key = prop.key;
-    var name;
-    switch (key.type) {
-    case "Identifier": name = key.name; break
-    case "Literal": name = String(key.value); break
-    default: return
-    }
-    var kind = prop.kind;
-    if (this.options.ecmaVersion >= 6) {
-      if (name === "__proto__" && kind === "init") {
-        if (propHash.proto) {
-          if (refDestructuringErrors) {
-            if (refDestructuringErrors.doubleProto < 0) {
-              refDestructuringErrors.doubleProto = key.start;
-            }
-          } else {
-            this.raiseRecoverable(key.start, "Redefinition of __proto__ property");
-          }
-        }
-        propHash.proto = true;
-      }
-      return
-    }
-    name = "$" + name;
-    var other = propHash[name];
-    if (other) {
-      var redefinition;
-      if (kind === "init") {
-        redefinition = this.strict && other.init || other.get || other.set;
-      } else {
-        redefinition = other.init || other[kind];
-      }
-      if (redefinition)
-        { this.raiseRecoverable(key.start, "Redefinition of property"); }
-    } else {
-      other = propHash[name] = {
-        init: false,
-        get: false,
-        set: false
-      };
-    }
-    other[kind] = true;
-  };
-
-  // ### Expression parsing
-
-  // These nest, from the most general expression type at the top to
-  // 'atomic', nondivisible expression types at the bottom. Most of
-  // the functions will simply let the function(s) below them parse,
-  // and, *if* the syntactic construct they handle is present, wrap
-  // the AST node that the inner parser gave them in another node.
-
-  // Parse a full expression. The optional arguments are used to
-  // forbid the `in` operator (in for loops initalization expressions)
-  // and provide reference for storing '=' operator inside shorthand
-  // property assignment in contexts where both object expression
-  // and object pattern might appear (so it's possible to raise
-  // delayed syntax error at correct position).
-
-  pp$5.parseExpression = function(forInit, refDestructuringErrors) {
-    var startPos = this.start, startLoc = this.startLoc;
-    var expr = this.parseMaybeAssign(forInit, refDestructuringErrors);
-    if (this.type === types$1.comma) {
-      var node = this.startNodeAt(startPos, startLoc);
-      node.expressions = [expr];
-      while (this.eat(types$1.comma)) { node.expressions.push(this.parseMaybeAssign(forInit, refDestructuringErrors)); }
-      return this.finishNode(node, "SequenceExpression")
-    }
-    return expr
-  };
-
-  // Parse an assignment expression. This includes applications of
-  // operators like `+=`.
-
-  pp$5.parseMaybeAssign = function(forInit, refDestructuringErrors, afterLeftParse) {
-    if (this.isContextual("yield")) {
-      if (this.inGenerator) { return this.parseYield(forInit) }
-      // The tokenizer will assume an expression is allowed after
-      // `yield`, but this isn't that kind of yield
-      else { this.exprAllowed = false; }
-    }
-
-    var ownDestructuringErrors = false, oldParenAssign = -1, oldTrailingComma = -1, oldDoubleProto = -1;
-    if (refDestructuringErrors) {
-      oldParenAssign = refDestructuringErrors.parenthesizedAssign;
-      oldTrailingComma = refDestructuringErrors.trailingComma;
-      oldDoubleProto = refDestructuringErrors.doubleProto;
-      refDestructuringErrors.parenthesizedAssign = refDestructuringErrors.trailingComma = -1;
-    } else {
-      refDestructuringErrors = new DestructuringErrors;
-      ownDestructuringErrors = true;
-    }
-
-    var startPos = this.start, startLoc = this.startLoc;
-    if (this.type === types$1.parenL || this.type === types$1.name) {
-      this.potentialArrowAt = this.start;
-      this.potentialArrowInForAwait = forInit === "await";
-    }
-    var left = this.parseMaybeConditional(forInit, refDestructuringErrors);
-    if (afterLeftParse) { left = afterLeftParse.call(this, left, startPos, startLoc); }
-    if (this.type.isAssign) {
-      var node = this.startNodeAt(startPos, startLoc);
-      node.operator = this.value;
-      if (this.type === types$1.eq)
-        { left = this.toAssignable(left, false, refDestructuringErrors); }
-      if (!ownDestructuringErrors) {
-        refDestructuringErrors.parenthesizedAssign = refDestructuringErrors.trailingComma = refDestructuringErrors.doubleProto = -1;
-      }
-      if (refDestructuringErrors.shorthandAssign >= left.start)
-        { refDestructuringErrors.shorthandAssign = -1; } // reset because shorthand default was used correctly
-      if (this.type === types$1.eq)
-        { this.checkLValPattern(left); }
-      else
-        { this.checkLValSimple(left); }
-      node.left = left;
-      this.next();
-      node.right = this.parseMaybeAssign(forInit);
-      if (oldDoubleProto > -1) { refDestructuringErrors.doubleProto = oldDoubleProto; }
-      return this.finishNode(node, "AssignmentExpression")
-    } else {
-      if (ownDestructuringErrors) { this.checkExpressionErrors(refDestructuringErrors, true); }
-    }
-    if (oldParenAssign > -1) { refDestructuringErrors.parenthesizedAssign = oldParenAssign; }
-    if (oldTrailingComma > -1) { refDestructuringErrors.trailingComma = oldTrailingComma; }
-    return left
-  };
-
-  // Parse a ternary conditional (`?:`) operator.
-
-  pp$5.parseMaybeConditional = function(forInit, refDestructuringErrors) {
-    var startPos = this.start, startLoc = this.startLoc;
-    var expr = this.parseExprOps(forInit, refDestructuringErrors);
-    if (this.checkExpressionErrors(refDestructuringErrors)) { return expr }
-    if (this.eat(types$1.question)) {
-      var node = this.startNodeAt(startPos, startLoc);
-      node.test = expr;
-      node.consequent = this.parseMaybeAssign();
-      this.expect(types$1.colon);
-      node.alternate = this.parseMaybeAssign(forInit);
-      return this.finishNode(node, "ConditionalExpression")
-    }
-    return expr
-  };
-
-  // Start the precedence parser.
-
-  pp$5.parseExprOps = function(forInit, refDestructuringErrors) {
-    var startPos = this.start, startLoc = this.startLoc;
-    var expr = this.parseMaybeUnary(refDestructuringErrors, false, false, forInit);
-    if (this.checkExpressionErrors(refDestructuringErrors)) { return expr }
-    return expr.start === startPos && expr.type === "ArrowFunctionExpression" ? expr : this.parseExprOp(expr, startPos, startLoc, -1, forInit)
-  };
-
-  // Parse binary operators with the operator precedence parsing
-  // algorithm. `left` is the left-hand side of the operator.
-  // `minPrec` provides context that allows the function to stop and
-  // defer further parser to one of its callers when it encounters an
-  // operator that has a lower precedence than the set it is parsing.
-
-  pp$5.parseExprOp = function(left, leftStartPos, leftStartLoc, minPrec, forInit) {
-    var prec = this.type.binop;
-    if (prec != null && (!forInit || this.type !== types$1._in)) {
-      if (prec > minPrec) {
-        var logical = this.type === types$1.logicalOR || this.type === types$1.logicalAND;
-        var coalesce = this.type === types$1.coalesce;
-        if (coalesce) {
-          // Handle the precedence of `tt.coalesce` as equal to the range of logical expressions.
-          // In other words, `node.right` shouldn't contain logical expressions in order to check the mixed error.
-          prec = types$1.logicalAND.binop;
-        }
-        var op = this.value;
-        this.next();
-        var startPos = this.start, startLoc = this.startLoc;
-        var right = this.parseExprOp(this.parseMaybeUnary(null, false, false, forInit), startPos, startLoc, prec, forInit);
-        var node = this.buildBinary(leftStartPos, leftStartLoc, left, right, op, logical || coalesce);
-        if ((logical && this.type === types$1.coalesce) || (coalesce && (this.type === types$1.logicalOR || this.type === types$1.logicalAND))) {
-          this.raiseRecoverable(this.start, "Logical expressions and coalesce expressions cannot be mixed. Wrap either by parentheses");
-        }
-        return this.parseExprOp(node, leftStartPos, leftStartLoc, minPrec, forInit)
-      }
-    }
-    return left
-  };
-
-  pp$5.buildBinary = function(startPos, startLoc, left, right, op, logical) {
-    if (right.type === "PrivateIdentifier") { this.raise(right.start, "Private identifier can only be left side of binary expression"); }
-    var node = this.startNodeAt(startPos, startLoc);
-    node.left = left;
-    node.operator = op;
-    node.right = right;
-    return this.finishNode(node, logical ? "LogicalExpression" : "BinaryExpression")
-  };
-
-  // Parse unary operators, both prefix and postfix.
-
-  pp$5.parseMaybeUnary = function(refDestructuringErrors, sawUnary, incDec, forInit) {
-    var startPos = this.start, startLoc = this.startLoc, expr;
-    if (this.isContextual("await") && this.canAwait) {
-      expr = this.parseAwait(forInit);
-      sawUnary = true;
-    } else if (this.type.prefix) {
-      var node = this.startNode(), update = this.type === types$1.incDec;
-      node.operator = this.value;
-      node.prefix = true;
-      this.next();
-      node.argument = this.parseMaybeUnary(null, true, update, forInit);
-      this.checkExpressionErrors(refDestructuringErrors, true);
-      if (update) { this.checkLValSimple(node.argument); }
-      else if (this.strict && node.operator === "delete" &&
-               node.argument.type === "Identifier")
-        { this.raiseRecoverable(node.start, "Deleting local variable in strict mode"); }
-      else if (node.operator === "delete" && isPrivateFieldAccess(node.argument))
-        { this.raiseRecoverable(node.start, "Private fields can not be deleted"); }
-      else { sawUnary = true; }
-      expr = this.finishNode(node, update ? "UpdateExpression" : "UnaryExpression");
-    } else if (!sawUnary && this.type === types$1.privateId) {
-      if (forInit || this.privateNameStack.length === 0) { this.unexpected(); }
-      expr = this.parsePrivateIdent();
-      // only could be private fields in 'in', such as #x in obj
-      if (this.type !== types$1._in) { this.unexpected(); }
-    } else {
-      expr = this.parseExprSubscripts(refDestructuringErrors, forInit);
-      if (this.checkExpressionErrors(refDestructuringErrors)) { return expr }
-      while (this.type.postfix && !this.canInsertSemicolon()) {
-        var node$1 = this.startNodeAt(startPos, startLoc);
-        node$1.operator = this.value;
-        node$1.prefix = false;
-        node$1.argument = expr;
-        this.checkLValSimple(expr);
-        this.next();
-        expr = this.finishNode(node$1, "UpdateExpression");
-      }
-    }
-
-    if (!incDec && this.eat(types$1.starstar)) {
-      if (sawUnary)
-        { this.unexpected(this.lastTokStart); }
-      else
-        { return this.buildBinary(startPos, startLoc, expr, this.parseMaybeUnary(null, false, false, forInit), "**", false) }
-    } else {
-      return expr
-    }
-  };
-
-  function isPrivateFieldAccess(node) {
-    return (
-      node.type === "MemberExpression" && node.property.type === "PrivateIdentifier" ||
-      node.type === "ChainExpression" && isPrivateFieldAccess(node.expression)
-    )
-  }
-
-  // Parse call, dot, and `[]`-subscript expressions.
-
-  pp$5.parseExprSubscripts = function(refDestructuringErrors, forInit) {
-    var startPos = this.start, startLoc = this.startLoc;
-    var expr = this.parseExprAtom(refDestructuringErrors, forInit);
-    if (expr.type === "ArrowFunctionExpression" && this.input.slice(this.lastTokStart, this.lastTokEnd) !== ")")
-      { return expr }
-    var result = this.parseSubscripts(expr, startPos, startLoc, false, forInit);
-    if (refDestructuringErrors && result.type === "MemberExpression") {
-      if (refDestructuringErrors.parenthesizedAssign >= result.start) { refDestructuringErrors.parenthesizedAssign = -1; }
-      if (refDestructuringErrors.parenthesizedBind >= result.start) { refDestructuringErrors.parenthesizedBind = -1; }
-      if (refDestructuringErrors.trailingComma >= result.start) { refDestructuringErrors.trailingComma = -1; }
-    }
-    return result
-  };
-
-  pp$5.parseSubscripts = function(base, startPos, startLoc, noCalls, forInit) {
-    var maybeAsyncArrow = this.options.ecmaVersion >= 8 && base.type === "Identifier" && base.name === "async" &&
-        this.lastTokEnd === base.end && !this.canInsertSemicolon() && base.end - base.start === 5 &&
-        this.potentialArrowAt === base.start;
-    var optionalChained = false;
-
-    while (true) {
-      var element = this.parseSubscript(base, startPos, startLoc, noCalls, maybeAsyncArrow, optionalChained, forInit);
-
-      if (element.optional) { optionalChained = true; }
-      if (element === base || element.type === "ArrowFunctionExpression") {
-        if (optionalChained) {
-          var chainNode = this.startNodeAt(startPos, startLoc);
-          chainNode.expression = element;
-          element = this.finishNode(chainNode, "ChainExpression");
-        }
-        return element
-      }
-
-      base = element;
-    }
-  };
-
-  pp$5.parseSubscript = function(base, startPos, startLoc, noCalls, maybeAsyncArrow, optionalChained, forInit) {
-    var optionalSupported = this.options.ecmaVersion >= 11;
-    var optional = optionalSupported && this.eat(types$1.questionDot);
-    if (noCalls && optional) { this.raise(this.lastTokStart, "Optional chaining cannot appear in the callee of new expressions"); }
-
-    var computed = this.eat(types$1.bracketL);
-    if (computed || (optional && this.type !== types$1.parenL && this.type !== types$1.backQuote) || this.eat(types$1.dot)) {
-      var node = this.startNodeAt(startPos, startLoc);
-      node.object = base;
-      if (computed) {
-        node.property = this.parseExpression();
-        this.expect(types$1.bracketR);
-      } else if (this.type === types$1.privateId && base.type !== "Super") {
-        node.property = this.parsePrivateIdent();
-      } else {
-        node.property = this.parseIdent(this.options.allowReserved !== "never");
-      }
-      node.computed = !!computed;
-      if (optionalSupported) {
-        node.optional = optional;
-      }
-      base = this.finishNode(node, "MemberExpression");
-    } else if (!noCalls && this.eat(types$1.parenL)) {
-      var refDestructuringErrors = new DestructuringErrors, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, oldAwaitIdentPos = this.awaitIdentPos;
-      this.yieldPos = 0;
-      this.awaitPos = 0;
-      this.awaitIdentPos = 0;
-      var exprList = this.parseExprList(types$1.parenR, this.options.ecmaVersion >= 8, false, refDestructuringErrors);
-      if (maybeAsyncArrow && !optional && !this.canInsertSemicolon() && this.eat(types$1.arrow)) {
-        this.checkPatternErrors(refDestructuringErrors, false);
-        this.checkYieldAwaitInDefaultParams();
-        if (this.awaitIdentPos > 0)
-          { this.raise(this.awaitIdentPos, "Cannot use 'await' as identifier inside an async function"); }
-        this.yieldPos = oldYieldPos;
-        this.awaitPos = oldAwaitPos;
-        this.awaitIdentPos = oldAwaitIdentPos;
-        return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), exprList, true, forInit)
-      }
-      this.checkExpressionErrors(refDestructuringErrors, true);
-      this.yieldPos = oldYieldPos || this.yieldPos;
-      this.awaitPos = oldAwaitPos || this.awaitPos;
-      this.awaitIdentPos = oldAwaitIdentPos || this.awaitIdentPos;
-      var node$1 = this.startNodeAt(startPos, startLoc);
-      node$1.callee = base;
-      node$1.arguments = exprList;
-      if (optionalSupported) {
-        node$1.optional = optional;
-      }
-      base = this.finishNode(node$1, "CallExpression");
-    } else if (this.type === types$1.backQuote) {
-      if (optional || optionalChained) {
-        this.raise(this.start, "Optional chaining cannot appear in the tag of tagged template expressions");
-      }
-      var node$2 = this.startNodeAt(startPos, startLoc);
-      node$2.tag = base;
-      node$2.quasi = this.parseTemplate({isTagged: true});
-      base = this.finishNode(node$2, "TaggedTemplateExpression");
-    }
-    return base
-  };
-
-  // Parse an atomic expression — either a single token that is an
-  // expression, an expression started by a keyword like `function` or
-  // `new`, or an expression wrapped in punctuation like `()`, `[]`,
-  // or `{}`.
-
-  pp$5.parseExprAtom = function(refDestructuringErrors, forInit) {
-    // If a division operator appears in an expression position, the
-    // tokenizer got confused, and we force it to read a regexp instead.
-    if (this.type === types$1.slash) { this.readRegexp(); }
-
-    var node, canBeArrow = this.potentialArrowAt === this.start;
-    switch (this.type) {
-    case types$1._super:
-      if (!this.allowSuper)
-        { this.raise(this.start, "'super' keyword outside a method"); }
-      node = this.startNode();
-      this.next();
-      if (this.type === types$1.parenL && !this.allowDirectSuper)
-        { this.raise(node.start, "super() call outside constructor of a subclass"); }
-      // The `super` keyword can appear at below:
-      // SuperProperty:
-      //     super [ Expression ]
-      //     super . IdentifierName
-      // SuperCall:
-      //     super ( Arguments )
-      if (this.type !== types$1.dot && this.type !== types$1.bracketL && this.type !== types$1.parenL)
-        { this.unexpected(); }
-      return this.finishNode(node, "Super")
-
-    case types$1._this:
-      node = this.startNode();
-      this.next();
-      return this.finishNode(node, "ThisExpression")
-
-    case types$1.name:
-      var startPos = this.start, startLoc = this.startLoc, containsEsc = this.containsEsc;
-      var id = this.parseIdent(false);
-      if (this.options.ecmaVersion >= 8 && !containsEsc && id.name === "async" && !this.canInsertSemicolon() && this.eat(types$1._function)) {
-        this.overrideContext(types.f_expr);
-        return this.parseFunction(this.startNodeAt(startPos, startLoc), 0, false, true, forInit)
-      }
-      if (canBeArrow && !this.canInsertSemicolon()) {
-        if (this.eat(types$1.arrow))
-          { return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), [id], false, forInit) }
-        if (this.options.ecmaVersion >= 8 && id.name === "async" && this.type === types$1.name && !containsEsc &&
-            (!this.potentialArrowInForAwait || this.value !== "of" || this.containsEsc)) {
-          id = this.parseIdent(false);
-          if (this.canInsertSemicolon() || !this.eat(types$1.arrow))
-            { this.unexpected(); }
-          return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), [id], true, forInit)
-        }
-      }
-      return id
-
-    case types$1.regexp:
-      var value = this.value;
-      node = this.parseLiteral(value.value);
-      node.regex = {pattern: value.pattern, flags: value.flags};
-      return node
-
-    case types$1.num: case types$1.string:
-      return this.parseLiteral(this.value)
-
-    case types$1._null: case types$1._true: case types$1._false:
-      node = this.startNode();
-      node.value = this.type === types$1._null ? null : this.type === types$1._true;
-      node.raw = this.type.keyword;
-      this.next();
-      return this.finishNode(node, "Literal")
-
-    case types$1.parenL:
-      var start = this.start, expr = this.parseParenAndDistinguishExpression(canBeArrow, forInit);
-      if (refDestructuringErrors) {
-        if (refDestructuringErrors.parenthesizedAssign < 0 && !this.isSimpleAssignTarget(expr))
-          { refDestructuringErrors.parenthesizedAssign = start; }
-        if (refDestructuringErrors.parenthesizedBind < 0)
-          { refDestructuringErrors.parenthesizedBind = start; }
-      }
-      return expr
-
-    case types$1.bracketL:
-      node = this.startNode();
-      this.next();
-      node.elements = this.parseExprList(types$1.bracketR, true, true, refDestructuringErrors);
-      return this.finishNode(node, "ArrayExpression")
-
-    case types$1.braceL:
-      this.overrideContext(types.b_expr);
-      return this.parseObj(false, refDestructuringErrors)
-
-    case types$1._function:
-      node = this.startNode();
-      this.next();
-      return this.parseFunction(node, 0)
-
-    case types$1._class:
-      return this.parseClass(this.startNode(), false)
-
-    case types$1._new:
-      return this.parseNew()
-
-    case types$1.backQuote:
-      return this.parseTemplate()
-
-    case types$1._import:
-      if (this.options.ecmaVersion >= 11) {
-        return this.parseExprImport()
-      } else {
-        return this.unexpected()
-      }
-
-    default:
-      this.unexpected();
-    }
-  };
-
-  pp$5.parseExprImport = function() {
-    var node = this.startNode();
-
-    // Consume `import` as an identifier for `import.meta`.
-    // Because `this.parseIdent(true)` doesn't check escape sequences, it needs the check of `this.containsEsc`.
-    if (this.containsEsc) { this.raiseRecoverable(this.start, "Escape sequence in keyword import"); }
-    var meta = this.parseIdent(true);
-
-    switch (this.type) {
-    case types$1.parenL:
-      return this.parseDynamicImport(node)
-    case types$1.dot:
-      node.meta = meta;
-      return this.parseImportMeta(node)
-    default:
-      this.unexpected();
-    }
-  };
-
-  pp$5.parseDynamicImport = function(node) {
-    this.next(); // skip `(`
-
-    // Parse node.source.
-    node.source = this.parseMaybeAssign();
-
-    // Verify ending.
-    if (!this.eat(types$1.parenR)) {
-      var errorPos = this.start;
-      if (this.eat(types$1.comma) && this.eat(types$1.parenR)) {
-        this.raiseRecoverable(errorPos, "Trailing comma is not allowed in import()");
-      } else {
-        this.unexpected(errorPos);
-      }
-    }
-
-    return this.finishNode(node, "ImportExpression")
-  };
-
-  pp$5.parseImportMeta = function(node) {
-    this.next(); // skip `.`
-
-    var containsEsc = this.containsEsc;
-    node.property = this.parseIdent(true);
-
-    if (node.property.name !== "meta")
-      { this.raiseRecoverable(node.property.start, "The only valid meta property for import is 'import.meta'"); }
-    if (containsEsc)
-      { this.raiseRecoverable(node.start, "'import.meta' must not contain escaped characters"); }
-    if (this.options.sourceType !== "module" && !this.options.allowImportExportEverywhere)
-      { this.raiseRecoverable(node.start, "Cannot use 'import.meta' outside a module"); }
-
-    return this.finishNode(node, "MetaProperty")
-  };
-
-  pp$5.parseLiteral = function(value) {
-    var node = this.startNode();
-    node.value = value;
-    node.raw = this.input.slice(this.start, this.end);
-    if (node.raw.charCodeAt(node.raw.length - 1) === 110) { node.bigint = node.raw.slice(0, -1).replace(/_/g, ""); }
-    this.next();
-    return this.finishNode(node, "Literal")
-  };
-
-  pp$5.parseParenExpression = function() {
-    this.expect(types$1.parenL);
-    var val = this.parseExpression();
-    this.expect(types$1.parenR);
-    return val
-  };
-
-  pp$5.parseParenAndDistinguishExpression = function(canBeArrow, forInit) {
-    var startPos = this.start, startLoc = this.startLoc, val, allowTrailingComma = this.options.ecmaVersion >= 8;
-    if (this.options.ecmaVersion >= 6) {
-      this.next();
-
-      var innerStartPos = this.start, innerStartLoc = this.startLoc;
-      var exprList = [], first = true, lastIsComma = false;
-      var refDestructuringErrors = new DestructuringErrors, oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, spreadStart;
-      this.yieldPos = 0;
-      this.awaitPos = 0;
-      // Do not save awaitIdentPos to allow checking awaits nested in parameters
-      while (this.type !== types$1.parenR) {
-        first ? first = false : this.expect(types$1.comma);
-        if (allowTrailingComma && this.afterTrailingComma(types$1.parenR, true)) {
-          lastIsComma = true;
-          break
-        } else if (this.type === types$1.ellipsis) {
-          spreadStart = this.start;
-          exprList.push(this.parseParenItem(this.parseRestBinding()));
-          if (this.type === types$1.comma) { this.raise(this.start, "Comma is not permitted after the rest element"); }
-          break
-        } else {
-          exprList.push(this.parseMaybeAssign(false, refDestructuringErrors, this.parseParenItem));
-        }
-      }
-      var innerEndPos = this.lastTokEnd, innerEndLoc = this.lastTokEndLoc;
-      this.expect(types$1.parenR);
-
-      if (canBeArrow && !this.canInsertSemicolon() && this.eat(types$1.arrow)) {
-        this.checkPatternErrors(refDestructuringErrors, false);
-        this.checkYieldAwaitInDefaultParams();
-        this.yieldPos = oldYieldPos;
-        this.awaitPos = oldAwaitPos;
-        return this.parseParenArrowList(startPos, startLoc, exprList, forInit)
-      }
-
-      if (!exprList.length || lastIsComma) { this.unexpected(this.lastTokStart); }
-      if (spreadStart) { this.unexpected(spreadStart); }
-      this.checkExpressionErrors(refDestructuringErrors, true);
-      this.yieldPos = oldYieldPos || this.yieldPos;
-      this.awaitPos = oldAwaitPos || this.awaitPos;
-
-      if (exprList.length > 1) {
-        val = this.startNodeAt(innerStartPos, innerStartLoc);
-        val.expressions = exprList;
-        this.finishNodeAt(val, "SequenceExpression", innerEndPos, innerEndLoc);
-      } else {
-        val = exprList[0];
-      }
-    } else {
-      val = this.parseParenExpression();
-    }
-
-    if (this.options.preserveParens) {
-      var par = this.startNodeAt(startPos, startLoc);
-      par.expression = val;
-      return this.finishNode(par, "ParenthesizedExpression")
-    } else {
-      return val
-    }
-  };
-
-  pp$5.parseParenItem = function(item) {
-    return item
-  };
-
-  pp$5.parseParenArrowList = function(startPos, startLoc, exprList, forInit) {
-    return this.parseArrowExpression(this.startNodeAt(startPos, startLoc), exprList, false, forInit)
-  };
-
-  // New's precedence is slightly tricky. It must allow its argument to
-  // be a `[]` or dot subscript expression, but not a call — at least,
-  // not without wrapping it in parentheses. Thus, it uses the noCalls
-  // argument to parseSubscripts to prevent it from consuming the
-  // argument list.
-
-  var empty = [];
-
-  pp$5.parseNew = function() {
-    if (this.containsEsc) { this.raiseRecoverable(this.start, "Escape sequence in keyword new"); }
-    var node = this.startNode();
-    var meta = this.parseIdent(true);
-    if (this.options.ecmaVersion >= 6 && this.eat(types$1.dot)) {
-      node.meta = meta;
-      var containsEsc = this.containsEsc;
-      node.property = this.parseIdent(true);
-      if (node.property.name !== "target")
-        { this.raiseRecoverable(node.property.start, "The only valid meta property for new is 'new.target'"); }
-      if (containsEsc)
-        { this.raiseRecoverable(node.start, "'new.target' must not contain escaped characters"); }
-      if (!this.allowNewDotTarget)
-        { this.raiseRecoverable(node.start, "'new.target' can only be used in functions and class static block"); }
-      return this.finishNode(node, "MetaProperty")
-    }
-    var startPos = this.start, startLoc = this.startLoc, isImport = this.type === types$1._import;
-    node.callee = this.parseSubscripts(this.parseExprAtom(), startPos, startLoc, true, false);
-    if (isImport && node.callee.type === "ImportExpression") {
-      this.raise(startPos, "Cannot use new with import()");
-    }
-    if (this.eat(types$1.parenL)) { node.arguments = this.parseExprList(types$1.parenR, this.options.ecmaVersion >= 8, false); }
-    else { node.arguments = empty; }
-    return this.finishNode(node, "NewExpression")
-  };
-
-  // Parse template expression.
-
-  pp$5.parseTemplateElement = function(ref) {
-    var isTagged = ref.isTagged;
-
-    var elem = this.startNode();
-    if (this.type === types$1.invalidTemplate) {
-      if (!isTagged) {
-        this.raiseRecoverable(this.start, "Bad escape sequence in untagged template literal");
-      }
-      elem.value = {
-        raw: this.value,
-        cooked: null
-      };
-    } else {
-      elem.value = {
-        raw: this.input.slice(this.start, this.end).replace(/\r\n?/g, "\n"),
-        cooked: this.value
-      };
-    }
-    this.next();
-    elem.tail = this.type === types$1.backQuote;
-    return this.finishNode(elem, "TemplateElement")
-  };
-
-  pp$5.parseTemplate = function(ref) {
-    if ( ref === void 0 ) ref = {};
-    var isTagged = ref.isTagged; if ( isTagged === void 0 ) isTagged = false;
-
-    var node = this.startNode();
-    this.next();
-    node.expressions = [];
-    var curElt = this.parseTemplateElement({isTagged: isTagged});
-    node.quasis = [curElt];
-    while (!curElt.tail) {
-      if (this.type === types$1.eof) { this.raise(this.pos, "Unterminated template literal"); }
-      this.expect(types$1.dollarBraceL);
-      node.expressions.push(this.parseExpression());
-      this.expect(types$1.braceR);
-      node.quasis.push(curElt = this.parseTemplateElement({isTagged: isTagged}));
-    }
-    this.next();
-    return this.finishNode(node, "TemplateLiteral")
-  };
-
-  pp$5.isAsyncProp = function(prop) {
-    return !prop.computed && prop.key.type === "Identifier" && prop.key.name === "async" &&
-      (this.type === types$1.name || this.type === types$1.num || this.type === types$1.string || this.type === types$1.bracketL || this.type.keyword || (this.options.ecmaVersion >= 9 && this.type === types$1.star)) &&
-      !lineBreak.test(this.input.slice(this.lastTokEnd, this.start))
-  };
-
-  // Parse an object literal or binding pattern.
-
-  pp$5.parseObj = function(isPattern, refDestructuringErrors) {
-    var node = this.startNode(), first = true, propHash = {};
-    node.properties = [];
-    this.next();
-    while (!this.eat(types$1.braceR)) {
-      if (!first) {
-        this.expect(types$1.comma);
-        if (this.options.ecmaVersion >= 5 && this.afterTrailingComma(types$1.braceR)) { break }
-      } else { first = false; }
-
-      var prop = this.parseProperty(isPattern, refDestructuringErrors);
-      if (!isPattern) { this.checkPropClash(prop, propHash, refDestructuringErrors); }
-      node.properties.push(prop);
-    }
-    return this.finishNode(node, isPattern ? "ObjectPattern" : "ObjectExpression")
-  };
-
-  pp$5.parseProperty = function(isPattern, refDestructuringErrors) {
-    var prop = this.startNode(), isGenerator, isAsync, startPos, startLoc;
-    if (this.options.ecmaVersion >= 9 && this.eat(types$1.ellipsis)) {
-      if (isPattern) {
-        prop.argument = this.parseIdent(false);
-        if (this.type === types$1.comma) {
-          this.raise(this.start, "Comma is not permitted after the rest element");
-        }
-        return this.finishNode(prop, "RestElement")
-      }
-      // To disallow parenthesized identifier via `this.toAssignable()`.
-      if (this.type === types$1.parenL && refDestructuringErrors) {
-        if (refDestructuringErrors.parenthesizedAssign < 0) {
-          refDestructuringErrors.parenthesizedAssign = this.start;
-        }
-        if (refDestructuringErrors.parenthesizedBind < 0) {
-          refDestructuringErrors.parenthesizedBind = this.start;
-        }
-      }
-      // Parse argument.
-      prop.argument = this.parseMaybeAssign(false, refDestructuringErrors);
-      // To disallow trailing comma via `this.toAssignable()`.
-      if (this.type === types$1.comma && refDestructuringErrors && refDestructuringErrors.trailingComma < 0) {
-        refDestructuringErrors.trailingComma = this.start;
-      }
-      // Finish
-      return this.finishNode(prop, "SpreadElement")
-    }
-    if (this.options.ecmaVersion >= 6) {
-      prop.method = false;
-      prop.shorthand = false;
-      if (isPattern || refDestructuringErrors) {
-        startPos = this.start;
-        startLoc = this.startLoc;
-      }
-      if (!isPattern)
-        { isGenerator = this.eat(types$1.star); }
-    }
-    var containsEsc = this.containsEsc;
-    this.parsePropertyName(prop);
-    if (!isPattern && !containsEsc && this.options.ecmaVersion >= 8 && !isGenerator && this.isAsyncProp(prop)) {
-      isAsync = true;
-      isGenerator = this.options.ecmaVersion >= 9 && this.eat(types$1.star);
-      this.parsePropertyName(prop, refDestructuringErrors);
-    } else {
-      isAsync = false;
-    }
-    this.parsePropertyValue(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors, containsEsc);
-    return this.finishNode(prop, "Property")
-  };
-
-  pp$5.parsePropertyValue = function(prop, isPattern, isGenerator, isAsync, startPos, startLoc, refDestructuringErrors, containsEsc) {
-    if ((isGenerator || isAsync) && this.type === types$1.colon)
-      { this.unexpected(); }
-
-    if (this.eat(types$1.colon)) {
-      prop.value = isPattern ? this.parseMaybeDefault(this.start, this.startLoc) : this.parseMaybeAssign(false, refDestructuringErrors);
-      prop.kind = "init";
-    } else if (this.options.ecmaVersion >= 6 && this.type === types$1.parenL) {
-      if (isPattern) { this.unexpected(); }
-      prop.kind = "init";
-      prop.method = true;
-      prop.value = this.parseMethod(isGenerator, isAsync);
-    } else if (!isPattern && !containsEsc &&
-               this.options.ecmaVersion >= 5 && !prop.computed && prop.key.type === "Identifier" &&
-               (prop.key.name === "get" || prop.key.name === "set") &&
-               (this.type !== types$1.comma && this.type !== types$1.braceR && this.type !== types$1.eq)) {
-      if (isGenerator || isAsync) { this.unexpected(); }
-      prop.kind = prop.key.name;
-      this.parsePropertyName(prop);
-      prop.value = this.parseMethod(false);
-      var paramCount = prop.kind === "get" ? 0 : 1;
-      if (prop.value.params.length !== paramCount) {
-        var start = prop.value.start;
-        if (prop.kind === "get")
-          { this.raiseRecoverable(start, "getter should have no params"); }
-        else
-          { this.raiseRecoverable(start, "setter should have exactly one param"); }
-      } else {
-        if (prop.kind === "set" && prop.value.params[0].type === "RestElement")
-          { this.raiseRecoverable(prop.value.params[0].start, "Setter cannot use rest params"); }
-      }
-    } else if (this.options.ecmaVersion >= 6 && !prop.computed && prop.key.type === "Identifier") {
-      if (isGenerator || isAsync) { this.unexpected(); }
-      this.checkUnreserved(prop.key);
-      if (prop.key.name === "await" && !this.awaitIdentPos)
-        { this.awaitIdentPos = startPos; }
-      prop.kind = "init";
-      if (isPattern) {
-        prop.value = this.parseMaybeDefault(startPos, startLoc, this.copyNode(prop.key));
-      } else if (this.type === types$1.eq && refDestructuringErrors) {
-        if (refDestructuringErrors.shorthandAssign < 0)
-          { refDestructuringErrors.shorthandAssign = this.start; }
-        prop.value = this.parseMaybeDefault(startPos, startLoc, this.copyNode(prop.key));
-      } else {
-        prop.value = this.copyNode(prop.key);
-      }
-      prop.shorthand = true;
-    } else { this.unexpected(); }
-  };
-
-  pp$5.parsePropertyName = function(prop) {
-    if (this.options.ecmaVersion >= 6) {
-      if (this.eat(types$1.bracketL)) {
-        prop.computed = true;
-        prop.key = this.parseMaybeAssign();
-        this.expect(types$1.bracketR);
-        return prop.key
-      } else {
-        prop.computed = false;
-      }
-    }
-    return prop.key = this.type === types$1.num || this.type === types$1.string ? this.parseExprAtom() : this.parseIdent(this.options.allowReserved !== "never")
-  };
-
-  // Initialize empty function node.
-
-  pp$5.initFunction = function(node) {
-    node.id = null;
-    if (this.options.ecmaVersion >= 6) { node.generator = node.expression = false; }
-    if (this.options.ecmaVersion >= 8) { node.async = false; }
-  };
-
-  // Parse object or class method.
-
-  pp$5.parseMethod = function(isGenerator, isAsync, allowDirectSuper) {
-    var node = this.startNode(), oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, oldAwaitIdentPos = this.awaitIdentPos;
-
-    this.initFunction(node);
-    if (this.options.ecmaVersion >= 6)
-      { node.generator = isGenerator; }
-    if (this.options.ecmaVersion >= 8)
-      { node.async = !!isAsync; }
-
-    this.yieldPos = 0;
-    this.awaitPos = 0;
-    this.awaitIdentPos = 0;
-    this.enterScope(functionFlags(isAsync, node.generator) | SCOPE_SUPER | (allowDirectSuper ? SCOPE_DIRECT_SUPER : 0));
-
-    this.expect(types$1.parenL);
-    node.params = this.parseBindingList(types$1.parenR, false, this.options.ecmaVersion >= 8);
-    this.checkYieldAwaitInDefaultParams();
-    this.parseFunctionBody(node, false, true, false);
-
-    this.yieldPos = oldYieldPos;
-    this.awaitPos = oldAwaitPos;
-    this.awaitIdentPos = oldAwaitIdentPos;
-    return this.finishNode(node, "FunctionExpression")
-  };
-
-  // Parse arrow function expression with given parameters.
-
-  pp$5.parseArrowExpression = function(node, params, isAsync, forInit) {
-    var oldYieldPos = this.yieldPos, oldAwaitPos = this.awaitPos, oldAwaitIdentPos = this.awaitIdentPos;
-
-    this.enterScope(functionFlags(isAsync, false) | SCOPE_ARROW);
-    this.initFunction(node);
-    if (this.options.ecmaVersion >= 8) { node.async = !!isAsync; }
-
-    this.yieldPos = 0;
-    this.awaitPos = 0;
-    this.awaitIdentPos = 0;
-
-    node.params = this.toAssignableList(params, true);
-    this.parseFunctionBody(node, true, false, forInit);
-
-    this.yieldPos = oldYieldPos;
-    this.awaitPos = oldAwaitPos;
-    this.awaitIdentPos = oldAwaitIdentPos;
-    return this.finishNode(node, "ArrowFunctionExpression")
-  };
-
-  // Parse function body and check parameters.
-
-  pp$5.parseFunctionBody = function(node, isArrowFunction, isMethod, forInit) {
-    var isExpression = isArrowFunction && this.type !== types$1.braceL;
-    var oldStrict = this.strict, useStrict = false;
-
-    if (isExpression) {
-      node.body = this.parseMaybeAssign(forInit);
-      node.expression = true;
-      this.checkParams(node, false);
-    } else {
-      var nonSimple = this.options.ecmaVersion >= 7 && !this.isSimpleParamList(node.params);
-      if (!oldStrict || nonSimple) {
-        useStrict = this.strictDirective(this.end);
-        // If this is a strict mode function, verify that argument names
-        // are not repeated, and it does not try to bind the words `eval`
-        // or `arguments`.
-        if (useStrict && nonSimple)
-          { this.raiseRecoverable(node.start, "Illegal 'use strict' directive in function with non-simple parameter list"); }
-      }
-      // Start a new scope with regard to labels and the `inFunction`
-      // flag (restore them to their old value afterwards).
-      var oldLabels = this.labels;
-      this.labels = [];
-      if (useStrict) { this.strict = true; }
-
-      // Add the params to varDeclaredNames to ensure that an error is thrown
-      // if a let/const declaration in the function clashes with one of the params.
-      this.checkParams(node, !oldStrict && !useStrict && !isArrowFunction && !isMethod && this.isSimpleParamList(node.params));
-      // Ensure the function name isn't a forbidden identifier in strict mode, e.g. 'eval'
-      if (this.strict && node.id) { this.checkLValSimple(node.id, BIND_OUTSIDE); }
-      node.body = this.parseBlock(false, undefined, useStrict && !oldStrict);
-      node.expression = false;
-      this.adaptDirectivePrologue(node.body.body);
-      this.labels = oldLabels;
-    }
-    this.exitScope();
-  };
-
-  pp$5.isSimpleParamList = function(params) {
-    for (var i = 0, list = params; i < list.length; i += 1)
-      {
-      var param = list[i];
-
-      if (param.type !== "Identifier") { return false
-    } }
-    return true
-  };
-
-  // Checks function params for various disallowed patterns such as using "eval"
-  // or "arguments" and duplicate parameters.
-
-  pp$5.checkParams = function(node, allowDuplicates) {
-    var nameHash = Object.create(null);
-    for (var i = 0, list = node.params; i < list.length; i += 1)
-      {
-      var param = list[i];
-
-      this.checkLValInnerPattern(param, BIND_VAR, allowDuplicates ? null : nameHash);
-    }
-  };
-
-  // Parses a comma-separated list of expressions, and returns them as
-  // an array. `close` is the token type that ends the list, and
-  // `allowEmpty` can be turned on to allow subsequent commas with
-  // nothing in between them to be parsed as `null` (which is needed
-  // for array literals).
-
-  pp$5.parseExprList = function(close, allowTrailingComma, allowEmpty, refDestructuringErrors) {
-    var elts = [], first = true;
-    while (!this.eat(close)) {
-      if (!first) {
-        this.expect(types$1.comma);
-        if (allowTrailingComma && this.afterTrailingComma(close)) { break }
-      } else { first = false; }
-
-      var elt = (void 0);
-      if (allowEmpty && this.type === types$1.comma)
-        { elt = null; }
-      else if (this.type === types$1.ellipsis) {
-        elt = this.parseSpread(refDestructuringErrors);
-        if (refDestructuringErrors && this.type === types$1.comma && refDestructuringErrors.trailingComma < 0)
-          { refDestructuringErrors.trailingComma = this.start; }
-      } else {
-        elt = this.parseMaybeAssign(false, refDestructuringErrors);
-      }
-      elts.push(elt);
-    }
-    return elts
-  };
-
-  pp$5.checkUnreserved = function(ref) {
-    var start = ref.start;
-    var end = ref.end;
-    var name = ref.name;
-
-    if (this.inGenerator && name === "yield")
-      { this.raiseRecoverable(start, "Cannot use 'yield' as identifier inside a generator"); }
-    if (this.inAsync && name === "await")
-      { this.raiseRecoverable(start, "Cannot use 'await' as identifier inside an async function"); }
-    if (this.currentThisScope().inClassFieldInit && name === "arguments")
-      { this.raiseRecoverable(start, "Cannot use 'arguments' in class field initializer"); }
-    if (this.inClassStaticBlock && (name === "arguments" || name === "await"))
-      { this.raise(start, ("Cannot use " + name + " in class static initialization block")); }
-    if (this.keywords.test(name))
-      { this.raise(start, ("Unexpected keyword '" + name + "'")); }
-    if (this.options.ecmaVersion < 6 &&
-      this.input.slice(start, end).indexOf("\\") !== -1) { return }
-    var re = this.strict ? this.reservedWordsStrict : this.reservedWords;
-    if (re.test(name)) {
-      if (!this.inAsync && name === "await")
-        { this.raiseRecoverable(start, "Cannot use keyword 'await' outside an async function"); }
-      this.raiseRecoverable(start, ("The keyword '" + name + "' is reserved"));
-    }
-  };
-
-  // Parse the next token as an identifier. If `liberal` is true (used
-  // when parsing properties), it will also convert keywords into
-  // identifiers.
-
-  pp$5.parseIdent = function(liberal, isBinding) {
-    var node = this.startNode();
-    if (this.type === types$1.name) {
-      node.name = this.value;
-    } else if (this.type.keyword) {
-      node.name = this.type.keyword;
-
-      // To fix https://github.com/acornjs/acorn/issues/575
-      // `class` and `function` keywords push new context into this.context.
-      // But there is no chance to pop the context if the keyword is consumed as an identifier such as a property name.
-      // If the previous token is a dot, this does not apply because the context-managing code already ignored the keyword
-      if ((node.name === "class" || node.name === "function") &&
-          (this.lastTokEnd !== this.lastTokStart + 1 || this.input.charCodeAt(this.lastTokStart) !== 46)) {
-        this.context.pop();
-      }
-    } else {
-      this.unexpected();
-    }
-    this.next(!!liberal);
-    this.finishNode(node, "Identifier");
-    if (!liberal) {
-      this.checkUnreserved(node);
-      if (node.name === "await" && !this.awaitIdentPos)
-        { this.awaitIdentPos = node.start; }
-    }
-    return node
-  };
-
-  pp$5.parsePrivateIdent = function() {
-    var node = this.startNode();
-    if (this.type === types$1.privateId) {
-      node.name = this.value;
-    } else {
-      this.unexpected();
-    }
-    this.next();
-    this.finishNode(node, "PrivateIdentifier");
-
-    // For validating existence
-    if (this.privateNameStack.length === 0) {
-      this.raise(node.start, ("Private field '#" + (node.name) + "' must be declared in an enclosing class"));
-    } else {
-      this.privateNameStack[this.privateNameStack.length - 1].used.push(node);
-    }
-
-    return node
-  };
-
-  // Parses yield expression inside generator.
-
-  pp$5.parseYield = function(forInit) {
-    if (!this.yieldPos) { this.yieldPos = this.start; }
-
-    var node = this.startNode();
-    this.next();
-    if (this.type === types$1.semi || this.canInsertSemicolon() || (this.type !== types$1.star && !this.type.startsExpr)) {
-      node.delegate = false;
-      node.argument = null;
-    } else {
-      node.delegate = this.eat(types$1.star);
-      node.argument = this.parseMaybeAssign(forInit);
-    }
-    return this.finishNode(node, "YieldExpression")
-  };
-
-  pp$5.parseAwait = function(forInit) {
-    if (!this.awaitPos) { this.awaitPos = this.start; }
-
-    var node = this.startNode();
-    this.next();
-    node.argument = this.parseMaybeUnary(null, true, false, forInit);
-    return this.finishNode(node, "AwaitExpression")
-  };
-
-  var pp$4 = Parser.prototype;
-
-  // This function is used to raise exceptions on parse errors. It
-  // takes an offset integer (into the current `input`) to indicate
-  // the location of the error, attaches the position to the end
-  // of the error message, and then raises a `SyntaxError` with that
-  // message.
-
-  pp$4.raise = function(pos, message) {
-    var loc = getLineInfo(this.input, pos);
-    message += " (" + loc.line + ":" + loc.column + ")";
-    var err = new SyntaxError(message);
-    err.pos = pos; err.loc = loc; err.raisedAt = this.pos;
-    throw err
-  };
-
-  pp$4.raiseRecoverable = pp$4.raise;
-
-  pp$4.curPosition = function() {
-    if (this.options.locations) {
-      return new Position(this.curLine, this.pos - this.lineStart)
-    }
-  };
-
-  var pp$3 = Parser.prototype;
-
-  var Scope = function Scope(flags) {
-    this.flags = flags;
-    // A list of var-declared names in the current lexical scope
-    this.var = [];
-    // A list of lexically-declared names in the current lexical scope
-    this.lexical = [];
-    // A list of lexically-declared FunctionDeclaration names in the current lexical scope
-    this.functions = [];
-    // A switch to disallow the identifier reference 'arguments'
-    this.inClassFieldInit = false;
-  };
-
-  // The functions in this module keep track of declared variables in the current scope in order to detect duplicate variable names.
-
-  pp$3.enterScope = function(flags) {
-    this.scopeStack.push(new Scope(flags));
-  };
-
-  pp$3.exitScope = function() {
-    this.scopeStack.pop();
-  };
-
-  // The spec says:
-  // > At the top level of a function, or script, function declarations are
-  // > treated like var declarations rather than like lexical declarations.
-  pp$3.treatFunctionsAsVarInScope = function(scope) {
-    return (scope.flags & SCOPE_FUNCTION) || !this.inModule && (scope.flags & SCOPE_TOP)
-  };
-
-  pp$3.declareName = function(name, bindingType, pos) {
-    var redeclared = false;
-    if (bindingType === BIND_LEXICAL) {
-      var scope = this.currentScope();
-      redeclared = scope.lexical.indexOf(name) > -1 || scope.functions.indexOf(name) > -1 || scope.var.indexOf(name) > -1;
-      scope.lexical.push(name);
-      if (this.inModule && (scope.flags & SCOPE_TOP))
-        { delete this.undefinedExports[name]; }
-    } else if (bindingType === BIND_SIMPLE_CATCH) {
-      var scope$1 = this.currentScope();
-      scope$1.lexical.push(name);
-    } else if (bindingType === BIND_FUNCTION) {
-      var scope$2 = this.currentScope();
-      if (this.treatFunctionsAsVar)
-        { redeclared = scope$2.lexical.indexOf(name) > -1; }
-      else
-        { redeclared = scope$2.lexical.indexOf(name) > -1 || scope$2.var.indexOf(name) > -1; }
-      scope$2.functions.push(name);
-    } else {
-      for (var i = this.scopeStack.length - 1; i >= 0; --i) {
-        var scope$3 = this.scopeStack[i];
-        if (scope$3.lexical.indexOf(name) > -1 && !((scope$3.flags & SCOPE_SIMPLE_CATCH) && scope$3.lexical[0] === name) ||
-            !this.treatFunctionsAsVarInScope(scope$3) && scope$3.functions.indexOf(name) > -1) {
-          redeclared = true;
-          break
-        }
-        scope$3.var.push(name);
-        if (this.inModule && (scope$3.flags & SCOPE_TOP))
-          { delete this.undefinedExports[name]; }
-        if (scope$3.flags & SCOPE_VAR) { break }
-      }
-    }
-    if (redeclared) { this.raiseRecoverable(pos, ("Identifier '" + name + "' has already been declared")); }
-  };
-
-  pp$3.checkLocalExport = function(id) {
-    // scope.functions must be empty as Module code is always strict.
-    if (this.scopeStack[0].lexical.indexOf(id.name) === -1 &&
-        this.scopeStack[0].var.indexOf(id.name) === -1) {
-      this.undefinedExports[id.name] = id;
-    }
-  };
-
-  pp$3.currentScope = function() {
-    return this.scopeStack[this.scopeStack.length - 1]
-  };
-
-  pp$3.currentVarScope = function() {
-    for (var i = this.scopeStack.length - 1;; i--) {
-      var scope = this.scopeStack[i];
-      if (scope.flags & SCOPE_VAR) { return scope }
-    }
-  };
-
-  // Could be useful for `this`, `new.target`, `super()`, `super.property`, and `super[property]`.
-  pp$3.currentThisScope = function() {
-    for (var i = this.scopeStack.length - 1;; i--) {
-      var scope = this.scopeStack[i];
-      if (scope.flags & SCOPE_VAR && !(scope.flags & SCOPE_ARROW)) { return scope }
-    }
-  };
-
-  var Node = function Node(parser, pos, loc) {
-    this.type = "";
-    this.start = pos;
-    this.end = 0;
-    if (parser.options.locations)
-      { this.loc = new SourceLocation(parser, loc); }
-    if (parser.options.directSourceFile)
-      { this.sourceFile = parser.options.directSourceFile; }
-    if (parser.options.ranges)
-      { this.range = [pos, 0]; }
-  };
-
-  // Start an AST node, attaching a start offset.
-
-  var pp$2 = Parser.prototype;
-
-  pp$2.startNode = function() {
-    return new Node(this, this.start, this.startLoc)
-  };
-
-  pp$2.startNodeAt = function(pos, loc) {
-    return new Node(this, pos, loc)
-  };
-
-  // Finish an AST node, adding `type` and `end` properties.
-
-  function finishNodeAt(node, type, pos, loc) {
-    node.type = type;
-    node.end = pos;
-    if (this.options.locations)
-      { node.loc.end = loc; }
-    if (this.options.ranges)
-      { node.range[1] = pos; }
-    return node
-  }
-
-  pp$2.finishNode = function(node, type) {
-    return finishNodeAt.call(this, node, type, this.lastTokEnd, this.lastTokEndLoc)
-  };
-
-  // Finish node at given position
-
-  pp$2.finishNodeAt = function(node, type, pos, loc) {
-    return finishNodeAt.call(this, node, type, pos, loc)
-  };
-
-  pp$2.copyNode = function(node) {
-    var newNode = new Node(this, node.start, this.startLoc);
-    for (var prop in node) { newNode[prop] = node[prop]; }
-    return newNode
-  };
-
-  // This file contains Unicode properties extracted from the ECMAScript
-  // specification. The lists are extracted like so:
-  // $$('#table-binary-unicode-properties > figure > table > tbody > tr > td:nth-child(1) code').map(el => el.innerText)
-
-  // #table-binary-unicode-properties
-  var ecma9BinaryProperties = "ASCII ASCII_Hex_Digit AHex Alphabetic Alpha Any Assigned Bidi_Control Bidi_C Bidi_Mirrored Bidi_M Case_Ignorable CI Cased Changes_When_Casefolded CWCF Changes_When_Casemapped CWCM Changes_When_Lowercased CWL Changes_When_NFKC_Casefolded CWKCF Changes_When_Titlecased CWT Changes_When_Uppercased CWU Dash Default_Ignorable_Code_Point DI Deprecated Dep Diacritic Dia Emoji Emoji_Component Emoji_Modifier Emoji_Modifier_Base Emoji_Presentation Extender Ext Grapheme_Base Gr_Base Grapheme_Extend Gr_Ext Hex_Digit Hex IDS_Binary_Operator IDSB IDS_Trinary_Operator IDST ID_Continue IDC ID_Start IDS Ideographic Ideo Join_Control Join_C Logical_Order_Exception LOE Lowercase Lower Math Noncharacter_Code_Point NChar Pattern_Syntax Pat_Syn Pattern_White_Space Pat_WS Quotation_Mark QMark Radical Regional_Indicator RI Sentence_Terminal STerm Soft_Dotted SD Terminal_Punctuation Term Unified_Ideograph UIdeo Uppercase Upper Variation_Selector VS White_Space space XID_Continue XIDC XID_Start XIDS";
-  var ecma10BinaryProperties = ecma9BinaryProperties + " Extended_Pictographic";
-  var ecma11BinaryProperties = ecma10BinaryProperties;
-  var ecma12BinaryProperties = ecma11BinaryProperties + " EBase EComp EMod EPres ExtPict";
-  var ecma13BinaryProperties = ecma12BinaryProperties;
-  var unicodeBinaryProperties = {
-    9: ecma9BinaryProperties,
-    10: ecma10BinaryProperties,
-    11: ecma11BinaryProperties,
-    12: ecma12BinaryProperties,
-    13: ecma13BinaryProperties
-  };
-
-  // #table-unicode-general-category-values
-  var unicodeGeneralCategoryValues = "Cased_Letter LC Close_Punctuation Pe Connector_Punctuation Pc Control Cc cntrl Currency_Symbol Sc Dash_Punctuation Pd Decimal_Number Nd digit Enclosing_Mark Me Final_Punctuation Pf Format Cf Initial_Punctuation Pi Letter L Letter_Number Nl Line_Separator Zl Lowercase_Letter Ll Mark M Combining_Mark Math_Symbol Sm Modifier_Letter Lm Modifier_Symbol Sk Nonspacing_Mark Mn Number N Open_Punctuation Ps Other C Other_Letter Lo Other_Number No Other_Punctuation Po Other_Symbol So Paragraph_Separator Zp Private_Use Co Punctuation P punct Separator Z Space_Separator Zs Spacing_Mark Mc Surrogate Cs Symbol S Titlecase_Letter Lt Unassigned Cn Uppercase_Letter Lu";
-
-  // #table-unicode-script-values
-  var ecma9ScriptValues = "Adlam Adlm Ahom Anatolian_Hieroglyphs Hluw Arabic Arab Armenian Armn Avestan Avst Balinese Bali Bamum Bamu Bassa_Vah Bass Batak Batk Bengali Beng Bhaiksuki Bhks Bopomofo Bopo Brahmi Brah Braille Brai Buginese Bugi Buhid Buhd Canadian_Aboriginal Cans Carian Cari Caucasian_Albanian Aghb Chakma Cakm Cham Cham Cherokee Cher Common Zyyy Coptic Copt Qaac Cuneiform Xsux Cypriot Cprt Cyrillic Cyrl Deseret Dsrt Devanagari Deva Duployan Dupl Egyptian_Hieroglyphs Egyp Elbasan Elba Ethiopic Ethi Georgian Geor Glagolitic Glag Gothic Goth Grantha Gran Greek Grek Gujarati Gujr Gurmukhi Guru Han Hani Hangul Hang Hanunoo Hano Hatran Hatr Hebrew Hebr Hiragana Hira Imperial_Aramaic Armi Inherited Zinh Qaai Inscriptional_Pahlavi Phli Inscriptional_Parthian Prti Javanese Java Kaithi Kthi Kannada Knda Katakana Kana Kayah_Li Kali Kharoshthi Khar Khmer Khmr Khojki Khoj Khudawadi Sind Lao Laoo Latin Latn Lepcha Lepc Limbu Limb Linear_A Lina Linear_B Linb Lisu Lisu Lycian Lyci Lydian Lydi Mahajani Mahj Malayalam Mlym Mandaic Mand Manichaean Mani Marchen Marc Masaram_Gondi Gonm Meetei_Mayek Mtei Mende_Kikakui Mend Meroitic_Cursive Merc Meroitic_Hieroglyphs Mero Miao Plrd Modi Mongolian Mong Mro Mroo Multani Mult Myanmar Mymr Nabataean Nbat New_Tai_Lue Talu Newa Newa Nko Nkoo Nushu Nshu Ogham Ogam Ol_Chiki Olck Old_Hungarian Hung Old_Italic Ital Old_North_Arabian Narb Old_Permic Perm Old_Persian Xpeo Old_South_Arabian Sarb Old_Turkic Orkh Oriya Orya Osage Osge Osmanya Osma Pahawh_Hmong Hmng Palmyrene Palm Pau_Cin_Hau Pauc Phags_Pa Phag Phoenician Phnx Psalter_Pahlavi Phlp Rejang Rjng Runic Runr Samaritan Samr Saurashtra Saur Sharada Shrd Shavian Shaw Siddham Sidd SignWriting Sgnw Sinhala Sinh Sora_Sompeng Sora Soyombo Soyo Sundanese Sund Syloti_Nagri Sylo Syriac Syrc Tagalog Tglg Tagbanwa Tagb Tai_Le Tale Tai_Tham Lana Tai_Viet Tavt Takri Takr Tamil Taml Tangut Tang Telugu Telu Thaana Thaa Thai Thai Tibetan Tibt Tifinagh Tfng Tirhuta Tirh Ugaritic Ugar Vai Vaii Warang_Citi Wara Yi Yiii Zanabazar_Square Zanb";
-  var ecma10ScriptValues = ecma9ScriptValues + " Dogra Dogr Gunjala_Gondi Gong Hanifi_Rohingya Rohg Makasar Maka Medefaidrin Medf Old_Sogdian Sogo Sogdian Sogd";
-  var ecma11ScriptValues = ecma10ScriptValues + " Elymaic Elym Nandinagari Nand Nyiakeng_Puachue_Hmong Hmnp Wancho Wcho";
-  var ecma12ScriptValues = ecma11ScriptValues + " Chorasmian Chrs Diak Dives_Akuru Khitan_Small_Script Kits Yezi Yezidi";
-  var ecma13ScriptValues = ecma12ScriptValues + " Cypro_Minoan Cpmn Old_Uyghur Ougr Tangsa Tnsa Toto Vithkuqi Vith";
-  var unicodeScriptValues = {
-    9: ecma9ScriptValues,
-    10: ecma10ScriptValues,
-    11: ecma11ScriptValues,
-    12: ecma12ScriptValues,
-    13: ecma13ScriptValues
-  };
-
-  var data = {};
-  function buildUnicodeData(ecmaVersion) {
-    var d = data[ecmaVersion] = {
-      binary: wordsRegexp(unicodeBinaryProperties[ecmaVersion] + " " + unicodeGeneralCategoryValues),
-      nonBinary: {
-        General_Category: wordsRegexp(unicodeGeneralCategoryValues),
-        Script: wordsRegexp(unicodeScriptValues[ecmaVersion])
-      }
-    };
-    d.nonBinary.Script_Extensions = d.nonBinary.Script;
-
-    d.nonBinary.gc = d.nonBinary.General_Category;
-    d.nonBinary.sc = d.nonBinary.Script;
-    d.nonBinary.scx = d.nonBinary.Script_Extensions;
-  }
-
-  for (var i = 0, list = [9, 10, 11, 12, 13]; i < list.length; i += 1) {
-    var ecmaVersion = list[i];
-
-    buildUnicodeData(ecmaVersion);
-  }
-
-  var pp$1 = Parser.prototype;
-
-  var RegExpValidationState = function RegExpValidationState(parser) {
-    this.parser = parser;
-    this.validFlags = "gim" + (parser.options.ecmaVersion >= 6 ? "uy" : "") + (parser.options.ecmaVersion >= 9 ? "s" : "") + (parser.options.ecmaVersion >= 13 ? "d" : "");
-    this.unicodeProperties = data[parser.options.ecmaVersion >= 13 ? 13 : parser.options.ecmaVersion];
-    this.source = "";
-    this.flags = "";
-    this.start = 0;
-    this.switchU = false;
-    this.switchN = false;
-    this.pos = 0;
-    this.lastIntValue = 0;
-    this.lastStringValue = "";
-    this.lastAssertionIsQuantifiable = false;
-    this.numCapturingParens = 0;
-    this.maxBackReference = 0;
-    this.groupNames = [];
-    this.backReferenceNames = [];
-  };
-
-  RegExpValidationState.prototype.reset = function reset (start, pattern, flags) {
-    var unicode = flags.indexOf("u") !== -1;
-    this.start = start | 0;
-    this.source = pattern + "";
-    this.flags = flags;
-    this.switchU = unicode && this.parser.options.ecmaVersion >= 6;
-    this.switchN = unicode && this.parser.options.ecmaVersion >= 9;
-  };
-
-  RegExpValidationState.prototype.raise = function raise (message) {
-    this.parser.raiseRecoverable(this.start, ("Invalid regular expression: /" + (this.source) + "/: " + message));
-  };
-
-  // If u flag is given, this returns the code point at the index (it combines a surrogate pair).
-  // Otherwise, this returns the code unit of the index (can be a part of a surrogate pair).
-  RegExpValidationState.prototype.at = function at (i, forceU) {
-      if ( forceU === void 0 ) forceU = false;
-
-    var s = this.source;
-    var l = s.length;
-    if (i >= l) {
-      return -1
-    }
-    var c = s.charCodeAt(i);
-    if (!(forceU || this.switchU) || c <= 0xD7FF || c >= 0xE000 || i + 1 >= l) {
-      return c
-    }
-    var next = s.charCodeAt(i + 1);
-    return next >= 0xDC00 && next <= 0xDFFF ? (c << 10) + next - 0x35FDC00 : c
-  };
-
-  RegExpValidationState.prototype.nextIndex = function nextIndex (i, forceU) {
-      if ( forceU === void 0 ) forceU = false;
-
-    var s = this.source;
-    var l = s.length;
-    if (i >= l) {
-      return l
-    }
-    var c = s.charCodeAt(i), next;
-    if (!(forceU || this.switchU) || c <= 0xD7FF || c >= 0xE000 || i + 1 >= l ||
-        (next = s.charCodeAt(i + 1)) < 0xDC00 || next > 0xDFFF) {
-      return i + 1
-    }
-    return i + 2
-  };
-
-  RegExpValidationState.prototype.current = function current (forceU) {
-      if ( forceU === void 0 ) forceU = false;
-
-    return this.at(this.pos, forceU)
-  };
-
-  RegExpValidationState.prototype.lookahead = function lookahead (forceU) {
-      if ( forceU === void 0 ) forceU = false;
-
-    return this.at(this.nextIndex(this.pos, forceU), forceU)
-  };
-
-  RegExpValidationState.prototype.advance = function advance (forceU) {
-      if ( forceU === void 0 ) forceU = false;
-
-    this.pos = this.nextIndex(this.pos, forceU);
-  };
-
-  RegExpValidationState.prototype.eat = function eat (ch, forceU) {
-      if ( forceU === void 0 ) forceU = false;
-
-    if (this.current(forceU) === ch) {
-      this.advance(forceU);
-      return true
-    }
-    return false
-  };
-
-  function codePointToString$1(ch) {
-    if (ch <= 0xFFFF) { return String.fromCharCode(ch) }
-    ch -= 0x10000;
-    return String.fromCharCode((ch >> 10) + 0xD800, (ch & 0x03FF) + 0xDC00)
-  }
-
-  /**
-   * Validate the flags part of a given RegExpLiteral.
-   *
-   * @param {RegExpValidationState} state The state to validate RegExp.
-   * @returns {void}
-   */
-  pp$1.validateRegExpFlags = function(state) {
-    var validFlags = state.validFlags;
-    var flags = state.flags;
-
-    for (var i = 0; i < flags.length; i++) {
-      var flag = flags.charAt(i);
-      if (validFlags.indexOf(flag) === -1) {
-        this.raise(state.start, "Invalid regular expression flag");
-      }
-      if (flags.indexOf(flag, i + 1) > -1) {
-        this.raise(state.start, "Duplicate regular expression flag");
-      }
-    }
-  };
-
-  /**
-   * Validate the pattern part of a given RegExpLiteral.
-   *
-   * @param {RegExpValidationState} state The state to validate RegExp.
-   * @returns {void}
-   */
-  pp$1.validateRegExpPattern = function(state) {
-    this.regexp_pattern(state);
-
-    // The goal symbol for the parse is |Pattern[~U, ~N]|. If the result of
-    // parsing contains a |GroupName|, reparse with the goal symbol
-    // |Pattern[~U, +N]| and use this result instead. Throw a *SyntaxError*
-    // exception if _P_ did not conform to the grammar, if any elements of _P_
-    // were not matched by the parse, or if any Early Error conditions exist.
-    if (!state.switchN && this.options.ecmaVersion >= 9 && state.groupNames.length > 0) {
-      state.switchN = true;
-      this.regexp_pattern(state);
-    }
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-Pattern
-  pp$1.regexp_pattern = function(state) {
-    state.pos = 0;
-    state.lastIntValue = 0;
-    state.lastStringValue = "";
-    state.lastAssertionIsQuantifiable = false;
-    state.numCapturingParens = 0;
-    state.maxBackReference = 0;
-    state.groupNames.length = 0;
-    state.backReferenceNames.length = 0;
-
-    this.regexp_disjunction(state);
-
-    if (state.pos !== state.source.length) {
-      // Make the same messages as V8.
-      if (state.eat(0x29 /* ) */)) {
-        state.raise("Unmatched ')'");
-      }
-      if (state.eat(0x5D /* ] */) || state.eat(0x7D /* } */)) {
-        state.raise("Lone quantifier brackets");
-      }
-    }
-    if (state.maxBackReference > state.numCapturingParens) {
-      state.raise("Invalid escape");
-    }
-    for (var i = 0, list = state.backReferenceNames; i < list.length; i += 1) {
-      var name = list[i];
-
-      if (state.groupNames.indexOf(name) === -1) {
-        state.raise("Invalid named capture referenced");
-      }
-    }
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-Disjunction
-  pp$1.regexp_disjunction = function(state) {
-    this.regexp_alternative(state);
-    while (state.eat(0x7C /* | */)) {
-      this.regexp_alternative(state);
-    }
-
-    // Make the same message as V8.
-    if (this.regexp_eatQuantifier(state, true)) {
-      state.raise("Nothing to repeat");
-    }
-    if (state.eat(0x7B /* { */)) {
-      state.raise("Lone quantifier brackets");
-    }
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-Alternative
-  pp$1.regexp_alternative = function(state) {
-    while (state.pos < state.source.length && this.regexp_eatTerm(state))
-      { }
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-Term
-  pp$1.regexp_eatTerm = function(state) {
-    if (this.regexp_eatAssertion(state)) {
-      // Handle `QuantifiableAssertion Quantifier` alternative.
-      // `state.lastAssertionIsQuantifiable` is true if the last eaten Assertion
-      // is a QuantifiableAssertion.
-      if (state.lastAssertionIsQuantifiable && this.regexp_eatQuantifier(state)) {
-        // Make the same message as V8.
-        if (state.switchU) {
-          state.raise("Invalid quantifier");
-        }
-      }
-      return true
-    }
-
-    if (state.switchU ? this.regexp_eatAtom(state) : this.regexp_eatExtendedAtom(state)) {
-      this.regexp_eatQuantifier(state);
-      return true
-    }
-
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-Assertion
-  pp$1.regexp_eatAssertion = function(state) {
-    var start = state.pos;
-    state.lastAssertionIsQuantifiable = false;
-
-    // ^, $
-    if (state.eat(0x5E /* ^ */) || state.eat(0x24 /* $ */)) {
-      return true
-    }
-
-    // \b \B
-    if (state.eat(0x5C /* \ */)) {
-      if (state.eat(0x42 /* B */) || state.eat(0x62 /* b */)) {
-        return true
-      }
-      state.pos = start;
-    }
-
-    // Lookahead / Lookbehind
-    if (state.eat(0x28 /* ( */) && state.eat(0x3F /* ? */)) {
-      var lookbehind = false;
-      if (this.options.ecmaVersion >= 9) {
-        lookbehind = state.eat(0x3C /* < */);
-      }
-      if (state.eat(0x3D /* = */) || state.eat(0x21 /* ! */)) {
-        this.regexp_disjunction(state);
-        if (!state.eat(0x29 /* ) */)) {
-          state.raise("Unterminated group");
-        }
-        state.lastAssertionIsQuantifiable = !lookbehind;
-        return true
-      }
-    }
-
-    state.pos = start;
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-Quantifier
-  pp$1.regexp_eatQuantifier = function(state, noError) {
-    if ( noError === void 0 ) noError = false;
-
-    if (this.regexp_eatQuantifierPrefix(state, noError)) {
-      state.eat(0x3F /* ? */);
-      return true
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-QuantifierPrefix
-  pp$1.regexp_eatQuantifierPrefix = function(state, noError) {
-    return (
-      state.eat(0x2A /* * */) ||
-      state.eat(0x2B /* + */) ||
-      state.eat(0x3F /* ? */) ||
-      this.regexp_eatBracedQuantifier(state, noError)
-    )
-  };
-  pp$1.regexp_eatBracedQuantifier = function(state, noError) {
-    var start = state.pos;
-    if (state.eat(0x7B /* { */)) {
-      var min = 0, max = -1;
-      if (this.regexp_eatDecimalDigits(state)) {
-        min = state.lastIntValue;
-        if (state.eat(0x2C /* , */) && this.regexp_eatDecimalDigits(state)) {
-          max = state.lastIntValue;
-        }
-        if (state.eat(0x7D /* } */)) {
-          // SyntaxError in https://www.ecma-international.org/ecma-262/8.0/#sec-term
-          if (max !== -1 && max < min && !noError) {
-            state.raise("numbers out of order in {} quantifier");
-          }
-          return true
-        }
-      }
-      if (state.switchU && !noError) {
-        state.raise("Incomplete quantifier");
-      }
-      state.pos = start;
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-Atom
-  pp$1.regexp_eatAtom = function(state) {
-    return (
-      this.regexp_eatPatternCharacters(state) ||
-      state.eat(0x2E /* . */) ||
-      this.regexp_eatReverseSolidusAtomEscape(state) ||
-      this.regexp_eatCharacterClass(state) ||
-      this.regexp_eatUncapturingGroup(state) ||
-      this.regexp_eatCapturingGroup(state)
-    )
-  };
-  pp$1.regexp_eatReverseSolidusAtomEscape = function(state) {
-    var start = state.pos;
-    if (state.eat(0x5C /* \ */)) {
-      if (this.regexp_eatAtomEscape(state)) {
-        return true
-      }
-      state.pos = start;
-    }
-    return false
-  };
-  pp$1.regexp_eatUncapturingGroup = function(state) {
-    var start = state.pos;
-    if (state.eat(0x28 /* ( */)) {
-      if (state.eat(0x3F /* ? */) && state.eat(0x3A /* : */)) {
-        this.regexp_disjunction(state);
-        if (state.eat(0x29 /* ) */)) {
-          return true
-        }
-        state.raise("Unterminated group");
-      }
-      state.pos = start;
-    }
-    return false
-  };
-  pp$1.regexp_eatCapturingGroup = function(state) {
-    if (state.eat(0x28 /* ( */)) {
-      if (this.options.ecmaVersion >= 9) {
-        this.regexp_groupSpecifier(state);
-      } else if (state.current() === 0x3F /* ? */) {
-        state.raise("Invalid group");
-      }
-      this.regexp_disjunction(state);
-      if (state.eat(0x29 /* ) */)) {
-        state.numCapturingParens += 1;
-        return true
-      }
-      state.raise("Unterminated group");
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-ExtendedAtom
-  pp$1.regexp_eatExtendedAtom = function(state) {
-    return (
-      state.eat(0x2E /* . */) ||
-      this.regexp_eatReverseSolidusAtomEscape(state) ||
-      this.regexp_eatCharacterClass(state) ||
-      this.regexp_eatUncapturingGroup(state) ||
-      this.regexp_eatCapturingGroup(state) ||
-      this.regexp_eatInvalidBracedQuantifier(state) ||
-      this.regexp_eatExtendedPatternCharacter(state)
-    )
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-InvalidBracedQuantifier
-  pp$1.regexp_eatInvalidBracedQuantifier = function(state) {
-    if (this.regexp_eatBracedQuantifier(state, true)) {
-      state.raise("Nothing to repeat");
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-SyntaxCharacter
-  pp$1.regexp_eatSyntaxCharacter = function(state) {
-    var ch = state.current();
-    if (isSyntaxCharacter(ch)) {
-      state.lastIntValue = ch;
-      state.advance();
-      return true
-    }
-    return false
-  };
-  function isSyntaxCharacter(ch) {
-    return (
-      ch === 0x24 /* $ */ ||
-      ch >= 0x28 /* ( */ && ch <= 0x2B /* + */ ||
-      ch === 0x2E /* . */ ||
-      ch === 0x3F /* ? */ ||
-      ch >= 0x5B /* [ */ && ch <= 0x5E /* ^ */ ||
-      ch >= 0x7B /* { */ && ch <= 0x7D /* } */
-    )
-  }
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-PatternCharacter
-  // But eat eager.
-  pp$1.regexp_eatPatternCharacters = function(state) {
-    var start = state.pos;
-    var ch = 0;
-    while ((ch = state.current()) !== -1 && !isSyntaxCharacter(ch)) {
-      state.advance();
-    }
-    return state.pos !== start
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-ExtendedPatternCharacter
-  pp$1.regexp_eatExtendedPatternCharacter = function(state) {
-    var ch = state.current();
-    if (
-      ch !== -1 &&
-      ch !== 0x24 /* $ */ &&
-      !(ch >= 0x28 /* ( */ && ch <= 0x2B /* + */) &&
-      ch !== 0x2E /* . */ &&
-      ch !== 0x3F /* ? */ &&
-      ch !== 0x5B /* [ */ &&
-      ch !== 0x5E /* ^ */ &&
-      ch !== 0x7C /* | */
-    ) {
-      state.advance();
-      return true
-    }
-    return false
-  };
-
-  // GroupSpecifier ::
-  //   [empty]
-  //   `?` GroupName
-  pp$1.regexp_groupSpecifier = function(state) {
-    if (state.eat(0x3F /* ? */)) {
-      if (this.regexp_eatGroupName(state)) {
-        if (state.groupNames.indexOf(state.lastStringValue) !== -1) {
-          state.raise("Duplicate capture group name");
-        }
-        state.groupNames.push(state.lastStringValue);
-        return
-      }
-      state.raise("Invalid group");
-    }
-  };
-
-  // GroupName ::
-  //   `<` RegExpIdentifierName `>`
-  // Note: this updates `state.lastStringValue` property with the eaten name.
-  pp$1.regexp_eatGroupName = function(state) {
-    state.lastStringValue = "";
-    if (state.eat(0x3C /* < */)) {
-      if (this.regexp_eatRegExpIdentifierName(state) && state.eat(0x3E /* > */)) {
-        return true
-      }
-      state.raise("Invalid capture group name");
-    }
-    return false
-  };
-
-  // RegExpIdentifierName ::
-  //   RegExpIdentifierStart
-  //   RegExpIdentifierName RegExpIdentifierPart
-  // Note: this updates `state.lastStringValue` property with the eaten name.
-  pp$1.regexp_eatRegExpIdentifierName = function(state) {
-    state.lastStringValue = "";
-    if (this.regexp_eatRegExpIdentifierStart(state)) {
-      state.lastStringValue += codePointToString$1(state.lastIntValue);
-      while (this.regexp_eatRegExpIdentifierPart(state)) {
-        state.lastStringValue += codePointToString$1(state.lastIntValue);
-      }
-      return true
-    }
-    return false
-  };
-
-  // RegExpIdentifierStart ::
-  //   UnicodeIDStart
-  //   `$`
-  //   `_`
-  //   `\` RegExpUnicodeEscapeSequence[+U]
-  pp$1.regexp_eatRegExpIdentifierStart = function(state) {
-    var start = state.pos;
-    var forceU = this.options.ecmaVersion >= 11;
-    var ch = state.current(forceU);
-    state.advance(forceU);
-
-    if (ch === 0x5C /* \ */ && this.regexp_eatRegExpUnicodeEscapeSequence(state, forceU)) {
-      ch = state.lastIntValue;
-    }
-    if (isRegExpIdentifierStart(ch)) {
-      state.lastIntValue = ch;
-      return true
-    }
-
-    state.pos = start;
-    return false
-  };
-  function isRegExpIdentifierStart(ch) {
-    return isIdentifierStart(ch, true) || ch === 0x24 /* $ */ || ch === 0x5F /* _ */
-  }
-
-  // RegExpIdentifierPart ::
-  //   UnicodeIDContinue
-  //   `$`
-  //   `_`
-  //   `\` RegExpUnicodeEscapeSequence[+U]
-  //   <ZWNJ>
-  //   <ZWJ>
-  pp$1.regexp_eatRegExpIdentifierPart = function(state) {
-    var start = state.pos;
-    var forceU = this.options.ecmaVersion >= 11;
-    var ch = state.current(forceU);
-    state.advance(forceU);
-
-    if (ch === 0x5C /* \ */ && this.regexp_eatRegExpUnicodeEscapeSequence(state, forceU)) {
-      ch = state.lastIntValue;
-    }
-    if (isRegExpIdentifierPart(ch)) {
-      state.lastIntValue = ch;
-      return true
-    }
-
-    state.pos = start;
-    return false
-  };
-  function isRegExpIdentifierPart(ch) {
-    return isIdentifierChar(ch, true) || ch === 0x24 /* $ */ || ch === 0x5F /* _ */ || ch === 0x200C /* <ZWNJ> */ || ch === 0x200D /* <ZWJ> */
-  }
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-AtomEscape
-  pp$1.regexp_eatAtomEscape = function(state) {
-    if (
-      this.regexp_eatBackReference(state) ||
-      this.regexp_eatCharacterClassEscape(state) ||
-      this.regexp_eatCharacterEscape(state) ||
-      (state.switchN && this.regexp_eatKGroupName(state))
-    ) {
-      return true
-    }
-    if (state.switchU) {
-      // Make the same message as V8.
-      if (state.current() === 0x63 /* c */) {
-        state.raise("Invalid unicode escape");
-      }
-      state.raise("Invalid escape");
-    }
-    return false
-  };
-  pp$1.regexp_eatBackReference = function(state) {
-    var start = state.pos;
-    if (this.regexp_eatDecimalEscape(state)) {
-      var n = state.lastIntValue;
-      if (state.switchU) {
-        // For SyntaxError in https://www.ecma-international.org/ecma-262/8.0/#sec-atomescape
-        if (n > state.maxBackReference) {
-          state.maxBackReference = n;
-        }
-        return true
-      }
-      if (n <= state.numCapturingParens) {
-        return true
-      }
-      state.pos = start;
-    }
-    return false
-  };
-  pp$1.regexp_eatKGroupName = function(state) {
-    if (state.eat(0x6B /* k */)) {
-      if (this.regexp_eatGroupName(state)) {
-        state.backReferenceNames.push(state.lastStringValue);
-        return true
-      }
-      state.raise("Invalid named reference");
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-CharacterEscape
-  pp$1.regexp_eatCharacterEscape = function(state) {
-    return (
-      this.regexp_eatControlEscape(state) ||
-      this.regexp_eatCControlLetter(state) ||
-      this.regexp_eatZero(state) ||
-      this.regexp_eatHexEscapeSequence(state) ||
-      this.regexp_eatRegExpUnicodeEscapeSequence(state, false) ||
-      (!state.switchU && this.regexp_eatLegacyOctalEscapeSequence(state)) ||
-      this.regexp_eatIdentityEscape(state)
-    )
-  };
-  pp$1.regexp_eatCControlLetter = function(state) {
-    var start = state.pos;
-    if (state.eat(0x63 /* c */)) {
-      if (this.regexp_eatControlLetter(state)) {
-        return true
-      }
-      state.pos = start;
-    }
-    return false
-  };
-  pp$1.regexp_eatZero = function(state) {
-    if (state.current() === 0x30 /* 0 */ && !isDecimalDigit(state.lookahead())) {
-      state.lastIntValue = 0;
-      state.advance();
-      return true
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-ControlEscape
-  pp$1.regexp_eatControlEscape = function(state) {
-    var ch = state.current();
-    if (ch === 0x74 /* t */) {
-      state.lastIntValue = 0x09; /* \t */
-      state.advance();
-      return true
-    }
-    if (ch === 0x6E /* n */) {
-      state.lastIntValue = 0x0A; /* \n */
-      state.advance();
-      return true
-    }
-    if (ch === 0x76 /* v */) {
-      state.lastIntValue = 0x0B; /* \v */
-      state.advance();
-      return true
-    }
-    if (ch === 0x66 /* f */) {
-      state.lastIntValue = 0x0C; /* \f */
-      state.advance();
-      return true
-    }
-    if (ch === 0x72 /* r */) {
-      state.lastIntValue = 0x0D; /* \r */
-      state.advance();
-      return true
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-ControlLetter
-  pp$1.regexp_eatControlLetter = function(state) {
-    var ch = state.current();
-    if (isControlLetter(ch)) {
-      state.lastIntValue = ch % 0x20;
-      state.advance();
-      return true
-    }
-    return false
-  };
-  function isControlLetter(ch) {
-    return (
-      (ch >= 0x41 /* A */ && ch <= 0x5A /* Z */) ||
-      (ch >= 0x61 /* a */ && ch <= 0x7A /* z */)
-    )
-  }
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-RegExpUnicodeEscapeSequence
-  pp$1.regexp_eatRegExpUnicodeEscapeSequence = function(state, forceU) {
-    if ( forceU === void 0 ) forceU = false;
-
-    var start = state.pos;
-    var switchU = forceU || state.switchU;
-
-    if (state.eat(0x75 /* u */)) {
-      if (this.regexp_eatFixedHexDigits(state, 4)) {
-        var lead = state.lastIntValue;
-        if (switchU && lead >= 0xD800 && lead <= 0xDBFF) {
-          var leadSurrogateEnd = state.pos;
-          if (state.eat(0x5C /* \ */) && state.eat(0x75 /* u */) && this.regexp_eatFixedHexDigits(state, 4)) {
-            var trail = state.lastIntValue;
-            if (trail >= 0xDC00 && trail <= 0xDFFF) {
-              state.lastIntValue = (lead - 0xD800) * 0x400 + (trail - 0xDC00) + 0x10000;
-              return true
-            }
-          }
-          state.pos = leadSurrogateEnd;
-          state.lastIntValue = lead;
-        }
-        return true
-      }
-      if (
-        switchU &&
-        state.eat(0x7B /* { */) &&
-        this.regexp_eatHexDigits(state) &&
-        state.eat(0x7D /* } */) &&
-        isValidUnicode(state.lastIntValue)
-      ) {
-        return true
-      }
-      if (switchU) {
-        state.raise("Invalid unicode escape");
-      }
-      state.pos = start;
-    }
-
-    return false
-  };
-  function isValidUnicode(ch) {
-    return ch >= 0 && ch <= 0x10FFFF
-  }
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-IdentityEscape
-  pp$1.regexp_eatIdentityEscape = function(state) {
-    if (state.switchU) {
-      if (this.regexp_eatSyntaxCharacter(state)) {
-        return true
-      }
-      if (state.eat(0x2F /* / */)) {
-        state.lastIntValue = 0x2F; /* / */
-        return true
-      }
-      return false
-    }
-
-    var ch = state.current();
-    if (ch !== 0x63 /* c */ && (!state.switchN || ch !== 0x6B /* k */)) {
-      state.lastIntValue = ch;
-      state.advance();
-      return true
-    }
-
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-DecimalEscape
-  pp$1.regexp_eatDecimalEscape = function(state) {
-    state.lastIntValue = 0;
-    var ch = state.current();
-    if (ch >= 0x31 /* 1 */ && ch <= 0x39 /* 9 */) {
-      do {
-        state.lastIntValue = 10 * state.lastIntValue + (ch - 0x30 /* 0 */);
-        state.advance();
-      } while ((ch = state.current()) >= 0x30 /* 0 */ && ch <= 0x39 /* 9 */)
-      return true
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-CharacterClassEscape
-  pp$1.regexp_eatCharacterClassEscape = function(state) {
-    var ch = state.current();
-
-    if (isCharacterClassEscape(ch)) {
-      state.lastIntValue = -1;
-      state.advance();
-      return true
-    }
-
-    if (
-      state.switchU &&
-      this.options.ecmaVersion >= 9 &&
-      (ch === 0x50 /* P */ || ch === 0x70 /* p */)
-    ) {
-      state.lastIntValue = -1;
-      state.advance();
-      if (
-        state.eat(0x7B /* { */) &&
-        this.regexp_eatUnicodePropertyValueExpression(state) &&
-        state.eat(0x7D /* } */)
-      ) {
-        return true
-      }
-      state.raise("Invalid property name");
-    }
-
-    return false
-  };
-  function isCharacterClassEscape(ch) {
-    return (
-      ch === 0x64 /* d */ ||
-      ch === 0x44 /* D */ ||
-      ch === 0x73 /* s */ ||
-      ch === 0x53 /* S */ ||
-      ch === 0x77 /* w */ ||
-      ch === 0x57 /* W */
-    )
-  }
-
-  // UnicodePropertyValueExpression ::
-  //   UnicodePropertyName `=` UnicodePropertyValue
-  //   LoneUnicodePropertyNameOrValue
-  pp$1.regexp_eatUnicodePropertyValueExpression = function(state) {
-    var start = state.pos;
-
-    // UnicodePropertyName `=` UnicodePropertyValue
-    if (this.regexp_eatUnicodePropertyName(state) && state.eat(0x3D /* = */)) {
-      var name = state.lastStringValue;
-      if (this.regexp_eatUnicodePropertyValue(state)) {
-        var value = state.lastStringValue;
-        this.regexp_validateUnicodePropertyNameAndValue(state, name, value);
-        return true
-      }
-    }
-    state.pos = start;
-
-    // LoneUnicodePropertyNameOrValue
-    if (this.regexp_eatLoneUnicodePropertyNameOrValue(state)) {
-      var nameOrValue = state.lastStringValue;
-      this.regexp_validateUnicodePropertyNameOrValue(state, nameOrValue);
-      return true
-    }
-    return false
-  };
-  pp$1.regexp_validateUnicodePropertyNameAndValue = function(state, name, value) {
-    if (!hasOwn(state.unicodeProperties.nonBinary, name))
-      { state.raise("Invalid property name"); }
-    if (!state.unicodeProperties.nonBinary[name].test(value))
-      { state.raise("Invalid property value"); }
-  };
-  pp$1.regexp_validateUnicodePropertyNameOrValue = function(state, nameOrValue) {
-    if (!state.unicodeProperties.binary.test(nameOrValue))
-      { state.raise("Invalid property name"); }
-  };
-
-  // UnicodePropertyName ::
-  //   UnicodePropertyNameCharacters
-  pp$1.regexp_eatUnicodePropertyName = function(state) {
-    var ch = 0;
-    state.lastStringValue = "";
-    while (isUnicodePropertyNameCharacter(ch = state.current())) {
-      state.lastStringValue += codePointToString$1(ch);
-      state.advance();
-    }
-    return state.lastStringValue !== ""
-  };
-  function isUnicodePropertyNameCharacter(ch) {
-    return isControlLetter(ch) || ch === 0x5F /* _ */
-  }
-
-  // UnicodePropertyValue ::
-  //   UnicodePropertyValueCharacters
-  pp$1.regexp_eatUnicodePropertyValue = function(state) {
-    var ch = 0;
-    state.lastStringValue = "";
-    while (isUnicodePropertyValueCharacter(ch = state.current())) {
-      state.lastStringValue += codePointToString$1(ch);
-      state.advance();
-    }
-    return state.lastStringValue !== ""
-  };
-  function isUnicodePropertyValueCharacter(ch) {
-    return isUnicodePropertyNameCharacter(ch) || isDecimalDigit(ch)
-  }
-
-  // LoneUnicodePropertyNameOrValue ::
-  //   UnicodePropertyValueCharacters
-  pp$1.regexp_eatLoneUnicodePropertyNameOrValue = function(state) {
-    return this.regexp_eatUnicodePropertyValue(state)
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-CharacterClass
-  pp$1.regexp_eatCharacterClass = function(state) {
-    if (state.eat(0x5B /* [ */)) {
-      state.eat(0x5E /* ^ */);
-      this.regexp_classRanges(state);
-      if (state.eat(0x5D /* ] */)) {
-        return true
-      }
-      // Unreachable since it threw "unterminated regular expression" error before.
-      state.raise("Unterminated character class");
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-ClassRanges
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-NonemptyClassRanges
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-NonemptyClassRangesNoDash
-  pp$1.regexp_classRanges = function(state) {
-    while (this.regexp_eatClassAtom(state)) {
-      var left = state.lastIntValue;
-      if (state.eat(0x2D /* - */) && this.regexp_eatClassAtom(state)) {
-        var right = state.lastIntValue;
-        if (state.switchU && (left === -1 || right === -1)) {
-          state.raise("Invalid character class");
-        }
-        if (left !== -1 && right !== -1 && left > right) {
-          state.raise("Range out of order in character class");
-        }
-      }
-    }
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-ClassAtom
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-ClassAtomNoDash
-  pp$1.regexp_eatClassAtom = function(state) {
-    var start = state.pos;
-
-    if (state.eat(0x5C /* \ */)) {
-      if (this.regexp_eatClassEscape(state)) {
-        return true
-      }
-      if (state.switchU) {
-        // Make the same message as V8.
-        var ch$1 = state.current();
-        if (ch$1 === 0x63 /* c */ || isOctalDigit(ch$1)) {
-          state.raise("Invalid class escape");
-        }
-        state.raise("Invalid escape");
-      }
-      state.pos = start;
-    }
-
-    var ch = state.current();
-    if (ch !== 0x5D /* ] */) {
-      state.lastIntValue = ch;
-      state.advance();
-      return true
-    }
-
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-ClassEscape
-  pp$1.regexp_eatClassEscape = function(state) {
-    var start = state.pos;
-
-    if (state.eat(0x62 /* b */)) {
-      state.lastIntValue = 0x08; /* <BS> */
-      return true
-    }
-
-    if (state.switchU && state.eat(0x2D /* - */)) {
-      state.lastIntValue = 0x2D; /* - */
-      return true
-    }
-
-    if (!state.switchU && state.eat(0x63 /* c */)) {
-      if (this.regexp_eatClassControlLetter(state)) {
-        return true
-      }
-      state.pos = start;
-    }
-
-    return (
-      this.regexp_eatCharacterClassEscape(state) ||
-      this.regexp_eatCharacterEscape(state)
-    )
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-ClassControlLetter
-  pp$1.regexp_eatClassControlLetter = function(state) {
-    var ch = state.current();
-    if (isDecimalDigit(ch) || ch === 0x5F /* _ */) {
-      state.lastIntValue = ch % 0x20;
-      state.advance();
-      return true
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-HexEscapeSequence
-  pp$1.regexp_eatHexEscapeSequence = function(state) {
-    var start = state.pos;
-    if (state.eat(0x78 /* x */)) {
-      if (this.regexp_eatFixedHexDigits(state, 2)) {
-        return true
-      }
-      if (state.switchU) {
-        state.raise("Invalid escape");
-      }
-      state.pos = start;
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-DecimalDigits
-  pp$1.regexp_eatDecimalDigits = function(state) {
-    var start = state.pos;
-    var ch = 0;
-    state.lastIntValue = 0;
-    while (isDecimalDigit(ch = state.current())) {
-      state.lastIntValue = 10 * state.lastIntValue + (ch - 0x30 /* 0 */);
-      state.advance();
-    }
-    return state.pos !== start
-  };
-  function isDecimalDigit(ch) {
-    return ch >= 0x30 /* 0 */ && ch <= 0x39 /* 9 */
-  }
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-HexDigits
-  pp$1.regexp_eatHexDigits = function(state) {
-    var start = state.pos;
-    var ch = 0;
-    state.lastIntValue = 0;
-    while (isHexDigit(ch = state.current())) {
-      state.lastIntValue = 16 * state.lastIntValue + hexToInt(ch);
-      state.advance();
-    }
-    return state.pos !== start
-  };
-  function isHexDigit(ch) {
-    return (
-      (ch >= 0x30 /* 0 */ && ch <= 0x39 /* 9 */) ||
-      (ch >= 0x41 /* A */ && ch <= 0x46 /* F */) ||
-      (ch >= 0x61 /* a */ && ch <= 0x66 /* f */)
-    )
-  }
-  function hexToInt(ch) {
-    if (ch >= 0x41 /* A */ && ch <= 0x46 /* F */) {
-      return 10 + (ch - 0x41 /* A */)
-    }
-    if (ch >= 0x61 /* a */ && ch <= 0x66 /* f */) {
-      return 10 + (ch - 0x61 /* a */)
-    }
-    return ch - 0x30 /* 0 */
-  }
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-annexB-LegacyOctalEscapeSequence
-  // Allows only 0-377(octal) i.e. 0-255(decimal).
-  pp$1.regexp_eatLegacyOctalEscapeSequence = function(state) {
-    if (this.regexp_eatOctalDigit(state)) {
-      var n1 = state.lastIntValue;
-      if (this.regexp_eatOctalDigit(state)) {
-        var n2 = state.lastIntValue;
-        if (n1 <= 3 && this.regexp_eatOctalDigit(state)) {
-          state.lastIntValue = n1 * 64 + n2 * 8 + state.lastIntValue;
-        } else {
-          state.lastIntValue = n1 * 8 + n2;
-        }
-      } else {
-        state.lastIntValue = n1;
-      }
-      return true
-    }
-    return false
-  };
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-OctalDigit
-  pp$1.regexp_eatOctalDigit = function(state) {
-    var ch = state.current();
-    if (isOctalDigit(ch)) {
-      state.lastIntValue = ch - 0x30; /* 0 */
-      state.advance();
-      return true
-    }
-    state.lastIntValue = 0;
-    return false
-  };
-  function isOctalDigit(ch) {
-    return ch >= 0x30 /* 0 */ && ch <= 0x37 /* 7 */
-  }
-
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-Hex4Digits
-  // https://www.ecma-international.org/ecma-262/8.0/#prod-HexDigit
-  // And HexDigit HexDigit in https://www.ecma-international.org/ecma-262/8.0/#prod-HexEscapeSequence
-  pp$1.regexp_eatFixedHexDigits = function(state, length) {
-    var start = state.pos;
-    state.lastIntValue = 0;
-    for (var i = 0; i < length; ++i) {
-      var ch = state.current();
-      if (!isHexDigit(ch)) {
-        state.pos = start;
-        return false
-      }
-      state.lastIntValue = 16 * state.lastIntValue + hexToInt(ch);
-      state.advance();
-    }
-    return true
-  };
-
-  // Object type used to represent tokens. Note that normally, tokens
-  // simply exist as properties on the parser object. This is only
-  // used for the onToken callback and the external tokenizer.
-
-  var Token = function Token(p) {
-    this.type = p.type;
-    this.value = p.value;
-    this.start = p.start;
-    this.end = p.end;
-    if (p.options.locations)
-      { this.loc = new SourceLocation(p, p.startLoc, p.endLoc); }
-    if (p.options.ranges)
-      { this.range = [p.start, p.end]; }
-  };
-
-  // ## Tokenizer
-
-  var pp = Parser.prototype;
-
-  // Move to the next token
-
-  pp.next = function(ignoreEscapeSequenceInKeyword) {
-    if (!ignoreEscapeSequenceInKeyword && this.type.keyword && this.containsEsc)
-      { this.raiseRecoverable(this.start, "Escape sequence in keyword " + this.type.keyword); }
-    if (this.options.onToken)
-      { this.options.onToken(new Token(this)); }
-
-    this.lastTokEnd = this.end;
-    this.lastTokStart = this.start;
-    this.lastTokEndLoc = this.endLoc;
-    this.lastTokStartLoc = this.startLoc;
-    this.nextToken();
-  };
-
-  pp.getToken = function() {
-    this.next();
-    return new Token(this)
-  };
-
-  // If we're in an ES6 environment, make parsers iterable
-  if (typeof Symbol !== "undefined")
-    { pp[Symbol.iterator] = function() {
-      var this$1$1 = this;
-
-      return {
-        next: function () {
-          var token = this$1$1.getToken();
-          return {
-            done: token.type === types$1.eof,
-            value: token
-          }
-        }
-      }
-    }; }
-
-  // Toggle strict mode. Re-reads the next number or string to please
-  // pedantic tests (`"use strict"; 010;` should fail).
-
-  // Read a single token, updating the parser object's token-related
-  // properties.
-
-  pp.nextToken = function() {
-    var curContext = this.curContext();
-    if (!curContext || !curContext.preserveSpace) { this.skipSpace(); }
-
-    this.start = this.pos;
-    if (this.options.locations) { this.startLoc = this.curPosition(); }
-    if (this.pos >= this.input.length) { return this.finishToken(types$1.eof) }
-
-    if (curContext.override) { return curContext.override(this) }
-    else { this.readToken(this.fullCharCodeAtPos()); }
-  };
-
-  pp.readToken = function(code) {
-    // Identifier or keyword. '\uXXXX' sequences are allowed in
-    // identifiers, so '\' also dispatches to that.
-    if (isIdentifierStart(code, this.options.ecmaVersion >= 6) || code === 92 /* '\' */)
-      { return this.readWord() }
-
-    return this.getTokenFromCode(code)
-  };
-
-  pp.fullCharCodeAtPos = function() {
-    var code = this.input.charCodeAt(this.pos);
-    if (code <= 0xd7ff || code >= 0xdc00) { return code }
-    var next = this.input.charCodeAt(this.pos + 1);
-    return next <= 0xdbff || next >= 0xe000 ? code : (code << 10) + next - 0x35fdc00
-  };
-
-  pp.skipBlockComment = function() {
-    var startLoc = this.options.onComment && this.curPosition();
-    var start = this.pos, end = this.input.indexOf("*/", this.pos += 2);
-    if (end === -1) { this.raise(this.pos - 2, "Unterminated comment"); }
-    this.pos = end + 2;
-    if (this.options.locations) {
-      for (var nextBreak = (void 0), pos = start; (nextBreak = nextLineBreak(this.input, pos, this.pos)) > -1;) {
-        ++this.curLine;
-        pos = this.lineStart = nextBreak;
-      }
-    }
-    if (this.options.onComment)
-      { this.options.onComment(true, this.input.slice(start + 2, end), start, this.pos,
-                             startLoc, this.curPosition()); }
-  };
-
-  pp.skipLineComment = function(startSkip) {
-    var start = this.pos;
-    var startLoc = this.options.onComment && this.curPosition();
-    var ch = this.input.charCodeAt(this.pos += startSkip);
-    while (this.pos < this.input.length && !isNewLine(ch)) {
-      ch = this.input.charCodeAt(++this.pos);
-    }
-    if (this.options.onComment)
-      { this.options.onComment(false, this.input.slice(start + startSkip, this.pos), start, this.pos,
-                             startLoc, this.curPosition()); }
-  };
-
-  // Called at the start of the parse and after every token. Skips
-  // whitespace and comments, and.
-
-  pp.skipSpace = function() {
-    loop: while (this.pos < this.input.length) {
-      var ch = this.input.charCodeAt(this.pos);
-      switch (ch) {
-      case 32: case 160: // ' '
-        ++this.pos;
-        break
-      case 13:
-        if (this.input.charCodeAt(this.pos + 1) === 10) {
-          ++this.pos;
-        }
-      case 10: case 8232: case 8233:
-        ++this.pos;
-        if (this.options.locations) {
-          ++this.curLine;
-          this.lineStart = this.pos;
-        }
-        break
-      case 47: // '/'
-        switch (this.input.charCodeAt(this.pos + 1)) {
-        case 42: // '*'
-          this.skipBlockComment();
-          break
-        case 47:
-          this.skipLineComment(2);
-          break
-        default:
-          break loop
-        }
-        break
-      default:
-        if (ch > 8 && ch < 14 || ch >= 5760 && nonASCIIwhitespace.test(String.fromCharCode(ch))) {
-          ++this.pos;
-        } else {
-          break loop
-        }
-      }
-    }
-  };
-
-  // Called at the end of every token. Sets `end`, `val`, and
-  // maintains `context` and `exprAllowed`, and skips the space after
-  // the token, so that the next one's `start` will point at the
-  // right position.
-
-  pp.finishToken = function(type, val) {
-    this.end = this.pos;
-    if (this.options.locations) { this.endLoc = this.curPosition(); }
-    var prevType = this.type;
-    this.type = type;
-    this.value = val;
-
-    this.updateContext(prevType);
-  };
-
-  // ### Token reading
-
-  // This is the function that is called to fetch the next token. It
-  // is somewhat obscure, because it works in character codes rather
-  // than characters, and because operator parsing has been inlined
-  // into it.
-  //
-  // All in the name of speed.
-  //
-  pp.readToken_dot = function() {
-    var next = this.input.charCodeAt(this.pos + 1);
-    if (next >= 48 && next <= 57) { return this.readNumber(true) }
-    var next2 = this.input.charCodeAt(this.pos + 2);
-    if (this.options.ecmaVersion >= 6 && next === 46 && next2 === 46) { // 46 = dot '.'
-      this.pos += 3;
-      return this.finishToken(types$1.ellipsis)
-    } else {
-      ++this.pos;
-      return this.finishToken(types$1.dot)
-    }
-  };
-
-  pp.readToken_slash = function() { // '/'
-    var next = this.input.charCodeAt(this.pos + 1);
-    if (this.exprAllowed) { ++this.pos; return this.readRegexp() }
-    if (next === 61) { return this.finishOp(types$1.assign, 2) }
-    return this.finishOp(types$1.slash, 1)
-  };
-
-  pp.readToken_mult_modulo_exp = function(code) { // '%*'
-    var next = this.input.charCodeAt(this.pos + 1);
-    var size = 1;
-    var tokentype = code === 42 ? types$1.star : types$1.modulo;
-
-    // exponentiation operator ** and **=
-    if (this.options.ecmaVersion >= 7 && code === 42 && next === 42) {
-      ++size;
-      tokentype = types$1.starstar;
-      next = this.input.charCodeAt(this.pos + 2);
-    }
-
-    if (next === 61) { return this.finishOp(types$1.assign, size + 1) }
-    return this.finishOp(tokentype, size)
-  };
-
-  pp.readToken_pipe_amp = function(code) { // '|&'
-    var next = this.input.charCodeAt(this.pos + 1);
-    if (next === code) {
-      if (this.options.ecmaVersion >= 12) {
-        var next2 = this.input.charCodeAt(this.pos + 2);
-        if (next2 === 61) { return this.finishOp(types$1.assign, 3) }
-      }
-      return this.finishOp(code === 124 ? types$1.logicalOR : types$1.logicalAND, 2)
-    }
-    if (next === 61) { return this.finishOp(types$1.assign, 2) }
-    return this.finishOp(code === 124 ? types$1.bitwiseOR : types$1.bitwiseAND, 1)
-  };
-
-  pp.readToken_caret = function() { // '^'
-    var next = this.input.charCodeAt(this.pos + 1);
-    if (next === 61) { return this.finishOp(types$1.assign, 2) }
-    return this.finishOp(types$1.bitwiseXOR, 1)
-  };
-
-  pp.readToken_plus_min = function(code) { // '+-'
-    var next = this.input.charCodeAt(this.pos + 1);
-    if (next === code) {
-      if (next === 45 && !this.inModule && this.input.charCodeAt(this.pos + 2) === 62 &&
-          (this.lastTokEnd === 0 || lineBreak.test(this.input.slice(this.lastTokEnd, this.pos)))) {
-        // A `-->` line comment
-        this.skipLineComment(3);
-        this.skipSpace();
-        return this.nextToken()
-      }
-      return this.finishOp(types$1.incDec, 2)
-    }
-    if (next === 61) { return this.finishOp(types$1.assign, 2) }
-    return this.finishOp(types$1.plusMin, 1)
-  };
-
-  pp.readToken_lt_gt = function(code) { // '<>'
-    var next = this.input.charCodeAt(this.pos + 1);
-    var size = 1;
-    if (next === code) {
-      size = code === 62 && this.input.charCodeAt(this.pos + 2) === 62 ? 3 : 2;
-      if (this.input.charCodeAt(this.pos + size) === 61) { return this.finishOp(types$1.assign, size + 1) }
-      return this.finishOp(types$1.bitShift, size)
-    }
-    if (next === 33 && code === 60 && !this.inModule && this.input.charCodeAt(this.pos + 2) === 45 &&
-        this.input.charCodeAt(this.pos + 3) === 45) {
-      // `<!--`, an XML-style comment that should be interpreted as a line comment
-      this.skipLineComment(4);
-      this.skipSpace();
-      return this.nextToken()
-    }
-    if (next === 61) { size = 2; }
-    return this.finishOp(types$1.relational, size)
-  };
-
-  pp.readToken_eq_excl = function(code) { // '=!'
-    var next = this.input.charCodeAt(this.pos + 1);
-    if (next === 61) { return this.finishOp(types$1.equality, this.input.charCodeAt(this.pos + 2) === 61 ? 3 : 2) }
-    if (code === 61 && next === 62 && this.options.ecmaVersion >= 6) { // '=>'
-      this.pos += 2;
-      return this.finishToken(types$1.arrow)
-    }
-    return this.finishOp(code === 61 ? types$1.eq : types$1.prefix, 1)
-  };
-
-  pp.readToken_question = function() { // '?'
-    var ecmaVersion = this.options.ecmaVersion;
-    if (ecmaVersion >= 11) {
-      var next = this.input.charCodeAt(this.pos + 1);
-      if (next === 46) {
-        var next2 = this.input.charCodeAt(this.pos + 2);
-        if (next2 < 48 || next2 > 57) { return this.finishOp(types$1.questionDot, 2) }
-      }
-      if (next === 63) {
-        if (ecmaVersion >= 12) {
-          var next2$1 = this.input.charCodeAt(this.pos + 2);
-          if (next2$1 === 61) { return this.finishOp(types$1.assign, 3) }
-        }
-        return this.finishOp(types$1.coalesce, 2)
-      }
-    }
-    return this.finishOp(types$1.question, 1)
-  };
-
-  pp.readToken_numberSign = function() { // '#'
-    var ecmaVersion = this.options.ecmaVersion;
-    var code = 35; // '#'
-    if (ecmaVersion >= 13) {
-      ++this.pos;
-      code = this.fullCharCodeAtPos();
-      if (isIdentifierStart(code, true) || code === 92 /* '\' */) {
-        return this.finishToken(types$1.privateId, this.readWord1())
-      }
-    }
-
-    this.raise(this.pos, "Unexpected character '" + codePointToString(code) + "'");
-  };
-
-  pp.getTokenFromCode = function(code) {
-    switch (code) {
-    // The interpretation of a dot depends on whether it is followed
-    // by a digit or another two dots.
-    case 46: // '.'
-      return this.readToken_dot()
-
-    // Punctuation tokens.
-    case 40: ++this.pos; return this.finishToken(types$1.parenL)
-    case 41: ++this.pos; return this.finishToken(types$1.parenR)
-    case 59: ++this.pos; return this.finishToken(types$1.semi)
-    case 44: ++this.pos; return this.finishToken(types$1.comma)
-    case 91: ++this.pos; return this.finishToken(types$1.bracketL)
-    case 93: ++this.pos; return this.finishToken(types$1.bracketR)
-    case 123: ++this.pos; return this.finishToken(types$1.braceL)
-    case 125: ++this.pos; return this.finishToken(types$1.braceR)
-    case 58: ++this.pos; return this.finishToken(types$1.colon)
-
-    case 96: // '`'
-      if (this.options.ecmaVersion < 6) { break }
-      ++this.pos;
-      return this.finishToken(types$1.backQuote)
-
-    case 48: // '0'
-      var next = this.input.charCodeAt(this.pos + 1);
-      if (next === 120 || next === 88) { return this.readRadixNumber(16) } // '0x', '0X' - hex number
-      if (this.options.ecmaVersion >= 6) {
-        if (next === 111 || next === 79) { return this.readRadixNumber(8) } // '0o', '0O' - octal number
-        if (next === 98 || next === 66) { return this.readRadixNumber(2) } // '0b', '0B' - binary number
-      }
-
-    // Anything else beginning with a digit is an integer, octal
-    // number, or float.
-    case 49: case 50: case 51: case 52: case 53: case 54: case 55: case 56: case 57: // 1-9
-      return this.readNumber(false)
-
-    // Quotes produce strings.
-    case 34: case 39: // '"', "'"
-      return this.readString(code)
-
-    // Operators are parsed inline in tiny state machines. '=' (61) is
-    // often referred to. `finishOp` simply skips the amount of
-    // characters it is given as second argument, and returns a token
-    // of the type given by its first argument.
-    case 47: // '/'
-      return this.readToken_slash()
-
-    case 37: case 42: // '%*'
-      return this.readToken_mult_modulo_exp(code)
-
-    case 124: case 38: // '|&'
-      return this.readToken_pipe_amp(code)
-
-    case 94: // '^'
-      return this.readToken_caret()
-
-    case 43: case 45: // '+-'
-      return this.readToken_plus_min(code)
-
-    case 60: case 62: // '<>'
-      return this.readToken_lt_gt(code)
-
-    case 61: case 33: // '=!'
-      return this.readToken_eq_excl(code)
-
-    case 63: // '?'
-      return this.readToken_question()
-
-    case 126: // '~'
-      return this.finishOp(types$1.prefix, 1)
-
-    case 35: // '#'
-      return this.readToken_numberSign()
-    }
-
-    this.raise(this.pos, "Unexpected character '" + codePointToString(code) + "'");
-  };
-
-  pp.finishOp = function(type, size) {
-    var str = this.input.slice(this.pos, this.pos + size);
-    this.pos += size;
-    return this.finishToken(type, str)
-  };
-
-  pp.readRegexp = function() {
-    var escaped, inClass, start = this.pos;
-    for (;;) {
-      if (this.pos >= this.input.length) { this.raise(start, "Unterminated regular expression"); }
-      var ch = this.input.charAt(this.pos);
-      if (lineBreak.test(ch)) { this.raise(start, "Unterminated regular expression"); }
-      if (!escaped) {
-        if (ch === "[") { inClass = true; }
-        else if (ch === "]" && inClass) { inClass = false; }
-        else if (ch === "/" && !inClass) { break }
-        escaped = ch === "\\";
-      } else { escaped = false; }
-      ++this.pos;
-    }
-    var pattern = this.input.slice(start, this.pos);
-    ++this.pos;
-    var flagsStart = this.pos;
-    var flags = this.readWord1();
-    if (this.containsEsc) { this.unexpected(flagsStart); }
-
-    // Validate pattern
-    var state = this.regexpState || (this.regexpState = new RegExpValidationState(this));
-    state.reset(start, pattern, flags);
-    this.validateRegExpFlags(state);
-    this.validateRegExpPattern(state);
-
-    // Create Literal#value property value.
-    var value = null;
-    try {
-      value = new RegExp(pattern, flags);
-    } catch (e) {
-      // ESTree requires null if it failed to instantiate RegExp object.
-      // https://github.com/estree/estree/blob/a27003adf4fd7bfad44de9cef372a2eacd527b1c/es5.md#regexpliteral
-    }
-
-    return this.finishToken(types$1.regexp, {pattern: pattern, flags: flags, value: value})
-  };
-
-  // Read an integer in the given radix. Return null if zero digits
-  // were read, the integer value otherwise. When `len` is given, this
-  // will return `null` unless the integer has exactly `len` digits.
-
-  pp.readInt = function(radix, len, maybeLegacyOctalNumericLiteral) {
-    // `len` is used for character escape sequences. In that case, disallow separators.
-    var allowSeparators = this.options.ecmaVersion >= 12 && len === undefined;
-
-    // `maybeLegacyOctalNumericLiteral` is true if it doesn't have prefix (0x,0o,0b)
-    // and isn't fraction part nor exponent part. In that case, if the first digit
-    // is zero then disallow separators.
-    var isLegacyOctalNumericLiteral = maybeLegacyOctalNumericLiteral && this.input.charCodeAt(this.pos) === 48;
-
-    var start = this.pos, total = 0, lastCode = 0;
-    for (var i = 0, e = len == null ? Infinity : len; i < e; ++i, ++this.pos) {
-      var code = this.input.charCodeAt(this.pos), val = (void 0);
-
-      if (allowSeparators && code === 95) {
-        if (isLegacyOctalNumericLiteral) { this.raiseRecoverable(this.pos, "Numeric separator is not allowed in legacy octal numeric literals"); }
-        if (lastCode === 95) { this.raiseRecoverable(this.pos, "Numeric separator must be exactly one underscore"); }
-        if (i === 0) { this.raiseRecoverable(this.pos, "Numeric separator is not allowed at the first of digits"); }
-        lastCode = code;
-        continue
-      }
-
-      if (code >= 97) { val = code - 97 + 10; } // a
-      else if (code >= 65) { val = code - 65 + 10; } // A
-      else if (code >= 48 && code <= 57) { val = code - 48; } // 0-9
-      else { val = Infinity; }
-      if (val >= radix) { break }
-      lastCode = code;
-      total = total * radix + val;
-    }
-
-    if (allowSeparators && lastCode === 95) { this.raiseRecoverable(this.pos - 1, "Numeric separator is not allowed at the last of digits"); }
-    if (this.pos === start || len != null && this.pos - start !== len) { return null }
-
-    return total
-  };
-
-  function stringToNumber(str, isLegacyOctalNumericLiteral) {
-    if (isLegacyOctalNumericLiteral) {
-      return parseInt(str, 8)
-    }
-
-    // `parseFloat(value)` stops parsing at the first numeric separator then returns a wrong value.
-    return parseFloat(str.replace(/_/g, ""))
-  }
-
-  function stringToBigInt(str) {
-    if (typeof BigInt !== "function") {
-      return null
-    }
-
-    // `BigInt(value)` throws syntax error if the string contains numeric separators.
-    return BigInt(str.replace(/_/g, ""))
-  }
-
-  pp.readRadixNumber = function(radix) {
-    var start = this.pos;
-    this.pos += 2; // 0x
-    var val = this.readInt(radix);
-    if (val == null) { this.raise(this.start + 2, "Expected number in radix " + radix); }
-    if (this.options.ecmaVersion >= 11 && this.input.charCodeAt(this.pos) === 110) {
-      val = stringToBigInt(this.input.slice(start, this.pos));
-      ++this.pos;
-    } else if (isIdentifierStart(this.fullCharCodeAtPos())) { this.raise(this.pos, "Identifier directly after number"); }
-    return this.finishToken(types$1.num, val)
-  };
-
-  // Read an integer, octal integer, or floating-point number.
-
-  pp.readNumber = function(startsWithDot) {
-    var start = this.pos;
-    if (!startsWithDot && this.readInt(10, undefined, true) === null) { this.raise(start, "Invalid number"); }
-    var octal = this.pos - start >= 2 && this.input.charCodeAt(start) === 48;
-    if (octal && this.strict) { this.raise(start, "Invalid number"); }
-    var next = this.input.charCodeAt(this.pos);
-    if (!octal && !startsWithDot && this.options.ecmaVersion >= 11 && next === 110) {
-      var val$1 = stringToBigInt(this.input.slice(start, this.pos));
-      ++this.pos;
-      if (isIdentifierStart(this.fullCharCodeAtPos())) { this.raise(this.pos, "Identifier directly after number"); }
-      return this.finishToken(types$1.num, val$1)
-    }
-    if (octal && /[89]/.test(this.input.slice(start, this.pos))) { octal = false; }
-    if (next === 46 && !octal) { // '.'
-      ++this.pos;
-      this.readInt(10);
-      next = this.input.charCodeAt(this.pos);
-    }
-    if ((next === 69 || next === 101) && !octal) { // 'eE'
-      next = this.input.charCodeAt(++this.pos);
-      if (next === 43 || next === 45) { ++this.pos; } // '+-'
-      if (this.readInt(10) === null) { this.raise(start, "Invalid number"); }
-    }
-    if (isIdentifierStart(this.fullCharCodeAtPos())) { this.raise(this.pos, "Identifier directly after number"); }
-
-    var val = stringToNumber(this.input.slice(start, this.pos), octal);
-    return this.finishToken(types$1.num, val)
-  };
-
-  // Read a string value, interpreting backslash-escapes.
-
-  pp.readCodePoint = function() {
-    var ch = this.input.charCodeAt(this.pos), code;
-
-    if (ch === 123) { // '{'
-      if (this.options.ecmaVersion < 6) { this.unexpected(); }
-      var codePos = ++this.pos;
-      code = this.readHexChar(this.input.indexOf("}", this.pos) - this.pos);
-      ++this.pos;
-      if (code > 0x10FFFF) { this.invalidStringToken(codePos, "Code point out of bounds"); }
-    } else {
-      code = this.readHexChar(4);
-    }
-    return code
-  };
-
-  function codePointToString(code) {
-    // UTF-16 Decoding
-    if (code <= 0xFFFF) { return String.fromCharCode(code) }
-    code -= 0x10000;
-    return String.fromCharCode((code >> 10) + 0xD800, (code & 1023) + 0xDC00)
-  }
-
-  pp.readString = function(quote) {
-    var out = "", chunkStart = ++this.pos;
-    for (;;) {
-      if (this.pos >= this.input.length) { this.raise(this.start, "Unterminated string constant"); }
-      var ch = this.input.charCodeAt(this.pos);
-      if (ch === quote) { break }
-      if (ch === 92) { // '\'
-        out += this.input.slice(chunkStart, this.pos);
-        out += this.readEscapedChar(false);
-        chunkStart = this.pos;
-      } else if (ch === 0x2028 || ch === 0x2029) {
-        if (this.options.ecmaVersion < 10) { this.raise(this.start, "Unterminated string constant"); }
-        ++this.pos;
-        if (this.options.locations) {
-          this.curLine++;
-          this.lineStart = this.pos;
-        }
-      } else {
-        if (isNewLine(ch)) { this.raise(this.start, "Unterminated string constant"); }
-        ++this.pos;
-      }
-    }
-    out += this.input.slice(chunkStart, this.pos++);
-    return this.finishToken(types$1.string, out)
-  };
-
-  // Reads template string tokens.
-
-  var INVALID_TEMPLATE_ESCAPE_ERROR = {};
-
-  pp.tryReadTemplateToken = function() {
-    this.inTemplateElement = true;
-    try {
-      this.readTmplToken();
-    } catch (err) {
-      if (err === INVALID_TEMPLATE_ESCAPE_ERROR) {
-        this.readInvalidTemplateToken();
-      } else {
-        throw err
-      }
-    }
-
-    this.inTemplateElement = false;
-  };
-
-  pp.invalidStringToken = function(position, message) {
-    if (this.inTemplateElement && this.options.ecmaVersion >= 9) {
-      throw INVALID_TEMPLATE_ESCAPE_ERROR
-    } else {
-      this.raise(position, message);
-    }
-  };
-
-  pp.readTmplToken = function() {
-    var out = "", chunkStart = this.pos;
-    for (;;) {
-      if (this.pos >= this.input.length) { this.raise(this.start, "Unterminated template"); }
-      var ch = this.input.charCodeAt(this.pos);
-      if (ch === 96 || ch === 36 && this.input.charCodeAt(this.pos + 1) === 123) { // '`', '${'
-        if (this.pos === this.start && (this.type === types$1.template || this.type === types$1.invalidTemplate)) {
-          if (ch === 36) {
-            this.pos += 2;
-            return this.finishToken(types$1.dollarBraceL)
-          } else {
-            ++this.pos;
-            return this.finishToken(types$1.backQuote)
-          }
-        }
-        out += this.input.slice(chunkStart, this.pos);
-        return this.finishToken(types$1.template, out)
-      }
-      if (ch === 92) { // '\'
-        out += this.input.slice(chunkStart, this.pos);
-        out += this.readEscapedChar(true);
-        chunkStart = this.pos;
-      } else if (isNewLine(ch)) {
-        out += this.input.slice(chunkStart, this.pos);
-        ++this.pos;
-        switch (ch) {
-        case 13:
-          if (this.input.charCodeAt(this.pos) === 10) { ++this.pos; }
-        case 10:
-          out += "\n";
-          break
-        default:
-          out += String.fromCharCode(ch);
-          break
-        }
-        if (this.options.locations) {
-          ++this.curLine;
-          this.lineStart = this.pos;
-        }
-        chunkStart = this.pos;
-      } else {
-        ++this.pos;
-      }
-    }
-  };
-
-  // Reads a template token to search for the end, without validating any escape sequences
-  pp.readInvalidTemplateToken = function() {
-    for (; this.pos < this.input.length; this.pos++) {
-      switch (this.input[this.pos]) {
-      case "\\":
-        ++this.pos;
-        break
-
-      case "$":
-        if (this.input[this.pos + 1] !== "{") {
-          break
-        }
-
-      // falls through
-      case "`":
-        return this.finishToken(types$1.invalidTemplate, this.input.slice(this.start, this.pos))
-
-      // no default
-      }
-    }
-    this.raise(this.start, "Unterminated template");
-  };
-
-  // Used to read escaped characters
-
-  pp.readEscapedChar = function(inTemplate) {
-    var ch = this.input.charCodeAt(++this.pos);
-    ++this.pos;
-    switch (ch) {
-    case 110: return "\n" // 'n' -> '\n'
-    case 114: return "\r" // 'r' -> '\r'
-    case 120: return String.fromCharCode(this.readHexChar(2)) // 'x'
-    case 117: return codePointToString(this.readCodePoint()) // 'u'
-    case 116: return "\t" // 't' -> '\t'
-    case 98: return "\b" // 'b' -> '\b'
-    case 118: return "\u000b" // 'v' -> '\u000b'
-    case 102: return "\f" // 'f' -> '\f'
-    case 13: if (this.input.charCodeAt(this.pos) === 10) { ++this.pos; } // '\r\n'
-    case 10: // ' \n'
-      if (this.options.locations) { this.lineStart = this.pos; ++this.curLine; }
-      return ""
-    case 56:
-    case 57:
-      if (this.strict) {
-        this.invalidStringToken(
-          this.pos - 1,
-          "Invalid escape sequence"
-        );
-      }
-      if (inTemplate) {
-        var codePos = this.pos - 1;
-
-        this.invalidStringToken(
-          codePos,
-          "Invalid escape sequence in template string"
-        );
-
-        return null
-      }
-    default:
-      if (ch >= 48 && ch <= 55) {
-        var octalStr = this.input.substr(this.pos - 1, 3).match(/^[0-7]+/)[0];
-        var octal = parseInt(octalStr, 8);
-        if (octal > 255) {
-          octalStr = octalStr.slice(0, -1);
-          octal = parseInt(octalStr, 8);
-        }
-        this.pos += octalStr.length - 1;
-        ch = this.input.charCodeAt(this.pos);
-        if ((octalStr !== "0" || ch === 56 || ch === 57) && (this.strict || inTemplate)) {
-          this.invalidStringToken(
-            this.pos - 1 - octalStr.length,
-            inTemplate
-              ? "Octal literal in template string"
-              : "Octal literal in strict mode"
-          );
-        }
-        return String.fromCharCode(octal)
-      }
-      if (isNewLine(ch)) {
-        // Unicode new line characters after \ get removed from output in both
-        // template literals and strings
-        return ""
-      }
-      return String.fromCharCode(ch)
-    }
-  };
-
-  // Used to read character escape sequences ('\x', '\u', '\U').
-
-  pp.readHexChar = function(len) {
-    var codePos = this.pos;
-    var n = this.readInt(16, len);
-    if (n === null) { this.invalidStringToken(codePos, "Bad character escape sequence"); }
-    return n
-  };
-
-  // Read an identifier, and return it as a string. Sets `this.containsEsc`
-  // to whether the word contained a '\u' escape.
-  //
-  // Incrementally adds only escaped chars, adding other chunks as-is
-  // as a micro-optimization.
-
-  pp.readWord1 = function() {
-    this.containsEsc = false;
-    var word = "", first = true, chunkStart = this.pos;
-    var astral = this.options.ecmaVersion >= 6;
-    while (this.pos < this.input.length) {
-      var ch = this.fullCharCodeAtPos();
-      if (isIdentifierChar(ch, astral)) {
-        this.pos += ch <= 0xffff ? 1 : 2;
-      } else if (ch === 92) { // "\"
-        this.containsEsc = true;
-        word += this.input.slice(chunkStart, this.pos);
-        var escStart = this.pos;
-        if (this.input.charCodeAt(++this.pos) !== 117) // "u"
-          { this.invalidStringToken(this.pos, "Expecting Unicode escape sequence \\uXXXX"); }
-        ++this.pos;
-        var esc = this.readCodePoint();
-        if (!(first ? isIdentifierStart : isIdentifierChar)(esc, astral))
-          { this.invalidStringToken(escStart, "Invalid Unicode escape"); }
-        word += codePointToString(esc);
-        chunkStart = this.pos;
-      } else {
-        break
-      }
-      first = false;
-    }
-    return word + this.input.slice(chunkStart, this.pos)
-  };
-
-  // Read an identifier or keyword token. Will check for reserved
-  // words when necessary.
-
-  pp.readWord = function() {
-    var word = this.readWord1();
-    var type = types$1.name;
-    if (this.keywords.test(word)) {
-      type = keywords[word];
-    }
-    return this.finishToken(type, word)
-  };
-
-  // Acorn is a tiny, fast JavaScript parser written in JavaScript.
-
-  var version = "8.7.0";
-
-  Parser.acorn = {
-    Parser: Parser,
-    version: version,
-    defaultOptions: defaultOptions,
-    Position: Position,
-    SourceLocation: SourceLocation,
-    getLineInfo: getLineInfo,
-    Node: Node,
-    TokenType: TokenType,
-    tokTypes: types$1,
-    keywordTypes: keywords,
-    TokContext: TokContext,
-    tokContexts: types,
-    isIdentifierChar: isIdentifierChar,
-    isIdentifierStart: isIdentifierStart,
-    Token: Token,
-    isNewLine: isNewLine,
-    lineBreak: lineBreak,
-    lineBreakG: lineBreakG,
-    nonASCIIwhitespace: nonASCIIwhitespace
-  };
-
-  // The main exported interface (under `self.acorn` when in the
-  // browser) is a `parse` function that takes a code string and
-  // returns an abstract syntax tree as specified by [Mozilla parser
-  // API][api].
-  //
-  // [api]: https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API
-
-  function parse(input, options) {
-    return Parser.parse(input, options)
-  }
-
-  // This function tries to parse a single expression at a given
-  // offset in a string. Useful for parsing mixed-language formats
-  // that embed JavaScript expressions.
-
-  function parseExpressionAt(input, pos, options) {
-    return Parser.parseExpressionAt(input, pos, options)
-  }
-
-  // Acorn is organized as a tokenizer and a recursive-descent parser.
-  // The `tokenizer` export provides an interface to the tokenizer.
-
-  function tokenizer(input, options) {
-    return Parser.tokenizer(input, options)
-  }
-
-  exports.Node = Node;
-  exports.Parser = Parser;
-  exports.Position = Position;
-  exports.SourceLocation = SourceLocation;
-  exports.TokContext = TokContext;
-  exports.Token = Token;
-  exports.TokenType = TokenType;
-  exports.defaultOptions = defaultOptions;
-  exports.getLineInfo = getLineInfo;
-  exports.isIdentifierChar = isIdentifierChar;
-  exports.isIdentifierStart = isIdentifierStart;
-  exports.isNewLine = isNewLine;
-  exports.keywordTypes = keywords;
-  exports.lineBreak = lineBreak;
-  exports.lineBreakG = lineBreakG;
-  exports.nonASCIIwhitespace = nonASCIIwhitespace;
-  exports.parse = parse;
-  exports.parseExpressionAt = parseExpressionAt;
-  exports.tokContexts = types;
-  exports.tokTypes = types$1;
-  exports.tokenizer = tokenizer;
-  exports.version = version;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-}));
-
-
-/***/ }),
-
 /***/ 9690:
 /***/ (function(module, __unused_webpack_exports, __nccwpck_require__) {
 
@@ -14586,7 +8775,7 @@ module.exports = once;
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const events_1 = __nccwpck_require__(2361);
+const events_1 = __nccwpck_require__(8614);
 const debug_1 = __importDefault(__nccwpck_require__(8237));
 const promisify_1 = __importDefault(__nccwpck_require__(6570));
 const debug = debug_1.default('agent-base');
@@ -14808,7 +8997,7 @@ function promisify(fn) {
         });
     };
 }
-exports["default"] = promisify;
+exports.default = promisify;
 //# sourceMappingURL=promisify.js.map
 
 /***/ }),
@@ -15071,7 +9260,7 @@ function default_1(fork) {
         .bases("Expression")
         .build();
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -15090,7 +9279,7 @@ function default_1(fork) {
     fork.use(babel_core_1.default);
     fork.use(flow_1.default);
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -15396,7 +9585,7 @@ function default_1(fork) {
         .field("leading", Boolean, defaults["true"])
         .field("trailing", Boolean, defaults["false"]);
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -15437,7 +9626,7 @@ function default_1(fork) {
     def("LogicalExpression")
         .field("operator", LogicalOperator);
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -15461,7 +9650,7 @@ function default_1(fork) {
         .build("source")
         .field("source", def("Expression"));
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -15679,7 +9868,7 @@ function default_1(fork) {
         .field("value", { "cooked": String, "raw": String })
         .field("tail", Boolean);
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -15721,7 +9910,7 @@ function default_1(fork) {
         .field("argument", or(def("Expression"), null))
         .field("all", Boolean, defaults["false"]);
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -15778,7 +9967,7 @@ function default_1(fork) {
         .bases("Comment")
         .build("value", /*optional:*/ "leading", "trailing");
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -16078,7 +10267,7 @@ function default_1(fork) {
     def("NewExpression")
         .field("typeArguments", or(null, def("TypeParameterInstantiation")), defaults["null"]);
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -16189,7 +10378,7 @@ function default_1(fork) {
         .build("expression")
         .field("expression", def("Expression"));
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -16237,7 +10426,7 @@ function default_1(fork) {
             .field("implements", or([def("ClassImplements")], [def("TSExpressionWithTypeArguments")]), defaults.emptyArray);
     });
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -16589,7 +10778,7 @@ function default_1(fork) {
         // Just need to add these types:
         def("TSDeclareMethod"), TSTypeMember)]);
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -16634,7 +10823,7 @@ function default_1(defs) {
         visit: PathVisitor.visit,
     };
 }
-exports["default"] = default_1;
+exports.default = default_1;
 function createFork() {
     var used = [];
     var usedResult = [];
@@ -16825,7 +11014,7 @@ function default_1(fork) {
     }
     return astNodesAreEquivalent;
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -17244,7 +11433,7 @@ function nodePathPlugin(fork) {
     }
     return NodePath;
 }
-exports["default"] = nodePathPlugin;
+exports.default = nodePathPlugin;
 module.exports = exports["default"];
 
 
@@ -17595,7 +11784,7 @@ function pathVisitorPlugin(fork) {
     };
     return PathVisitor;
 }
-exports["default"] = pathVisitorPlugin;
+exports.default = pathVisitorPlugin;
 module.exports = exports["default"];
 
 
@@ -17934,7 +12123,7 @@ function pathPlugin(fork) {
     };
     return Path;
 }
-exports["default"] = pathPlugin;
+exports.default = pathPlugin;
 module.exports = exports["default"];
 
 
@@ -18260,7 +12449,7 @@ function scopePlugin(fork) {
     };
     return Scope;
 }
-exports["default"] = scopePlugin;
+exports.default = scopePlugin;
 module.exports = exports["default"];
 
 
@@ -18315,7 +12504,7 @@ function default_1(fork) {
         isPrimitive: isPrimitive,
     };
 }
-exports["default"] = default_1;
+exports.default = default_1;
 module.exports = exports["default"];
 
 
@@ -19103,7 +13292,7 @@ function typesPlugin(_fork) {
         finalize: finalize,
     };
 }
-exports["default"] = typesPlugin;
+exports.default = typesPlugin;
 ;
 
 
@@ -19920,7 +14109,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __nccwpck_require__(4300).Buffer.isBuffer;
+exports.isBuffer = __nccwpck_require__(4293).Buffer.isBuffer;
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -19929,7 +14118,7 @@ function objectToString(o) {
 
 /***/ }),
 
-/***/ 2371:
+/***/ 7799:
 /***/ ((module) => {
 
 "use strict";
@@ -20571,8 +14760,8 @@ if (typeof process === 'undefined' || process.type === 'renderer' || process.bro
  * Module dependencies.
  */
 
-const tty = __nccwpck_require__(6224);
-const util = __nccwpck_require__(3837);
+const tty = __nccwpck_require__(3867);
+const util = __nccwpck_require__(1669);
 
 /**
  * This is the Node.js implementation of `debug()`.
@@ -20839,11 +15028,11 @@ formatters.O = function (v) {
 
 "use strict";
 
-const util_1 = __nccwpck_require__(3837);
-const escodegen_1 = __nccwpck_require__(6426);
+const util_1 = __nccwpck_require__(1669);
+const escodegen_1 = __nccwpck_require__(7398);
 const esprima_1 = __nccwpck_require__(8823);
 const ast_types_1 = __nccwpck_require__(7012);
-const vm2_1 = __nccwpck_require__(2417);
+const vm2_1 = __nccwpck_require__(4315);
 /**
  * Compiles sync JavaScript code into JavaScript with async Functions.
  *
@@ -21028,7 +15217,7 @@ module.exports = degenerator;
 
 /***/ }),
 
-/***/ 6426:
+/***/ 7398:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 /*
@@ -23601,7 +17790,7 @@ module.exports = degenerator;
             if (!exports.browser) {
                 // We assume environment is node.js
                 // And prevent from including source-map by browserify
-                SourceNode = (__nccwpck_require__(6594).SourceNode);
+                SourceNode = __nccwpck_require__(6594).SourceNode;
             } else {
                 SourceNode = global.sourceMap.SourceNode;
             }
@@ -23648,7 +17837,7 @@ module.exports = degenerator;
 
     FORMAT_DEFAULTS = getDefaultOptions().format;
 
-    exports.version = __nccwpck_require__(783).version;
+    exports.version = __nccwpck_require__(1875).version;
     exports.generate = generate;
     exports.attachComments = estraverse.attachComments;
     exports.Precedence = updateDeeply({}, Precedence);
@@ -23674,9 +17863,9 @@ module.exports = degenerator;
  * Module dependencies.
  */
 
-var callSiteToString = (__nccwpck_require__(9829).callSiteToString)
-var eventListenerCount = (__nccwpck_require__(9829).eventListenerCount)
-var relative = (__nccwpck_require__(1017).relative)
+var callSiteToString = __nccwpck_require__(9829).callSiteToString
+var eventListenerCount = __nccwpck_require__(9829).eventListenerCount
+var relative = __nccwpck_require__(5622).relative
 
 /**
  * Module exports.
@@ -24348,7 +18537,7 @@ function eventListenerCount (emitter, type) {
  * @private
  */
 
-var EventEmitter = (__nccwpck_require__(2361).EventEmitter)
+var EventEmitter = __nccwpck_require__(8614).EventEmitter
 
 /**
  * Module exports.
@@ -31927,7 +26116,7 @@ return /******/ (function(modules) { // webpackBootstrap
         return tree;
     }
 
-    exports.version = (__nccwpck_require__(2600)/* .version */ .i8);
+    exports.version = __nccwpck_require__(2788)/* .version */ .i8;
     exports.Syntax = Syntax;
     exports.traverse = traverse;
     exports.replace = replace;
@@ -32454,7 +26643,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 
-const path_1 = __nccwpck_require__(1017);
+const path_1 = __nccwpck_require__(5622);
 /**
  * File URI to Path function.
  *
@@ -32515,9 +26704,9 @@ module.exports = fileUriToPath;
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const mkdirpSync = (__nccwpck_require__(8605).mkdirsSync)
-const utimesSync = (__nccwpck_require__(2548).utimesMillisSync)
+const path = __nccwpck_require__(5622)
+const mkdirpSync = __nccwpck_require__(2915).mkdirsSync
+const utimesSync = __nccwpck_require__(2548).utimesMillisSync
 const stat = __nccwpck_require__(3901)
 
 function copySync (src, dest, opts) {
@@ -32700,10 +26889,10 @@ module.exports = {
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const mkdirp = (__nccwpck_require__(8605).mkdirs)
-const pathExists = (__nccwpck_require__(3835).pathExists)
-const utimes = (__nccwpck_require__(2548).utimesMillis)
+const path = __nccwpck_require__(5622)
+const mkdirp = __nccwpck_require__(2915).mkdirs
+const pathExists = __nccwpck_require__(3835).pathExists
+const utimes = __nccwpck_require__(2548).utimesMillis
 const stat = __nccwpck_require__(3901)
 
 function copy (src, dest, opts, cb) {
@@ -32919,7 +27108,7 @@ module.exports = copy
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 module.exports = {
   copy: u(__nccwpck_require__(8834))
 }
@@ -32933,10 +27122,10 @@ module.exports = {
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const mkdir = __nccwpck_require__(8605)
+const path = __nccwpck_require__(5622)
+const mkdir = __nccwpck_require__(2915)
 const remove = __nccwpck_require__(7357)
 
 const emptyDir = u(function emptyDir (dir, callback) {
@@ -32989,11 +27178,11 @@ module.exports = {
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
-const path = __nccwpck_require__(1017)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
+const path = __nccwpck_require__(5622)
 const fs = __nccwpck_require__(7758)
-const mkdir = __nccwpck_require__(8605)
-const pathExists = (__nccwpck_require__(3835).pathExists)
+const mkdir = __nccwpck_require__(2915)
+const pathExists = __nccwpck_require__(3835).pathExists
 
 function createFile (file, callback) {
   function makeFile () {
@@ -33077,11 +27266,11 @@ module.exports = {
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
-const path = __nccwpck_require__(1017)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
+const path = __nccwpck_require__(5622)
 const fs = __nccwpck_require__(7758)
-const mkdir = __nccwpck_require__(8605)
-const pathExists = (__nccwpck_require__(3835).pathExists)
+const mkdir = __nccwpck_require__(2915)
+const pathExists = __nccwpck_require__(3835).pathExists
 
 function createLink (srcpath, dstpath, callback) {
   function makeLink (srcpath, dstpath) {
@@ -33146,9 +27335,9 @@ module.exports = {
 "use strict";
 
 
-const path = __nccwpck_require__(1017)
+const path = __nccwpck_require__(5622)
 const fs = __nccwpck_require__(7758)
-const pathExists = (__nccwpck_require__(3835).pathExists)
+const pathExists = __nccwpck_require__(3835).pathExists
 
 /**
  * Function that returns two types of paths, one relative to symlink, and one
@@ -33292,10 +27481,10 @@ module.exports = {
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
-const path = __nccwpck_require__(1017)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
+const path = __nccwpck_require__(5622)
 const fs = __nccwpck_require__(7758)
-const _mkdirs = __nccwpck_require__(8605)
+const _mkdirs = __nccwpck_require__(2915)
 const mkdirs = _mkdirs.mkdirs
 const mkdirsSync = _mkdirs.mkdirsSync
 
@@ -33307,7 +27496,7 @@ const _symlinkType = __nccwpck_require__(8254)
 const symlinkType = _symlinkType.symlinkType
 const symlinkTypeSync = _symlinkType.symlinkTypeSync
 
-const pathExists = (__nccwpck_require__(3835).pathExists)
+const pathExists = __nccwpck_require__(3835).pathExists
 
 function createSymlink (srcpath, dstpath, type, callback) {
   callback = (typeof type === 'function') ? type : callback
@@ -33364,7 +27553,7 @@ module.exports = {
 
 // This is adapted from https://github.com/normalize/mz
 // Copyright (c) 2014-2016 Jonathan Ong me@jongleberry.com and Contributors
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 const fs = __nccwpck_require__(7758)
 
 const api = [
@@ -33490,7 +27679,7 @@ module.exports = Object.assign(
   __nccwpck_require__(6970),
   __nccwpck_require__(55),
   __nccwpck_require__(213),
-  __nccwpck_require__(8605),
+  __nccwpck_require__(2915),
   __nccwpck_require__(9665),
   __nccwpck_require__(1497),
   __nccwpck_require__(9161),
@@ -33500,7 +27689,7 @@ module.exports = Object.assign(
 
 // Export fs.promises as a getter property so that we don't trigger
 // ExperimentalWarning before fs.promises is actually accessed.
-const fs = __nccwpck_require__(7147)
+const fs = __nccwpck_require__(5747)
 if (Object.getOwnPropertyDescriptor(fs, 'promises')) {
   Object.defineProperty(module.exports, "promises", ({
     get () { return fs.promises }
@@ -33516,7 +27705,7 @@ if (Object.getOwnPropertyDescriptor(fs, 'promises')) {
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 const jsonFile = __nccwpck_require__(8970)
 
 jsonFile.outputJson = u(__nccwpck_require__(531))
@@ -33540,7 +27729,7 @@ module.exports = jsonFile
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 const jsonFile = __nccwpck_require__(6160)
 
 module.exports = {
@@ -33561,8 +27750,8 @@ module.exports = {
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const mkdir = __nccwpck_require__(8605)
+const path = __nccwpck_require__(5622)
+const mkdir = __nccwpck_require__(2915)
 const jsonFile = __nccwpck_require__(8970)
 
 function outputJsonSync (file, data, options) {
@@ -33586,9 +27775,9 @@ module.exports = outputJsonSync
 "use strict";
 
 
-const path = __nccwpck_require__(1017)
-const mkdir = __nccwpck_require__(8605)
-const pathExists = (__nccwpck_require__(3835).pathExists)
+const path = __nccwpck_require__(5622)
+const mkdir = __nccwpck_require__(2915)
+const pathExists = __nccwpck_require__(3835).pathExists
 const jsonFile = __nccwpck_require__(8970)
 
 function outputJson (file, data, options, callback) {
@@ -33615,12 +27804,12 @@ module.exports = outputJson
 
 /***/ }),
 
-/***/ 8605:
+/***/ 2915:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 const mkdirs = u(__nccwpck_require__(9677))
 const mkdirsSync = __nccwpck_require__(684)
 
@@ -33644,8 +27833,8 @@ module.exports = {
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const invalidWin32Path = (__nccwpck_require__(1590).invalidWin32Path)
+const path = __nccwpck_require__(5622)
+const invalidWin32Path = __nccwpck_require__(1590).invalidWin32Path
 
 const o777 = parseInt('0777', 8)
 
@@ -33706,8 +27895,8 @@ module.exports = mkdirsSync
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const invalidWin32Path = (__nccwpck_require__(1590).invalidWin32Path)
+const path = __nccwpck_require__(5622)
+const invalidWin32Path = __nccwpck_require__(1590).invalidWin32Path
 
 const o777 = parseInt('0777', 8)
 
@@ -33776,7 +27965,7 @@ module.exports = mkdirs
 "use strict";
 
 
-const path = __nccwpck_require__(1017)
+const path = __nccwpck_require__(5622)
 
 // get drive on windows
 function getRootPath (p) {
@@ -33823,10 +28012,10 @@ module.exports = {
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const copySync = (__nccwpck_require__(1135).copySync)
-const removeSync = (__nccwpck_require__(7357).removeSync)
-const mkdirpSync = (__nccwpck_require__(8605).mkdirpSync)
+const path = __nccwpck_require__(5622)
+const copySync = __nccwpck_require__(1135).copySync
+const removeSync = __nccwpck_require__(7357).removeSync
+const mkdirpSync = __nccwpck_require__(2915).mkdirpSync
 const stat = __nccwpck_require__(3901)
 
 function moveSync (src, dest, opts) {
@@ -33877,7 +28066,7 @@ module.exports = moveSync
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 module.exports = {
   move: u(__nccwpck_require__(2231))
 }
@@ -33892,11 +28081,11 @@ module.exports = {
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const copy = (__nccwpck_require__(1335).copy)
-const remove = (__nccwpck_require__(7357).remove)
-const mkdirp = (__nccwpck_require__(8605).mkdirp)
-const pathExists = (__nccwpck_require__(3835).pathExists)
+const path = __nccwpck_require__(5622)
+const copy = __nccwpck_require__(1335).copy
+const remove = __nccwpck_require__(7357).remove
+const mkdirp = __nccwpck_require__(2915).mkdirp
+const pathExists = __nccwpck_require__(3835).pathExists
 const stat = __nccwpck_require__(3901)
 
 function move (src, dest, opts, cb) {
@@ -33964,11 +28153,11 @@ module.exports = move
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const mkdir = __nccwpck_require__(8605)
-const pathExists = (__nccwpck_require__(3835).pathExists)
+const path = __nccwpck_require__(5622)
+const mkdir = __nccwpck_require__(2915)
+const pathExists = __nccwpck_require__(3835).pathExists
 
 function outputFile (file, data, encoding, callback) {
   if (typeof encoding === 'function') {
@@ -34011,7 +28200,7 @@ module.exports = {
 
 "use strict";
 
-const u = (__nccwpck_require__(9046)/* .fromPromise */ .p)
+const u = __nccwpck_require__(9046)/* .fromPromise */ .p
 const fs = __nccwpck_require__(1176)
 
 function pathExists (path) {
@@ -34032,8 +28221,8 @@ module.exports = {
 "use strict";
 
 
-const u = (__nccwpck_require__(9046)/* .fromCallback */ .E)
-const rimraf = __nccwpck_require__(8761)
+const u = __nccwpck_require__(9046)/* .fromCallback */ .E
+const rimraf = __nccwpck_require__(7247)
 
 module.exports = {
   remove: u(rimraf),
@@ -34043,15 +28232,15 @@ module.exports = {
 
 /***/ }),
 
-/***/ 8761:
+/***/ 7247:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
-const assert = __nccwpck_require__(9491)
+const path = __nccwpck_require__(5622)
+const assert = __nccwpck_require__(2357)
 
 const isWindows = (process.platform === 'win32')
 
@@ -34392,7 +28581,7 @@ module.exports = function (size) {
 
 
 const fs = __nccwpck_require__(7758)
-const path = __nccwpck_require__(1017)
+const path = __nccwpck_require__(5622)
 
 const NODE_VERSION_MAJOR_WITH_BIGINT = 10
 const NODE_VERSION_MINOR_WITH_BIGINT = 5
@@ -34572,8 +28761,8 @@ module.exports = {
 
 
 const fs = __nccwpck_require__(7758)
-const os = __nccwpck_require__(2037)
-const path = __nccwpck_require__(1017)
+const os = __nccwpck_require__(2087)
+const path = __nccwpck_require__(5622)
 
 // HFS, ext{2,3}, FAT do not, Node.js v0.10 does not
 function hasMillisResSync () {
@@ -34662,7 +28851,7 @@ realpath.realpathSync = realpathSync
 realpath.monkeypatch = monkeypatch
 realpath.unmonkeypatch = unmonkeypatch
 
-var fs = __nccwpck_require__(7147)
+var fs = __nccwpck_require__(5747)
 var origRealpath = fs.realpath
 var origRealpathSync = fs.realpathSync
 
@@ -34749,9 +28938,9 @@ function unmonkeypatch () {
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var pathModule = __nccwpck_require__(1017);
+var pathModule = __nccwpck_require__(5622);
 var isWindows = process.platform === 'win32';
-var fs = __nccwpck_require__(7147);
+var fs = __nccwpck_require__(5747);
 
 // JavaScript implementation of realpath, ported from node pre-v6
 
@@ -35038,16 +29227,16 @@ exports.realpath = function realpath(p, cache, cb) {
 /***/ 9203:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var fs = __nccwpck_require__(7147),
-    tls = __nccwpck_require__(4404),
-    zlib = __nccwpck_require__(9796),
-    Socket = (__nccwpck_require__(1808).Socket),
-    EventEmitter = (__nccwpck_require__(2361).EventEmitter),
-    inherits = (__nccwpck_require__(3837).inherits),
-    inspect = (__nccwpck_require__(3837).inspect);
+var fs = __nccwpck_require__(5747),
+    tls = __nccwpck_require__(4016),
+    zlib = __nccwpck_require__(8761),
+    Socket = __nccwpck_require__(1631).Socket,
+    EventEmitter = __nccwpck_require__(8614).EventEmitter,
+    inherits = __nccwpck_require__(1669).inherits,
+    inspect = __nccwpck_require__(1669).inspect;
 
 var Parser = __nccwpck_require__(9330);
-var XRegExp = (__nccwpck_require__(6155)/* .XRegExp */ .d);
+var XRegExp = __nccwpck_require__(6155)/* .XRegExp */ .d;
 
 var REX_TIMEVAL = XRegExp.cache('^(?<year>\\d{4})(?<month>\\d{2})(?<date>\\d{2})(?<hour>\\d{2})(?<minute>\\d{2})(?<second>\\d+)(?:.\\d+)?$'),
     RE_PASV = /([\d]+),([\d]+),([\d]+),([\d]+),([-\d]+),([-\d]+)/,
@@ -36115,12 +30304,12 @@ function makeError(code, text) {
 /***/ 9330:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var WritableStream = (__nccwpck_require__(2781).Writable)
-                     || (__nccwpck_require__(1642).Writable),
-    inherits = (__nccwpck_require__(3837).inherits),
-    inspect = (__nccwpck_require__(3837).inspect);
+var WritableStream = __nccwpck_require__(2413).Writable
+                     || __nccwpck_require__(1642).Writable,
+    inherits = __nccwpck_require__(1669).inherits,
+    inspect = __nccwpck_require__(1669).inspect;
 
-var XRegExp = (__nccwpck_require__(6155)/* .XRegExp */ .d);
+var XRegExp = __nccwpck_require__(6155)/* .XRegExp */ .d;
 
 var REX_LISTUNIX = XRegExp.cache('^(?<type>[\\-ld])(?<permission>([\\-r][\\-w][\\-xstT]){3})(?<acl>(\\+))?\\s+(?<inodes>\\d+)\\s+(?<owner>\\S+)\\s+(?<group>\\S+)\\s+(?<size>\\d+)\\s+(?<timestamp>((?<month1>\\w{3})\\s+(?<date1>\\d{1,2})\\s+(?<hour>\\d{1,2}):(?<minute>\\d{2}))|((?<month2>\\w{3})\\s+(?<date2>\\d{1,2})\\s+(?<year>\\d{4})))\\s+(?<name>.+)$'),
     REX_LISTMSDOS = XRegExp.cache('^(?<month>\\d{2})(?:\\-|\\/)(?<date>\\d{2})(?:\\-|\\/)(?<year>\\d{2,4})\\s+(?<hour>\\d{2}):(?<minute>\\d{2})\\s{0,1}(?<ampm>[AaMmPp]{1,2})\\s+(?:(?<size>\\d+)|(?<isdir>\\<DIR\\>))\\s+(?<name>.+)$'),
@@ -36354,9 +30543,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const debug_1 = __importDefault(__nccwpck_require__(8237));
-const stream_1 = __nccwpck_require__(2781);
-const crypto_1 = __nccwpck_require__(6113);
-const data_uri_to_buffer_1 = __importDefault(__nccwpck_require__(2371));
+const stream_1 = __nccwpck_require__(2413);
+const crypto_1 = __nccwpck_require__(6417);
+const data_uri_to_buffer_1 = __importDefault(__nccwpck_require__(7799));
 const notmodified_1 = __importDefault(__nccwpck_require__(186));
 const debug = debug_1.default('get-uri:data');
 class DataReadable extends stream_1.Readable {
@@ -36390,7 +30579,7 @@ function get({ href: uri }, { cache }) {
         }
     });
 }
-exports["default"] = get;
+exports.default = get;
 //# sourceMappingURL=data.js.map
 
 /***/ }),
@@ -36414,7 +30603,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const debug_1 = __importDefault(__nccwpck_require__(8237));
-const fs_1 = __nccwpck_require__(7147);
+const fs_1 = __nccwpck_require__(5747);
 const fs_extra_1 = __nccwpck_require__(5630);
 const file_uri_to_path_1 = __importDefault(__nccwpck_require__(1683));
 const notfound_1 = __importDefault(__nccwpck_require__(5767));
@@ -36456,7 +30645,7 @@ function get({ href: uri }, opts) {
         }
     });
 }
-exports["default"] = get;
+exports.default = get;
 // returns `true` if the `mtime` of the 2 stat objects are equal
 function isNotModified(prev, curr) {
     return +prev.mtime === +curr.mtime;
@@ -36485,7 +30674,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const once_1 = __importDefault(__nccwpck_require__(1040));
 const ftp_1 = __importDefault(__nccwpck_require__(9203));
-const path_1 = __nccwpck_require__(1017);
+const path_1 = __nccwpck_require__(5622);
 const debug_1 = __importDefault(__nccwpck_require__(8237));
 const notfound_1 = __importDefault(__nccwpck_require__(5767));
 const notmodified_1 = __importDefault(__nccwpck_require__(186));
@@ -36585,7 +30774,7 @@ function get(parsed, opts) {
         }
     });
 }
-exports["default"] = get;
+exports.default = get;
 //# sourceMappingURL=ftp.js.map
 
 /***/ }),
@@ -36596,7 +30785,7 @@ exports["default"] = get;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const http_1 = __nccwpck_require__(3685);
+const http_1 = __nccwpck_require__(8605);
 /**
  * Error subclass to use when an HTTP application error has occurred.
  */
@@ -36610,7 +30799,7 @@ class HTTPError extends Error {
             .replace(/\s+/g, '')}`;
     }
 }
-exports["default"] = HTTPError;
+exports.default = HTTPError;
 //# sourceMappingURL=http-error.js.map
 
 /***/ }),
@@ -36633,11 +30822,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const http_1 = __importDefault(__nccwpck_require__(3685));
-const https_1 = __importDefault(__nccwpck_require__(5687));
+const http_1 = __importDefault(__nccwpck_require__(8605));
+const https_1 = __importDefault(__nccwpck_require__(7211));
 const once_1 = __importDefault(__nccwpck_require__(1040));
 const debug_1 = __importDefault(__nccwpck_require__(8237));
-const url_1 = __nccwpck_require__(7310);
+const url_1 = __nccwpck_require__(8835);
 const http_error_1 = __importDefault(__nccwpck_require__(8558));
 const notfound_1 = __importDefault(__nccwpck_require__(5767));
 const notmodified_1 = __importDefault(__nccwpck_require__(186));
@@ -36745,7 +30934,7 @@ function get(parsed, opts) {
         return res;
     });
 }
-exports["default"] = get;
+exports.default = get;
 /**
  * Returns `true` if the provided cache's "freshness" is valid. That is, either
  * the Cache-Control header or Expires header values are still within the allowed
@@ -36833,7 +31022,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const https_1 = __importDefault(__nccwpck_require__(5687));
+const https_1 = __importDefault(__nccwpck_require__(7211));
 const http_1 = __importDefault(__nccwpck_require__(3582));
 /**
  * Returns a Readable stream from an "https:" URI.
@@ -36841,7 +31030,7 @@ const http_1 = __importDefault(__nccwpck_require__(3582));
 function get(parsed, opts) {
     return http_1.default(parsed, Object.assign(Object.assign({}, opts), { http: https_1.default }));
 }
-exports["default"] = get;
+exports.default = get;
 //# sourceMappingURL=https.js.map
 
 /***/ }),
@@ -36855,7 +31044,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const debug_1 = __importDefault(__nccwpck_require__(8237));
-const url_1 = __nccwpck_require__(7310);
+const url_1 = __nccwpck_require__(8835);
 // Built-in protocols
 const data_1 = __importDefault(__nccwpck_require__(5525));
 const file_1 = __importDefault(__nccwpck_require__(878));
@@ -36927,7 +31116,7 @@ class NotFoundError extends Error {
         Object.setPrototypeOf(this, new.target.prototype);
     }
 }
-exports["default"] = NotFoundError;
+exports.default = NotFoundError;
 //# sourceMappingURL=notfound.js.map
 
 /***/ }),
@@ -36952,7 +31141,7 @@ class NotModifiedError extends Error {
         Object.setPrototypeOf(this, new.target.prototype);
     }
 }
-exports["default"] = NotModifiedError;
+exports.default = NotModifiedError;
 //# sourceMappingURL=notmodified.js.map
 
 /***/ }),
@@ -36972,8 +31161,8 @@ function ownProp (obj, field) {
   return Object.prototype.hasOwnProperty.call(obj, field)
 }
 
-var fs = __nccwpck_require__(7147)
-var path = __nccwpck_require__(1017)
+var fs = __nccwpck_require__(5747)
+var path = __nccwpck_require__(5622)
 var minimatch = __nccwpck_require__(3973)
 var isAbsolute = __nccwpck_require__(8714)
 var Minimatch = minimatch.Minimatch
@@ -37249,16 +31438,16 @@ var rp = __nccwpck_require__(6863)
 var minimatch = __nccwpck_require__(3973)
 var Minimatch = minimatch.Minimatch
 var inherits = __nccwpck_require__(4124)
-var EE = (__nccwpck_require__(2361).EventEmitter)
-var path = __nccwpck_require__(1017)
-var assert = __nccwpck_require__(9491)
+var EE = __nccwpck_require__(8614).EventEmitter
+var path = __nccwpck_require__(5622)
+var assert = __nccwpck_require__(2357)
 var isAbsolute = __nccwpck_require__(8714)
 var globSync = __nccwpck_require__(9010)
 var common = __nccwpck_require__(7625)
 var setopts = common.setopts
 var ownProp = common.ownProp
 var inflight = __nccwpck_require__(2492)
-var util = __nccwpck_require__(3837)
+var util = __nccwpck_require__(1669)
 var childrenIgnored = common.childrenIgnored
 var isIgnored = common.isIgnored
 
@@ -38003,10 +32192,10 @@ globSync.GlobSync = GlobSync
 var rp = __nccwpck_require__(6863)
 var minimatch = __nccwpck_require__(3973)
 var Minimatch = minimatch.Minimatch
-var Glob = (__nccwpck_require__(1957).Glob)
-var util = __nccwpck_require__(3837)
-var path = __nccwpck_require__(1017)
-var assert = __nccwpck_require__(9491)
+var Glob = __nccwpck_require__(1957).Glob
+var util = __nccwpck_require__(1669)
+var path = __nccwpck_require__(5622)
+var assert = __nccwpck_require__(2357)
 var isAbsolute = __nccwpck_require__(8714)
 var common = __nccwpck_require__(7625)
 var setopts = common.setopts
@@ -38518,12 +32707,12 @@ function clone (obj) {
 /***/ 7758:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var fs = __nccwpck_require__(7147)
+var fs = __nccwpck_require__(5747)
 var polyfills = __nccwpck_require__(263)
 var legacy = __nccwpck_require__(3086)
 var clone = __nccwpck_require__(7356)
 
-var util = __nccwpck_require__(3837)
+var util = __nccwpck_require__(1669)
 
 /* istanbul ignore next - node 0.x polyfill */
 var gracefulQueue
@@ -38604,7 +32793,7 @@ if (!fs[gracefulQueue]) {
   if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || '')) {
     process.on('exit', function() {
       debug(fs[gracefulQueue])
-      __nccwpck_require__(9491).equal(fs[gracefulQueue].length, 0)
+      __nccwpck_require__(2357).equal(fs[gracefulQueue].length, 0)
     })
   }
 }
@@ -38954,7 +33143,7 @@ function retry () {
 /***/ 3086:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var Stream = (__nccwpck_require__(2781).Stream)
+var Stream = __nccwpck_require__(2413).Stream
 
 module.exports = legacy
 
@@ -39079,7 +33268,7 @@ function legacy (fs) {
 /***/ 263:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var constants = __nccwpck_require__(2057)
+var constants = __nccwpck_require__(7619)
 
 var origCwd = process.cwd
 var cwd = null
@@ -39391,10 +33580,8 @@ function patch (fs) {
     return function (target, options) {
       var stats = options ? orig.call(fs, target, options)
         : orig.call(fs, target)
-      if (stats) {
-        if (stats.uid < 0) stats.uid += 0x100000000
-        if (stats.gid < 0) stats.gid += 0x100000000
-      }
+      if (stats.uid < 0) stats.uid += 0x100000000
+      if (stats.gid < 0) stats.gid += 0x100000000
       return stats;
     }
   }
@@ -39739,9 +33926,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const net_1 = __importDefault(__nccwpck_require__(1808));
-const tls_1 = __importDefault(__nccwpck_require__(4404));
-const url_1 = __importDefault(__nccwpck_require__(7310));
+const net_1 = __importDefault(__nccwpck_require__(1631));
+const tls_1 = __importDefault(__nccwpck_require__(4016));
+const url_1 = __importDefault(__nccwpck_require__(8835));
 const debug_1 = __importDefault(__nccwpck_require__(8237));
 const once_1 = __importDefault(__nccwpck_require__(1040));
 const agent_base_1 = __nccwpck_require__(9690);
@@ -39868,7 +34055,7 @@ class HttpProxyAgent extends agent_base_1.Agent {
         });
     }
 }
-exports["default"] = HttpProxyAgent;
+exports.default = HttpProxyAgent;
 //# sourceMappingURL=agent.js.map
 
 /***/ }),
@@ -39912,10 +34099,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const net_1 = __importDefault(__nccwpck_require__(1808));
-const tls_1 = __importDefault(__nccwpck_require__(4404));
-const url_1 = __importDefault(__nccwpck_require__(7310));
-const assert_1 = __importDefault(__nccwpck_require__(9491));
+const net_1 = __importDefault(__nccwpck_require__(1631));
+const tls_1 = __importDefault(__nccwpck_require__(4016));
+const url_1 = __importDefault(__nccwpck_require__(8835));
+const assert_1 = __importDefault(__nccwpck_require__(2357));
 const debug_1 = __importDefault(__nccwpck_require__(8237));
 const agent_base_1 = __nccwpck_require__(9690);
 const parse_proxy_response_1 = __importDefault(__nccwpck_require__(595));
@@ -40057,7 +34244,7 @@ class HttpsProxyAgent extends agent_base_1.Agent {
         });
     }
 }
-exports["default"] = HttpsProxyAgent;
+exports.default = HttpsProxyAgent;
 function resume(socket) {
     socket.resume();
 }
@@ -40170,7 +34357,7 @@ function parseProxyResponse(socket) {
         read();
     });
 }
-exports["default"] = parseProxyResponse;
+exports.default = parseProxyResponse;
 //# sourceMappingURL=parse-proxy-response.js.map
 
 /***/ }),
@@ -40180,7 +34367,7 @@ exports["default"] = parseProxyResponse;
 
 "use strict";
 
-var Buffer = (__nccwpck_require__(5118).Buffer);
+var Buffer = __nccwpck_require__(5118).Buffer;
 
 // Multibyte codec. In this scheme, a character is represented by 1 or more bytes.
 // Our codec supports UTF-16 surrogates, extensions for GB18030 and unicode sequences.
@@ -40784,7 +34971,7 @@ module.exports = {
 
     'shiftjis': {
         type: '_dbcs',
-        table: function() { return __nccwpck_require__(7014) },
+        table: function() { return __nccwpck_require__(4108) },
         encodeAdd: {'\u00a5': 0x5C, '\u203E': 0x7E},
         encodeSkipVals: [{from: 0xED40, to: 0xF940}],
     },
@@ -40801,7 +34988,7 @@ module.exports = {
 
     'eucjp': {
         type: '_dbcs',
-        table: function() { return __nccwpck_require__(1532) },
+        table: function() { return __nccwpck_require__(2417) },
         encodeAdd: {'\u00a5': 0x5C, '\u203E': 0x7E},
     },
 
@@ -40828,13 +35015,13 @@ module.exports = {
     '936': 'cp936',
     'cp936': {
         type: '_dbcs',
-        table: function() { return __nccwpck_require__(3336) },
+        table: function() { return __nccwpck_require__(7803) },
     },
 
     // GBK (~22000 chars) is an extension of CP936 that added user-mapped chars and some other.
     'gbk': {
         type: '_dbcs',
-        table: function() { return (__nccwpck_require__(3336).concat)(__nccwpck_require__(4346)) },
+        table: function() { return __nccwpck_require__(7803).concat(__nccwpck_require__(7419)) },
     },
     'xgbk': 'gbk',
     'isoir58': 'gbk',
@@ -40846,8 +35033,8 @@ module.exports = {
     // http://www.khngai.com/chinese/charmap/tblgbk.php?page=0
     'gb18030': {
         type: '_dbcs',
-        table: function() { return (__nccwpck_require__(3336).concat)(__nccwpck_require__(4346)) },
-        gb18030: function() { return __nccwpck_require__(6258) },
+        table: function() { return __nccwpck_require__(7803).concat(__nccwpck_require__(7419)) },
+        gb18030: function() { return __nccwpck_require__(6351) },
         encodeSkipVals: [0x80],
         encodeAdd: {'€': 0xA2E3},
     },
@@ -40862,7 +35049,7 @@ module.exports = {
     '949': 'cp949',
     'cp949': {
         type: '_dbcs',
-        table: function() { return __nccwpck_require__(7348) },
+        table: function() { return __nccwpck_require__(7013) },
     },
 
     'cseuckr': 'cp949',
@@ -40903,14 +35090,14 @@ module.exports = {
     '950': 'cp950',
     'cp950': {
         type: '_dbcs',
-        table: function() { return __nccwpck_require__(4284) },
+        table: function() { return __nccwpck_require__(3104) },
     },
 
     // Big5 has many variations and is an extension of cp950. We use Encoding Standard's as a consensus.
     'big5': 'big5hkscs',
     'big5hkscs': {
         type: '_dbcs',
-        table: function() { return (__nccwpck_require__(4284).concat)(__nccwpck_require__(3480)) },
+        table: function() { return __nccwpck_require__(3104).concat(__nccwpck_require__(3612)) },
         encodeSkipVals: [0xa2cc],
     },
 
@@ -40957,7 +35144,7 @@ for (var i = 0; i < modules.length; i++) {
 
 "use strict";
 
-var Buffer = (__nccwpck_require__(5118).Buffer);
+var Buffer = __nccwpck_require__(5118).Buffer;
 
 // Export Node.js internal encodings.
 
@@ -41004,7 +35191,7 @@ InternalCodec.prototype.decoder = InternalDecoder;
 //------------------------------------------------------------------------------
 
 // We use node.js internal decoder. Its signature is the same as ours.
-var StringDecoder = (__nccwpck_require__(1576).StringDecoder);
+var StringDecoder = __nccwpck_require__(4304).StringDecoder;
 
 if (!StringDecoder.prototype.end) // Node v0.8 doesn't have this method.
     StringDecoder.prototype.end = function() {};
@@ -41153,7 +35340,7 @@ InternalDecoderCesu8.prototype.end = function() {
 
 "use strict";
 
-var Buffer = (__nccwpck_require__(5118).Buffer);
+var Buffer = __nccwpck_require__(5118).Buffer;
 
 // Single-byte codec. Needs a 'chars' string parameter that contains 256 or 128 chars that
 // correspond to encoded bytes (if 128 - then lower half is ASCII). 
@@ -41873,7 +36060,7 @@ module.exports = {
 
 "use strict";
 
-var Buffer = (__nccwpck_require__(5118).Buffer);
+var Buffer = __nccwpck_require__(5118).Buffer;
 
 // Note: UTF16-LE (or UCS2) codec is Node.js native. See encodings/internal.js
 
@@ -42058,7 +36245,7 @@ function detectEncoding(buf, defaultEncoding) {
 
 "use strict";
 
-var Buffer = (__nccwpck_require__(5118).Buffer);
+var Buffer = __nccwpck_require__(5118).Buffer;
 
 // UTF-7 codec, according to https://tools.ietf.org/html/rfc2152
 // See also below a UTF-7-IMAP codec, according to http://tools.ietf.org/html/rfc3501#section-5.1.3
@@ -42416,7 +36603,7 @@ StripBOMWrapper.prototype.end = function() {
 
 "use strict";
 
-var Buffer = (__nccwpck_require__(4300).Buffer);
+var Buffer = __nccwpck_require__(4293).Buffer;
 // Note: not polyfilled with safer-buffer on a purpose, as overrides Buffer
 
 // == Extend Node primitives to use iconv-lite =================================
@@ -42449,7 +36636,7 @@ module.exports = function (iconv) {
         }
 
         // -- SlowBuffer -----------------------------------------------------------
-        var SlowBuffer = (__nccwpck_require__(4300).SlowBuffer);
+        var SlowBuffer = __nccwpck_require__(4293).SlowBuffer;
 
         original.SlowBufferToString = SlowBuffer.prototype.toString;
         SlowBuffer.prototype.toString = function(encoding, start, end) {
@@ -42589,7 +36776,7 @@ module.exports = function (iconv) {
 
         // -- Readable -------------------------------------------------------------
         if (iconv.supportsStreams) {
-            var Readable = (__nccwpck_require__(2781).Readable);
+            var Readable = __nccwpck_require__(2413).Readable;
 
             original.ReadableSetEncoding = Readable.prototype.setEncoding;
             Readable.prototype.setEncoding = function setEncoding(enc, options) {
@@ -42612,7 +36799,7 @@ module.exports = function (iconv) {
 
         delete Buffer.isNativeEncoding;
 
-        var SlowBuffer = (__nccwpck_require__(4300).SlowBuffer);
+        var SlowBuffer = __nccwpck_require__(4293).SlowBuffer;
 
         SlowBuffer.prototype.toString = original.SlowBufferToString;
         SlowBuffer.prototype.write = original.SlowBufferWrite;
@@ -42623,7 +36810,7 @@ module.exports = function (iconv) {
         Buffer.prototype.write = original.BufferWrite;
 
         if (iconv.supportsStreams) {
-            var Readable = (__nccwpck_require__(2781).Readable);
+            var Readable = __nccwpck_require__(2413).Readable;
 
             Readable.prototype.setEncoding = original.ReadableSetEncoding;
             delete Readable.prototype.collect;
@@ -42644,7 +36831,7 @@ module.exports = function (iconv) {
 
 // Some environments don't have global Buffer (e.g. React Native).
 // Solution would be installing npm modules "buffer" and "stream" explicitly.
-var Buffer = (__nccwpck_require__(5118).Buffer);
+var Buffer = __nccwpck_require__(5118).Buffer;
 
 var bomHandling = __nccwpck_require__(7961),
     iconv = module.exports;
@@ -42801,8 +36988,8 @@ if (false) {}
 "use strict";
 
 
-var Buffer = (__nccwpck_require__(4300).Buffer),
-    Transform = (__nccwpck_require__(2781).Transform);
+var Buffer = __nccwpck_require__(4293).Buffer,
+    Transform = __nccwpck_require__(2413).Transform;
 
 
 // == Exports ==================================================================
@@ -42978,8 +37165,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.types = exports.setConcurrency = exports.disableTypes = exports.disableFS = exports.imageSize = void 0;
-const fs = __nccwpck_require__(7147);
-const path = __nccwpck_require__(1017);
+const fs = __nccwpck_require__(5747);
+const path = __nccwpck_require__(5622);
 const queue_1 = __nccwpck_require__(3795);
 const types_1 = __nccwpck_require__(6379);
 const detector_1 = __nccwpck_require__(7606);
@@ -43001,7 +37188,7 @@ const globalOptions = {
  */
 function lookup(buffer, filepath) {
     // detect the file type.. don't rely on the extension
-    const type = (0, detector_1.detector)(buffer);
+    const type = detector_1.detector(buffer);
     if (typeof type !== 'undefined') {
         if (globalOptions.disabledTypes.indexOf(type) > -1) {
             throw new TypeError('disabled file type: ' + type);
@@ -43026,19 +37213,16 @@ function lookup(buffer, filepath) {
 function asyncFileToBuffer(filepath) {
     return __awaiter(this, void 0, void 0, function* () {
         const handle = yield fs.promises.open(filepath, 'r');
-        try {
-            const { size } = yield handle.stat();
-            if (size <= 0) {
-                throw new Error('Empty file');
-            }
-            const bufferSize = Math.min(size, MaxBufferSize);
-            const buffer = Buffer.alloc(bufferSize);
-            yield handle.read(buffer, 0, bufferSize, 0);
-            return buffer;
-        }
-        finally {
+        const { size } = yield handle.stat();
+        if (size <= 0) {
             yield handle.close();
+            throw new Error('Empty file');
         }
+        const bufferSize = Math.min(size, MaxBufferSize);
+        const buffer = Buffer.alloc(bufferSize);
+        yield handle.read(buffer, 0, bufferSize, 0);
+        yield handle.close();
+        return buffer;
     });
 }
 /**
@@ -43050,23 +37234,20 @@ function asyncFileToBuffer(filepath) {
 function syncFileToBuffer(filepath) {
     // read from the file, synchronously
     const descriptor = fs.openSync(filepath, 'r');
-    try {
-        const { size } = fs.fstatSync(descriptor);
-        if (size <= 0) {
-            throw new Error('Empty file');
-        }
-        const bufferSize = Math.min(size, MaxBufferSize);
-        const buffer = Buffer.alloc(bufferSize);
-        fs.readSync(descriptor, buffer, 0, bufferSize, 0);
-        return buffer;
-    }
-    finally {
+    const { size } = fs.fstatSync(descriptor);
+    if (size <= 0) {
         fs.closeSync(descriptor);
+        throw new Error('Empty file');
     }
+    const bufferSize = Math.min(size, MaxBufferSize);
+    const buffer = Buffer.alloc(bufferSize);
+    fs.readSync(descriptor, buffer, 0, bufferSize, 0);
+    fs.closeSync(descriptor);
+    return buffer;
 }
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 module.exports = exports = imageSize; // backwards compatibility
-exports["default"] = imageSize;
+exports.default = imageSize;
 /**
  * @param {Buffer|string} input - buffer or relative/absolute path of the image file
  * @param {Function=} [callback] - optional function for async detection
@@ -43575,7 +37756,7 @@ function extractOrientation(exifBlock, isBigEndian) {
     // IDF osset works from right after the header bytes
     // (so the offset includes the tiff byte align)
     const offset = EXIF_HEADER_BYTES + idfOffset;
-    const idfDirectoryEntries = (0, readUInt_1.readUInt)(exifBlock, 16, offset, isBigEndian);
+    const idfDirectoryEntries = readUInt_1.readUInt(exifBlock, 16, offset, isBigEndian);
     for (let directoryEntryNumber = 0; directoryEntryNumber < idfDirectoryEntries; directoryEntryNumber++) {
         const start = offset + NUM_DIRECTORY_ENTRIES_BYTES + (directoryEntryNumber * IDF_ENTRY_BYTES);
         const end = start + IDF_ENTRY_BYTES;
@@ -43584,20 +37765,20 @@ function extractOrientation(exifBlock, isBigEndian) {
             return;
         }
         const block = exifBlock.slice(start, end);
-        const tagNumber = (0, readUInt_1.readUInt)(block, 16, 0, isBigEndian);
+        const tagNumber = readUInt_1.readUInt(block, 16, 0, isBigEndian);
         // 0x0112 (decimal: 274) is the `orientation` tag ID
         if (tagNumber === 274) {
-            const dataFormat = (0, readUInt_1.readUInt)(block, 16, 2, isBigEndian);
+            const dataFormat = readUInt_1.readUInt(block, 16, 2, isBigEndian);
             if (dataFormat !== 3) {
                 return;
             }
             // unsinged int has 2 bytes per component
             // if there would more than 4 bytes in total it's a pointer
-            const numberOfComponents = (0, readUInt_1.readUInt)(block, 32, 4, isBigEndian);
+            const numberOfComponents = readUInt_1.readUInt(block, 32, 4, isBigEndian);
             if (numberOfComponents !== 1) {
                 return;
             }
-            return (0, readUInt_1.readUInt)(block, 16, 8, isBigEndian);
+            return readUInt_1.readUInt(block, 16, 8, isBigEndian);
         }
     }
 }
@@ -43945,11 +38126,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TIFF = void 0;
 // based on http://www.compix.com/fileformattif.htm
 // TO-DO: support big-endian as well
-const fs = __nccwpck_require__(7147);
+const fs = __nccwpck_require__(5747);
 const readUInt_1 = __nccwpck_require__(1446);
 // Read IFD (image-file-directory) into a buffer
 function readIFD(buffer, filepath, isBigEndian) {
-    const ifdOffset = (0, readUInt_1.readUInt)(buffer, 32, 4, isBigEndian);
+    const ifdOffset = readUInt_1.readUInt(buffer, 32, 4, isBigEndian);
     // read only till the end of the file
     let bufferSize = 1024;
     const fileSize = fs.statSync(filepath).size;
@@ -43965,8 +38146,8 @@ function readIFD(buffer, filepath, isBigEndian) {
 }
 // TIFF values seem to be messed up on Big-Endian, this helps
 function readValue(buffer, isBigEndian) {
-    const low = (0, readUInt_1.readUInt)(buffer, 16, 8, isBigEndian);
-    const high = (0, readUInt_1.readUInt)(buffer, 16, 10, isBigEndian);
+    const low = readUInt_1.readUInt(buffer, 16, 8, isBigEndian);
+    const high = readUInt_1.readUInt(buffer, 16, 10, isBigEndian);
     return (high << 16) + low;
 }
 // move to the next tag
@@ -43980,9 +38161,9 @@ function extractTags(buffer, isBigEndian) {
     const tags = {};
     let temp = buffer;
     while (temp && temp.length) {
-        const code = (0, readUInt_1.readUInt)(temp, 16, 0, isBigEndian);
-        const type = (0, readUInt_1.readUInt)(temp, 16, 2, isBigEndian);
-        const length = (0, readUInt_1.readUInt)(temp, 32, 4, isBigEndian);
+        const code = readUInt_1.readUInt(temp, 16, 0, isBigEndian);
+        const type = readUInt_1.readUInt(temp, 16, 2, isBigEndian);
+        const length = readUInt_1.readUInt(temp, 32, 4, isBigEndian);
         // 0 means end of IFD
         if (code === 0) {
             break;
@@ -44172,7 +38353,7 @@ function slice (args) {
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 try {
-  var util = __nccwpck_require__(3837);
+  var util = __nccwpck_require__(1669);
   /* istanbul ignore next */
   if (typeof util.inherits !== 'function') throw '';
   module.exports = util.inherits;
@@ -44225,8 +38406,8 @@ if (typeof Object.create === 'function') {
 
 
 var ip = exports;
-var Buffer = (__nccwpck_require__(4300).Buffer);
-var os = __nccwpck_require__(2037);
+var Buffer = __nccwpck_require__(4293).Buffer;
+var os = __nccwpck_require__(2087);
 
 ip.toBuffer = function(ip, buff, offset) {
   offset = ~~offset;
@@ -44705,7 +38886,7 @@ var _fs
 try {
   _fs = __nccwpck_require__(7758)
 } catch (_) {
-  _fs = __nccwpck_require__(7147)
+  _fs = __nccwpck_require__(5747)
 }
 
 function readFile (file, options, callback) {
@@ -45189,7 +39370,7 @@ minimatch.Minimatch = Minimatch
 
 var path = { sep: '/' }
 try {
-  path = __nccwpck_require__(1017)
+  path = __nccwpck_require__(5622)
 } catch (er) {}
 
 var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {}
@@ -46505,12 +40686,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var Stream = _interopDefault(__nccwpck_require__(2781));
-var http = _interopDefault(__nccwpck_require__(3685));
-var Url = _interopDefault(__nccwpck_require__(7310));
+var Stream = _interopDefault(__nccwpck_require__(2413));
+var http = _interopDefault(__nccwpck_require__(8605));
+var Url = _interopDefault(__nccwpck_require__(8835));
 var whatwgUrl = _interopDefault(__nccwpck_require__(3323));
-var https = _interopDefault(__nccwpck_require__(5687));
-var zlib = _interopDefault(__nccwpck_require__(9796));
+var https = _interopDefault(__nccwpck_require__(7211));
+var zlib = _interopDefault(__nccwpck_require__(8761));
 
 // Based on https://github.com/tmpvar/jsdom/blob/aa85b2abf07766ff7bf5c1f6daafb3726f2f2db5/lib/jsdom/living/blob.js
 
@@ -46661,7 +40842,7 @@ FetchError.prototype.name = 'FetchError';
 
 let convert;
 try {
-	convert = (__nccwpck_require__(2877).convert);
+	convert = __nccwpck_require__(2877).convert;
 } catch (e) {}
 
 const INTERNALS = Symbol('Body internals');
@@ -47906,17 +42087,9 @@ AbortError.prototype = Object.create(Error.prototype);
 AbortError.prototype.constructor = AbortError;
 AbortError.prototype.name = 'AbortError';
 
-const URL$1 = Url.URL || whatwgUrl.URL;
-
 // fix an issue where "PassThrough", "resolve" aren't a named export for node <10
 const PassThrough$1 = Stream.PassThrough;
-
-const isDomainOrSubdomain = function isDomainOrSubdomain(destination, original) {
-	const orig = new URL$1(original).hostname;
-	const dest = new URL$1(destination).hostname;
-
-	return orig === dest || orig[orig.length - dest.length - 1] === '.' && orig.endsWith(dest);
-};
+const resolve_url = Url.resolve;
 
 /**
  * Fetch function
@@ -48004,19 +42177,7 @@ function fetch(url, opts) {
 				const location = headers.get('Location');
 
 				// HTTP fetch step 5.3
-				let locationURL = null;
-				try {
-					locationURL = location === null ? null : new URL$1(location, request.url).toString();
-				} catch (err) {
-					// error here can only be invalid URL in Location: header
-					// do not throw when options.redirect == manual
-					// let the user extract the errorneous redirect URL
-					if (request.redirect !== 'manual') {
-						reject(new FetchError(`uri requested responds with an invalid redirect URL: ${location}`, 'invalid-redirect'));
-						finalize();
-						return;
-					}
-				}
+				const locationURL = location === null ? null : resolve_url(request.url, location);
 
 				// HTTP fetch step 5.5
 				switch (request.redirect) {
@@ -48063,12 +42224,6 @@ function fetch(url, opts) {
 							timeout: request.timeout,
 							size: request.size
 						};
-
-						if (!isDomainOrSubdomain(request.url, locationURL)) {
-							for (const name of ['authorization', 'www-authenticate', 'cookie', 'cookie2']) {
-								requestOpts.headers.delete(name);
-							}
-						}
 
 						// HTTP-redirect fetch step 9
 						if (res.statusCode !== 303 && request.body && getTotalBytes(request) === null) {
@@ -48191,7 +42346,7 @@ fetch.Promise = global.Promise;
 
 module.exports = exports = fetch;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports["default"] = exports;
+exports.default = exports;
 exports.Headers = Headers;
 exports.Request = Request;
 exports.Response = Response;
@@ -48206,8 +42361,8 @@ exports.FetchError = FetchError;
 "use strict";
 
 
-var punycode = __nccwpck_require__(5477);
-var mappingTable = __nccwpck_require__(1907);
+var punycode = __nccwpck_require__(4213);
+var mappingTable = __nccwpck_require__(8661);
 
 var PROCESSING_OPTIONS = {
   TRANSITIONAL: 0,
@@ -49016,7 +43171,7 @@ module.exports = {
 "use strict";
 
 
-exports.URL = __nccwpck_require__(653)["interface"];
+exports.URL = __nccwpck_require__(653).interface;
 exports.serializeURL = __nccwpck_require__(33).serializeURL;
 exports.serializeURLOrigin = __nccwpck_require__(33).serializeURLOrigin;
 exports.basicURLParse = __nccwpck_require__(33).basicURLParse;
@@ -49034,7 +43189,7 @@ exports.parseURL = __nccwpck_require__(33).parseURL;
 
 "use strict";
 
-const punycode = __nccwpck_require__(5477);
+const punycode = __nccwpck_require__(4213);
 const tr46 = __nccwpck_require__(2299);
 
 const specialSchemes = {
@@ -50429,14 +44584,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const net_1 = __importDefault(__nccwpck_require__(1808));
-const tls_1 = __importDefault(__nccwpck_require__(4404));
+const net_1 = __importDefault(__nccwpck_require__(1631));
+const tls_1 = __importDefault(__nccwpck_require__(4016));
 const once_1 = __importDefault(__nccwpck_require__(1040));
-const crypto_1 = __importDefault(__nccwpck_require__(6113));
+const crypto_1 = __importDefault(__nccwpck_require__(6417));
 const get_uri_1 = __importDefault(__nccwpck_require__(1792));
 const debug_1 = __importDefault(__nccwpck_require__(8237));
 const raw_body_1 = __importDefault(__nccwpck_require__(7742));
-const url_1 = __nccwpck_require__(7310);
+const url_1 = __nccwpck_require__(8835);
 const http_proxy_agent_1 = __nccwpck_require__(3764);
 const https_proxy_agent_1 = __nccwpck_require__(7219);
 const socks_proxy_agent_1 = __nccwpck_require__(5038);
@@ -50628,7 +44783,7 @@ class PacProxyAgent extends agent_base_1.Agent {
         });
     }
 }
-exports["default"] = PacProxyAgent;
+exports.default = PacProxyAgent;
 //# sourceMappingURL=agent.js.map
 
 /***/ }),
@@ -50642,7 +44797,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const get_uri_1 = __importDefault(__nccwpck_require__(1792));
-const url_1 = __nccwpck_require__(7310);
+const url_1 = __nccwpck_require__(8835);
 const agent_1 = __importDefault(__nccwpck_require__(8476));
 function createPacProxyAgent(uri, opts) {
     // was an options object passed in first?
@@ -50756,7 +44911,7 @@ function dateRange() {
     // TODO: implement me!
     return false;
 }
-exports["default"] = dateRange;
+exports.default = dateRange;
 //# sourceMappingURL=dateRange.js.map
 
 /***/ }),
@@ -50793,7 +44948,7 @@ function dnsDomainIs(host, domain) {
     domain = String(domain);
     return host.substr(domain.length * -1) === domain;
 }
-exports["default"] = dnsDomainIs;
+exports.default = dnsDomainIs;
 //# sourceMappingURL=dnsDomainIs.js.map
 
 /***/ }),
@@ -50828,7 +44983,7 @@ function dnsDomainLevels(host) {
     }
     return levels;
 }
-exports["default"] = dnsDomainLevels;
+exports.default = dnsDomainLevels;
 //# sourceMappingURL=dnsDomainLevels.js.map
 
 /***/ }),
@@ -50878,7 +45033,7 @@ function dnsResolve(host) {
         return null;
     });
 }
-exports["default"] = dnsResolve;
+exports.default = dnsResolve;
 //# sourceMappingURL=dnsResolve.js.map
 
 /***/ }),
@@ -50891,7 +45046,7 @@ exports["default"] = dnsResolve;
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const url_1 = __nccwpck_require__(7310);
+const url_1 = __nccwpck_require__(8835);
 const degenerator_1 = __nccwpck_require__(4033);
 /**
  * Built-in PAC functions.
@@ -51050,7 +45205,7 @@ function isInNet(host, pattern, mask) {
         return false;
     });
 }
-exports["default"] = isInNet;
+exports.default = isInNet;
 //# sourceMappingURL=isInNet.js.map
 
 /***/ }),
@@ -51080,7 +45235,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 function isPlainHostName(host) {
     return !/\./.test(host);
 }
-exports["default"] = isPlainHostName;
+exports.default = isPlainHostName;
 //# sourceMappingURL=isPlainHostName.js.map
 
 /***/ }),
@@ -51121,7 +45276,7 @@ function isResolvable(host) {
         return false;
     });
 }
-exports["default"] = isResolvable;
+exports.default = isResolvable;
 //# sourceMappingURL=isResolvable.js.map
 
 /***/ }),
@@ -51168,7 +45323,7 @@ function localHostOrDomainIs(host, hostdom) {
     }
     return matches;
 }
-exports["default"] = localHostOrDomainIs;
+exports.default = localHostOrDomainIs;
 //# sourceMappingURL=localHostOrDomainIs.js.map
 
 /***/ }),
@@ -51192,7 +45347,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const ip_1 = __importDefault(__nccwpck_require__(7547));
-const net_1 = __importDefault(__nccwpck_require__(1808));
+const net_1 = __importDefault(__nccwpck_require__(1631));
 /**
  * Returns the IP address of the host that the Navigator is running on, as
  * a string in the dot-separated integer format.
@@ -51236,7 +45391,7 @@ function myIpAddress() {
         });
     });
 }
-exports["default"] = myIpAddress;
+exports.default = myIpAddress;
 //# sourceMappingURL=myIpAddress.js.map
 
 /***/ }),
@@ -51272,7 +45427,7 @@ function shExpMatch(str, shexp) {
     var re = toRegExp(shexp);
     return re.test(str);
 }
-exports["default"] = shExpMatch;
+exports.default = shExpMatch;
 /**
  * Converts a "shell expression" to a JavaScript RegExp.
  *
@@ -51363,7 +45518,7 @@ function timeRange() {
     }
     return result;
 }
-exports["default"] = timeRange;
+exports.default = timeRange;
 function secondsElapsedToday(hh, mm, ss) {
     return hh * 3600 + mm * 60 + ss;
 }
@@ -51391,7 +45546,7 @@ function valueInRange(start, value, finish) {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isGMT = exports.dnsLookup = void 0;
-const dns_1 = __nccwpck_require__(9523);
+const dns_1 = __nccwpck_require__(881);
 function dnsLookup(host, opts) {
     return new Promise((resolve, reject) => {
         dns_1.lookup(host, opts, (err, res) => {
@@ -51496,7 +45651,7 @@ function weekdayRange(wd1, wd2, gmt) {
     }
     return result;
 }
-exports["default"] = weekdayRange;
+exports.default = weekdayRange;
 function getTodaysDay(gmt) {
     return gmt ? new Date().getUTCDay() : new Date().getDay();
 }
@@ -51549,15 +45704,15 @@ module.exports.win32 = win32;
  * Module dependencies.
  */
 
-var url = __nccwpck_require__(7310);
+var url = __nccwpck_require__(8835);
 var LRU = __nccwpck_require__(7129);
 var Agent = __nccwpck_require__(9690);
-var inherits = (__nccwpck_require__(3837).inherits);
+var inherits = __nccwpck_require__(1669).inherits;
 var debug = __nccwpck_require__(8237)('proxy-agent');
-var getProxyForUrl = (__nccwpck_require__(3329)/* .getProxyForUrl */ .j);
+var getProxyForUrl = __nccwpck_require__(3329)/* .getProxyForUrl */ .j;
 
-var http = __nccwpck_require__(3685);
-var https = __nccwpck_require__(5687);
+var http = __nccwpck_require__(8605);
+var https = __nccwpck_require__(7211);
 var PacProxyAgent = __nccwpck_require__(6338);
 var HttpProxyAgent = __nccwpck_require__(3764);
 var HttpsProxyAgent = __nccwpck_require__(7219);
@@ -51753,7 +45908,7 @@ ProxyAgent.prototype.callback = function(req, opts, fn) {
 "use strict";
 
 
-var parseUrl = (__nccwpck_require__(7310).parse);
+var parseUrl = __nccwpck_require__(8835).parse;
 
 var DEFAULT_PORTS = {
   ftp: 21,
@@ -51867,10 +46022,10 @@ exports.j = getProxyForUrl;
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var inherits = __nccwpck_require__(4124)
-var EventEmitter = (__nccwpck_require__(2361).EventEmitter)
+var EventEmitter = __nccwpck_require__(8614).EventEmitter
 
 module.exports = Queue
-module.exports["default"] = Queue
+module.exports.default = Queue
 
 function Queue (options) {
   if (!(this instanceof Queue)) {
@@ -52540,12 +46695,12 @@ var isArray = __nccwpck_require__(893);
 
 
 /*<replacement>*/
-var Buffer = (__nccwpck_require__(4300).Buffer);
+var Buffer = __nccwpck_require__(4293).Buffer;
 /*</replacement>*/
 
 Readable.ReadableState = ReadableState;
 
-var EE = (__nccwpck_require__(2361).EventEmitter);
+var EE = __nccwpck_require__(8614).EventEmitter;
 
 /*<replacement>*/
 if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -52553,7 +46708,7 @@ if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
 };
 /*</replacement>*/
 
-var Stream = __nccwpck_require__(2781);
+var Stream = __nccwpck_require__(2413);
 
 /*<replacement>*/
 var util = __nccwpck_require__(5898);
@@ -52564,7 +46719,7 @@ var StringDecoder;
 
 
 /*<replacement>*/
-var debug = __nccwpck_require__(3837);
+var debug = __nccwpck_require__(1669);
 if (debug && debug.debuglog) {
   debug = debug.debuglog('stream');
 } else {
@@ -52637,7 +46792,7 @@ function ReadableState(options, stream) {
   this.encoding = null;
   if (options.encoding) {
     if (!StringDecoder)
-      StringDecoder = (__nccwpck_require__(674)/* .StringDecoder */ .s);
+      StringDecoder = __nccwpck_require__(674)/* .StringDecoder */ .s;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
@@ -52747,7 +46902,7 @@ function needMoreData(state) {
 // backwards compatibility.
 Readable.prototype.setEncoding = function(enc) {
   if (!StringDecoder)
-    StringDecoder = (__nccwpck_require__(674)/* .StringDecoder */ .s);
+    StringDecoder = __nccwpck_require__(674)/* .StringDecoder */ .s;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
   return this;
@@ -53713,7 +47868,7 @@ function done(stream, er) {
 module.exports = Writable;
 
 /*<replacement>*/
-var Buffer = (__nccwpck_require__(4300).Buffer);
+var Buffer = __nccwpck_require__(4293).Buffer;
 /*</replacement>*/
 
 Writable.WritableState = WritableState;
@@ -53724,7 +47879,7 @@ var util = __nccwpck_require__(5898);
 util.inherits = __nccwpck_require__(4124);
 /*</replacement>*/
 
-var Stream = __nccwpck_require__(2781);
+var Stream = __nccwpck_require__(2413);
 
 util.inherits(Writable, Stream);
 
@@ -54170,382 +48325,15 @@ function endWritable(stream, state, cb) {
 /***/ ((module, exports, __nccwpck_require__) => {
 
 exports = module.exports = __nccwpck_require__(1433);
-exports.Stream = __nccwpck_require__(2781);
+exports.Stream = __nccwpck_require__(2413);
 exports.Readable = exports;
 exports.Writable = __nccwpck_require__(6993);
 exports.Duplex = __nccwpck_require__(1359);
 exports.Transform = __nccwpck_require__(4415);
 exports.PassThrough = __nccwpck_require__(1542);
 if (!process.browser && process.env.READABLE_STREAM === 'disable') {
-  module.exports = __nccwpck_require__(2781);
+  module.exports = __nccwpck_require__(2413);
 }
-
-
-/***/ }),
-
-/***/ 4959:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const assert = __nccwpck_require__(9491)
-const path = __nccwpck_require__(1017)
-const fs = __nccwpck_require__(7147)
-let glob = undefined
-try {
-  glob = __nccwpck_require__(1957)
-} catch (_err) {
-  // treat glob as optional.
-}
-
-const defaultGlobOpts = {
-  nosort: true,
-  silent: true
-}
-
-// for EMFILE handling
-let timeout = 0
-
-const isWindows = (process.platform === "win32")
-
-const defaults = options => {
-  const methods = [
-    'unlink',
-    'chmod',
-    'stat',
-    'lstat',
-    'rmdir',
-    'readdir'
-  ]
-  methods.forEach(m => {
-    options[m] = options[m] || fs[m]
-    m = m + 'Sync'
-    options[m] = options[m] || fs[m]
-  })
-
-  options.maxBusyTries = options.maxBusyTries || 3
-  options.emfileWait = options.emfileWait || 1000
-  if (options.glob === false) {
-    options.disableGlob = true
-  }
-  if (options.disableGlob !== true && glob === undefined) {
-    throw Error('glob dependency not found, set `options.disableGlob = true` if intentional')
-  }
-  options.disableGlob = options.disableGlob || false
-  options.glob = options.glob || defaultGlobOpts
-}
-
-const rimraf = (p, options, cb) => {
-  if (typeof options === 'function') {
-    cb = options
-    options = {}
-  }
-
-  assert(p, 'rimraf: missing path')
-  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
-  assert.equal(typeof cb, 'function', 'rimraf: callback function required')
-  assert(options, 'rimraf: invalid options argument provided')
-  assert.equal(typeof options, 'object', 'rimraf: options should be object')
-
-  defaults(options)
-
-  let busyTries = 0
-  let errState = null
-  let n = 0
-
-  const next = (er) => {
-    errState = errState || er
-    if (--n === 0)
-      cb(errState)
-  }
-
-  const afterGlob = (er, results) => {
-    if (er)
-      return cb(er)
-
-    n = results.length
-    if (n === 0)
-      return cb()
-
-    results.forEach(p => {
-      const CB = (er) => {
-        if (er) {
-          if ((er.code === "EBUSY" || er.code === "ENOTEMPTY" || er.code === "EPERM") &&
-              busyTries < options.maxBusyTries) {
-            busyTries ++
-            // try again, with the same exact callback as this one.
-            return setTimeout(() => rimraf_(p, options, CB), busyTries * 100)
-          }
-
-          // this one won't happen if graceful-fs is used.
-          if (er.code === "EMFILE" && timeout < options.emfileWait) {
-            return setTimeout(() => rimraf_(p, options, CB), timeout ++)
-          }
-
-          // already gone
-          if (er.code === "ENOENT") er = null
-        }
-
-        timeout = 0
-        next(er)
-      }
-      rimraf_(p, options, CB)
-    })
-  }
-
-  if (options.disableGlob || !glob.hasMagic(p))
-    return afterGlob(null, [p])
-
-  options.lstat(p, (er, stat) => {
-    if (!er)
-      return afterGlob(null, [p])
-
-    glob(p, options.glob, afterGlob)
-  })
-
-}
-
-// Two possible strategies.
-// 1. Assume it's a file.  unlink it, then do the dir stuff on EPERM or EISDIR
-// 2. Assume it's a directory.  readdir, then do the file stuff on ENOTDIR
-//
-// Both result in an extra syscall when you guess wrong.  However, there
-// are likely far more normal files in the world than directories.  This
-// is based on the assumption that a the average number of files per
-// directory is >= 1.
-//
-// If anyone ever complains about this, then I guess the strategy could
-// be made configurable somehow.  But until then, YAGNI.
-const rimraf_ = (p, options, cb) => {
-  assert(p)
-  assert(options)
-  assert(typeof cb === 'function')
-
-  // sunos lets the root user unlink directories, which is... weird.
-  // so we have to lstat here and make sure it's not a dir.
-  options.lstat(p, (er, st) => {
-    if (er && er.code === "ENOENT")
-      return cb(null)
-
-    // Windows can EPERM on stat.  Life is suffering.
-    if (er && er.code === "EPERM" && isWindows)
-      fixWinEPERM(p, options, er, cb)
-
-    if (st && st.isDirectory())
-      return rmdir(p, options, er, cb)
-
-    options.unlink(p, er => {
-      if (er) {
-        if (er.code === "ENOENT")
-          return cb(null)
-        if (er.code === "EPERM")
-          return (isWindows)
-            ? fixWinEPERM(p, options, er, cb)
-            : rmdir(p, options, er, cb)
-        if (er.code === "EISDIR")
-          return rmdir(p, options, er, cb)
-      }
-      return cb(er)
-    })
-  })
-}
-
-const fixWinEPERM = (p, options, er, cb) => {
-  assert(p)
-  assert(options)
-  assert(typeof cb === 'function')
-
-  options.chmod(p, 0o666, er2 => {
-    if (er2)
-      cb(er2.code === "ENOENT" ? null : er)
-    else
-      options.stat(p, (er3, stats) => {
-        if (er3)
-          cb(er3.code === "ENOENT" ? null : er)
-        else if (stats.isDirectory())
-          rmdir(p, options, er, cb)
-        else
-          options.unlink(p, cb)
-      })
-  })
-}
-
-const fixWinEPERMSync = (p, options, er) => {
-  assert(p)
-  assert(options)
-
-  try {
-    options.chmodSync(p, 0o666)
-  } catch (er2) {
-    if (er2.code === "ENOENT")
-      return
-    else
-      throw er
-  }
-
-  let stats
-  try {
-    stats = options.statSync(p)
-  } catch (er3) {
-    if (er3.code === "ENOENT")
-      return
-    else
-      throw er
-  }
-
-  if (stats.isDirectory())
-    rmdirSync(p, options, er)
-  else
-    options.unlinkSync(p)
-}
-
-const rmdir = (p, options, originalEr, cb) => {
-  assert(p)
-  assert(options)
-  assert(typeof cb === 'function')
-
-  // try to rmdir first, and only readdir on ENOTEMPTY or EEXIST (SunOS)
-  // if we guessed wrong, and it's not a directory, then
-  // raise the original error.
-  options.rmdir(p, er => {
-    if (er && (er.code === "ENOTEMPTY" || er.code === "EEXIST" || er.code === "EPERM"))
-      rmkids(p, options, cb)
-    else if (er && er.code === "ENOTDIR")
-      cb(originalEr)
-    else
-      cb(er)
-  })
-}
-
-const rmkids = (p, options, cb) => {
-  assert(p)
-  assert(options)
-  assert(typeof cb === 'function')
-
-  options.readdir(p, (er, files) => {
-    if (er)
-      return cb(er)
-    let n = files.length
-    if (n === 0)
-      return options.rmdir(p, cb)
-    let errState
-    files.forEach(f => {
-      rimraf(path.join(p, f), options, er => {
-        if (errState)
-          return
-        if (er)
-          return cb(errState = er)
-        if (--n === 0)
-          options.rmdir(p, cb)
-      })
-    })
-  })
-}
-
-// this looks simpler, and is strictly *faster*, but will
-// tie up the JavaScript thread and fail on excessively
-// deep directory trees.
-const rimrafSync = (p, options) => {
-  options = options || {}
-  defaults(options)
-
-  assert(p, 'rimraf: missing path')
-  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
-  assert(options, 'rimraf: missing options')
-  assert.equal(typeof options, 'object', 'rimraf: options should be object')
-
-  let results
-
-  if (options.disableGlob || !glob.hasMagic(p)) {
-    results = [p]
-  } else {
-    try {
-      options.lstatSync(p)
-      results = [p]
-    } catch (er) {
-      results = glob.sync(p, options.glob)
-    }
-  }
-
-  if (!results.length)
-    return
-
-  for (let i = 0; i < results.length; i++) {
-    const p = results[i]
-
-    let st
-    try {
-      st = options.lstatSync(p)
-    } catch (er) {
-      if (er.code === "ENOENT")
-        return
-
-      // Windows can EPERM on stat.  Life is suffering.
-      if (er.code === "EPERM" && isWindows)
-        fixWinEPERMSync(p, options, er)
-    }
-
-    try {
-      // sunos lets the root user unlink directories, which is... weird.
-      if (st && st.isDirectory())
-        rmdirSync(p, options, null)
-      else
-        options.unlinkSync(p)
-    } catch (er) {
-      if (er.code === "ENOENT")
-        return
-      if (er.code === "EPERM")
-        return isWindows ? fixWinEPERMSync(p, options, er) : rmdirSync(p, options, er)
-      if (er.code !== "EISDIR")
-        throw er
-
-      rmdirSync(p, options, er)
-    }
-  }
-}
-
-const rmdirSync = (p, options, originalEr) => {
-  assert(p)
-  assert(options)
-
-  try {
-    options.rmdirSync(p)
-  } catch (er) {
-    if (er.code === "ENOENT")
-      return
-    if (er.code === "ENOTDIR")
-      throw originalEr
-    if (er.code === "ENOTEMPTY" || er.code === "EEXIST" || er.code === "EPERM")
-      rmkidsSync(p, options)
-  }
-}
-
-const rmkidsSync = (p, options) => {
-  assert(p)
-  assert(options)
-  options.readdirSync(p).forEach(f => rimrafSync(path.join(p, f), options))
-
-  // We only end up here once we got ENOTEMPTY at least once, and
-  // at this point, we are guaranteed to have removed all the kids.
-  // So, we know that it won't be ENOENT or ENOTDIR or anything else.
-  // try really hard to delete stuff on windows, because it has a
-  // PROFOUNDLY annoying habit of not closing handles promptly when
-  // files are deleted, resulting in spurious ENOTEMPTY errors.
-  const retries = isWindows ? 100 : 1
-  let i = 0
-  do {
-    let threw = true
-    try {
-      const ret = options.rmdirSync(p, options)
-      threw = false
-      return ret
-    } finally {
-      if (++i < retries && threw)
-        continue
-    }
-  } while (true)
-}
-
-module.exports = rimraf
-rimraf.sync = rimrafSync
 
 
 /***/ }),
@@ -54558,7 +48346,7 @@ rimraf.sync = rimrafSync
 
 
 
-var buffer = __nccwpck_require__(4300)
+var buffer = __nccwpck_require__(4293)
 var Buffer = buffer.Buffer
 
 var safer = {}
@@ -55906,7 +49694,7 @@ exports.SmartBuffer = SmartBuffer;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const buffer_1 = __nccwpck_require__(4300);
+const buffer_1 = __nccwpck_require__(4293);
 /**
  * Error strings
  */
@@ -56033,9 +49821,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const dns_1 = __importDefault(__nccwpck_require__(9523));
-const tls_1 = __importDefault(__nccwpck_require__(4404));
-const url_1 = __importDefault(__nccwpck_require__(7310));
+const dns_1 = __importDefault(__nccwpck_require__(881));
+const tls_1 = __importDefault(__nccwpck_require__(4016));
+const url_1 = __importDefault(__nccwpck_require__(8835));
 const debug_1 = __importDefault(__nccwpck_require__(8237));
 const agent_base_1 = __nccwpck_require__(9690);
 const socks_1 = __nccwpck_require__(4754);
@@ -56187,7 +49975,7 @@ class SocksProxyAgent extends agent_base_1.Agent {
         });
     }
 }
-exports["default"] = SocksProxyAgent;
+exports.default = SocksProxyAgent;
 function omit(obj, ...keys) {
     const ret = {};
     let key;
@@ -56239,8 +50027,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SocksClientError = exports.SocksClient = void 0;
-const events_1 = __nccwpck_require__(2361);
-const net = __nccwpck_require__(1808);
+const events_1 = __nccwpck_require__(8614);
+const net = __nccwpck_require__(1631);
 const ip = __nccwpck_require__(7547);
 const smart_buffer_1 = __nccwpck_require__(1062);
 const constants_1 = __nccwpck_require__(9647);
@@ -57148,7 +50936,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.validateSocksClientChainOptions = exports.validateSocksClientOptions = void 0;
 const util_1 = __nccwpck_require__(5523);
 const constants_1 = __nccwpck_require__(9647);
-const stream = __nccwpck_require__(2781);
+const stream = __nccwpck_require__(2413);
 /**
  * Validates the provided SocksClientOptions
  * @param options { SocksClientOptions }
@@ -58065,9 +51853,9 @@ var __webpack_unused_export__;
 
 var util = __nccwpck_require__(2344);
 var binarySearch = __nccwpck_require__(3600);
-var ArraySet = (__nccwpck_require__(6375)/* .ArraySet */ .I);
+var ArraySet = __nccwpck_require__(6375)/* .ArraySet */ .I;
 var base64VLQ = __nccwpck_require__(975);
-var quickSort = (__nccwpck_require__(3254)/* .quickSort */ .U);
+var quickSort = __nccwpck_require__(3254)/* .quickSort */ .U;
 
 function SourceMapConsumer(aSourceMap, aSourceMapURL) {
   var sourceMap = aSourceMap;
@@ -59217,8 +53005,8 @@ __webpack_unused_export__ = IndexedSourceMapConsumer;
 
 var base64VLQ = __nccwpck_require__(975);
 var util = __nccwpck_require__(2344);
-var ArraySet = (__nccwpck_require__(6375)/* .ArraySet */ .I);
-var MappingList = (__nccwpck_require__(6817)/* .MappingList */ .H);
+var ArraySet = __nccwpck_require__(6375)/* .ArraySet */ .I;
+var MappingList = __nccwpck_require__(6817)/* .MappingList */ .H;
 
 /**
  * An instance of the SourceMapGenerator represents a source map which is
@@ -59647,7 +53435,7 @@ exports.h = SourceMapGenerator;
  * http://opensource.org/licenses/BSD-3-Clause
  */
 
-var SourceMapGenerator = (__nccwpck_require__(9425)/* .SourceMapGenerator */ .h);
+var SourceMapGenerator = __nccwpck_require__(9425)/* .SourceMapGenerator */ .h;
 var util = __nccwpck_require__(2344);
 
 // Matches a Windows-style `\r\n` newline or a `\n` newline used by all other
@@ -60585,7 +54373,7 @@ exports.SourceNode = __nccwpck_require__(2616).SourceNode;
  * @private
  */
 
-var codes = __nccwpck_require__(855)
+var codes = __nccwpck_require__(7907)
 
 /**
  * Module exports.
@@ -60712,7 +54500,7 @@ function status (code) {
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var Buffer = (__nccwpck_require__(4300).Buffer);
+var Buffer = __nccwpck_require__(4293).Buffer;
 
 var isBufferEncoding = Buffer.isEncoding
   || function(encoding) {
@@ -60921,8 +54709,8 @@ function base64DetectIncompleteChar(buffer) {
 
 "use strict";
 
-const os = __nccwpck_require__(2037);
-const tty = __nccwpck_require__(6224);
+const os = __nccwpck_require__(2087);
+const tty = __nccwpck_require__(3867);
 const hasFlag = __nccwpck_require__(1621);
 
 const {env} = process;
@@ -61062,10 +54850,7 @@ module.exports = {
 /***/ 8065:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
-
-
-const { promisify } = __nccwpck_require__(3837);
+const {promisify} = __nccwpck_require__(1669);
 const tmp = __nccwpck_require__(8517);
 
 // file
@@ -61131,12 +54916,14 @@ module.exports.setGracefulCleanup = tmp.setGracefulCleanup;
 /*
  * Module dependencies.
  */
-const fs = __nccwpck_require__(7147);
-const os = __nccwpck_require__(2037);
-const path = __nccwpck_require__(1017);
-const crypto = __nccwpck_require__(6113);
-const _c = { fs: fs.constants, os: os.constants };
-const rimraf = __nccwpck_require__(4959);
+const fs = __nccwpck_require__(5747);
+const os = __nccwpck_require__(2087);
+const path = __nccwpck_require__(5622);
+const crypto = __nccwpck_require__(6417);
+const _c = fs.constants && os.constants ?
+  { fs: fs.constants, os: os.constants } :
+  process.binding('constants');
+const rimraf = __nccwpck_require__(2371);
 
 /*
  * The working inner variables.
@@ -61151,25 +54938,127 @@ const
 
   CREATE_FLAGS = (_c.O_CREAT || _c.fs.O_CREAT) | (_c.O_EXCL || _c.fs.O_EXCL) | (_c.O_RDWR || _c.fs.O_RDWR),
 
-  // constants are off on the windows platform and will not match the actual errno codes
-  IS_WIN32 = os.platform() === 'win32',
   EBADF = _c.EBADF || _c.os.errno.EBADF,
   ENOENT = _c.ENOENT || _c.os.errno.ENOENT,
 
-  DIR_MODE = 0o700 /* 448 */,
-  FILE_MODE = 0o600 /* 384 */,
+  DIR_MODE = 448 /* 0o700 */,
+  FILE_MODE = 384 /* 0o600 */,
 
   EXIT = 'exit',
 
+  SIGINT = 'SIGINT',
+
   // this will hold the objects need to be removed on exit
-  _removeObjects = [],
+  _removeObjects = [];
 
-  // API change in fs.rmdirSync leads to error when passing in a second parameter, e.g. the callback
-  FN_RMDIR_SYNC = fs.rmdirSync.bind(fs),
-  FN_RIMRAF_SYNC = rimraf.sync;
-
-let
+var
   _gracefulCleanup = false;
+
+/**
+ * Random name generator based on crypto.
+ * Adapted from http://blog.tompawlak.org/how-to-generate-random-values-nodejs-javascript
+ *
+ * @param {number} howMany
+ * @returns {string} the generated random name
+ * @private
+ */
+function _randomChars(howMany) {
+  var
+    value = [],
+    rnd = null;
+
+  // make sure that we do not fail because we ran out of entropy
+  try {
+    rnd = crypto.randomBytes(howMany);
+  } catch (e) {
+    rnd = crypto.pseudoRandomBytes(howMany);
+  }
+
+  for (var i = 0; i < howMany; i++) {
+    value.push(RANDOM_CHARS[rnd[i] % RANDOM_CHARS.length]);
+  }
+
+  return value.join('');
+}
+
+/**
+ * Checks whether the `obj` parameter is defined or not.
+ *
+ * @param {Object} obj
+ * @returns {boolean} true if the object is undefined
+ * @private
+ */
+function _isUndefined(obj) {
+  return typeof obj === 'undefined';
+}
+
+/**
+ * Parses the function arguments.
+ *
+ * This function helps to have optional arguments.
+ *
+ * @param {(Options|Function)} options
+ * @param {Function} callback
+ * @returns {Array} parsed arguments
+ * @private
+ */
+function _parseArguments(options, callback) {
+  /* istanbul ignore else */
+  if (typeof options === 'function') {
+    return [{}, options];
+  }
+
+  /* istanbul ignore else */
+  if (_isUndefined(options)) {
+    return [{}, callback];
+  }
+
+  return [options, callback];
+}
+
+/**
+ * Generates a new temporary name.
+ *
+ * @param {Object} opts
+ * @returns {string} the new random name according to opts
+ * @private
+ */
+function _generateTmpName(opts) {
+
+  const tmpDir = _getTmpDir();
+
+  // fail early on missing tmp dir
+  if (isBlank(opts.dir) && isBlank(tmpDir)) {
+    throw new Error('No tmp dir specified');
+  }
+
+  /* istanbul ignore else */
+  if (!isBlank(opts.name)) {
+    return path.join(opts.dir || tmpDir, opts.name);
+  }
+
+  // mkstemps like template
+  // opts.template has already been guarded in tmpName() below
+  /* istanbul ignore else */
+  if (opts.template) {
+    var template = opts.template;
+    // make sure that we prepend the tmp path if none was given
+    /* istanbul ignore else */
+    if (path.basename(template) === template)
+      template = path.join(opts.dir || tmpDir, template);
+    return template.replace(TEMPLATE_PATTERN, _randomChars(6));
+  }
+
+  // prefix and postfix
+  const name = [
+    (isBlank(opts.prefix) ? 'tmp-' : opts.prefix),
+    process.pid,
+    _randomChars(12),
+    (opts.postfix ? opts.postfix : '')
+  ].join('');
+
+  return path.join(opts.dir || tmpDir, name);
+}
 
 /**
  * Gets a temporary file name.
@@ -61178,18 +55067,20 @@ let
  * @param {?tmpNameCallback} callback the callback function
  */
 function tmpName(options, callback) {
-  const
+  var
     args = _parseArguments(options, callback),
     opts = args[0],
-    cb = args[1];
+    cb = args[1],
+    tries = !isBlank(opts.name) ? 1 : opts.tries || DEFAULT_TRIES;
 
-  try {
-    _assertAndSanitizeOptions(opts);
-  } catch (err) {
-    return cb(err);
-  }
+  /* istanbul ignore else */
+  if (isNaN(tries) || tries < 0)
+    return cb(new Error('Invalid tries'));
 
-  let tries = opts.tries;
+  /* istanbul ignore else */
+  if (opts.template && !opts.template.match(TEMPLATE_PATTERN))
+    return cb(new Error('Invalid template provided'));
+
   (function _getUniqueName() {
     try {
       const name = _generateTmpName(opts);
@@ -61220,13 +55111,19 @@ function tmpName(options, callback) {
  * @throws {Error} if the options are invalid or could not generate a filename
  */
 function tmpNameSync(options) {
-  const
+  var
     args = _parseArguments(options),
-    opts = args[0];
+    opts = args[0],
+    tries = !isBlank(opts.name) ? 1 : opts.tries || DEFAULT_TRIES;
 
-  _assertAndSanitizeOptions(opts);
+  /* istanbul ignore else */
+  if (isNaN(tries) || tries < 0)
+    throw new Error('Invalid tries');
 
-  let tries = opts.tries;
+  /* istanbul ignore else */
+  if (opts.template && !opts.template.match(TEMPLATE_PATTERN))
+    throw new Error('Invalid template provided');
+
   do {
     const name = _generateTmpName(opts);
     try {
@@ -61242,11 +55139,11 @@ function tmpNameSync(options) {
 /**
  * Creates and opens a temporary file.
  *
- * @param {(Options|null|undefined|fileCallback)} options the config options or the callback function or null or undefined
+ * @param {(Options|fileCallback)} options the config options or the callback function
  * @param {?fileCallback} callback
  */
 function file(options, callback) {
-  const
+  var
     args = _parseArguments(options, callback),
     opts = args[0],
     cb = args[1];
@@ -61258,20 +55155,34 @@ function file(options, callback) {
 
     // create and open the file
     fs.open(name, CREATE_FLAGS, opts.mode || FILE_MODE, function _fileCreated(err, fd) {
-      /* istanbu ignore else */
+      /* istanbul ignore else */
       if (err) return cb(err);
 
       if (opts.discardDescriptor) {
-        return fs.close(fd, function _discardCallback(possibleErr) {
-          // the chance of getting an error on close here is rather low and might occur in the most edgiest cases only
-          return cb(possibleErr, name, undefined, _prepareTmpFileRemoveCallback(name, -1, opts, false));
+        return fs.close(fd, function _discardCallback(err) {
+          /* istanbul ignore else */
+          if (err) {
+            // Low probability, and the file exists, so this could be
+            // ignored.  If it isn't we certainly need to unlink the
+            // file, and if that fails too its error is more
+            // important.
+            try {
+              fs.unlinkSync(name);
+            } catch (e) {
+              if (!isENOENT(e)) {
+                err = e;
+              }
+            }
+            return cb(err);
+          }
+          cb(null, name, undefined, _prepareTmpFileRemoveCallback(name, -1, opts));
         });
-      } else {
-        // detachDescriptor passes the descriptor whereas discardDescriptor closes it, either way, we no longer care
-        // about the descriptor
-        const discardOrDetachDescriptor = opts.discardDescriptor || opts.detachDescriptor;
-        cb(null, name, fd, _prepareTmpFileRemoveCallback(name, discardOrDetachDescriptor ? -1 : fd, opts, false));
       }
+      /* istanbul ignore else */
+      if (opts.detachDescriptor) {
+        return cb(null, name, fd, _prepareTmpFileRemoveCallback(name, -1, opts));
+      }
+      cb(null, name, fd, _prepareTmpFileRemoveCallback(name, fd, opts));
     });
   });
 }
@@ -61284,7 +55195,7 @@ function file(options, callback) {
  * @throws {Error} if cannot create a file
  */
 function fileSync(options) {
-  const
+  var
     args = _parseArguments(options),
     opts = args[0];
 
@@ -61300,7 +55211,7 @@ function fileSync(options) {
   return {
     name: name,
     fd: fd,
-    removeCallback: _prepareTmpFileRemoveCallback(name, discardOrDetachDescriptor ? -1 : fd, opts, true)
+    removeCallback: _prepareTmpFileRemoveCallback(name, discardOrDetachDescriptor ? -1 : fd, opts)
   };
 }
 
@@ -61311,7 +55222,7 @@ function fileSync(options) {
  * @param {?dirCallback} callback
  */
 function dir(options, callback) {
-  const
+  var
     args = _parseArguments(options, callback),
     opts = args[0],
     cb = args[1];
@@ -61326,7 +55237,7 @@ function dir(options, callback) {
       /* istanbul ignore else */
       if (err) return cb(err);
 
-      cb(null, name, _prepareTmpDirRemoveCallback(name, opts, false));
+      cb(null, name, _prepareTmpDirRemoveCallback(name, opts));
     });
   });
 }
@@ -61339,7 +55250,7 @@ function dir(options, callback) {
  * @throws {Error} if it cannot create a directory
  */
 function dirSync(options) {
-  const
+  var
     args = _parseArguments(options),
     opts = args[0];
 
@@ -61348,7 +55259,7 @@ function dirSync(options) {
 
   return {
     name: name,
-    removeCallback: _prepareTmpDirRemoveCallback(name, opts, true)
+    removeCallback: _prepareTmpDirRemoveCallback(name, opts)
   };
 }
 
@@ -61361,15 +55272,15 @@ function dirSync(options) {
  */
 function _removeFileAsync(fdPath, next) {
   const _handler = function (err) {
-    if (err && !_isENOENT(err)) {
+    if (err && !isENOENT(err)) {
       // reraise any unanticipated error
       return next(err);
     }
     next();
-  };
+  }
 
   if (0 <= fdPath[0])
-    fs.close(fdPath[0], function () {
+    fs.close(fdPath[0], function (err) {
       fs.unlink(fdPath[1], _handler);
     });
   else fs.unlink(fdPath[1], _handler);
@@ -61382,104 +55293,117 @@ function _removeFileAsync(fdPath, next) {
  * @private
  */
 function _removeFileSync(fdPath) {
-  let rethrownException = null;
   try {
     if (0 <= fdPath[0]) fs.closeSync(fdPath[0]);
   } catch (e) {
     // reraise any unanticipated error
-    if (!_isEBADF(e) && !_isENOENT(e)) throw e;
+    if (!isEBADF(e) && !isENOENT(e)) throw e;
   } finally {
     try {
       fs.unlinkSync(fdPath[1]);
     }
     catch (e) {
       // reraise any unanticipated error
-      if (!_isENOENT(e)) rethrownException = e;
+      if (!isENOENT(e)) throw e;
     }
-  }
-  if (rethrownException !== null) {
-    throw rethrownException;
   }
 }
 
 /**
  * Prepares the callback for removal of the temporary file.
  *
- * Returns either a sync callback or a async callback depending on whether
- * fileSync or file was called, which is expressed by the sync parameter.
- *
  * @param {string} name the path of the file
  * @param {number} fd file descriptor
  * @param {Object} opts
- * @param {boolean} sync
- * @returns {fileCallback | fileCallbackSync}
+ * @returns {fileCallback}
  * @private
  */
-function _prepareTmpFileRemoveCallback(name, fd, opts, sync) {
-  const removeCallbackSync = _prepareRemoveCallback(_removeFileSync, [fd, name], sync);
-  const removeCallback = _prepareRemoveCallback(_removeFileAsync, [fd, name], sync, removeCallbackSync);
+function _prepareTmpFileRemoveCallback(name, fd, opts) {
+  const removeCallbackSync = _prepareRemoveCallback(_removeFileSync, [fd, name]);
+  const removeCallback = _prepareRemoveCallback(_removeFileAsync, [fd, name], removeCallbackSync);
 
   if (!opts.keep) _removeObjects.unshift(removeCallbackSync);
 
-  return sync ? removeCallbackSync : removeCallback;
+  return removeCallback;
+}
+
+/**
+ * Simple wrapper for rimraf.
+ *
+ * @param {string} dirPath
+ * @param {Function} next
+ * @private
+ */
+function _rimrafRemoveDirWrapper(dirPath, next) {
+  rimraf(dirPath, next);
+}
+
+/**
+ * Simple wrapper for rimraf.sync.
+ *
+ * @param {string} dirPath
+ * @private
+ */
+function _rimrafRemoveDirSyncWrapper(dirPath, next) {
+  try {
+    return next(null, rimraf.sync(dirPath));
+  } catch (err) {
+    return next(err);
+  }
 }
 
 /**
  * Prepares the callback for removal of the temporary directory.
  *
- * Returns either a sync callback or a async callback depending on whether
- * tmpFileSync or tmpFile was called, which is expressed by the sync parameter.
- *
  * @param {string} name
  * @param {Object} opts
- * @param {boolean} sync
  * @returns {Function} the callback
  * @private
  */
-function _prepareTmpDirRemoveCallback(name, opts, sync) {
-  const removeFunction = opts.unsafeCleanup ? rimraf : fs.rmdir.bind(fs);
-  const removeFunctionSync = opts.unsafeCleanup ? FN_RIMRAF_SYNC : FN_RMDIR_SYNC;
-  const removeCallbackSync = _prepareRemoveCallback(removeFunctionSync, name, sync);
-  const removeCallback = _prepareRemoveCallback(removeFunction, name, sync, removeCallbackSync);
+function _prepareTmpDirRemoveCallback(name, opts) {
+  const removeFunction = opts.unsafeCleanup ? _rimrafRemoveDirWrapper : fs.rmdir.bind(fs);
+  const removeFunctionSync = opts.unsafeCleanup ? _rimrafRemoveDirSyncWrapper : fs.rmdirSync.bind(fs);
+  const removeCallbackSync = _prepareRemoveCallback(removeFunctionSync, name);
+  const removeCallback = _prepareRemoveCallback(removeFunction, name, removeCallbackSync);
   if (!opts.keep) _removeObjects.unshift(removeCallbackSync);
 
-  return sync ? removeCallbackSync : removeCallback;
+  return removeCallback;
 }
 
 /**
  * Creates a guarded function wrapping the removeFunction call.
  *
- * The cleanup callback is save to be called multiple times.
- * Subsequent invocations will be ignored.
- *
  * @param {Function} removeFunction
- * @param {string} fileOrDirName
- * @param {boolean} sync
- * @param {cleanupCallbackSync?} cleanupCallbackSync
- * @returns {cleanupCallback | cleanupCallbackSync}
+ * @param {Object} arg
+ * @returns {Function}
  * @private
  */
-function _prepareRemoveCallback(removeFunction, fileOrDirName, sync, cleanupCallbackSync) {
-  let called = false;
+function _prepareRemoveCallback(removeFunction, arg, cleanupCallbackSync) {
+  var called = false;
 
-  // if sync is true, the next parameter will be ignored
   return function _cleanupCallback(next) {
-
-    /* istanbul ignore else */
+    next = next || function () {};
     if (!called) {
-      // remove cleanupCallback from cache
       const toRemove = cleanupCallbackSync || _cleanupCallback;
       const index = _removeObjects.indexOf(toRemove);
       /* istanbul ignore else */
       if (index >= 0) _removeObjects.splice(index, 1);
 
       called = true;
-      if (sync || removeFunction === FN_RMDIR_SYNC || removeFunction === FN_RIMRAF_SYNC) {
-        return removeFunction(fileOrDirName);
-      } else {
-        return removeFunction(fileOrDirName, next || function() {});
-      }
-    }
+      // sync?
+      if (removeFunction.length === 1) {
+        try {
+          removeFunction(arg);
+          return next(null);
+        }
+        catch (err) {
+          // if no next is provided and since we are
+          // in silent cleanup mode on process exit,
+          // we will ignore the error
+          return next(err);
+        }
+      } else return removeFunction(arg, next);
+    } else return next(new Error('cleanup callback has already been called'));
   };
 }
 
@@ -61504,30 +55428,41 @@ function _garbageCollector() {
 }
 
 /**
- * Random name generator based on crypto.
- * Adapted from http://blog.tompawlak.org/how-to-generate-random-values-nodejs-javascript
- *
- * @param {number} howMany
- * @returns {string} the generated random name
- * @private
+ * Helper for testing against EBADF to compensate changes made to Node 7.x under Windows.
  */
-function _randomChars(howMany) {
-  let
-    value = [],
-    rnd = null;
+function isEBADF(error) {
+  return isExpectedError(error, -EBADF, 'EBADF');
+}
 
-  // make sure that we do not fail because we ran out of entropy
-  try {
-    rnd = crypto.randomBytes(howMany);
-  } catch (e) {
-    rnd = crypto.pseudoRandomBytes(howMany);
-  }
+/**
+ * Helper for testing against ENOENT to compensate changes made to Node 7.x under Windows.
+ */
+function isENOENT(error) {
+  return isExpectedError(error, -ENOENT, 'ENOENT');
+}
 
-  for (var i = 0; i < howMany; i++) {
-    value.push(RANDOM_CHARS[rnd[i] % RANDOM_CHARS.length]);
-  }
-
-  return value.join('');
+/**
+ * Helper to determine whether the expected error code matches the actual code and errno,
+ * which will differ between the supported node versions.
+ *
+ * - Node >= 7.0:
+ *   error.code {string}
+ *   error.errno {string|number} any numerical value will be negated
+ *
+ * - Node >= 6.0 < 7.0:
+ *   error.code {string}
+ *   error.errno {number} negated
+ *
+ * - Node >= 4.0 < 6.0: introduces SystemError
+ *   error.code {string}
+ *   error.errno {number} negated
+ *
+ * - Node >= 0.10 < 4.0:
+ *   error.code {number} negated
+ *   error.errno n/a
+ */
+function isExpectedError(error, code, errno) {
+  return error.code === code || error.code === errno;
 }
 
 /**
@@ -61537,241 +55472,12 @@ function _randomChars(howMany) {
  * @param {string} s
  * @returns {Boolean} true whether the string s is blank, false otherwise
  */
-function _isBlank(s) {
-  return s === null || _isUndefined(s) || !s.trim();
-}
-
-/**
- * Checks whether the `obj` parameter is defined or not.
- *
- * @param {Object} obj
- * @returns {boolean} true if the object is undefined
- * @private
- */
-function _isUndefined(obj) {
-  return typeof obj === 'undefined';
-}
-
-/**
- * Parses the function arguments.
- *
- * This function helps to have optional arguments.
- *
- * @param {(Options|null|undefined|Function)} options
- * @param {?Function} callback
- * @returns {Array} parsed arguments
- * @private
- */
-function _parseArguments(options, callback) {
-  /* istanbul ignore else */
-  if (typeof options === 'function') {
-    return [{}, options];
-  }
-
-  /* istanbul ignore else */
-  if (_isUndefined(options)) {
-    return [{}, callback];
-  }
-
-  // copy options so we do not leak the changes we make internally
-  const actualOptions = {};
-  for (const key of Object.getOwnPropertyNames(options)) {
-    actualOptions[key] = options[key];
-  }
-
-  return [actualOptions, callback];
-}
-
-/**
- * Generates a new temporary name.
- *
- * @param {Object} opts
- * @returns {string} the new random name according to opts
- * @private
- */
-function _generateTmpName(opts) {
-
-  const tmpDir = opts.tmpdir;
-
-  /* istanbul ignore else */
-  if (!_isUndefined(opts.name))
-    return path.join(tmpDir, opts.dir, opts.name);
-
-  /* istanbul ignore else */
-  if (!_isUndefined(opts.template))
-    return path.join(tmpDir, opts.dir, opts.template).replace(TEMPLATE_PATTERN, _randomChars(6));
-
-  // prefix and postfix
-  const name = [
-    opts.prefix ? opts.prefix : 'tmp',
-    '-',
-    process.pid,
-    '-',
-    _randomChars(12),
-    opts.postfix ? '-' + opts.postfix : ''
-  ].join('');
-
-  return path.join(tmpDir, opts.dir, name);
-}
-
-/**
- * Asserts whether the specified options are valid, also sanitizes options and provides sane defaults for missing
- * options.
- *
- * @param {Options} options
- * @private
- */
-function _assertAndSanitizeOptions(options) {
-
-  options.tmpdir = _getTmpDir(options);
-
-  const tmpDir = options.tmpdir;
-
-  /* istanbul ignore else */
-  if (!_isUndefined(options.name))
-    _assertIsRelative(options.name, 'name', tmpDir);
-  /* istanbul ignore else */
-  if (!_isUndefined(options.dir))
-    _assertIsRelative(options.dir, 'dir', tmpDir);
-  /* istanbul ignore else */
-  if (!_isUndefined(options.template)) {
-    _assertIsRelative(options.template, 'template', tmpDir);
-    if (!options.template.match(TEMPLATE_PATTERN))
-      throw new Error(`Invalid template, found "${options.template}".`);
-  }
-  /* istanbul ignore else */
-  if (!_isUndefined(options.tries) && isNaN(options.tries) || options.tries < 0)
-    throw new Error(`Invalid tries, found "${options.tries}".`);
-
-  // if a name was specified we will try once
-  options.tries = _isUndefined(options.name) ? options.tries || DEFAULT_TRIES : 1;
-  options.keep = !!options.keep;
-  options.detachDescriptor = !!options.detachDescriptor;
-  options.discardDescriptor = !!options.discardDescriptor;
-  options.unsafeCleanup = !!options.unsafeCleanup;
-
-  // sanitize dir, also keep (multiple) blanks if the user, purportedly sane, requests us to
-  options.dir = _isUndefined(options.dir) ? '' : path.relative(tmpDir, _resolvePath(options.dir, tmpDir));
-  options.template = _isUndefined(options.template) ? undefined : path.relative(tmpDir, _resolvePath(options.template, tmpDir));
-  // sanitize further if template is relative to options.dir
-  options.template = _isBlank(options.template) ? undefined : path.relative(options.dir, options.template);
-
-  // for completeness' sake only, also keep (multiple) blanks if the user, purportedly sane, requests us to
-  options.name = _isUndefined(options.name) ? undefined : _sanitizeName(options.name);
-  options.prefix = _isUndefined(options.prefix) ? '' : options.prefix;
-  options.postfix = _isUndefined(options.postfix) ? '' : options.postfix;
-}
-
-/**
- * Resolve the specified path name in respect to tmpDir.
- *
- * The specified name might include relative path components, e.g. ../
- * so we need to resolve in order to be sure that is is located inside tmpDir
- *
- * @param name
- * @param tmpDir
- * @returns {string}
- * @private
- */
-function _resolvePath(name, tmpDir) {
-  const sanitizedName = _sanitizeName(name);
-  if (sanitizedName.startsWith(tmpDir)) {
-    return path.resolve(sanitizedName);
-  } else {
-    return path.resolve(path.join(tmpDir, sanitizedName));
-  }
-}
-
-/**
- * Sanitize the specified path name by removing all quote characters.
- *
- * @param name
- * @returns {string}
- * @private
- */
-function _sanitizeName(name) {
-  if (_isBlank(name)) {
-    return name;
-  }
-  return name.replace(/["']/g, '');
-}
-
-/**
- * Asserts whether specified name is relative to the specified tmpDir.
- *
- * @param {string} name
- * @param {string} option
- * @param {string} tmpDir
- * @throws {Error}
- * @private
- */
-function _assertIsRelative(name, option, tmpDir) {
-  if (option === 'name') {
-    // assert that name is not absolute and does not contain a path
-    if (path.isAbsolute(name))
-      throw new Error(`${option} option must not contain an absolute path, found "${name}".`);
-    // must not fail on valid .<name> or ..<name> or similar such constructs
-    let basename = path.basename(name);
-    if (basename === '..' || basename === '.' || basename !== name)
-      throw new Error(`${option} option must not contain a path, found "${name}".`);
-  }
-  else { // if (option === 'dir' || option === 'template') {
-    // assert that dir or template are relative to tmpDir
-    if (path.isAbsolute(name) && !name.startsWith(tmpDir)) {
-      throw new Error(`${option} option must be relative to "${tmpDir}", found "${name}".`);
-    }
-    let resolvedPath = _resolvePath(name, tmpDir);
-    if (!resolvedPath.startsWith(tmpDir))
-      throw new Error(`${option} option must be relative to "${tmpDir}", found "${resolvedPath}".`);
-  }
-}
-
-/**
- * Helper for testing against EBADF to compensate changes made to Node 7.x under Windows.
- *
- * @private
- */
-function _isEBADF(error) {
-  return _isExpectedError(error, -EBADF, 'EBADF');
-}
-
-/**
- * Helper for testing against ENOENT to compensate changes made to Node 7.x under Windows.
- *
- * @private
- */
-function _isENOENT(error) {
-  return _isExpectedError(error, -ENOENT, 'ENOENT');
-}
-
-/**
- * Helper to determine whether the expected error code matches the actual code and errno,
- * which will differ between the supported node versions.
- *
- * - Node >= 7.0:
- *   error.code {string}
- *   error.errno {number} any numerical value will be negated
- *
- * CAVEAT
- *
- * On windows, the errno for EBADF is -4083 but os.constants.errno.EBADF is different and we must assume that ENOENT
- * is no different here.
- *
- * @param {SystemError} error
- * @param {number} errno
- * @param {string} code
- * @private
- */
-function _isExpectedError(error, errno, code) {
-  return IS_WIN32 ? error.code === code : error.code === code && error.errno === errno;
+function isBlank(s) {
+  return s === null || s === undefined || !s.trim();
 }
 
 /**
  * Sets the graceful cleanup.
- *
- * If graceful cleanup is set, tmp will remove all controlled temporary objects on process exit, otherwise the
- * temporary objects will remain in place, waiting to be cleaned up on system restart or otherwise scheduled temporary
- * object removals.
  */
 function setGracefulCleanup() {
   _gracefulCleanup = true;
@@ -61781,38 +55487,120 @@ function setGracefulCleanup() {
  * Returns the currently configured tmp dir from os.tmpdir().
  *
  * @private
- * @param {?Options} options
  * @returns {string} the currently configured tmp dir
  */
-function _getTmpDir(options) {
-  return path.resolve(_sanitizeName(options && options.tmpdir || os.tmpdir()));
+function _getTmpDir() {
+  return os.tmpdir();
 }
 
-// Install process exit listener
-process.addListener(EXIT, _garbageCollector);
+/**
+ * If there are multiple different versions of tmp in place, make sure that
+ * we recognize the old listeners.
+ *
+ * @param {Function} listener
+ * @private
+ * @returns {Boolean} true whether listener is a legacy listener
+ */
+function _is_legacy_listener(listener) {
+  return (listener.name === '_exit' || listener.name === '_uncaughtExceptionThrown')
+    && listener.toString().indexOf('_garbageCollector();') > -1;
+}
+
+/**
+ * Safely install SIGINT listener.
+ *
+ * NOTE: this will only work on OSX and Linux.
+ *
+ * @private
+ */
+function _safely_install_sigint_listener() {
+
+  const listeners = process.listeners(SIGINT);
+  const existingListeners = [];
+  for (let i = 0, length = listeners.length; i < length; i++) {
+    const lstnr = listeners[i];
+    /* istanbul ignore else */
+    if (lstnr.name === '_tmp$sigint_listener') {
+      existingListeners.push(lstnr);
+      process.removeListener(SIGINT, lstnr);
+    }
+  }
+  process.on(SIGINT, function _tmp$sigint_listener(doExit) {
+    for (let i = 0, length = existingListeners.length; i < length; i++) {
+      // let the existing listener do the garbage collection (e.g. jest sandbox)
+      try {
+        existingListeners[i](false);
+      } catch (err) {
+        // ignore
+      }
+    }
+    try {
+      // force the garbage collector even it is called again in the exit listener
+      _garbageCollector();
+    } finally {
+      if (!!doExit) {
+        process.exit(0);
+      }
+    }
+  });
+}
+
+/**
+ * Safely install process exit listener.
+ *
+ * @private
+ */
+function _safely_install_exit_listener() {
+  const listeners = process.listeners(EXIT);
+
+  // collect any existing listeners
+  const existingListeners = [];
+  for (let i = 0, length = listeners.length; i < length; i++) {
+    const lstnr = listeners[i];
+    /* istanbul ignore else */
+    // TODO: remove support for legacy listeners once release 1.0.0 is out
+    if (lstnr.name === '_tmp$safe_listener' || _is_legacy_listener(lstnr)) {
+      // we must forget about the uncaughtException listener, hopefully it is ours
+      if (lstnr.name !== '_uncaughtExceptionThrown') {
+        existingListeners.push(lstnr);
+      }
+      process.removeListener(EXIT, lstnr);
+    }
+  }
+  // TODO: what was the data parameter good for?
+  process.addListener(EXIT, function _tmp$safe_listener(data) {
+    for (let i = 0, length = existingListeners.length; i < length; i++) {
+      // let the existing listener do the garbage collection (e.g. jest sandbox)
+      try {
+        existingListeners[i](data);
+      } catch (err) {
+        // ignore
+      }
+    }
+    _garbageCollector();
+  });
+}
+
+_safely_install_exit_listener();
+_safely_install_sigint_listener();
 
 /**
  * Configuration options.
  *
  * @typedef {Object} Options
- * @property {?boolean} keep the temporary object (file or dir) will not be garbage collected
  * @property {?number} tries the number of tries before give up the name generation
- * @property (?int) mode the access mode, defaults are 0o700 for directories and 0o600 for files
  * @property {?string} template the "mkstemp" like filename template
- * @property {?string} name fixed name relative to tmpdir or the specified dir option
- * @property {?string} dir tmp directory relative to the root tmp directory in use
+ * @property {?string} name fix name
+ * @property {?string} dir the tmp directory to use
  * @property {?string} prefix prefix for the generated name
  * @property {?string} postfix postfix for the generated name
- * @property {?string} tmpdir the root tmp directory which overrides the os tmpdir
  * @property {?boolean} unsafeCleanup recursively removes the created temporary directory, even when it's not empty
- * @property {?boolean} detachDescriptor detaches the file descriptor, caller is responsible for closing the file, tmp will no longer try closing the file during garbage collection
- * @property {?boolean} discardDescriptor discards the file descriptor (closes file, fd is -1), tmp will no longer try closing the file during garbage collection
  */
 
 /**
  * @typedef {Object} FileSyncObject
  * @property {string} name the name of the file
- * @property {string} fd the file descriptor or -1 if the fd has been discarded
+ * @property {string} fd the file descriptor
  * @property {fileCallback} removeCallback the callback function to remove the file
  */
 
@@ -61832,16 +55620,8 @@ process.addListener(EXIT, _garbageCollector);
  * @callback fileCallback
  * @param {?Error} err the error object if anything goes wrong
  * @param {string} name the temporary file name
- * @param {number} fd the file descriptor or -1 if the fd had been discarded
+ * @param {number} fd the file descriptor
  * @param {cleanupCallback} fn the cleanup callback function
- */
-
-/**
- * @callback fileCallbackSync
- * @param {?Error} err the error object if anything goes wrong
- * @param {string} name the temporary file name
- * @param {number} fd the file descriptor or -1 if the fd had been discarded
- * @param {cleanupCallbackSync} fn the cleanup callback function
  */
 
 /**
@@ -61852,23 +55632,10 @@ process.addListener(EXIT, _garbageCollector);
  */
 
 /**
- * @callback dirCallbackSync
- * @param {?Error} err the error object if anything goes wrong
- * @param {string} name the temporary file name
- * @param {cleanupCallbackSync} fn the cleanup callback function
- */
-
-/**
  * Removes the temporary created file or directory.
  *
  * @callback cleanupCallback
- * @param {simpleCallback} [next] function to call whenever the tmp object needs to be removed
- */
-
-/**
- * Removes the temporary created file or directory.
- *
- * @callback cleanupCallbackSync
+ * @param {simpleCallback} [next] function to call after entry was removed
  */
 
 /**
@@ -61880,7 +55647,7 @@ process.addListener(EXIT, _garbageCollector);
 
 // exporting all the needed methods
 
-// evaluate _getTmpDir() lazily, mainly for simplifying testing but it also will
+// evaluate os.tmpdir() lazily, mainly for simplifying testing but it also will
 // allow users to reconfigure the temporary directory
 Object.defineProperty(module.exports, "tmpdir", ({
   enumerable: true,
@@ -61900,6 +55667,385 @@ module.exports.tmpName = tmpName;
 module.exports.tmpNameSync = tmpNameSync;
 
 module.exports.setGracefulCleanup = setGracefulCleanup;
+
+
+/***/ }),
+
+/***/ 2371:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+module.exports = rimraf
+rimraf.sync = rimrafSync
+
+var assert = __nccwpck_require__(2357)
+var path = __nccwpck_require__(5622)
+var fs = __nccwpck_require__(5747)
+var glob = undefined
+try {
+  glob = __nccwpck_require__(1957)
+} catch (_err) {
+  // treat glob as optional.
+}
+var _0666 = parseInt('666', 8)
+
+var defaultGlobOpts = {
+  nosort: true,
+  silent: true
+}
+
+// for EMFILE handling
+var timeout = 0
+
+var isWindows = (process.platform === "win32")
+
+function defaults (options) {
+  var methods = [
+    'unlink',
+    'chmod',
+    'stat',
+    'lstat',
+    'rmdir',
+    'readdir'
+  ]
+  methods.forEach(function(m) {
+    options[m] = options[m] || fs[m]
+    m = m + 'Sync'
+    options[m] = options[m] || fs[m]
+  })
+
+  options.maxBusyTries = options.maxBusyTries || 3
+  options.emfileWait = options.emfileWait || 1000
+  if (options.glob === false) {
+    options.disableGlob = true
+  }
+  if (options.disableGlob !== true && glob === undefined) {
+    throw Error('glob dependency not found, set `options.disableGlob = true` if intentional')
+  }
+  options.disableGlob = options.disableGlob || false
+  options.glob = options.glob || defaultGlobOpts
+}
+
+function rimraf (p, options, cb) {
+  if (typeof options === 'function') {
+    cb = options
+    options = {}
+  }
+
+  assert(p, 'rimraf: missing path')
+  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
+  assert.equal(typeof cb, 'function', 'rimraf: callback function required')
+  assert(options, 'rimraf: invalid options argument provided')
+  assert.equal(typeof options, 'object', 'rimraf: options should be object')
+
+  defaults(options)
+
+  var busyTries = 0
+  var errState = null
+  var n = 0
+
+  if (options.disableGlob || !glob.hasMagic(p))
+    return afterGlob(null, [p])
+
+  options.lstat(p, function (er, stat) {
+    if (!er)
+      return afterGlob(null, [p])
+
+    glob(p, options.glob, afterGlob)
+  })
+
+  function next (er) {
+    errState = errState || er
+    if (--n === 0)
+      cb(errState)
+  }
+
+  function afterGlob (er, results) {
+    if (er)
+      return cb(er)
+
+    n = results.length
+    if (n === 0)
+      return cb()
+
+    results.forEach(function (p) {
+      rimraf_(p, options, function CB (er) {
+        if (er) {
+          if ((er.code === "EBUSY" || er.code === "ENOTEMPTY" || er.code === "EPERM") &&
+              busyTries < options.maxBusyTries) {
+            busyTries ++
+            var time = busyTries * 100
+            // try again, with the same exact callback as this one.
+            return setTimeout(function () {
+              rimraf_(p, options, CB)
+            }, time)
+          }
+
+          // this one won't happen if graceful-fs is used.
+          if (er.code === "EMFILE" && timeout < options.emfileWait) {
+            return setTimeout(function () {
+              rimraf_(p, options, CB)
+            }, timeout ++)
+          }
+
+          // already gone
+          if (er.code === "ENOENT") er = null
+        }
+
+        timeout = 0
+        next(er)
+      })
+    })
+  }
+}
+
+// Two possible strategies.
+// 1. Assume it's a file.  unlink it, then do the dir stuff on EPERM or EISDIR
+// 2. Assume it's a directory.  readdir, then do the file stuff on ENOTDIR
+//
+// Both result in an extra syscall when you guess wrong.  However, there
+// are likely far more normal files in the world than directories.  This
+// is based on the assumption that a the average number of files per
+// directory is >= 1.
+//
+// If anyone ever complains about this, then I guess the strategy could
+// be made configurable somehow.  But until then, YAGNI.
+function rimraf_ (p, options, cb) {
+  assert(p)
+  assert(options)
+  assert(typeof cb === 'function')
+
+  // sunos lets the root user unlink directories, which is... weird.
+  // so we have to lstat here and make sure it's not a dir.
+  options.lstat(p, function (er, st) {
+    if (er && er.code === "ENOENT")
+      return cb(null)
+
+    // Windows can EPERM on stat.  Life is suffering.
+    if (er && er.code === "EPERM" && isWindows)
+      fixWinEPERM(p, options, er, cb)
+
+    if (st && st.isDirectory())
+      return rmdir(p, options, er, cb)
+
+    options.unlink(p, function (er) {
+      if (er) {
+        if (er.code === "ENOENT")
+          return cb(null)
+        if (er.code === "EPERM")
+          return (isWindows)
+            ? fixWinEPERM(p, options, er, cb)
+            : rmdir(p, options, er, cb)
+        if (er.code === "EISDIR")
+          return rmdir(p, options, er, cb)
+      }
+      return cb(er)
+    })
+  })
+}
+
+function fixWinEPERM (p, options, er, cb) {
+  assert(p)
+  assert(options)
+  assert(typeof cb === 'function')
+  if (er)
+    assert(er instanceof Error)
+
+  options.chmod(p, _0666, function (er2) {
+    if (er2)
+      cb(er2.code === "ENOENT" ? null : er)
+    else
+      options.stat(p, function(er3, stats) {
+        if (er3)
+          cb(er3.code === "ENOENT" ? null : er)
+        else if (stats.isDirectory())
+          rmdir(p, options, er, cb)
+        else
+          options.unlink(p, cb)
+      })
+  })
+}
+
+function fixWinEPERMSync (p, options, er) {
+  assert(p)
+  assert(options)
+  if (er)
+    assert(er instanceof Error)
+
+  try {
+    options.chmodSync(p, _0666)
+  } catch (er2) {
+    if (er2.code === "ENOENT")
+      return
+    else
+      throw er
+  }
+
+  try {
+    var stats = options.statSync(p)
+  } catch (er3) {
+    if (er3.code === "ENOENT")
+      return
+    else
+      throw er
+  }
+
+  if (stats.isDirectory())
+    rmdirSync(p, options, er)
+  else
+    options.unlinkSync(p)
+}
+
+function rmdir (p, options, originalEr, cb) {
+  assert(p)
+  assert(options)
+  if (originalEr)
+    assert(originalEr instanceof Error)
+  assert(typeof cb === 'function')
+
+  // try to rmdir first, and only readdir on ENOTEMPTY or EEXIST (SunOS)
+  // if we guessed wrong, and it's not a directory, then
+  // raise the original error.
+  options.rmdir(p, function (er) {
+    if (er && (er.code === "ENOTEMPTY" || er.code === "EEXIST" || er.code === "EPERM"))
+      rmkids(p, options, cb)
+    else if (er && er.code === "ENOTDIR")
+      cb(originalEr)
+    else
+      cb(er)
+  })
+}
+
+function rmkids(p, options, cb) {
+  assert(p)
+  assert(options)
+  assert(typeof cb === 'function')
+
+  options.readdir(p, function (er, files) {
+    if (er)
+      return cb(er)
+    var n = files.length
+    if (n === 0)
+      return options.rmdir(p, cb)
+    var errState
+    files.forEach(function (f) {
+      rimraf(path.join(p, f), options, function (er) {
+        if (errState)
+          return
+        if (er)
+          return cb(errState = er)
+        if (--n === 0)
+          options.rmdir(p, cb)
+      })
+    })
+  })
+}
+
+// this looks simpler, and is strictly *faster*, but will
+// tie up the JavaScript thread and fail on excessively
+// deep directory trees.
+function rimrafSync (p, options) {
+  options = options || {}
+  defaults(options)
+
+  assert(p, 'rimraf: missing path')
+  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
+  assert(options, 'rimraf: missing options')
+  assert.equal(typeof options, 'object', 'rimraf: options should be object')
+
+  var results
+
+  if (options.disableGlob || !glob.hasMagic(p)) {
+    results = [p]
+  } else {
+    try {
+      options.lstatSync(p)
+      results = [p]
+    } catch (er) {
+      results = glob.sync(p, options.glob)
+    }
+  }
+
+  if (!results.length)
+    return
+
+  for (var i = 0; i < results.length; i++) {
+    var p = results[i]
+
+    try {
+      var st = options.lstatSync(p)
+    } catch (er) {
+      if (er.code === "ENOENT")
+        return
+
+      // Windows can EPERM on stat.  Life is suffering.
+      if (er.code === "EPERM" && isWindows)
+        fixWinEPERMSync(p, options, er)
+    }
+
+    try {
+      // sunos lets the root user unlink directories, which is... weird.
+      if (st && st.isDirectory())
+        rmdirSync(p, options, null)
+      else
+        options.unlinkSync(p)
+    } catch (er) {
+      if (er.code === "ENOENT")
+        return
+      if (er.code === "EPERM")
+        return isWindows ? fixWinEPERMSync(p, options, er) : rmdirSync(p, options, er)
+      if (er.code !== "EISDIR")
+        throw er
+
+      rmdirSync(p, options, er)
+    }
+  }
+}
+
+function rmdirSync (p, options, originalEr) {
+  assert(p)
+  assert(options)
+  if (originalEr)
+    assert(originalEr instanceof Error)
+
+  try {
+    options.rmdirSync(p)
+  } catch (er) {
+    if (er.code === "ENOENT")
+      return
+    if (er.code === "ENOTDIR")
+      throw originalEr
+    if (er.code === "ENOTEMPTY" || er.code === "EEXIST" || er.code === "EPERM")
+      rmkidsSync(p, options)
+  }
+}
+
+function rmkidsSync (p, options) {
+  assert(p)
+  assert(options)
+  options.readdirSync(p).forEach(function (f) {
+    rimrafSync(path.join(p, f), options)
+  })
+
+  // We only end up here once we got ENOTEMPTY at least once, and
+  // at this point, we are guaranteed to have removed all the kids.
+  // So, we know that it won't be ENOENT or ENOTDIR or anything else.
+  // try really hard to delete stuff on windows, because it has a
+  // PROFOUNDLY annoying habit of not closing handles promptly when
+  // files are deleted, resulting in spurious ENOTEMPTY errors.
+  var retries = isWindows ? 100 : 1
+  var i = 0
+  do {
+    var threw = true
+    try {
+      var ret = options.rmdirSync(p, options)
+      threw = false
+      return ret
+    } finally {
+      if (++i < retries && threw)
+        continue
+    }
+  } while (true)
+}
 
 
 /***/ }),
@@ -62268,13 +56414,13 @@ module.exports = __nccwpck_require__(4219);
 "use strict";
 
 
-var net = __nccwpck_require__(1808);
-var tls = __nccwpck_require__(4404);
-var http = __nccwpck_require__(3685);
-var https = __nccwpck_require__(5687);
-var events = __nccwpck_require__(2361);
-var assert = __nccwpck_require__(9491);
-var util = __nccwpck_require__(3837);
+var net = __nccwpck_require__(1631);
+var tls = __nccwpck_require__(4016);
+var http = __nccwpck_require__(8605);
+var https = __nccwpck_require__(7211);
+var events = __nccwpck_require__(8614);
+var assert = __nccwpck_require__(2357);
+var util = __nccwpck_require__(1669);
 
 
 exports.httpOverHttp = httpOverHttp;
@@ -62670,7 +56816,7 @@ function unpipe(stream) {
 
 /***/ }),
 
-/***/ 2417:
+/***/ 4315:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 if (parseInt(process.versions.node.split('.')[0]) < 6) throw new Error('vm2 requires Node.js version 6 or newer.');
@@ -62680,1025 +56826,145 @@ module.exports = __nccwpck_require__(4357);
 
 /***/ }),
 
-/***/ 2989:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 9817:
+/***/ ((module) => {
 
-"use strict";
-
-
-/**
- * __        ___    ____  _   _ ___ _   _  ____
- * \ \      / / \  |  _ \| \ | |_ _| \ | |/ ___|
- *  \ \ /\ / / _ \ | |_) |  \| || ||  \| | |  _
- *   \ V  V / ___ \|  _ <| |\  || || |\  | |_| |
- *    \_/\_/_/   \_\_| \_\_| \_|___|_| \_|\____|
- *
- * This file is critical for vm2. It implements the bridge between the host and the sandbox.
- * If you do not know exactly what you are doing, you should NOT edit this file.
- *
- * The file is loaded in the host and sandbox to handle objects in both directions.
- * This is done to ensure that RangeErrors are from the correct context.
- * The boundary between the sandbox and host might throw RangeErrors from both contexts.
- * Therefore, thisFromOther and friends can handle objects from both domains.
- *
- * Method parameters have comments to tell from which context they came.
- *
- */
-
-const globalsList = [
-	'Number',
-	'String',
-	'Boolean',
-	'Date',
-	'RegExp',
-	'Map',
-	'WeakMap',
-	'Set',
-	'WeakSet',
-	'Promise',
-	'Function'
-];
-
-const errorsList = [
-	'RangeError',
-	'ReferenceError',
-	'SyntaxError',
-	'TypeError',
-	'EvalError',
-	'URIError',
-	'Error'
-];
-
-const OPNA = 'Operation not allowed on contextified object.';
-
-const thisGlobalPrototypes = {
-	__proto__: null,
-	Object: Object.prototype,
-	Array: Array.prototype
-};
-
-for (let i = 0; i < globalsList.length; i++) {
-	const key = globalsList[i];
-	const g = global[key];
-	if (g) thisGlobalPrototypes[key] = g.prototype;
+// source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping
+function escapeRegExp(string) {
+	return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
-for (let i = 0; i < errorsList.length; i++) {
-	const key = errorsList[i];
-	const g = global[key];
-	if (g) thisGlobalPrototypes[key] = g.prototype;
+function match(wildcard, s) {
+	const regexString = escapeRegExp(wildcard).replace(/\\\*/g, '\\S*').replace(/\\\?/g, '.');
+	const regex = new RegExp(regexString);
+	return regex.test(s);
 }
 
-const {
-	getPrototypeOf: thisReflectGetPrototypeOf,
-	setPrototypeOf: thisReflectSetPrototypeOf,
-	defineProperty: thisReflectDefineProperty,
-	deleteProperty: thisReflectDeleteProperty,
-	getOwnPropertyDescriptor: thisReflectGetOwnPropertyDescriptor,
-	isExtensible: thisReflectIsExtensible,
-	preventExtensions: thisReflectPreventExtensions,
-	apply: thisReflectApply,
-	construct: thisReflectConstruct,
-	set: thisReflectSet,
-	get: thisReflectGet,
-	has: thisReflectHas,
-	ownKeys: thisReflectOwnKeys,
-	enumerate: thisReflectEnumerate,
-} = Reflect;
-
-const thisObject = Object;
-const {
-	freeze: thisObjectFreeze,
-	prototype: thisObjectPrototype
-} = thisObject;
-const thisObjectHasOwnProperty = thisObjectPrototype.hasOwnProperty;
-const ThisProxy = Proxy;
-const ThisWeakMap = WeakMap;
-const {
-	get: thisWeakMapGet,
-	set: thisWeakMapSet
-} = ThisWeakMap.prototype;
-const ThisMap = Map;
-const thisMapGet = ThisMap.prototype.get;
-const thisMapSet = ThisMap.prototype.set;
-const thisFunction = Function;
-const thisFunctionBind = thisFunction.prototype.bind;
-const thisArrayIsArray = Array.isArray;
-const thisErrorCaptureStackTrace = Error.captureStackTrace;
-
-const thisSymbolToString = Symbol.prototype.toString;
-const thisSymbolToStringTag = Symbol.toStringTag;
-
-/**
- * VMError.
- *
- * @public
- * @extends {Error}
- */
-class VMError extends Error {
-
-	/**
-	 * Create VMError instance.
-	 *
-	 * @public
-	 * @param {string} message - Error message.
-	 * @param {string} code - Error code.
-	 */
-	constructor(message, code) {
-		super(message);
-
-		this.name = 'VMError';
-		this.code = code;
-
-		thisErrorCaptureStackTrace(this, this.constructor);
-	}
-}
-
-thisGlobalPrototypes['VMError'] = VMError.prototype;
-
-function thisUnexpected() {
-	return new VMError('Unexpected');
-}
-
-if (!thisReflectSetPrototypeOf(exports, null)) throw thisUnexpected();
-
-function thisSafeGetOwnPropertyDescriptor(obj, key) {
-	const desc = thisReflectGetOwnPropertyDescriptor(obj, key);
-	if (!desc) return desc;
-	if (!thisReflectSetPrototypeOf(desc, null)) throw thisUnexpected();
-	return desc;
-}
-
-function thisThrowCallerCalleeArgumentsAccess(key) {
-	'use strict';
-	thisThrowCallerCalleeArgumentsAccess[key];
-	return thisUnexpected();
-}
-
-function thisIdMapping(factory, other) {
-	return other;
-}
-
-const thisThrowOnKeyAccessHandler = thisObjectFreeze({
-	__proto__: null,
-	get(target, key, receiver) {
-		if (typeof key === 'symbol') {
-			key = thisReflectApply(thisSymbolToString, key, []);
-		}
-		throw new VMError(`Unexpected access to key '${key}'`);
-	}
-});
-
-const emptyForzenObject = thisObjectFreeze({
-	__proto__: null
-});
-
-const thisThrowOnKeyAccess = new ThisProxy(emptyForzenObject, thisThrowOnKeyAccessHandler);
-
-function SafeBase() {}
-
-if (!thisReflectDefineProperty(SafeBase, 'prototype', {
-	__proto__: null,
-	value: thisThrowOnKeyAccess
-})) throw thisUnexpected();
-
-function SHARED_FUNCTION() {}
-
-const TEST_PROXY_HANDLER = thisObjectFreeze({
-	__proto__: thisThrowOnKeyAccess,
-	construct() {
-		return this;
-	}
-});
-
-function thisIsConstructor(obj) {
-	// Note: obj@any(unsafe)
-	const Func = new ThisProxy(obj, TEST_PROXY_HANDLER);
-	try {
-		// eslint-disable-next-line no-new
-		new Func();
-		return true;
-	} catch (e) {
-		return false;
-	}
-}
-
-function thisCreateTargetObject(obj, proto) {
-	// Note: obj@any(unsafe) proto@any(unsafe) returns@this(unsafe) throws@this(unsafe)
-	let base;
-	if (typeof obj === 'function') {
-		if (thisIsConstructor(obj)) {
-			// Bind the function since bound functions do not have a prototype property.
-			base = thisReflectApply(thisFunctionBind, SHARED_FUNCTION, [null]);
-		} else {
-			base = () => {};
-		}
-	} else if (thisArrayIsArray(obj)) {
-		base = [];
-	} else {
-		return {__proto__: proto};
-	}
-	if (!thisReflectSetPrototypeOf(base, proto)) throw thisUnexpected();
-	return base;
-}
-
-function createBridge(otherInit, registerProxy) {
-
-	const mappingOtherToThis = new ThisWeakMap();
-	const protoMappings = new ThisMap();
-	const protoName = new ThisMap();
-
-	function thisAddProtoMapping(proto, other, name) {
-		// Note: proto@this(unsafe) other@other(unsafe) name@this(unsafe) throws@this(unsafe)
-		thisReflectApply(thisMapSet, protoMappings, [proto, thisIdMapping]);
-		thisReflectApply(thisMapSet, protoMappings, [other,
-			(factory, object) => thisProxyOther(factory, object, proto)]);
-		if (name) thisReflectApply(thisMapSet, protoName, [proto, name]);
-	}
-
-	function thisAddProtoMappingFactory(protoFactory, other, name) {
-		// Note: protoFactory@this(unsafe) other@other(unsafe) name@this(unsafe) throws@this(unsafe)
-		let proto;
-		thisReflectApply(thisMapSet, protoMappings, [other,
-			(factory, object) => {
-				if (!proto) {
-					proto = protoFactory();
-					thisReflectApply(thisMapSet, protoMappings, [proto, thisIdMapping]);
-					if (name) thisReflectApply(thisMapSet, protoName, [proto, name]);
-				}
-				return thisProxyOther(factory, object, proto);
-			}]);
-	}
-
-	const result = {
-		__proto__: null,
-		globalPrototypes: thisGlobalPrototypes,
-		safeGetOwnPropertyDescriptor: thisSafeGetOwnPropertyDescriptor,
-		fromArguments: thisFromOtherArguments,
-		from: thisFromOther,
-		fromWithFactory: thisFromOtherWithFactory,
-		ensureThis: thisEnsureThis,
-		mapping: mappingOtherToThis,
-		connect: thisConnect,
-		reflectSet: thisReflectSet,
-		reflectGet: thisReflectGet,
-		reflectDefineProperty: thisReflectDefineProperty,
-		reflectDeleteProperty: thisReflectDeleteProperty,
-		reflectApply: thisReflectApply,
-		reflectConstruct: thisReflectConstruct,
-		reflectHas: thisReflectHas,
-		reflectOwnKeys: thisReflectOwnKeys,
-		reflectEnumerate: thisReflectEnumerate,
-		reflectGetPrototypeOf: thisReflectGetPrototypeOf,
-		reflectIsExtensible: thisReflectIsExtensible,
-		reflectPreventExtensions: thisReflectPreventExtensions,
-		objectHasOwnProperty: thisObjectHasOwnProperty,
-		weakMapSet: thisWeakMapSet,
-		addProtoMapping: thisAddProtoMapping,
-		addProtoMappingFactory: thisAddProtoMappingFactory,
-		defaultFactory,
-		protectedFactory,
-		readonlyFactory,
-		VMError
-	};
-
-	const isHost = typeof otherInit !== 'object';
-
-	if (isHost) {
-		otherInit = otherInit(result, registerProxy);
-	}
-
-	result.other = otherInit;
-
-	const {
-		globalPrototypes: otherGlobalPrototypes,
-		safeGetOwnPropertyDescriptor: otherSafeGetOwnPropertyDescriptor,
-		fromArguments: otherFromThisArguments,
-		from: otherFromThis,
-		mapping: mappingThisToOther,
-		reflectSet: otherReflectSet,
-		reflectGet: otherReflectGet,
-		reflectDefineProperty: otherReflectDefineProperty,
-		reflectDeleteProperty: otherReflectDeleteProperty,
-		reflectApply: otherReflectApply,
-		reflectConstruct: otherReflectConstruct,
-		reflectHas: otherReflectHas,
-		reflectOwnKeys: otherReflectOwnKeys,
-		reflectEnumerate: otherReflectEnumerate,
-		reflectGetPrototypeOf: otherReflectGetPrototypeOf,
-		reflectIsExtensible: otherReflectIsExtensible,
-		reflectPreventExtensions: otherReflectPreventExtensions,
-		objectHasOwnProperty: otherObjectHasOwnProperty,
-		weakMapSet: otherWeakMapSet
-	} = otherInit;
-
-	function thisOtherHasOwnProperty(object, key) {
-		// Note: object@other(safe) key@prim throws@this(unsafe)
-		try {
-			return otherReflectApply(otherObjectHasOwnProperty, object, [key]) === true;
-		} catch (e) { // @other(unsafe)
-			throw thisFromOther(e);
-		}
-	}
-
-	function thisDefaultGet(handler, object, key, desc) {
-		// Note: object@other(unsafe) key@prim desc@other(safe)
-		let ret; // @other(unsafe)
-		if (desc.get || desc.set) {
-			const getter = desc.get;
-			if (!getter) return undefined;
-			try {
-				ret = otherReflectApply(getter, object, [key]);
-			} catch (e) {
-				throw thisFromOther(e);
-			}
-		} else {
-			ret = desc.value;
-		}
-		return handler.fromOtherWithContext(ret);
-	}
-
-	function otherFromThisIfAvailable(to, from, key) {
-		// Note: to@other(safe) from@this(safe) key@prim throws@this(unsafe)
-		if (!thisReflectApply(thisObjectHasOwnProperty, from, [key])) return false;
-		try {
-			to[key] = otherFromThis(from[key]);
-		} catch (e) { // @other(unsafe)
-			throw thisFromOther(e);
-		}
-		return true;
-	}
-
-	class BaseHandler extends SafeBase {
-
-		constructor(object) {
-			// Note: object@other(unsafe) throws@this(unsafe)
-			super();
-			this.object = object;
-		}
-
-		getFactory() {
-			return defaultFactory;
-		}
-
-		fromOtherWithContext(other) {
-			// Note: other@other(unsafe) throws@this(unsafe)
-			return thisFromOtherWithFactory(this.getFactory(), other);
-		}
-
-		doPreventExtensions(target, object, factory) {
-			// Note: target@this(unsafe) object@other(unsafe) throws@this(unsafe)
-			let keys; // @other(safe-array-of-prim)
-			try {
-				keys = otherReflectOwnKeys(object);
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			for (let i = 0; i < keys.length; i++) {
-				const key = keys[i]; // @prim
-				let desc;
-				try {
-					desc = otherSafeGetOwnPropertyDescriptor(object, key);
-				} catch (e) { // @other(unsafe)
-					throw thisFromOther(e);
-				}
-				if (!desc) continue;
-				if (!desc.configurable) {
-					const current = thisSafeGetOwnPropertyDescriptor(target, key);
-					if (current && !current.configurable) continue;
-					if (desc.get || desc.set) {
-						desc.get = this.fromOtherWithContext(desc.get);
-						desc.set = this.fromOtherWithContext(desc.set);
-					} else if (typeof object === 'function' && (key === 'caller' || key === 'callee' || key === 'arguments')) {
-						desc.value = null;
-					} else {
-						desc.value = this.fromOtherWithContext(desc.value);
-					}
-				} else {
-					if (desc.get || desc.set) {
-						desc = {
-							__proto__: null,
-							configurable: true,
-							enumerable: desc.enumerable,
-							writable: true,
-							value: null
-						};
-					} else {
-						desc.value = null;
-					}
-				}
-				if (!thisReflectDefineProperty(target, key, desc)) throw thisUnexpected();
-			}
-			if (!thisReflectPreventExtensions(target)) throw thisUnexpected();
-		}
-
-		get(target, key, receiver) {
-			// Note: target@this(unsafe) key@prim receiver@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			switch (key) {
-				case 'constructor': {
-					const desc = otherSafeGetOwnPropertyDescriptor(object, key);
-					if (desc) return thisDefaultGet(this, object, key, desc);
-					const proto = thisReflectGetPrototypeOf(target);
-					return proto === null ? undefined : proto.constructor;
-				}
-				case '__proto__': {
-					const desc = otherSafeGetOwnPropertyDescriptor(object, key);
-					if (desc) return thisDefaultGet(this, object, key, desc);
-					return thisReflectGetPrototypeOf(target);
-				}
-				case thisSymbolToStringTag:
-					if (!thisOtherHasOwnProperty(object, thisSymbolToStringTag)) {
-						const proto = thisReflectGetPrototypeOf(target);
-						const name = thisReflectApply(thisMapGet, protoName, [proto]);
-						if (name) return name;
-					}
-					break;
-				case 'arguments':
-				case 'caller':
-				case 'callee':
-					if (thisOtherHasOwnProperty(object, key)) throw thisThrowCallerCalleeArgumentsAccess(key);
-					break;
-			}
-			let ret; // @other(unsafe)
-			try {
-				ret = otherReflectGet(object, key);
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			return this.fromOtherWithContext(ret);
-		}
-
-		set(target, key, value, receiver) {
-			// Note: target@this(unsafe) key@prim value@this(unsafe) receiver@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			if (key === '__proto__' && !thisOtherHasOwnProperty(object, key)) {
-				return this.setPrototypeOf(target, value);
-			}
-			try {
-				value = otherFromThis(value);
-				return otherReflectSet(object, key, value) === true;
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-		}
-
-		getPrototypeOf(target) {
-			// Note: target@this(unsafe)
-			return thisReflectGetPrototypeOf(target);
-		}
-
-		setPrototypeOf(target, value) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			throw new VMError(OPNA);
-		}
-
-		apply(target, context, args) {
-			// Note: target@this(unsafe) context@this(unsafe) args@this(safe-array) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			let ret; // @other(unsafe)
-			try {
-				context = otherFromThis(context);
-				args = otherFromThisArguments(args);
-				ret = otherReflectApply(object, context, args);
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			return thisFromOther(ret);
-		}
-
-		construct(target, args, newTarget) {
-			// Note: target@this(unsafe) args@this(safe-array) newTarget@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			let ret; // @other(unsafe)
-			try {
-				args = otherFromThisArguments(args);
-				ret = otherReflectConstruct(object, args);
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			return thisFromOtherWithFactory(this.getFactory(), ret, thisFromOther(object));
-		}
-
-		getOwnPropertyDescriptorDesc(target, prop, desc) {
-			// Note: target@this(unsafe) prop@prim desc@other{safe} throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			if (desc && typeof object === 'function' && (prop === 'arguments' || prop === 'caller' || prop === 'callee')) desc.value = null;
-			return desc;
-		}
-
-		getOwnPropertyDescriptor(target, prop) {
-			// Note: target@this(unsafe) prop@prim throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			let desc; // @other(safe)
-			try {
-				desc = otherSafeGetOwnPropertyDescriptor(object, prop);
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-
-			desc = this.getOwnPropertyDescriptorDesc(target, prop, desc);
-
-			if (!desc) return undefined;
-
-			let thisDesc;
-			if (desc.get || desc.set) {
-				thisDesc = {
-					__proto__: null,
-					get: this.fromOtherWithContext(desc.get),
-					set: this.fromOtherWithContext(desc.set),
-					enumerable: desc.enumerable === true,
-					configurable: desc.configurable === true
-				};
-			} else {
-				thisDesc = {
-					__proto__: null,
-					value: this.fromOtherWithContext(desc.value),
-					writable: desc.writable === true,
-					enumerable: desc.enumerable === true,
-					configurable: desc.configurable === true
-				};
-			}
-			if (!thisDesc.configurable) {
-				const oldDesc = thisSafeGetOwnPropertyDescriptor(target, prop);
-				if (!oldDesc || oldDesc.configurable || oldDesc.writable !== thisDesc.writable) {
-					if (!thisReflectDefineProperty(target, prop, thisDesc)) throw thisUnexpected();
-				}
-			}
-			return thisDesc;
-		}
-
-		definePropertyDesc(target, prop, desc) {
-			// Note: target@this(unsafe) prop@prim desc@this(safe) throws@this(unsafe)
-			return desc;
-		}
-
-		defineProperty(target, prop, desc) {
-			// Note: target@this(unsafe) prop@prim desc@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			if (!thisReflectSetPrototypeOf(desc, null)) throw thisUnexpected();
-
-			desc = this.definePropertyDesc(target, prop, desc);
-
-			if (!desc) return false;
-
-			let otherDesc = {__proto__: null};
-			let hasFunc = true;
-			let hasValue = true;
-			let hasBasic = true;
-			hasFunc &= otherFromThisIfAvailable(otherDesc, desc, 'get');
-			hasFunc &= otherFromThisIfAvailable(otherDesc, desc, 'set');
-			hasValue &= otherFromThisIfAvailable(otherDesc, desc, 'value');
-			hasValue &= otherFromThisIfAvailable(otherDesc, desc, 'writable');
-			hasBasic &= otherFromThisIfAvailable(otherDesc, desc, 'enumerable');
-			hasBasic &= otherFromThisIfAvailable(otherDesc, desc, 'configurable');
-
-			try {
-				if (!otherReflectDefineProperty(object, prop, otherDesc)) return false;
-				if (otherDesc.configurable !== true && (!hasBasic || !(hasFunc || hasValue))) {
-					otherDesc = otherSafeGetOwnPropertyDescriptor(object, prop);
-				}
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-
-			if (!otherDesc.configurable) {
-				let thisDesc;
-				if (otherDesc.get || otherDesc.set) {
-					thisDesc = {
-						__proto__: null,
-						get: this.fromOtherWithContext(otherDesc.get),
-						set: this.fromOtherWithContext(otherDesc.set),
-						enumerable: otherDesc.enumerable,
-						configurable: otherDesc.configurable
-					};
-				} else {
-					thisDesc = {
-						__proto__: null,
-						value: this.fromOtherWithContext(otherDesc.value),
-						writable: otherDesc.writable,
-						enumerable: otherDesc.enumerable,
-						configurable: otherDesc.configurable
-					};
-				}
-				if (!thisReflectDefineProperty(target, prop, thisDesc)) throw thisUnexpected();
-			}
-			return true;
-		}
-
-		deleteProperty(target, prop) {
-			// Note: target@this(unsafe) prop@prim throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			try {
-				return otherReflectDeleteProperty(object, prop) === true;
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-		}
-
-		has(target, key) {
-			// Note: target@this(unsafe) key@prim throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			try {
-				return otherReflectHas(object, key) === true;
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-		}
-
-		isExtensible(target) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			try {
-				if (otherReflectIsExtensible(object)) return true;
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			if (thisReflectIsExtensible(target)) {
-				this.doPreventExtensions(target, object, this);
-			}
-			return false;
-		}
-
-		ownKeys(target) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			let res; // @other(unsafe)
-			try {
-				res = otherReflectOwnKeys(object);
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			return thisFromOther(res);
-		}
-
-		preventExtensions(target) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			try {
-				if (!otherReflectPreventExtensions(object)) return false;
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			if (thisReflectIsExtensible(target)) {
-				this.doPreventExtensions(target, object, this);
-			}
-			return true;
-		}
-
-		enumerate(target) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			let res; // @other(unsafe)
-			try {
-				res = otherReflectEnumerate(object);
-			} catch (e) { // @other(unsafe)
-				throw thisFromOther(e);
-			}
-			return this.fromOtherWithContext(res);
-		}
-
-	}
-
-	function defaultFactory(object) {
-		// Note: other@other(unsafe) returns@this(unsafe) throws@this(unsafe)
-		return new BaseHandler(object);
-	}
-
-	class ProtectedHandler extends BaseHandler {
-
-		getFactory() {
-			return protectedFactory;
-		}
-
-		set(target, key, value, receiver) {
-			// Note: target@this(unsafe) key@prim value@this(unsafe) receiver@this(unsafe) throws@this(unsafe)
-			if (typeof value === 'function') {
-				return thisReflectDefineProperty(receiver, key, {
-					__proto__: null,
-					value: value,
-					writable: true,
-					enumerable: true,
-					configurable: true
-				}) === true;
-			}
-			return super.set(target, key, value, receiver);
-		}
-
-		definePropertyDesc(target, prop, desc) {
-			// Note: target@this(unsafe) prop@prim desc@this(safe) throws@this(unsafe)
-			if (desc && (desc.set || desc.get || typeof desc.value === 'function')) return undefined;
-			return desc;
-		}
-
-	}
-
-	function protectedFactory(object) {
-		// Note: other@other(unsafe) returns@this(unsafe) throws@this(unsafe)
-		return new ProtectedHandler(object);
-	}
-
-	class ReadOnlyHandler extends BaseHandler {
-
-		getFactory() {
-			return readonlyFactory;
-		}
-
-		set(target, key, value, receiver) {
-			// Note: target@this(unsafe) key@prim value@this(unsafe) receiver@this(unsafe) throws@this(unsafe)
-			return thisReflectDefineProperty(receiver, key, {
-				__proto__: null,
-				value: value,
-				writable: true,
-				enumerable: true,
-				configurable: true
-			});
-		}
-
-		setPrototypeOf(target, value) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			return false;
-		}
-
-		defineProperty(target, prop, desc) {
-			// Note: target@this(unsafe) prop@prim desc@this(unsafe) throws@this(unsafe)
-			return false;
-		}
-
-		deleteProperty(target, prop) {
-			// Note: target@this(unsafe) prop@prim throws@this(unsafe)
-			return false;
-		}
-
-		isExtensible(target) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			return false;
-		}
-
-		preventExtensions(target) {
-			// Note: target@this(unsafe) throws@this(unsafe)
-			return false;
-		}
-
-	}
-
-	function readonlyFactory(object) {
-		// Note: other@other(unsafe) returns@this(unsafe) throws@this(unsafe)
-		return new ReadOnlyHandler(object);
-	}
-
-	class ReadOnlyMockHandler extends ReadOnlyHandler {
-
-		constructor(object, mock) {
-			// Note: object@other(unsafe) mock:this(unsafe) throws@this(unsafe)
-			super(object);
-			this.mock = mock;
-		}
-
-		get(target, key, receiver) {
-			// Note: target@this(unsafe) key@prim receiver@this(unsafe) throws@this(unsafe)
-			const object = this.object; // @other(unsafe)
-			const mock = this.mock;
-			if (thisReflectApply(thisObjectHasOwnProperty, mock, key) && !thisOtherHasOwnProperty(object, key)) {
-				return mock[key];
-			}
-			return super.get(target, key, receiver);
-		}
-
-	}
-
-	function thisFromOther(other) {
-		// Note: other@other(unsafe) returns@this(unsafe) throws@this(unsafe)
-		return thisFromOtherWithFactory(defaultFactory, other);
-	}
-
-	function thisProxyOther(factory, other, proto) {
-		const target = thisCreateTargetObject(other, proto);
-		const handler = factory(other);
-		const proxy = new ThisProxy(target, handler);
-		try {
-			otherReflectApply(otherWeakMapSet, mappingThisToOther, [proxy, other]);
-			registerProxy(proxy, handler);
-		} catch (e) {
-			throw new VMError('Unexpected error');
-		}
-		if (!isHost) {
-			thisReflectApply(thisWeakMapSet, mappingOtherToThis, [other, proxy]);
-			return proxy;
-		}
-		const proxy2 = new ThisProxy(proxy, emptyForzenObject);
-		try {
-			otherReflectApply(otherWeakMapSet, mappingThisToOther, [proxy2, other]);
-			registerProxy(proxy2, handler);
-		} catch (e) {
-			throw new VMError('Unexpected error');
-		}
-		thisReflectApply(thisWeakMapSet, mappingOtherToThis, [other, proxy2]);
-		return proxy2;
-	}
-
-	function thisEnsureThis(other) {
-		const type = typeof other;
-		switch (type) {
-			case 'object':
-			case 'function':
-				if (other === null) {
-					return null;
-				} else {
-					let proto = thisReflectGetPrototypeOf(other);
-					if (!proto) {
-						return other;
-					}
-					while (proto) {
-						const mapping = thisReflectApply(thisMapGet, protoMappings, [proto]);
-						if (mapping) {
-							const mapped = thisReflectApply(thisWeakMapGet, mappingOtherToThis, [other]);
-							if (mapped) return mapped;
-							return mapping(defaultFactory, other);
-						}
-						proto = thisReflectGetPrototypeOf(proto);
-					}
-					return other;
-				}
-
-			case 'undefined':
-			case 'string':
-			case 'number':
-			case 'boolean':
-			case 'symbol':
-			case 'bigint':
-				return other;
-
-			default: // new, unknown types can be dangerous
-				throw new VMError(`Unknown type '${type}'`);
-		}
-	}
-
-	function thisFromOtherWithFactory(factory, other, proto) {
-		for (let loop = 0; loop < 10; loop++) {
-			const type = typeof other;
-			switch (type) {
-				case 'object':
-				case 'function':
-					if (other === null) {
-						return null;
-					} else {
-						const mapped = thisReflectApply(thisWeakMapGet, mappingOtherToThis, [other]);
-						if (mapped) return mapped;
-						if (proto) {
-							return thisProxyOther(factory, other, proto);
-						}
-						try {
-							proto = otherReflectGetPrototypeOf(other);
-						} catch (e) { // @other(unsafe)
-							other = e;
-							break;
-						}
-						if (!proto) {
-							return thisProxyOther(factory, other, null);
-						}
-						while (proto) {
-							const mapping = thisReflectApply(thisMapGet, protoMappings, [proto]);
-							if (mapping) return mapping(factory, other);
-							try {
-								proto = otherReflectGetPrototypeOf(proto);
-							} catch (e) { // @other(unsafe)
-								other = e;
-								break;
-							}
-						}
-						return thisProxyOther(factory, other, thisObjectPrototype);
-					}
-
-				case 'undefined':
-				case 'string':
-				case 'number':
-				case 'boolean':
-				case 'symbol':
-				case 'bigint':
-					return other;
-
-				default: // new, unknown types can be dangerous
-					throw new VMError(`Unknown type '${type}'`);
-			}
-			factory = defaultFactory;
-			proto = undefined;
-		}
-		throw new VMError('Exception recursion depth');
-	}
-
-	function thisFromOtherArguments(args) {
-		// Note: args@other(safe-array) returns@this(safe-array) throws@this(unsafe)
-		const arr = [];
-		for (let i = 0; i < args.length; i++) {
-			const value = thisFromOther(args[i]);
-			thisReflectDefineProperty(arr, i, {
-				__proto__: null,
-				value: value,
-				writable: true,
-				enumerable: true,
-				configurable: true
-			});
-		}
-		return arr;
-	}
-
-	function thisConnect(obj, other) {
-		// Note: obj@this(unsafe) other@other(unsafe) throws@this(unsafe)
-		try {
-			otherReflectApply(otherWeakMapSet, mappingThisToOther, [obj, other]);
-		} catch (e) {
-			throw new VMError('Unexpected error');
-		}
-		thisReflectApply(thisWeakMapSet, mappingOtherToThis, [other, obj]);
-	}
-
-	thisAddProtoMapping(thisGlobalPrototypes.Object, otherGlobalPrototypes.Object);
-	thisAddProtoMapping(thisGlobalPrototypes.Array, otherGlobalPrototypes.Array);
-
-	for (let i = 0; i < globalsList.length; i++) {
-		const key = globalsList[i];
-		const tp = thisGlobalPrototypes[key];
-		const op = otherGlobalPrototypes[key];
-		if (tp && op) thisAddProtoMapping(tp, op, key);
-	}
-
-	for (let i = 0; i < errorsList.length; i++) {
-		const key = errorsList[i];
-		const tp = thisGlobalPrototypes[key];
-		const op = otherGlobalPrototypes[key];
-		if (tp && op) thisAddProtoMapping(tp, op, 'Error');
-	}
-
-	thisAddProtoMapping(thisGlobalPrototypes.VMError, otherGlobalPrototypes.VMError, 'Error');
-
-	result.BaseHandler = BaseHandler;
-	result.ProtectedHandler = ProtectedHandler;
-	result.ReadOnlyHandler = ReadOnlyHandler;
-	result.ReadOnlyMockHandler = ReadOnlyMockHandler;
-
-	return result;
-}
-
-exports.createBridge = createBridge;
-exports.VMError = VMError;
+module.exports = {match};
 
 
 /***/ }),
 
-/***/ 6400:
+/***/ 4357:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
+/* eslint-disable global-require, no-use-before-define */
 
 
-const {
-	VMError
-} = __nccwpck_require__(2989);
 
-let cacheCoffeeScriptCompiler;
+/**
+ * This callback will be called to transform a script to JavaScript.
+ *
+ * @callback compileCallback
+ * @param {string} code - Script code to transform to JavaScript.
+ * @param {string} filename - Filename of this script.
+ * @return {string} JavaScript code that represents the script code.
+ */
+
+/**
+ * This callback will be called to resolve a module if it couldn't be found.
+ *
+ * @callback resolveCallback
+ * @param {string} moduleName - Name of the module to resolve.
+ * @param {string} dirname - Name of the current directory.
+ * @return {(string|undefined)} The file or directory to use to load the requested module.
+ */
+
+const fs = __nccwpck_require__(5747);
+const vm = __nccwpck_require__(2184);
+const pa = __nccwpck_require__(5622);
+const {EventEmitter} = __nccwpck_require__(8614);
+const {INSPECT_MAX_BYTES} = __nccwpck_require__(4293);
+const helpers = __nccwpck_require__(9817);
+const importModuleDynamically = () => {
+	// We can't throw an error object here because since vm.Script doesn't store a context, we can't properly contextify that error object.
+	// eslint-disable-next-line no-throw-literal
+	throw 'Dynamic imports are not allowed.';
+};
+
+const MODULE_PREFIX = '(function (exports, require, module, __filename, __dirname) { ';
+const STRICT_MODULE_PREFIX = MODULE_PREFIX + '"use strict"; ';
+const MODULE_SUFFIX = '\n});';
+
+/**
+ * Load a script from a file and compile it.
+ * 
+ * @private
+ * @param {string} filename - File to load and compile to a script.
+ * @param {string} prefix - Prefix for the script.
+ * @param {string} suffix - Suffix for the script.
+ * @return {vm.Script} The compiled script.
+ */
+function loadAndCompileScript(filename, prefix, suffix) {
+	const data = fs.readFileSync(filename, 'utf8');
+	return new vm.Script(prefix + data + suffix, {
+		filename,
+		displayErrors: false,
+		importModuleDynamically
+	});
+}
+
+/**
+ * Cache where we can cache some things
+ * 
+ * @private
+ * @property {?compileCallback} coffeeScriptCompiler - The coffee script compiler or null if not yet used.
+ * @property {?Object} timeoutContext - The context used for the timeout functionality of null if not yet used.
+ * @property {?vm.Script} timeoutScript - The compiled script used for the timeout functionality of null if not yet used.
+ * @property {vm.Script} contextifyScript - The compiled script used to setup a sandbox.
+ * @property {?vm.Script} sandboxScript - The compiled script used to setup the NodeVM require mechanism of null if not yet used.
+ * @property {?vm.Script} hookScript - The compiled script used to setup the async hooking functionality.
+ * @property {?vm.Script} getGlobalScript - The compiled script used to get the global sandbox object.
+ * @property {?vm.Script} getGeneratorFunctionScript - The compiled script used to get the generator function constructor.
+ * @property {?vm.Script} getAsyncFunctionScript - The compiled script used to get the async function constructor.
+ * @property {?vm.Script} getAsyncGeneratorFunctionScript - The compiled script used to get the async generator function constructor.
+ */
+const CACHE = {
+	coffeeScriptCompiler: null,
+	timeoutContext: null,
+	timeoutScript: null,
+	contextifyScript: loadAndCompileScript(__nccwpck_require__.ab + "contextify.js", '(function(require, host) { ', '\n})'),
+	sandboxScript: null,
+	hookScript: null,
+	getGlobalScript: null,
+	getGeneratorFunctionScript: null,
+	getAsyncFunctionScript: null,
+	getAsyncGeneratorFunctionScript: null,
+};
+
+/**
+ * Default run options for vm.Script.runInContext
+ * 
+ * @private
+ */
+const DEFAULT_RUN_OPTIONS = {displayErrors: false, importModuleDynamically};
 
 /**
  * Returns the cached coffee script compiler or loads it
  * if it is not found in the cache.
- *
+ * 
  * @private
  * @return {compileCallback} The coffee script compiler.
  * @throws {VMError} If the coffee-script module can't be found.
  */
 function getCoffeeScriptCompiler() {
-	if (!cacheCoffeeScriptCompiler) {
+	if (!CACHE.coffeeScriptCompiler) {
 		try {
-			// The warning generated by webpack can be disabled by setting:
-			// ignoreWarnings[].message = /Can't resolve 'coffee-script'/
-			/* eslint-disable-next-line global-require */
 			const coffeeScript = __nccwpck_require__(8188);
-			cacheCoffeeScriptCompiler = (code, filename) => {
+			CACHE.coffeeScriptCompiler = (code, filename) => {
 				return coffeeScript.compile(code, {header: false, bare: true});
 			};
 		} catch (e) {
 			throw new VMError('Coffee-Script compiler is not installed.');
 		}
 	}
-	return cacheCoffeeScriptCompiler;
+	return CACHE.coffeeScriptCompiler;
 }
-
-/**
- * Remove the shebang from source code.
- *
- * @private
- * @param {string} code - Code from which to remove the shebang.
- * @return {string} code without the shebang.
- */
-function removeShebang(code) {
-	if (!code.startsWith('#!')) return code;
-	return '//' + code.substring(2);
-}
-
 
 /**
  * The JavaScript compiler, just a identity function.
- *
+ * 
  * @private
  * @type {compileCallback}
  * @param {string} code - The JavaScript code.
@@ -63711,7 +56977,7 @@ function jsCompiler(code, filename) {
 
 /**
  * Look up the compiler for a specific name.
- *
+ * 
  * @private
  * @param {(string|compileCallback)} compiler - A compile callback or the name of the compiler.
  * @return {compileCallback} The resolved compiler.
@@ -63735,130 +57001,828 @@ function lookupCompiler(compiler) {
 	}
 }
 
-exports.removeShebang = removeShebang;
-exports.lookupCompiler = lookupCompiler;
-
-
-/***/ }),
-
-/***/ 4357:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-
-const {
-	VMError
-} = __nccwpck_require__(2989);
-const {
-	VMScript
-} = __nccwpck_require__(8611);
-const {
-	VM
-} = __nccwpck_require__(3841);
-const {
-	NodeVM
-} = __nccwpck_require__(6461);
-
-exports.VMError = VMError;
-exports.VMScript = VMScript;
-exports.NodeVM = NodeVM;
-exports.VM = VM;
-
-
-/***/ }),
-
-/***/ 6461:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-
 /**
- * This callback will be called to resolve a module if it couldn't be found.
- *
- * @callback resolveCallback
- * @param {string} moduleName - Name of the module used to resolve.
- * @param {string} dirname - Name of the current directory.
- * @return {(string|undefined)} The file or directory to use to load the requested module.
- */
-
-/**
- * This callback will be called to require a module instead of node's require.
- *
- * @callback customRequire
- * @param {string} moduleName - Name of the module requested.
- * @return {*} The required module object.
- */
-
-const fs = __nccwpck_require__(7147);
-const pa = __nccwpck_require__(1017);
-const {
-	Script
-} = __nccwpck_require__(6144);
-const {
-	VMError
-} = __nccwpck_require__(2989);
-const {
-	VMScript,
-	MODULE_PREFIX,
-	STRICT_MODULE_PREFIX,
-	MODULE_SUFFIX
-} = __nccwpck_require__(8611);
-const {
-	transformer
-} = __nccwpck_require__(3342);
-const {
-	VM
-} = __nccwpck_require__(3841);
-const {
-	resolverFromOptions
-} = __nccwpck_require__(1909);
-
-const objectDefineProperty = Object.defineProperty;
-const objectDefineProperties = Object.defineProperties;
-
-/**
- * Host objects
- *
+ * Remove the shebang from source code.
+ * 
  * @private
+ * @param {string} code - Code from which to remove the shebang.
+ * @return {string} code without the shebang.
  */
-const HOST = Object.freeze({
-	__proto__: null,
-	version: parseInt(process.versions.node.split('.')[0]),
-	process,
-	console,
-	setTimeout,
-	setInterval,
-	setImmediate,
-	clearTimeout,
-	clearInterval,
-	clearImmediate
-});
-
-/**
- * Compile a script.
- *
- * @private
- * @param {string} filename - Filename of the script.
- * @param {string} script - Script.
- * @return {vm.Script} The compiled script.
- */
-function compileScript(filename, script) {
-	return new Script(script, {
-		__proto__: null,
-		filename,
-		displayErrors: false
-	});
+function removeShebang(code) {
+	if (!code.startsWith('#!')) return code;
+	return '//' + code.substr(2);
 }
 
-let cacheSandboxScript = null;
-let cacheMakeNestingScript = null;
+/**
+ * Class Script
+ *
+ * @public
+ */
+class VMScript {
 
-const NESTING_OVERRIDE = Object.freeze({
-	__proto__: null,
-	vm2: vm2NestingLoader
-});
+	/**
+	 * The script code with wrapping. If set will invalidate the cache.<br>
+	 * Writable only for backwards compatibility.
+	 * 
+	 * @public
+	 * @readonly
+	 * @member {string} code
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The filename used for this script.
+	 * 
+	 * @public
+	 * @readonly
+	 * @since v3.9.0
+	 * @member {string} filename
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The line offset use for stack traces.
+	 * 
+	 * @public
+	 * @readonly
+	 * @since v3.9.0
+	 * @member {number} lineOffset
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The column offset use for stack traces.
+	 * 
+	 * @public
+	 * @readonly
+	 * @since v3.9.0
+	 * @member {number} columnOffset
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The compiler to use to get the JavaScript code.
+	 * 
+	 * @public
+	 * @readonly
+	 * @since v3.9.0
+	 * @member {(string|compileCallback)} compiler
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The prefix for the script.
+	 * 
+	 * @private
+	 * @member {string} _prefix
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The suffix for the script.
+	 * 
+	 * @private
+	 * @member {string} _suffix
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The compiled vm.Script for the VM or if not compiled <code>null</code>.
+	 * 
+	 * @private
+	 * @member {?vm.Script} _compiledVM
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The compiled vm.Script for the NodeVM or if not compiled <code>null</code>.
+	 * 
+	 * @private
+	 * @member {?vm.Script} _compiledNodeVM
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The compiled vm.Script for the NodeVM in strict mode or if not compiled <code>null</code>.
+	 * 
+	 * @private
+	 * @member {?vm.Script} _compiledNodeVMStrict
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The resolved compiler to use to get the JavaScript code.
+	 * 
+	 * @private
+	 * @readonly
+	 * @member {compileCallback} _compiler
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * The script to run without wrapping.
+	 * 
+	 * @private
+	 * @member {string} _code
+	 * @memberOf VMScript#
+	 */
+
+	/**
+	 * Create VMScript instance.
+	 *
+	 * @public
+	 * @param {string} code - Code to run.
+	 * @param {(string|Object)} [options] - Options map or filename.
+	 * @param {string} [options.filename="vm.js"] - Filename that shows up in any stack traces produced from this script.
+	 * @param {number} [options.lineOffset=0] - Passed to vm.Script options.
+	 * @param {number} [options.columnOffset=0] - Passed to vm.Script options.
+	 * @param {(string|compileCallback)} [options.compiler="javascript"] - The compiler to use.
+	 * @throws {VMError} If the compiler is unknown or if coffee-script was requested but the module not found.
+	 */
+	constructor(code, options) {
+		const sCode = `${code}`;
+		let useFileName;
+		let useOptions;
+		if (arguments.length === 2) {
+			if (typeof options === 'object' && options.toString === Object.prototype.toString) {
+				useOptions = options || {};
+				useFileName = useOptions.filename;
+			} else {
+				useOptions = {};
+				useFileName = options;
+			}
+		} else if (arguments.length > 2) {
+			// We do it this way so that there are no more arguments in the function.
+			// eslint-disable-next-line prefer-rest-params
+			useOptions = arguments[2] || {};
+			useFileName = options || useOptions.filename;
+		} else {
+			useOptions = {};
+		}
+
+		const {
+			compiler = 'javascript',
+			lineOffset = 0,
+			columnOffset = 0
+		} = useOptions;
+
+		// Throw if the compiler is unknown.
+		const resolvedCompiler = lookupCompiler(compiler);
+
+		Object.defineProperties(this, {
+			code: {
+				// Put this here so that it is enumerable, and looks like a property.
+				get() {
+					return this._prefix + this._code + this._suffix;
+				},
+				set(value) {
+					const strNewCode = String(value);
+					if (strNewCode === this._code && this._prefix === '' && this._suffix === '') return;
+					this._code = strNewCode;
+					this._prefix = '';
+					this._suffix = '';
+					this._compiledVM = null;
+					this._compiledNodeVM = null;
+					this._compiledCode = null;
+				},
+				enumerable: true
+			},
+			filename: {
+				value: useFileName || 'vm.js',
+				enumerable: true
+			},
+			lineOffset: {
+				value: lineOffset,
+				enumerable: true
+			},
+			columnOffset: {
+				value: columnOffset,
+				enumerable: true
+			},
+			compiler: {
+				value: compiler,
+				enumerable: true
+			},
+			_code: {
+				value: sCode,
+				writable: true
+			},
+			_prefix: {
+				value: '',
+				writable: true
+			},
+			_suffix: {
+				value: '',
+				writable: true
+			},
+			_compiledVM: {
+				value: null,
+				writable: true
+			},
+			_compiledNodeVM: {
+				value: null,
+				writable: true
+			},
+			_compiledNodeVMStrict: {
+				value: null,
+				writable: true
+			},
+			_compiledCode: {
+				value: null,
+				writable: true
+			},
+			_compiler: {value: resolvedCompiler}
+		});
+	}
+
+	/**
+	 * Wraps the code.<br>
+	 * This will replace the old wrapping.<br>
+	 * Will invalidate the code cache.
+	 *
+	 * @public
+	 * @deprecated Since v3.9.0. Wrap your code before passing it into the VMScript object.
+	 * @param {string} prefix - String that will be appended before the script code.
+	 * @param {script} suffix - String that will be appended behind the script code.
+	 * @return {this} This for chaining.
+	 * @throws {TypeError} If prefix or suffix is a Symbol.
+	 */
+	wrap(prefix, suffix) {
+		const strPrefix = `${prefix}`;
+		const strSuffix = `${suffix}`;
+		if (this._prefix === strPrefix && this._suffix === strSuffix) return this;
+		this._prefix = strPrefix;
+		this._suffix = strSuffix;
+		this._compiledVM = null;
+		this._compiledNodeVM = null;
+		this._compiledNodeVMStrict = null;
+		return this;
+	}
+
+	/**
+	 * Compile this script. <br>
+	 * This is useful to detect syntax errors in the script.
+	 *
+	 * @public
+	 * @return {this} This for chaining.
+	 * @throws {SyntaxError} If there is a syntax error in the script.
+	 */
+	compile() {
+		this._compileVM();
+		return this;
+	}
+
+	/**
+	 * Get the compiled code.
+	 * 
+	 * @private
+	 * @return {string} The code.
+	 */
+	getCompiledCode() {
+		if (!this._compiledCode) {
+			this._compiledCode = this._compiler(this._prefix + removeShebang(this._code) + this._suffix, this.filename);
+		}
+		return this._compiledCode;
+	}
+
+	/**
+	 * Compiles this script to a vm.Script.
+	 * 
+	 * @private
+	 * @param {string} prefix - JavaScript code that will be used as prefix.
+	 * @param {string} suffix - JavaScript code that will be used as suffix.
+	 * @return {vm.Script} The compiled vm.Script.
+	 * @throws {SyntaxError} If there is a syntax error in the script.
+	 */
+	_compile(prefix, suffix) {
+		return new vm.Script(prefix + this.getCompiledCode() + suffix, {
+			filename: this.filename,
+			displayErrors: false,
+			lineOffset: this.lineOffset,
+			columnOffset: this.columnOffset,
+			importModuleDynamically
+		});
+	}
+
+	/**
+	 * Will return the cached version of the script intended for VM or compile it.
+	 * 
+	 * @private
+	 * @return {vm.Script} The compiled script
+	 * @throws {SyntaxError} If there is a syntax error in the script.
+	 */
+	_compileVM() {
+		let script = this._compiledVM;
+		if (!script) {
+			this._compiledVM = script = this._compile('', '');
+		}
+		return script;
+	}
+
+	/**
+	 * Will return the cached version of the script intended for NodeVM or compile it.
+	 * 
+	 * @private
+	 * @return {vm.Script} The compiled script
+	 * @throws {SyntaxError} If there is a syntax error in the script.
+	 */
+	_compileNodeVM() {
+		let script = this._compiledNodeVM;
+		if (!script) {
+			this._compiledNodeVM = script = this._compile(MODULE_PREFIX, MODULE_SUFFIX);
+		}
+		return script;
+	}
+
+	/**
+	 * Will return the cached version of the script intended for NodeVM in strict mode or compile it.
+	 * 
+	 * @private
+	 * @return {vm.Script} The compiled script
+	 * @throws {SyntaxError} If there is a syntax error in the script.
+	 */
+	_compileNodeVMStrict() {
+		let script = this._compiledNodeVMStrict;
+		if (!script) {
+			this._compiledNodeVMStrict = script = this._compile(STRICT_MODULE_PREFIX, MODULE_SUFFIX);
+		}
+		return script;
+	}
+
+}
+
+/**
+ * 
+ * This callback will be called and has a specific time to finish.<br>
+ * No parameters will be supplied.<br>
+ * If parameters are required, use a closure.
+ * 
+ * @private
+ * @callback runWithTimeout
+ * @return {*} 
+ * 
+ */
+
+/**
+ * Run a function with a specific timeout.
+ * 
+ * @private
+ * @param {runWithTimeout} fn - Function to run with the specific timeout.
+ * @param {number} timeout - The amount of time to give the function to finish.
+ * @return {*} The value returned by the function.
+ * @throws {Error} If the function took to long.
+ */
+function doWithTimeout(fn, timeout) {
+	let ctx = CACHE.timeoutContext;
+	let script = CACHE.timeoutScript;
+	if (!ctx) {
+		CACHE.timeoutContext = ctx = vm.createContext();
+		CACHE.timeoutScript = script = new vm.Script('fn()', {
+			filename: 'timeout_bridge.js',
+			displayErrors: false,
+			importModuleDynamically
+		});
+	}
+	ctx.fn = fn;
+	try {
+		return script.runInContext(ctx, {
+			displayErrors: false,
+			importModuleDynamically,
+			timeout
+		});
+	} finally {
+		ctx.fn = null;
+	}
+}
+
+function tryCompile(args) {
+	const code = args[args.length - 1];
+	const params = args.slice(0, -1);
+	vm.compileFunction(code, params);
+}
+
+function makeCheckHook(checkAsync, checkImport) {
+	if (!checkAsync && !checkImport) return null;
+	return (hook, args) => {
+		if (hook === 'function' || hook === 'generator_function' || hook === 'eval' || hook === 'run' ||
+			(!checkAsync && (hook === 'async_function' || hook === 'async_generator_function'))) {
+			if (hook === 'eval') {
+				const script = args[0];
+				args = [script];
+				if (typeof(script) !== 'string') return args;
+			} else {
+				// Next line throws on Symbol, this is the same behavior as function constructor calls
+				args = args.map(arg => `${arg}`);
+			}
+			const hasAsync = checkAsync && args.findIndex(arg => /\basync\b/.test(arg)) !== -1;
+			const hasImport = checkImport && args.findIndex(arg => /\bimport\b/.test(arg)) !== -1;
+			if (!hasAsync && !hasImport) return args;
+			const mapped = args.map(arg => {
+				if (hasAsync) arg = arg.replace(/async/g, 'a\\u0073ync');
+				if (hasImport) arg = arg.replace(/import/g, 'i\\u006dport');
+				return arg;
+			});
+			try {
+				tryCompile(mapped);
+			} catch (u) {
+				// Some random syntax error or error because of async or import.
+
+				// First report real syntax errors
+				tryCompile(args);
+
+				if (hasAsync && hasImport) {
+					const mapped2 = args.map(arg => arg.replace(/async/g, 'a\\u0073ync'));
+					try {
+						tryCompile(mapped2);
+					} catch (e) {
+						throw new VMError('Async not available');
+					}
+					throw new VMError('Dynamic Import not supported');
+				}
+				if (hasAsync) {
+					// Then async error
+					throw new VMError('Async not available');
+				}
+				throw new VMError('Dynamic Import not supported');
+			}
+			return args;
+		}
+		if (checkAsync) throw new VMError('Async not available');
+		return args;
+	};
+}
+
+/**
+ * Class VM.
+ *
+ * @public
+ */
+class VM extends EventEmitter {
+
+	/**
+	 * The timeout for {@link VM#run} calls.
+	 *
+	 * @public
+	 * @since v3.9.0
+	 * @member {number} timeout
+	 * @memberOf VM#
+	 */
+
+	/**
+	 * Get the global sandbox object.
+	 *
+	 * @public
+	 * @readonly
+	 * @since v3.9.0
+	 * @member {Object} sandbox
+	 * @memberOf VM#
+	 */
+
+	/**
+	 * The compiler to use to get the JavaScript code.
+	 * 
+	 * @public
+	 * @readonly
+	 * @since v3.9.0
+	 * @member {(string|compileCallback)} compiler
+	 * @memberOf VM#
+	 */
+
+	/**
+	 * The context for this sandbox.
+	 * 
+	 * @private
+	 * @readonly
+	 * @member {Object} _context
+	 * @memberOf VM#
+	 */
+
+	/**
+	 * The internal methods for this sandbox.
+	 * 
+	 * @private
+	 * @readonly
+	 * @member {{Contextify: Object, Decontextify: Object, Buffer: Object, sandbox:Object}} _internal
+	 * @memberOf VM#
+	 */
+
+	/**
+	 * The resolved compiler to use to get the JavaScript code.
+	 * 
+	 * @private
+	 * @readonly
+	 * @member {compileCallback} _compiler
+	 * @memberOf VM#
+	 */
+
+	/**
+	 * The hook called when some events occurs.
+	 * 
+	 * @private
+	 * @readonly
+	 * @since v3.9.2
+	 * @member {Function} _hook
+	 * @memberOf VM#
+	 */
+
+	/**
+	 * Create a new VM instance.
+	 *
+	 * @public
+	 * @param {Object} [options] - VM options.
+	 * @param {number} [options.timeout] - The amount of time until a call to {@link VM#run} will timeout.
+	 * @param {Object} [options.sandbox] - Objects that will be copied into the global object of the sandbox.
+	 * @param {(string|compileCallback)} [options.compiler="javascript"] - The compiler to use.
+	 * @param {boolean} [options.eval=true] - Allow the dynamic evaluation of code via eval(code) or Function(code)().<br>
+	 * Only available for node v10+.
+	 * @param {boolean} [options.wasm=true] - Allow to run wasm code.<br>
+	 * Only available for node v10+.
+	 * @param {boolean} [options.fixAsync=false] - Filters for async functions.
+	 * @throws {VMError} If the compiler is unknown.
+	 */
+	constructor(options = {}) {
+		super();
+
+		// Read all options
+		const {
+			timeout,
+			sandbox,
+			compiler = 'javascript'
+		} = options;
+		const allowEval = options.eval !== false;
+		const allowWasm = options.wasm !== false;
+		const fixAsync = !!options.fixAsync;
+
+		// Early error if sandbox is not an object.
+		if (sandbox && 'object' !== typeof sandbox) {
+			throw new VMError('Sandbox must be object.');
+		}
+
+		// Early error if compiler can't be found.
+		const resolvedCompiler = lookupCompiler(compiler);
+
+		// Create a new context for this vm.
+		const _context = vm.createContext(undefined, {
+			codeGeneration: {
+				strings: allowEval,
+				wasm: allowWasm
+			}
+		});
+
+		// Create the bridge between the host and the sandbox.
+		const _internal = CACHE.contextifyScript.runInContext(_context, DEFAULT_RUN_OPTIONS).call(_context, require, HOST);
+
+		const hook = makeCheckHook(fixAsync, true);
+
+		// Define the properties of this object.
+		// Use Object.defineProperties here to be able to
+		// hide and set properties write only.
+		Object.defineProperties(this, {
+			timeout: {
+				value: timeout,
+				writable: true,
+				enumerable: true
+			},
+			compiler: {
+				value: compiler,
+				enumerable: true
+			},
+			sandbox: {
+				value: _internal.sandbox,
+				enumerable: true
+			},
+			_context: {value: _context},
+			_internal: {value: _internal},
+			_compiler: {value: resolvedCompiler},
+			_hook: {value: hook}
+		});
+
+		if (hook) {
+			if (!CACHE.hookScript) {
+				CACHE.hookScript = loadAndCompileScript(__nccwpck_require__.ab + "fixasync.js", '(function() { ', '\n})');
+				CACHE.getGlobalScript = new vm.Script('this', {
+					filename: 'get_global.js',
+					displayErrors: false,
+					importModuleDynamically
+				});
+				try {
+					CACHE.getGeneratorFunctionScript = new vm.Script('(function*(){}).constructor', {
+						filename: 'get_generator_function.js',
+						displayErrors: false,
+						importModuleDynamically
+					});
+				} catch (ex) {}
+				try {
+					CACHE.getAsyncFunctionScript = new vm.Script('(async function(){}).constructor', {
+						filename: 'get_async_function.js',
+						displayErrors: false,
+						importModuleDynamically
+					});
+				} catch (ex) {}
+				try {
+					CACHE.getAsyncGeneratorFunctionScript = new vm.Script('(async function*(){}).constructor', {
+						filename: 'get_async_generator_function.js',
+						displayErrors: false,
+						importModuleDynamically
+					});
+				} catch (ex) {}
+			}
+			const internal = {
+				__proto__: null,
+				global: CACHE.getGlobalScript.runInContext(_context, DEFAULT_RUN_OPTIONS),
+				internal: _internal,
+				host: HOST,
+				hook
+			};
+			if (CACHE.getGeneratorFunctionScript) {
+				try {
+					internal.GeneratorFunction = CACHE.getGeneratorFunctionScript.runInContext(_context, DEFAULT_RUN_OPTIONS);
+				} catch (ex) {}
+			}
+			if (CACHE.getAsyncFunctionScript) {
+				try {
+					internal.AsyncFunction = CACHE.getAsyncFunctionScript.runInContext(_context, DEFAULT_RUN_OPTIONS);
+				} catch (ex) {}
+			}
+			if (CACHE.getAsyncGeneratorFunctionScript) {
+				try {
+					internal.AsyncGeneratorFunction = CACHE.getAsyncGeneratorFunctionScript.runInContext(_context, DEFAULT_RUN_OPTIONS);
+				} catch (ex) {}
+			}
+			CACHE.hookScript.runInContext(_context, DEFAULT_RUN_OPTIONS).call(internal);
+		}
+
+		// prepare global sandbox
+		if (sandbox) {
+			this.setGlobals(sandbox);
+		}
+	}
+
+	/**
+	 * Adds all the values to the globals.
+	 * 
+	 * @public
+	 * @since v3.9.0
+	 * @param {Object} values - All values that will be added to the globals.
+	 * @return {this} This for chaining.
+	 * @throws {*} If the setter of a global throws an exception it is propagated. And the remaining globals will not be written.
+	 */
+	setGlobals(values) {
+		for (const name in values) {
+			if (Object.prototype.hasOwnProperty.call(values, name)) {
+				this._internal.Contextify.setGlobal(name, values[name]);
+			}
+		}
+		return this;
+	}
+
+	/**
+	 * Set a global value.
+	 * 
+	 * @public
+	 * @since v3.9.0
+	 * @param {string} name - The name of the global.
+	 * @param {*} value - The value of the global.
+	 * @return {this} This for chaining.
+	 * @throws {*} If the setter of the global throws an exception it is propagated.
+	 */
+	setGlobal(name, value) {
+		this._internal.Contextify.setGlobal(name, value);
+		return this;
+	}
+
+	/**
+	 * Get a global value.
+	 * 
+	 * @public
+	 * @since v3.9.0
+	 * @param {string} name - The name of the global.
+	 * @return {*} The value of the global.
+	 * @throws {*} If the getter of the global throws an exception it is propagated.
+	 */
+	getGlobal(name) {
+		return this._internal.Contextify.getGlobal(name);
+	}
+
+	/**
+	 * Freezes the object inside VM making it read-only. Not available for primitive values.
+	 *
+	 * @public
+	 * @param {*} value - Object to freeze.
+	 * @param {string} [globalName] - Whether to add the object to global.
+	 * @return {*} Object to freeze.
+	 * @throws {*} If the setter of the global throws an exception it is propagated.
+	 */
+	freeze(value, globalName) {
+		this._internal.Contextify.readonly(value);
+		if (globalName) this._internal.Contextify.setGlobal(globalName, value);
+		return value;
+	}
+
+	/**
+	 * Protects the object inside VM making impossible to set functions as it's properties. Not available for primitive values.
+	 *
+	 * @public
+	 * @param {*} value - Object to protect.
+	 * @param {string} [globalName] - Whether to add the object to global.
+	 * @return {*} Object to protect.
+	 * @throws {*} If the setter of the global throws an exception it is propagated.
+	 */
+	protect(value, globalName) {
+		this._internal.Contextify.protected(value);
+		if (globalName) this._internal.Contextify.setGlobal(globalName, value);
+		return value;
+	}
+
+	/**
+	 * Run the code in VM.
+	 *
+	 * @public
+	 * @param {(string|VMScript)} code - Code to run.
+	 * @param {string} [filename="vm.js"] - Filename that shows up in any stack traces produced from this script.<br>
+	 * This is only used if code is a String.
+	 * @return {*} Result of executed code.
+	 * @throws {SyntaxError} If there is a syntax error in the script.
+	 * @throws {Error} An error is thrown when the script took to long and there is a timeout.
+	 * @throws {*} If the script execution terminated with an exception it is propagated.
+	 */
+	run(code, filename) {
+		let script;
+		if (code instanceof VMScript) {
+			if (this._hook) {
+				const scriptCode = code.getCompiledCode();
+				const changed = this._hook('run', [scriptCode])[0];
+				if (changed === scriptCode) {
+					script = code._compileVM();
+				} else {
+					script = new vm.Script(changed, {
+						filename: code.filename,
+						displayErrors: false,
+						importModuleDynamically
+					});
+				}
+			} else {
+				script = code._compileVM();
+			}
+		} else {
+			const useFileName = filename || 'vm.js';
+			let scriptCode = this._compiler(code, useFileName);
+			if (this._hook) {
+				scriptCode = this._hook('run', [scriptCode])[0];
+			}
+			// Compile the script here so that we don't need to create a instance of VMScript.
+			script = new vm.Script(scriptCode, {
+				filename: useFileName,
+				displayErrors: false,
+				importModuleDynamically
+			});
+		}
+
+		if (!this.timeout) {
+			// If no timeout is given, directly run the script.
+			try {
+				return this._internal.Decontextify.value(script.runInContext(this._context, DEFAULT_RUN_OPTIONS));
+			} catch (e) {
+				throw this._internal.Decontextify.value(e);
+			}
+		}
+
+		return doWithTimeout(()=>{
+			try {
+				return this._internal.Decontextify.value(script.runInContext(this._context, DEFAULT_RUN_OPTIONS));
+			} catch (e) {
+				throw this._internal.Decontextify.value(e);
+			}
+		}, this.timeout);
+	}
+
+	/**
+	 * Run the code in VM.
+	 *
+	 * @public
+	 * @since v3.9.0
+	 * @param {string} filename - Filename of file to load and execute in a NodeVM.
+	 * @return {*} Result of executed code.
+	 * @throws {Error} If filename is not a valid filename.
+	 * @throws {SyntaxError} If there is a syntax error in the script.
+	 * @throws {Error} An error is thrown when the script took to long and there is a timeout.
+	 * @throws {*} If the script execution terminated with an exception it is propagated.
+	 */
+	runFile(filename) {
+		const resolvedFilename = pa.resolve(filename);
+
+		if (!fs.existsSync(resolvedFilename)) {
+			throw new VMError(`Script '${filename}' not found.`);
+		}
+
+		if (fs.statSync(resolvedFilename).isDirectory()) {
+			throw new VMError('Script must be file, got directory.');
+		}
+
+		return this.run(fs.readFileSync(resolvedFilename, 'utf8'), resolvedFilename);
+	}
+
+}
 
 /**
  * Event caused by a <code>console.debug</code> call if <code>options.console="redirect"</code> is specified.
@@ -63929,7 +57893,7 @@ class NodeVM extends VM {
 	 * Create a new NodeVM instance.<br>
 	 *
 	 * Unlike VM, NodeVM lets you use require same way like in regular node.<br>
-	 *
+	 * 
 	 * However, it does not use the timeout.
 	 *
 	 * @public
@@ -63943,133 +57907,74 @@ class NodeVM extends VM {
 	 * @param {("inherit"|"redirect"|"off")} [options.console="inherit"] - Sets the behavior of the console in the sandbox.
 	 * <code>inherit</code> to enable console, <code>redirect</code> to redirect to events, <code>off</code> to disable console.
 	 * @param {Object|boolean} [options.require=false] - Allow require inside the sandbox.
-	 * @param {(boolean|string[]|Object)} [options.require.external=false] - <b>WARNING: When allowing require the option <code>options.require.root</code>
-	 * should be set to restrict the script from requiring any module. Values can be true, an array of allowed external modules or an object.
-	 * @param {(string[])} [options.require.external.modules] - Array of allowed external modules. Also supports wildcards, so specifying ['@scope/*-ver-??],
+	 * @param {(boolean|string[]|Object)} [options.require.external=false] - true, an array of allowed external modules or an object.
+	 * @param {(string[])} [options.require.external.modules] - Array of allowed external modules. Also supports wildcards, so specifying ['@scope/*-ver-??], 
 	 * for instance, will allow using all modules having a name of the form @scope/something-ver-aa, @scope/other-ver-11, etc.
 	 * @param {boolean} [options.require.external.transitive=false] - Boolean which indicates if transitive dependencies of external modules are allowed.
-	 * @param {string[]} [options.require.builtin=[]] - Array of allowed built-in modules, accepts ["*"] for all.
+	 * @param {string[]} [options.require.builtin=[]] - Array of allowed builtin modules, accepts ["*"] for all.
 	 * @param {(string|string[])} [options.require.root] - Restricted path(s) where local modules can be required. If omitted every path is allowed.
-	 * @param {Object} [options.require.mock] - Collection of mock modules (both external or built-in).
+	 * @param {Object} [options.require.mock] - Collection of mock modules (both external or builtin).
 	 * @param {("host"|"sandbox")} [options.require.context="host"] - <code>host</code> to require modules in host and proxy them to sandbox.
 	 * <code>sandbox</code> to load, compile and require modules in sandbox.
 	 * Builtin modules except <code>events</code> always required in host and proxied to sandbox.
 	 * @param {string[]} [options.require.import] - Array of modules to be loaded into NodeVM on start.
 	 * @param {resolveCallback} [options.require.resolve] - An additional lookup function in case a module wasn't
 	 * found in one of the traditional node lookup paths.
-	 * @param {customRequire} [options.require.customRequire=require] - Custom require to require host and built-in modules.
-	 * @param {boolean} [options.nesting=false] -
-	 * <b>WARNING: Allowing this is a security risk as scripts can create a NodeVM which can require any host module.</b>
-	 * Allow nesting of VMs.
-	 * @param {("commonjs"|"none")} [options.wrapper="commonjs"] - <code>commonjs</code> to wrap script into CommonJS wrapper,
+	 * @param {boolean} [options.nesting=false] - Allow nesting of VMs.
+	 * @param {("commonjs"|"none")} [options.wrapper="commonjs"] - <code>commonjs</code> to wrap script into CommonJS wrapper, 
 	 * <code>none</code> to retrieve value returned by the script.
 	 * @param {string[]} [options.sourceExtensions=["js"]] - Array of file extensions to treat as source code.
-	 * @param {string[]} [options.argv=[]] - Array of arguments passed to <code>process.argv</code>.
+	 * @param {string[]} [options.argv=[]] - Array of arguments passed to <code>process.argv</code>. 
 	 * This object will not be copied and the script can change this object.
-	 * @param {Object} [options.env={}] - Environment map passed to <code>process.env</code>.
+	 * @param {Object} [options.env={}] - Environment map passed to <code>process.env</code>. 
 	 * This object will not be copied and the script can change this object.
 	 * @param {boolean} [options.strict=false] - If modules should be loaded in strict mode.
 	 * @throws {VMError} If the compiler is unknown.
 	 */
 	constructor(options = {}) {
-		const {
-			compiler,
-			eval: allowEval,
-			wasm,
-			console: consoleType = 'inherit',
-			require: requireOpts = false,
-			nesting = false,
-			wrapper = 'commonjs',
-			sourceExtensions = ['js'],
-			argv,
-			env,
-			strict = false,
-			sandbox
-		} = options;
+		const sandbox = options.sandbox;
 
 		// Throw this early
 		if (sandbox && 'object' !== typeof sandbox) {
-			throw new VMError('Sandbox must be an object.');
+			throw new VMError('Sandbox must be object.');
 		}
 
-		super({__proto__: null, compiler: compiler, eval: allowEval, wasm});
+		super({compiler: options.compiler, eval: options.eval, wasm: options.wasm});
 
-		// This is only here for backwards compatibility.
-		objectDefineProperty(this, 'options', {__proto__: null, value: {
-			console: consoleType,
-			require: requireOpts,
-			nesting,
-			wrapper,
-			sourceExtensions,
-			strict
+		// defaults
+		Object.defineProperty(this, 'options', {value: {
+			console: options.console || 'inherit',
+			require: options.require || false,
+			nesting: options.nesting || false,
+			wrapper: options.wrapper || 'commonjs',
+			sourceExtensions: options.sourceExtensions || ['js'],
+			strict: options.strict || false
 		}});
 
-		const resolver = resolverFromOptions(this, requireOpts, nesting && NESTING_OVERRIDE, this._compiler);
-
-		objectDefineProperty(this, '_resolver', {__proto__: null, value: resolver});
-
-		if (!cacheSandboxScript) {
-			cacheSandboxScript = compileScript(__nccwpck_require__.ab + "setup-node-sandbox.js",
-				`(function (host, data) { ${fs.readFileSync(`${__dirname}/setup-node-sandbox.js`, 'utf8')}\n})`);
+		let sandboxScript = CACHE.sandboxScript;
+		if (!sandboxScript) {
+			CACHE.sandboxScript = sandboxScript = loadAndCompileScript(__nccwpck_require__.ab + "sandbox.js",
+				'(function (vm, host, Contextify, Decontextify, Buffer, options) { ', '\n})');
 		}
 
-		const closure = this._runScript(cacheSandboxScript);
+		const closure = sandboxScript.runInContext(this._context, DEFAULT_RUN_OPTIONS);
 
-		const extensions = {
-			__proto__: null
-		};
-
-		const loadJS = (mod, filename) => resolver.loadJS(this, mod, filename);
-
-		for (let i = 0; i < sourceExtensions.length; i++) {
-			extensions['.' + sourceExtensions[i]] = loadJS;
-		}
-
-		if (!extensions['.json']) extensions['.json'] = (mod, filename) => resolver.loadJSON(this, mod, filename);
-		if (!extensions['.node']) extensions['.node'] = (mod, filename) => resolver.loadNode(this, mod, filename);
-
-
-		this.readonly(HOST);
-		this.readonly(resolver);
-		this.readonly(this);
-
-		const {
-			Module,
-			jsonParse,
-			createRequireForModule
-		} = closure(HOST, {
-			__proto__: null,
-			argv,
-			env,
-			console: consoleType,
-			vm: this,
-			resolver,
-			extensions
+		Object.defineProperty(this, '_prepareRequire', {
+			value: closure.call(this._context, this, HOST, this._internal.Contextify, this._internal.Decontextify, this._internal.Buffer, options)
 		});
-
-		objectDefineProperties(this, {
-			__proto__: null,
-			_Module: {__proto__: null, value: Module},
-			_jsonParse: {__proto__: null, value: jsonParse},
-			_createRequireForModule: {__proto__: null, value: createRequireForModule},
-			_cacheRequireModule: {__proto__: null, value: null, writable: true}
-		});
-
-
-		resolver.init(this, ()=>true);
 
 		// prepare global sandbox
 		if (sandbox) {
 			this.setGlobals(sandbox);
 		}
 
-		if (requireOpts && requireOpts.import) {
-			if (Array.isArray(requireOpts.import)) {
-				for (let i = 0, l = requireOpts.import.length; i < l; i++) {
-					this.require(requireOpts.import[i]);
+		if (this.options.require && this.options.require.import) {
+			if (Array.isArray(this.options.require.import)) {
+				for (let i = 0, l = this.options.require.import.length; i < l; i++) {
+					this.require(this.options.require.import[i]);
 				}
 			} else {
-				this.require(requireOpts.import);
+				this.require(this.options.require.import);
 			}
 		}
 	}
@@ -64102,13 +58007,7 @@ class NodeVM extends VM {
 	 * @throws {*} If the module couldn't be found or loading it threw an error.
 	 */
 	require(module) {
-		const path = this._resolver.pathResolve('.');
-		let mod = this._cacheRequireModule;
-		if (!mod || mod.path !== path) {
-			mod = new (this._Module)(this._resolver.pathConcat(path, '/vm.js'), path);
-			this._cacheRequireModule = mod;
-		}
-		return mod.require(module);
+		return this.run(`module.exports = require('${module}');`, 'vm.js');
 	}
 
 	/**
@@ -64118,12 +58017,8 @@ class NodeVM extends VM {
 	 * `module`, `require`, `exports`, `__dirname`, `__filename` variables and expect result in `module.exports'.
 	 *
 	 * @param {(string|VMScript)} code - Code to run.
-	 * @param {(string|Object)} [options] - Options map or filename.
-	 * @param {string} [options.filename="vm.js"] - Filename that shows up in any stack traces produced from this script.<br>
+	 * @param {string} [filename] - Filename that shows up in any stack traces produced from this script.<br>
 	 * This is only used if code is a String.
-	 * @param {boolean} [options.strict] - If modules should be loaded in strict mode. Defaults to NodeVM options.
-	 * @param {("commonjs"|"none")} [options.wrapper] - <code>commonjs</code> to wrap script into CommonJS wrapper,
-	 * <code>none</code> to retrieve value returned by the script. Defaults to NodeVM options.
 	 * @return {*} Result of executed code.
 	 * @throws {SyntaxError} If there is a syntax error in the script.
 	 * @throws {*} If the script execution terminated with an exception it is propagated.
@@ -64135,65 +58030,64 @@ class NodeVM extends VM {
 	 * @fires NodeVM."console.dir"
 	 * @fires NodeVM."console.trace"
 	 */
-	run(code, options) {
+	run(code, filename) {
+		let dirname;
+		let resolvedFilename;
 		let script;
-		let filename;
-
-		if (typeof options === 'object') {
-			filename = options.filename;
-		} else {
-			filename = options;
-			options = {__proto__: null};
-		}
-
-		const {
-			strict = this.options.strict,
-			wrapper = this.options.wrapper,
-			module: customModule,
-			require: customRequire,
-			dirname: customDirname = null
-		} = options;
-
-		let sandboxModule = customModule;
-		let dirname = customDirname;
 
 		if (code instanceof VMScript) {
-			script = strict ? code._compileNodeVMStrict() : code._compileNodeVM();
-			if (!sandboxModule) {
-				const resolvedFilename = this._resolver.pathResolve(code.filename);
-				dirname = this._resolver.pathDirname(resolvedFilename);
-				sandboxModule = new (this._Module)(resolvedFilename, dirname);
-				this._resolver.registerModule(sandboxModule, resolvedFilename, dirname, null, false);
+			if (this._hook) {
+				const prefix = this.options.strict ? STRICT_MODULE_PREFIX : MODULE_PREFIX;
+				const scriptCode = prefix + code.getCompiledCode() + MODULE_SUFFIX;
+				const changed = this._hook('run', [scriptCode])[0];
+				if (changed === scriptCode) {
+					script = this.options.strict ? code._compileNodeVMStrict() : code._compileNodeVM();
+				} else {
+					script = new vm.Script(changed, {
+						filename: code.filename,
+						displayErrors: false,
+						importModuleDynamically
+					});
+				}
+			} else {
+				script = this.options.strict ? code._compileNodeVMStrict() : code._compileNodeVM();
 			}
+			resolvedFilename = pa.resolve(code.filename);
+			dirname = pa.dirname(resolvedFilename);
 		} else {
 			const unresolvedFilename = filename || 'vm.js';
-			if (!sandboxModule) {
-				if (filename) {
-					const resolvedFilename = this._resolver.pathResolve(filename);
-					dirname = this._resolver.pathDirname(resolvedFilename);
-					sandboxModule = new (this._Module)(resolvedFilename, dirname);
-					this._resolver.registerModule(sandboxModule, resolvedFilename, dirname, null, false);
-				} else {
-					sandboxModule = new (this._Module)(null, null);
-					sandboxModule.id = unresolvedFilename;
-				}
+			if (filename) {
+				resolvedFilename = pa.resolve(filename);
+				dirname = pa.dirname(resolvedFilename);
+			} else {
+				resolvedFilename = null;
+				dirname = null;
 			}
-			const prefix = strict ? STRICT_MODULE_PREFIX : MODULE_PREFIX;
+			const prefix = this.options.strict ? STRICT_MODULE_PREFIX : MODULE_PREFIX;
 			let scriptCode = prefix + this._compiler(code, unresolvedFilename) + MODULE_SUFFIX;
-			scriptCode = transformer(null, scriptCode, false, false).code;
-			script = new Script(scriptCode, {
-				__proto__: null,
+			if (this._hook) {
+				scriptCode = this._hook('run', [scriptCode])[0];
+			}
+			script = new vm.Script(scriptCode, {
 				filename: unresolvedFilename,
-				displayErrors: false
+				displayErrors: false,
+				importModuleDynamically
 			});
 		}
 
-		const closure = this._runScript(script);
+		const wrapper = this.options.wrapper;
+		const module = this._internal.Contextify.makeModule();
 
-		const usedRequire = customRequire || this._createRequireForModule(sandboxModule);
+		try {
+			const closure = script.runInContext(this._context, DEFAULT_RUN_OPTIONS);
 
-		const ret = Reflect.apply(closure, this.sandbox, [sandboxModule.exports, usedRequire, sandboxModule, filename, dirname]);
-		return wrapper === 'commonjs' ? sandboxModule.exports : ret;
+			const returned = closure.call(this._context, module.exports, this._prepareRequire(dirname), module, resolvedFilename, dirname);
+
+			return this._internal.Decontextify.value(wrapper === 'commonjs' ? module.exports : returned);
+		} catch (e) {
+			throw this._internal.Decontextify.value(e);
+		}
+
 	}
 
 	/**
@@ -64262,2787 +58156,83 @@ class NodeVM extends VM {
 	}
 }
 
-function vm2NestingLoader(resolver, vm, id) {
-	if (!cacheMakeNestingScript) {
-		cacheMakeNestingScript = compileScript('nesting.js', '(vm, nodevm) => ({VM: vm, NodeVM: nodevm})');
-	}
-	const makeNesting = vm._runScript(cacheMakeNestingScript);
-	return makeNesting(vm.readonly(VM), vm.readonly(NodeVM));
-}
-
-exports.NodeVM = NodeVM;
-
-
-/***/ }),
-
-/***/ 1909:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-
-// Translate the old options to the new Resolver functionality.
-
-const fs = __nccwpck_require__(7147);
-const pa = __nccwpck_require__(1017);
-const nmod = __nccwpck_require__(2503);
-const {EventEmitter} = __nccwpck_require__(2361);
-const util = __nccwpck_require__(3837);
-
-const {
-	Resolver,
-	DefaultResolver
-} = __nccwpck_require__(8038);
-const {VMScript} = __nccwpck_require__(8611);
-const {VM} = __nccwpck_require__(3841);
-const {VMError} = __nccwpck_require__(2989);
-
 /**
- * Require wrapper to be able to annotate require with webpackIgnore.
- *
- * @private
- * @param {string} moduleName - Name of module to load.
- * @return {*} Module exports.
- */
-function defaultRequire(moduleName) {
-	// Set module.parser.javascript.commonjsMagicComments=true in your webpack config.
-	// eslint-disable-next-line global-require
-	return require(/* webpackIgnore: true */ moduleName);
-}
-
-// source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping
-function escapeRegExp(string) {
-	return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-}
-
-function makeExternalMatcherRegex(obj) {
-	return escapeRegExp(obj).replace(/\\\\|\//g, '[\\\\/]')
-		.replace(/\\\*\\\*/g, '.*').replace(/\\\*/g, '[^\\\\/]*').replace(/\\\?/g, '[^\\\\/]');
-}
-
-function makeExternalMatcher(obj) {
-	const regexString = makeExternalMatcherRegex(obj);
-	return new RegExp(`[\\\\/]node_modules[\\\\/]${regexString}(?:[\\\\/](?!(?:.*[\\\\/])?node_modules[\\\\/]).*)?$`);
-}
-
-class LegacyResolver extends DefaultResolver {
-
-	constructor(builtinModules, checkPath, globalPaths, pathContext, customResolver, hostRequire, compiler, externals, allowTransitive) {
-		super(builtinModules, checkPath, globalPaths, pathContext, customResolver, hostRequire, compiler);
-		this.externals = externals;
-		this.currMod = undefined;
-		this.trustedMods = new WeakMap();
-		this.allowTransitive = allowTransitive;
-	}
-
-	isPathAllowed(path) {
-		return this.isPathAllowedForModule(path, this.currMod);
-	}
-
-	isPathAllowedForModule(path, mod) {
-		if (!super.isPathAllowed(path)) return false;
-		if (mod) {
-			if (mod.allowTransitive) return true;
-			if (path.startsWith(mod.path)) {
-				const rem = path.slice(mod.path.length);
-				if (!/(?:^|[\\\\/])node_modules(?:$|[\\\\/])/.test(rem)) return true;
-			}
-		}
-		return this.externals.some(regex => regex.test(path));
-	}
-
-	registerModule(mod, filename, path, parent, direct) {
-		const trustedParent = this.trustedMods.get(parent);
-		this.trustedMods.set(mod, {
-			filename,
-			path,
-			paths: this.genLookupPaths(path),
-			allowTransitive: this.allowTransitive &&
-				((direct && trustedParent && trustedParent.allowTransitive) || this.externals.some(regex => regex.test(filename)))
-		});
-	}
-
-	resolveFull(mod, x, options, ext, direct) {
-		this.currMod = undefined;
-		if (!direct) return super.resolveFull(mod, x, options, ext, false);
-		const trustedMod = this.trustedMods.get(mod);
-		if (!trustedMod || mod.path !== trustedMod.path) return super.resolveFull(mod, x, options, ext, false);
-		const paths = [...mod.paths];
-		if (paths.length === trustedMod.length) {
-			for (let i = 0; i < paths.length; i++) {
-				if (paths[i] !== trustedMod.paths[i]) {
-					return super.resolveFull(mod, x, options, ext, false);
-				}
-			}
-		}
-		const extCopy = Object.assign({__proto__: null}, ext);
-		try {
-			this.currMod = trustedMod;
-			return super.resolveFull(trustedMod, x, undefined, extCopy, true);
-		} finally {
-			this.currMod = undefined;
-		}
-	}
-
-	checkAccess(mod, filename) {
-		const trustedMod = this.trustedMods.get(mod);
-		if ((!trustedMod || trustedMod.filename !== filename) && !this.isPathAllowedForModule(filename, undefined)) {
-			throw new VMError(`Module '${filename}' is not allowed to be required. The path is outside the border!`, 'EDENIED');
-		}
-	}
-
-	loadJS(vm, mod, filename) {
-		filename = this.pathResolve(filename);
-		this.checkAccess(mod, filename);
-		if (this.pathContext(filename, 'js') === 'sandbox') {
-			const trustedMod = this.trustedMods.get(mod);
-			const script = this.readScript(filename);
-			vm.run(script, {filename, strict: true, module: mod, wrapper: 'none', dirname: trustedMod ? trustedMod.path : mod.path});
-		} else {
-			const m = this.hostRequire(filename);
-			mod.exports = vm.readonly(m);
-		}
-	}
-
-}
-
-function defaultBuiltinLoader(resolver, vm, id) {
-	const mod = resolver.hostRequire(id);
-	return vm.readonly(mod);
-}
-
-const eventsModules = new WeakMap();
-
-function defaultBuiltinLoaderEvents(resolver, vm, id) {
-	return eventsModules.get(vm);
-}
-
-let cacheBufferScript;
-
-function defaultBuiltinLoaderBuffer(resolver, vm, id) {
-	if (!cacheBufferScript) {
-		cacheBufferScript = new VMScript('return buffer=>({Buffer: buffer});', {__proto__: null, filename: 'buffer.js'});
-	}
-	const makeBuffer = vm.run(cacheBufferScript, {__proto__: null, strict: true, wrapper: 'none'});
-	return makeBuffer(Buffer);
-}
-
-let cacheUtilScript;
-
-function defaultBuiltinLoaderUtil(resolver, vm, id) {
-	if (!cacheUtilScript) {
-		cacheUtilScript = new VMScript(`return function inherits(ctor, superCtor) {
-			ctor.super_ = superCtor;
-			Object.setPrototypeOf(ctor.prototype, superCtor.prototype);
-		}`, {__proto__: null, filename: 'util.js'});
-	}
-	const inherits = vm.run(cacheUtilScript, {__proto__: null, strict: true, wrapper: 'none'});
-	const copy = Object.assign({}, util);
-	copy.inherits = inherits;
-	return vm.readonly(copy);
-}
-
-const BUILTIN_MODULES = (nmod.builtinModules || Object.getOwnPropertyNames(process.binding('natives'))).filter(s=>!s.startsWith('internal/'));
-
-let EventEmitterReferencingAsyncResourceClass = null;
-if (EventEmitter.EventEmitterAsyncResource) {
-	// eslint-disable-next-line global-require
-	const {AsyncResource} = __nccwpck_require__(852);
-	const kEventEmitter = Symbol('kEventEmitter');
-	class EventEmitterReferencingAsyncResource extends AsyncResource {
-		constructor(ee, type, options) {
-			super(type, options);
-			this[kEventEmitter] = ee;
-		}
-		get eventEmitter() {
-			return this[kEventEmitter];
-		}
-	}
-	EventEmitterReferencingAsyncResourceClass = EventEmitterReferencingAsyncResource;
-}
-
-let cacheEventsScript;
-
-const SPECIAL_MODULES = {
-	events(vm) {
-		if (!cacheEventsScript) {
-			const eventsSource = fs.readFileSync(__nccwpck_require__.ab + "events.js", 'utf8');
-			cacheEventsScript = new VMScript(`(function (fromhost) { const module = {}; module.exports={};{ ${eventsSource}
-} return module.exports;})`, {filename: 'events.js'});
-		}
-		const closure = VM.prototype.run.call(vm, cacheEventsScript);
-		const eventsInstance = closure(vm.readonly({
-			kErrorMonitor: EventEmitter.errorMonitor,
-			once: EventEmitter.once,
-			on: EventEmitter.on,
-			getEventListeners: EventEmitter.getEventListeners,
-			EventEmitterReferencingAsyncResource: EventEmitterReferencingAsyncResourceClass
-		}));
-		eventsModules.set(vm, eventsInstance);
-		vm._addProtoMapping(EventEmitter.prototype, eventsInstance.EventEmitter.prototype);
-		return defaultBuiltinLoaderEvents;
-	},
-	buffer(vm) {
-		return defaultBuiltinLoaderBuffer;
-	},
-	util(vm) {
-		return defaultBuiltinLoaderUtil;
-	}
-};
-
-function addDefaultBuiltin(builtins, key, vm) {
-	if (builtins[key]) return;
-	const special = SPECIAL_MODULES[key];
-	builtins[key] = special ? special(vm) : defaultBuiltinLoader;
-}
-
-
-function genBuiltinsFromOptions(vm, builtinOpt, mockOpt, override) {
-	const builtins = {__proto__: null};
-	if (mockOpt) {
-		const keys = Object.getOwnPropertyNames(mockOpt);
-		for (let i = 0; i < keys.length; i++) {
-			const key = keys[i];
-			builtins[key] = (resolver, tvm, id) => tvm.readonly(mockOpt[key]);
-		}
-	}
-	if (override) {
-		const keys = Object.getOwnPropertyNames(override);
-		for (let i = 0; i < keys.length; i++) {
-			const key = keys[i];
-			builtins[key] = override[key];
-		}
-	}
-	if (Array.isArray(builtinOpt)) {
-		const def = builtinOpt.indexOf('*') >= 0;
-		if (def) {
-			for (let i = 0; i < BUILTIN_MODULES.length; i++) {
-				const name = BUILTIN_MODULES[i];
-				if (builtinOpt.indexOf(`-${name}`) === -1) {
-					addDefaultBuiltin(builtins, name, vm);
-				}
-			}
-		} else {
-			for (let i = 0; i < BUILTIN_MODULES.length; i++) {
-				const name = BUILTIN_MODULES[i];
-				if (builtinOpt.indexOf(name) !== -1) {
-					addDefaultBuiltin(builtins, name, vm);
-				}
-			}
-		}
-	} else if (builtinOpt) {
-		for (let i = 0; i < BUILTIN_MODULES.length; i++) {
-			const name = BUILTIN_MODULES[i];
-			if (builtinOpt[name]) {
-				addDefaultBuiltin(builtins, name, vm);
-			}
-		}
-	}
-	return builtins;
-}
-
-function defaultCustomResolver() {
-	return undefined;
-}
-
-const DENY_RESOLVER = new Resolver({__proto__: null}, [], id => {
-	throw new VMError(`Access denied to require '${id}'`, 'EDENIED');
-});
-
-function resolverFromOptions(vm, options, override, compiler) {
-	if (!options) {
-		if (!override) return DENY_RESOLVER;
-		const builtins = genBuiltinsFromOptions(vm, undefined, undefined, override);
-		return new Resolver(builtins, [], defaultRequire);
-	}
-
-	const {
-		builtin: builtinOpt,
-		mock: mockOpt,
-		external: externalOpt,
-		root: rootPaths,
-		resolve: customResolver,
-		customRequire: hostRequire = defaultRequire,
-		context = 'host'
-	} = options;
-
-	const builtins = genBuiltinsFromOptions(vm, builtinOpt, mockOpt, override);
-
-	if (!externalOpt) return new Resolver(builtins, [], hostRequire);
-
-	let checkPath;
-	if (rootPaths) {
-		const checkedRootPaths = (Array.isArray(rootPaths) ? rootPaths : [rootPaths]).map(f => pa.resolve(f));
-		checkPath = (filename) => {
-			return checkedRootPaths.some(path => {
-				if (!filename.startsWith(path)) return false;
-				const len = path.length;
-				if (filename.length === len) return true;
-				const sep = filename[len];
-				return sep === '/' || sep === pa.sep;
-			});
-		};
-	} else {
-		checkPath = () => true;
-	}
-
-	let newCustomResolver = defaultCustomResolver;
-	let externals = undefined;
-	let external = undefined;
-	if (customResolver) {
-		let externalCache;
-		newCustomResolver = (resolver, x, path, extList) => {
-			if (external && !(resolver.pathIsAbsolute(x) || resolver.pathIsRelative(x))) {
-				if (!externalCache) {
-					externalCache = external.map(ext => new RegExp(makeExternalMatcherRegex(ext)));
-				}
-				if (!externalCache.some(regex => regex.test(x))) return undefined;
-			}
-			const resolved = customResolver(x, path);
-			if (!resolved) return undefined;
-			if (externals) externals.push(new RegExp('^' + escapeRegExp(resolved)));
-			return resolver.loadAsFileOrDirecotry(resolved, extList);
-		};
-	}
-
-	if (typeof externalOpt !== 'object') {
-		return new DefaultResolver(builtins, checkPath, [], () => context, newCustomResolver, hostRequire, compiler);
-	}
-
-	let transitive = false;
-	if (Array.isArray(externalOpt)) {
-		external = externalOpt;
-	} else {
-		external = externalOpt.modules;
-		transitive = context === 'sandbox' && externalOpt.transitive;
-	}
-	externals = external.map(makeExternalMatcher);
-	return new LegacyResolver(builtins, checkPath, [], () => context, newCustomResolver, hostRequire, compiler, externals, transitive);
-}
-
-exports.resolverFromOptions = resolverFromOptions;
-
-
-/***/ }),
-
-/***/ 8038:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-
-// The Resolver is currently experimental and might be exposed to users in the future.
-
-const pa = __nccwpck_require__(1017);
-const fs = __nccwpck_require__(7147);
-
-const {
-	VMError
-} = __nccwpck_require__(2989);
-const { VMScript } = __nccwpck_require__(8611);
-
-// This should match. Note that '\', '%' are invalid characters
-// 1. name/.*
-// 2. @scope/name/.*
-const EXPORTS_PATTERN = /^((?:@[^/\\%]+\/)?[^/\\%]+)(\/.*)?$/;
-
-// See https://tc39.es/ecma262/#integer-index
-function isArrayIndex(key) {
-	const keyNum = +key;
-	if (`${keyNum}` !== key) return false;
-	return keyNum >= 0 && keyNum < 0xFFFFFFFF;
-}
-
-class Resolver {
-
-	constructor(builtinModules, globalPaths, hostRequire) {
-		this.builtinModules = builtinModules;
-		this.globalPaths = globalPaths;
-		this.hostRequire = hostRequire;
-	}
-
-	init(vm) {
-
-	}
-
-	pathResolve(path) {
-		return pa.resolve(path);
-	}
-
-	pathIsRelative(path) {
-		if (path === '' || path[0] !== '.') return false;
-		if (path.length === 1) return true;
-		const idx = path[1] === '.' ? 2 : 1;
-		if (path.length <= idx) return false;
-		return path[idx] === '/' || path[idx] === pa.sep;
-	}
-
-	pathIsAbsolute(path) {
-		return pa.isAbsolute(path);
-	}
-
-	pathConcat(...paths) {
-		return pa.join(...paths);
-	}
-
-	pathBasename(path) {
-		return pa.basename(path);
-	}
-
-	pathDirname(path) {
-		return pa.dirname(path);
-	}
-
-	lookupPaths(mod, id) {
-		if (typeof id === 'string') throw new Error('Id is not a string');
-		if (this.pathIsRelative(id)) return [mod.path || '.'];
-		return [...mod.paths, ...this.globalPaths];
-	}
-
-	getBuiltinModulesList() {
-		return Object.getOwnPropertyNames(this.builtinModules);
-	}
-
-	loadBuiltinModule(vm, id) {
-		const handler = this.builtinModules[id];
-		return handler && handler(this, vm, id);
-	}
-
-	loadJS(vm, mod, filename) {
-		throw new VMError(`Access denied to require '${filename}'`, 'EDENIED');
-	}
-
-	loadJSON(vm, mod, filename) {
-		throw new VMError(`Access denied to require '${filename}'`, 'EDENIED');
-	}
-
-	loadNode(vm, mod, filename) {
-		throw new VMError(`Access denied to require '${filename}'`, 'EDENIED');
-	}
-
-	registerModule(mod, filename, path, parent, direct) {
-
-	}
-
-	resolve(mod, x, options, ext, direct) {
-		if (typeof x !== 'string') throw new Error('Id is not a string');
-
-		if (x.startsWith('node:') || this.builtinModules[x]) {
-			// a. return the core module
-			// b. STOP
-			return x;
-		}
-
-		return this.resolveFull(mod, x, options, ext, direct);
-	}
-
-	resolveFull(mod, x, options, ext, direct) {
-		// 7. THROW "not found"
-		throw new VMError(`Cannot find module '${x}'`, 'ENOTFOUND');
-	}
-
-	// NODE_MODULES_PATHS(START)
-	genLookupPaths(path) {
-		// 1. let PARTS = path split(START)
-		// 2. let I = count of PARTS - 1
-		// 3. let DIRS = []
-		const dirs = [];
-		// 4. while I >= 0,
-		while (true) {
-			const name = this.pathBasename(path);
-			// a. if PARTS[I] = "node_modules" CONTINUE
-			if (name !== 'node_modules') {
-				// b. DIR = path join(PARTS[0 .. I] + "node_modules")
-				// c. DIRS = DIR + DIRS // Note: this seems wrong. Should be DIRS + DIR
-				dirs.push(this.pathConcat(path, 'node_modules'));
-			}
-			const dir = this.pathDirname(path);
-			if (dir == path) break;
-			// d. let I = I - 1
-			path = dir;
-		}
-
-		return dirs;
-		// This is done later on
-		// 5. return DIRS + GLOBAL_FOLDERS
-	}
-
-}
-
-class DefaultResolver extends Resolver {
-
-	constructor(builtinModules, checkPath, globalPaths, pathContext, customResolver, hostRequire, compiler) {
-		super(builtinModules, globalPaths, hostRequire);
-		this.checkPath = checkPath;
-		this.pathContext = pathContext;
-		this.customResolver = customResolver;
-		this.compiler = compiler;
-		this.packageCache = {__proto__: null};
-		this.scriptCache = {__proto__: null};
-	}
-
-	isPathAllowed(path) {
-		return this.checkPath(path);
-	}
-
-	pathTestIsDirectory(path) {
-		try {
-			const stat = fs.statSync(path, {__proto__: null, throwIfNoEntry: false});
-			return stat && stat.isDirectory();
-		} catch (e) {
-			return false;
-		}
-	}
-
-	pathTestIsFile(path) {
-		try {
-			const stat = fs.statSync(path, {__proto__: null, throwIfNoEntry: false});
-			return stat && stat.isFile();
-		} catch (e) {
-			return false;
-		}
-	}
-
-	readFile(path) {
-		return fs.readFileSync(path, {encoding: 'utf8'});
-	}
-
-	readFileWhenExists(path) {
-		return this.pathTestIsFile(path) ? this.readFile(path) : undefined;
-	}
-
-	readScript(filename) {
-		let script = this.scriptCache[filename];
-		if (!script) {
-			script = new VMScript(this.readFile(filename), {filename, compiler: this.compiler});
-			this.scriptCache[filename] = script;
-		}
-		return script;
-	}
-
-	checkAccess(mod, filename) {
-		if (!this.isPathAllowed(filename)) {
-			throw new VMError(`Module '${filename}' is not allowed to be required. The path is outside the border!`, 'EDENIED');
-		}
-	}
-
-	loadJS(vm, mod, filename) {
-		filename = this.pathResolve(filename);
-		this.checkAccess(mod, filename);
-		if (this.pathContext(filename, 'js') === 'sandbox') {
-			const script = this.readScript(filename);
-			vm.run(script, {filename, strict: true, module: mod, wrapper: 'none', dirname: mod.path});
-		} else {
-			const m = this.hostRequire(filename);
-			mod.exports = vm.readonly(m);
-		}
-	}
-
-	loadJSON(vm, mod, filename) {
-		filename = this.pathResolve(filename);
-		this.checkAccess(mod, filename);
-		const json = this.readFile(filename);
-		mod.exports = vm._jsonParse(json);
-	}
-
-	loadNode(vm, mod, filename) {
-		filename = this.pathResolve(filename);
-		this.checkAccess(mod, filename);
-		if (this.pathContext(filename, 'node') === 'sandbox') throw new VMError('Native modules can be required only with context set to \'host\'.');
-		const m = this.hostRequire(filename);
-		mod.exports = vm.readonly(m);
-	}
-
-	// require(X) from module at path Y
-	resolveFull(mod, x, options, ext, direct) {
-		// Note: core module handled by caller
-
-		const extList = Object.getOwnPropertyNames(ext);
-		const path = mod.path || '.';
-
-		// 5. LOAD_PACKAGE_SELF(X, dirname(Y))
-		let f = this.loadPackageSelf(x, path, extList);
-		if (f) return f;
-
-		// 4. If X begins with '#'
-		if (x[0] === '#') {
-			// a. LOAD_PACKAGE_IMPORTS(X, dirname(Y))
-			f = this.loadPackageImports(x, path, extList);
-			if (f) return f;
-		}
-
-		// 2. If X begins with '/'
-		if (this.pathIsAbsolute(x)) {
-			// a. set Y to be the filesystem root
-			f = this.loadAsFileOrDirecotry(x, extList);
-			if (f) return f;
-
-			// c. THROW "not found"
-			throw new VMError(`Cannot find module '${x}'`, 'ENOTFOUND');
-
-		// 3. If X begins with './' or '/' or '../'
-		} else if (this.pathIsRelative(x)) {
-			if (typeof options === 'object' && options !== null) {
-				const paths = options.paths;
-				if (Array.isArray(paths)) {
-					for (let i = 0; i < paths.length; i++) {
-						// a. LOAD_AS_FILE(Y + X)
-						// b. LOAD_AS_DIRECTORY(Y + X)
-						f = this.loadAsFileOrDirecotry(this.pathConcat(paths[i], x), extList);
-						if (f) return f;
-					}
-				} else if (paths === undefined) {
-					// a. LOAD_AS_FILE(Y + X)
-					// b. LOAD_AS_DIRECTORY(Y + X)
-					f = this.loadAsFileOrDirecotry(this.pathConcat(path, x), extList);
-					if (f) return f;
-				} else {
-					throw new VMError('Invalid options.paths option.');
-				}
-			} else {
-				// a. LOAD_AS_FILE(Y + X)
-				// b. LOAD_AS_DIRECTORY(Y + X)
-				f = this.loadAsFileOrDirecotry(this.pathConcat(path, x), extList);
-				if (f) return f;
-			}
-
-			// c. THROW "not found"
-			throw new VMError(`Cannot find module '${x}'`, 'ENOTFOUND');
-		}
-
-		let dirs;
-		if (typeof options === 'object' && options !== null) {
-			const paths = options.paths;
-			if (Array.isArray(paths)) {
-				dirs = [];
-
-				for (let i = 0; i < paths.length; i++) {
-					const lookups = this.genLookupPaths(paths[i]);
-					for (let j = 0; j < lookups.length; j++) {
-						if (!dirs.includes(lookups[j])) dirs.push(lookups[j]);
-					}
-					if (i === 0) {
-						const globalPaths = this.globalPaths;
-						for (let j = 0; j < globalPaths.length; j++) {
-							if (!dirs.includes(globalPaths[j])) dirs.push(globalPaths[j]);
-						}
-					}
-				}
-			} else if (paths === undefined) {
-				dirs = [...mod.paths, ...this.globalPaths];
-			} else {
-				throw new VMError('Invalid options.paths option.');
-			}
-		} else {
-			dirs = [...mod.paths, ...this.globalPaths];
-		}
-
-		// 6. LOAD_NODE_MODULES(X, dirname(Y))
-		f = this.loadNodeModules(x, dirs, extList);
-		if (f) return f;
-
-		f = this.customResolver(this, x, path, extList);
-		if (f) return f;
-
-		return super.resolveFull(mod, x, options, ext, direct);
-	}
-
-	loadAsFileOrDirecotry(x, extList) {
-		// a. LOAD_AS_FILE(X)
-		const f = this.loadAsFile(x, extList);
-		if (f) return f;
-		// b. LOAD_AS_DIRECTORY(X)
-		return this.loadAsDirectory(x, extList);
-	}
-
-	tryFile(x) {
-		x = this.pathResolve(x);
-		return this.isPathAllowed(x) && this.pathTestIsFile(x) ? x : undefined;
-	}
-
-	tryWithExtension(x, extList) {
-		for (let i = 0; i < extList.length; i++) {
-			const ext = extList[i];
-			if (ext !== this.pathBasename(ext)) continue;
-			const f = this.tryFile(x + ext);
-			if (f) return f;
-		}
-		return undefined;
-	}
-
-	readPackage(path) {
-		const packagePath = this.pathResolve(this.pathConcat(path, 'package.json'));
-
-		const cache = this.packageCache[packagePath];
-		if (cache !== undefined) return cache;
-
-		if (!this.isPathAllowed(packagePath)) return undefined;
-		const content = this.readFileWhenExists(packagePath);
-		if (!content) {
-			this.packageCache[packagePath] = false;
-			return false;
-		}
-
-		let parsed;
-		try {
-			parsed = JSON.parse(content);
-		} catch (e) {
-			e.path = packagePath;
-			e.message = 'Error parsing ' + packagePath + ': ' + e.message;
-			throw e;
-		}
-
-		const filtered = {
-			name: parsed.name,
-			main: parsed.main,
-			exports: parsed.exports,
-			imports: parsed.imports,
-			type: parsed.type
-		};
-		this.packageCache[packagePath] = filtered;
-		return filtered;
-	}
-
-	readPackageScope(path) {
-		while (true) {
-			const dir = this.pathDirname(path);
-			if (dir === path) break;
-			const basename = this.pathBasename(dir);
-			if (basename === 'node_modules') break;
-			const pack = this.readPackage(dir);
-			if (pack) return {data: pack, scope: dir};
-			path = dir;
-		}
-		return {data: undefined, scope: undefined};
-	}
-
-	// LOAD_AS_FILE(X)
-	loadAsFile(x, extList) {
-		// 1. If X is a file, load X as its file extension format. STOP
-		const f = this.tryFile(x);
-		if (f) return f;
-		// 2. If X.js is a file, load X.js as JavaScript text. STOP
-		// 3. If X.json is a file, parse X.json to a JavaScript Object. STOP
-		// 4. If X.node is a file, load X.node as binary addon. STOP
-		return this.tryWithExtension(x, extList);
-	}
-
-	// LOAD_INDEX(X)
-	loadIndex(x, extList) {
-		// 1. If X/index.js is a file, load X/index.js as JavaScript text. STOP
-		// 2. If X/index.json is a file, parse X/index.json to a JavaScript object. STOP
-		// 3. If X/index.node is a file, load X/index.node as binary addon. STOP
-		return this.tryWithExtension(this.pathConcat(x, 'index'), extList);
-	}
-
-	// LOAD_AS_DIRECTORY(X)
-	loadAsPackage(x, pack, extList) {
-		// 1. If X/package.json is a file,
-		// already done.
-		if (pack) {
-			// a. Parse X/package.json, and look for "main" field.
-			// b. If "main" is a falsy value, GOTO 2.
-			if (typeof pack.main === 'string') {
-				// c. let M = X + (json main field)
-				const m = this.pathConcat(x, pack.main);
-				// d. LOAD_AS_FILE(M)
-				let f = this.loadAsFile(m, extList);
-				if (f) return f;
-				// e. LOAD_INDEX(M)
-				f = this.loadIndex(m, extList);
-				if (f) return f;
-				// f. LOAD_INDEX(X) DEPRECATED
-				f = this.loadIndex(x, extList);
-				if (f) return f;
-				// g. THROW "not found"
-				throw new VMError(`Cannot find module '${x}'`, 'ENOTFOUND');
-			}
-		}
-
-		// 2. LOAD_INDEX(X)
-		return this.loadIndex(x, extList);
-	}
-
-	// LOAD_AS_DIRECTORY(X)
-	loadAsDirectory(x, extList) {
-		// 1. If X/package.json is a file,
-		const pack = this.readPackage(x);
-		return this.loadAsPackage(x, pack, extList);
-	}
-
-	// LOAD_NODE_MODULES(X, START)
-	loadNodeModules(x, dirs, extList) {
-		// 1. let DIRS = NODE_MODULES_PATHS(START)
-		// This step is already done.
-
-		// 2. for each DIR in DIRS:
-		for (let i = 0; i < dirs.length; i++) {
-			const dir = dirs[i];
-			// a. LOAD_PACKAGE_EXPORTS(X, DIR)
-			let f = this.loadPackageExports(x, dir, extList);
-			if (f) return f;
-			// b. LOAD_AS_FILE(DIR/X)
-			f = this.loadAsFile(dir + '/' + x, extList);
-			if (f) return f;
-			// c. LOAD_AS_DIRECTORY(DIR/X)
-			f = this.loadAsDirectory(dir + '/' + x, extList);
-			if (f) return f;
-		}
-
-		return undefined;
-	}
-
-	// LOAD_PACKAGE_IMPORTS(X, DIR)
-	loadPackageImports(x, dir, extList) {
-		// 1. Find the closest package scope SCOPE to DIR.
-		const {data, scope} = this.readPackageScope(dir);
-		// 2. If no scope was found, return.
-		if (!data) return undefined;
-		// 3. If the SCOPE/package.json "imports" is null or undefined, return.
-		if (typeof data.imports !== 'object' || data.imports === null || Array.isArray(data.imports)) return undefined;
-		// 4. let MATCH = PACKAGE_IMPORTS_RESOLVE(X, pathToFileURL(SCOPE),
-		//   ["node", "require"]) defined in the ESM resolver.
-
-		// PACKAGE_IMPORTS_RESOLVE(specifier, parentURL, conditions)
-		// 1. Assert: specifier begins with "#".
-		// 2. If specifier is exactly equal to "#" or starts with "#/", then
-		if (x === '#' || x.startsWith('#/')) {
-			// a. Throw an Invalid Module Specifier error.
-			throw new VMError(`Invalid module specifier '${x}'`, 'ERR_INVALID_MODULE_SPECIFIER');
-		}
-		// 3. Let packageURL be the result of LOOKUP_PACKAGE_SCOPE(parentURL).
-		// Note: packageURL === parentURL === scope
-		// 4. If packageURL is not null, then
-		// Always true
-		// a. Let pjson be the result of READ_PACKAGE_JSON(packageURL).
-		// pjson === data
-		// b. If pjson.imports is a non-null Object, then
-		// Already tested
-		// x. Let resolved be the result of PACKAGE_IMPORTS_EXPORTS_RESOLVE( specifier, pjson.imports, packageURL, true, conditions).
-		const match = this.packageImportsExportsResolve(x, data.imports, scope, true, ['node', 'require'], extList);
-		// y. If resolved is not null or undefined, return resolved.
-		if (!match) {
-			// 5. Throw a Package Import Not Defined error.
-			throw new VMError(`Package import not defined for '${x}'`, 'ERR_PACKAGE_IMPORT_NOT_DEFINED');
-		}
-		// END PACKAGE_IMPORTS_RESOLVE
-
-		// 5. RESOLVE_ESM_MATCH(MATCH).
-		return this.resolveEsmMatch(match, x, extList);
-	}
-
-	// LOAD_PACKAGE_EXPORTS(X, DIR)
-	loadPackageExports(x, dir, extList) {
-		// 1. Try to interpret X as a combination of NAME and SUBPATH where the name
-		//    may have a @scope/ prefix and the subpath begins with a slash (`/`).
-		const res = x.match(EXPORTS_PATTERN);
-		// 2. If X does not match this pattern or DIR/NAME/package.json is not a file,
-		//    return.
-		if (!res) return undefined;
-		const scope = this.pathConcat(dir, res[1]);
-		const pack = this.readPackage(scope);
-		if (!pack) return undefined;
-		// 3. Parse DIR/NAME/package.json, and look for "exports" field.
-		// 4. If "exports" is null or undefined, return.
-		if (!pack.exports) return undefined;
-		// 5. let MATCH = PACKAGE_EXPORTS_RESOLVE(pathToFileURL(DIR/NAME), "." + SUBPATH,
-		//    `package.json` "exports", ["node", "require"]) defined in the ESM resolver.
-		const match = this.packageExportsResolve(scope, '.' + (res[2] || ''), pack.exports, ['node', 'require'], extList);
-		// 6. RESOLVE_ESM_MATCH(MATCH)
-		return this.resolveEsmMatch(match, x, extList);
-	}
-
-	// LOAD_PACKAGE_SELF(X, DIR)
-	loadPackageSelf(x, dir, extList) {
-		// 1. Find the closest package scope SCOPE to DIR.
-		const {data, scope} = this.readPackageScope(dir);
-		// 2. If no scope was found, return.
-		if (!data) return undefined;
-		// 3. If the SCOPE/package.json "exports" is null or undefined, return.
-		if (!data.exports) return undefined;
-		// 4. If the SCOPE/package.json "name" is not the first segment of X, return.
-		if (x !== data.name && !x.startsWith(data.name + '/')) return undefined;
-		// 5. let MATCH = PACKAGE_EXPORTS_RESOLVE(pathToFileURL(SCOPE),
-		//    "." + X.slice("name".length), `package.json` "exports", ["node", "require"])
-		//    defined in the ESM resolver.
-		const match = this.packageExportsResolve(scope, '.' + x.slice(data.name.length), data.exports, ['node', 'require'], extList);
-		// 6. RESOLVE_ESM_MATCH(MATCH)
-		return this.resolveEsmMatch(match, x, extList);
-	}
-
-	// RESOLVE_ESM_MATCH(MATCH)
-	resolveEsmMatch(match, x, extList) {
-		// 1. let { RESOLVED, EXACT } = MATCH
-		const resolved = match;
-		const exact = true;
-		// 2. let RESOLVED_PATH = fileURLToPath(RESOLVED)
-		const resolvedPath = resolved;
-		let f;
-		// 3. If EXACT is true,
-		if (exact) {
-			// a. If the file at RESOLVED_PATH exists, load RESOLVED_PATH as its extension
-			// format. STOP
-			f = this.tryFile(resolvedPath);
-		// 4. Otherwise, if EXACT is false,
-		} else {
-			// a. LOAD_AS_FILE(RESOLVED_PATH)
-			// b. LOAD_AS_DIRECTORY(RESOLVED_PATH)
-			f = this.loadAsFileOrDirecotry(resolvedPath, extList);
-		}
-		if (f) return f;
-		// 5. THROW "not found"
-		throw new VMError(`Cannot find module '${x}'`, 'ENOTFOUND');
-	}
-
-	// PACKAGE_EXPORTS_RESOLVE(packageURL, subpath, exports, conditions)
-	packageExportsResolve(packageURL, subpath, rexports, conditions, extList) {
-		// 1. If exports is an Object with both a key starting with "." and a key not starting with ".", throw an Invalid Package Configuration error.
-		let hasDots = false;
-		if (typeof rexports === 'object' && !Array.isArray(rexports)) {
-			const keys = Object.getOwnPropertyNames(rexports);
-			if (keys.length > 0) {
-				hasDots = keys[0][0] === '.';
-				for (let i = 0; i < keys.length; i++) {
-					if (hasDots !== (keys[i][0] === '.')) {
-						throw new VMError('Invalid package configuration', 'ERR_INVALID_PACKAGE_CONFIGURATION');
-					}
-				}
-			}
-		}
-		// 2. If subpath is equal to ".", then
-		if (subpath === '.') {
-			// a. Let mainExport be undefined.
-			let mainExport = undefined;
-			// b. If exports is a String or Array, or an Object containing no keys starting with ".", then
-			if (typeof rexports === 'string' || Array.isArray(rexports) || !hasDots) {
-				// x. Set mainExport to exports.
-				mainExport = rexports;
-			// c. Otherwise if exports is an Object containing a "." property, then
-			} else if (hasDots) {
-				// x. Set mainExport to exports["."].
-				mainExport = rexports['.'];
-			}
-			// d. If mainExport is not undefined, then
-			if (mainExport) {
-				// x. Let resolved be the result of PACKAGE_TARGET_RESOLVE( packageURL, mainExport, "", false, false, conditions).
-				const resolved = this.packageTargetResolve(packageURL, mainExport, '', false, false, conditions, extList);
-				// y. If resolved is not null or undefined, return resolved.
-				if (resolved) return resolved;
-			}
-		// 3. Otherwise, if exports is an Object and all keys of exports start with ".", then
-		} else if (hasDots) {
-			// a. Let matchKey be the string "./" concatenated with subpath.
-			// Note: Here subpath starts already with './'
-			// b. Let resolved be the result of PACKAGE_IMPORTS_EXPORTS_RESOLVE( matchKey, exports, packageURL, false, conditions).
-			const resolved = this.packageImportsExportsResolve(subpath, rexports, packageURL, false, conditions, extList);
-			// c. If resolved is not null or undefined, return resolved.
-			if (resolved) return resolved;
-		}
-		// 4. Throw a Package Path Not Exported error.
-		throw new VMError(`Package path '${subpath}' is not exported`, 'ERR_PACKAGE_PATH_NOT_EXPORTED');
-	}
-
-	// PACKAGE_IMPORTS_EXPORTS_RESOLVE(matchKey, matchObj, packageURL, isImports, conditions)
-	packageImportsExportsResolve(matchKey, matchObj, packageURL, isImports, conditions, extList) {
-		// 1. If matchKey is a key of matchObj and does not contain "*", then
-		let target = matchObj[matchKey];
-		if (target && matchKey.indexOf('*') === -1) {
-			// a. Let target be the value of matchObj[matchKey].
-			// b. Return the result of PACKAGE_TARGET_RESOLVE(packageURL, target, "", false, isImports, conditions).
-			return this.packageTargetResolve(packageURL, target, '', false, isImports, conditions, extList);
-		}
-		// 2. Let expansionKeys be the list of keys of matchObj containing only a single "*",
-		//    sorted by the sorting function PATTERN_KEY_COMPARE which orders in descending order of specificity.
-		const expansionKeys = Object.getOwnPropertyNames(matchObj);
-		let bestKey = '';
-		let bestSubpath;
-		// 3. For each key expansionKey in expansionKeys, do
-		for (let i = 0; i < expansionKeys.length; i++) {
-			const expansionKey = expansionKeys[i];
-			if (matchKey.length < expansionKey.length) continue;
-			// a. Let patternBase be the substring of expansionKey up to but excluding the first "*" character.
-			const star = expansionKey.indexOf('*');
-			if (star === -1) continue; // Note: expansionKeys was not filtered
-			const patternBase = expansionKey.slice(0, star);
-			// b. If matchKey starts with but is not equal to patternBase, then
-			if (matchKey.startsWith(patternBase) && expansionKey.indexOf('*', star + 1) === -1) { // Note: expansionKeys was not filtered
-				// 1. Let patternTrailer be the substring of expansionKey from the index after the first "*" character.
-				const patternTrailer = expansionKey.slice(star + 1);
-				// 2. If patternTrailer has zero length, or if matchKey ends with patternTrailer and the length of matchKey is greater than or
-				//    equal to the length of expansionKey, then
-				if (matchKey.endsWith(patternTrailer) && this.patternKeyCompare(bestKey, expansionKey) === 1) { // Note: expansionKeys was not sorted
-					// a. Let target be the value of matchObj[expansionKey].
-					target = matchObj[expansionKey];
-					// b. Let subpath be the substring of matchKey starting at the index of the length of patternBase up to the length of
-					//    matchKey minus the length of patternTrailer.
-					bestKey = expansionKey;
-					bestSubpath = matchKey.slice(patternBase.length, matchKey.length - patternTrailer.length);
-				}
-			}
-		}
-		if (bestSubpath) { // Note: expansionKeys was not sorted
-			// c. Return the result of PACKAGE_TARGET_RESOLVE(packageURL, target, subpath, true, isImports, conditions).
-			return this.packageTargetResolve(packageURL, target, bestSubpath, true, isImports, conditions, extList);
-		}
-		// 4. Return null.
-		return null;
-	}
-
-	// PATTERN_KEY_COMPARE(keyA, keyB)
-	patternKeyCompare(keyA, keyB) {
-		// 1. Assert: keyA ends with "/" or contains only a single "*".
-		// 2. Assert: keyB ends with "/" or contains only a single "*".
-		// 3. Let baseLengthA be the index of "*" in keyA plus one, if keyA contains "*", or the length of keyA otherwise.
-		const baseAStar = keyA.indexOf('*');
-		const baseLengthA = baseAStar === -1 ? keyA.length : baseAStar + 1;
-		// 4. Let baseLengthB be the index of "*" in keyB plus one, if keyB contains "*", or the length of keyB otherwise.
-		const baseBStar = keyB.indexOf('*');
-		const baseLengthB = baseBStar === -1 ? keyB.length : baseBStar + 1;
-		// 5. If baseLengthA is greater than baseLengthB, return -1.
-		if (baseLengthA > baseLengthB) return -1;
-		// 6. If baseLengthB is greater than baseLengthA, return 1.
-		if (baseLengthB > baseLengthA) return 1;
-		// 7. If keyA does not contain "*", return 1.
-		if (baseAStar === -1) return 1;
-		// 8. If keyB does not contain "*", return -1.
-		if (baseBStar === -1) return -1;
-		// 9. If the length of keyA is greater than the length of keyB, return -1.
-		if (keyA.length > keyB.length) return -1;
-		// 10. If the length of keyB is greater than the length of keyA, return 1.
-		if (keyB.length > keyA.length) return 1;
-		// 11. Return 0.
-		return 0;
-	}
-
-	// PACKAGE_TARGET_RESOLVE(packageURL, target, subpath, pattern, internal, conditions)
-	packageTargetResolve(packageURL, target, subpath, pattern, internal, conditions, extList) {
-		// 1. If target is a String, then
-		if (typeof target === 'string') {
-			// a. If pattern is false, subpath has non-zero length and target does not end with "/", throw an Invalid Module Specifier error.
-			if (!pattern && subpath.length > 0 && !target.endsWith('/')) {
-				throw new VMError(`Invalid package specifier '${subpath}'`, 'ERR_INVALID_MODULE_SPECIFIER');
-			}
-			// b. If target does not start with "./", then
-			if (!target.startsWith('./')) {
-				// 1. If internal is true and target does not start with "../" or "/" and is not a valid URL, then
-				if (internal && !target.startsWith('../') && !target.startsWith('/')) {
-					let isURL = false;
-					try {
-						// eslint-disable-next-line no-new
-						new URL(target);
-						isURL = true;
-					} catch (e) {}
-					if (!isURL) {
-						// a. If pattern is true, then
-						if (pattern) {
-							// 1. Return PACKAGE_RESOLVE(target with every instance of "*" replaced by subpath, packageURL + "/").
-							return this.packageResolve(target.replace(/\*/g, subpath), packageURL, conditions, extList);
-						}
-						// b. Return PACKAGE_RESOLVE(target + subpath, packageURL + "/").
-						return this.packageResolve(this.pathConcat(target, subpath), packageURL, conditions, extList);
-					}
-				}
-				// Otherwise, throw an Invalid Package Target error.
-				throw new VMError(`Invalid package target for '${subpath}'`, 'ERR_INVALID_PACKAGE_TARGET');
-			}
-			target = decodeURI(target);
-			// c. If target split on "/" or "\" contains any ".", ".." or "node_modules" segments after the first segment, case insensitive
-			//    and including percent encoded variants, throw an Invalid Package Target error.
-			if (target.split(/[/\\]/).slice(1).findIndex(x => x === '.' || x === '..' || x.toLowerCase() === 'node_modules') !== -1) {
-				throw new VMError(`Invalid package target for '${subpath}'`, 'ERR_INVALID_PACKAGE_TARGET');
-			}
-			// d. Let resolvedTarget be the URL resolution of the concatenation of packageURL and target.
-			const resolvedTarget = this.pathConcat(packageURL, target);
-			// e. Assert: resolvedTarget is contained in packageURL.
-			subpath = decodeURI(subpath);
-			// f. If subpath split on "/" or "\" contains any ".", ".." or "node_modules" segments, case insensitive and including percent
-			//    encoded variants, throw an Invalid Module Specifier error.
-			if (subpath.split(/[/\\]/).findIndex(x => x === '.' || x === '..' || x.toLowerCase() === 'node_modules') !== -1) {
-				throw new VMError(`Invalid package specifier '${subpath}'`, 'ERR_INVALID_MODULE_SPECIFIER');
-			}
-			// g. If pattern is true, then
-			if (pattern) {
-				// 1. Return the URL resolution of resolvedTarget with every instance of "*" replaced with subpath.
-				return resolvedTarget.replace(/\*/g, subpath);
-			}
-			// h. Otherwise,
-			// 1. Return the URL resolution of the concatenation of subpath and resolvedTarget.
-			return this.pathConcat(resolvedTarget, subpath);
-		// 3. Otherwise, if target is an Array, then
-		} else if (Array.isArray(target)) {
-			// a. If target.length is zero, return null.
-			if (target.length === 0) return null;
-			let lastException = undefined;
-			// b. For each item targetValue in target, do
-			for (let i = 0; i < target.length; i++) {
-				const targetValue = target[i];
-				// 1. Let resolved be the result of PACKAGE_TARGET_RESOLVE( packageURL, targetValue, subpath, pattern, internal, conditions),
-				//    continuing the loop on any Invalid Package Target error.
-				let resolved;
-				try {
-					resolved = this.packageTargetResolve(packageURL, targetValue, subpath, pattern, internal, conditions, extList);
-				} catch (e) {
-					if (e.code !== 'ERR_INVALID_PACKAGE_TARGET') throw e;
-					lastException = e;
-					continue;
-				}
-				// 2. If resolved is undefined, continue the loop.
-				// 3. Return resolved.
-				if (resolved !== undefined) return resolved;
-				if (resolved === null) {
-					lastException = null;
-				}
-			}
-			// c. Return or throw the last fallback resolution null return or error.
-			if (lastException === undefined || lastException === null) return lastException;
-			throw lastException;
-		// 2. Otherwise, if target is a non-null Object, then
-		} else if (typeof target === 'object' && target !== null) {
-			const keys = Object.getOwnPropertyNames(target);
-			// a. If exports contains any index property keys, as defined in ECMA-262 6.1.7 Array Index, throw an Invalid Package Configuration error.
-			for (let i = 0; i < keys.length; i++) {
-				const p = keys[i];
-				if (isArrayIndex(p)) throw new VMError(`Invalid package configuration for '${subpath}'`, 'ERR_INVALID_PACKAGE_CONFIGURATION');
-			}
-			// b. For each property p of target, in object insertion order as,
-			for (let i = 0; i < keys.length; i++) {
-				const p = keys[i];
-				// 1. If p equals "default" or conditions contains an entry for p, then
-				if (p === 'default' || conditions.includes(p)) {
-					// a. Let targetValue be the value of the p property in target.
-					const targetValue = target[p];
-					// b. Let resolved be the result of PACKAGE_TARGET_RESOLVE( packageURL, targetValue, subpath, pattern, internal, conditions).
-					const resolved = this.packageTargetResolve(packageURL, targetValue, subpath, pattern, internal, conditions, extList);
-					// c. If resolved is equal to undefined, continue the loop.
-					// d. Return resolved.
-					if (resolved !== undefined) return resolved;
-				}
-			}
-			// c. Return undefined.
-			return undefined;
-		// 4. Otherwise, if target is null, return null.
-		} else if (target == null) {
-			return null;
-		}
-		// Otherwise throw an Invalid Package Target error.
-		throw new VMError(`Invalid package target for '${subpath}'`, 'ERR_INVALID_PACKAGE_TARGET');
-	}
-
-	// PACKAGE_RESOLVE(packageSpecifier, parentURL)
-	packageResolve(packageSpecifier, parentURL, conditions, extList) {
-		// 1. Let packageName be undefined.
-		let packageName = undefined;
-		// 2. If packageSpecifier is an empty string, then
-		if (packageSpecifier === '') {
-			// a. Throw an Invalid Module Specifier error.
-			throw new VMError(`Invalid package specifier '${packageSpecifier}'`, 'ERR_INVALID_MODULE_SPECIFIER');
-		}
-		// 3. If packageSpecifier is a Node.js builtin module name, then
-		if (this.builtinModules[packageSpecifier]) {
-			// a. Return the string "node:" concatenated with packageSpecifier.
-			return 'node:' + packageSpecifier;
-		}
-		let idx = packageSpecifier.indexOf('/');
-		// 5. Otherwise,
-		if (packageSpecifier[0] === '@') {
-			// a. If packageSpecifier does not contain a "/" separator, then
-			if (idx === -1) {
-				// x. Throw an Invalid Module Specifier error.
-				throw new VMError(`Invalid package specifier '${packageSpecifier}'`, 'ERR_INVALID_MODULE_SPECIFIER');
-			}
-			// b. Set packageName to the substring of packageSpecifier until the second "/" separator or the end of the string.
-			idx = packageSpecifier.indexOf('/', idx + 1);
-		}
-		// else
-		// 4. If packageSpecifier does not start with "@", then
-		// a. Set packageName to the substring of packageSpecifier until the first "/" separator or the end of the string.
-		packageName = idx === -1 ? packageSpecifier : packageSpecifier.slice(0, idx);
-		// 6. If packageName starts with "." or contains "\" or "%", then
-		if (idx !== 0 && (packageName[0] === '.' || packageName.indexOf('\\') >= 0 || packageName.indexOf('%') >= 0)) {
-			// a. Throw an Invalid Module Specifier error.
-			throw new VMError(`Invalid package specifier '${packageSpecifier}'`, 'ERR_INVALID_MODULE_SPECIFIER');
-		}
-		// 7. Let packageSubpath be "." concatenated with the substring of packageSpecifier from the position at the length of packageName.
-		const packageSubpath = '.' + packageSpecifier.slice(packageName.length);
-		// 8. If packageSubpath ends in "/", then
-		if (packageSubpath[packageSubpath.length - 1] === '/') {
-			// a. Throw an Invalid Module Specifier error.
-			throw new VMError(`Invalid package specifier '${packageSpecifier}'`, 'ERR_INVALID_MODULE_SPECIFIER');
-		}
-		// 9. Let selfUrl be the result of PACKAGE_SELF_RESOLVE(packageName, packageSubpath, parentURL).
-		const selfUrl = this.packageSelfResolve(packageName, packageSubpath, parentURL);
-		// 10. If selfUrl is not undefined, return selfUrl.
-		if (selfUrl) return selfUrl;
-		// 11. While parentURL is not the file system root,
-		let packageURL;
-		while (true) {
-			// a. Let packageURL be the URL resolution of "node_modules/" concatenated with packageSpecifier, relative to parentURL.
-			packageURL = this.pathResolve(this.pathConcat(parentURL, 'node_modules', packageSpecifier));
-			// b. Set parentURL to the parent folder URL of parentURL.
-			const parentParentURL = this.pathDirname(parentURL);
-			// c. If the folder at packageURL does not exist, then
-			if (this.isPathAllowed(packageURL) && this.pathTestIsDirectory(packageURL)) break;
-			// 1. Continue the next loop iteration.
-			if (parentParentURL === parentURL) {
-				// 12. Throw a Module Not Found error.
-				throw new VMError(`Cannot find module '${packageSpecifier}'`, 'ENOTFOUND');
-			}
-			parentURL = parentParentURL;
-		}
-		// d. Let pjson be the result of READ_PACKAGE_JSON(packageURL).
-		const pack = this.readPackage(packageURL);
-		// e. If pjson is not null and pjson.exports is not null or undefined, then
-		if (pack && pack.exports) {
-			// 1. Return the result of PACKAGE_EXPORTS_RESOLVE(packageURL, packageSubpath, pjson.exports, defaultConditions).
-			return this.packageExportsResolve(packageURL, packageSubpath, pack.exports, conditions, extList);
-		}
-		// f. Otherwise, if packageSubpath is equal to ".", then
-		if (packageSubpath === '.') {
-			// 1. If pjson.main is a string, then
-			// a. Return the URL resolution of main in packageURL.
-			return this.loadAsPackage(packageSubpath, pack, extList);
-		}
-		// g. Otherwise,
-		// 1. Return the URL resolution of packageSubpath in packageURL.
-		return this.pathConcat(packageURL, packageSubpath);
-	}
-
-}
-
-exports.Resolver = Resolver;
-exports.DefaultResolver = DefaultResolver;
-
-
-/***/ }),
-
-/***/ 8611:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-
-const {Script} = __nccwpck_require__(6144);
-const {
-	lookupCompiler,
-	removeShebang
-} = __nccwpck_require__(6400);
-const {
-	transformer
-} = __nccwpck_require__(3342);
-
-const objectDefineProperties = Object.defineProperties;
-
-const MODULE_PREFIX = '(function (exports, require, module, __filename, __dirname) { ';
-const STRICT_MODULE_PREFIX = MODULE_PREFIX + '"use strict"; ';
-const MODULE_SUFFIX = '\n});';
-
-/**
- * Class Script
+ * VMError.
  *
  * @public
+ * @extends {Error}
  */
-class VMScript {
+class VMError extends Error {
 
 	/**
-	 * The script code with wrapping. If set will invalidate the cache.<br>
-	 * Writable only for backwards compatibility.
+	 * Create VMError instance.
 	 *
 	 * @public
-	 * @readonly
-	 * @member {string} code
-	 * @memberOf VMScript#
+	 * @param {string} message - Error message.
 	 */
+	constructor(message) {
+		super(message);
 
-	/**
-	 * The filename used for this script.
-	 *
-	 * @public
-	 * @readonly
-	 * @since v3.9.0
-	 * @member {string} filename
-	 * @memberOf VMScript#
-	 */
+		this.name = 'VMError';
 
-	/**
-	 * The line offset use for stack traces.
-	 *
-	 * @public
-	 * @readonly
-	 * @since v3.9.0
-	 * @member {number} lineOffset
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The column offset use for stack traces.
-	 *
-	 * @public
-	 * @readonly
-	 * @since v3.9.0
-	 * @member {number} columnOffset
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The compiler to use to get the JavaScript code.
-	 *
-	 * @public
-	 * @readonly
-	 * @since v3.9.0
-	 * @member {(string|compileCallback)} compiler
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The prefix for the script.
-	 *
-	 * @private
-	 * @member {string} _prefix
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The suffix for the script.
-	 *
-	 * @private
-	 * @member {string} _suffix
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The compiled vm.Script for the VM or if not compiled <code>null</code>.
-	 *
-	 * @private
-	 * @member {?vm.Script} _compiledVM
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The compiled vm.Script for the NodeVM or if not compiled <code>null</code>.
-	 *
-	 * @private
-	 * @member {?vm.Script} _compiledNodeVM
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The compiled vm.Script for the NodeVM in strict mode or if not compiled <code>null</code>.
-	 *
-	 * @private
-	 * @member {?vm.Script} _compiledNodeVMStrict
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The resolved compiler to use to get the JavaScript code.
-	 *
-	 * @private
-	 * @readonly
-	 * @member {compileCallback} _compiler
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * The script to run without wrapping.
-	 *
-	 * @private
-	 * @member {string} _code
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * Whether or not the script contains async functions.
-	 *
-	 * @private
-	 * @member {boolean} _hasAsync
-	 * @memberOf VMScript#
-	 */
-
-	/**
-	 * Create VMScript instance.
-	 *
-	 * @public
-	 * @param {string} code - Code to run.
-	 * @param {(string|Object)} [options] - Options map or filename.
-	 * @param {string} [options.filename="vm.js"] - Filename that shows up in any stack traces produced from this script.
-	 * @param {number} [options.lineOffset=0] - Passed to vm.Script options.
-	 * @param {number} [options.columnOffset=0] - Passed to vm.Script options.
-	 * @param {(string|compileCallback)} [options.compiler="javascript"] - The compiler to use.
-	 * @throws {VMError} If the compiler is unknown or if coffee-script was requested but the module not found.
-	 */
-	constructor(code, options) {
-		const sCode = `${code}`;
-		let useFileName;
-		let useOptions;
-		if (arguments.length === 2) {
-			if (typeof options === 'object') {
-				useOptions = options || {__proto__: null};
-				useFileName = useOptions.filename;
-			} else {
-				useOptions = {__proto__: null};
-				useFileName = options;
-			}
-		} else if (arguments.length > 2) {
-			// We do it this way so that there are no more arguments in the function.
-			// eslint-disable-next-line prefer-rest-params
-			useOptions = arguments[2] || {__proto__: null};
-			useFileName = options || useOptions.filename;
-		} else {
-			useOptions = {__proto__: null};
-		}
-
-		const {
-			compiler = 'javascript',
-			lineOffset = 0,
-			columnOffset = 0
-		} = useOptions;
-
-		// Throw if the compiler is unknown.
-		const resolvedCompiler = lookupCompiler(compiler);
-
-		objectDefineProperties(this, {
-			__proto__: null,
-			code: {
-				__proto__: null,
-				// Put this here so that it is enumerable, and looks like a property.
-				get() {
-					return this._prefix + this._code + this._suffix;
-				},
-				set(value) {
-					const strNewCode = String(value);
-					if (strNewCode === this._code && this._prefix === '' && this._suffix === '') return;
-					this._code = strNewCode;
-					this._prefix = '';
-					this._suffix = '';
-					this._compiledVM = null;
-					this._compiledNodeVM = null;
-					this._compiledCode = null;
-				},
-				enumerable: true
-			},
-			filename: {
-				__proto__: null,
-				value: useFileName || 'vm.js',
-				enumerable: true
-			},
-			lineOffset: {
-				__proto__: null,
-				value: lineOffset,
-				enumerable: true
-			},
-			columnOffset: {
-				__proto__: null,
-				value: columnOffset,
-				enumerable: true
-			},
-			compiler: {
-				__proto__: null,
-				value: compiler,
-				enumerable: true
-			},
-			_code: {
-				__proto__: null,
-				value: sCode,
-				writable: true
-			},
-			_prefix: {
-				__proto__: null,
-				value: '',
-				writable: true
-			},
-			_suffix: {
-				__proto__: null,
-				value: '',
-				writable: true
-			},
-			_compiledVM: {
-				__proto__: null,
-				value: null,
-				writable: true
-			},
-			_compiledNodeVM: {
-				__proto__: null,
-				value: null,
-				writable: true
-			},
-			_compiledNodeVMStrict: {
-				__proto__: null,
-				value: null,
-				writable: true
-			},
-			_compiledCode: {
-				__proto__: null,
-				value: null,
-				writable: true
-			},
-			_hasAsync: {
-				__proto__: null,
-				value: false,
-				writable: true
-			},
-			_compiler: {__proto__: null, value: resolvedCompiler}
-		});
+		Error.captureStackTrace(this, this.constructor);
 	}
-
-	/**
-	 * Wraps the code.<br>
-	 * This will replace the old wrapping.<br>
-	 * Will invalidate the code cache.
-	 *
-	 * @public
-	 * @deprecated Since v3.9.0. Wrap your code before passing it into the VMScript object.
-	 * @param {string} prefix - String that will be appended before the script code.
-	 * @param {script} suffix - String that will be appended behind the script code.
-	 * @return {this} This for chaining.
-	 * @throws {TypeError} If prefix or suffix is a Symbol.
-	 */
-	wrap(prefix, suffix) {
-		const strPrefix = `${prefix}`;
-		const strSuffix = `${suffix}`;
-		if (this._prefix === strPrefix && this._suffix === strSuffix) return this;
-		this._prefix = strPrefix;
-		this._suffix = strSuffix;
-		this._compiledVM = null;
-		this._compiledNodeVM = null;
-		this._compiledNodeVMStrict = null;
-		return this;
-	}
-
-	/**
-	 * Compile this script. <br>
-	 * This is useful to detect syntax errors in the script.
-	 *
-	 * @public
-	 * @return {this} This for chaining.
-	 * @throws {SyntaxError} If there is a syntax error in the script.
-	 */
-	compile() {
-		this._compileVM();
-		return this;
-	}
-
-	/**
-	 * Get the compiled code.
-	 *
-	 * @private
-	 * @return {string} The code.
-	 */
-	getCompiledCode() {
-		if (!this._compiledCode) {
-			const comp = this._compiler(this._prefix + removeShebang(this._code) + this._suffix, this.filename);
-			const res = transformer(null, comp, false, false);
-			this._compiledCode = res.code;
-			this._hasAsync = res.hasAsync;
-		}
-		return this._compiledCode;
-	}
-
-	/**
-	 * Compiles this script to a vm.Script.
-	 *
-	 * @private
-	 * @param {string} prefix - JavaScript code that will be used as prefix.
-	 * @param {string} suffix - JavaScript code that will be used as suffix.
-	 * @return {vm.Script} The compiled vm.Script.
-	 * @throws {SyntaxError} If there is a syntax error in the script.
-	 */
-	_compile(prefix, suffix) {
-		return new Script(prefix + this.getCompiledCode() + suffix, {
-			__proto__: null,
-			filename: this.filename,
-			displayErrors: false,
-			lineOffset: this.lineOffset,
-			columnOffset: this.columnOffset
-		});
-	}
-
-	/**
-	 * Will return the cached version of the script intended for VM or compile it.
-	 *
-	 * @private
-	 * @return {vm.Script} The compiled script
-	 * @throws {SyntaxError} If there is a syntax error in the script.
-	 */
-	_compileVM() {
-		let script = this._compiledVM;
-		if (!script) {
-			this._compiledVM = script = this._compile('', '');
-		}
-		return script;
-	}
-
-	/**
-	 * Will return the cached version of the script intended for NodeVM or compile it.
-	 *
-	 * @private
-	 * @return {vm.Script} The compiled script
-	 * @throws {SyntaxError} If there is a syntax error in the script.
-	 */
-	_compileNodeVM() {
-		let script = this._compiledNodeVM;
-		if (!script) {
-			this._compiledNodeVM = script = this._compile(MODULE_PREFIX, MODULE_SUFFIX);
-		}
-		return script;
-	}
-
-	/**
-	 * Will return the cached version of the script intended for NodeVM in strict mode or compile it.
-	 *
-	 * @private
-	 * @return {vm.Script} The compiled script
-	 * @throws {SyntaxError} If there is a syntax error in the script.
-	 */
-	_compileNodeVMStrict() {
-		let script = this._compiledNodeVMStrict;
-		if (!script) {
-			this._compiledNodeVMStrict = script = this._compile(STRICT_MODULE_PREFIX, MODULE_SUFFIX);
-		}
-		return script;
-	}
-
 }
-
-exports.MODULE_PREFIX = MODULE_PREFIX;
-exports.STRICT_MODULE_PREFIX = STRICT_MODULE_PREFIX;
-exports.MODULE_SUFFIX = MODULE_SUFFIX;
-exports.VMScript = VMScript;
-
-
-/***/ }),
-
-/***/ 3342:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-const {parse: acornParse} = __nccwpck_require__(390);
-const {full: acornWalkFull} = __nccwpck_require__(5000);
-
-const INTERNAL_STATE_NAME = 'VM2_INTERNAL_STATE_DO_NOT_USE_OR_PROGRAM_WILL_FAIL';
-
-function assertType(node, type) {
-	if (!node) throw new Error(`None existent node expected '${type}'`);
-	if (node.type !== type) throw new Error(`Invalid node type '${node.type}' expected '${type}'`);
-	return node;
-}
-
-function transformer(args, body, isAsync, isGenerator) {
-	let code;
-	let argsOffset;
-	if (args === null) {
-		code = body;
-	} else {
-		code = isAsync ? '(async function' : '(function';
-		if (isGenerator) code += '*';
-		code += ' anonymous(';
-		code += args;
-		argsOffset = code.length;
-		code += '\n) {\n';
-		code += body;
-		code += '\n})';
-	}
-
-	const ast = acornParse(code, {
-		__proto__: null,
-		ecmaVersion: 2020,
-		allowAwaitOutsideFunction: args === null && isAsync,
-		allowReturnOutsideFunction: args === null
-	});
-
-	if (args !== null) {
-		const pBody = assertType(ast, 'Program').body;
-		if (pBody.length !== 1) throw new Error('Invalid arguments');
-		const expr = pBody[0];
-		if (expr.type !== 'ExpressionStatement') throw new Error('Invalid arguments');
-		const func = expr.expression;
-		if (func.type !== 'FunctionExpression') throw new Error('Invalid arguments');
-		if (func.body.start !== argsOffset + 3) throw new Error('Invalid arguments');
-	}
-
-	const insertions = [];
-	let hasAsync = false;
-
-	const RIGHT = -100;
-	const LEFT = 100;
-
-	acornWalkFull(ast, (node, state, type) => {
-		if (type === 'CatchClause') {
-			const param = node.param;
-			if (param) {
-				const name = assertType(param, 'Identifier').name;
-				const cBody = assertType(node.body, 'BlockStatement');
-				if (cBody.body.length > 0) {
-					insertions.push({
-						__proto__: null,
-						pos: cBody.body[0].start,
-						order: RIGHT,
-						code: `${name}=${INTERNAL_STATE_NAME}.handleException(${name});`
-					});
-				}
-			}
-		} else if (type === 'WithStatement') {
-			insertions.push({
-				__proto__: null,
-				pos: node.object.start,
-				order: RIGHT,
-				code: INTERNAL_STATE_NAME + '.wrapWith('
-			});
-			insertions.push({
-				__proto__: null,
-				pos: node.object.end,
-				order: LEFT,
-				code: ')'
-			});
-		} else if (type === 'Identifier') {
-			if (node.name === INTERNAL_STATE_NAME) {
-				throw new Error('Use of internal vm2 state variable');
-			}
-		} else if (type === 'ImportExpression') {
-			insertions.push({
-				__proto__: null,
-				pos: node.start,
-				order: LEFT,
-				code: INTERNAL_STATE_NAME + '.'
-			});
-		} else if (type === 'Function') {
-			if (node.async) hasAsync = true;
-		}
-	});
-
-	if (insertions.length === 0) return {__proto__: null, code, hasAsync};
-
-	insertions.sort((a, b) => (a.pos == b.pos ? a.order - b.order : a.pos - b.pos));
-
-	let ncode = '';
-	let curr = 0;
-	for (let i = 0; i < insertions.length; i++) {
-		const change = insertions[i];
-		ncode += code.substring(curr, change.pos) + change.code;
-		curr = change.pos;
-	}
-	ncode += code.substring(curr);
-
-	return {__proto__: null, code: ncode, hasAsync};
-}
-
-exports.INTERNAL_STATE_NAME = INTERNAL_STATE_NAME;
-exports.transformer = transformer;
-
-
-/***/ }),
-
-/***/ 3841:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-
-/**
- * This callback will be called to transform a script to JavaScript.
- *
- * @callback compileCallback
- * @param {string} code - Script code to transform to JavaScript.
- * @param {string} filename - Filename of this script.
- * @return {string} JavaScript code that represents the script code.
- */
-
-/**
- * This callback will be called to resolve a module if it couldn't be found.
- *
- * @callback resolveCallback
- * @param {string} moduleName - Name of the modulusedRequiree to resolve.
- * @param {string} dirname - Name of the current directory.
- * @return {(string|undefined)} The file or directory to use to load the requested module.
- */
-
-const fs = __nccwpck_require__(7147);
-const pa = __nccwpck_require__(1017);
-const {
-	Script,
-	createContext
-} = __nccwpck_require__(6144);
-const {
-	EventEmitter
-} = __nccwpck_require__(2361);
-const {
-	INSPECT_MAX_BYTES
-} = __nccwpck_require__(4300);
-const {
-	createBridge,
-	VMError
-} = __nccwpck_require__(2989);
-const {
-	transformer,
-	INTERNAL_STATE_NAME
-} = __nccwpck_require__(3342);
-const {
-	lookupCompiler
-} = __nccwpck_require__(6400);
-const {
-	VMScript
-} = __nccwpck_require__(8611);
-
-const objectDefineProperties = Object.defineProperties;
 
 /**
  * Host objects
- *
+ * 
  * @private
  */
-const HOST = Object.freeze({
+const HOST = {
+	version: parseInt(process.versions.node.split('.')[0]),
+	require,
+	process,
+	console,
+	setTimeout,
+	setInterval,
+	setImmediate,
+	clearTimeout,
+	clearInterval,
+	clearImmediate,
+	String,
+	Number,
 	Buffer,
+	Boolean,
+	Array,
+	Date,
+	Error,
+	EvalError,
+	RangeError,
+	ReferenceError,
+	SyntaxError,
+	TypeError,
+	URIError,
+	RegExp,
 	Function,
 	Object,
-	transformAndCheck,
+	VMError,
+	Proxy,
+	Reflect,
+	Map,
+	WeakMap,
+	Set,
+	WeakSet,
+	Promise,
+	Symbol,
 	INSPECT_MAX_BYTES,
-	INTERNAL_STATE_NAME
-});
+	VM,
+	NodeVM,
+	helpers,
+	MODULE_PREFIX,
+	STRICT_MODULE_PREFIX,
+	MODULE_SUFFIX
+};
 
-/**
- * Compile a script.
- *
- * @private
- * @param {string} filename - Filename of the script.
- * @param {string} script - Script.
- * @return {vm.Script} The compiled script.
- */
-function compileScript(filename, script) {
-	return new Script(script, {
-		__proto__: null,
-		filename,
-		displayErrors: false
-	});
-}
-
-/**
- * Default run options for vm.Script.runInContext
- *
- * @private
- */
-const DEFAULT_RUN_OPTIONS = Object.freeze({__proto__: null, displayErrors: false});
-
-function checkAsync(allow) {
-	if (!allow) throw new VMError('Async not available');
-}
-
-function transformAndCheck(args, code, isAsync, isGenerator, allowAsync) {
-	const ret = transformer(args, code, isAsync, isGenerator);
-	checkAsync(allowAsync || !ret.hasAsync);
-	return ret.code;
-}
-
-/**
- *
- * This callback will be called and has a specific time to finish.<br>
- * No parameters will be supplied.<br>
- * If parameters are required, use a closure.
- *
- * @private
- * @callback runWithTimeout
- * @return {*}
- *
- */
-
-let cacheTimeoutContext = null;
-let cacheTimeoutScript = null;
-
-/**
- * Run a function with a specific timeout.
- *
- * @private
- * @param {runWithTimeout} fn - Function to run with the specific timeout.
- * @param {number} timeout - The amount of time to give the function to finish.
- * @return {*} The value returned by the function.
- * @throws {Error} If the function took to long.
- */
-function doWithTimeout(fn, timeout) {
-	if (!cacheTimeoutContext) {
-		cacheTimeoutContext = createContext();
-		cacheTimeoutScript = new Script('fn()', {
-			__proto__: null,
-			filename: 'timeout_bridge.js',
-			displayErrors: false
-		});
-	}
-	cacheTimeoutContext.fn = fn;
-	try {
-		return cacheTimeoutScript.runInContext(cacheTimeoutContext, {
-			__proto__: null,
-			displayErrors: false,
-			timeout
-		});
-	} finally {
-		cacheTimeoutContext.fn = null;
-	}
-}
-
-const bridgeScript = compileScript(__nccwpck_require__.ab + "bridge.js",
-	`(function(global) {"use strict"; const exports = {};${fs.readFileSync(`${__dirname}/bridge.js`, 'utf8')}\nreturn exports;})`);
-const setupSandboxScript = compileScript(__nccwpck_require__.ab + "setup-sandbox.js",
-	`(function(global, host, bridge, data, context) { ${fs.readFileSync(`${__dirname}/setup-sandbox.js`, 'utf8')}\n})`);
-const getGlobalScript = compileScript('get_global.js', 'this');
-
-let getGeneratorFunctionScript = null;
-let getAsyncFunctionScript = null;
-let getAsyncGeneratorFunctionScript = null;
-try {
-	getGeneratorFunctionScript = compileScript('get_generator_function.js', '(function*(){}).constructor');
-} catch (ex) {}
-try {
-	getAsyncFunctionScript = compileScript('get_async_function.js', '(async function(){}).constructor');
-} catch (ex) {}
-try {
-	getAsyncGeneratorFunctionScript = compileScript('get_async_generator_function.js', '(async function*(){}).constructor');
-} catch (ex) {}
-
-/**
- * Class VM.
- *
- * @public
- */
-class VM extends EventEmitter {
-
-	/**
-	 * The timeout for {@link VM#run} calls.
-	 *
-	 * @public
-	 * @since v3.9.0
-	 * @member {number} timeout
-	 * @memberOf VM#
-	 */
-
-	/**
-	 * Get the global sandbox object.
-	 *
-	 * @public
-	 * @readonly
-	 * @since v3.9.0
-	 * @member {Object} sandbox
-	 * @memberOf VM#
-	 */
-
-	/**
-	 * The compiler to use to get the JavaScript code.
-	 *
-	 * @public
-	 * @readonly
-	 * @since v3.9.0
-	 * @member {(string|compileCallback)} compiler
-	 * @memberOf VM#
-	 */
-
-	/**
-	 * The resolved compiler to use to get the JavaScript code.
-	 *
-	 * @private
-	 * @readonly
-	 * @member {compileCallback} _compiler
-	 * @memberOf VM#
-	 */
-
-	/**
-	 * Create a new VM instance.
-	 *
-	 * @public
-	 * @param {Object} [options] - VM options.
-	 * @param {number} [options.timeout] - The amount of time until a call to {@link VM#run} will timeout.
-	 * @param {Object} [options.sandbox] - Objects that will be copied into the global object of the sandbox.
-	 * @param {(string|compileCallback)} [options.compiler="javascript"] - The compiler to use.
-	 * @param {boolean} [options.eval=true] - Allow the dynamic evaluation of code via eval(code) or Function(code)().<br>
-	 * Only available for node v10+.
-	 * @param {boolean} [options.wasm=true] - Allow to run wasm code.<br>
-	 * Only available for node v10+.
-	 * @param {boolean} [options.allowAsync=true] - Allows for async functions.
-	 * @throws {VMError} If the compiler is unknown.
-	 */
-	constructor(options = {}) {
-		super();
-
-		// Read all options
-		const {
-			timeout,
-			sandbox,
-			compiler = 'javascript',
-			allowAsync: optAllowAsync = true
-		} = options;
-		const allowEval = options.eval !== false;
-		const allowWasm = options.wasm !== false;
-		const allowAsync = optAllowAsync && !options.fixAsync;
-
-		// Early error if sandbox is not an object.
-		if (sandbox && 'object' !== typeof sandbox) {
-			throw new VMError('Sandbox must be object.');
-		}
-
-		// Early error if compiler can't be found.
-		const resolvedCompiler = lookupCompiler(compiler);
-
-		// Create a new context for this vm.
-		const _context = createContext(undefined, {
-			__proto__: null,
-			codeGeneration: {
-				__proto__: null,
-				strings: allowEval,
-				wasm: allowWasm
-			}
-		});
-
-		const sandboxGlobal = getGlobalScript.runInContext(_context, DEFAULT_RUN_OPTIONS);
-
-		// Initialize the sandbox bridge
-		const {
-			createBridge: sandboxCreateBridge
-		} = bridgeScript.runInContext(_context, DEFAULT_RUN_OPTIONS)(sandboxGlobal);
-
-		// Initialize the bridge
-		const bridge = createBridge(sandboxCreateBridge, () => {});
-
-		const data = {
-			__proto__: null,
-			allowAsync
-		};
-
-		if (getGeneratorFunctionScript) {
-			data.GeneratorFunction = getGeneratorFunctionScript.runInContext(_context, DEFAULT_RUN_OPTIONS);
-		}
-		if (getAsyncFunctionScript) {
-			data.AsyncFunction = getAsyncFunctionScript.runInContext(_context, DEFAULT_RUN_OPTIONS);
-		}
-		if (getAsyncGeneratorFunctionScript) {
-			data.AsyncGeneratorFunction = getAsyncGeneratorFunctionScript.runInContext(_context, DEFAULT_RUN_OPTIONS);
-		}
-
-		// Create the bridge between the host and the sandbox.
-		const internal = setupSandboxScript.runInContext(_context, DEFAULT_RUN_OPTIONS)(sandboxGlobal, HOST, bridge.other, data, _context);
-
-		const runScript = (script) => {
-			// This closure is intentional to hide _context and bridge since the allow to access the sandbox directly which is unsafe.
-			let ret;
-			try {
-				ret = script.runInContext(_context, DEFAULT_RUN_OPTIONS);
-			} catch (e) {
-				throw bridge.from(e);
-			}
-			return bridge.from(ret);
-		};
-
-		const makeReadonly = (value, mock) => {
-			try {
-				internal.readonly(value, mock);
-			} catch (e) {
-				throw bridge.from(e);
-			}
-			return value;
-		};
-
-		const makeProtected = (value) => {
-			const sandboxBridge = bridge.other;
-			try {
-				sandboxBridge.fromWithFactory(sandboxBridge.protectedFactory, value);
-			} catch (e) {
-				throw bridge.from(e);
-			}
-			return value;
-		};
-
-		const addProtoMapping = (hostProto, sandboxProto) => {
-			const sandboxBridge = bridge.other;
-			let otherProto;
-			try {
-				otherProto = sandboxBridge.from(sandboxProto);
-				sandboxBridge.addProtoMapping(otherProto, hostProto);
-			} catch (e) {
-				throw bridge.from(e);
-			}
-			bridge.addProtoMapping(hostProto, otherProto);
-		};
-
-		const addProtoMappingFactory = (hostProto, sandboxProtoFactory) => {
-			const sandboxBridge = bridge.other;
-			const factory = () => {
-				const proto = sandboxProtoFactory(this);
-				bridge.addProtoMapping(hostProto, proto);
-				return proto;
-			};
-			try {
-				const otherProtoFactory = sandboxBridge.from(factory);
-				sandboxBridge.addProtoMappingFactory(otherProtoFactory, hostProto);
-			} catch (e) {
-				throw bridge.from(e);
-			}
-		};
-
-		// Define the properties of this object.
-		// Use Object.defineProperties here to be able to
-		// hide and set properties read-only.
-		objectDefineProperties(this, {
-			__proto__: null,
-			timeout: {
-				__proto__: null,
-				value: timeout,
-				writable: true,
-				enumerable: true
-			},
-			compiler: {
-				__proto__: null,
-				value: compiler,
-				enumerable: true
-			},
-			sandbox: {
-				__proto__: null,
-				value: bridge.from(sandboxGlobal),
-				enumerable: true
-			},
-			_runScript: {__proto__: null, value: runScript},
-			_makeReadonly: {__proto__: null, value: makeReadonly},
-			_makeProtected: {__proto__: null, value: makeProtected},
-			_addProtoMapping: {__proto__: null, value: addProtoMapping},
-			_addProtoMappingFactory: {__proto__: null, value: addProtoMappingFactory},
-			_compiler: {__proto__: null, value: resolvedCompiler},
-			_allowAsync: {__proto__: null, value: allowAsync}
-		});
-
-		// prepare global sandbox
-		if (sandbox) {
-			this.setGlobals(sandbox);
-		}
-	}
-
-	/**
-	 * Adds all the values to the globals.
-	 *
-	 * @public
-	 * @since v3.9.0
-	 * @param {Object} values - All values that will be added to the globals.
-	 * @return {this} This for chaining.
-	 * @throws {*} If the setter of a global throws an exception it is propagated. And the remaining globals will not be written.
-	 */
-	setGlobals(values) {
-		for (const name in values) {
-			if (Object.prototype.hasOwnProperty.call(values, name)) {
-				this.sandbox[name] = values[name];
-			}
-		}
-		return this;
-	}
-
-	/**
-	 * Set a global value.
-	 *
-	 * @public
-	 * @since v3.9.0
-	 * @param {string} name - The name of the global.
-	 * @param {*} value - The value of the global.
-	 * @return {this} This for chaining.
-	 * @throws {*} If the setter of the global throws an exception it is propagated.
-	 */
-	setGlobal(name, value) {
-		this.sandbox[name] = value;
-		return this;
-	}
-
-	/**
-	 * Get a global value.
-	 *
-	 * @public
-	 * @since v3.9.0
-	 * @param {string} name - The name of the global.
-	 * @return {*} The value of the global.
-	 * @throws {*} If the getter of the global throws an exception it is propagated.
-	 */
-	getGlobal(name) {
-		return this.sandbox[name];
-	}
-
-	/**
-	 * Freezes the object inside VM making it read-only. Not available for primitive values.
-	 *
-	 * @public
-	 * @param {*} value - Object to freeze.
-	 * @param {string} [globalName] - Whether to add the object to global.
-	 * @return {*} Object to freeze.
-	 * @throws {*} If the setter of the global throws an exception it is propagated.
-	 */
-	freeze(value, globalName) {
-		this.readonly(value);
-		if (globalName) this.sandbox[globalName] = value;
-		return value;
-	}
-
-	/**
-	 * Freezes the object inside VM making it read-only. Not available for primitive values.
-	 *
-	 * @public
-	 * @param {*} value - Object to freeze.
-	 * @param {*} [mock] - When the object does not have a property the mock is used before prototype lookup.
-	 * @return {*} Object to freeze.
-	 */
-	readonly(value, mock) {
-		return this._makeReadonly(value, mock);
-	}
-
-	/**
-	 * Protects the object inside VM making impossible to set functions as it's properties. Not available for primitive values.
-	 *
-	 * @public
-	 * @param {*} value - Object to protect.
-	 * @param {string} [globalName] - Whether to add the object to global.
-	 * @return {*} Object to protect.
-	 * @throws {*} If the setter of the global throws an exception it is propagated.
-	 */
-	protect(value, globalName) {
-		this._makeProtected(value);
-		if (globalName) this.sandbox[globalName] = value;
-		return value;
-	}
-
-	/**
-	 * Run the code in VM.
-	 *
-	 * @public
-	 * @param {(string|VMScript)} code - Code to run.
-	 * @param {(string|Object)} [options] - Options map or filename.
-	 * @param {string} [options.filename="vm.js"] - Filename that shows up in any stack traces produced from this script.<br>
-	 * This is only used if code is a String.
-	 * @return {*} Result of executed code.
-	 * @throws {SyntaxError} If there is a syntax error in the script.
-	 * @throws {Error} An error is thrown when the script took to long and there is a timeout.
-	 * @throws {*} If the script execution terminated with an exception it is propagated.
-	 */
-	run(code, options) {
-		let script;
-		let filename;
-
-		if (typeof options === 'object') {
-			filename = options.filename;
-		} else {
-			filename = options;
-		}
-
-		if (code instanceof VMScript) {
-			script = code._compileVM();
-			checkAsync(this._allowAsync || !code._hasAsync);
-		} else {
-			const useFileName = filename || 'vm.js';
-			let scriptCode = this._compiler(code, useFileName);
-			const ret = transformer(null, scriptCode, false, false);
-			scriptCode = ret.code;
-			checkAsync(this._allowAsync || !ret.hasAsync);
-			// Compile the script here so that we don't need to create a instance of VMScript.
-			script = new Script(scriptCode, {
-				__proto__: null,
-				filename: useFileName,
-				displayErrors: false
-			});
-		}
-
-		if (!this.timeout) {
-			return this._runScript(script);
-		}
-
-		return doWithTimeout(() => {
-			return this._runScript(script);
-		}, this.timeout);
-	}
-
-	/**
-	 * Run the code in VM.
-	 *
-	 * @public
-	 * @since v3.9.0
-	 * @param {string} filename - Filename of file to load and execute in a NodeVM.
-	 * @return {*} Result of executed code.
-	 * @throws {Error} If filename is not a valid filename.
-	 * @throws {SyntaxError} If there is a syntax error in the script.
-	 * @throws {Error} An error is thrown when the script took to long and there is a timeout.
-	 * @throws {*} If the script execution terminated with an exception it is propagated.
-	 */
-	runFile(filename) {
-		const resolvedFilename = pa.resolve(filename);
-
-		if (!fs.existsSync(resolvedFilename)) {
-			throw new VMError(`Script '${filename}' not found.`);
-		}
-
-		if (fs.statSync(resolvedFilename).isDirectory()) {
-			throw new VMError('Script must be file, got directory.');
-		}
-
-		return this.run(fs.readFileSync(resolvedFilename, 'utf8'), resolvedFilename);
-	}
-
-}
-
+exports.VMError = VMError;
+exports.NodeVM = NodeVM;
 exports.VM = VM;
-
-
-/***/ }),
-
-/***/ 5000:
-/***/ (function(__unused_webpack_module, exports) {
-
-(function (global, factory) {
-   true ? factory(exports) :
-  0;
-}(this, (function (exports) { 'use strict';
-
-  // AST walker module for Mozilla Parser API compatible trees
-
-  // A simple walk is one where you simply specify callbacks to be
-  // called on specific nodes. The last two arguments are optional. A
-  // simple use would be
-  //
-  //     walk.simple(myTree, {
-  //         Expression: function(node) { ... }
-  //     });
-  //
-  // to do something with all expressions. All Parser API node types
-  // can be used to identify node types, as well as Expression and
-  // Statement, which denote categories of nodes.
-  //
-  // The base argument can be used to pass a custom (recursive)
-  // walker, and state can be used to give this walked an initial
-  // state.
-
-  function simple(node, visitors, baseVisitor, state, override) {
-    if (!baseVisitor) { baseVisitor = base
-    ; }(function c(node, st, override) {
-      var type = override || node.type, found = visitors[type];
-      baseVisitor[type](node, st, c);
-      if (found) { found(node, st); }
-    })(node, state, override);
-  }
-
-  // An ancestor walk keeps an array of ancestor nodes (including the
-  // current node) and passes them to the callback as third parameter
-  // (and also as state parameter when no other state is present).
-  function ancestor(node, visitors, baseVisitor, state, override) {
-    var ancestors = [];
-    if (!baseVisitor) { baseVisitor = base
-    ; }(function c(node, st, override) {
-      var type = override || node.type, found = visitors[type];
-      var isNew = node !== ancestors[ancestors.length - 1];
-      if (isNew) { ancestors.push(node); }
-      baseVisitor[type](node, st, c);
-      if (found) { found(node, st || ancestors, ancestors); }
-      if (isNew) { ancestors.pop(); }
-    })(node, state, override);
-  }
-
-  // A recursive walk is one where your functions override the default
-  // walkers. They can modify and replace the state parameter that's
-  // threaded through the walk, and can opt how and whether to walk
-  // their child nodes (by calling their third argument on these
-  // nodes).
-  function recursive(node, state, funcs, baseVisitor, override) {
-    var visitor = funcs ? make(funcs, baseVisitor || undefined) : baseVisitor
-    ;(function c(node, st, override) {
-      visitor[override || node.type](node, st, c);
-    })(node, state, override);
-  }
-
-  function makeTest(test) {
-    if (typeof test === "string")
-      { return function (type) { return type === test; } }
-    else if (!test)
-      { return function () { return true; } }
-    else
-      { return test }
-  }
-
-  var Found = function Found(node, state) { this.node = node; this.state = state; };
-
-  // A full walk triggers the callback on each node
-  function full(node, callback, baseVisitor, state, override) {
-    if (!baseVisitor) { baseVisitor = base; }
-    var last
-    ;(function c(node, st, override) {
-      var type = override || node.type;
-      baseVisitor[type](node, st, c);
-      if (last !== node) {
-        callback(node, st, type);
-        last = node;
-      }
-    })(node, state, override);
-  }
-
-  // An fullAncestor walk is like an ancestor walk, but triggers
-  // the callback on each node
-  function fullAncestor(node, callback, baseVisitor, state) {
-    if (!baseVisitor) { baseVisitor = base; }
-    var ancestors = [], last
-    ;(function c(node, st, override) {
-      var type = override || node.type;
-      var isNew = node !== ancestors[ancestors.length - 1];
-      if (isNew) { ancestors.push(node); }
-      baseVisitor[type](node, st, c);
-      if (last !== node) {
-        callback(node, st || ancestors, ancestors, type);
-        last = node;
-      }
-      if (isNew) { ancestors.pop(); }
-    })(node, state);
-  }
-
-  // Find a node with a given start, end, and type (all are optional,
-  // null can be used as wildcard). Returns a {node, state} object, or
-  // undefined when it doesn't find a matching node.
-  function findNodeAt(node, start, end, test, baseVisitor, state) {
-    if (!baseVisitor) { baseVisitor = base; }
-    test = makeTest(test);
-    try {
-      (function c(node, st, override) {
-        var type = override || node.type;
-        if ((start == null || node.start <= start) &&
-            (end == null || node.end >= end))
-          { baseVisitor[type](node, st, c); }
-        if ((start == null || node.start === start) &&
-            (end == null || node.end === end) &&
-            test(type, node))
-          { throw new Found(node, st) }
-      })(node, state);
-    } catch (e) {
-      if (e instanceof Found) { return e }
-      throw e
-    }
-  }
-
-  // Find the innermost node of a given type that contains the given
-  // position. Interface similar to findNodeAt.
-  function findNodeAround(node, pos, test, baseVisitor, state) {
-    test = makeTest(test);
-    if (!baseVisitor) { baseVisitor = base; }
-    try {
-      (function c(node, st, override) {
-        var type = override || node.type;
-        if (node.start > pos || node.end < pos) { return }
-        baseVisitor[type](node, st, c);
-        if (test(type, node)) { throw new Found(node, st) }
-      })(node, state);
-    } catch (e) {
-      if (e instanceof Found) { return e }
-      throw e
-    }
-  }
-
-  // Find the outermost matching node after a given position.
-  function findNodeAfter(node, pos, test, baseVisitor, state) {
-    test = makeTest(test);
-    if (!baseVisitor) { baseVisitor = base; }
-    try {
-      (function c(node, st, override) {
-        if (node.end < pos) { return }
-        var type = override || node.type;
-        if (node.start >= pos && test(type, node)) { throw new Found(node, st) }
-        baseVisitor[type](node, st, c);
-      })(node, state);
-    } catch (e) {
-      if (e instanceof Found) { return e }
-      throw e
-    }
-  }
-
-  // Find the outermost matching node before a given position.
-  function findNodeBefore(node, pos, test, baseVisitor, state) {
-    test = makeTest(test);
-    if (!baseVisitor) { baseVisitor = base; }
-    var max
-    ;(function c(node, st, override) {
-      if (node.start > pos) { return }
-      var type = override || node.type;
-      if (node.end <= pos && (!max || max.node.end < node.end) && test(type, node))
-        { max = new Found(node, st); }
-      baseVisitor[type](node, st, c);
-    })(node, state);
-    return max
-  }
-
-  // Used to create a custom walker. Will fill in all missing node
-  // type properties with the defaults.
-  function make(funcs, baseVisitor) {
-    var visitor = Object.create(baseVisitor || base);
-    for (var type in funcs) { visitor[type] = funcs[type]; }
-    return visitor
-  }
-
-  function skipThrough(node, st, c) { c(node, st); }
-  function ignore(_node, _st, _c) {}
-
-  // Node walkers.
-
-  var base = {};
-
-  base.Program = base.BlockStatement = base.StaticBlock = function (node, st, c) {
-    for (var i = 0, list = node.body; i < list.length; i += 1)
-      {
-      var stmt = list[i];
-
-      c(stmt, st, "Statement");
-    }
-  };
-  base.Statement = skipThrough;
-  base.EmptyStatement = ignore;
-  base.ExpressionStatement = base.ParenthesizedExpression = base.ChainExpression =
-    function (node, st, c) { return c(node.expression, st, "Expression"); };
-  base.IfStatement = function (node, st, c) {
-    c(node.test, st, "Expression");
-    c(node.consequent, st, "Statement");
-    if (node.alternate) { c(node.alternate, st, "Statement"); }
-  };
-  base.LabeledStatement = function (node, st, c) { return c(node.body, st, "Statement"); };
-  base.BreakStatement = base.ContinueStatement = ignore;
-  base.WithStatement = function (node, st, c) {
-    c(node.object, st, "Expression");
-    c(node.body, st, "Statement");
-  };
-  base.SwitchStatement = function (node, st, c) {
-    c(node.discriminant, st, "Expression");
-    for (var i$1 = 0, list$1 = node.cases; i$1 < list$1.length; i$1 += 1) {
-      var cs = list$1[i$1];
-
-      if (cs.test) { c(cs.test, st, "Expression"); }
-      for (var i = 0, list = cs.consequent; i < list.length; i += 1)
-        {
-        var cons = list[i];
-
-        c(cons, st, "Statement");
-      }
-    }
-  };
-  base.SwitchCase = function (node, st, c) {
-    if (node.test) { c(node.test, st, "Expression"); }
-    for (var i = 0, list = node.consequent; i < list.length; i += 1)
-      {
-      var cons = list[i];
-
-      c(cons, st, "Statement");
-    }
-  };
-  base.ReturnStatement = base.YieldExpression = base.AwaitExpression = function (node, st, c) {
-    if (node.argument) { c(node.argument, st, "Expression"); }
-  };
-  base.ThrowStatement = base.SpreadElement =
-    function (node, st, c) { return c(node.argument, st, "Expression"); };
-  base.TryStatement = function (node, st, c) {
-    c(node.block, st, "Statement");
-    if (node.handler) { c(node.handler, st); }
-    if (node.finalizer) { c(node.finalizer, st, "Statement"); }
-  };
-  base.CatchClause = function (node, st, c) {
-    if (node.param) { c(node.param, st, "Pattern"); }
-    c(node.body, st, "Statement");
-  };
-  base.WhileStatement = base.DoWhileStatement = function (node, st, c) {
-    c(node.test, st, "Expression");
-    c(node.body, st, "Statement");
-  };
-  base.ForStatement = function (node, st, c) {
-    if (node.init) { c(node.init, st, "ForInit"); }
-    if (node.test) { c(node.test, st, "Expression"); }
-    if (node.update) { c(node.update, st, "Expression"); }
-    c(node.body, st, "Statement");
-  };
-  base.ForInStatement = base.ForOfStatement = function (node, st, c) {
-    c(node.left, st, "ForInit");
-    c(node.right, st, "Expression");
-    c(node.body, st, "Statement");
-  };
-  base.ForInit = function (node, st, c) {
-    if (node.type === "VariableDeclaration") { c(node, st); }
-    else { c(node, st, "Expression"); }
-  };
-  base.DebuggerStatement = ignore;
-
-  base.FunctionDeclaration = function (node, st, c) { return c(node, st, "Function"); };
-  base.VariableDeclaration = function (node, st, c) {
-    for (var i = 0, list = node.declarations; i < list.length; i += 1)
-      {
-      var decl = list[i];
-
-      c(decl, st);
-    }
-  };
-  base.VariableDeclarator = function (node, st, c) {
-    c(node.id, st, "Pattern");
-    if (node.init) { c(node.init, st, "Expression"); }
-  };
-
-  base.Function = function (node, st, c) {
-    if (node.id) { c(node.id, st, "Pattern"); }
-    for (var i = 0, list = node.params; i < list.length; i += 1)
-      {
-      var param = list[i];
-
-      c(param, st, "Pattern");
-    }
-    c(node.body, st, node.expression ? "Expression" : "Statement");
-  };
-
-  base.Pattern = function (node, st, c) {
-    if (node.type === "Identifier")
-      { c(node, st, "VariablePattern"); }
-    else if (node.type === "MemberExpression")
-      { c(node, st, "MemberPattern"); }
-    else
-      { c(node, st); }
-  };
-  base.VariablePattern = ignore;
-  base.MemberPattern = skipThrough;
-  base.RestElement = function (node, st, c) { return c(node.argument, st, "Pattern"); };
-  base.ArrayPattern = function (node, st, c) {
-    for (var i = 0, list = node.elements; i < list.length; i += 1) {
-      var elt = list[i];
-
-      if (elt) { c(elt, st, "Pattern"); }
-    }
-  };
-  base.ObjectPattern = function (node, st, c) {
-    for (var i = 0, list = node.properties; i < list.length; i += 1) {
-      var prop = list[i];
-
-      if (prop.type === "Property") {
-        if (prop.computed) { c(prop.key, st, "Expression"); }
-        c(prop.value, st, "Pattern");
-      } else if (prop.type === "RestElement") {
-        c(prop.argument, st, "Pattern");
-      }
-    }
-  };
-
-  base.Expression = skipThrough;
-  base.ThisExpression = base.Super = base.MetaProperty = ignore;
-  base.ArrayExpression = function (node, st, c) {
-    for (var i = 0, list = node.elements; i < list.length; i += 1) {
-      var elt = list[i];
-
-      if (elt) { c(elt, st, "Expression"); }
-    }
-  };
-  base.ObjectExpression = function (node, st, c) {
-    for (var i = 0, list = node.properties; i < list.length; i += 1)
-      {
-      var prop = list[i];
-
-      c(prop, st);
-    }
-  };
-  base.FunctionExpression = base.ArrowFunctionExpression = base.FunctionDeclaration;
-  base.SequenceExpression = function (node, st, c) {
-    for (var i = 0, list = node.expressions; i < list.length; i += 1)
-      {
-      var expr = list[i];
-
-      c(expr, st, "Expression");
-    }
-  };
-  base.TemplateLiteral = function (node, st, c) {
-    for (var i = 0, list = node.quasis; i < list.length; i += 1)
-      {
-      var quasi = list[i];
-
-      c(quasi, st);
-    }
-
-    for (var i$1 = 0, list$1 = node.expressions; i$1 < list$1.length; i$1 += 1)
-      {
-      var expr = list$1[i$1];
-
-      c(expr, st, "Expression");
-    }
-  };
-  base.TemplateElement = ignore;
-  base.UnaryExpression = base.UpdateExpression = function (node, st, c) {
-    c(node.argument, st, "Expression");
-  };
-  base.BinaryExpression = base.LogicalExpression = function (node, st, c) {
-    c(node.left, st, "Expression");
-    c(node.right, st, "Expression");
-  };
-  base.AssignmentExpression = base.AssignmentPattern = function (node, st, c) {
-    c(node.left, st, "Pattern");
-    c(node.right, st, "Expression");
-  };
-  base.ConditionalExpression = function (node, st, c) {
-    c(node.test, st, "Expression");
-    c(node.consequent, st, "Expression");
-    c(node.alternate, st, "Expression");
-  };
-  base.NewExpression = base.CallExpression = function (node, st, c) {
-    c(node.callee, st, "Expression");
-    if (node.arguments)
-      { for (var i = 0, list = node.arguments; i < list.length; i += 1)
-        {
-          var arg = list[i];
-
-          c(arg, st, "Expression");
-        } }
-  };
-  base.MemberExpression = function (node, st, c) {
-    c(node.object, st, "Expression");
-    if (node.computed) { c(node.property, st, "Expression"); }
-  };
-  base.ExportNamedDeclaration = base.ExportDefaultDeclaration = function (node, st, c) {
-    if (node.declaration)
-      { c(node.declaration, st, node.type === "ExportNamedDeclaration" || node.declaration.id ? "Statement" : "Expression"); }
-    if (node.source) { c(node.source, st, "Expression"); }
-  };
-  base.ExportAllDeclaration = function (node, st, c) {
-    if (node.exported)
-      { c(node.exported, st); }
-    c(node.source, st, "Expression");
-  };
-  base.ImportDeclaration = function (node, st, c) {
-    for (var i = 0, list = node.specifiers; i < list.length; i += 1)
-      {
-      var spec = list[i];
-
-      c(spec, st);
-    }
-    c(node.source, st, "Expression");
-  };
-  base.ImportExpression = function (node, st, c) {
-    c(node.source, st, "Expression");
-  };
-  base.ImportSpecifier = base.ImportDefaultSpecifier = base.ImportNamespaceSpecifier = base.Identifier = base.PrivateIdentifier = base.Literal = ignore;
-
-  base.TaggedTemplateExpression = function (node, st, c) {
-    c(node.tag, st, "Expression");
-    c(node.quasi, st, "Expression");
-  };
-  base.ClassDeclaration = base.ClassExpression = function (node, st, c) { return c(node, st, "Class"); };
-  base.Class = function (node, st, c) {
-    if (node.id) { c(node.id, st, "Pattern"); }
-    if (node.superClass) { c(node.superClass, st, "Expression"); }
-    c(node.body, st);
-  };
-  base.ClassBody = function (node, st, c) {
-    for (var i = 0, list = node.body; i < list.length; i += 1)
-      {
-      var elt = list[i];
-
-      c(elt, st);
-    }
-  };
-  base.MethodDefinition = base.PropertyDefinition = base.Property = function (node, st, c) {
-    if (node.computed) { c(node.key, st, "Expression"); }
-    if (node.value) { c(node.value, st, "Expression"); }
-  };
-
-  exports.ancestor = ancestor;
-  exports.base = base;
-  exports.findNodeAfter = findNodeAfter;
-  exports.findNodeAround = findNodeAround;
-  exports.findNodeAt = findNodeAt;
-  exports.findNodeBefore = findNodeBefore;
-  exports.full = full;
-  exports.fullAncestor = fullAncestor;
-  exports.make = make;
-  exports.recursive = recursive;
-  exports.simple = simple;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
+exports.VMScript = VMScript;
 
 
 /***/ }),
@@ -69868,215 +61058,7 @@ module.exports = eval("require")("encoding");
 
 /***/ }),
 
-/***/ 9491:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("assert");
-
-/***/ }),
-
-/***/ 852:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("async_hooks");
-
-/***/ }),
-
-/***/ 4300:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("buffer");
-
-/***/ }),
-
-/***/ 2081:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("child_process");
-
-/***/ }),
-
-/***/ 2057:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("constants");
-
-/***/ }),
-
-/***/ 6113:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("crypto");
-
-/***/ }),
-
-/***/ 9523:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("dns");
-
-/***/ }),
-
-/***/ 2361:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("events");
-
-/***/ }),
-
-/***/ 7147:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("fs");
-
-/***/ }),
-
-/***/ 3685:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("http");
-
-/***/ }),
-
-/***/ 5687:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("https");
-
-/***/ }),
-
-/***/ 2503:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("module");
-
-/***/ }),
-
-/***/ 1808:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("net");
-
-/***/ }),
-
-/***/ 2037:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("os");
-
-/***/ }),
-
-/***/ 1017:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("path");
-
-/***/ }),
-
-/***/ 4074:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("perf_hooks");
-
-/***/ }),
-
-/***/ 5477:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("punycode");
-
-/***/ }),
-
-/***/ 2781:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("stream");
-
-/***/ }),
-
-/***/ 1576:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("string_decoder");
-
-/***/ }),
-
-/***/ 9512:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("timers");
-
-/***/ }),
-
-/***/ 4404:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("tls");
-
-/***/ }),
-
-/***/ 6224:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("tty");
-
-/***/ }),
-
-/***/ 7310:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("url");
-
-/***/ }),
-
-/***/ 3837:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("util");
-
-/***/ }),
-
-/***/ 6144:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("vm");
-
-/***/ }),
-
-/***/ 9796:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("zlib");
-
-/***/ }),
-
-/***/ 783:
+/***/ 1875:
 /***/ ((module) => {
 
 "use strict";
@@ -70084,7 +61066,7 @@ module.exports = {"version":"1.14.3"};
 
 /***/ }),
 
-/***/ 2600:
+/***/ 2788:
 /***/ ((module) => {
 
 "use strict";
@@ -70092,7 +61074,7 @@ module.exports = {"i8":"4.3.0"};
 
 /***/ }),
 
-/***/ 3480:
+/***/ 3612:
 /***/ ((module) => {
 
 "use strict";
@@ -70100,7 +61082,7 @@ module.exports = JSON.parse('[["8740","䏰䰲䘃䖦䕸𧉧䵷䖳𧲱䳢𧳅㮕�
 
 /***/ }),
 
-/***/ 3336:
+/***/ 7803:
 /***/ ((module) => {
 
 "use strict";
@@ -70108,7 +61090,7 @@ module.exports = JSON.parse('[["0","\\u0000",127,"€"],["8140","丂丄丅丆丏
 
 /***/ }),
 
-/***/ 7348:
+/***/ 7013:
 /***/ ((module) => {
 
 "use strict";
@@ -70116,7 +61098,7 @@ module.exports = JSON.parse('[["0","\\u0000",127],["8141","갂갃갅갆갋",4,"�
 
 /***/ }),
 
-/***/ 4284:
+/***/ 3104:
 /***/ ((module) => {
 
 "use strict";
@@ -70124,7 +61106,7 @@ module.exports = JSON.parse('[["0","\\u0000",127],["a140","　，、。．‧；
 
 /***/ }),
 
-/***/ 1532:
+/***/ 2417:
 /***/ ((module) => {
 
 "use strict";
@@ -70132,7 +61114,7 @@ module.exports = JSON.parse('[["0","\\u0000",127],["8ea1","｡",62],["a1a1","　
 
 /***/ }),
 
-/***/ 6258:
+/***/ 6351:
 /***/ ((module) => {
 
 "use strict";
@@ -70140,7 +61122,7 @@ module.exports = JSON.parse('{"uChars":[128,165,169,178,184,216,226,235,238,244,
 
 /***/ }),
 
-/***/ 4346:
+/***/ 7419:
 /***/ ((module) => {
 
 "use strict";
@@ -70148,7 +61130,7 @@ module.exports = JSON.parse('[["a140","",62],["a180","",32],["a240","",
 
 /***/ }),
 
-/***/ 7014:
+/***/ 4108:
 /***/ ((module) => {
 
 "use strict";
@@ -70156,7 +61138,7 @@ module.exports = JSON.parse('[["0","\\u0000",128],["a1","｡",62],["8140","　�
 
 /***/ }),
 
-/***/ 1907:
+/***/ 8661:
 /***/ ((module) => {
 
 "use strict";
@@ -70164,11 +61146,203 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 
 /***/ }),
 
-/***/ 855:
+/***/ 7907:
 /***/ ((module) => {
 
 "use strict";
 module.exports = JSON.parse('{"100":"Continue","101":"Switching Protocols","102":"Processing","103":"Early Hints","200":"OK","201":"Created","202":"Accepted","203":"Non-Authoritative Information","204":"No Content","205":"Reset Content","206":"Partial Content","207":"Multi-Status","208":"Already Reported","226":"IM Used","300":"Multiple Choices","301":"Moved Permanently","302":"Found","303":"See Other","304":"Not Modified","305":"Use Proxy","306":"(Unused)","307":"Temporary Redirect","308":"Permanent Redirect","400":"Bad Request","401":"Unauthorized","402":"Payment Required","403":"Forbidden","404":"Not Found","405":"Method Not Allowed","406":"Not Acceptable","407":"Proxy Authentication Required","408":"Request Timeout","409":"Conflict","410":"Gone","411":"Length Required","412":"Precondition Failed","413":"Payload Too Large","414":"URI Too Long","415":"Unsupported Media Type","416":"Range Not Satisfiable","417":"Expectation Failed","418":"I\'m a teapot","421":"Misdirected Request","422":"Unprocessable Entity","423":"Locked","424":"Failed Dependency","425":"Unordered Collection","426":"Upgrade Required","428":"Precondition Required","429":"Too Many Requests","431":"Request Header Fields Too Large","451":"Unavailable For Legal Reasons","500":"Internal Server Error","501":"Not Implemented","502":"Bad Gateway","503":"Service Unavailable","504":"Gateway Timeout","505":"HTTP Version Not Supported","506":"Variant Also Negotiates","507":"Insufficient Storage","508":"Loop Detected","509":"Bandwidth Limit Exceeded","510":"Not Extended","511":"Network Authentication Required"}');
+
+/***/ }),
+
+/***/ 2357:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("assert");
+
+/***/ }),
+
+/***/ 4293:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("buffer");
+
+/***/ }),
+
+/***/ 3129:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("child_process");
+
+/***/ }),
+
+/***/ 7619:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("constants");
+
+/***/ }),
+
+/***/ 6417:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("crypto");
+
+/***/ }),
+
+/***/ 881:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("dns");
+
+/***/ }),
+
+/***/ 8614:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("events");
+
+/***/ }),
+
+/***/ 5747:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ 8605:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("http");
+
+/***/ }),
+
+/***/ 7211:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("https");
+
+/***/ }),
+
+/***/ 1631:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("net");
+
+/***/ }),
+
+/***/ 2087:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("os");
+
+/***/ }),
+
+/***/ 5622:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");
+
+/***/ }),
+
+/***/ 630:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("perf_hooks");
+
+/***/ }),
+
+/***/ 4213:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("punycode");
+
+/***/ }),
+
+/***/ 2413:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("stream");
+
+/***/ }),
+
+/***/ 4304:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("string_decoder");
+
+/***/ }),
+
+/***/ 8213:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("timers");
+
+/***/ }),
+
+/***/ 4016:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("tls");
+
+/***/ }),
+
+/***/ 3867:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("tty");
+
+/***/ }),
+
+/***/ 8835:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("url");
+
+/***/ }),
+
+/***/ 1669:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("util");
+
+/***/ }),
+
+/***/ 2184:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("vm");
+
+/***/ }),
+
+/***/ 8761:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("zlib");
 
 /***/ })
 
