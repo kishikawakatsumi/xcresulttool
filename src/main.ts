@@ -53,28 +53,30 @@ async function run(): Promise<void> {
       const charactersLimit = 65535
       let title = core.getInput('title')
       if (title.length > charactersLimit) {
-        core.error(
+        core.warning(
           `The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`
         )
         title = title.substring(0, charactersLimit)
       }
       let reportSummary = report.reportSummary
       if (reportSummary.length > charactersLimit) {
-        core.error(
+        core.warning(
           `The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`
         )
         reportSummary = reportSummary.substring(0, charactersLimit)
       }
       let reportDetail = report.reportDetail
       if (reportDetail.length > charactersLimit) {
-        core.error(
+        core.warning(
           `The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`
         )
         reportDetail = reportDetail.substring(0, charactersLimit)
       }
 
       if (report.annotations.length > 50) {
-        core.error('Annotations that exceed the limit (50) will be truncated.')
+        core.warning(
+          'Annotations that exceed the limit (50) will be truncated.'
+        )
       }
       const annotations = report.annotations.slice(0, 50)
       let output
