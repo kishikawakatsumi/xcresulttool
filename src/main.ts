@@ -87,6 +87,8 @@ async function run(): Promise<void> {
     if (createJobSummary) {
       core.info('Creating job summary')
       await core.summary.addHeading(output.title).addRaw(output.summary).write()
+      core.summary.addRaw(output.summary)
+      core.error('This is a bad error. This will also fail the build.')
       for (const annotation of report.annotations) {
         const properties: core.AnnotationProperties = {
           title: annotation.title,
@@ -112,6 +114,9 @@ async function run(): Promise<void> {
 
     if (core.getBooleanInput('create-check')) {
       const octokit = new Octokit()
+
+      const owner = github.context.repo.owner
+      const repo = github.context.repo.repo
 
       const pr = github.context.payload.pull_request
       const sha = (pr && pr.head.sha) || github.context.sha
@@ -189,9 +194,21 @@ async function run(): Promise<void> {
 
         const artifactClient = artifact.create()
         const artifactName = path.basename(uploadBundlePath)
+            continueOnError: false
+          }
 
         const rootDirectory = uploadBundlePath
+            if (error) {
+              core.error(error)
+            }
         const options = {
+              await artifactClient.uploadArtifact(
+                artifactName,
+                files,
+                rootDirectory,
+                options
+              )
+            }
           continueOnError: false
         }
 

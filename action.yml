@@ -32,14 +32,14 @@ inputs:
   create-job-summary:
     description: 'Whether to create a job summary. Should be used if the actions is not triggered via pull request'
     required: false
-    default: 'false'
+    default: false
 outputs:
   failed_tests:
     description: 'Number of failed tests'
   passed_tests:
     description: 'Number of passed tests'
   skipped_tests:
-    description: 'Number of skipped tests'
+    description: 'Number of passed tests'
   total_tests:
     description: 'Number of total tests'
 runs:
