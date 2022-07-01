@@ -97,3 +97,9 @@ Thumbs.db
 # Ignore built ts files
 __tests__/runner/*
 lib/**/*
+
+# Ignore asdf
+.tool-versions
+
+# Ignore IDEA
+.idea

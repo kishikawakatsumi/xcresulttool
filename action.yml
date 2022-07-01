@@ -20,6 +20,12 @@ inputs:
   upload-bundles:
     description: 'Whether to upload the xcresult bundles'
     default: true
+  create-check:
+    description: 'Whether to create a check'
+    default: true
+  create-job-summary:
+    description: 'Whether to create a job summary. Should be used if the actions is not triggered via pull request'
+    default: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

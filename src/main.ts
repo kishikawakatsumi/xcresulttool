@@ -8,7 +8,16 @@ import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 import {glob} from 'glob'
 import {promises} from 'fs'
+import {Annotation, TestReport} from './report'
+
 const {stat} = promises
+
+interface ReportOutput {
+  title: string
+  summary: string
+  text?: string
+  annotations: Annotation[]
+}
 
 async function run(): Promise<void> {
   try {
@@ -41,7 +50,33 @@ async function run(): Promise<void> {
       showCodeCoverage
     })
 
-    if (core.getInput('token')) {
+    const charactersLimit = 65535
+    let title = core.getInput('title')
+    if (title.length > charactersLimit) {
+      core.warning(
+        `The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`
+      )
+      title = title.substring(0, charactersLimit)
+    }
+    const output = generateOutput(report)
+
+    if (core.getBooleanInput('create-job-summary')) {
+      core.summary.addHeading(output.title)
+      core.summary.addRaw(output.summary)
+      core.error('This is a bad error. This will also fail the build.')
+      for (const value of output.annotations) {
+        core.error(value.message, {
+          title: value.title,
+          file: value.path,
+          startLine: value.start_line,
+          endLine: value.end_line,
+          startColumn: value.start_column,
+          endColumn: value.end_column
+        })
+      }
+    }
+
+    if (core.getInput('token') && core.getBooleanInput('create-check')) {
       const octokit = new Octokit()
 
       const owner = github.context.repo.owner
@@ -50,50 +85,6 @@ async function run(): Promise<void> {
       const pr = github.context.payload.pull_request
       const sha = (pr && pr.head.sha) || github.context.sha
 
-      const charactersLimit = 65535
-      let title = core.getInput('title')
-      if (title.length > charactersLimit) {
-        core.warning(
-          `The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        title = title.substring(0, charactersLimit)
-      }
-      let reportSummary = report.reportSummary
-      if (reportSummary.length > charactersLimit) {
-        core.warning(
-          `The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        reportSummary = reportSummary.substring(0, charactersLimit)
-      }
-      let reportDetail = report.reportDetail
-      if (reportDetail.length > charactersLimit) {
-        core.warning(
-          `The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        reportDetail = reportDetail.substring(0, charactersLimit)
-      }
-
-      if (report.annotations.length > 50) {
-        core.warning(
-          'Annotations that exceed the limit (50) will be truncated.'
-        )
-      }
-      const annotations = report.annotations.slice(0, 50)
-      let output
-      if (reportDetail.trim()) {
-        output = {
-          title: 'Xcode test results',
-          summary: reportSummary,
-          text: reportDetail,
-          annotations
-        }
-      } else {
-        output = {
-          title: 'Xcode test results',
-          summary: reportSummary,
-          annotations
-        }
-      }
       await octokit.checks.create({
         owner,
         repo,
@@ -155,4 +146,44 @@ async function mergeResultBundle(
   }
 
   await exec.exec('xcrun', args, options)
+}
+
+function generateOutput(report: TestReport): ReportOutput {
+  const charactersLimit = 65535
+  let reportSummary = report.reportSummary
+  if (reportSummary.length > charactersLimit) {
+    core.warning(
+      `The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`
+    )
+    reportSummary = reportSummary.substring(0, charactersLimit)
+  }
+  let reportDetail = report.reportDetail
+  if (reportDetail.length > charactersLimit) {
+    core.warning(
+      `The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`
+    )
+    reportDetail = reportDetail.substring(0, charactersLimit)
+  }
+
+  if (report.annotations.length > 50) {
+    core.warning('Annotations that exceed the limit (50) will be truncated.')
+  }
+  const annotations = report.annotations.slice(0, 50)
+  let output
+  if (reportDetail.trim()) {
+    output = {
+      title: 'Xcode test results',
+      summary: reportSummary,
+      text: reportDetail,
+      annotations
+    }
+  } else {
+    output = {
+      title: 'Xcode test results',
+      summary: reportSummary,
+      annotations
+    }
+  }
+
+  return output
 }
