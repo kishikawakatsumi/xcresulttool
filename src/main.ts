@@ -8,6 +8,8 @@ import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 import {glob} from 'glob'
 import {promises} from 'fs'
+import {Annotation, TestReport} from './report'
+
 const {stat} = promises
 
 interface ReportOutput {
@@ -78,7 +80,7 @@ async function run(): Promise<void> {
     }
     const output = generateOutput(report)
 
-    core.info(`Setting output: ${JSON.stringify(report.stats, null, 2)}`)
+    if (core.getBooleanInput('create-job-summary')) {
     core.setOutput('failed_tests', report.stats?.failed ?? 0)
     core.setOutput('passed_tests', report.stats?.passed ?? 0)
     core.setOutput('skipped_tests', report.stats?.skipped ?? 0)
@@ -86,18 +88,18 @@ async function run(): Promise<void> {
 
     if (createJobSummary) {
       core.info('Creating job summary')
-      await core.summary.addHeading(output.title).addRaw(output.summary).write()
+      core.summary.addHeading(output.title)
       core.summary.addRaw(output.summary)
       core.error('This is a bad error. This will also fail the build.')
-      for (const annotation of report.annotations) {
-        const properties: core.AnnotationProperties = {
-          title: annotation.title,
-          file: annotation.path,
-          startLine: annotation.start_line,
-          endLine: annotation.end_line,
-          startColumn: annotation.start_column,
-          endColumn: annotation.end_column
-        }
+      for (const value of output.annotations) {
+        core.error(value.message, {
+          title: value.title,
+          file: value.path,
+          startLine: value.start_line,
+          endLine: value.end_line,
+          startColumn: value.start_column,
+          endColumn: value.end_column
+        })
         if (annotation.annotation_level === 'failure') {
           core.error(annotation.message, properties)
         } else if (annotation.annotation_level === 'warning') {
@@ -112,7 +114,7 @@ async function run(): Promise<void> {
       }
     }
 
-    if (core.getBooleanInput('create-check')) {
+    if (core.getInput('token') && core.getBooleanInput('create-check')) {
       const octokit = new Octokit()
 
       const owner = github.context.repo.owner
@@ -121,50 +123,6 @@ async function run(): Promise<void> {
       const pr = github.context.payload.pull_request
       const sha = (pr && pr.head.sha) || github.context.sha
 
-      const charactersLimit = 65535
-      let title = core.getInput('title')
-      if (title.length > charactersLimit) {
-        core.warning(
-          `The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        title = title.substring(0, charactersLimit)
-      }
-      let reportSummary = report.reportSummary
-      if (reportSummary.length > charactersLimit) {
-        core.warning(
-          `The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        reportSummary = reportSummary.substring(0, charactersLimit)
-      }
-      let reportDetail = report.reportDetail
-      if (reportDetail.length > charactersLimit) {
-        core.warning(
-          `The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        reportDetail = reportDetail.substring(0, charactersLimit)
-      }
-
-      if (report.annotations.length > 50) {
-        core.warning(
-          'Annotations that exceed the limit (50) will be truncated.'
-        )
-      }
-      const annotations = report.annotations.slice(0, 50)
-      let output
-      if (reportDetail.trim()) {
-        output = {
-          title: 'Xcode test results',
-          summary: reportSummary,
-          text: reportDetail,
-          annotations
-        }
-      } else {
-        output = {
-          title: 'Xcode test results',
-          summary: reportSummary,
-          annotations
-        }
-      }
       await octokit.checks.create({
         ...github.context.repo,
         name: title,
@@ -251,4 +209,44 @@ async function mergeResultBundle(
   }
 
   await exec.exec('xcrun', args, options)
+}
+
+function generateOutput(report: TestReport): ReportOutput {
+  const charactersLimit = 65535
+  let reportSummary = report.reportSummary
+  if (reportSummary.length > charactersLimit) {
+    core.warning(
+      `The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`
+    )
+    reportSummary = reportSummary.substring(0, charactersLimit)
+  }
+  let reportDetail = report.reportDetail
+  if (reportDetail.length > charactersLimit) {
+    core.warning(
+      `The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`
+    )
+    reportDetail = reportDetail.substring(0, charactersLimit)
+  }
+
+  if (report.annotations.length > 50) {
+    core.warning('Annotations that exceed the limit (50) will be truncated.')
+  }
+  const annotations = report.annotations.slice(0, 50)
+  let output
+  if (reportDetail.trim()) {
+    output = {
+      title: 'Xcode test results',
+      summary: reportSummary,
+      text: reportDetail,
+      annotations
+    }
+  } else {
+    output = {
+      title: 'Xcode test results',
+      summary: reportSummary,
+      annotations
+    }
+  }
+
+  return output
 }

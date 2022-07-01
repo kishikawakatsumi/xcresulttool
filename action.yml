@@ -28,11 +28,11 @@ inputs:
   create-check:
     description: 'Whether to create a check'
     required: false
-    default: 'true'
+    default: true
   create-job-summary:
     description: 'Whether to create a job summary. Should be used if the actions is not triggered via pull request'
     required: false
-    default: false
+    default: true
 outputs:
   failed_tests:
     description: 'Number of failed tests'
