@@ -146,6 +146,8 @@ async function run(): Promise<void> {
         })
       }
     }
+
+    core.debug(JSON.stringify(report.stats, null, 2))
   } catch (error) {
     core.setFailed((error as Error).message)
   }

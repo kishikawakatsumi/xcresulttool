@@ -231,8 +231,6 @@ export class Formatter {
         groups[identifier] = group
       }
 
-      testReport.stats = testSummary.stats
-
       chapterSummary.content.push('### Summary')
 
       chapterSummary.content.push('<table>')
@@ -274,6 +272,8 @@ export class Formatter {
       } else if (testSummary.stats.passed > 0) {
         testReport.testStatus = 'success'
       }
+
+      testReport.stats = testSummary.stats
 
       chapterSummary.content.push('### Test Summary')
 
