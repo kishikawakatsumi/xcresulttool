@@ -224,6 +224,8 @@ async function run(): Promise<void> {
         }
       }
     }
+
+    core.debug(JSON.stringify(report.stats, null, 2))
   } catch (error) {
     core.info('An unexpected error occurred')
     core.setFailed((error as Error).message)

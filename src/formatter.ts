@@ -272,6 +272,8 @@ export class Formatter {
         testReport.testStatus = 'success'
       }
 
+      testReport.stats = testSummary.stats
+
       chapterSummary.content.push('### Test Summary')
 
       for (const [groupIdentifier, group] of Object.entries(
