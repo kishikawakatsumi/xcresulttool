@@ -54,6 +54,14 @@ const testClassIcon = Image.icon('test-class.png')
 const testMethodIcon = Image.icon('test-method.png')
 const attachmentIcon = Image.icon('attachment.png')
 
+export class TestSummaryStats {
+  passed = 0
+  failed = 0
+  skipped = 0
+  expectedFailure = 0
+  total = 0
+}
+
 export class Formatter {
   readonly summaries = ''
   readonly details = ''
@@ -145,13 +153,6 @@ export class Formatter {
       }
     }
 
-    class TestSummaryStats {
-      passed = 0
-      failed = 0
-      skipped = 0
-      expectedFailure = 0
-      total = 0
-    }
     type TestSummaryStatsGroup = {[key: string]: TestSummaryStats}
     const testSummary = {
       stats: new TestSummaryStats(),
@@ -229,6 +230,8 @@ export class Formatter {
         const groups = testSummary.groups
         groups[identifier] = group
       }
+
+      testReport.stats = testSummary.stats
 
       chapterSummary.content.push('### Summary')
 

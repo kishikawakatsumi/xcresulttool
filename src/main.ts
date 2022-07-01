@@ -60,6 +60,11 @@ async function run(): Promise<void> {
     }
     const output = generateOutput(report)
 
+    core.setOutput('failed_tests', report.stats?.failed ?? 0)
+    core.setOutput('passed_tests', report.stats?.passed ?? 0)
+    core.setOutput('skipped_tests', report.stats?.skipped ?? 0)
+    core.setOutput('total_tests', report.stats?.total ?? 0)
+
     if (core.getBooleanInput('create-job-summary')) {
       core.summary.addHeading(output.title)
       core.summary.addRaw(output.summary)

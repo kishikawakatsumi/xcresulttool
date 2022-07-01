@@ -25,7 +25,16 @@ inputs:
     default: true
   create-job-summary:
     description: 'Whether to create a job summary. Should be used if the actions is not triggered via pull request'
-    default: true
+    default: false
+outputs:
+  failed_tests:
+    description: 'Number of failed tests'
+  passed_tests:
+    description: 'Number of passed tests'
+  skipped_tests:
+    description: 'Number of passed tests'
+  total_tests:
+    description: 'Number of total tests'
 runs:
   using: 'node16'
   main: 'dist/index.js'
