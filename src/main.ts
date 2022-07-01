@@ -25,6 +25,15 @@ async function run(): Promise<void> {
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
     const uploadBundles = core.getBooleanInput('upload-bundles')
+    const token =
+      core.getInput('token') ||
+      core.getInput('github_token') ||
+      process.env.GITHUB_TOKEN
+
+    if (!token) {
+      core.setFailed('❌ A token is required to execute this action')
+      return
+    }
 
     const bundlePaths: string[] = []
     for (const checkPath of inputPaths) {
@@ -66,70 +75,75 @@ async function run(): Promise<void> {
     core.setOutput('total_tests', report.stats?.total ?? 0)
 
     if (core.getBooleanInput('create-job-summary')) {
-      core.summary.addHeading(output.title)
-      core.summary.addRaw(output.summary)
-      core.error('This is a bad error. This will also fail the build.')
-      for (const value of output.annotations) {
-        core.error(value.message, {
-          title: value.title,
-          file: value.path,
-          startLine: value.start_line,
-          endLine: value.end_line,
-          startColumn: value.start_column,
-          endColumn: value.end_column
-        })
+      await core.summary.addHeading(output.title).addRaw(output.summary).write()
+      for (const annotation of report.annotations) {
+        const properties: core.AnnotationProperties = {
+          title: annotation.title,
+          file: annotation.path,
+          startLine: annotation.start_line,
+          endLine: annotation.end_line,
+          startColumn: annotation.start_column,
+          endColumn: annotation.end_column
+        }
+        if (annotation.annotation_level === 'failure') {
+          core.error(annotation.message, properties)
+        } else if (annotation.annotation_level === 'warning') {
+          core.warning(annotation.message, properties)
+        } else {
+          core.notice(annotation.message, properties)
+        }
+      }
+
+      if (report.testStatus === 'failure') {
+        core.setFailed(`❌ Tests reported ${report.stats?.failed} failures`)
       }
     }
 
-    if (core.getInput('token') && core.getBooleanInput('create-check')) {
+    if (core.getBooleanInput('create-check')) {
       const octokit = new Octokit()
-
-      const owner = github.context.repo.owner
-      const repo = github.context.repo.repo
 
       const pr = github.context.payload.pull_request
       const sha = (pr && pr.head.sha) || github.context.sha
 
       await octokit.checks.create({
-        owner,
-        repo,
+        ...github.context.repo,
         name: title,
         head_sha: sha,
         status: 'completed',
         conclusion: report.testStatus,
         output
       })
+    }
 
-      if (uploadBundles) {
-        for (const uploadBundlePath of inputPaths) {
-          try {
-            await stat(uploadBundlePath)
-          } catch (error) {
-            continue
-          }
-
-          const artifactClient = artifact.create()
-          const artifactName = path.basename(uploadBundlePath)
-
-          const rootDirectory = uploadBundlePath
-          const options = {
-            continueOnError: false
-          }
-
-          glob(`${uploadBundlePath}/**/*`, async (error, files) => {
-            if (error) {
-              core.error(error)
-            }
-            if (files.length) {
-              await artifactClient.uploadArtifact(
-                artifactName,
-                files,
-                rootDirectory,
-                options
-              )
-            }
-          })
+    if (uploadBundles) {
+      for (const uploadBundlePath of inputPaths) {
+        try {
+          await stat(uploadBundlePath)
+        } catch (error) {
+          continue
         }
+
+        const artifactClient = artifact.create()
+        const artifactName = path.basename(uploadBundlePath)
+
+        const rootDirectory = uploadBundlePath
+        const options = {
+          continueOnError: false
+        }
+
+        glob(`${uploadBundlePath}/**/*`, async (error, files) => {
+          if (error) {
+            core.error(error)
+          }
+          if (files.length) {
+            await artifactClient.uploadArtifact(
+              artifactName,
+              files,
+              rootDirectory,
+              options
+            )
+          }
+        })
       }
     }
   } catch (error) {
