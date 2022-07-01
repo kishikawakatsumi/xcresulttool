@@ -10,6 +10,13 @@ import {glob} from 'glob'
 import {promises} from 'fs'
 const {stat} = promises
 
+interface ReportOutput {
+  title: string
+  summary: string
+  text?: string
+  annotations: Annotation[]
+}
+
 async function run(): Promise<void> {
   try {
     const inputPaths = core.getMultilineInput('path')
@@ -98,18 +105,13 @@ async function run(): Promise<void> {
         }
       }
 
-      core.info(
-        `Tests reported ${report.stats?.failed}/${report.stats?.total} failures`
-      )
+      if (report.testStatus === 'failure') {
+        core.setFailed(`❌ Tests reported ${report.stats?.failed} failures`)
+      }
     }
 
-    if (createCheck) {
-      core.info('Creating job check')
->>>>>>> f9c7918 (Don't fail if token is missing to mimic original behaviour)
+    if (core.getBooleanInput('create-check')) {
       const octokit = new Octokit()
-
-      const owner = github.context.repo.owner
-      const repo = github.context.repo.repo
 
       const pr = github.context.payload.pull_request
       const sha = (pr && pr.head.sha) || github.context.sha
@@ -159,14 +161,14 @@ async function run(): Promise<void> {
         }
       }
       await octokit.checks.create({
-        owner,
-        repo,
+        ...github.context.repo,
         name: title,
         head_sha: sha,
         status: 'completed',
         conclusion: report.testStatus,
         output
       })
+    }
 
 <<<<<<< HEAD
       if (uploadBundles) {
@@ -199,29 +201,15 @@ async function run(): Promise<void> {
             core.error(error)
 >>>>>>> 5bb51bd (Adds logging)
           }
-
-          const artifactClient = artifact.create()
-          const artifactName = path.basename(uploadBundlePath)
-
-          const rootDirectory = uploadBundlePath
-          const options = {
-            continueOnError: false
+          if (files.length) {
+            await artifactClient.uploadArtifact(
+              artifactName,
+              files,
+              rootDirectory,
+              options
+            )
           }
-
-          glob(`${uploadBundlePath}/**/*`, async (error, files) => {
-            if (error) {
-              core.error(error)
-            }
-            if (files.length) {
-              await artifactClient.uploadArtifact(
-                artifactName,
-                files,
-                rootDirectory,
-                options
-              )
-            }
-          })
-        }
+        })
       }
     }
 
