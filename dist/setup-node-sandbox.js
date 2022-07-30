@@ -148,7 +148,7 @@ Module._cache = {__proto__: null};
 function findBestExtensionHandler(filename) {
 	const name = resolver.pathBasename(filename);
 	for (let i = 0; (i = localStringPrototypeIndexOf(name, '.', i + 1)) !== -1;) {
-		const ext = localStringPrototypeSlice(name, i + 1);
+		const ext = localStringPrototypeSlice(name, i);
 		const handler = Module._extensions[ext];
 		if (handler) return handler;
 	}
@@ -330,6 +330,8 @@ function process() {
 	return this;
 }
 
+const baseUptime = localProcess.uptime();
+
 // FIXME wrong class structure
 global.process = {
 	__proto__: process.prototype,
@@ -353,6 +355,9 @@ global.process = {
 	},
 	hrtime: function hrtime(time) {
 		return localProcess.hrtime(time);
+	},
+	uptime: function uptime() {
+		return localProcess.uptime() - baseUptime;
 	},
 	cwd: function cwd() {
 		return localProcess.cwd();
@@ -459,5 +464,6 @@ return {
 	__proto__: null,
 	Module,
 	jsonParse: JSON.parse,
-	createRequireForModule
+	createRequireForModule,
+	requireImpl
 };

@@ -21,7 +21,7 @@ inputs:
     description: 'Whether to upload the xcresult bundles'
     default: true
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
 branding:
   icon: 'file-text'
