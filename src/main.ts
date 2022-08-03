@@ -24,7 +24,11 @@ async function run(): Promise<void> {
       core.getInput('token') ||
       core.getInput('github_token') ||
       process.env.GITHUB_TOKEN
->>>>>>> f9c7918 (Don't fail if token is missing to mimic original behaviour)
+
+    if (!token) {
+      core.setFailed('❌ A token is required to execute this action')
+      return
+    }
 
     const bundlePaths: string[] = []
     for (const checkPath of inputPaths) {
@@ -67,6 +71,7 @@ async function run(): Promise<void> {
     }
     const output = generateOutput(report)
 
+    core.info(`Setting output: ${JSON.stringify(report.stats, null, 2)}`)
     core.setOutput('failed_tests', report.stats?.failed ?? 0)
     core.setOutput('passed_tests', report.stats?.passed ?? 0)
     core.setOutput('skipped_tests', report.stats?.skipped ?? 0)
