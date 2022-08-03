@@ -756,7 +756,7 @@ depd
 MIT
 (The MIT License)
 
-Copyright (c) 2014-2018 Douglas Christopher Wilson
+Copyright (c) 2014-2017 Douglas Christopher Wilson
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1037,7 +1037,7 @@ graceful-fs
 ISC
 The ISC License
 
-Copyright (c) 2011-2022 Isaac Z. Schlueter, Ben Noordhuis, and Contributors
+Copyright (c) Isaac Z. Schlueter, Ben Noordhuis, and Contributors
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -1411,7 +1411,7 @@ MIT
 The MIT License (MIT)
 
 Copyright (c) 2013-2014 Jonathan Ong <me@jongleberry.com>
-Copyright (c) 2014-2022 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2014-2015 Douglas Christopher Wilson <doug@somethingdoug.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

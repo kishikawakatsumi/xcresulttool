@@ -9,7 +9,7 @@ import {ActionTestableSummary} from '../dev/@types/ActionTestableSummary.d'
 import {ActivityLogCommandInvocationSection} from '../dev/@types/ActivityLogCommandInvocationSection.d'
 import {ActivityLogSection} from '../dev/@types/ActivityLogSection.d'
 import {CodeCoverage} from './coverage'
-import {TestSummaryStats} from './formatter';
+import {TestSummaryStats} from './formatter'
 
 export class TestReport {
   entityName?: string
