@@ -69,12 +69,14 @@ async function run(): Promise<void> {
     }
     const output = generateOutput(report)
 
+    core.info(`Setting output: ${JSON.stringify(report.stats, null, 2)}`)
     core.setOutput('failed_tests', report.stats?.failed ?? 0)
     core.setOutput('passed_tests', report.stats?.passed ?? 0)
     core.setOutput('skipped_tests', report.stats?.skipped ?? 0)
     core.setOutput('total_tests', report.stats?.total ?? 0)
 
     if (core.getBooleanInput('create-job-summary')) {
+      core.info('Creating job summary')
       await core.summary.addHeading(output.title).addRaw(output.summary).write()
       for (const annotation of report.annotations) {
         const properties: core.AnnotationProperties = {
@@ -100,6 +102,7 @@ async function run(): Promise<void> {
     }
 
     if (core.getBooleanInput('create-check')) {
+      core.info('Creating job check')
       const octokit = new Octokit()
 
       const pr = github.context.payload.pull_request
