@@ -1185,7 +1185,7 @@ const glob_1 = __nccwpck_require__(1957);
 const fs_1 = __nccwpck_require__(7147);
 const { stat } = fs_1.promises;
 function run() {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const inputPaths = core.getMultilineInput('path');
@@ -1230,7 +1230,6 @@ function run() {
                 title = title.substring(0, charactersLimit);
             }
             const output = generateOutput(report);
-            core.info(`Setting output: ${JSON.stringify(report.stats, null, 2)}`);
             core.setOutput('failed_tests', (_b = (_a = report.stats) === null || _a === void 0 ? void 0 : _a.failed) !== null && _b !== void 0 ? _b : 0);
             core.setOutput('passed_tests', (_d = (_c = report.stats) === null || _c === void 0 ? void 0 : _c.passed) !== null && _d !== void 0 ? _d : 0);
             core.setOutput('skipped_tests', (_f = (_e = report.stats) === null || _e === void 0 ? void 0 : _e.skipped) !== null && _f !== void 0 ? _f : 0);
@@ -1257,9 +1256,7 @@ function run() {
                         core.notice(annotation.message, properties);
                     }
                 }
-                if (report.testStatus === 'failure') {
-                    core.setFailed(`❌ Tests reported ${(_j = report.stats) === null || _j === void 0 ? void 0 : _j.failed} failures`);
-                }
+                core.info(`Tests reported ${(_j = report.stats) === null || _j === void 0 ? void 0 : _j.failed}/${(_k = report.stats) === null || _k === void 0 ? void 0 : _k.total} failures`);
             }
             if (core.getBooleanInput('create-check')) {
                 core.info('Creating job check');
@@ -1292,7 +1289,6 @@ function run() {
                     }));
                 }
             }
-            core.debug(JSON.stringify(report.stats, null, 2));
         }
         catch (error) {
             core.setFailed(error.message);
