@@ -1192,13 +1192,11 @@ function run() {
             const showPassedTests = core.getBooleanInput('show-passed-tests');
             const showCodeCoverage = core.getBooleanInput('show-code-coverage');
             const uploadBundles = core.getBooleanInput('upload-bundles');
+            const createCheck = core.getBooleanInput('create-check');
+            const createJobSummary = core.getBooleanInput('create-job-summary');
             const token = core.getInput('token') ||
                 core.getInput('github_token') ||
                 process.env.GITHUB_TOKEN;
-            if (!token) {
-                core.setFailed('❌ A token is required to execute this action');
-                return;
-            }
             const bundlePaths = [];
             for (const checkPath of inputPaths) {
                 try {
@@ -1223,6 +1221,9 @@ function run() {
                 showPassedTests,
                 showCodeCoverage
             });
+            if (!token) {
+                return;
+            }
             const charactersLimit = 65535;
             let title = core.getInput('title');
             if (title.length > charactersLimit) {
@@ -1234,7 +1235,7 @@ function run() {
             core.setOutput('passed_tests', (_d = (_c = report.stats) === null || _c === void 0 ? void 0 : _c.passed) !== null && _d !== void 0 ? _d : 0);
             core.setOutput('skipped_tests', (_f = (_e = report.stats) === null || _e === void 0 ? void 0 : _e.skipped) !== null && _f !== void 0 ? _f : 0);
             core.setOutput('total_tests', (_h = (_g = report.stats) === null || _g === void 0 ? void 0 : _g.total) !== null && _h !== void 0 ? _h : 0);
-            if (core.getBooleanInput('create-job-summary')) {
+            if (createJobSummary) {
                 core.info('Creating job summary');
                 yield core.summary.addHeading(output.title).addRaw(output.summary).write();
                 for (const annotation of report.annotations) {
@@ -1258,7 +1259,7 @@ function run() {
                 }
                 core.info(`Tests reported ${(_j = report.stats) === null || _j === void 0 ? void 0 : _j.failed}/${(_k = report.stats) === null || _k === void 0 ? void 0 : _k.total} failures`);
             }
-            if (core.getBooleanInput('create-check')) {
+            if (createCheck) {
                 core.info('Creating job check');
                 const octokit = new action_1.Octokit();
                 const pr = github.context.payload.pull_request;

@@ -25,15 +25,12 @@ async function run(): Promise<void> {
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
     const uploadBundles = core.getBooleanInput('upload-bundles')
+    const createCheck = core.getBooleanInput('create-check')
+    const createJobSummary = core.getBooleanInput('create-job-summary')
     const token =
       core.getInput('token') ||
       core.getInput('github_token') ||
       process.env.GITHUB_TOKEN
-
-    if (!token) {
-      core.setFailed('❌ A token is required to execute this action')
-      return
-    }
 
     const bundlePaths: string[] = []
     for (const checkPath of inputPaths) {
@@ -59,6 +56,10 @@ async function run(): Promise<void> {
       showCodeCoverage
     })
 
+    if (!token) {
+      return
+    }
+
     const charactersLimit = 65535
     let title = core.getInput('title')
     if (title.length > charactersLimit) {
@@ -74,7 +75,7 @@ async function run(): Promise<void> {
     core.setOutput('skipped_tests', report.stats?.skipped ?? 0)
     core.setOutput('total_tests', report.stats?.total ?? 0)
 
-    if (core.getBooleanInput('create-job-summary')) {
+    if (createJobSummary) {
       core.info('Creating job summary')
       await core.summary.addHeading(output.title).addRaw(output.summary).write()
       for (const annotation of report.annotations) {
@@ -100,7 +101,7 @@ async function run(): Promise<void> {
       )
     }
 
-    if (core.getBooleanInput('create-check')) {
+    if (createCheck) {
       core.info('Creating job check')
       const octokit = new Octokit()
 
