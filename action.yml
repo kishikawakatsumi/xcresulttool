@@ -20,6 +20,19 @@ inputs:
   upload-bundles:
     description: 'Whether to upload the xcresult bundles'
     default: true
+  create-job-summary:
+    description: 'Whether to create a job summary. Should be used if the actions is not triggered via pull request'
+    required: false
+    default: 'false'
+outputs:
+  failed_tests:
+    description: 'Number of failed tests'
+  passed_tests:
+    description: 'Number of passed tests'
+  skipped_tests:
+    description: 'Number of skipped tests'
+  total_tests:
+    description: 'Number of total tests'
 runs:
   using: 'node16'
   main: 'dist/index.js'
