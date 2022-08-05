@@ -39,7 +39,7 @@ outputs:
   passed_tests:
     description: 'Number of passed tests'
   skipped_tests:
-    description: 'Number of passed tests'
+    description: 'Number of skipped tests'
   total_tests:
     description: 'Number of total tests'
 runs:
