@@ -16,6 +16,15 @@ async function run(): Promise<void> {
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
     const uploadBundles = core.getBooleanInput('upload-bundles')
+<<<<<<< HEAD
+=======
+    const createCheck = core.getBooleanInput('create-check')
+    const createJobSummary = core.getBooleanInput('create-job-summary')
+    const token =
+      core.getInput('token') ||
+      core.getInput('github_token') ||
+      process.env.GITHUB_TOKEN
+>>>>>>> f9c7918 (Don't fail if token is missing to mimic original behaviour)
 
     const bundlePaths: string[] = []
     for (const checkPath of inputPaths) {
@@ -41,7 +50,57 @@ async function run(): Promise<void> {
       showCodeCoverage
     })
 
+<<<<<<< HEAD
     if (core.getInput('token')) {
+=======
+    if (!token) {
+      return
+    }
+
+    const charactersLimit = 65535
+    let title = core.getInput('title')
+    if (title.length > charactersLimit) {
+      core.warning(
+        `The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`
+      )
+      title = title.substring(0, charactersLimit)
+    }
+    const output = generateOutput(report)
+
+    core.setOutput('failed_tests', report.stats?.failed ?? 0)
+    core.setOutput('passed_tests', report.stats?.passed ?? 0)
+    core.setOutput('skipped_tests', report.stats?.skipped ?? 0)
+    core.setOutput('total_tests', report.stats?.total ?? 0)
+
+    if (createJobSummary) {
+      core.info('Creating job summary')
+      await core.summary.addHeading(output.title).addRaw(output.summary).write()
+      for (const annotation of report.annotations) {
+        const properties: core.AnnotationProperties = {
+          title: annotation.title,
+          file: annotation.path,
+          startLine: annotation.start_line,
+          endLine: annotation.end_line,
+          startColumn: annotation.start_column,
+          endColumn: annotation.end_column
+        }
+        if (annotation.annotation_level === 'failure') {
+          core.error(annotation.message, properties)
+        } else if (annotation.annotation_level === 'warning') {
+          core.warning(annotation.message, properties)
+        } else {
+          core.notice(annotation.message, properties)
+        }
+      }
+
+      core.info(
+        `Tests reported ${report.stats?.failed}/${report.stats?.total} failures`
+      )
+    }
+
+    if (createCheck) {
+      core.info('Creating job check')
+>>>>>>> f9c7918 (Don't fail if token is missing to mimic original behaviour)
       const octokit = new Octokit()
 
       const owner = github.context.repo.owner
