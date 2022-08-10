@@ -104,12 +104,36 @@ async function run(): Promise<void> {
         output
       })
 
+<<<<<<< HEAD
       if (uploadBundles) {
         for (const uploadBundlePath of inputPaths) {
           try {
             await stat(uploadBundlePath)
           } catch (error) {
             continue
+=======
+    if (uploadBundles) {
+      core.info('Uploading bundle')
+      for (const uploadBundlePath of inputPaths) {
+        try {
+          await stat(uploadBundlePath)
+        } catch (error) {
+          continue
+        }
+
+        const artifactClient = artifact.create()
+        const artifactName = path.basename(uploadBundlePath)
+
+        const rootDirectory = uploadBundlePath
+        const options = {
+          continueOnError: false
+        }
+
+        glob(`${uploadBundlePath}/**/*`, async (error, files) => {
+          if (error) {
+            core.info('An error occurred while searching for bundle')
+            core.error(error)
+>>>>>>> 5bb51bd (Adds logging)
           }
 
           const artifactClient = artifact.create()
@@ -137,6 +161,7 @@ async function run(): Promise<void> {
       }
     }
   } catch (error) {
+    core.info('An unexpected error occurred')
     core.setFailed((error as Error).message)
   }
 }
