@@ -119,6 +119,7 @@ async function run(): Promise<void> {
     }
 
     if (uploadBundles) {
+      core.info('Uploading bundle')
       for (const uploadBundlePath of inputPaths) {
         try {
           await stat(uploadBundlePath)
@@ -136,6 +137,7 @@ async function run(): Promise<void> {
 
         glob(`${uploadBundlePath}/**/*`, async (error, files) => {
           if (error) {
+            core.info('An error occurred while searching for bundle')
             core.error(error)
           }
           if (files.length) {
@@ -150,6 +152,7 @@ async function run(): Promise<void> {
       }
     }
   } catch (error) {
+    core.info('An unexpected error occurred')
     core.setFailed((error as Error).message)
   }
 }
