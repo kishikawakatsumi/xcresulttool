@@ -381,11 +381,13 @@ export class BuildLog {
                   const value = parseInt(pair[1])
                   switch (pair[0]) {
                     case 'StartingLineNumber': {
-                      startLine = value
+                      // StartingLineNumber is 0-based, but we need a 1-based value
+                      startLine = value + 1
                       break
                     }
                     case 'EndingLineNumber': {
-                      endLine = value
+                      // EndingLineNumber is 0-based, but we need a 1-based value
+                      endLine = value + 1
                       break
                     }
                     default:
