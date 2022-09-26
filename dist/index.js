@@ -1214,6 +1214,7 @@ function run() {
                 showCodeCoverage
             });
             if (core.getInput('token')) {
+                yield core.summary.addRaw(report.reportSummary).write();
                 const octokit = new action_1.Octokit();
                 const owner = github.context.repo.owner;
                 const repo = github.context.repo.repo;

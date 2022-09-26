@@ -42,6 +42,8 @@ async function run(): Promise<void> {
     })
 
     if (core.getInput('token')) {
+      await core.summary.addRaw(report.reportSummary).write()
+
       const octokit = new Octokit()
 
       const owner = github.context.repo.owner
