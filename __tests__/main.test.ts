@@ -7,7 +7,6 @@ import {expect, test} from '@jest/globals'
 import {promises} from 'fs'
 const {readFile, writeFile} = promises
 import {Formatter, FormatterOptions} from '../src/formatter'
-import {ExecException} from 'child_process'
 
 test('Example.xcresult', async () => {
   const bundlePath = '__tests__/data/Example.xcresult'
@@ -277,8 +276,6 @@ test('test runs', () => {
   process.env['INPUT_SHOW-PASSED-TESTS'] = 'true'
   process.env['INPUT_SHOW-CODE-COVERAGE'] = 'true'
   process.env['INPUT_UPLOAD-BUNDLES'] = 'true'
-  process.env['INPUT_CREATE-CHECK'] = 'true'
-  process.env['INPUT_CREATE-JOB-SUMMARY'] = 'false'
   const np = process.execPath
   const ip = path.join(__dirname, '..', 'lib', 'main.js')
   const options: cp.ExecFileSyncOptions = {

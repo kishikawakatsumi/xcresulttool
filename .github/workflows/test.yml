@@ -26,12 +26,6 @@ jobs:
       - uses: ./
         with:
           path: __tests__/data/Example.xcresult
-          title: Example test job summary
-          create-job-summary: true
-          create-check: false
-      - uses: ./
-        with:
-          path: __tests__/data/Example.xcresult
           title: Example Failures Only test report
           show-passed-tests: false
       - uses: ./
