@@ -1781,11 +1781,13 @@ class BuildLog {
                                         const value = parseInt(pair[1]);
                                         switch (pair[0]) {
                                             case 'StartingLineNumber': {
-                                                startLine = value;
+                                                // StartingLineNumber is 0-based, but we need a 1-based value
+                                                // see https://github.com/diogot/danger-xcode_summary/blob/master/lib/xcode_summary/plugin.rb#L207
+                                                startLine = value + 1;
                                                 break;
                                             }
                                             case 'EndingLineNumber': {
-                                                endLine = value;
+                                                endLine = value + 1;
                                                 break;
                                             }
                                             default:
@@ -1840,11 +1842,11 @@ class BuildLog {
                                     const value = parseInt(pair[1]);
                                     switch (pair[0]) {
                                         case 'StartingLineNumber': {
-                                            startLine = value;
+                                            startLine = value + 1;
                                             break;
                                         }
                                         case 'EndingLineNumber': {
-                                            endLine = value;
+                                            endLine = value + 1;
                                             break;
                                         }
                                         default:
@@ -5874,8 +5876,9 @@ exports.context = new Context.Context();
  * @param     token    the repo PAT or GITHUB_TOKEN
  * @param     options  other options to set
  */
-function getOctokit(token, options) {
-    return new utils_1.GitHub(utils_1.getOctokitOptions(token, options));
+function getOctokit(token, options, ...additionalPlugins) {
+    const GitHubWithPlugins = utils_1.GitHub.plugin(...additionalPlugins);
+    return new GitHubWithPlugins(utils_1.getOctokitOptions(token, options));
 }
 exports.getOctokit = getOctokit;
 //# sourceMappingURL=github.js.map
