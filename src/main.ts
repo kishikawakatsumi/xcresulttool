@@ -106,7 +106,10 @@ async function run(): Promise<void> {
         output
       })
 
-      if (uploadBundles == "always" || (uploadBundles == "failure" && report.testStatus != "Success")) {
+      if (
+        uploadBundles === 'always' ||
+        (uploadBundles === 'failure' && report.testStatus !== 'Success')
+      ) {
         for (const uploadBundlePath of inputPaths) {
           try {
             await stat(uploadBundlePath)
