@@ -18,8 +18,8 @@ inputs:
     description: 'Whether to show code coverage'
     default: true
   upload-bundles:
-    description: 'Whether to upload the xcresult bundles'
-    default: true
+    description: 'Whether to upload the xcresult bundles. possible values: always, failure, never. Specifying failure will only upload the bundle if all the tests do not pass.'
+    default: always
 runs:
   using: 'node16'
   main: 'dist/index.js'

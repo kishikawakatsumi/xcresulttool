@@ -15,7 +15,7 @@ async function run(): Promise<void> {
     const inputPaths = core.getMultilineInput('path')
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
-    const uploadBundles = core.getBooleanInput('upload-bundles')
+    const uploadBundles = core.getInput('upload-bundles').toLowerCase()
 
     const bundlePaths: string[] = []
     for (const checkPath of inputPaths) {
@@ -106,7 +106,7 @@ async function run(): Promise<void> {
         output
       })
 
-      if (uploadBundles) {
+      if (uploadBundles == "always" || (uploadBundles == "failure" && report.testStatus != "Success")) {
         for (const uploadBundlePath of inputPaths) {
           try {
             await stat(uploadBundlePath)
