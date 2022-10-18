@@ -1266,7 +1266,7 @@ function run() {
                     output
                 });
                 if (uploadBundles === 'always' ||
-                    (uploadBundles === 'failure' && report.testStatus !== 'Success')) {
+                    (uploadBundles === 'failure' && report.testStatus === 'failure')) {
                     for (const uploadBundlePath of inputPaths) {
                         try {
                             yield stat(uploadBundlePath);
