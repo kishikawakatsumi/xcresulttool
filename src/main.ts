@@ -108,7 +108,7 @@ async function run(): Promise<void> {
 
       if (
         uploadBundles === 'always' ||
-        (uploadBundles === 'failure' && report.testStatus !== 'Success')
+        (uploadBundles === 'failure' && report.testStatus === 'failure')
       ) {
         for (const uploadBundlePath of inputPaths) {
           try {
