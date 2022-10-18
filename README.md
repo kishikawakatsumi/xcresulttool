@@ -114,9 +114,9 @@ jobs:
     # Default: true
     show-code-coverage:
 
-    # Whether to upload the xcresult bundles.
+    # Whether to upload the xcresult bundles. possible values: always, failure, never. Specifying failure will only upload the bundle if all the tests do not pass.
     #
-    # Default: true
+    # Default: 'always'
     upload-bundles:
 ```
 
