@@ -1188,7 +1188,13 @@ function run() {
             const inputPaths = core.getMultilineInput('path');
             const showPassedTests = core.getBooleanInput('show-passed-tests');
             const showCodeCoverage = core.getBooleanInput('show-code-coverage');
-            const uploadBundles = core.getInput('upload-bundles').toLowerCase();
+            let uploadBundles = core.getInput('upload-bundles').toLowerCase();
+            if (uploadBundles === "true") {
+                uploadBundles = "always";
+            }
+            else if (uploadBundles === "false") {
+                uploadBundles = "never";
+            }
             const bundlePaths = [];
             for (const checkPath of inputPaths) {
                 try {

@@ -16,10 +16,10 @@ async function run(): Promise<void> {
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
     let uploadBundles = core.getInput('upload-bundles').toLowerCase()
-    if (uploadBundles === "true") {
-      uploadBundles = "always"
-    } else if (uploadBundles === "false") {
-      uploadBundles = "never"
+    if (uploadBundles === 'true') {
+      uploadBundles = 'always'
+    } else if (uploadBundles === 'false') {
+      uploadBundles = 'never'
     }
 
     const bundlePaths: string[] = []
