@@ -881,6 +881,10 @@ export class Formatter {
     tests: actionTestSummaries,
     testSummaries: actionTestSummaries
   ): Promise<void> {
+    if (!tests) {
+      return
+    }
+
     for (const test of tests) {
       if (test.hasOwnProperty('subtests')) {
         const group = test as ActionTestSummaryGroup
