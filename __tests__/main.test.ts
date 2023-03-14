@@ -271,6 +271,31 @@ test('NoTests.xcresult', async () => {
   )
 })
 
+test('TestResults#669.xcresult', async () => {
+  const bundlePath = '__tests__/data/TestResults#669.xcresult'
+  const formatter = new Formatter(bundlePath)
+  const report = await formatter.format()
+
+  let root = ''
+  if (process.env.GITHUB_REPOSITORY) {
+    const pr = github.context.payload.pull_request
+    const sha = (pr && pr.head.sha) || github.context.sha
+    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`
+  }
+  const re = new RegExp(`${root}`, 'g')
+  const reportText = `${report.reportSummary}\n${report.reportDetail}`.replace(
+    re,
+    ''
+  )
+
+  const outputPath = path.join(os.tmpdir(), 'NoTests.md')
+  await writeFile(outputPath, reportText)
+  // await writeFile('TestResults#669.md', reportText)
+  expect((await readFile(outputPath)).toString()).toBe(
+    (await readFile('__tests__/data/TestResults#669.md')).toString()
+  )
+})
+
 test('test runs', () => {
   process.env['INPUT_PATH'] = '__tests__/data/Example.xcresult'
   process.env['INPUT_SHOW-PASSED-TESTS'] = 'true'
