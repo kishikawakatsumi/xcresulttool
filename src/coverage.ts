@@ -1,7 +1,6 @@
 /*eslint-disable
 no-empty,
 no-shadow,
-github/array-foreach,
 @typescript-eslint/explicit-function-return-type,
 @typescript-eslint/explicit-member-accessibility,
 @typescript-eslint/no-explicit-any,
