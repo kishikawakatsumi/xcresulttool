@@ -8,7 +8,7 @@ on: # rebuild any PRs and main branch changes
 
 jobs:
   build: # make sure build/ci work properly
-    runs-on: macos-11
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
       - run: |
@@ -16,7 +16,7 @@ jobs:
       - run: |
           npm run all
   test: # make sure the action works on a clean machine without building
-    runs-on: macos-11
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
       - uses: ./
