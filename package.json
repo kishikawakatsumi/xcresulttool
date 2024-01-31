@@ -39,7 +39,7 @@
     "@types/node": "20.11.13",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "@vercel/ncc": "0.36.1",
+    "@vercel/ncc": "0.38.1",
     "eslint": "8.51.0",
     "eslint-plugin-github": "4.10.1",
     "eslint-plugin-jest": "27.4.2",
