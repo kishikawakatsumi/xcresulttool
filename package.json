@@ -1,9 +1,12 @@
 {
   "name": "xcresulttool",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "private": false,
   "description": "A GitHub Action that generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.",
   "main": "lib/main.js",
+  "engines": {
+    "node": ">= 20"
+  },
   "scripts": {
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
@@ -30,22 +33,22 @@
     "@actions/exec": "1.1.1",
     "@actions/github": "5.1.1",
     "@octokit/action": "5.0.6",
-    "image-size": "1.0.2"
+    "image-size": "1.1.1"
   },
   "devDependencies": {
-    "@types/node": "18.18.4",
-    "@typescript-eslint/eslint-plugin": "5.62.0",
-    "@typescript-eslint/parser": "5.62.0",
-    "@vercel/ncc": "0.36.1",
-    "eslint": "8.51.0",
+    "@types/node": "20.11.13",
+    "@typescript-eslint/eslint-plugin": "6.20.0",
+    "@typescript-eslint/parser": "6.20.0",
+    "@vercel/ncc": "0.38.1",
+    "eslint": "8.56.0",
     "eslint-plugin-github": "4.10.1",
-    "eslint-plugin-jest": "27.4.2",
-    "jest": "29.5.0",
+    "eslint-plugin-jest": "27.6.3",
+    "jest": "29.7.0",
     "js-yaml": "4.1.0",
-    "json-schema-to-typescript": "13.1.1",
-    "prettier": "2.8.8",
-    "ts-jest": "29.1.1",
-    "ts-node": "10.9.1",
-    "typescript": "5.2.2"
+    "json-schema-to-typescript": "13.1.2",
+    "prettier": "3.2.4",
+    "ts-jest": "29.1.2",
+    "ts-node": "10.9.2",
+    "typescript": "5.3.3"
   }
 }

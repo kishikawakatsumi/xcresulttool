@@ -29,15 +29,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -48,47 +39,45 @@ const exec = __importStar(__nccwpck_require__(1514));
 const os = __importStar(__nccwpck_require__(2037));
 const path = __importStar(__nccwpck_require__(1017));
 const image_size_1 = __importDefault(__nccwpck_require__(8250));
-function exportAttachments(parser, activity) {
-    return __awaiter(this, void 0, void 0, function* () {
-        activity.attachments = activity.attachments || [];
-        if (activity.attachments) {
-            for (const attachment of activity.attachments) {
-                if (attachment.filename && attachment.payloadRef) {
-                    const outputPath = path.join(os.tmpdir(), attachment.filename);
-                    const image = yield parser.exportObject(attachment.payloadRef.id, outputPath);
-                    let output = '';
-                    const options = {
-                        silent: true,
-                        listeners: {
-                            stdout: (data) => {
-                                output += data.toString();
-                            }
-                        }
-                    };
-                    try {
-                        const dimensions = (0, image_size_1.default)(image);
-                        attachment.dimensions = dimensions;
-                        if (image && core.getInput('token')) {
-                            yield exec.exec('curl', [
-                                '-X',
-                                'POST',
-                                'https://xcresulttool-file.herokuapp.com/file',
-                                '-d',
-                                image.toString('base64')
-                            ], options);
-                            const response = JSON.parse(output);
-                            if (response) {
-                                attachment.link = response.link;
-                            }
+async function exportAttachments(parser, activity) {
+    activity.attachments = activity.attachments || [];
+    if (activity.attachments) {
+        for (const attachment of activity.attachments) {
+            if (attachment.filename && attachment.payloadRef) {
+                const outputPath = path.join(os.tmpdir(), attachment.filename);
+                const image = await parser.exportObject(attachment.payloadRef.id, outputPath);
+                let output = '';
+                const options = {
+                    silent: true,
+                    listeners: {
+                        stdout: (data) => {
+                            output += data.toString();
                         }
                     }
-                    catch (_a) {
-                        // no-op
+                };
+                try {
+                    const dimensions = (0, image_size_1.default)(image);
+                    attachment.dimensions = dimensions;
+                    if (image && core.getInput('token')) {
+                        await exec.exec('curl', [
+                            '-X',
+                            'POST',
+                            'https://xcresulttool-file.herokuapp.com/file',
+                            '-d',
+                            image.toString('base64')
+                        ], options);
+                        const response = JSON.parse(output);
+                        if (response) {
+                            attachment.link = response.link;
+                        }
                     }
+                }
+                catch {
+                    // no-op
                 }
             }
         }
-    });
+    }
 }
 exports.exportAttachments = exportAttachments;
 
@@ -317,15 +306,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FormatterOptions = exports.Formatter = void 0;
 const Image = __importStar(__nccwpck_require__(1281));
@@ -345,583 +325,494 @@ const testClassIcon = Image.icon('test-class.png');
 const testMethodIcon = Image.icon('test-method.png');
 const attachmentIcon = Image.icon('attachment.png');
 class Formatter {
+    summaries = '';
+    details = '';
+    bundlePath;
+    parser;
     constructor(bundlePath) {
-        this.summaries = '';
-        this.details = '';
         this.bundlePath = bundlePath;
         this.parser = new parser_1.Parser(this.bundlePath);
     }
-    format(options = new FormatterOptions()) {
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-            const actionsInvocationRecord = yield this.parser.parse();
-            const testReport = new report_1.TestReport();
-            if (actionsInvocationRecord.metadataRef) {
-                const metadata = yield this.parser.parse(actionsInvocationRecord.metadataRef.id);
-                testReport.entityName = (_a = metadata.schemeIdentifier) === null || _a === void 0 ? void 0 : _a.entityName;
-                testReport.creatingWorkspaceFilePath = metadata.creatingWorkspaceFilePath;
-            }
-            if (actionsInvocationRecord.actions) {
-                for (const action of actionsInvocationRecord.actions) {
-                    if (action.buildResult.logRef) {
-                        const log = yield this.parser.parse(action.buildResult.logRef.id);
-                        const buildLog = new report_1.BuildLog(log, testReport.creatingWorkspaceFilePath);
-                        if (buildLog.content.length) {
-                            testReport.buildLog = buildLog;
-                            testReport.testStatus = 'failure';
-                            for (const annotation of buildLog.annotations) {
-                                testReport.annotations.push(annotation);
-                            }
+    async format(options = new FormatterOptions()) {
+        const actionsInvocationRecord = await this.parser.parse();
+        const testReport = new report_1.TestReport();
+        if (actionsInvocationRecord.metadataRef) {
+            const metadata = await this.parser.parse(actionsInvocationRecord.metadataRef.id);
+            testReport.entityName = metadata.schemeIdentifier?.entityName;
+            testReport.creatingWorkspaceFilePath = metadata.creatingWorkspaceFilePath;
+        }
+        if (actionsInvocationRecord.actions) {
+            for (const action of actionsInvocationRecord.actions) {
+                if (action.buildResult.logRef) {
+                    const log = await this.parser.parse(action.buildResult.logRef.id);
+                    const buildLog = new report_1.BuildLog(log, testReport.creatingWorkspaceFilePath);
+                    if (buildLog.content.length) {
+                        testReport.buildLog = buildLog;
+                        testReport.testStatus = 'failure';
+                        for (const annotation of buildLog.annotations) {
+                            testReport.annotations.push(annotation);
                         }
                     }
-                    if (action.actionResult) {
-                        if (action.actionResult.testsRef) {
-                            const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName, action.runDestination, action.title);
-                            testReport.chapters.push(testReportChapter);
-                            const actionTestPlanRunSummaries = yield this.parser.parse(action.actionResult.testsRef.id);
-                            for (const summary of actionTestPlanRunSummaries.summaries) {
-                                for (const testableSummary of summary.testableSummaries) {
-                                    const testSummaries = [];
-                                    yield this.collectTestSummaries(testableSummary, testableSummary.tests, testSummaries);
-                                    if (testableSummary.name) {
-                                        testReportChapter.sections[testableSummary.name] =
-                                            new report_1.TestReportSection(testableSummary, testSummaries);
-                                    }
+                }
+                if (action.actionResult) {
+                    if (action.actionResult.testsRef) {
+                        const testReportChapter = new report_1.TestReportChapter(action.schemeCommandName, action.runDestination, action.title);
+                        testReport.chapters.push(testReportChapter);
+                        const actionTestPlanRunSummaries = await this.parser.parse(action.actionResult.testsRef.id);
+                        for (const summary of actionTestPlanRunSummaries.summaries) {
+                            for (const testableSummary of summary.testableSummaries) {
+                                const testSummaries = [];
+                                await this.collectTestSummaries(testableSummary, testableSummary.tests, testSummaries);
+                                if (testableSummary.name) {
+                                    testReportChapter.sections[testableSummary.name] =
+                                        new report_1.TestReportSection(testableSummary, testSummaries);
                                 }
                             }
-                            if (action.actionResult.coverage) {
-                                try {
-                                    const codeCoverage = coverage_1.Convert.toCodeCoverage(yield this.parser.exportCodeCoverage());
-                                    const testCodeCoverage = new report_1.TestCodeCoverage(codeCoverage);
-                                    testReport.codeCoverage = testCodeCoverage;
-                                }
-                                catch (error) {
-                                    // no-op
-                                }
+                        }
+                        if (action.actionResult.coverage) {
+                            try {
+                                const codeCoverage = coverage_1.Convert.toCodeCoverage(await this.parser.exportCodeCoverage());
+                                const testCodeCoverage = new report_1.TestCodeCoverage(codeCoverage);
+                                testReport.codeCoverage = testCodeCoverage;
+                            }
+                            catch (error) {
+                                // no-op
                             }
                         }
                     }
                 }
             }
-            class TestSummaryStats {
-                constructor() {
-                    this.passed = 0;
-                    this.failed = 0;
-                    this.skipped = 0;
-                    this.expectedFailure = 0;
-                    this.total = 0;
-                }
-            }
-            const testSummary = {
-                stats: new TestSummaryStats(),
-                duration: 0,
-                groups: {}
-            };
-            for (const chapter of testReport.chapters) {
-                const chapterSummary = new report_1.TestReportChapterSummary();
-                chapter.summaries.push(chapterSummary);
-                for (const [identifier, results] of Object.entries(chapter.sections)) {
-                    const detailGroup = results.details.reduce((groups, detail) => {
-                        const d = detail;
-                        if (d.group) {
-                            if (groups[d.group]) {
-                                groups[d.group].push(detail);
-                            }
-                            else {
-                                groups[d.group] = [detail];
-                            }
+        }
+        class TestSummaryStats {
+            passed = 0;
+            failed = 0;
+            skipped = 0;
+            expectedFailure = 0;
+            total = 0;
+        }
+        const testSummary = {
+            stats: new TestSummaryStats(),
+            duration: 0,
+            groups: {}
+        };
+        for (const chapter of testReport.chapters) {
+            const chapterSummary = new report_1.TestReportChapterSummary();
+            chapter.summaries.push(chapterSummary);
+            for (const [identifier, results] of Object.entries(chapter.sections)) {
+                const detailGroup = results.details.reduce((groups, detail) => {
+                    const d = detail;
+                    if (d.group) {
+                        if (groups[d.group]) {
+                            groups[d.group].push(detail);
                         }
-                        return groups;
-                    }, {});
-                    const group = {};
-                    for (const [identifier, details] of Object.entries(detailGroup)) {
-                        const [stats, duration] = details.reduce(([stats, duration], detail) => {
-                            const test = detail;
-                            if (test.testStatus) {
-                                switch (test.testStatus) {
-                                    case 'Success':
-                                        stats.passed++;
-                                        break;
-                                    case 'Failure':
-                                        stats.failed++;
-                                        break;
-                                    case 'Skipped':
-                                        stats.skipped++;
-                                        break;
-                                    case 'Expected Failure':
-                                        stats.expectedFailure++;
-                                        break;
-                                }
-                                stats.total++;
-                            }
-                            if (test.duration) {
-                                duration = test.duration;
-                            }
-                            return [stats, duration];
-                        }, [new TestSummaryStats(), 0]);
-                        testSummary.stats.passed += stats.passed;
-                        testSummary.stats.failed += stats.failed;
-                        testSummary.stats.skipped += stats.skipped;
-                        testSummary.stats.expectedFailure += stats.expectedFailure;
-                        testSummary.stats.total += stats.total;
-                        testSummary.duration += duration;
-                        group[identifier] = {
-                            passed: stats.passed,
-                            failed: stats.failed,
-                            skipped: stats.skipped,
-                            expectedFailure: stats.expectedFailure,
-                            total: stats.total
-                        };
+                        else {
+                            groups[d.group] = [detail];
+                        }
                     }
-                    const groups = testSummary.groups;
-                    groups[identifier] = group;
+                    return groups;
+                }, {});
+                const group = {};
+                for (const [identifier, details] of Object.entries(detailGroup)) {
+                    const [stats, duration] = details.reduce(([stats, duration], detail) => {
+                        const test = detail;
+                        if (test.testStatus) {
+                            switch (test.testStatus) {
+                                case 'Success':
+                                    stats.passed++;
+                                    break;
+                                case 'Failure':
+                                    stats.failed++;
+                                    break;
+                                case 'Skipped':
+                                    stats.skipped++;
+                                    break;
+                                case 'Expected Failure':
+                                    stats.expectedFailure++;
+                                    break;
+                            }
+                            stats.total++;
+                        }
+                        if (test.duration) {
+                            duration = test.duration;
+                        }
+                        return [stats, duration];
+                    }, [new TestSummaryStats(), 0]);
+                    testSummary.stats.passed += stats.passed;
+                    testSummary.stats.failed += stats.failed;
+                    testSummary.stats.skipped += stats.skipped;
+                    testSummary.stats.expectedFailure += stats.expectedFailure;
+                    testSummary.stats.total += stats.total;
+                    testSummary.duration += duration;
+                    group[identifier] = {
+                        passed: stats.passed,
+                        failed: stats.failed,
+                        skipped: stats.skipped,
+                        expectedFailure: stats.expectedFailure,
+                        total: stats.total
+                    };
                 }
-                chapterSummary.content.push('### Summary');
+                const groups = testSummary.groups;
+                groups[identifier] = group;
+            }
+            chapterSummary.content.push('### Summary');
+            chapterSummary.content.push('<table>');
+            chapterSummary.content.push('<tr>');
+            const header = [
+                `<th>Total`,
+                `<th>${passedIcon}&nbsp;Passed`,
+                `<th>${failedIcon}&nbsp;Failed`,
+                `<th>${skippedIcon}&nbsp;Skipped`,
+                `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
+                `<th>:stopwatch:&nbsp;Time`
+            ].join('');
+            chapterSummary.content.push(header);
+            chapterSummary.content.push('<tr>');
+            let failedCount;
+            if (testSummary.stats.failed > 0) {
+                failedCount = `<b>${testSummary.stats.failed}</b>`;
+            }
+            else {
+                failedCount = `${testSummary.stats.failed}`;
+            }
+            const duration = testSummary.duration.toFixed(2);
+            const cols = [
+                `<td align="right" width="118px">${testSummary.stats.total}`,
+                `<td align="right" width="118px">${testSummary.stats.passed}`,
+                `<td align="right" width="118px">${failedCount}`,
+                `<td align="right" width="118px">${testSummary.stats.skipped}`,
+                `<td align="right" width="158px">${testSummary.stats.expectedFailure}`,
+                `<td align="right" width="138px">${duration}s`
+            ].join('');
+            chapterSummary.content.push(cols);
+            chapterSummary.content.push('</table>\n');
+            chapterSummary.content.push('---\n');
+            if (testSummary.stats.failed > 0) {
+                testReport.testStatus = 'failure';
+            }
+            else if (testSummary.stats.passed > 0) {
+                testReport.testStatus = 'success';
+            }
+            chapterSummary.content.push('### Test Summary');
+            for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
+                const anchorName = (0, markdown_1.anchorIdentifier)(groupIdentifier);
+                const anchorTag = (0, markdown_1.anchorNameTag)(`${groupIdentifier}_summary`);
+                chapterSummary.content.push(`#### ${anchorTag}[${groupIdentifier}](${anchorName})\n`);
+                const runDestination = chapter.runDestination;
+                chapterSummary.content.push(`- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`);
+                chapterSummary.content.push(`- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`);
                 chapterSummary.content.push('<table>');
                 chapterSummary.content.push('<tr>');
                 const header = [
+                    `<th>Test`,
                     `<th>Total`,
-                    `<th>${passedIcon}&nbsp;Passed`,
-                    `<th>${failedIcon}&nbsp;Failed`,
-                    `<th>${skippedIcon}&nbsp;Skipped`,
-                    `<th>${expectedFailureIcon}&nbsp;Expected Failure`,
-                    `<th>:stopwatch:&nbsp;Time`
+                    `<th>${passedIcon}`,
+                    `<th>${failedIcon}`,
+                    `<th>${skippedIcon}`,
+                    `<th>${expectedFailureIcon}`
                 ].join('');
                 chapterSummary.content.push(header);
-                chapterSummary.content.push('<tr>');
-                let failedCount;
-                if (testSummary.stats.failed > 0) {
-                    failedCount = `<b>${testSummary.stats.failed}</b>`;
-                }
-                else {
-                    failedCount = `${testSummary.stats.failed}`;
-                }
-                const duration = testSummary.duration.toFixed(2);
-                const cols = [
-                    `<td align="right" width="118px">${testSummary.stats.total}`,
-                    `<td align="right" width="118px">${testSummary.stats.passed}`,
-                    `<td align="right" width="118px">${failedCount}`,
-                    `<td align="right" width="118px">${testSummary.stats.skipped}`,
-                    `<td align="right" width="158px">${testSummary.stats.expectedFailure}`,
-                    `<td align="right" width="138px">${duration}s`
-                ].join('');
-                chapterSummary.content.push(cols);
-                chapterSummary.content.push('</table>\n');
-                chapterSummary.content.push('---\n');
-                if (testSummary.stats.failed > 0) {
-                    testReport.testStatus = 'failure';
-                }
-                else if (testSummary.stats.passed > 0) {
-                    testReport.testStatus = 'success';
-                }
-                chapterSummary.content.push('### Test Summary');
-                for (const [groupIdentifier, group] of Object.entries(testSummary.groups)) {
-                    const anchorName = (0, markdown_1.anchorIdentifier)(groupIdentifier);
-                    const anchorTag = (0, markdown_1.anchorNameTag)(`${groupIdentifier}_summary`);
-                    chapterSummary.content.push(`#### ${anchorTag}[${groupIdentifier}](${anchorName})\n`);
-                    const runDestination = chapter.runDestination;
-                    chapterSummary.content.push(`- **Device:** ${runDestination.targetDeviceRecord.modelName}, ${runDestination.targetDeviceRecord.operatingSystemVersionWithBuildNumber}`);
-                    chapterSummary.content.push(`- **SDK:** ${runDestination.targetSDKRecord.name}, ${runDestination.targetSDKRecord.operatingSystemVersion}`);
-                    chapterSummary.content.push('<table>');
+                for (const [identifier, stats] of Object.entries(group)) {
                     chapterSummary.content.push('<tr>');
+                    const testClass = `${testClassIcon}&nbsp;${identifier}`;
+                    const testClassAnchor = (0, markdown_1.anchorNameTag)(`${groupIdentifier}_${identifier}_summary`);
+                    const anchorName = (0, markdown_1.anchorIdentifier)(`${groupIdentifier}_${identifier}`);
+                    const testClassLink = `<a href="${anchorName}">${testClass}</a>`;
+                    let failedCount;
+                    if (stats.failed > 0) {
+                        failedCount = `<b>${stats.failed}</b>`;
+                    }
+                    else {
+                        failedCount = `${stats.failed}`;
+                    }
+                    const cols = [
+                        `<td align="left" width="368px">${testClassAnchor}${testClassLink}`,
+                        `<td align="right" width="80px">${stats.total}`,
+                        `<td align="right" width="80px">${stats.passed}`,
+                        `<td align="right" width="80px">${failedCount}`,
+                        `<td align="right" width="80px">${stats.skipped}`,
+                        `<td align="right" width="80px">${stats.expectedFailure}`
+                    ].join('');
+                    chapterSummary.content.push(cols);
+                }
+                chapterSummary.content.push('');
+                chapterSummary.content.push('</table>\n');
+            }
+            chapterSummary.content.push('---\n');
+            const testFailures = new report_1.TestFailures();
+            const annotations = [];
+            for (const [, results] of Object.entries(chapter.sections)) {
+                const testResultSummaryName = results.summary.name;
+                const detailGroup = results.details.reduce((groups, detail) => {
+                    const d = detail;
+                    if (d.group) {
+                        if (groups[d.group]) {
+                            groups[d.group].push(detail);
+                        }
+                        else {
+                            groups[d.group] = [detail];
+                        }
+                    }
+                    return groups;
+                }, {});
+                for (const [, details] of Object.entries(detailGroup)) {
+                    const configurationGroup = details.reduce((groups, detail) => {
+                        if (detail.identifier) {
+                            if (groups[detail.identifier]) {
+                                groups[detail.identifier].push(detail);
+                            }
+                            else {
+                                groups[detail.identifier] = [detail];
+                            }
+                        }
+                        return groups;
+                    }, {});
+                    for (const [, details] of Object.entries(configurationGroup)) {
+                        for (const [, detail] of details.entries()) {
+                            const testResult = detail;
+                            if (testResult.summaryRef) {
+                                const summary = await this.parser.parse(testResult.summaryRef.id);
+                                const testFailureGroup = new report_1.TestFailureGroup(testResultSummaryName || '', summary.identifier || '', summary.name || '');
+                                testFailures.failureGroups.push(testFailureGroup);
+                                if (summary.failureSummaries) {
+                                    const testFailure = new report_1.TestFailure();
+                                    testFailureGroup.failures.push(testFailure);
+                                    const failureSummaries = collectFailureSummaries(summary.failureSummaries);
+                                    for (const failureSummary of failureSummaries) {
+                                        testFailure.lines.push(`${failureSummary.contents}`);
+                                        const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
+                                        let filepath = '';
+                                        if (failureSummary.filePath) {
+                                            filepath = failureSummary.filePath.replace(`${workspace}/`, '');
+                                        }
+                                        if (filepath &&
+                                            failureSummary.lineNumber &&
+                                            failureSummary.message) {
+                                            const annotation = new report_1.Annotation(filepath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
+                                            annotations.push(annotation);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (const annotation of annotations) {
+                testReport.annotations.push(annotation);
+            }
+            chapterSummary.content.push(`### ${failedIcon} Failures`);
+            const summaryFailures = [];
+            for (const failureGroup of testFailures.failureGroups) {
+                if (failureGroup.failures.length) {
+                    const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`;
+                    const anchorName = (0, markdown_1.anchorIdentifier)(testIdentifier);
+                    const anchorTag = (0, markdown_1.anchorNameTag)(`${testIdentifier}_failure-summary`);
+                    const testMethodLink = `${anchorTag}<a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`;
+                    summaryFailures.push(`<h4>${testMethodLink}</h4>`);
+                    for (const failure of failureGroup.failures) {
+                        for (const line of failure.lines) {
+                            summaryFailures.push(line);
+                        }
+                    }
+                }
+            }
+            if (summaryFailures.length) {
+                chapterSummary.content.push(summaryFailures.join('\n'));
+                chapterSummary.content.push('');
+            }
+            else {
+                chapterSummary.content.push('All tests passed :tada:\n');
+            }
+            if (testReport.codeCoverage && options.showCodeCoverage) {
+                const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
+                chapterSummary.content.push('---\n');
+                const re = new RegExp(`${workspace}/`, 'g');
+                let root = '';
+                if (process.env.GITHUB_REPOSITORY) {
+                    const pr = github.context.payload.pull_request;
+                    const sha = (pr && pr.head.sha) || github.context.sha;
+                    root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`;
+                }
+                chapterSummary.content.push(testReport.codeCoverage.lines.join('\n').replace(re, root));
+            }
+            const testDetails = new report_1.TestDetails();
+            for (const [, results] of Object.entries(chapter.sections)) {
+                const testDetail = new report_1.TestDetail();
+                testDetails.details.push(testDetail);
+                const testResultSummaryName = results.summary.name;
+                const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}`);
+                const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_summary`);
+                testDetail.lines.push(`#### ${anchorTag}${testResultSummaryName}[${backIcon}](${anchorName})`);
+                testDetail.lines.push('');
+                const detailGroup = results.details.reduce((groups, detail) => {
+                    const d = detail;
+                    if (d.group) {
+                        if (groups[d.group]) {
+                            groups[d.group].push(detail);
+                        }
+                        else {
+                            groups[d.group] = [detail];
+                        }
+                    }
+                    return groups;
+                }, {});
+                for (const [identifier, details] of Object.entries(detailGroup)) {
+                    const groupIdentifier = identifier;
+                    const [passed, failed, skipped, expectedFailure, total, duration] = details.reduce(([passed, failed, skipped, expectedFailure, total, duration], detail) => {
+                        const test = detail;
+                        switch (test.testStatus) {
+                            case 'Success':
+                                passed++;
+                                break;
+                            case 'Failure':
+                                failed++;
+                                break;
+                            case 'Skipped':
+                                skipped++;
+                                break;
+                            case 'Expected Failure':
+                                expectedFailure++;
+                                break;
+                        }
+                        total++;
+                        if (test.duration) {
+                            duration = test.duration;
+                        }
+                        return [
+                            passed,
+                            failed,
+                            skipped,
+                            expectedFailure,
+                            total,
+                            duration
+                        ];
+                    }, [0, 0, 0, 0, 0, 0]);
+                    const testName = `${groupIdentifier}`;
+                    const passedRate = ((passed / total) * 100).toFixed(0);
+                    const failedRate = ((failed / total) * 100).toFixed(0);
+                    const skippedRate = ((skipped / total) * 100).toFixed(0);
+                    const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
+                    const testDuration = duration.toFixed(2);
+                    const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${groupIdentifier}`);
+                    const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${groupIdentifier}_summary`);
+                    const anchorBack = `[${backIcon}](${anchorName})`;
+                    testDetail.lines.push(`${anchorTag}<h5>${testName}&nbsp;${anchorBack}</h5>`);
+                    const testsStatsLines = [];
+                    testsStatsLines.push('<table>');
+                    testsStatsLines.push('<tr>');
                     const header = [
-                        `<th>Test`,
-                        `<th>Total`,
                         `<th>${passedIcon}`,
                         `<th>${failedIcon}`,
                         `<th>${skippedIcon}`,
-                        `<th>${expectedFailureIcon}`
+                        `<th>${expectedFailureIcon}`,
+                        `<th>:stopwatch:`
                     ].join('');
-                    chapterSummary.content.push(header);
-                    for (const [identifier, stats] of Object.entries(group)) {
-                        chapterSummary.content.push('<tr>');
-                        const testClass = `${testClassIcon}&nbsp;${identifier}`;
-                        const testClassAnchor = (0, markdown_1.anchorNameTag)(`${groupIdentifier}_${identifier}_summary`);
-                        const anchorName = (0, markdown_1.anchorIdentifier)(`${groupIdentifier}_${identifier}`);
-                        const testClassLink = `<a href="${anchorName}">${testClass}</a>`;
-                        let failedCount;
-                        if (stats.failed > 0) {
-                            failedCount = `<b>${stats.failed}</b>`;
-                        }
-                        else {
-                            failedCount = `${stats.failed}`;
-                        }
-                        const cols = [
-                            `<td align="left" width="368px">${testClassAnchor}${testClassLink}`,
-                            `<td align="right" width="80px">${stats.total}`,
-                            `<td align="right" width="80px">${stats.passed}`,
-                            `<td align="right" width="80px">${failedCount}`,
-                            `<td align="right" width="80px">${stats.skipped}`,
-                            `<td align="right" width="80px">${stats.expectedFailure}`
-                        ].join('');
-                        chapterSummary.content.push(cols);
+                    testsStatsLines.push(header);
+                    testsStatsLines.push('<tr>');
+                    let failedCount;
+                    if (failed > 0) {
+                        failedCount = `<b>${failed} (${failedRate}%)</b>`;
                     }
-                    chapterSummary.content.push('');
-                    chapterSummary.content.push('</table>\n');
-                }
-                chapterSummary.content.push('---\n');
-                const testFailures = new report_1.TestFailures();
-                const annotations = [];
-                for (const [, results] of Object.entries(chapter.sections)) {
-                    const testResultSummaryName = results.summary.name;
-                    const detailGroup = results.details.reduce((groups, detail) => {
-                        const d = detail;
-                        if (d.group) {
-                            if (groups[d.group]) {
-                                groups[d.group].push(detail);
+                    else {
+                        failedCount = `${failed} (${failedRate}%)`;
+                    }
+                    const cols = [
+                        `<td align="right" width="154px">${passed} (${passedRate}%)`,
+                        `<td align="right" width="154px">${failedCount}`,
+                        `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
+                        `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
+                        `<td align="right" width="154px">${testDuration}s`
+                    ].join('');
+                    testsStatsLines.push(cols);
+                    testsStatsLines.push('</table>\n');
+                    testDetail.lines.push(testsStatsLines.join('\n'));
+                    const testDetailTable = [];
+                    testDetailTable.push(`<table>`);
+                    const configurationGroup = details.reduce((groups, detail) => {
+                        if (detail.identifier) {
+                            if (groups[detail.identifier]) {
+                                groups[detail.identifier].push(detail);
                             }
                             else {
-                                groups[d.group] = [detail];
+                                groups[detail.identifier] = [detail];
                             }
                         }
                         return groups;
                     }, {});
-                    for (const [, details] of Object.entries(detailGroup)) {
-                        const configurationGroup = details.reduce((groups, detail) => {
-                            if (detail.identifier) {
-                                if (groups[detail.identifier]) {
-                                    groups[detail.identifier].push(detail);
-                                }
-                                else {
-                                    groups[detail.identifier] = [detail];
-                                }
-                            }
-                            return groups;
-                        }, {});
-                        for (const [, details] of Object.entries(configurationGroup)) {
-                            for (const [, detail] of details.entries()) {
-                                const testResult = detail;
-                                if (testResult.summaryRef) {
-                                    const summary = yield this.parser.parse(testResult.summaryRef.id);
-                                    const testFailureGroup = new report_1.TestFailureGroup(testResultSummaryName || '', summary.identifier || '', summary.name || '');
-                                    testFailures.failureGroups.push(testFailureGroup);
-                                    if (summary.failureSummaries) {
-                                        const testFailure = new report_1.TestFailure();
-                                        testFailureGroup.failures.push(testFailure);
-                                        const failureSummaries = collectFailureSummaries(summary.failureSummaries);
-                                        for (const failureSummary of failureSummaries) {
-                                            testFailure.lines.push(`${failureSummary.contents}`);
-                                            const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
-                                            let filepath = '';
-                                            if (failureSummary.filePath) {
-                                                filepath = failureSummary.filePath.replace(`${workspace}/`, '');
-                                            }
-                                            if (filepath &&
-                                                failureSummary.lineNumber &&
-                                                failureSummary.message) {
-                                                const annotation = new report_1.Annotation(filepath, failureSummary.lineNumber, failureSummary.lineNumber, 'failure', failureSummary.message, failureSummary.issueType);
-                                                annotations.push(annotation);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                for (const annotation of annotations) {
-                    testReport.annotations.push(annotation);
-                }
-                chapterSummary.content.push(`### ${failedIcon} Failures`);
-                const summaryFailures = [];
-                for (const failureGroup of testFailures.failureGroups) {
-                    if (failureGroup.failures.length) {
-                        const testIdentifier = `${failureGroup.summaryIdentifier}_${failureGroup.identifier}`;
-                        const anchorName = (0, markdown_1.anchorIdentifier)(testIdentifier);
-                        const anchorTag = (0, markdown_1.anchorNameTag)(`${testIdentifier}_failure-summary`);
-                        const testMethodLink = `${anchorTag}<a href="${anchorName}">${failureGroup.summaryIdentifier}/${failureGroup.identifier}</a>`;
-                        summaryFailures.push(`<h4>${testMethodLink}</h4>`);
-                        for (const failure of failureGroup.failures) {
-                            for (const line of failure.lines) {
-                                summaryFailures.push(line);
-                            }
-                        }
-                    }
-                }
-                if (summaryFailures.length) {
-                    chapterSummary.content.push(summaryFailures.join('\n'));
-                    chapterSummary.content.push('');
-                }
-                else {
-                    chapterSummary.content.push('All tests passed :tada:\n');
-                }
-                if (testReport.codeCoverage && options.showCodeCoverage) {
-                    const workspace = path.dirname(`${testReport.creatingWorkspaceFilePath}`);
-                    chapterSummary.content.push('---\n');
-                    const re = new RegExp(`${workspace}/`, 'g');
-                    let root = '';
-                    if (process.env.GITHUB_REPOSITORY) {
-                        const pr = github.context.payload.pull_request;
-                        const sha = (pr && pr.head.sha) || github.context.sha;
-                        root = `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/blob/${sha}/`;
-                    }
-                    chapterSummary.content.push(testReport.codeCoverage.lines.join('\n').replace(re, root));
-                }
-                const testDetails = new report_1.TestDetails();
-                for (const [, results] of Object.entries(chapter.sections)) {
-                    const testDetail = new report_1.TestDetail();
-                    testDetails.details.push(testDetail);
-                    const testResultSummaryName = results.summary.name;
-                    const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}`);
-                    const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_summary`);
-                    testDetail.lines.push(`#### ${anchorTag}${testResultSummaryName}[${backIcon}](${anchorName})`);
-                    testDetail.lines.push('');
-                    const detailGroup = results.details.reduce((groups, detail) => {
-                        const d = detail;
-                        if (d.group) {
-                            if (groups[d.group]) {
-                                groups[d.group].push(detail);
-                            }
-                            else {
-                                groups[d.group] = [detail];
-                            }
-                        }
-                        return groups;
-                    }, {});
-                    for (const [identifier, details] of Object.entries(detailGroup)) {
-                        const groupIdentifier = identifier;
-                        const [passed, failed, skipped, expectedFailure, total, duration] = details.reduce(([passed, failed, skipped, expectedFailure, total, duration], detail) => {
+                    for (const [, details] of Object.entries(configurationGroup)) {
+                        const statuses = details.map(detail => {
                             const test = detail;
-                            switch (test.testStatus) {
-                                case 'Success':
-                                    passed++;
-                                    break;
-                                case 'Failure':
-                                    failed++;
-                                    break;
-                                case 'Skipped':
-                                    skipped++;
-                                    break;
-                                case 'Expected Failure':
-                                    expectedFailure++;
-                                    break;
+                            return test.testStatus;
+                        });
+                        let groupStatus = '';
+                        if (statuses.length) {
+                            if (statuses.every(status => status === 'Success')) {
+                                groupStatus = 'Success';
                             }
-                            total++;
-                            if (test.duration) {
-                                duration = test.duration;
+                            else if (statuses.every(status => status === 'Failure')) {
+                                groupStatus = 'Failure';
                             }
-                            return [
-                                passed,
-                                failed,
-                                skipped,
-                                expectedFailure,
-                                total,
-                                duration
-                            ];
-                        }, [0, 0, 0, 0, 0, 0]);
-                        const testName = `${groupIdentifier}`;
-                        const passedRate = ((passed / total) * 100).toFixed(0);
-                        const failedRate = ((failed / total) * 100).toFixed(0);
-                        const skippedRate = ((skipped / total) * 100).toFixed(0);
-                        const expectedFailureRate = ((expectedFailure / total) * 100).toFixed(0);
-                        const testDuration = duration.toFixed(2);
-                        const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${groupIdentifier}`);
-                        const anchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${groupIdentifier}_summary`);
-                        const anchorBack = `[${backIcon}](${anchorName})`;
-                        testDetail.lines.push(`${anchorTag}<h5>${testName}&nbsp;${anchorBack}</h5>`);
-                        const testsStatsLines = [];
-                        testsStatsLines.push('<table>');
-                        testsStatsLines.push('<tr>');
-                        const header = [
-                            `<th>${passedIcon}`,
-                            `<th>${failedIcon}`,
-                            `<th>${skippedIcon}`,
-                            `<th>${expectedFailureIcon}`,
-                            `<th>:stopwatch:`
-                        ].join('');
-                        testsStatsLines.push(header);
-                        testsStatsLines.push('<tr>');
-                        let failedCount;
-                        if (failed > 0) {
-                            failedCount = `<b>${failed} (${failedRate}%)</b>`;
-                        }
-                        else {
-                            failedCount = `${failed} (${failedRate}%)`;
-                        }
-                        const cols = [
-                            `<td align="right" width="154px">${passed} (${passedRate}%)`,
-                            `<td align="right" width="154px">${failedCount}`,
-                            `<td align="right" width="154px">${skipped} (${skippedRate}%)`,
-                            `<td align="right" width="154px">${expectedFailure} (${expectedFailureRate}%)`,
-                            `<td align="right" width="154px">${testDuration}s`
-                        ].join('');
-                        testsStatsLines.push(cols);
-                        testsStatsLines.push('</table>\n');
-                        testDetail.lines.push(testsStatsLines.join('\n'));
-                        const testDetailTable = [];
-                        testDetailTable.push(`<table>`);
-                        const configurationGroup = details.reduce((groups, detail) => {
-                            if (detail.identifier) {
-                                if (groups[detail.identifier]) {
-                                    groups[detail.identifier].push(detail);
+                            else if (statuses.every(status => status === 'Skipped')) {
+                                groupStatus = 'Skipped';
+                            }
+                            else if (statuses.every(status => status === 'Expected Failure')) {
+                                groupStatus = 'Expected Failure';
+                            }
+                            else {
+                                if (statuses
+                                    .filter(status => status !== 'Skipped')
+                                    .some(status => status === 'Failure')) {
+                                    groupStatus = 'Mixed Failure';
+                                }
+                                else if (statuses
+                                    .filter(status => status !== 'Skipped')
+                                    .filter(status => status !== 'Expected Failure')
+                                    .every(status => status === 'Success')) {
+                                    groupStatus = 'Mixed Success';
                                 }
                                 else {
-                                    groups[detail.identifier] = [detail];
-                                }
-                            }
-                            return groups;
-                        }, {});
-                        for (const [, details] of Object.entries(configurationGroup)) {
-                            const statuses = details.map(detail => {
-                                const test = detail;
-                                return test.testStatus;
-                            });
-                            let groupStatus = '';
-                            if (statuses.length) {
-                                if (statuses.every(status => status === 'Success')) {
-                                    groupStatus = 'Success';
-                                }
-                                else if (statuses.every(status => status === 'Failure')) {
-                                    groupStatus = 'Failure';
-                                }
-                                else if (statuses.every(status => status === 'Skipped')) {
-                                    groupStatus = 'Skipped';
-                                }
-                                else if (statuses.every(status => status === 'Expected Failure')) {
                                     groupStatus = 'Expected Failure';
                                 }
-                                else {
-                                    if (statuses
-                                        .filter(status => status !== 'Skipped')
-                                        .some(status => status === 'Failure')) {
-                                        groupStatus = 'Mixed Failure';
-                                    }
-                                    else if (statuses
-                                        .filter(status => status !== 'Skipped')
-                                        .filter(status => status !== 'Expected Failure')
-                                        .every(status => status === 'Success')) {
-                                        groupStatus = 'Mixed Success';
-                                    }
-                                    else {
-                                        groupStatus = 'Expected Failure';
-                                    }
-                                }
                             }
-                            const groupStatusImage = Image.testStatus(groupStatus);
-                            let skippedPassedTests = 0;
-                            for (const [index, detail] of details.entries()) {
-                                const testResult = detail;
-                                if (!testResult.testStatus) {
-                                    continue;
-                                }
-                                const isFailure = testResult.testStatus === 'Failure';
-                                const rowSpan = `rowspan="${details.length}"`;
-                                const valign = `valign="top"`;
-                                const colWidth = 'width="52px"';
-                                const detailWidth = 'width="716px"';
-                                const status = Image.testStatus(testResult.testStatus);
-                                const resultLines = [];
-                                if (testResult.summaryRef) {
-                                    const summary = yield this.parser.parse(testResult.summaryRef.id);
-                                    if (summary.configuration) {
-                                        if (testResult.name) {
-                                            const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
-                                            const testMethodAnchor = isFailure ? anchorTag : '';
-                                            const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
-                                            const backAnchorLink = isFailure
-                                                ? `<a href="${backAnchorName}">${backIcon}</a>`
-                                                : '';
-                                            const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
-                                            resultLines.push(`${status} ${testMethod}`);
-                                        }
-                                        if (!options.showPassedTests && !isFailure) {
-                                            skippedPassedTests++;
-                                            continue;
-                                        }
-                                        const configuration = summary.configuration;
-                                        const configurationValues = configuration.values.storage
-                                            .map(value => {
-                                            return `${value.key}: ${value.value}`;
-                                        })
-                                            .join(', ');
-                                        resultLines.push(`<br><b>Configuration:</b><br><code>${configurationValues}</code>`);
+                        }
+                        const groupStatusImage = Image.testStatus(groupStatus);
+                        let skippedPassedTests = 0;
+                        for (const [index, detail] of details.entries()) {
+                            const testResult = detail;
+                            if (!testResult.testStatus) {
+                                continue;
+                            }
+                            const isFailure = testResult.testStatus === 'Failure';
+                            const rowSpan = `rowspan="${details.length}"`;
+                            const valign = `valign="top"`;
+                            const colWidth = 'width="52px"';
+                            const detailWidth = 'width="716px"';
+                            const status = Image.testStatus(testResult.testStatus);
+                            const resultLines = [];
+                            if (testResult.summaryRef) {
+                                const summary = await this.parser.parse(testResult.summaryRef.id);
+                                if (summary.configuration) {
+                                    if (testResult.name) {
+                                        const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
+                                        const testMethodAnchor = isFailure ? anchorTag : '';
+                                        const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                        const backAnchorLink = isFailure
+                                            ? `<a href="${backAnchorName}">${backIcon}</a>`
+                                            : '';
+                                        const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
+                                        resultLines.push(`${status} ${testMethod}`);
                                     }
-                                    else {
-                                        if (!options.showPassedTests && !isFailure) {
-                                            continue;
-                                        }
-                                        if (testResult.name) {
-                                            const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
-                                            const testMethodAnchor = isFailure ? anchorTag : '';
-                                            const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
-                                            const backAnchorLink = isFailure
-                                                ? `<a href="${backAnchorName}">${backIcon}</a>`
-                                                : '';
-                                            const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
-                                            resultLines.push(`${testMethod}`);
-                                        }
+                                    if (!options.showPassedTests && !isFailure) {
+                                        skippedPassedTests++;
+                                        continue;
                                     }
-                                    const activities = [];
-                                    if (summary.activitySummaries) {
-                                        yield this.collectActivities(summary.activitySummaries, activities);
-                                    }
-                                    if (activities.length) {
-                                        if (!options.showPassedTests &&
-                                            summary.testStatus !== 'Failure') {
-                                            continue;
-                                        }
-                                        const testActivities = activities
-                                            .map(activity => {
-                                            const attachments = activity.attachments
-                                                .filter(attachment => {
-                                                return attachment.dimensions;
-                                            })
-                                                .map(attachment => {
-                                                let width = '100%';
-                                                const dimensions = attachment.dimensions;
-                                                if (dimensions.width && dimensions.height) {
-                                                    const orientation = dimensions.orientation;
-                                                    if (orientation && orientation >= 5) {
-                                                        width = `${dimensions.height}px`;
-                                                    }
-                                                    else {
-                                                        width = `${dimensions.width}px`;
-                                                    }
-                                                }
-                                                const userInfo = attachment.userInfo;
-                                                if (userInfo) {
-                                                    for (const info of userInfo.storage) {
-                                                        if (info.key === 'Scale') {
-                                                            const scale = parseInt(`${info.value}`);
-                                                            if (dimensions.width && dimensions.height) {
-                                                                if (dimensions.orientation &&
-                                                                    dimensions.orientation >= 5) {
-                                                                    const value = dimensions.height / scale;
-                                                                    width = `${value.toFixed(0)}px`;
-                                                                }
-                                                                else {
-                                                                    const value = dimensions.width / scale;
-                                                                    width = `${value.toFixed(0)}px`;
-                                                                }
-                                                            }
-                                                            else {
-                                                                width = `${(100 / scale).toFixed(0)}%`;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                const widthAttr = `width="${width}"`;
-                                                return `<div><img ${widthAttr} src="${attachment.link}"></div>`;
-                                            });
-                                            if (attachments.length) {
-                                                const testStatus = testResult.testStatus;
-                                                const open = testStatus.includes('Failure')
-                                                    ? 'open'
-                                                    : '';
-                                                const title = (0, markdown_1.escapeHashSign)(activity.title);
-                                                const message = `${(0, markdown_1.indentation)(activity.indent)}- ${title}`;
-                                                const attachmentIndent = (0, markdown_1.indentation)(activity.indent + 1);
-                                                const attachmentContent = attachments.join('');
-                                                return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>\n`;
-                                            }
-                                            else {
-                                                const indent = (0, markdown_1.indentation)(activity.indent);
-                                                return `${indent}- ${(0, markdown_1.escapeHashSign)(activity.title)}`;
-                                            }
-                                        })
-                                            .join('\n');
-                                        resultLines.push(`<br><b>Activities:</b>\n\n${testActivities}`);
-                                    }
+                                    const configuration = summary.configuration;
+                                    const configurationValues = configuration.values.storage
+                                        .map(value => {
+                                        return `${value.key}: ${value.value}`;
+                                    })
+                                        .join(', ');
+                                    resultLines.push(`<br><b>Configuration:</b><br><code>${configurationValues}</code>`);
                                 }
                                 else {
                                     if (!options.showPassedTests && !isFailure) {
@@ -938,74 +829,156 @@ class Formatter {
                                         resultLines.push(`${testMethod}`);
                                     }
                                 }
-                                const testResultContent = resultLines.join('<br>');
-                                let testResultRow = '';
-                                if (details.length > 1) {
-                                    if (index - skippedPassedTests === 0) {
-                                        testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`;
+                                const activities = [];
+                                if (summary.activitySummaries) {
+                                    await this.collectActivities(summary.activitySummaries, activities);
+                                }
+                                if (activities.length) {
+                                    if (!options.showPassedTests &&
+                                        summary.testStatus !== 'Failure') {
+                                        continue;
                                     }
-                                    else {
-                                        testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`;
-                                    }
+                                    const testActivities = activities
+                                        .map(activity => {
+                                        const attachments = activity.attachments
+                                            .filter(attachment => {
+                                            return attachment.dimensions;
+                                        })
+                                            .map(attachment => {
+                                            let width = '100%';
+                                            const dimensions = attachment.dimensions;
+                                            if (dimensions.width && dimensions.height) {
+                                                const orientation = dimensions.orientation;
+                                                if (orientation && orientation >= 5) {
+                                                    width = `${dimensions.height}px`;
+                                                }
+                                                else {
+                                                    width = `${dimensions.width}px`;
+                                                }
+                                            }
+                                            const userInfo = attachment.userInfo;
+                                            if (userInfo) {
+                                                for (const info of userInfo.storage) {
+                                                    if (info.key === 'Scale') {
+                                                        const scale = parseInt(`${info.value}`);
+                                                        if (dimensions.width && dimensions.height) {
+                                                            if (dimensions.orientation &&
+                                                                dimensions.orientation >= 5) {
+                                                                const value = dimensions.height / scale;
+                                                                width = `${value.toFixed(0)}px`;
+                                                            }
+                                                            else {
+                                                                const value = dimensions.width / scale;
+                                                                width = `${value.toFixed(0)}px`;
+                                                            }
+                                                        }
+                                                        else {
+                                                            width = `${(100 / scale).toFixed(0)}%`;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            const widthAttr = `width="${width}"`;
+                                            return `<div><img ${widthAttr} src="${attachment.link}"></div>`;
+                                        });
+                                        if (attachments.length) {
+                                            const testStatus = testResult.testStatus;
+                                            const open = testStatus.includes('Failure')
+                                                ? 'open'
+                                                : '';
+                                            const title = (0, markdown_1.escapeHashSign)(activity.title);
+                                            const message = `${(0, markdown_1.indentation)(activity.indent)}- ${title}`;
+                                            const attachmentIndent = (0, markdown_1.indentation)(activity.indent + 1);
+                                            const attachmentContent = attachments.join('');
+                                            return `${message}\n${attachmentIndent}<details ${open}><summary>${attachmentIcon}</summary>${attachmentContent}</details>\n`;
+                                        }
+                                        else {
+                                            const indent = (0, markdown_1.indentation)(activity.indent);
+                                            return `${indent}- ${(0, markdown_1.escapeHashSign)(activity.title)}`;
+                                        }
+                                    })
+                                        .join('\n');
+                                    resultLines.push(`<br><b>Activities:</b>\n\n${testActivities}`);
+                                }
+                            }
+                            else {
+                                if (!options.showPassedTests && !isFailure) {
+                                    continue;
+                                }
+                                if (testResult.name) {
+                                    const anchorTag = (0, markdown_1.anchorNameTag)(`${testResultSummaryName}_${testResult.identifier}`);
+                                    const testMethodAnchor = isFailure ? anchorTag : '';
+                                    const backAnchorName = (0, markdown_1.anchorIdentifier)(`${testResultSummaryName}_${testResult.identifier}_failure-summary`);
+                                    const backAnchorLink = isFailure
+                                        ? `<a href="${backAnchorName}">${backIcon}</a>`
+                                        : '';
+                                    const testMethod = `${testMethodAnchor}${testMethodIcon}&nbsp;<code>${testResult.name}</code>${backAnchorLink}`;
+                                    resultLines.push(`${testMethod}`);
+                                }
+                            }
+                            const testResultContent = resultLines.join('<br>');
+                            let testResultRow = '';
+                            if (details.length > 1) {
+                                if (index - skippedPassedTests === 0) {
+                                    testResultRow = `<tr><td align="center" ${rowSpan} ${valign} ${colWidth}>${groupStatusImage}<td ${valign} ${detailWidth}>${testResultContent}`;
                                 }
                                 else {
-                                    testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`;
+                                    testResultRow = `<tr><td ${valign} ${detailWidth}>${testResultContent}`;
                                 }
-                                testDetailTable.push(testResultRow);
                             }
-                        }
-                        testDetailTable.push(`</table>`);
-                        testDetailTable.push('');
-                        if (testDetailTable.join('').trim() === '<table></table>') {
-                            testDetail.lines.push('All tests passed :tada:\n');
-                        }
-                        else {
-                            testDetail.lines.push(testDetailTable.join('\n'));
+                            else {
+                                testResultRow = `<tr><td align="center" ${valign} ${colWidth}>${status}<td ${valign} ${detailWidth}>${testResultContent}`;
+                            }
+                            testDetailTable.push(testResultRow);
                         }
                     }
-                }
-                const chapterDetail = new report_1.TestReportChapterDetail();
-                chapter.details.push(chapterDetail);
-                chapterDetail.content.push(testDetails.header);
-                for (const testDetail of testDetails.details) {
-                    for (const detail of testDetail.lines) {
-                        chapterDetail.content.push(detail);
+                    testDetailTable.push(`</table>`);
+                    testDetailTable.push('');
+                    if (testDetailTable.join('').trim() === '<table></table>') {
+                        testDetail.lines.push('All tests passed :tada:\n');
+                    }
+                    else {
+                        testDetail.lines.push(testDetailTable.join('\n'));
                     }
                 }
             }
-            return testReport;
-        });
+            const chapterDetail = new report_1.TestReportChapterDetail();
+            chapter.details.push(chapterDetail);
+            chapterDetail.content.push(testDetails.header);
+            for (const testDetail of testDetails.details) {
+                for (const detail of testDetail.lines) {
+                    chapterDetail.content.push(detail);
+                }
+            }
+        }
+        return testReport;
     }
-    collectTestSummaries(group, tests, testSummaries) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!tests) {
-                return;
+    async collectTestSummaries(group, tests, testSummaries) {
+        if (!tests) {
+            return;
+        }
+        for (const test of tests) {
+            if (test.hasOwnProperty('subtests')) {
+                const group = test;
+                await this.collectTestSummaries(group, group.subtests, testSummaries);
             }
-            for (const test of tests) {
-                if (test.hasOwnProperty('subtests')) {
-                    const group = test;
-                    yield this.collectTestSummaries(group, group.subtests, testSummaries);
-                }
-                else {
-                    const t = test;
-                    t.group = group.name;
-                    testSummaries.push(test);
-                }
+            else {
+                const t = test;
+                t.group = group.name;
+                testSummaries.push(test);
             }
-        });
+        }
     }
-    collectActivities(activitySummaries, activities, indent = 0) {
-        return __awaiter(this, void 0, void 0, function* () {
-            for (const activitySummary of activitySummaries) {
-                const activity = activitySummary;
-                activity.indent = indent;
-                yield (0, attachment_1.exportAttachments)(this.parser, activity);
-                activities.push(activity);
-                if (activitySummary.subactivities) {
-                    yield this.collectActivities(activitySummary.subactivities, activities, indent + 1);
-                }
+    async collectActivities(activitySummaries, activities, indent = 0) {
+        for (const activitySummary of activitySummaries) {
+            const activity = activitySummary;
+            activity.indent = indent;
+            await (0, attachment_1.exportAttachments)(this.parser, activity);
+            activities.push(activity);
+            if (activitySummary.subactivities) {
+                await this.collectActivities(activitySummary.subactivities, activities, indent + 1);
             }
-        });
+        }
     }
 }
 exports.Formatter = Formatter;
@@ -1013,10 +986,10 @@ function collectFailureSummaries(failureSummaries) {
     return failureSummaries.map(failureSummary => {
         const fileName = failureSummary.fileName;
         const sourceCodeContext = failureSummary.sourceCodeContext;
-        const callStack = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.callStack;
-        const location = sourceCodeContext === null || sourceCodeContext === void 0 ? void 0 : sourceCodeContext.location;
-        const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName;
-        const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
+        const callStack = sourceCodeContext?.callStack;
+        const location = sourceCodeContext?.location;
+        const filePath = location?.filePath || fileName;
+        const lineNumber = location?.lineNumber;
         let fileLocation = '';
         if (fileName && lineNumber) {
             fileLocation = `${fileName}:${lineNumber}`;
@@ -1033,17 +1006,19 @@ function collectFailureSummaries(failureSummaries) {
             `<tr><td ${titleAttr}><b>Issue Type</b><td ${detailWidth}>${failureSummary.issueType}` +
             `<tr><td ${titleAttr}><b>Message</b><td ${detailWidth}>${failureSummary.message}` +
             `</table>\n`;
-        const stackTrace = callStack === null || callStack === void 0 ? void 0 : callStack.map((callStack, index) => {
+        const stackTrace = callStack
+            ?.map((callStack, index) => {
             const addressString = callStack.addressString;
             const symbolInfo = callStack.symbolInfo;
-            const imageName = (symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.imageName) || '';
-            const symbolName = (symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.symbolName) || '';
-            const location = symbolInfo === null || symbolInfo === void 0 ? void 0 : symbolInfo.location;
-            const filePath = (location === null || location === void 0 ? void 0 : location.filePath) || fileName;
-            const lineNumber = location === null || location === void 0 ? void 0 : location.lineNumber;
+            const imageName = symbolInfo?.imageName || '';
+            const symbolName = symbolInfo?.symbolName || '';
+            const location = symbolInfo?.location;
+            const filePath = location?.filePath || fileName;
+            const lineNumber = location?.lineNumber;
             const seq = `${index}`.padEnd(2, ' ');
             return `${seq} ${imageName} ${addressString} ${symbolName} ${filePath}: ${lineNumber}`;
-        }).join('\n');
+        })
+            .join('\n');
         return {
             filePath,
             lineNumber,
@@ -1055,6 +1030,8 @@ function collectFailureSummaries(failureSummaries) {
     });
 }
 class FormatterOptions {
+    showPassedTests;
+    showCodeCoverage;
     constructor(showPassedTests = true, showCodeCoverage = true) {
         this.showPassedTests = showPassedTests;
         this.showCodeCoverage = showCodeCoverage;
@@ -1163,15 +1140,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const artifact = __importStar(__nccwpck_require__(2605));
 const core = __importStar(__nccwpck_require__(2186));
@@ -1184,138 +1152,134 @@ const action_1 = __nccwpck_require__(1231);
 const glob_1 = __nccwpck_require__(1957);
 const fs_1 = __nccwpck_require__(7147);
 const { stat } = fs_1.promises;
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const inputPaths = core.getMultilineInput('path');
-            const showPassedTests = core.getBooleanInput('show-passed-tests');
-            const showCodeCoverage = core.getBooleanInput('show-code-coverage');
-            let uploadBundles = core.getInput('upload-bundles').toLowerCase();
-            if (uploadBundles === 'true') {
-                uploadBundles = 'always';
+async function run() {
+    try {
+        const inputPaths = core.getMultilineInput('path');
+        const showPassedTests = core.getBooleanInput('show-passed-tests');
+        const showCodeCoverage = core.getBooleanInput('show-code-coverage');
+        let uploadBundles = core.getInput('upload-bundles').toLowerCase();
+        if (uploadBundles === 'true') {
+            uploadBundles = 'always';
+        }
+        else if (uploadBundles === 'false') {
+            uploadBundles = 'never';
+        }
+        const bundlePaths = [];
+        for (const checkPath of inputPaths) {
+            try {
+                await stat(checkPath);
+                bundlePaths.push(checkPath);
             }
-            else if (uploadBundles === 'false') {
-                uploadBundles = 'never';
+            catch (error) {
+                core.error(error.message);
             }
-            const bundlePaths = [];
-            for (const checkPath of inputPaths) {
-                try {
-                    yield stat(checkPath);
-                    bundlePaths.push(checkPath);
-                }
-                catch (error) {
-                    core.error(error.message);
-                }
+        }
+        let bundlePath = path.join(os.tmpdir(), 'Merged.xcresult');
+        if (inputPaths.length > 1) {
+            await mergeResultBundle(bundlePaths, bundlePath);
+        }
+        else {
+            const inputPath = inputPaths[0];
+            await stat(inputPath);
+            bundlePath = inputPath;
+        }
+        const formatter = new formatter_1.Formatter(bundlePath);
+        const report = await formatter.format({
+            showPassedTests,
+            showCodeCoverage
+        });
+        if (core.getInput('token')) {
+            await core.summary.addRaw(report.reportSummary).write();
+            const octokit = new action_1.Octokit();
+            const owner = github.context.repo.owner;
+            const repo = github.context.repo.repo;
+            const pr = github.context.payload.pull_request;
+            const sha = (pr && pr.head.sha) || github.context.sha;
+            const charactersLimit = 65535;
+            let title = core.getInput('title');
+            if (title.length > charactersLimit) {
+                core.warning(`The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`);
+                title = title.substring(0, charactersLimit);
             }
-            let bundlePath = path.join(os.tmpdir(), 'Merged.xcresult');
-            if (inputPaths.length > 1) {
-                yield mergeResultBundle(bundlePaths, bundlePath);
+            let reportSummary = report.reportSummary;
+            if (reportSummary.length > charactersLimit) {
+                core.warning(`The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`);
+                reportSummary = reportSummary.substring(0, charactersLimit);
+            }
+            let reportDetail = report.reportDetail;
+            if (reportDetail.length > charactersLimit) {
+                core.warning(`The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`);
+                reportDetail = reportDetail.substring(0, charactersLimit);
+            }
+            if (report.annotations.length > 50) {
+                core.warning('Annotations that exceed the limit (50) will be truncated.');
+            }
+            const annotations = report.annotations.slice(0, 50);
+            let output;
+            if (reportDetail.trim()) {
+                output = {
+                    title: 'Xcode test results',
+                    summary: reportSummary,
+                    text: reportDetail,
+                    annotations
+                };
             }
             else {
-                const inputPath = inputPaths[0];
-                yield stat(inputPath);
-                bundlePath = inputPath;
+                output = {
+                    title: 'Xcode test results',
+                    summary: reportSummary,
+                    annotations
+                };
             }
-            const formatter = new formatter_1.Formatter(bundlePath);
-            const report = yield formatter.format({
-                showPassedTests,
-                showCodeCoverage
+            await octokit.checks.create({
+                owner,
+                repo,
+                name: title,
+                head_sha: sha,
+                status: 'completed',
+                conclusion: report.testStatus,
+                output
             });
-            if (core.getInput('token')) {
-                yield core.summary.addRaw(report.reportSummary).write();
-                const octokit = new action_1.Octokit();
-                const owner = github.context.repo.owner;
-                const repo = github.context.repo.repo;
-                const pr = github.context.payload.pull_request;
-                const sha = (pr && pr.head.sha) || github.context.sha;
-                const charactersLimit = 65535;
-                let title = core.getInput('title');
-                if (title.length > charactersLimit) {
-                    core.warning(`The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`);
-                    title = title.substring(0, charactersLimit);
-                }
-                let reportSummary = report.reportSummary;
-                if (reportSummary.length > charactersLimit) {
-                    core.warning(`The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`);
-                    reportSummary = reportSummary.substring(0, charactersLimit);
-                }
-                let reportDetail = report.reportDetail;
-                if (reportDetail.length > charactersLimit) {
-                    core.warning(`The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`);
-                    reportDetail = reportDetail.substring(0, charactersLimit);
-                }
-                if (report.annotations.length > 50) {
-                    core.warning('Annotations that exceed the limit (50) will be truncated.');
-                }
-                const annotations = report.annotations.slice(0, 50);
-                let output;
-                if (reportDetail.trim()) {
-                    output = {
-                        title: 'Xcode test results',
-                        summary: reportSummary,
-                        text: reportDetail,
-                        annotations
-                    };
-                }
-                else {
-                    output = {
-                        title: 'Xcode test results',
-                        summary: reportSummary,
-                        annotations
-                    };
-                }
-                yield octokit.checks.create({
-                    owner,
-                    repo,
-                    name: title,
-                    head_sha: sha,
-                    status: 'completed',
-                    conclusion: report.testStatus,
-                    output
-                });
-                if (uploadBundles === 'always' ||
-                    (uploadBundles === 'failure' && report.testStatus === 'failure')) {
-                    for (const uploadBundlePath of inputPaths) {
-                        try {
-                            yield stat(uploadBundlePath);
-                        }
-                        catch (error) {
-                            continue;
-                        }
-                        const artifactClient = artifact.create();
-                        const artifactName = path.basename(uploadBundlePath);
-                        const rootDirectory = uploadBundlePath;
-                        const options = {
-                            continueOnError: false
-                        };
-                        (0, glob_1.glob)(`${uploadBundlePath}/**/*`, (error, files) => __awaiter(this, void 0, void 0, function* () {
-                            if (error) {
-                                core.error(error);
-                            }
-                            if (files.length) {
-                                yield artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
-                            }
-                        }));
+            if (uploadBundles === 'always' ||
+                (uploadBundles === 'failure' && report.testStatus === 'failure')) {
+                for (const uploadBundlePath of inputPaths) {
+                    try {
+                        await stat(uploadBundlePath);
                     }
+                    catch (error) {
+                        continue;
+                    }
+                    const artifactClient = artifact.create();
+                    const artifactName = path.basename(uploadBundlePath);
+                    const rootDirectory = uploadBundlePath;
+                    const options = {
+                        continueOnError: false
+                    };
+                    (0, glob_1.glob)(`${uploadBundlePath}/**/*`, async (error, files) => {
+                        if (error) {
+                            core.error(error);
+                        }
+                        if (files.length) {
+                            await artifactClient.uploadArtifact(artifactName, files, rootDirectory, options);
+                        }
+                    });
                 }
             }
         }
-        catch (error) {
-            core.setFailed(error.message);
-        }
-    });
+    }
+    catch (error) {
+        core.setFailed(error.message);
+    }
 }
 run();
-function mergeResultBundle(inputPaths, outputPath) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const args = ['xcresulttool', 'merge']
-            .concat(inputPaths)
-            .concat(['--output-path', outputPath]);
-        const options = {
-            silent: true
-        };
-        yield exec.exec('xcrun', args, options);
-    });
+async function mergeResultBundle(inputPaths, outputPath) {
+    const args = ['xcresulttool', 'merge']
+        .concat(inputPaths)
+        .concat(['--output-path', outputPath]);
+    const options = {
+        silent: true
+    };
+    await exec.exec('xcrun', args, options);
 }
 
 
@@ -1378,93 +1342,77 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Parser = void 0;
 const exec = __importStar(__nccwpck_require__(1514));
 const fs_1 = __nccwpck_require__(7147);
 const { readFile } = fs_1.promises;
 class Parser {
+    bundlePath;
     constructor(bundlePath) {
         this.bundlePath = bundlePath;
     }
-    parse(reference) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const root = JSON.parse(yield this.toJSON(reference));
-            return parseObject(root);
-        });
+    async parse(reference) {
+        const root = JSON.parse(await this.toJSON(reference));
+        return parseObject(root);
     }
-    exportObject(reference, outputPath) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const args = [
-                'xcresulttool',
-                'export',
-                '--type',
-                'file',
-                '--path',
-                this.bundlePath,
-                '--output-path',
-                outputPath,
-                '--id',
-                reference
-            ];
-            const options = {
-                silent: true
-            };
-            yield exec.exec('xcrun', args, options);
-            return Buffer.from(yield readFile(outputPath));
-        });
+    async exportObject(reference, outputPath) {
+        const args = [
+            'xcresulttool',
+            'export',
+            '--type',
+            'file',
+            '--path',
+            this.bundlePath,
+            '--output-path',
+            outputPath,
+            '--id',
+            reference
+        ];
+        const options = {
+            silent: true
+        };
+        await exec.exec('xcrun', args, options);
+        return Buffer.from(await readFile(outputPath));
     }
-    exportCodeCoverage() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const args = ['xccov', 'view', '--report', '--json', this.bundlePath];
-            let output = '';
-            const options = {
-                silent: true,
-                listeners: {
-                    stdout: (data) => {
-                        output += data.toString();
-                    }
+    async exportCodeCoverage() {
+        const args = ['xccov', 'view', '--report', '--json', this.bundlePath];
+        let output = '';
+        const options = {
+            silent: true,
+            listeners: {
+                stdout: (data) => {
+                    output += data.toString();
                 }
-            };
-            yield exec.exec('xcrun', args, options);
-            return output;
-        });
-    }
-    toJSON(reference) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const args = [
-                'xcresulttool',
-                'get',
-                '--path',
-                this.bundlePath,
-                '--format',
-                'json'
-            ];
-            if (reference) {
-                args.push('--id');
-                args.push(reference);
             }
-            let output = '';
-            const options = {
-                silent: true,
-                listeners: {
-                    stdout: (data) => {
-                        output += data.toString();
-                    }
+        };
+        await exec.exec('xcrun', args, options);
+        return output;
+    }
+    async toJSON(reference) {
+        const args = [
+            'xcresulttool',
+            'get',
+            '--path',
+            this.bundlePath,
+            '--format',
+            'json'
+        ];
+        if (reference) {
+            args.push('--id');
+            args.push(reference);
+        }
+        let output = '';
+        const options = {
+            silent: true,
+            listeners: {
+                stdout: (data) => {
+                    output += data.toString();
                 }
-            };
-            yield exec.exec('xcrun', args, options);
-            return output;
-        });
+            }
+        };
+        await exec.exec('xcrun', args, options);
+        return output;
     }
 }
 exports.Parser = Parser;
@@ -1555,11 +1503,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BuildLog = exports.Annotation = exports.TestCodeCoverage = exports.TestFailure = exports.TestFailureGroup = exports.TestFailures = exports.TestDetail = exports.TestDetails = exports.TestReportSection = exports.TestReportChapterDetail = exports.TestReportChapterSummary = exports.TestReportChapter = exports.TestReport = void 0;
 const pathModule = __importStar(__nccwpck_require__(1017));
 class TestReport {
-    constructor() {
-        this.testStatus = 'neutral';
-        this.chapters = [];
-        this.annotations = [];
-    }
+    entityName;
+    creatingWorkspaceFilePath;
+    testStatus = 'neutral';
+    buildLog;
+    chapters = [];
+    codeCoverage;
+    annotations = [];
     get reportSummary() {
         const lines = [];
         if (this.buildLog) {
@@ -1596,10 +1546,13 @@ class TestReport {
 }
 exports.TestReport = TestReport;
 class TestReportChapter {
+    title;
+    schemeCommandName;
+    runDestination;
+    sections = {};
+    summaries = [];
+    details = [];
     constructor(schemeCommandName, runDestination, title) {
-        this.sections = {};
-        this.summaries = [];
-        this.details = [];
         this.schemeCommandName = schemeCommandName;
         this.runDestination = runDestination;
         this.title = title;
@@ -1607,47 +1560,42 @@ class TestReportChapter {
 }
 exports.TestReportChapter = TestReportChapter;
 class TestReportChapterSummary {
-    constructor() {
-        this.content = [];
-    }
+    content = [];
 }
 exports.TestReportChapterSummary = TestReportChapterSummary;
 class TestReportChapterDetail {
-    constructor() {
-        this.content = [];
-    }
+    content = [];
 }
 exports.TestReportChapterDetail = TestReportChapterDetail;
 class TestReportSection {
+    summary;
+    details;
+    sectionSummary = [];
     constructor(summary, details) {
-        this.sectionSummary = [];
         this.summary = summary;
         this.details = details;
     }
 }
 exports.TestReportSection = TestReportSection;
 class TestDetails {
-    constructor() {
-        this.header = '### Test Details\n';
-        this.details = [];
-    }
+    header = '### Test Details\n';
+    details = [];
 }
 exports.TestDetails = TestDetails;
 class TestDetail {
-    constructor() {
-        this.lines = [];
-    }
+    lines = [];
 }
 exports.TestDetail = TestDetail;
 class TestFailures {
-    constructor() {
-        this.failureGroups = [];
-    }
+    failureGroups = [];
 }
 exports.TestFailures = TestFailures;
 class TestFailureGroup {
+    summaryIdentifier;
+    identifier;
+    name;
+    failures = [];
     constructor(summaryIdentifier, identifier, name) {
-        this.failures = [];
         this.summaryIdentifier = summaryIdentifier;
         this.identifier = identifier;
         this.name = name;
@@ -1655,14 +1603,12 @@ class TestFailureGroup {
 }
 exports.TestFailureGroup = TestFailureGroup;
 class TestFailure {
-    constructor() {
-        this.lines = [];
-    }
+    lines = [];
 }
 exports.TestFailure = TestFailure;
 class TestCodeCoverage {
+    lines = [];
     constructor(codeCoverage) {
-        this.lines = [];
         const baseUrl = 'https://xcresulttool-static.netlify.app/i/';
         this.lines.push('### Code Coverage');
         this.lines.push('<table>');
@@ -1730,6 +1676,15 @@ class TestCodeCoverage {
 }
 exports.TestCodeCoverage = TestCodeCoverage;
 class Annotation {
+    path;
+    start_line;
+    end_line;
+    start_column;
+    end_column;
+    annotation_level;
+    message;
+    title;
+    raw_details;
     constructor(path, start_line, end_line, annotation_level, message, title, raw_details) {
         this.path = path;
         this.start_line = start_line;
@@ -1742,15 +1697,14 @@ class Annotation {
 }
 exports.Annotation = Annotation;
 class BuildLog {
+    content = [];
+    annotations = [];
     constructor(log, creatingWorkspaceFilePath) {
-        var _a, _b, _c, _d;
-        this.content = [];
-        this.annotations = [];
         const lines = [];
         if (!log.subsections) {
             return;
         }
-        const workspace = pathModule.dirname(`${creatingWorkspaceFilePath !== null && creatingWorkspaceFilePath !== void 0 ? creatingWorkspaceFilePath : ''}`);
+        const workspace = pathModule.dirname(`${creatingWorkspaceFilePath ?? ''}`);
         const re = new RegExp(`${workspace}/`, 'g');
         const failures = log.subsections.filter(subsection => {
             if (subsection.hasOwnProperty('exitCode')) {
@@ -1780,10 +1734,10 @@ class BuildLog {
                             else {
                                 lines.push(`${message.type}:&nbsp;${message.title}`);
                             }
-                            if ((_a = message.location) === null || _a === void 0 ? void 0 : _a.url) {
+                            if (message.location?.url) {
                                 let startLine = 0;
                                 let endLine = 0;
-                                const url = new URL((_b = message.location) === null || _b === void 0 ? void 0 : _b.url);
+                                const url = new URL(message.location?.url);
                                 const locations = url.hash.substring(1).split('&');
                                 for (const location of locations) {
                                     const pair = location.split('=');
@@ -1841,10 +1795,10 @@ class BuildLog {
                         else {
                             lines.push(`${message.type}:&nbsp;${message.title}`);
                         }
-                        if ((_c = message.location) === null || _c === void 0 ? void 0 : _c.url) {
+                        if (message.location?.url) {
                             let startLine = 0;
                             let endLine = 0;
-                            const url = new URL((_d = message.location) === null || _d === void 0 ? void 0 : _d.url);
+                            const url = new URL(message.location?.url);
                             const locations = url.hash.substring(1).split('&');
                             for (const location of locations) {
                                 const pair = location.split('=');
@@ -4698,7 +4652,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {
@@ -17069,8 +17023,8 @@ exports.parseProxyResponse = parseProxyResponse;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.detector = void 0;
-const types_1 = __nccwpck_require__(6379);
-const keys = Object.keys(types_1.typeHandlers);
+const index_1 = __nccwpck_require__(7673);
+const keys = Object.keys(index_1.typeHandlers);
 // This map helps avoid validating for every single image type
 const firstBytes = {
     0x38: 'psd',
@@ -17082,17 +17036,17 @@ const firstBytes = {
     0x52: 'webp',
     0x69: 'icns',
     0x89: 'png',
-    0xff: 'jpg'
+    0xff: 'jpg',
 };
-function detector(buffer) {
-    const byte = buffer[0];
+function detector(input) {
+    const byte = input[0];
     if (byte in firstBytes) {
         const type = firstBytes[byte];
-        if (type && types_1.typeHandlers[type].validate(buffer)) {
+        if (type && index_1.typeHandlers[type].validate(input)) {
             return type;
         }
     }
-    const finder = (key) => types_1.typeHandlers[key].validate(buffer);
+    const finder = (key) => index_1.typeHandlers[key].validate(input);
     return keys.find(finder);
 }
 exports.detector = detector;
@@ -17110,36 +17064,36 @@ exports.types = exports.setConcurrency = exports.disableTypes = exports.disableF
 const fs = __nccwpck_require__(7147);
 const path = __nccwpck_require__(1017);
 const queue_1 = __nccwpck_require__(3795);
-const types_1 = __nccwpck_require__(6379);
+const index_1 = __nccwpck_require__(7673);
 const detector_1 = __nccwpck_require__(7606);
-// Maximum buffer size, with a default of 512 kilobytes.
+// Maximum input size, with a default of 512 kilobytes.
 // TO-DO: make this adaptive based on the initial signature of the image
-const MaxBufferSize = 512 * 1024;
+const MaxInputSize = 512 * 1024;
 // This queue is for async `fs` operations, to avoid reaching file-descriptor limits
 const queue = new queue_1.default({ concurrency: 100, autostart: true });
 const globalOptions = {
     disabledFS: false,
-    disabledTypes: []
+    disabledTypes: [],
 };
 /**
- * Return size information based on a buffer
+ * Return size information based on an Uint8Array
  *
- * @param {Buffer} buffer
+ * @param {Uint8Array} input
  * @param {String} filepath
  * @returns {Object}
  */
-function lookup(buffer, filepath) {
+function lookup(input, filepath) {
     // detect the file type.. don't rely on the extension
-    const type = (0, detector_1.detector)(buffer);
+    const type = (0, detector_1.detector)(input);
     if (typeof type !== 'undefined') {
         if (globalOptions.disabledTypes.indexOf(type) > -1) {
             throw new TypeError('disabled file type: ' + type);
         }
         // find an appropriate handler for this file type
-        if (type in types_1.typeHandlers) {
-            const size = types_1.typeHandlers[type].calculate(buffer, filepath);
+        if (type in index_1.typeHandlers) {
+            const size = index_1.typeHandlers[type].calculate(input, filepath);
             if (size !== undefined) {
-                size.type = type;
+                size.type = size.type ?? type;
                 return size;
             }
         }
@@ -17148,33 +17102,33 @@ function lookup(buffer, filepath) {
     throw new TypeError('unsupported file type: ' + type + ' (file: ' + filepath + ')');
 }
 /**
- * Reads a file into a buffer.
+ * Reads a file into an Uint8Array.
  * @param {String} filepath
- * @returns {Promise<Buffer>}
+ * @returns {Promise<Uint8Array>}
  */
-async function asyncFileToBuffer(filepath) {
+async function readFileAsync(filepath) {
     const handle = await fs.promises.open(filepath, 'r');
     try {
         const { size } = await handle.stat();
         if (size <= 0) {
             throw new Error('Empty file');
         }
-        const bufferSize = Math.min(size, MaxBufferSize);
-        const buffer = Buffer.alloc(bufferSize);
-        await handle.read(buffer, 0, bufferSize, 0);
-        return buffer;
+        const inputSize = Math.min(size, MaxInputSize);
+        const input = new Uint8Array(inputSize);
+        await handle.read(input, 0, inputSize, 0);
+        return input;
     }
     finally {
         await handle.close();
     }
 }
 /**
- * Synchronously reads a file into a buffer, blocking the nodejs process.
+ * Synchronously reads a file into an Uint8Array, blocking the nodejs process.
  *
  * @param {String} filepath
- * @returns {Buffer}
+ * @returns {Uint8Array}
  */
-function syncFileToBuffer(filepath) {
+function readFileSync(filepath) {
     // read from the file, synchronously
     const descriptor = fs.openSync(filepath, 'r');
     try {
@@ -17182,10 +17136,10 @@ function syncFileToBuffer(filepath) {
         if (size <= 0) {
             throw new Error('Empty file');
         }
-        const bufferSize = Math.min(size, MaxBufferSize);
-        const buffer = Buffer.alloc(bufferSize);
-        fs.readSync(descriptor, buffer, 0, bufferSize, 0);
-        return buffer;
+        const inputSize = Math.min(size, MaxInputSize);
+        const input = new Uint8Array(inputSize);
+        fs.readSync(descriptor, input, 0, inputSize, 0);
+        return input;
     }
     finally {
         fs.closeSync(descriptor);
@@ -17195,126 +17149,62 @@ function syncFileToBuffer(filepath) {
 module.exports = exports = imageSize; // backwards compatibility
 exports["default"] = imageSize;
 /**
- * @param {Buffer|string} input - buffer or relative/absolute path of the image file
+ * @param {Uint8Array|string} input - Uint8Array or relative/absolute path of the image file
  * @param {Function=} [callback] - optional function for async detection
  */
 function imageSize(input, callback) {
-    // Handle buffer input
-    if (Buffer.isBuffer(input)) {
+    // Handle Uint8Array input
+    if (input instanceof Uint8Array) {
         return lookup(input);
     }
     // input should be a string at this point
     if (typeof input !== 'string' || globalOptions.disabledFS) {
-        throw new TypeError('invalid invocation. input should be a Buffer');
+        throw new TypeError('invalid invocation. input should be a Uint8Array');
     }
     // resolve the file path
     const filepath = path.resolve(input);
     if (typeof callback === 'function') {
-        queue.push(() => asyncFileToBuffer(filepath)
-            .then((buffer) => process.nextTick(callback, null, lookup(buffer, filepath)))
+        queue.push(() => readFileAsync(filepath)
+            .then((input) => process.nextTick(callback, null, lookup(input, filepath)))
             .catch(callback));
     }
     else {
-        const buffer = syncFileToBuffer(filepath);
-        return lookup(buffer, filepath);
+        const input = readFileSync(filepath);
+        return lookup(input, filepath);
     }
 }
 exports.imageSize = imageSize;
-const disableFS = (v) => { globalOptions.disabledFS = v; };
-exports.disableFS = disableFS;
-const disableTypes = (types) => { globalOptions.disabledTypes = types; };
-exports.disableTypes = disableTypes;
-const setConcurrency = (c) => { queue.concurrency = c; };
-exports.setConcurrency = setConcurrency;
-exports.types = Object.keys(types_1.typeHandlers);
-
-
-/***/ }),
-
-/***/ 1446:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.readUInt = void 0;
-// Abstract reading multi-byte unsigned integers
-function readUInt(buffer, bits, offset, isBigEndian) {
-    offset = offset || 0;
-    const endian = isBigEndian ? 'BE' : 'LE';
-    const methodName = ('readUInt' + bits + endian);
-    return buffer[methodName].call(buffer, offset);
-}
-exports.readUInt = readUInt;
-
-
-/***/ }),
-
-/***/ 6379:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.typeHandlers = void 0;
-// load all available handlers explicitely for browserify support
-const bmp_1 = __nccwpck_require__(7098);
-const cur_1 = __nccwpck_require__(3769);
-const dds_1 = __nccwpck_require__(8773);
-const gif_1 = __nccwpck_require__(3941);
-const icns_1 = __nccwpck_require__(7045);
-const ico_1 = __nccwpck_require__(313);
-const j2c_1 = __nccwpck_require__(5947);
-const jp2_1 = __nccwpck_require__(6542);
-const jpg_1 = __nccwpck_require__(7710);
-const ktx_1 = __nccwpck_require__(645);
-const png_1 = __nccwpck_require__(7622);
-const pnm_1 = __nccwpck_require__(5664);
-const psd_1 = __nccwpck_require__(659);
-const svg_1 = __nccwpck_require__(7544);
-const tga_1 = __nccwpck_require__(8453);
-const tiff_1 = __nccwpck_require__(3651);
-const webp_1 = __nccwpck_require__(5759);
-exports.typeHandlers = {
-    bmp: bmp_1.BMP,
-    cur: cur_1.CUR,
-    dds: dds_1.DDS,
-    gif: gif_1.GIF,
-    icns: icns_1.ICNS,
-    ico: ico_1.ICO,
-    j2c: j2c_1.J2C,
-    jp2: jp2_1.JP2,
-    jpg: jpg_1.JPG,
-    ktx: ktx_1.KTX,
-    png: png_1.PNG,
-    pnm: pnm_1.PNM,
-    psd: psd_1.PSD,
-    svg: svg_1.SVG,
-    tga: tga_1.TGA,
-    tiff: tiff_1.TIFF,
-    webp: webp_1.WEBP,
+const disableFS = (v) => {
+    globalOptions.disabledFS = v;
 };
+exports.disableFS = disableFS;
+const disableTypes = (types) => {
+    globalOptions.disabledTypes = types;
+};
+exports.disableTypes = disableTypes;
+const setConcurrency = (c) => {
+    queue.concurrency = c;
+};
+exports.setConcurrency = setConcurrency;
+exports.types = Object.keys(index_1.typeHandlers);
 
 
 /***/ }),
 
 /***/ 7098:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BMP = void 0;
+const utils_1 = __nccwpck_require__(8574);
 exports.BMP = {
-    validate(buffer) {
-        return ('BM' === buffer.toString('ascii', 0, 2));
-    },
-    calculate(buffer) {
-        return {
-            height: Math.abs(buffer.readInt32LE(22)),
-            width: buffer.readUInt32LE(18)
-        };
-    }
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 2) === 'BM',
+    calculate: (input) => ({
+        height: Math.abs((0, utils_1.readInt32LE)(input, 22)),
+        width: (0, utils_1.readUInt32LE)(input, 18),
+    }),
 };
 
 
@@ -17328,65 +17218,99 @@ exports.BMP = {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CUR = void 0;
 const ico_1 = __nccwpck_require__(313);
+const utils_1 = __nccwpck_require__(8574);
 const TYPE_CURSOR = 2;
 exports.CUR = {
-    validate(buffer) {
-        const reserved = buffer.readUInt16LE(0);
-        const imageCount = buffer.readUInt16LE(4);
-        if (reserved !== 0 || imageCount === 0) {
+    validate(input) {
+        const reserved = (0, utils_1.readUInt16LE)(input, 0);
+        const imageCount = (0, utils_1.readUInt16LE)(input, 4);
+        if (reserved !== 0 || imageCount === 0)
             return false;
-        }
-        const imageType = buffer.readUInt16LE(2);
+        const imageType = (0, utils_1.readUInt16LE)(input, 2);
         return imageType === TYPE_CURSOR;
     },
-    calculate(buffer) {
-        return ico_1.ICO.calculate(buffer);
-    }
+    calculate: (input) => ico_1.ICO.calculate(input),
 };
 
 
 /***/ }),
 
 /***/ 8773:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DDS = void 0;
+const utils_1 = __nccwpck_require__(8574);
 exports.DDS = {
-    validate(buffer) {
-        return buffer.readUInt32LE(0) === 0x20534444;
-    },
-    calculate(buffer) {
-        return {
-            height: buffer.readUInt32LE(12),
-            width: buffer.readUInt32LE(16)
-        };
-    }
+    validate: (input) => (0, utils_1.readUInt32LE)(input, 0) === 0x20534444,
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt32LE)(input, 12),
+        width: (0, utils_1.readUInt32LE)(input, 16),
+    }),
 };
 
 
 /***/ }),
 
 /***/ 3941:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GIF = void 0;
+const utils_1 = __nccwpck_require__(8574);
 const gifRegexp = /^GIF8[79]a/;
 exports.GIF = {
+    validate: (input) => gifRegexp.test((0, utils_1.toUTF8String)(input, 0, 6)),
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt16LE)(input, 8),
+        width: (0, utils_1.readUInt16LE)(input, 6),
+    }),
+};
+
+
+/***/ }),
+
+/***/ 7218:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HEIF = void 0;
+const utils_1 = __nccwpck_require__(8574);
+const brandMap = {
+    avif: 'avif',
+    mif1: 'heif',
+    msf1: 'heif', // hief-sequence
+    heic: 'heic',
+    heix: 'heic',
+    hevc: 'heic', // heic-sequence
+    hevx: 'heic', // heic-sequence
+};
+exports.HEIF = {
     validate(buffer) {
-        const signature = buffer.toString('ascii', 0, 6);
-        return (gifRegexp.test(signature));
+        const ftype = (0, utils_1.toUTF8String)(buffer, 4, 8);
+        const brand = (0, utils_1.toUTF8String)(buffer, 8, 12);
+        return 'ftyp' === ftype && brand in brandMap;
     },
     calculate(buffer) {
-        return {
-            height: buffer.readUInt16LE(8),
-            width: buffer.readUInt16LE(6)
-        };
+        // Based on https://nokiatech.github.io/heif/technical.html
+        const metaBox = (0, utils_1.findBox)(buffer, 'meta', 0);
+        const iprpBox = metaBox && (0, utils_1.findBox)(buffer, 'iprp', metaBox.offset + 12);
+        const ipcoBox = iprpBox && (0, utils_1.findBox)(buffer, 'ipco', iprpBox.offset + 8);
+        const ispeBox = ipcoBox && (0, utils_1.findBox)(buffer, 'ispe', ipcoBox.offset + 8);
+        if (ispeBox) {
+            return {
+                height: (0, utils_1.readUInt32BE)(buffer, ispeBox.offset + 16),
+                width: (0, utils_1.readUInt32BE)(buffer, ispeBox.offset + 12),
+                type: (0, utils_1.toUTF8String)(buffer, 8, 12),
+            };
+        }
+        throw new TypeError('Invalid HEIF, no size found');
     }
 };
 
@@ -17394,12 +17318,13 @@ exports.GIF = {
 /***/ }),
 
 /***/ 7045:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ICNS = void 0;
+const utils_1 = __nccwpck_require__(8574);
 /**
  * ICNS Header
  *
@@ -17461,11 +17386,11 @@ const ICON_TYPE_SIZE = {
     // . => 1024 x 1024
     ic10: 1024,
 };
-function readImageHeader(buffer, imageOffset) {
+function readImageHeader(input, imageOffset) {
     const imageLengthOffset = imageOffset + ENTRY_LENGTH_OFFSET;
     return [
-        buffer.toString('ascii', imageOffset, imageLengthOffset),
-        buffer.readUInt32BE(imageLengthOffset)
+        (0, utils_1.toUTF8String)(input, imageOffset, imageLengthOffset),
+        (0, utils_1.readUInt32BE)(input, imageLengthOffset),
     ];
 }
 function getImageSize(type) {
@@ -17473,44 +17398,42 @@ function getImageSize(type) {
     return { width: size, height: size, type };
 }
 exports.ICNS = {
-    validate(buffer) {
-        return ('icns' === buffer.toString('ascii', 0, 4));
-    },
-    calculate(buffer) {
-        const bufferLength = buffer.length;
-        const fileLength = buffer.readUInt32BE(FILE_LENGTH_OFFSET);
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 4) === 'icns',
+    calculate(input) {
+        const inputLength = input.length;
+        const fileLength = (0, utils_1.readUInt32BE)(input, FILE_LENGTH_OFFSET);
         let imageOffset = SIZE_HEADER;
-        let imageHeader = readImageHeader(buffer, imageOffset);
+        let imageHeader = readImageHeader(input, imageOffset);
         let imageSize = getImageSize(imageHeader[0]);
         imageOffset += imageHeader[1];
-        if (imageOffset === fileLength) {
+        if (imageOffset === fileLength)
             return imageSize;
-        }
         const result = {
             height: imageSize.height,
             images: [imageSize],
-            width: imageSize.width
+            width: imageSize.width,
         };
-        while (imageOffset < fileLength && imageOffset < bufferLength) {
-            imageHeader = readImageHeader(buffer, imageOffset);
+        while (imageOffset < fileLength && imageOffset < inputLength) {
+            imageHeader = readImageHeader(input, imageOffset);
             imageSize = getImageSize(imageHeader[0]);
             imageOffset += imageHeader[1];
             result.images.push(imageSize);
         }
         return result;
-    }
+    },
 };
 
 
 /***/ }),
 
 /***/ 313:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ICO = void 0;
+const utils_1 = __nccwpck_require__(8574);
 const TYPE_ICON = 1;
 /**
  * ICON Header
@@ -17539,133 +17462,144 @@ const SIZE_HEADER = 2 + 2 + 2; // 6
  *
  */
 const SIZE_IMAGE_ENTRY = 1 + 1 + 1 + 1 + 2 + 2 + 4 + 4; // 16
-function getSizeFromOffset(buffer, offset) {
-    const value = buffer.readUInt8(offset);
+function getSizeFromOffset(input, offset) {
+    const value = input[offset];
     return value === 0 ? 256 : value;
 }
-function getImageSize(buffer, imageIndex) {
-    const offset = SIZE_HEADER + (imageIndex * SIZE_IMAGE_ENTRY);
+function getImageSize(input, imageIndex) {
+    const offset = SIZE_HEADER + imageIndex * SIZE_IMAGE_ENTRY;
     return {
-        height: getSizeFromOffset(buffer, offset + 1),
-        width: getSizeFromOffset(buffer, offset)
+        height: getSizeFromOffset(input, offset + 1),
+        width: getSizeFromOffset(input, offset),
     };
 }
 exports.ICO = {
-    validate(buffer) {
-        const reserved = buffer.readUInt16LE(0);
-        const imageCount = buffer.readUInt16LE(4);
-        if (reserved !== 0 || imageCount === 0) {
+    validate(input) {
+        const reserved = (0, utils_1.readUInt16LE)(input, 0);
+        const imageCount = (0, utils_1.readUInt16LE)(input, 4);
+        if (reserved !== 0 || imageCount === 0)
             return false;
-        }
-        const imageType = buffer.readUInt16LE(2);
+        const imageType = (0, utils_1.readUInt16LE)(input, 2);
         return imageType === TYPE_ICON;
     },
-    calculate(buffer) {
-        const nbImages = buffer.readUInt16LE(4);
-        const imageSize = getImageSize(buffer, 0);
-        if (nbImages === 1) {
+    calculate(input) {
+        const nbImages = (0, utils_1.readUInt16LE)(input, 4);
+        const imageSize = getImageSize(input, 0);
+        if (nbImages === 1)
             return imageSize;
-        }
         const imgs = [imageSize];
         for (let imageIndex = 1; imageIndex < nbImages; imageIndex += 1) {
-            imgs.push(getImageSize(buffer, imageIndex));
+            imgs.push(getImageSize(input, imageIndex));
         }
-        const result = {
+        return {
             height: imageSize.height,
             images: imgs,
-            width: imageSize.width
+            width: imageSize.width,
         };
-        return result;
-    }
+    },
+};
+
+
+/***/ }),
+
+/***/ 7673:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.typeHandlers = void 0;
+// load all available handlers explicitly for browserify support
+const bmp_1 = __nccwpck_require__(7098);
+const cur_1 = __nccwpck_require__(3769);
+const dds_1 = __nccwpck_require__(8773);
+const gif_1 = __nccwpck_require__(3941);
+const heif_1 = __nccwpck_require__(7218);
+const icns_1 = __nccwpck_require__(7045);
+const ico_1 = __nccwpck_require__(313);
+const j2c_1 = __nccwpck_require__(5947);
+const jp2_1 = __nccwpck_require__(6542);
+const jpg_1 = __nccwpck_require__(7710);
+const ktx_1 = __nccwpck_require__(645);
+const png_1 = __nccwpck_require__(7622);
+const pnm_1 = __nccwpck_require__(5664);
+const psd_1 = __nccwpck_require__(659);
+const svg_1 = __nccwpck_require__(7544);
+const tga_1 = __nccwpck_require__(8453);
+const tiff_1 = __nccwpck_require__(3651);
+const webp_1 = __nccwpck_require__(5759);
+exports.typeHandlers = {
+    bmp: bmp_1.BMP,
+    cur: cur_1.CUR,
+    dds: dds_1.DDS,
+    gif: gif_1.GIF,
+    heif: heif_1.HEIF,
+    icns: icns_1.ICNS,
+    ico: ico_1.ICO,
+    j2c: j2c_1.J2C,
+    jp2: jp2_1.JP2,
+    jpg: jpg_1.JPG,
+    ktx: ktx_1.KTX,
+    png: png_1.PNG,
+    pnm: pnm_1.PNM,
+    psd: psd_1.PSD,
+    svg: svg_1.SVG,
+    tga: tga_1.TGA,
+    tiff: tiff_1.TIFF,
+    webp: webp_1.WEBP,
 };
 
 
 /***/ }),
 
 /***/ 5947:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.J2C = void 0;
+const utils_1 = __nccwpck_require__(8574);
 exports.J2C = {
-    validate(buffer) {
-        // TODO: this doesn't seem right. SIZ marker doesn't have to be right after the SOC
-        return buffer.toString('hex', 0, 4) === 'ff4fff51';
-    },
-    calculate(buffer) {
-        return {
-            height: buffer.readUInt32BE(12),
-            width: buffer.readUInt32BE(8),
-        };
-    }
+    // TODO: this doesn't seem right. SIZ marker doesn't have to be right after the SOC
+    validate: (input) => (0, utils_1.toHexString)(input, 0, 4) === 'ff4fff51',
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt32BE)(input, 12),
+        width: (0, utils_1.readUInt32BE)(input, 8),
+    }),
 };
 
 
 /***/ }),
 
 /***/ 6542:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.JP2 = void 0;
-const BoxTypes = {
-    ftyp: '66747970',
-    ihdr: '69686472',
-    jp2h: '6a703268',
-    jp__: '6a502020',
-    rreq: '72726571',
-    xml_: '786d6c20'
-};
-const calculateRREQLength = (box) => {
-    const unit = box.readUInt8(0);
-    let offset = 1 + (2 * unit);
-    const numStdFlags = box.readUInt16BE(offset);
-    const flagsLength = numStdFlags * (2 + unit);
-    offset = offset + 2 + flagsLength;
-    const numVendorFeatures = box.readUInt16BE(offset);
-    const featuresLength = numVendorFeatures * (16 + unit);
-    return offset + 2 + featuresLength;
-};
-const parseIHDR = (box) => {
-    return {
-        height: box.readUInt32BE(4),
-        width: box.readUInt32BE(8),
-    };
-};
+const utils_1 = __nccwpck_require__(8574);
 exports.JP2 = {
-    validate(buffer) {
-        const signature = buffer.toString('hex', 4, 8);
-        const signatureLength = buffer.readUInt32BE(0);
-        if (signature !== BoxTypes.jp__ || signatureLength < 1) {
+    validate(input) {
+        if ((0, utils_1.readUInt32BE)(input, 4) !== 0x6a502020 || (0, utils_1.readUInt32BE)(input, 0) < 1)
             return false;
-        }
-        const ftypeBoxStart = signatureLength + 4;
-        const ftypBoxLength = buffer.readUInt32BE(signatureLength);
-        const ftypBox = buffer.slice(ftypeBoxStart, ftypeBoxStart + ftypBoxLength);
-        return ftypBox.toString('hex', 0, 4) === BoxTypes.ftyp;
+        const ftypBox = (0, utils_1.findBox)(input, 'ftyp', 0);
+        if (!ftypBox)
+            return false;
+        return (0, utils_1.readUInt32BE)(input, ftypBox.offset + 4) === 0x66747970;
     },
-    calculate(buffer) {
-        const signatureLength = buffer.readUInt32BE(0);
-        const ftypBoxLength = buffer.readUInt16BE(signatureLength + 2);
-        let offset = signatureLength + 4 + ftypBoxLength;
-        const nextBoxType = buffer.toString('hex', offset, offset + 4);
-        switch (nextBoxType) {
-            case BoxTypes.rreq:
-                // WHAT ARE THESE 4 BYTES?????
-                // eslint-disable-next-line no-case-declarations
-                const MAGIC = 4;
-                offset = offset + 4 + MAGIC + calculateRREQLength(buffer.slice(offset + 4));
-                return parseIHDR(buffer.slice(offset + 8, offset + 24));
-            case BoxTypes.jp2h:
-                return parseIHDR(buffer.slice(offset + 8, offset + 24));
-            default:
-                throw new TypeError('Unsupported header found: ' + buffer.toString('ascii', offset, offset + 4));
+    calculate(input) {
+        const jp2hBox = (0, utils_1.findBox)(input, 'jp2h', 0);
+        const ihdrBox = jp2hBox && (0, utils_1.findBox)(input, 'ihdr', jp2hBox.offset + 8);
+        if (ihdrBox) {
+            return {
+                height: (0, utils_1.readUInt32BE)(input, ihdrBox.offset + 8),
+                width: (0, utils_1.readUInt32BE)(input, ihdrBox.offset + 12),
+            };
         }
-    }
+        throw new TypeError('Unsupported JPEG 2000 format');
+    },
 };
 
 
@@ -17682,7 +17616,7 @@ exports.JP2 = {
 // if this range we can't detect the file size correctly.
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.JPG = void 0;
-const readUInt_1 = __nccwpck_require__(1446);
+const utils_1 = __nccwpck_require__(8574);
 const EXIF_MARKER = '45786966';
 const APP1_DATA_SIZE_BYTES = 2;
 const EXIF_HEADER_BYTES = 6;
@@ -17692,13 +17626,13 @@ const LITTLE_ENDIAN_BYTE_ALIGN = '4949';
 // Each entry is exactly 12 bytes
 const IDF_ENTRY_BYTES = 12;
 const NUM_DIRECTORY_ENTRIES_BYTES = 2;
-function isEXIF(buffer) {
-    return (buffer.toString('hex', 2, 6) === EXIF_MARKER);
+function isEXIF(input) {
+    return (0, utils_1.toHexString)(input, 2, 6) === EXIF_MARKER;
 }
-function extractSize(buffer, index) {
+function extractSize(input, index) {
     return {
-        height: buffer.readUInt16BE(index),
-        width: buffer.readUInt16BE(index + 2)
+        height: (0, utils_1.readUInt16BE)(input, index),
+        width: (0, utils_1.readUInt16BE)(input, index + 2),
     };
 }
 function extractOrientation(exifBlock, isBigEndian) {
@@ -17710,37 +17644,39 @@ function extractOrientation(exifBlock, isBigEndian) {
     // IDF osset works from right after the header bytes
     // (so the offset includes the tiff byte align)
     const offset = EXIF_HEADER_BYTES + idfOffset;
-    const idfDirectoryEntries = (0, readUInt_1.readUInt)(exifBlock, 16, offset, isBigEndian);
+    const idfDirectoryEntries = (0, utils_1.readUInt)(exifBlock, 16, offset, isBigEndian);
     for (let directoryEntryNumber = 0; directoryEntryNumber < idfDirectoryEntries; directoryEntryNumber++) {
-        const start = offset + NUM_DIRECTORY_ENTRIES_BYTES + (directoryEntryNumber * IDF_ENTRY_BYTES);
+        const start = offset +
+            NUM_DIRECTORY_ENTRIES_BYTES +
+            directoryEntryNumber * IDF_ENTRY_BYTES;
         const end = start + IDF_ENTRY_BYTES;
         // Skip on corrupt EXIF blocks
         if (start > exifBlock.length) {
             return;
         }
         const block = exifBlock.slice(start, end);
-        const tagNumber = (0, readUInt_1.readUInt)(block, 16, 0, isBigEndian);
+        const tagNumber = (0, utils_1.readUInt)(block, 16, 0, isBigEndian);
         // 0x0112 (decimal: 274) is the `orientation` tag ID
         if (tagNumber === 274) {
-            const dataFormat = (0, readUInt_1.readUInt)(block, 16, 2, isBigEndian);
+            const dataFormat = (0, utils_1.readUInt)(block, 16, 2, isBigEndian);
             if (dataFormat !== 3) {
                 return;
             }
             // unsinged int has 2 bytes per component
             // if there would more than 4 bytes in total it's a pointer
-            const numberOfComponents = (0, readUInt_1.readUInt)(block, 32, 4, isBigEndian);
+            const numberOfComponents = (0, utils_1.readUInt)(block, 32, 4, isBigEndian);
             if (numberOfComponents !== 1) {
                 return;
             }
-            return (0, readUInt_1.readUInt)(block, 16, 8, isBigEndian);
+            return (0, utils_1.readUInt)(block, 16, 8, isBigEndian);
         }
     }
 }
-function validateExifBlock(buffer, index) {
+function validateExifBlock(input, index) {
     // Skip APP1 Data Size
-    const exifBlock = buffer.slice(APP1_DATA_SIZE_BYTES, index);
+    const exifBlock = input.slice(APP1_DATA_SIZE_BYTES, index);
     // Consider byte alignment
-    const byteAlign = exifBlock.toString('hex', EXIF_HEADER_BYTES, EXIF_HEADER_BYTES + TIFF_BYTE_ALIGN_BYTES);
+    const byteAlign = (0, utils_1.toHexString)(exifBlock, EXIF_HEADER_BYTES, EXIF_HEADER_BYTES + TIFF_BYTE_ALIGN_BYTES);
     // Ignore Empty EXIF. Validate byte alignment
     const isBigEndian = byteAlign === BIG_ENDIAN_BYTE_ALIGN;
     const isLittleEndian = byteAlign === LITTLE_ENDIAN_BYTE_ALIGN;
@@ -17748,40 +17684,38 @@ function validateExifBlock(buffer, index) {
         return extractOrientation(exifBlock, isBigEndian);
     }
 }
-function validateBuffer(buffer, index) {
+function validateInput(input, index) {
     // index should be within buffer limits
-    if (index > buffer.length) {
+    if (index > input.length) {
         throw new TypeError('Corrupt JPG, exceeded buffer limits');
-    }
-    // Every JPEG block must begin with a 0xFF
-    if (buffer[index] !== 0xFF) {
-        throw new TypeError('Invalid JPG, marker table corrupted');
     }
 }
 exports.JPG = {
-    validate(buffer) {
-        const SOIMarker = buffer.toString('hex', 0, 2);
-        return ('ffd8' === SOIMarker);
-    },
-    calculate(buffer) {
+    validate: (input) => (0, utils_1.toHexString)(input, 0, 2) === 'ffd8',
+    calculate(input) {
         // Skip 4 chars, they are for signature
-        buffer = buffer.slice(4);
+        input = input.slice(4);
         let orientation;
         let next;
-        while (buffer.length) {
+        while (input.length) {
             // read length of the next block
-            const i = buffer.readUInt16BE(0);
-            if (isEXIF(buffer)) {
-                orientation = validateExifBlock(buffer, i);
+            const i = (0, utils_1.readUInt16BE)(input, 0);
+            // Every JPEG block must begin with a 0xFF
+            if (input[i] !== 0xff) {
+                input = input.slice(1);
+                continue;
+            }
+            if (isEXIF(input)) {
+                orientation = validateExifBlock(input, i);
             }
             // ensure correct format
-            validateBuffer(buffer, i);
+            validateInput(input, i);
             // 0xFFC0 is baseline standard(SOF)
             // 0xFFC1 is baseline optimized(SOF)
             // 0xFFC2 is progressive(SOF2)
-            next = buffer[i + 1];
-            if (next === 0xC0 || next === 0xC1 || next === 0xC2) {
-                const size = extractSize(buffer, i + 5);
+            next = input[i + 1];
+            if (next === 0xc0 || next === 0xc1 || next === 0xc2) {
+                const size = extractSize(input, i + 5);
                 // TODO: is orientation=0 a valid answer here?
                 if (!orientation) {
                     return size;
@@ -17789,59 +17723,64 @@ exports.JPG = {
                 return {
                     height: size.height,
                     orientation,
-                    width: size.width
+                    width: size.width,
                 };
             }
             // move to the next block
-            buffer = buffer.slice(i + 2);
+            input = input.slice(i + 2);
         }
         throw new TypeError('Invalid JPG, no size found');
-    }
+    },
 };
 
 
 /***/ }),
 
 /***/ 645:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KTX = void 0;
-const SIGNATURE = 'KTX 11';
+const utils_1 = __nccwpck_require__(8574);
 exports.KTX = {
-    validate(buffer) {
-        return SIGNATURE === buffer.toString('ascii', 1, 7);
+    validate: (input) => {
+        const signature = (0, utils_1.toUTF8String)(input, 1, 7);
+        return ['KTX 11', 'KTX 20'].includes(signature);
     },
-    calculate(buffer) {
-        return {
-            height: buffer.readUInt32LE(40),
-            width: buffer.readUInt32LE(36),
-        };
-    }
+    calculate: (input) => {
+        const type = input[5] === 0x31 ? 'ktx' : 'ktx2';
+        const offset = type === 'ktx' ? 36 : 20;
+        return ({
+            height: (0, utils_1.readUInt32LE)(input, offset + 4),
+            width: (0, utils_1.readUInt32LE)(input, offset),
+            type,
+        });
+    },
 };
 
 
 /***/ }),
 
 /***/ 7622:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PNG = void 0;
+const utils_1 = __nccwpck_require__(8574);
 const pngSignature = 'PNG\r\n\x1a\n';
 const pngImageHeaderChunkName = 'IHDR';
 // Used to detect "fried" png's: http://www.jongware.com/pngdefry.html
 const pngFriedChunkName = 'CgBI';
 exports.PNG = {
-    validate(buffer) {
-        if (pngSignature === buffer.toString('ascii', 1, 8)) {
-            let chunkName = buffer.toString('ascii', 12, 16);
+    validate(input) {
+        if (pngSignature === (0, utils_1.toUTF8String)(input, 1, 8)) {
+            let chunkName = (0, utils_1.toUTF8String)(input, 12, 16);
             if (chunkName === pngFriedChunkName) {
-                chunkName = buffer.toString('ascii', 28, 32);
+                chunkName = (0, utils_1.toUTF8String)(input, 28, 32);
             }
             if (chunkName !== pngImageHeaderChunkName) {
                 throw new TypeError('Invalid PNG');
@@ -17850,30 +17789,31 @@ exports.PNG = {
         }
         return false;
     },
-    calculate(buffer) {
-        if (buffer.toString('ascii', 12, 16) === pngFriedChunkName) {
+    calculate(input) {
+        if ((0, utils_1.toUTF8String)(input, 12, 16) === pngFriedChunkName) {
             return {
-                height: buffer.readUInt32BE(36),
-                width: buffer.readUInt32BE(32)
+                height: (0, utils_1.readUInt32BE)(input, 36),
+                width: (0, utils_1.readUInt32BE)(input, 32),
             };
         }
         return {
-            height: buffer.readUInt32BE(20),
-            width: buffer.readUInt32BE(16)
+            height: (0, utils_1.readUInt32BE)(input, 20),
+            width: (0, utils_1.readUInt32BE)(input, 16),
         };
-    }
+    },
 };
 
 
 /***/ }),
 
 /***/ 5664:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PNM = void 0;
+const utils_1 = __nccwpck_require__(8574);
 const PNMTypes = {
     P1: 'pbm/ascii',
     P2: 'pgm/ascii',
@@ -17882,9 +17822,8 @@ const PNMTypes = {
     P5: 'pgm',
     P6: 'ppm',
     P7: 'pam',
-    PF: 'pfm'
+    PF: 'pfm',
 };
-const Signatures = Object.keys(PNMTypes);
 const handlers = {
     default: (lines) => {
         let dimensions = [];
@@ -17924,61 +17863,56 @@ const handlers = {
         if (size.height && size.width) {
             return {
                 height: size.height,
-                width: size.width
+                width: size.width,
             };
         }
         else {
             throw new TypeError('Invalid PAM');
         }
-    }
+    },
 };
 exports.PNM = {
-    validate(buffer) {
-        const signature = buffer.toString('ascii', 0, 2);
-        return Signatures.includes(signature);
-    },
-    calculate(buffer) {
-        const signature = buffer.toString('ascii', 0, 2);
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 2) in PNMTypes,
+    calculate(input) {
+        const signature = (0, utils_1.toUTF8String)(input, 0, 2);
         const type = PNMTypes[signature];
         // TODO: this probably generates garbage. move to a stream based parser
-        const lines = buffer.toString('ascii', 3).split(/[\r\n]+/);
+        const lines = (0, utils_1.toUTF8String)(input, 3).split(/[\r\n]+/);
         const handler = handlers[type] || handlers.default;
         return handler(lines);
-    }
+    },
 };
 
 
 /***/ }),
 
 /***/ 659:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PSD = void 0;
+const utils_1 = __nccwpck_require__(8574);
 exports.PSD = {
-    validate(buffer) {
-        return ('8BPS' === buffer.toString('ascii', 0, 4));
-    },
-    calculate(buffer) {
-        return {
-            height: buffer.readUInt32BE(14),
-            width: buffer.readUInt32BE(18)
-        };
-    }
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 4) === '8BPS',
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt32BE)(input, 14),
+        width: (0, utils_1.readUInt32BE)(input, 18),
+    }),
 };
 
 
 /***/ }),
 
 /***/ 7544:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SVG = void 0;
+const utils_1 = __nccwpck_require__(8574);
 const svgReg = /<svg\s([^>"']|"[^"]*"|'[^']*')*>/;
 const extractorRegExps = {
     height: /\sheight=(['"])([^%]+?)\1/,
@@ -17992,11 +17926,11 @@ const units = {
     cm: 96 / INCH_CM,
     em: 16,
     ex: 8,
-    m: 96 / INCH_CM * 100,
+    m: (96 / INCH_CM) * 100,
     mm: 96 / INCH_CM / 10,
     pc: 96 / 72 / 12,
     pt: 96 / 72,
-    px: 1
+    px: 1,
 };
 const unitsReg = new RegExp(`^([0-9.]+(?:e\\d+)?)(${Object.keys(units).join('|')})?$`);
 function parseLength(len) {
@@ -18010,7 +17944,7 @@ function parseViewbox(viewbox) {
     const bounds = viewbox.split(' ');
     return {
         height: parseLength(bounds[3]),
-        width: parseLength(bounds[2])
+        width: parseLength(bounds[2]),
     };
 }
 function parseAttributes(root) {
@@ -18049,12 +17983,10 @@ function calculateByViewbox(attrs, viewbox) {
     };
 }
 exports.SVG = {
-    validate(buffer) {
-        const str = String(buffer);
-        return svgReg.test(str);
-    },
-    calculate(buffer) {
-        const root = buffer.toString('utf8').match(extractorRegExps.root);
+    // Scan only the first kilo-byte to speed up the check on larger files
+    validate: (input) => svgReg.test((0, utils_1.toUTF8String)(input, 0, 1000)),
+    calculate(input) {
+        const root = (0, utils_1.toUTF8String)(input).match(extractorRegExps.root);
         if (root) {
             const attrs = parseAttributes(root[0]);
             if (attrs.width && attrs.height) {
@@ -18065,29 +17997,30 @@ exports.SVG = {
             }
         }
         throw new TypeError('Invalid SVG');
-    }
+    },
 };
 
 
 /***/ }),
 
 /***/ 8453:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TGA = void 0;
+const utils_1 = __nccwpck_require__(8574);
 exports.TGA = {
-    validate(buffer) {
-        return buffer.readUInt16LE(0) === 0 && buffer.readUInt16LE(4) === 0;
+    validate(input) {
+        return (0, utils_1.readUInt16LE)(input, 0) === 0 && (0, utils_1.readUInt16LE)(input, 4) === 0;
     },
-    calculate(buffer) {
+    calculate(input) {
         return {
-            height: buffer.readUInt16LE(14),
-            width: buffer.readUInt16LE(12),
+            height: (0, utils_1.readUInt16LE)(input, 14),
+            width: (0, utils_1.readUInt16LE)(input, 12),
         };
-    }
+    },
 };
 
 
@@ -18103,10 +18036,10 @@ exports.TIFF = void 0;
 // based on http://www.compix.com/fileformattif.htm
 // TO-DO: support big-endian as well
 const fs = __nccwpck_require__(7147);
-const readUInt_1 = __nccwpck_require__(1446);
+const utils_1 = __nccwpck_require__(8574);
 // Read IFD (image-file-directory) into a buffer
-function readIFD(buffer, filepath, isBigEndian) {
-    const ifdOffset = (0, readUInt_1.readUInt)(buffer, 32, 4, isBigEndian);
+function readIFD(input, filepath, isBigEndian) {
+    const ifdOffset = (0, utils_1.readUInt)(input, 32, 4, isBigEndian);
     // read only till the end of the file
     let bufferSize = 1024;
     const fileSize = fs.statSync(filepath).size;
@@ -18114,32 +18047,32 @@ function readIFD(buffer, filepath, isBigEndian) {
         bufferSize = fileSize - ifdOffset - 10;
     }
     // populate the buffer
-    const endBuffer = Buffer.alloc(bufferSize);
+    const endBuffer = new Uint8Array(bufferSize);
     const descriptor = fs.openSync(filepath, 'r');
     fs.readSync(descriptor, endBuffer, 0, bufferSize, ifdOffset);
     fs.closeSync(descriptor);
     return endBuffer.slice(2);
 }
 // TIFF values seem to be messed up on Big-Endian, this helps
-function readValue(buffer, isBigEndian) {
-    const low = (0, readUInt_1.readUInt)(buffer, 16, 8, isBigEndian);
-    const high = (0, readUInt_1.readUInt)(buffer, 16, 10, isBigEndian);
+function readValue(input, isBigEndian) {
+    const low = (0, utils_1.readUInt)(input, 16, 8, isBigEndian);
+    const high = (0, utils_1.readUInt)(input, 16, 10, isBigEndian);
     return (high << 16) + low;
 }
 // move to the next tag
-function nextTag(buffer) {
-    if (buffer.length > 24) {
-        return buffer.slice(12);
+function nextTag(input) {
+    if (input.length > 24) {
+        return input.slice(12);
     }
 }
 // Extract IFD tags from TIFF metadata
-function extractTags(buffer, isBigEndian) {
+function extractTags(input, isBigEndian) {
     const tags = {};
-    let temp = buffer;
+    let temp = input;
     while (temp && temp.length) {
-        const code = (0, readUInt_1.readUInt)(temp, 16, 0, isBigEndian);
-        const type = (0, readUInt_1.readUInt)(temp, 16, 2, isBigEndian);
-        const length = (0, readUInt_1.readUInt)(temp, 32, 4, isBigEndian);
+        const code = (0, utils_1.readUInt)(temp, 16, 0, isBigEndian);
+        const type = (0, utils_1.readUInt)(temp, 16, 2, isBigEndian);
+        const length = (0, utils_1.readUInt)(temp, 32, 4, isBigEndian);
         // 0 means end of IFD
         if (code === 0) {
             break;
@@ -18157,8 +18090,8 @@ function extractTags(buffer, isBigEndian) {
     return tags;
 }
 // Test if the TIFF is Big Endian or Little Endian
-function determineEndianness(buffer) {
-    const signature = buffer.toString('ascii', 0, 2);
+function determineEndianness(input) {
+    const signature = (0, utils_1.toUTF8String)(input, 0, 2);
     if ('II' === signature) {
         return 'LE';
     }
@@ -18168,22 +18101,20 @@ function determineEndianness(buffer) {
 }
 const signatures = [
     // '492049', // currently not supported
-    '49492a00',
+    '49492a00', // Little endian
     '4d4d002a', // Big Endian
     // '4d4d002a', // BigTIFF > 4GB. currently not supported
 ];
 exports.TIFF = {
-    validate(buffer) {
-        return signatures.includes(buffer.toString('hex', 0, 4));
-    },
-    calculate(buffer, filepath) {
+    validate: (input) => signatures.includes((0, utils_1.toHexString)(input, 0, 4)),
+    calculate(input, filepath) {
         if (!filepath) {
             throw new TypeError('Tiff doesn\'t support buffer');
         }
         // Determine BE/LE
-        const isBigEndian = determineEndianness(buffer) === 'BE';
+        const isBigEndian = determineEndianness(input) === 'BE';
         // read the IFD
-        const ifdBuffer = readIFD(buffer, filepath, isBigEndian);
+        const ifdBuffer = readIFD(input, filepath, isBigEndian);
         // extract the tags from the IFD
         const tags = extractTags(ifdBuffer, isBigEndian);
         const width = tags[256];
@@ -18192,56 +18123,139 @@ exports.TIFF = {
             throw new TypeError('Invalid Tiff. Missing tags');
         }
         return { height, width };
-    }
+    },
 };
 
 
 /***/ }),
 
-/***/ 5759:
+/***/ 8574:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.findBox = exports.readUInt = exports.readUInt32LE = exports.readUInt32BE = exports.readInt32LE = exports.readUInt24LE = exports.readUInt16LE = exports.readUInt16BE = exports.readInt16LE = exports.toHexString = exports.toUTF8String = void 0;
+const decoder = new TextDecoder();
+const toUTF8String = (input, start = 0, end = input.length) => decoder.decode(input.slice(start, end));
+exports.toUTF8String = toUTF8String;
+const toHexString = (input, start = 0, end = input.length) => input
+    .slice(start, end)
+    .reduce((memo, i) => memo + ('0' + i.toString(16)).slice(-2), '');
+exports.toHexString = toHexString;
+const readInt16LE = (input, offset = 0) => {
+    const val = input[offset] + input[offset + 1] * 2 ** 8;
+    return val | ((val & (2 ** 15)) * 0x1fffe);
+};
+exports.readInt16LE = readInt16LE;
+const readUInt16BE = (input, offset = 0) => input[offset] * 2 ** 8 + input[offset + 1];
+exports.readUInt16BE = readUInt16BE;
+const readUInt16LE = (input, offset = 0) => input[offset] + input[offset + 1] * 2 ** 8;
+exports.readUInt16LE = readUInt16LE;
+const readUInt24LE = (input, offset = 0) => input[offset] + input[offset + 1] * 2 ** 8 + input[offset + 2] * 2 ** 16;
+exports.readUInt24LE = readUInt24LE;
+const readInt32LE = (input, offset = 0) => input[offset] +
+    input[offset + 1] * 2 ** 8 +
+    input[offset + 2] * 2 ** 16 +
+    (input[offset + 3] << 24);
+exports.readInt32LE = readInt32LE;
+const readUInt32BE = (input, offset = 0) => input[offset] * 2 ** 24 +
+    input[offset + 1] * 2 ** 16 +
+    input[offset + 2] * 2 ** 8 +
+    input[offset + 3];
+exports.readUInt32BE = readUInt32BE;
+const readUInt32LE = (input, offset = 0) => input[offset] +
+    input[offset + 1] * 2 ** 8 +
+    input[offset + 2] * 2 ** 16 +
+    input[offset + 3] * 2 ** 24;
+exports.readUInt32LE = readUInt32LE;
+// Abstract reading multi-byte unsigned integers
+const methods = {
+    readUInt16BE: exports.readUInt16BE,
+    readUInt16LE: exports.readUInt16LE,
+    readUInt32BE: exports.readUInt32BE,
+    readUInt32LE: exports.readUInt32LE,
+};
+function readUInt(input, bits, offset, isBigEndian) {
+    offset = offset || 0;
+    const endian = isBigEndian ? 'BE' : 'LE';
+    const methodName = ('readUInt' + bits + endian);
+    return methods[methodName](input, offset);
+}
+exports.readUInt = readUInt;
+function readBox(buffer, offset) {
+    if (buffer.length - offset < 4)
+        return;
+    const boxSize = (0, exports.readUInt32BE)(buffer, offset);
+    if (buffer.length - offset < boxSize)
+        return;
+    return {
+        name: (0, exports.toUTF8String)(buffer, 4 + offset, 8 + offset),
+        offset,
+        size: boxSize,
+    };
+}
+function findBox(buffer, boxName, offset) {
+    while (offset < buffer.length) {
+        const box = readBox(buffer, offset);
+        if (!box)
+            break;
+        if (box.name === boxName)
+            return box;
+        offset += box.size;
+    }
+}
+exports.findBox = findBox;
+
+
+/***/ }),
+
+/***/ 5759:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WEBP = void 0;
-function calculateExtended(buffer) {
+const utils_1 = __nccwpck_require__(8574);
+function calculateExtended(input) {
     return {
-        height: 1 + buffer.readUIntLE(7, 3),
-        width: 1 + buffer.readUIntLE(4, 3)
+        height: 1 + (0, utils_1.readUInt24LE)(input, 7),
+        width: 1 + (0, utils_1.readUInt24LE)(input, 4),
     };
 }
-function calculateLossless(buffer) {
+function calculateLossless(input) {
     return {
-        height: 1 + (((buffer[4] & 0xF) << 10) | (buffer[3] << 2) | ((buffer[2] & 0xC0) >> 6)),
-        width: 1 + (((buffer[2] & 0x3F) << 8) | buffer[1])
+        height: 1 +
+            (((input[4] & 0xf) << 10) | (input[3] << 2) | ((input[2] & 0xc0) >> 6)),
+        width: 1 + (((input[2] & 0x3f) << 8) | input[1]),
     };
 }
-function calculateLossy(buffer) {
+function calculateLossy(input) {
     // `& 0x3fff` returns the last 14 bits
     // TO-DO: include webp scaling in the calculations
     return {
-        height: buffer.readInt16LE(8) & 0x3fff,
-        width: buffer.readInt16LE(6) & 0x3fff
+        height: (0, utils_1.readInt16LE)(input, 8) & 0x3fff,
+        width: (0, utils_1.readInt16LE)(input, 6) & 0x3fff,
     };
 }
 exports.WEBP = {
-    validate(buffer) {
-        const riffHeader = 'RIFF' === buffer.toString('ascii', 0, 4);
-        const webpHeader = 'WEBP' === buffer.toString('ascii', 8, 12);
-        const vp8Header = 'VP8' === buffer.toString('ascii', 12, 15);
-        return (riffHeader && webpHeader && vp8Header);
+    validate(input) {
+        const riffHeader = 'RIFF' === (0, utils_1.toUTF8String)(input, 0, 4);
+        const webpHeader = 'WEBP' === (0, utils_1.toUTF8String)(input, 8, 12);
+        const vp8Header = 'VP8' === (0, utils_1.toUTF8String)(input, 12, 15);
+        return riffHeader && webpHeader && vp8Header;
     },
-    calculate(buffer) {
-        const chunkHeader = buffer.toString('ascii', 12, 16);
-        buffer = buffer.slice(20, 30);
+    calculate(input) {
+        const chunkHeader = (0, utils_1.toUTF8String)(input, 12, 16);
+        input = input.slice(20, 30);
         // Extended webp stream signature
         if (chunkHeader === 'VP8X') {
-            const extendedHeader = buffer[0];
+            const extendedHeader = input[0];
             const validStart = (extendedHeader & 0xc0) === 0;
             const validEnd = (extendedHeader & 0x01) === 0;
             if (validStart && validEnd) {
-                return calculateExtended(buffer);
+                return calculateExtended(input);
             }
             else {
                 // TODO: breaking change
@@ -18249,16 +18263,16 @@ exports.WEBP = {
             }
         }
         // Lossless webp stream signature
-        if (chunkHeader === 'VP8 ' && buffer[0] !== 0x2f) {
-            return calculateLossy(buffer);
+        if (chunkHeader === 'VP8 ' && input[0] !== 0x2f) {
+            return calculateLossy(input);
         }
         // Lossy webp stream signature
-        const signature = buffer.toString('hex', 3, 6);
+        const signature = (0, utils_1.toHexString)(input, 3, 6);
         if (chunkHeader === 'VP8L' && signature !== '9d012a') {
-            return calculateLossless(buffer);
+            return calculateLossless(input);
         }
         throw new TypeError('Invalid WebP');
-    }
+    },
 };
 
 
