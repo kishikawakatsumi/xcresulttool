@@ -1190,6 +1190,7 @@ function run() {
             const inputPaths = core.getMultilineInput('path');
             const showPassedTests = core.getBooleanInput('show-passed-tests');
             const showCodeCoverage = core.getBooleanInput('show-code-coverage');
+            const needToCreateJobResultCheck = core.getBooleanInput('need-to-create-job-result-check');
             let uploadBundles = core.getInput('upload-bundles').toLowerCase();
             if (uploadBundles === 'true') {
                 uploadBundles = 'always';
@@ -1264,15 +1265,17 @@ function run() {
                         annotations
                     };
                 }
-                yield octokit.checks.create({
-                    owner,
-                    repo,
-                    name: title,
-                    head_sha: sha,
-                    status: 'completed',
-                    conclusion: report.testStatus,
-                    output
-                });
+                if (needToCreateJobResultCheck) {
+                    yield octokit.checks.create({
+                        owner,
+                        repo,
+                        name: title,
+                        head_sha: sha,
+                        status: 'completed',
+                        conclusion: report.testStatus,
+                        output
+                    });
+                }
                 if (uploadBundles === 'always' ||
                     (uploadBundles === 'failure' && report.testStatus === 'failure')) {
                     for (const uploadBundlePath of inputPaths) {
@@ -4698,7 +4701,7 @@ class OidcClient {
                 .catch(error => {
                 throw new Error(`Failed to get ID Token. \n 
         Error Code : ${error.statusCode}\n 
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
             if (!id_token) {
