@@ -15,6 +15,9 @@ async function run(): Promise<void> {
     const inputPaths = core.getMultilineInput('path')
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
+    const needToCreateJobResultCheck = core.getBooleanInput(
+      'need-to-create-job-result-check'
+    )
     let uploadBundles = core.getInput('upload-bundles').toLowerCase()
     if (uploadBundles === 'true') {
       uploadBundles = 'always'
@@ -101,15 +104,17 @@ async function run(): Promise<void> {
           annotations
         }
       }
-      await octokit.checks.create({
-        owner,
-        repo,
-        name: title,
-        head_sha: sha,
-        status: 'completed',
-        conclusion: report.testStatus,
-        output
-      })
+      if (needToCreateJobResultCheck) {
+        await octokit.checks.create({
+          owner,
+          repo,
+          name: title,
+          head_sha: sha,
+          status: 'completed',
+          conclusion: report.testStatus,
+          output
+        })
+      }
 
       if (
         uploadBundles === 'always' ||

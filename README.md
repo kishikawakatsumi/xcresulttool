@@ -118,6 +118,11 @@ jobs:
     #
     # Default: 'always'
     upload-bundles:
+
+    #'Will result be reported as check. If false, the result will be added only as job summary.'
+    #
+    # Default: 'true'
+    need-to-create-job-result-check:
 ```
 
 ## Limitations
