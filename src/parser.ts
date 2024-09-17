@@ -27,7 +27,8 @@ export class Parser {
       '--output-path',
       outputPath,
       '--id',
-      reference
+      reference,
+	  '--legacy'
     ]
     const options = {
       silent: true
@@ -61,7 +62,8 @@ export class Parser {
       '--path',
       this.bundlePath,
       '--format',
-      'json'
+      'json',
+	  '--legacy'
     ]
     if (reference) {
       args.push('--id')

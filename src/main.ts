@@ -160,6 +160,7 @@ async function mergeResultBundle(
   const args = ['xcresulttool', 'merge']
     .concat(inputPaths)
     .concat(['--output-path', outputPath])
+	.concat(['--legacy'])
   const options = {
     silent: true
   }
