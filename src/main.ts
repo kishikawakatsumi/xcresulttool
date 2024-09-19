@@ -10,6 +10,23 @@ import {glob} from 'glob'
 import {promises} from 'fs'
 const {stat} = promises
 
+async function getXcodeVersion(): Promise<number> {
+  let output = '';
+  const options = {
+    listeners: {
+      stdout: (data: Buffer) => {
+        output += data.toString();
+      }
+    }
+  };
+  await exec.exec('xcodebuild', ['-version'], options);
+  const match = output.match(/Xcode (\d+)/);
+  if (match) {
+    return parseInt(match[1], 10);
+  }
+  throw new Error('Unable to determine Xcode version');
+}
+
 async function run(): Promise<void> {
   try {
     const inputPaths = core.getMultilineInput('path')
@@ -157,10 +174,16 @@ async function mergeResultBundle(
   inputPaths: string[],
   outputPath: string
 ): Promise<void> {
+  const xcodeVersion = await getXcodeVersion();
+
   const args = ['xcresulttool', 'merge']
-    .concat(inputPaths)
-    .concat(['--output-path', outputPath])
-    .concat(['--legacy'])
+  .concat(inputPaths)
+  .concat(['--output-path', outputPath])
+
+  if (xcodeVersion >= 16) {
+    args.push('--legacy');
+  }
+
   const options = {
     silent: true
   }
