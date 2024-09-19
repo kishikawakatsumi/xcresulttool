@@ -8,24 +8,8 @@ import {Formatter} from './formatter'
 import {Octokit} from '@octokit/action'
 import {glob} from 'glob'
 import {promises} from 'fs'
+import {getXcodeVersion} from './xcode'
 const {stat} = promises
-
-async function getXcodeVersion(): Promise<number> {
-  let output = '';
-  const options = {
-    listeners: {
-      stdout: (data: Buffer) => {
-        output += data.toString();
-      }
-    }
-  };
-  await exec.exec('xcodebuild', ['-version'], options);
-  const match = output.match(/Xcode (\d+)/);
-  if (match) {
-    return parseInt(match[1], 10);
-  }
-  throw new Error('Unable to determine Xcode version');
-}
 
 async function run(): Promise<void> {
   try {

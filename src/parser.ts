@@ -2,6 +2,8 @@
 
 import * as exec from '@actions/exec'
 import {promises} from 'fs'
+import {getXcodeVersion} from './xcode'
+
 const {readFile} = promises
 
 export class Parser {
@@ -17,6 +19,8 @@ export class Parser {
   }
 
   async exportObject(reference: string, outputPath: string): Promise<Buffer> {
+    const xcodeVersion = await getXcodeVersion();
+    
     const args = [
       'xcresulttool',
       'export',
@@ -27,9 +31,13 @@ export class Parser {
       '--output-path',
       outputPath,
       '--id',
-      reference,
-      '--legacy'
+      reference
     ]
+
+    if (xcodeVersion >= 16) {
+      args.push('--legacy');
+    }
+    
     const options = {
       silent: true
     }
@@ -56,20 +64,25 @@ export class Parser {
   }
 
   private async toJSON(reference?: string): Promise<string> {
+    const xcodeVersion = await getXcodeVersion();
+    
     const args = [
       'xcresulttool',
       'get',
       '--path',
       this.bundlePath,
       '--format',
-      'json',
-      '--legacy'
+      'json'
     ]
     if (reference) {
       args.push('--id')
       args.push(reference)
     }
 
+    if (xcodeVersion >= 16) {
+      args.push('--legacy');
+    }
+    
     let output = ''
     const options = {
       silent: true,
