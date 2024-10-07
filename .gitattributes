@@ -1,1 +1,2 @@
-dist/** -diff linguist-generated=true 
+dist/** -diff linguist-generated=true
+__tests__/** export-ignore
