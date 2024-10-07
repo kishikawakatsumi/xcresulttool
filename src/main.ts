@@ -169,7 +169,7 @@ async function mergeResultBundle(
   }
 
   const options = {
-    silent: true
+    silent: false
   }
 
   await exec.exec('xcrun', args, options)
