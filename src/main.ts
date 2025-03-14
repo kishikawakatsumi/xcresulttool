@@ -1,168 +1,152 @@
-import * as artifact from '@actions/artifact'
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
-import * as github from '@actions/github'
-import * as os from 'os'
 import * as path from 'path'
-import {Formatter} from './formatter'
-import {Octokit} from '@octokit/action'
-import {glob} from 'glob'
-import {promises} from 'fs'
-const {stat} = promises
+import * as fs from 'fs'
 
 async function run(): Promise<void> {
   try {
+    // Get inputs from the action
     const inputPaths = core.getMultilineInput('path')
     const showPassedTests = core.getBooleanInput('show-passed-tests')
     const showCodeCoverage = core.getBooleanInput('show-code-coverage')
-    let uploadBundles = core.getInput('upload-bundles').toLowerCase()
-    if (uploadBundles === 'true') {
-      uploadBundles = 'always'
-    } else if (uploadBundles === 'false') {
-      uploadBundles = 'never'
+    const token = core.getInput('token')
+    const title = core.getInput('title')
+    const uploadBundles = core.getInput('upload-bundles').toLowerCase()
+    
+    // Validate inputs
+    if (inputPaths.length === 0) {
+      core.setFailed('No xcresult paths provided')
+      return
     }
-
-    const bundlePaths: string[] = []
-    for (const checkPath of inputPaths) {
-      try {
-        await stat(checkPath)
-        bundlePaths.push(checkPath)
-      } catch (error) {
-        core.error((error as Error).message)
-      }
-    }
-    let bundlePath = path.join(os.tmpdir(), 'Merged.xcresult')
-    if (inputPaths.length > 1) {
-      await mergeResultBundle(bundlePaths, bundlePath)
-    } else {
-      const inputPath = inputPaths[0]
-      await stat(inputPath)
-      bundlePath = inputPath
-    }
-
-    const formatter = new Formatter(bundlePath)
-    const report = await formatter.format({
-      showPassedTests,
-      showCodeCoverage
-    })
-
-    if (core.getInput('token')) {
-      await core.summary.addRaw(report.reportSummary).write()
-
-      const octokit = new Octokit()
-
-      const owner = github.context.repo.owner
-      const repo = github.context.repo.repo
-
-      const pr = github.context.payload.pull_request
-      const sha = (pr && pr.head.sha) || github.context.sha
-
-      const charactersLimit = 65535
-      let title = core.getInput('title')
-      if (title.length > charactersLimit) {
-        core.warning(
-          `The 'title' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        title = title.substring(0, charactersLimit)
-      }
-      let reportSummary = report.reportSummary
-      if (reportSummary.length > charactersLimit) {
-        core.warning(
-          `The 'summary' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        reportSummary = reportSummary.substring(0, charactersLimit)
-      }
-      let reportDetail = report.reportDetail
-      if (reportDetail.length > charactersLimit) {
-        core.warning(
-          `The 'text' will be truncated because the character limit (${charactersLimit}) exceeded.`
-        )
-        reportDetail = reportDetail.substring(0, charactersLimit)
-      }
-
-      if (report.annotations.length > 50) {
-        core.warning(
-          'Annotations that exceed the limit (50) will be truncated.'
-        )
-      }
-      const annotations = report.annotations.slice(0, 50)
-      let output
-      if (reportDetail.trim()) {
-        output = {
-          title: 'Xcode test results',
-          summary: reportSummary,
-          text: reportDetail,
-          annotations
-        }
+    
+    // Check if paths exist
+    const validPaths: string[] = []
+    for (const inputPath of inputPaths) {
+      if (fs.existsSync(inputPath)) {
+        validPaths.push(inputPath)
       } else {
-        output = {
-          title: 'Xcode test results',
-          summary: reportSummary,
-          annotations
+        core.warning(`Path does not exist: ${inputPath}`)
+      }
+    }
+    
+    if (validPaths.length === 0) {
+      core.setFailed('No valid xcresult paths found')
+      return
+    }
+    
+    // Get the path to our CLI
+    const cliPath = path.join(__dirname, 'cli.js')
+    
+    // Make sure the CLI is executable
+    fs.chmodSync(cliPath, '755')
+    
+    // For each valid path, run the CLI
+    for (const xcresultPath of validPaths) {
+      core.info(`Processing xcresult: ${xcresultPath}`)
+      
+      // Build CLI arguments
+      const args = [
+        cliPath,
+        '--path', xcresultPath,
+        '--show-passed-tests', showPassedTests.toString(),
+        '--show-code-coverage', showCodeCoverage.toString(),
+        '--github-action' // Special flag to indicate we're running in GitHub Actions
+      ]
+      
+      // Run the CLI and capture output
+      let stdout = ''
+      let stderr = ''
+      
+      const options = {
+        listeners: {
+          stdout: (data: Buffer) => {
+            stdout += data.toString()
+          },
+          stderr: (data: Buffer) => {
+            stderr += data.toString()
+          }
         }
       }
-      await octokit.checks.create({
-        owner,
-        repo,
-        name: title,
-        head_sha: sha,
-        status: 'completed',
-        conclusion: report.testStatus,
-        output
-      })
-
-      if (
-        uploadBundles === 'always' ||
-        (uploadBundles === 'failure' && report.testStatus === 'failure')
-      ) {
-        for (const uploadBundlePath of inputPaths) {
-          try {
-            await stat(uploadBundlePath)
-          } catch (error) {
-            continue
+      
+      const exitCode = await exec.exec('node', args, options)
+      
+      if (exitCode !== 0) {
+        core.error(`CLI failed with exit code ${exitCode}`)
+        core.error(stderr)
+        core.setFailed('Failed to process xcresult')
+        return
+      }
+      
+      // Add the output to the GitHub Actions summary
+      await core.summary.addRaw(stdout).write()
+      
+      // If token is provided, create a check run
+      if (token) {
+        // Extract the summary and details from the CLI output
+        // This assumes our CLI outputs in a specific format we can parse
+        const summaryMatch = stdout.match(/# Test Results Summary\n\n([\s\S]*?)(?=\n# |$)/)
+        const detailsMatch = stdout.match(/# Test Details\n\n([\s\S]*?)(?=\n# |$)/)
+        
+        const summary = summaryMatch ? summaryMatch[1] : 'No test summary available'
+        const details = detailsMatch ? detailsMatch[1] : 'No test details available'
+        
+        // Determine test status from summary
+        const failedMatch = summary.match(/Failed tests: (\d+)/)
+        const failedCount = failedMatch ? parseInt(failedMatch[1]) : 0
+        const testStatus = failedCount > 0 ? 'failure' : 'success'
+        
+        // Create GitHub check
+        const github = require('@actions/github')
+        const octokit = github.getOctokit(token)
+        
+        const owner = github.context.repo.owner
+        const repo = github.context.repo.repo
+        
+        const pr = github.context.payload.pull_request
+        const sha = (pr && pr.head.sha) || github.context.sha
+        
+        await octokit.rest.checks.create({
+          owner,
+          repo,
+          name: title,
+          head_sha: sha,
+          status: 'completed',
+          conclusion: testStatus,
+          output: {
+            title: 'Xcode Test Results',
+            summary,
+            text: details
           }
-
-          const artifactClient = artifact.create()
-          const artifactName = path.basename(uploadBundlePath)
-
-          const rootDirectory = uploadBundlePath
-          const options = {
-            continueOnError: false
-          }
-
-          glob(`${uploadBundlePath}/**/*`, async (error, files) => {
-            if (error) {
-              core.error(error)
-            }
-            if (files.length) {
-              await artifactClient.uploadArtifact(
-                artifactName,
-                files,
-                rootDirectory,
-                options
-              )
-            }
-          })
+        })
+      }
+      
+      // Handle bundle uploads if requested
+      if (uploadBundles === 'always' || 
+          (uploadBundles === 'failure' && stdout.includes('Failed tests: ') && !stdout.includes('Failed tests: 0'))) {
+        core.info(`Uploading xcresult bundle: ${xcresultPath}`)
+        
+        const artifact = require('@actions/artifact')
+        const artifactClient = artifact.create()
+        const artifactName = path.basename(xcresultPath)
+        
+        // We need to list all files in the xcresult bundle
+        const { glob } = require('glob')
+        const files = await glob(`${xcresultPath}/**/*`)
+        
+        if (files.length > 0) {
+          await artifactClient.uploadArtifact(
+            artifactName,
+            files,
+            xcresultPath,
+            { continueOnError: false }
+          )
         }
       }
     }
+    
   } catch (error) {
     core.setFailed((error as Error).message)
   }
 }
 
 run()
-
-async function mergeResultBundle(
-  inputPaths: string[],
-  outputPath: string
-): Promise<void> {
-  const args = ['xcresulttool', 'merge']
-    .concat(inputPaths)
-    .concat(['--output-path', outputPath])
-  const options = {
-    silent: true
-  }
-
-  await exec.exec('xcrun', args, options)
-}
