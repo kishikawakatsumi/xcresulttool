@@ -35,7 +35,7 @@ export class Parser {
       reference
     ]
 
-    if (xcodeVersion === 16) {
+    if (xcodeVersion >= 16) {
       args.push('--legacy')
     }
 
