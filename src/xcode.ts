@@ -14,7 +14,9 @@ export async function getXcodeVersion(): Promise<number> {
   await exec.exec('xcodebuild', ['-version'], options)
   const match = output.match(/Xcode (\d+)/)
   if (match) {
-    return parseInt(match[1], 10)
+    let version = parseInt(match[1], 10)
+    core.info(`Determined Xcode version : ` + version)
+    return version
   } else {
     core.warning(
       `Failed to determine Xcode version from command 'xcodebuild -version'.`

@@ -37,6 +37,9 @@ export class Parser {
 
     if (xcodeVersion >= 16) {
       args.push('--legacy')
+      core.info(`Added --legacy flag for current Xcode version`)
+    } else {
+      core.info(`Skip --legacy flag for current Xcode version`)
     }
 
     const options = {
@@ -80,8 +83,11 @@ export class Parser {
       args.push(reference)
     }
 
-    if (xcodeVersion === 16) {
+    if (xcodeVersion >= 16) {
       args.push('--legacy')
+      core.info(`Added --legacy flag for current Xcode version`)
+    } else {
+      core.info(`Skip --legacy flag for current Xcode version`)
     }
 
     let output = ''
