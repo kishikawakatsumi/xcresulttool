@@ -2,10 +2,10 @@
 
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
-import {promises} from 'fs'
-import {getXcodeVersion} from './xcode'
+import { promises } from 'fs'
+import { getXcodeVersion } from './xcode'
 
-const {readFile} = promises
+const { readFile } = promises
 
 export class Parser {
   private bundlePath: string
@@ -37,9 +37,6 @@ export class Parser {
 
     if (xcodeVersion >= 16) {
       args.push('--legacy')
-      core.info(`Added --legacy flag for current Xcode version`)
-    } else {
-      core.info(`Skip --legacy flag for current Xcode version`)
     }
 
     const options = {
@@ -85,9 +82,6 @@ export class Parser {
 
     if (xcodeVersion >= 16) {
       args.push('--legacy')
-      core.info(`Added --legacy flag for current Xcode version`)
-    } else {
-      core.info(`Skip --legacy flag for current Xcode version`)
     }
 
     let output = ''
