@@ -1323,8 +1323,12 @@ class Parser {
             '--id',
             reference
         ];
-        if (xcodeVersion === 16) {
+        if (xcodeVersion >= 16) {
             args.push('--legacy');
+            core.info(`Added --legacy flag for current Xcode version`);
+        }
+        else {
+            core.info(`Skip --legacy flag for current Xcode version`);
         }
         const options = {
             silent: !core.isDebug()
@@ -1360,8 +1364,12 @@ class Parser {
             args.push('--id');
             args.push(reference);
         }
-        if (xcodeVersion === 16) {
+        if (xcodeVersion >= 16) {
             args.push('--legacy');
+            core.info(`Added --legacy flag for current Xcode version`);
+        }
+        else {
+            core.info(`Skip --legacy flag for current Xcode version`);
         }
         let output = '';
         const options = {
@@ -1853,7 +1861,9 @@ async function getXcodeVersion() {
     await exec.exec('xcodebuild', ['-version'], options);
     const match = output.match(/Xcode (\d+)/);
     if (match) {
-        return parseInt(match[1], 10);
+        let version = parseInt(match[1], 10);
+        core.info(`Determined Xcode version : ` + version);
+        return version;
     }
     else {
         core.warning(`Failed to determine Xcode version from command 'xcodebuild -version'.`);
