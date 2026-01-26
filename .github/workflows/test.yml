@@ -13,8 +13,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['xcode16', 'xcode15']
+        xcode: ['xcode26', 'xcode16', 'xcode15']
         include:
+          - xcode: 'xcode26'
+            xcode-path: '/Applications/Xcode_26.0.1.app'
+            macos: 'macos-26'
           - xcode: 'xcode16'
             xcode-path: '/Applications/Xcode_16.0.app'
             macos: 'macos-15'
@@ -35,8 +38,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: ['xcode16', 'xcode15']
+        xcode: ['xcode26', 'xcode16', 'xcode15']
         include:
+          - xcode: 'xcode26'
+            xcode-path: '/Applications/Xcode_26.0.1.app'
+            macos: 'macos-26'
           - xcode: 'xcode16'
             xcode-path: '/Applications/Xcode_16.0.app'
             macos: 'macos-15'

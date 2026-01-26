@@ -1323,7 +1323,7 @@ class Parser {
             '--id',
             reference
         ];
-        if (xcodeVersion === 16) {
+        if (xcodeVersion >= 16) {
             args.push('--legacy');
         }
         const options = {
@@ -1360,7 +1360,7 @@ class Parser {
             args.push('--id');
             args.push(reference);
         }
-        if (xcodeVersion === 16) {
+        if (xcodeVersion >= 16) {
             args.push('--legacy');
         }
         let output = '';
