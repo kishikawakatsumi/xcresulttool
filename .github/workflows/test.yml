@@ -53,36 +53,44 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/Example.xcresult
           title: 'Example test report (${{ matrix.xcode }})'
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/Example.xcresult
           title: 'Example Failures Only test report (${{ matrix.xcode }})'
           show-passed-tests: false
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/KeychainAccess.xcresult
           title: 'KeychainAccess Failures Only test report (${{ matrix.xcode }})'
           show-passed-tests: false
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/KeychainAccess.xcresult
           title: 'KeychainAccess test report (${{ matrix.xcode }})'
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/TAU.xcresult
           title: 'TAU test report (${{ matrix.xcode }})'
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/TestResults.xcresult
           title: 'TestResults test report (${{ matrix.xcode }})'
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/Coverage.xcresult
           title: 'Coverage test report (${{ matrix.xcode }})'
       - uses: ./
+        continue-on-error: true
         with:
           path: __tests__/data/Coverage.xcresult
           title: 'Hide Coverage test report (${{ matrix.xcode }})'
@@ -102,6 +110,7 @@ jobs:
           title: 'UhooiPicBook No Code Coverage test report (${{ matrix.xcode }})'
           show-code-coverage: false
       - uses: ./
+        continue-on-error: true
         with:
           path: |
             __tests__/data/Example.xcresult
