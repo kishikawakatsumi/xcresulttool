@@ -1,6 +1,4 @@
 /*eslint-disable
-no-empty,
-no-shadow,
 @typescript-eslint/explicit-function-return-type,
 @typescript-eslint/explicit-member-accessibility,
 @typescript-eslint/no-explicit-any,

@@ -1,5 +1,3 @@
-/*eslint-disable no-shadow */
-
 import * as Image from './image'
 import * as github from '@actions/github'
 import * as path from 'path'
@@ -136,7 +134,7 @@ export class Formatter {
 
                 const testCodeCoverage = new TestCodeCoverage(codeCoverage)
                 testReport.codeCoverage = testCodeCoverage
-              } catch (error) {
+              } catch {
                 // no-op
               }
             }

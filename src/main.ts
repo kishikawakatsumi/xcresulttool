@@ -110,7 +110,7 @@ async function run(): Promise<void> {
         for (const uploadBundlePath of inputPaths) {
           try {
             await stat(uploadBundlePath)
-          } catch (error) {
+          } catch {
             continue
           }
 
