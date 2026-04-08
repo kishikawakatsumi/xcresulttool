@@ -5,7 +5,7 @@
   "description": "A GitHub Action that generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.",
   "main": "lib/main.js",
   "engines": {
-    "node": ">= 20"
+    "node": ">= 24"
   },
   "scripts": {
     "build": "tsc",
@@ -35,7 +35,7 @@
     "@octokit/action": "6.1.0"
   },
   "devDependencies": {
-    "@types/node": "20.12.11",
+    "@types/node": "24.12.2",
     "@typescript-eslint/eslint-plugin": "6.20.0",
     "@typescript-eslint/parser": "6.20.0",
     "@vercel/ncc": "0.38.1",
