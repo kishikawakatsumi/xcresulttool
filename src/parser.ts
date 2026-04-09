@@ -2,10 +2,10 @@
 
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
-import { promises } from 'fs'
-import { getXcodeVersion } from './xcode'
+import {promises} from 'fs'
+import {getXcodeVersion} from './xcode'
 
-const { readFile } = promises
+const {readFile} = promises
 
 export class Parser {
   private bundlePath: string
